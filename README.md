@@ -4,6 +4,8 @@ Gen AI: Best Practices
 
 ---
 
+Github Pages: https://runawayhorse001.github.io/GenAI_Best_Practices
+
 ## **Chapter 1: Math Preliminary**  
 ### **1.1 Linear Algebra**  
 - Importance in AI: Representing data and operations in vector spaces.  
