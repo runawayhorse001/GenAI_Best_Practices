@@ -26,10 +26,10 @@ Preface
 About
 +++++
 
-About this API
---------------
+About this book
+---------------
 
-This document is the |api| book for our AutoFeatures: PySpark Auto Feature Selector [AutoFeatures]_ API.
+This is the book for our Generative AI: Best practics [AutoFeatures]_ API.
 The PDF version can be downloaded from `HERE <GenAI.pdf>`_. **You may download and distribute it. Please beaware,
 however, that the note contains typos as well as inaccurate or incorrect description.**
 

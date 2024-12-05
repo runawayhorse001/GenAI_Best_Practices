@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'GenAI: Best Practices'
-copyright = '2024, Wenqiang Feng'
+copyright = '2024, Wenqiang Feng and Di Zhen'
 author = 'Wenqiang Feng and Di Zhen'
 
 

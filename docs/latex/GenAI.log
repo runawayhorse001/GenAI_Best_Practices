@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  5 DEC 2024 15:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  5 DEC 2024 16:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1095,7 +1095,7 @@ LaTeX Info: Redefining \nameref on input line 82.
 \openout5 = `GenAI.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 85.
- <logo.png, id=33, 786.94pt x 483.8075pt>
+ <logo.png, id=33, 496.85625pt x 308.15125pt>
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 85.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1pcr.fd
@@ -1104,7 +1104,7 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 File: logo.png Graphic file (type png)
  <use logo.png>
 Package pdftex.def Info: logo.png used on input line 85.
-(pdftex.def)             Requested size: 469.75409pt x 288.81766pt.
+(pdftex.def)             Requested size: 469.75908pt x 291.36432pt.
 LaTeX Font Info:    Try loading font information for T1+phv on input line 85.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1phv.fd
@@ -1162,7 +1162,7 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 File: logo.png Graphic file (type png)
  <use logo.png>
 Package pdftex.def Info: logo.png used on input line 94.
-(pdftex.def)             Requested size: 469.75409pt x 288.81766pt.
+(pdftex.def)             Requested size: 469.75908pt x 291.36432pt.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1194,13 +1194,13 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
 Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: 33B5A87ECC0BB933492ACA958716EC4E;841.
+(rerunfilecheck)             Checksum: D6608BB26AA6DB4C76CA6FFD238CF901;846.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 190.
  ) 
 Here is how much of TeX's memory you used:
  13551 strings out of 493014
- 188262 string characters out of 6133351
- 275365 words of memory out of 5000000
+ 188263 string characters out of 6133351
+ 275366 words of memory out of 5000000
  16769 multiletter control sequences out of 15000+600000
  45714 words of font info for 72 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
@@ -1212,7 +1212,7 @@ live/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/201
 -dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2016/texmf-dist/
 fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
 1/urw/times/utmr8a.pfb>
-Output written on GenAI.pdf (11 pages, 109635 bytes).
+Output written on GenAI.pdf (11 pages, 541250 bytes).
 PDF statistics:
  139 PDF objects out of 1000 (max. 8388607)
  111 compressed objects within 2 object streams
