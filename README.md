@@ -1,4 +1,4 @@
-# GenAI_Best_Practices
+# GenAI: Best Practices
 Gen AI: Best Practices
 
 
