@@ -30,7 +30,7 @@ About this book
 ---------------
 
 This is the book for our Generative AI: Best practics [AutoFeatures]_ API.
-The PDF version can be downloaded from `HERE <GenAI.pdf>`_. **You may download and distribute it. Please beaware,
+The PDF version can be downloaded from `HERE <../latex/GenAI.pdf>`_. **You may download and distribute it. Please beaware,
 however, that the note contains typos as well as inaccurate or incorrect description.**
 
 The |api| assumes that the reader has a preliminary knowledge of ``python`` programing and ``Linux``. And this
