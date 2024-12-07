@@ -44,8 +44,8 @@ Limitations:
    - Many entries in the vectors might be zeros, leading to sparsity.
 
 
- One Hot Encoder
-----------------
+One Hot Encoder
+---------------
 
 CountVectorizer
 ---------------
@@ -67,3 +67,5 @@ GloVE
 Fast Text 
 +++++++++
 
+BERT
+++++
