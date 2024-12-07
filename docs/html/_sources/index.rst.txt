@@ -17,4 +17,5 @@ Contents
    :numbered:
 
    preface
+   prelim
    reference 

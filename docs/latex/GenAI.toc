@@ -1,8 +1,9 @@
-\select@language {english}
-\contentsline {chapter}{\numberline {1}Preface}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}About}{3}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}About this book}{3}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}About the author}{3}{subsection.1.1.2}
-\contentsline {section}{\numberline {1.2}Feedback and suggestions}{4}{section.1.2}
-\contentsline {chapter}{\numberline {2}Main Reference}{5}{chapter.2}
-\contentsline {chapter}{Bibliography}{7}{chapter*.4}
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Preface}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}About}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}About this book}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}About the author}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Feedback and suggestions}{4}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Preliminary}{5}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Main Reference}{7}{chapter.3}%
+\contentsline {chapter}{Bibliography}{9}{chapter*.4}%

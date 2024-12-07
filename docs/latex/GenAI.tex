@@ -4,6 +4,14 @@
 \ifdefined\pdfpxdimen
    \let\sphinxpxdimen\pdfpxdimen\else\newdimen\sphinxpxdimen
 \fi \sphinxpxdimen=.75bp\relax
+\ifdefined\pdfimageresolution
+    \pdfimageresolution= \numexpr \dimexpr1in\relax/\sphinxpxdimen\relax
+\fi
+%% let collapsible pdf bookmarks panel have high depth per default
+\PassOptionsToPackage{bookmarksdepth=5}{hyperref}
+
+\PassOptionsToPackage{booktabs}{sphinx}
+\PassOptionsToPackage{colorrows}{sphinx}
 
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
@@ -28,34 +36,16 @@
 
 
 
-\usepackage{times}
-\expandafter\ifx\csname T@LGR\endcsname\relax
-\else
-% LGR was declared as font encoding
-  \substitutefont{LGR}{\rmdefault}{cmr}
-  \substitutefont{LGR}{\sfdefault}{cmss}
-  \substitutefont{LGR}{\ttdefault}{cmtt}
-\fi
-\expandafter\ifx\csname T@X2\endcsname\relax
-  \expandafter\ifx\csname T@T2A\endcsname\relax
-  \else
-  % T2A was declared as font encoding
-    \substitutefont{T2A}{\rmdefault}{cmr}
-    \substitutefont{T2A}{\sfdefault}{cmss}
-    \substitutefont{T2A}{\ttdefault}{cmtt}
-  \fi
-\else
-% X2 was declared as font encoding
-  \substitutefont{X2}{\rmdefault}{cmr}
-  \substitutefont{X2}{\sfdefault}{cmss}
-  \substitutefont{X2}{\ttdefault}{cmtt}
-\fi
+\usepackage{tgtermes}
+\usepackage{tgheros}
+\renewcommand{\ttdefault}{txtt}
+
 
 
 \usepackage[Bjarne]{fncychap}
 \usepackage{sphinx}
 
-\fvset{fontsize=\small}
+\fvset{fontsize=auto}
 \usepackage{geometry}
 
 
@@ -73,13 +63,18 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 05, 2024}
+\date{December 07, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
 \renewcommand{\releasename}{Release}
 \makeindex
 \begin{document}
+
+\ifdefined\shorthandoff
+  \ifnum\catcode`\=\string=\active\shorthandoff{=}\fi
+  \ifnum\catcode`\"=\active\shorthandoff{"}\fi
+\fi
 
 \pagestyle{empty}
 \sphinxmaketitle
@@ -95,16 +90,20 @@
 \end{figure}
 \end{quote}
 
+\sphinxAtStartPar
 Welcome to our \sphinxstylestrong{GenAI: Best Practices}!!! The PDF version
 can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}.
 
 
 
+\sphinxstepscope
+
 
 \chapter{Preface}
-\label{\detokenize{preface:preface}}\label{\detokenize{preface:id1}}\label{\detokenize{preface::doc}}
+\label{\detokenize{preface:id1}}\label{\detokenize{preface::doc}}
 \begin{sphinxadmonition}{note}{Chinese proverb}
 
+\sphinxAtStartPar
 Good tools are prerequisite to the successful execution of a job. \textendash{} old Chinese proverb
 \end{sphinxadmonition}
 
@@ -114,10 +113,12 @@ Good tools are prerequisite to the successful execution of a job. \textendash{} 
 
 \subsection{About this book}
 \label{\detokenize{preface:about-this-book}}
+\sphinxAtStartPar
 This is the book for our Generative AI: Best practics \sphinxcite{reference:autofeatures} API.
-The PDF version can be downloaded from \sphinxhref{GenAI.pdf}{HERE}. \sphinxstylestrong{You may download and distribute it. Please beaware,
+The PDF version can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}. \sphinxstylestrong{You may download and distribute it. Please beaware,
 however, that the note contains typos as well as inaccurate or incorrect description.}
 
+\sphinxAtStartPar
 The \sphinxcode{\sphinxupquote{API}} assumes that the reader has a preliminary knowledge of \sphinxcode{\sphinxupquote{python}} programing and \sphinxcode{\sphinxupquote{Linux}}. And this
 document is generated automatically by using \sphinxhref{http://sphinx.pocoo.org}{sphinx}.
 
@@ -125,43 +126,54 @@ document is generated automatically by using \sphinxhref{http://sphinx.pocoo.org
 \subsection{About the author}
 \label{\detokenize{preface:about-the-author}}\begin{itemize}
 \item {} 
+\sphinxAtStartPar
 \sphinxstylestrong{Wenqiang Feng}
 \begin{itemize}
 \item {} 
+\sphinxAtStartPar
 Sr. Data Scientist and PhD in Mathematics
 
 \item {} 
+\sphinxAtStartPar
 University of Tennessee at Knoxville
 
 \item {} 
+\sphinxAtStartPar
 Webpage: \sphinxurl{http://web.utk.edu/~wfeng1/}
 
 \item {} 
+\sphinxAtStartPar
 Email: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com}
 
 \end{itemize}
 
 \item {} 
+\sphinxAtStartPar
 \sphinxstylestrong{Biography}
 
+\sphinxAtStartPar
 Wenqiang Feng is Data Scientist within DST’s Applied Analytics Group. Dr. Feng’s responsibilities include providing
 DST clients with access to cutting\sphinxhyphen{}edge skills and technologies, including Big Data analytic solutions, advanced
 analytic and data enhancement techniques and modeling.
 
+\sphinxAtStartPar
 Dr. Feng has deep analytic expertise in data mining, analytic systems, machine learning algorithms, business
 intelligence, and applying Big Data tools to strategically solve industry problems in a cross\sphinxhyphen{}functional business.
 Before joining DST, Dr. Feng was an IMA Data Science Fellow at The Institute for Mathematics and its
 Applications (IMA) at the University of Minnesota. While there, he helped startup companies make marketing
 decisions based on deep predictive analytics.
 
+\sphinxAtStartPar
 Dr. Feng graduated from University of Tennessee, Knoxville, with Ph.D. in Computational Mathematics and Master’s
 degree in Statistics. He also holds Master’s degree in Computational Mathematics from Missouri University of
 Science and Technology (MST) and Master’s degree in Applied Mathematics from the University of Science and
 Technology of China (USTC).
 
 \item {} 
+\sphinxAtStartPar
 \sphinxstylestrong{Declaration}
 
+\sphinxAtStartPar
 The work of Wenqiang Feng was supported by the IMA, while working at IMA. However, any opinion, finding,
 and conclusions or recommendations expressed in this material are those of the author and do not necessarily
 reflect the views of the IMA, UTK and DST.
@@ -171,14 +183,26 @@ reflect the views of the IMA, UTK and DST.
 
 \section{Feedback and suggestions}
 \label{\detokenize{preface:feedback-and-suggestions}}
+\sphinxAtStartPar
 Your comments and suggestions are highly appreciated. I am more than happy to receive
 corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com}) for improvements.
+
+\sphinxstepscope
+
+
+\chapter{Preliminary}
+\label{\detokenize{prelim:preliminary}}\label{\detokenize{prelim:prelim}}\label{\detokenize{prelim::doc}}
+\sphinxAtStartPar
+In this chapter, we will introduce some math preliminary which is highly used in Generative AI.
+
+\sphinxstepscope
 
 
 \chapter{Main Reference}
 \label{\detokenize{reference:main-reference}}\label{\detokenize{reference:reference}}\label{\detokenize{reference::doc}}
 \begin{sphinxthebibliography}{AutoFeat}
 \bibitem[AutoFeatures]{reference:autofeatures}
+\sphinxAtStartPar
 Wenqiang Feng and Ming Chen.
 \sphinxhref{https://runawayhorse001.github.io/AutoFeatures/}{Python Data Audit Library API}, 2019.
 \end{sphinxthebibliography}
