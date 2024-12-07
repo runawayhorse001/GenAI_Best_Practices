@@ -18,4 +18,5 @@ Contents
 
    preface
    prelim
+   embedding
    reference 

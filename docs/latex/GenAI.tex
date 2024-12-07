@@ -193,8 +193,117 @@ corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{m
 \chapter{Preliminary}
 \label{\detokenize{prelim:preliminary}}\label{\detokenize{prelim:prelim}}\label{\detokenize{prelim::doc}}
 \sphinxAtStartPar
-In this chapter, we will introduce some math preliminary which is highly used in Generative AI.
+In this chapter, we will introduce some math preliminary which is highly
+used in Generative AI.
 
+
+\section{Math Preliminary}
+\label{\detokenize{prelim:math-preliminary}}
+
+\section{NLP Preliminary}
+\label{\detokenize{prelim:nlp-preliminary}}
+\sphinxstepscope
+
+
+\chapter{Word and Sentence Embedding}
+\label{\detokenize{embedding:word-and-sentence-embedding}}\label{\detokenize{embedding:embedding}}\label{\detokenize{embedding::doc}}
+
+\section{Bag\sphinxhyphen{}of\sphinxhyphen{}Word}
+\label{\detokenize{embedding:bag-of-word}}
+\sphinxAtStartPar
+\sphinxstylestrong{Bag of Words (BoW)} is a simple and widely used text representation technique in natural language processing (NLP). It represents a text (e.g., a document or a sentence) as a collection of words, ignoring grammar, order, and context but keeping their frequency.
+
+\sphinxAtStartPar
+Key Features of Bag of Words:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Vocabulary Creation}:
+\sphinxhyphen{} A list of all unique words in the dataset (the “vocabulary”) is created.
+\sphinxhyphen{} Each word becomes a feature.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Representation}:
+\sphinxhyphen{} Each document is represented as a vector or a frequency count of words from the vocabulary.
+\sphinxhyphen{} If a word from the vocabulary is present in the document, its count is included in the vector.
+\sphinxhyphen{} Words not present in the document are assigned a count of zero.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Simplicity}:
+\sphinxhyphen{} The method is computationally efficient and straightforward.
+\sphinxhyphen{} However, it ignores the sequence and semantic meaning of the words.
+
+\end{enumerate}
+
+\sphinxAtStartPar
+Applications:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Text Classification
+
+\item {} 
+\sphinxAtStartPar
+Sentiment Analysis
+
+\item {} 
+\sphinxAtStartPar
+Document Similarity
+
+\end{itemize}
+
+\sphinxAtStartPar
+Limitations:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Context Ignorance}:
+\sphinxhyphen{} BoW does not capture word order or semantics.
+\sphinxhyphen{} For example, “not good” and “good” might appear similar in BoW.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Dimensionality}:
+\sphinxhyphen{} As the vocabulary size increases, the vector representation grows, leading to high\sphinxhyphen{}dimensional data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Sparse Representations}:
+\sphinxhyphen{} Many entries in the vectors might be zeros, leading to sparsity.
+
+\end{enumerate}
+\begin{quote}
+
+\sphinxAtStartPar
+One Hot Encoder
+\end{quote}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\subsection{CountVectorizer}
+\label{\detokenize{embedding:countvectorizer}}
+\sphinxAtStartPar
+To overcome these limitations, advanced techniques like \sphinxstylestrong{TF\sphinxhyphen{}IDF}, \sphinxstylestrong{word embeddings} (e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.
+
+
+\section{TF\sphinxhyphen{}IDF}
+\label{\detokenize{embedding:tf-idf}}
+
+\section{Word2Vec}
+\label{\detokenize{embedding:word2vec}}
+
+\section{GloVE}
+\label{\detokenize{embedding:glove}}
+
+\section{Fast Text}
+\label{\detokenize{embedding:fast-text}}
 \sphinxstepscope
 
 
