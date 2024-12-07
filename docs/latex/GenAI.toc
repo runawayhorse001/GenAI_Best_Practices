@@ -16,5 +16,16 @@
 \contentsline {section}{\numberline {3.4}GloVE}{8}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Fast Text}{8}{section.3.5}%
 \contentsline {section}{\numberline {3.6}BERT}{8}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Main Reference}{9}{chapter.4}%
-\contentsline {chapter}{Bibliography}{11}{chapter*.4}%
+\contentsline {chapter}{\numberline {4}Prompt Engineering}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Background about LLM and Prompt}{9}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Prompt Engineering Basics}{9}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Prompt Components}{9}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Prompt Engineering Principles}{9}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{9}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Overview}{11}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Indexing}{11}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Retrieval}{11}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Generation}{11}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Main Reference}{13}{chapter.6}%
+\contentsline {chapter}{Bibliography}{15}{chapter*.4}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  7 DEC 2024 11:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  7 DEC 2024 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,7 +825,7 @@ Package hyperref Info: Link coloring ON on input line 72.
 \openout5 = `GenAI.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 80.
-<logo.png, id=81, 496.85625pt x 308.15125pt>
+<logo.png, id=125, 496.85625pt x 308.15125pt>
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 8
 0.
 
@@ -969,9 +969,41 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [10
 
+]
+Chapter 5.
+
+
+[11]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12
+
+]
+Chapter 6.
+
+
+[13]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[14
+
 ] (./GenAI.ind)
 
-[11
+[15
 
 ] (./GenAI.aux)
  ***********
@@ -979,13 +1011,13 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
  ***********
 Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: ADF7D87433F706E5DD08D1BEADE4C6BA;2230.
+(rerunfilecheck)             Checksum: 93AB6756820000E45E30250D24BA4E2F;3926.
  ) 
 Here is how much of TeX's memory you used:
- 16938 strings out of 475544
- 286785 string characters out of 5777741
- 1936905 words of memory out of 5000000
- 39155 multiletter control sequences out of 15000+600000
+ 16979 strings out of 475544
+ 287455 string characters out of 5777741
+ 1939905 words of memory out of 5000000
+ 39181 multiletter control sequences out of 15000+600000
  608852 words of font info for 85 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  72i,11n,83p,1194b,558s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -993,10 +1025,10 @@ Here is how much of TeX's memory you used:
 s/type1/public/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/type1/public/tex-gyre
 /qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on GenAI.pdf (15 pages, 586850 bytes).
+Output written on GenAI.pdf (19 pages, 590717 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 196 compressed objects within 2 object streams
- 43 named destinations out of 1000 (max. 500000)
- 178 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 303 PDF objects out of 1000 (max. 8388607)
+ 266 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 266 words of extra memory for PDF output out of 10000 (max. 10000000)
 
