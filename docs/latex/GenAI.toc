@@ -27,5 +27,7 @@
 \contentsline {section}{\numberline {5.2}Indexing}{11}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Retrieval}{11}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Generation}{11}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Main Reference}{13}{chapter.6}%
-\contentsline {chapter}{Bibliography}{15}{chapter*.4}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{13}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{15}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Main Reference}{17}{chapter.8}%
+\contentsline {chapter}{Bibliography}{19}{chapter*.4}%

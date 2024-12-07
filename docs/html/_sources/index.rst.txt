@@ -21,4 +21,6 @@ Contents
    embedding
    prompt
    rag
+   finetuning
+   pretraining
    reference 
