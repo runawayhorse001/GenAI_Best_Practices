@@ -6,7 +6,7 @@
     :align: center
 
 Welcome to our **GenAI: Best Practices**!!! The PDF version
-can be downloaded from `HERE <../atex/GenAI.pdf>`_.
+can be downloaded from `HERE <../latex/GenAI.pdf>`_.
 
 ========
 Contents

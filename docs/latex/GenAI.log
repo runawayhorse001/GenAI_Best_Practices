@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  7 DEC 2024 18:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  7 DEC 2024 18:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1025,7 +1025,7 @@ Here is how much of TeX's memory you used:
 s/type1/public/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/type1/public/tex-gyre
 /qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on GenAI.pdf (19 pages, 590683 bytes).
+Output written on GenAI.pdf (19 pages, 590677 bytes).
 PDF statistics:
  303 PDF objects out of 1000 (max. 8388607)
  266 compressed objects within 3 object streams
