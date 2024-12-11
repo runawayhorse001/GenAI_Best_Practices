@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 07, 2024}
+\date{December 11, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -123,8 +123,8 @@ The \sphinxcode{\sphinxupquote{API}} assumes that the reader has a preliminary k
 document is generated automatically by using \sphinxhref{http://sphinx.pocoo.org}{sphinx}.
 
 
-\subsection{About the author}
-\label{\detokenize{preface:about-the-author}}\begin{itemize}
+\subsection{About the authors}
+\label{\detokenize{preface:about-the-authors}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Wenqiang Feng}
@@ -185,7 +185,8 @@ reflect the views of the IMA, UTK and DST.
 \label{\detokenize{preface:feedback-and-suggestions}}
 \sphinxAtStartPar
 Your comments and suggestions are highly appreciated. I am more than happy to receive
-corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com}) for improvements.
+corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com} and Di Zhen: \sphinxhref{mailto:dizhen318@gmail.com}{dizhen318@gmail.com}
+) for improvements.
 
 \sphinxstepscope
 
@@ -193,20 +194,255 @@ corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{m
 \chapter{Preliminary}
 \label{\detokenize{prelim:preliminary}}\label{\detokenize{prelim:prelim}}\label{\detokenize{prelim::doc}}
 \sphinxAtStartPar
-In this chapter, we will introduce some math preliminary which is highly
+In this chapter, we will introduce some math and NLP preliminaries which is highly
 used in Generative AI.
 
 
 \section{Math Preliminary}
 \label{\detokenize{prelim:math-preliminary}}
 
+\subsection{Vector}
+\label{\detokenize{prelim:vector}}
+\sphinxAtStartPar
+A vector is a mathematical representation of data that has both magnitude and direction.
+Each data point is represented as a feature vector, where each component of the vector
+corresponds to a specific feature or attribute of the data.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{import} \PYG{n+nn}{gensim}\PYG{n+nn}{.}\PYG{n+nn}{downloader} \PYG{k}{as} \PYG{n+nn}{api}
+\PYG{c+c1}{\PYGZsh{} Download pre\PYGZhy{}trained GloVe model}
+\PYG{n}{glove\PYGZus{}vectors} \PYG{o}{=} \PYG{n}{api}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{glove\PYGZhy{}twitter\PYGZhy{}25}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Get word vectors (embeddings)}
+\PYG{n}{word1} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{king}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{word2} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{queen}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} embedding}
+\PYG{n}{king} \PYG{o}{=} \PYG{n}{glove\PYGZus{}vectors}\PYG{p}{[}\PYG{n}{word1}\PYG{p}{]}
+\PYG{n}{queen} \PYG{o}{=} \PYG{n}{glove\PYGZus{}vectors}\PYG{p}{[}\PYG{n}{word2}\PYG{p}{]}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{king:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{king}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{queen:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{queen}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{king}\PYG{p}{:}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.74501}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11992}   \PYG{l+m+mf}{0.37329}   \PYG{l+m+mf}{0.36847}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.4472}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2288}    \PYG{l+m+mf}{0.70118}
+\PYG{l+m+mf}{0.82872}   \PYG{l+m+mf}{0.39486}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.58347}   \PYG{l+m+mf}{0.41488}   \PYG{l+m+mf}{0.37074}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{3.6906}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20101}
+\PYG{l+m+mf}{0.11472}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.34661}   \PYG{l+m+mf}{0.36208}   \PYG{l+m+mf}{0.095679} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.01765}   \PYG{l+m+mf}{0.68498}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.049013}
+\PYG{l+m+mf}{0.54049}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.21005}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.65397}   \PYG{l+m+mf}{0.64556} \PYG{p}{]}
+\PYG{n}{queen}\PYG{p}{:}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.1266}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.52064}   \PYG{l+m+mf}{0.45565}   \PYG{l+m+mf}{0.21079}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05081}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.65158}   \PYG{l+m+mf}{1.1395}
+\PYG{l+m+mf}{0.69897}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20612}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.71803}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.02811}   \PYG{l+m+mf}{0.10977}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{3.3089}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.49299}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.51375}   \PYG{l+m+mf}{0.10363}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11764}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.084972}  \PYG{l+m+mf}{0.02558}   \PYG{l+m+mf}{0.6859}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.29196}
+\PYG{l+m+mf}{0.4594}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.39955}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.40371}   \PYG{l+m+mf}{0.31828} \PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{vector}.png}
+\caption{Vector}\label{\detokenize{prelim:id2}}\label{\detokenize{prelim:fig-logo}}\end{figure}
+
+
+\subsection{Norm}
+\label{\detokenize{prelim:norm}}
+\sphinxAtStartPar
+Norm is a function that maps a vector to a single positive value, representing its
+magnitude. Norms are used to calculate distances between vectors, which is vital
+for measuring prediction errors in models, performing feature
+selection, and applying regularization techniques.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{1Bauo}.png}
+\caption{Geometrical Interpretation of Norm (\sphinxhref{https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent}{source\_1})}\label{\detokenize{prelim:id3}}\label{\detokenize{prelim:id1}}\end{figure}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Formula:
+\begin{quote}
+
+\sphinxAtStartPar
+The \(\displaystyle \ell^p\) norm for \(\vec{v} = (v_1, v_2, \cdots, v_n)\) is
+\begin{equation*}
+\begin{split}||\vec{v}||_p = \sqrt[p]{|v_1|^p + |v_2|^p + \cdots +|v_n|^p }\end{split}
+\end{equation*}\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+\(\displaystyle \ell^1\) norm: Sum of absolute values of vector components, often used for feature selection due to its tendency to produce sparse solutions.
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} l1 norm}
+\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{king}\PYG{p}{,}\PYG{n+nb}{ord}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}    max(sum(abs(x), axis=0))}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} 13.188952}
+\end{sphinxVerbatim}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+\(\displaystyle \ell^2\) norm: Square root of the sum of squared vector components, the most common norm used in many machine learning algorithms.
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} l2 norm}
+\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{king}\PYG{p}{,}\PYG{n+nb}{ord}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} 4.3206835}
+\end{sphinxVerbatim}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+\(\displaystyle \ell^\infty\) norm (Maximum norm): The largest absolute value of a vector component.
+
+\end{itemize}
+
+
+\subsection{Distances}
+\label{\detokenize{prelim:distances}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Manhattan Distance (\(\displaystyle \ell^1\) Distance)
+\begin{quote}
+
+\sphinxAtStartPar
+Also known as taxicab or city block distance, Manhattan distance measures the absolute differences between the components of two vectors. It calculates the distance a point would travel along the grid lines in a Cartesian plane, as if navigating through a city.
+
+\sphinxAtStartPar
+For two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\), the
+Manhattan Distance distance \(d(\vec{u},\vec{v})\) is
+\begin{equation*}
+\begin{split}d(\vec{u},\vec{v}) = ||\vec{u}-\vec{v}||_1 = |u_1-v_1| + |u_2-v_2|+ \cdots +|u_n-v_n|\end{split}
+\end{equation*}\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Euclidean Distance (\(\displaystyle \ell^2\) Distance)
+\begin{quote}
+
+\sphinxAtStartPar
+Euclidean distance is the most common way to measure the distance between two points (vectors) in space. It is essentially the straight\sphinxhyphen{}line distance between them, calculated using the Pythagorean theorem.
+
+\sphinxAtStartPar
+For two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\), the Euclidean Distance distance \(d(\vec{u},\vec{v})\) is
+\begin{equation*}
+\begin{split}d(\vec{u},\vec{v}) = ||\vec{u}-\vec{v}||_2 = \sqrt{(u_1-v_1)^2 + (u_2-v_2)^2+ \cdots +(u_n-v_n)^2}\end{split}
+\end{equation*}\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Minkowski Distance (\(\displaystyle \ell^p\) Distance)
+\begin{quote}
+
+\sphinxAtStartPar
+Minkowski distance is a generalization of both Euclidean and Manhattan distances. It introduces a parameter \(p\) that allows you to adjust the sensitivity of the distance metric.
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Cos Similarity
+\begin{quote}
+
+\sphinxAtStartPar
+Cosine similarity measures the angle between two vectors rather than their straight\sphinxhyphen{}line distance. It is used to determine how similar two vectors are by focusing on their orientation rather than their magnitude. This makes it particularly useful for high\sphinxhyphen{}dimensional data, such as text, where the magnitude of the vectors may not be as important as the direction.
+
+\sphinxAtStartPar
+The Cos similarity for two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\) is
+\begin{equation*}
+\begin{split}cos(\theta) = \frac{\vec{u}\cdot\vec{v}}{||\vec{u}|| ||\vec{v}||}\end{split}
+\end{equation*}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+1 means the vectors point in exactly the same direction (perfect similarity).
+
+\item {} 
+\sphinxAtStartPar
+0 means they are orthogonal (no similarity).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxhyphen{}1 means they point in opposite directions (complete dissimilarity).
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Compute cosine similarity between the two word vectors}
+\PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{king}\PYG{p}{,}\PYG{n}{queen}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{king}\PYG{p}{)}\PYG{o}{*}\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{queen}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} 0.92024213}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Compute cosine similarity between the two word vectors}
+\PYG{n}{similarity} \PYG{o}{=} \PYG{n}{glove\PYGZus{}vectors}\PYG{o}{.}\PYG{n}{similarity}\PYG{p}{(}\PYG{n}{word1}\PYG{p}{,} \PYG{n}{word2}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Word vectors for }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{king}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Word vectors for }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word2}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{queen}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Cosine similarity between }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word2}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{similarity}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Word} \PYG{n}{vectors} \PYG{k}{for} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{king}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.74501}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11992}   \PYG{l+m+mf}{0.37329}   \PYG{l+m+mf}{0.36847}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.4472}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2288}    \PYG{l+m+mf}{0.70118}
+\PYG{l+m+mf}{0.82872}   \PYG{l+m+mf}{0.39486}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.58347}   \PYG{l+m+mf}{0.41488}   \PYG{l+m+mf}{0.37074}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{3.6906}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20101}
+\PYG{l+m+mf}{0.11472}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.34661}   \PYG{l+m+mf}{0.36208}   \PYG{l+m+mf}{0.095679} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.01765}   \PYG{l+m+mf}{0.68498}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.049013}
+\PYG{l+m+mf}{0.54049}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.21005}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.65397}   \PYG{l+m+mf}{0.64556} \PYG{p}{]}
+\PYG{n}{Word} \PYG{n}{vectors} \PYG{k}{for} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{queen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.1266}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.52064}   \PYG{l+m+mf}{0.45565}   \PYG{l+m+mf}{0.21079}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05081}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.65158}   \PYG{l+m+mf}{1.1395}
+\PYG{l+m+mf}{0.69897}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20612}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.71803}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.02811}   \PYG{l+m+mf}{0.10977}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{3.3089}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.49299}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.51375}   \PYG{l+m+mf}{0.10363}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11764}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.084972}  \PYG{l+m+mf}{0.02558}   \PYG{l+m+mf}{0.6859}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.29196}
+\PYG{l+m+mf}{0.4594}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.39955}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.40371}   \PYG{l+m+mf}{0.31828} \PYG{p}{]}
+\PYG{n}{Cosine} \PYG{n}{similarity} \PYG{n}{between} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{king}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{and} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{queen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{0.920242190361023}
+\end{sphinxVerbatim}
+\end{quote}
+
+\end{itemize}
+
+
 \section{NLP Preliminary}
 \label{\detokenize{prelim:nlp-preliminary}}
+
+\subsection{Vocabulary}
+\label{\detokenize{prelim:vocabulary}}
+
+\subsection{Tagging}
+\label{\detokenize{prelim:tagging}}
+
+\subsection{Lemmatization}
+\label{\detokenize{prelim:lemmatization}}
+
+\subsection{Tokenization}
+\label{\detokenize{prelim:tokenization}}
+\sphinxAtStartPar
+Out\sphinxhyphen{}of\sphinxhyphen{}vocabulary tokens
+Subword Tokenization
+
+
+\section{Platform and Packages}
+\label{\detokenize{prelim:platform-and-packages}}
 \sphinxstepscope
 
 
 \chapter{Word and Sentence Embedding}
 \label{\detokenize{embedding:word-and-sentence-embedding}}\label{\detokenize{embedding:embedding}}\label{\detokenize{embedding::doc}}
+\sphinxAtStartPar
+Word embedding is a method in natural language processing (NLP) to represent words as dense
+vectors of real numbers, capturing semantic relationships between them. Instead of treating
+words as discrete symbols (like one\sphinxhyphen{}hot encoding), word embeddings map words into a
+continuous vector space where similar words are located closer together.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{embedding_diagram}.png}
+\caption{Embedding Diagram}\label{\detokenize{embedding:id1}}\label{\detokenize{embedding:fig-logo}}\end{figure}
+
 
 \section{Bag\sphinxhyphen{}of\sphinxhyphen{}Word}
 \label{\detokenize{embedding:bag-of-word}}

@@ -5,6 +5,19 @@
 Word and Sentence Embedding
 ===========================
 
+Word embedding is a method in natural language processing (NLP) to represent words as dense 
+vectors of real numbers, capturing semantic relationships between them. Instead of treating 
+words as discrete symbols (like one-hot encoding), word embeddings map words into a 
+continuous vector space where similar words are located closer together.
+
+
+
+.. _fig_logo:
+.. figure:: images/embedding_diagram.png
+    :align: center
+
+    Embedding Diagram
+
 Bag-of-Word
 +++++++++++
 

@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Main Reference" href="reference.html" />
+    <link rel="next" title="4. Prompt Engineering" href="prompt.html" />
     <link rel="prev" title="2. Preliminary" href="prelim.html" /> 
 </head>
 
@@ -60,7 +60,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#bert">3.6. BERT</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">4. Main Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">8. Main Reference</a></li>
 </ul>
 
         </div>
@@ -89,6 +93,16 @@
              
   <section id="word-and-sentence-embedding">
 <span id="embedding"></span><h1><span class="section-number">3. </span>Word and Sentence Embedding<a class="headerlink" href="#word-and-sentence-embedding" title="Link to this heading"></a></h1>
+<p>Word embedding is a method in natural language processing (NLP) to represent words as dense
+vectors of real numbers, capturing semantic relationships between them. Instead of treating
+words as discrete symbols (like one-hot encoding), word embeddings map words into a
+continuous vector space where similar words are located closer together.</p>
+<figure class="align-center" id="id1">
+<span id="fig-logo"></span><img alt="_images/embedding_diagram.png" src="_images/embedding_diagram.png" />
+<figcaption>
+<p><span class="caption-text">Embedding Diagram</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <section id="bag-of-word">
 <h2><span class="section-number">3.1. </span>Bag-of-Word<a class="headerlink" href="#bag-of-word" title="Link to this heading"></a></h2>
 <p><strong>Bag of Words (BoW)</strong> is a simple and widely used text representation technique in natural language processing (NLP). It represents a text (e.g., a document or a sentence) as a collection of words, ignoring grammar, order, and context but keeping their frequency.</p>
@@ -151,14 +165,14 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="prelim.html" class="btn btn-neutral float-left" title="2. Preliminary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="reference.html" class="btn btn-neutral float-right" title="4. Main Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="prompt.html" class="btn btn-neutral float-right" title="4. Prompt Engineering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 07, 2024.
+      <span class="lastupdated">Last updated on Dec 10, 2024.
       </span></p>
   </div>
 

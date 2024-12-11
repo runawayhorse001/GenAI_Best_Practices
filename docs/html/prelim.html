@@ -18,10 +18,11 @@
       <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Main Reference" href="reference.html" />
+    <link rel="next" title="3. Word and Sentence Embedding" href="embedding.html" />
     <link rel="prev" title="1. Preface" href="preface.html" /> 
 </head>
 
@@ -47,11 +48,28 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="preface.html">1. Preface</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. Preliminary</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#math-preliminary">2.1. Math Preliminary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nlp-preliminary">2.2. NLP Preliminary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#math-preliminary">2.1. Math Preliminary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vector">2.1.1. Vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#norm">2.1.2. Norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distances">2.1.3. Distances</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">3. Main Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nlp-preliminary">2.2. NLP Preliminary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vocabulary">2.2.1. Vocabulary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tagging">2.2.2. Tagging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lemmatization">2.2.3. Lemmatization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tokenization">2.2.4. Tokenization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-and-packages">2.3. Platform and Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="embedding.html">3. Word and Sentence Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">8. Main Reference</a></li>
 </ul>
 
         </div>
@@ -80,13 +98,178 @@
              
   <section id="preliminary">
 <span id="prelim"></span><h1><span class="section-number">2. </span>Preliminary<a class="headerlink" href="#preliminary" title="Link to this heading"></a></h1>
-<p>In this chapter, we will introduce some math preliminary which is highly
+<p>In this chapter, we will introduce some math and NLP preliminaries which is highly
 used in Generative AI.</p>
 <section id="math-preliminary">
 <h2><span class="section-number">2.1. </span>Math Preliminary<a class="headerlink" href="#math-preliminary" title="Link to this heading"></a></h2>
+<section id="vector">
+<h3><span class="section-number">2.1.1. </span>Vector<a class="headerlink" href="#vector" title="Link to this heading"></a></h3>
+<p>A vector is a mathematical representation of data that has both magnitude and direction.
+Each data point is represented as a feature vector, where each component of the vector
+corresponds to a specific feature or attribute of the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gensim.downloader</span> <span class="k">as</span> <span class="nn">api</span>
+<span class="c1"># Download pre-trained GloVe model</span>
+<span class="n">glove_vectors</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;glove-twitter-25&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get word vectors (embeddings)</span>
+<span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;king&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;queen&quot;</span>
+
+<span class="c1"># embedding</span>
+<span class="n">king</span> <span class="o">=</span> <span class="n">glove_vectors</span><span class="p">[</span><span class="n">word1</span><span class="p">]</span>
+<span class="n">queen</span> <span class="o">=</span> <span class="n">glove_vectors</span><span class="p">[</span><span class="n">word2</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;king:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">king</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;queen:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">queen</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">king</span><span class="p">:</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.74501</span>  <span class="o">-</span><span class="mf">0.11992</span>   <span class="mf">0.37329</span>   <span class="mf">0.36847</span>  <span class="o">-</span><span class="mf">0.4472</span>   <span class="o">-</span><span class="mf">0.2288</span>    <span class="mf">0.70118</span>
+<span class="mf">0.82872</span>   <span class="mf">0.39486</span>  <span class="o">-</span><span class="mf">0.58347</span>   <span class="mf">0.41488</span>   <span class="mf">0.37074</span>  <span class="o">-</span><span class="mf">3.6906</span>   <span class="o">-</span><span class="mf">0.20101</span>
+<span class="mf">0.11472</span>  <span class="o">-</span><span class="mf">0.34661</span>   <span class="mf">0.36208</span>   <span class="mf">0.095679</span> <span class="o">-</span><span class="mf">0.01765</span>   <span class="mf">0.68498</span>  <span class="o">-</span><span class="mf">0.049013</span>
+<span class="mf">0.54049</span>  <span class="o">-</span><span class="mf">0.21005</span>  <span class="o">-</span><span class="mf">0.65397</span>   <span class="mf">0.64556</span> <span class="p">]</span>
+<span class="n">queen</span><span class="p">:</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">1.1266</span>   <span class="o">-</span><span class="mf">0.52064</span>   <span class="mf">0.45565</span>   <span class="mf">0.21079</span>  <span class="o">-</span><span class="mf">0.05081</span>  <span class="o">-</span><span class="mf">0.65158</span>   <span class="mf">1.1395</span>
+<span class="mf">0.69897</span>  <span class="o">-</span><span class="mf">0.20612</span>  <span class="o">-</span><span class="mf">0.71803</span>  <span class="o">-</span><span class="mf">0.02811</span>   <span class="mf">0.10977</span>  <span class="o">-</span><span class="mf">3.3089</span>   <span class="o">-</span><span class="mf">0.49299</span>
+<span class="o">-</span><span class="mf">0.51375</span>   <span class="mf">0.10363</span>  <span class="o">-</span><span class="mf">0.11764</span>  <span class="o">-</span><span class="mf">0.084972</span>  <span class="mf">0.02558</span>   <span class="mf">0.6859</span>   <span class="o">-</span><span class="mf">0.29196</span>
+<span class="mf">0.4594</span>   <span class="o">-</span><span class="mf">0.39955</span>  <span class="o">-</span><span class="mf">0.40371</span>   <span class="mf">0.31828</span> <span class="p">]</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id2">
+<span id="fig-logo"></span><img alt="_images/vector.png" src="_images/vector.png" />
+<figcaption>
+<p><span class="caption-text">Vector</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="norm">
+<h3><span class="section-number">2.1.2. </span>Norm<a class="headerlink" href="#norm" title="Link to this heading"></a></h3>
+<p>Norm is a function that maps a vector to a single positive value, representing its
+magnitude. Norms are used to calculate distances between vectors, which is vital
+for measuring prediction errors in models, performing feature
+selection, and applying regularization techniques.</p>
+<figure class="align-center" id="id3">
+<span id="id1"></span><img alt="_images/1Bauo.png" src="_images/1Bauo.png" />
+<figcaption>
+<p><span class="caption-text">Geometrical Interpretation of Norm (<a class="reference external" href="https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent">source_1</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul>
+<li><p>Formula:</p>
+<blockquote>
+<div><p>The <span class="math notranslate nohighlight">\(\displaystyle \ell^p\)</span> norm for <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[||\vec{v}||_p = \sqrt[p]{|v_1|^p + |v_2|^p + \cdots +|v_n|^p }\]</div>
+</div></blockquote>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \ell^1\)</span> norm: Sum of absolute values of vector components, often used for feature selection due to its tendency to produce sparse solutions.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># l1 norm</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">king</span><span class="p">,</span><span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#    max(sum(abs(x), axis=0))</span>
+
+<span class="c1">### 13.188952</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \ell^2\)</span> norm: Square root of the sum of squared vector components, the most common norm used in many machine learning algorithms.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># l2 norm</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">king</span><span class="p">,</span><span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">### 4.3206835</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \ell^\infty\)</span> norm (Maximum norm): The largest absolute value of a vector component.</p></li>
+</ul>
+</section>
+<section id="distances">
+<h3><span class="section-number">2.1.3. </span>Distances<a class="headerlink" href="#distances" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Manhattan Distance (<span class="math notranslate nohighlight">\(\displaystyle \ell^1\)</span> Distance)</p>
+<blockquote>
+<div><p>Also known as taxicab or city block distance, Manhattan distance measures the absolute differences between the components of two vectors. It calculates the distance a point would travel along the grid lines in a Cartesian plane, as if navigating through a city.</p>
+<p>For two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span>, the
+Manhattan Distance distance <span class="math notranslate nohighlight">\(d(\vec{u},\vec{v})\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[d(\vec{u},\vec{v}) = ||\vec{u}-\vec{v}||_1 = |u_1-v_1| + |u_2-v_2|+ \cdots +|u_n-v_n|\]</div>
+</div></blockquote>
+</li>
+<li><p>Euclidean Distance (<span class="math notranslate nohighlight">\(\displaystyle \ell^2\)</span> Distance)</p>
+<blockquote>
+<div><p>Euclidean distance is the most common way to measure the distance between two points (vectors) in space. It is essentially the straight-line distance between them, calculated using the Pythagorean theorem.</p>
+<p>For two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span>, the Euclidean Distance distance <span class="math notranslate nohighlight">\(d(\vec{u},\vec{v})\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[d(\vec{u},\vec{v}) = ||\vec{u}-\vec{v}||_2 = \sqrt{(u_1-v_1)^2 + (u_2-v_2)^2+ \cdots +(u_n-v_n)^2}\]</div>
+</div></blockquote>
+</li>
+<li><p>Minkowski Distance (<span class="math notranslate nohighlight">\(\displaystyle \ell^p\)</span> Distance)</p>
+<blockquote>
+<div><p>Minkowski distance is a generalization of both Euclidean and Manhattan distances. It introduces a parameter <span class="math notranslate nohighlight">\(p\)</span> that allows you to adjust the sensitivity of the distance metric.</p>
+</div></blockquote>
+</li>
+<li><p>Cos Similarity</p>
+<blockquote>
+<div><p>Cosine similarity measures the angle between two vectors rather than their straight-line distance. It is used to determine how similar two vectors are by focusing on their orientation rather than their magnitude. This makes it particularly useful for high-dimensional data, such as text, where the magnitude of the vectors may not be as important as the direction.</p>
+<p>The Cos similarity for two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[cos(\theta) = \frac{\vec{u}\cdot\vec{v}}{||\vec{u}|| ||\vec{v}||}\]</div>
+<ul class="simple">
+<li><p>1 means the vectors point in exactly the same direction (perfect similarity).</p></li>
+<li><p>0 means they are orthogonal (no similarity).</p></li>
+<li><p>-1 means they point in opposite directions (complete dissimilarity).</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute cosine similarity between the two word vectors</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">king</span><span class="p">,</span><span class="n">queen</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">king</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">queen</span><span class="p">))</span>
+
+<span class="c1">### 0.92024213</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute cosine similarity between the two word vectors</span>
+<span class="n">similarity</span> <span class="o">=</span> <span class="n">glove_vectors</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word vectors for &#39;</span><span class="si">{</span><span class="n">word1</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">king</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word vectors for &#39;</span><span class="si">{</span><span class="n">word2</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">queen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cosine similarity between &#39;</span><span class="si">{</span><span class="n">word1</span><span class="si">}</span><span class="s2">&#39; and &#39;</span><span class="si">{</span><span class="n">word2</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">similarity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Word</span> <span class="n">vectors</span> <span class="k">for</span> <span class="s1">&#39;king&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.74501</span>  <span class="o">-</span><span class="mf">0.11992</span>   <span class="mf">0.37329</span>   <span class="mf">0.36847</span>  <span class="o">-</span><span class="mf">0.4472</span>   <span class="o">-</span><span class="mf">0.2288</span>    <span class="mf">0.70118</span>
+<span class="mf">0.82872</span>   <span class="mf">0.39486</span>  <span class="o">-</span><span class="mf">0.58347</span>   <span class="mf">0.41488</span>   <span class="mf">0.37074</span>  <span class="o">-</span><span class="mf">3.6906</span>   <span class="o">-</span><span class="mf">0.20101</span>
+<span class="mf">0.11472</span>  <span class="o">-</span><span class="mf">0.34661</span>   <span class="mf">0.36208</span>   <span class="mf">0.095679</span> <span class="o">-</span><span class="mf">0.01765</span>   <span class="mf">0.68498</span>  <span class="o">-</span><span class="mf">0.049013</span>
+<span class="mf">0.54049</span>  <span class="o">-</span><span class="mf">0.21005</span>  <span class="o">-</span><span class="mf">0.65397</span>   <span class="mf">0.64556</span> <span class="p">]</span>
+<span class="n">Word</span> <span class="n">vectors</span> <span class="k">for</span> <span class="s1">&#39;queen&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.1266</span>   <span class="o">-</span><span class="mf">0.52064</span>   <span class="mf">0.45565</span>   <span class="mf">0.21079</span>  <span class="o">-</span><span class="mf">0.05081</span>  <span class="o">-</span><span class="mf">0.65158</span>   <span class="mf">1.1395</span>
+<span class="mf">0.69897</span>  <span class="o">-</span><span class="mf">0.20612</span>  <span class="o">-</span><span class="mf">0.71803</span>  <span class="o">-</span><span class="mf">0.02811</span>   <span class="mf">0.10977</span>  <span class="o">-</span><span class="mf">3.3089</span>   <span class="o">-</span><span class="mf">0.49299</span>
+<span class="o">-</span><span class="mf">0.51375</span>   <span class="mf">0.10363</span>  <span class="o">-</span><span class="mf">0.11764</span>  <span class="o">-</span><span class="mf">0.084972</span>  <span class="mf">0.02558</span>   <span class="mf">0.6859</span>   <span class="o">-</span><span class="mf">0.29196</span>
+<span class="mf">0.4594</span>   <span class="o">-</span><span class="mf">0.39955</span>  <span class="o">-</span><span class="mf">0.40371</span>   <span class="mf">0.31828</span> <span class="p">]</span>
+<span class="n">Cosine</span> <span class="n">similarity</span> <span class="n">between</span> <span class="s1">&#39;king&#39;</span> <span class="ow">and</span> <span class="s1">&#39;queen&#39;</span><span class="p">:</span> <span class="mf">0.920242190361023</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
 </section>
 <section id="nlp-preliminary">
 <h2><span class="section-number">2.2. </span>NLP Preliminary<a class="headerlink" href="#nlp-preliminary" title="Link to this heading"></a></h2>
+<section id="vocabulary">
+<h3><span class="section-number">2.2.1. </span>Vocabulary<a class="headerlink" href="#vocabulary" title="Link to this heading"></a></h3>
+</section>
+<section id="tagging">
+<h3><span class="section-number">2.2.2. </span>Tagging<a class="headerlink" href="#tagging" title="Link to this heading"></a></h3>
+</section>
+<section id="lemmatization">
+<h3><span class="section-number">2.2.3. </span>Lemmatization<a class="headerlink" href="#lemmatization" title="Link to this heading"></a></h3>
+</section>
+<section id="tokenization">
+<h3><span class="section-number">2.2.4. </span>Tokenization<a class="headerlink" href="#tokenization" title="Link to this heading"></a></h3>
+<p>Out-of-vocabulary tokens
+Subword Tokenization</p>
+</section>
+</section>
+<section id="platform-and-packages">
+<h2><span class="section-number">2.3. </span>Platform and Packages<a class="headerlink" href="#platform-and-packages" title="Link to this heading"></a></h2>
 </section>
 </section>
 
@@ -95,14 +278,14 @@ used in Generative AI.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="preface.html" class="btn btn-neutral float-left" title="1. Preface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="reference.html" class="btn btn-neutral float-right" title="3. Main Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="embedding.html" class="btn btn-neutral float-right" title="3. Word and Sentence Embedding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 07, 2024.
+      <span class="lastupdated">Last updated on Dec 10, 2024.
       </span></p>
   </div>
 

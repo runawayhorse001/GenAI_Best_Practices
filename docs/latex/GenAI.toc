@@ -2,32 +2,40 @@
 \contentsline {chapter}{\numberline {1}Preface}{3}{chapter.1}%
 \contentsline {section}{\numberline {1.1}About}{3}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}About this book}{3}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}About the author}{3}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.2}About the authors}{3}{subsection.1.1.2}%
 \contentsline {section}{\numberline {1.2}Feedback and suggestions}{4}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Preliminary}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Math Preliminary}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}NLP Preliminary}{5}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Word and Sentence Embedding}{7}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Bag\sphinxhyphen {}of\sphinxhyphen {}Word}{7}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}One Hot Encoder}{7}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{7}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}TF\sphinxhyphen {}IDF}{8}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Word2Vec}{8}{section.3.3}%
-\contentsline {section}{\numberline {3.4}GloVE}{8}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Fast Text}{8}{section.3.5}%
-\contentsline {section}{\numberline {3.6}BERT}{8}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Prompt Engineering}{9}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Background about LLM and Prompt}{9}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Prompt Engineering Basics}{9}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Prompt Components}{9}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Prompt Engineering Principles}{9}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{9}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{11}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{11}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Indexing}{11}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Retrieval}{11}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Generation}{11}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Fine Tuning}{13}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{15}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Main Reference}{17}{chapter.8}%
-\contentsline {chapter}{Bibliography}{19}{chapter*.4}%
+\contentsline {subsection}{\numberline {2.1.1}Vector}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Norm}{6}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Distances}{7}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}NLP Preliminary}{9}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Vocabulary}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Tagging}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Lemmatization}{9}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Tokenization}{9}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Platform and Packages}{9}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Word and Sentence Embedding}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Bag\sphinxhyphen {}of\sphinxhyphen {}Word}{11}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}One Hot Encoder}{12}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{12}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}TF\sphinxhyphen {}IDF}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Word2Vec}{12}{section.3.3}%
+\contentsline {section}{\numberline {3.4}GloVE}{12}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Fast Text}{12}{section.3.5}%
+\contentsline {section}{\numberline {3.6}BERT}{12}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Prompt Engineering}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Background about LLM and Prompt}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Prompt Engineering Basics}{13}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Prompt Components}{13}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Prompt Engineering Principles}{13}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{13}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{15}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Overview}{15}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Indexing}{15}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Retrieval}{15}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Generation}{15}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{17}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{19}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Main Reference}{21}{chapter.8}%
+\contentsline {chapter}{Bibliography}{23}{chapter*.4}%

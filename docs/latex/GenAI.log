@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  7 DEC 2024 18:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  10 DEC 2024 22:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,7 +825,7 @@ Package hyperref Info: Link coloring ON on input line 72.
 \openout5 = `GenAI.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 80.
-<logo.png, id=133, 496.85625pt x 308.15125pt>
+<logo.png, id=165, 496.85625pt x 308.15125pt>
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 8
 0.
 
@@ -921,11 +921,30 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [4]
 Chapter 2.
-
+LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10.95> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 212.
+LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10.95> not available
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 214.
+LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
+225.
+(/usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
+File: ts1txtt.fd 2000/12/15 v3.1
+)
 
 [5
 
 ]
+<vector.png, id=270, 720.44156pt x 458.46281pt>
+File: vector.png Graphic file (type png)
+<use vector.png>
+Package pdftex.def Info: vector.png  used on input line 246.
+(pdftex.def)             Requested size: 469.75453pt x 298.94868pt.
+<1Bauo.png, id=271, 697.8572pt x 186.6975pt>
+File: 1Bauo.png Graphic file (type png)
+<use 1Bauo.png>
+Package pdftex.def Info: 1Bauo.png  used on input line 262.
+(pdftex.def)             Requested size: 469.75546pt x 125.67351pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -935,11 +954,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6
+[6 <./vector.png> <./1Bauo.png (PNG copy)>]
 
-]
-Chapter 3.
 
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [7]
 
@@ -952,12 +975,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8]
-Chapter 4.
 
 
-[9
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
 
-]
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -970,10 +997,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [10
 
 ]
-Chapter 5.
+Chapter 3.
+<embedding_diagram.png, id=306, 601.4972pt x 356.83313pt>
+File: embedding_diagram.png Graphic file (type png)
+<use embedding_diagram.png>
+Package pdftex.def Info: embedding_diagram.png  used on input line 443.
+(pdftex.def)             Requested size: 469.77168pt x 278.69351pt.
 
 
-[11]
+[11 <./embedding_diagram.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -983,13 +1015,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12
+[12]
+Chapter 4.
+
+
+[13
 
 ]
-Chapter 6.
-
-
-[13]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1002,7 +1034,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [14
 
 ]
-Chapter 7.
+Chapter 5.
 
 
 [15]
@@ -1018,7 +1050,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [16
 
 ]
-Chapter 8.
+Chapter 6.
 
 
 [17]
@@ -1033,9 +1065,41 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [18
 
+]
+Chapter 7.
+
+
+[19]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[20
+
+]
+Chapter 8.
+
+
+[21]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[22
+
 ] (./GenAI.ind)
 
-[19
+[23
 
 ] (./GenAI.aux)
  ***********
@@ -1043,24 +1107,35 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
  ***********
 Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: BA7E7E2A7A173932C21889115C84E553;4132.
+(rerunfilecheck)             Checksum: 02A93F387DF089CC64D34CDB379B88AE;5042.
  ) 
 Here is how much of TeX's memory you used:
- 16993 strings out of 475544
- 287656 string characters out of 5777741
- 1939905 words of memory out of 5000000
- 39189 multiletter control sequences out of 15000+600000
- 608852 words of font info for 85 fonts, out of 8000000 for 9000
+ 17123 strings out of 475544
+ 289888 string characters out of 5777741
+ 1982905 words of memory out of 5000000
+ 39288 multiletter control sequences out of 15000+600000
+ 613687 words of font info for 93 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,11n,83p,1194b,705s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf/font
-s/type1/public/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/type1/public/tex-gyre
-/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on GenAI.pdf (23 pages, 592732 bytes).
+ 72i,20n,83p,1194b,672s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></us
+r/share/texmf/fonts/type1/public/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/typ
+e1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/txfonts/tcxtt.pfb>
+Output written on GenAI.pdf (27 pages, 851245 bytes).
 PDF statistics:
- 330 PDF objects out of 1000 (max. 8388607)
- 289 compressed objects within 3 object streams
- 64 named destinations out of 1000 (max. 500000)
- 282 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 452 PDF objects out of 1000 (max. 8388607)
+ 387 compressed objects within 4 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 361 words of extra memory for PDF output out of 10000 (max. 10000000)
 

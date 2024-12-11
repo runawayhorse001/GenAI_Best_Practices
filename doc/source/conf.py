@@ -118,3 +118,11 @@ latex_logo = 'images/logo.png'
 
 # If false, no module index is generated.
 #latex_use_modindex = True
+#latex_elements['preamble'] = '\usepackage{unicode-math}'
+# imgmath_latex_preamble =  '\\usepackage{unicode-math}\n'+\
+#latex_preamble 
+# latex_elements['preamble'] =  '\\usepackage{amsmath}\n'+\
+#                           '\\usepackage{mathtools}\n'+\
+#                           '\\usepackage{amsfonts}\n'+\
+#                           '\\usepackage{amssymb}\n'+\
+#                           '\\def\\cdots{\\cdot\cdot\cdot}\n'

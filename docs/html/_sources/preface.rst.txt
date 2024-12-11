@@ -38,8 +38,8 @@ document is generated automatically by using `sphinx`_.
 
 .. _sphinx: http://sphinx.pocoo.org
 
-About the author
-----------------
+About the authors
+-----------------
 
 * **Wenqiang Feng**
 
@@ -73,5 +73,7 @@ About the author
 
 Feedback and suggestions
 ++++++++++++++++++++++++
+
 Your comments and suggestions are highly appreciated. I am more than happy to receive
-corrections, suggestions or feedback through email (Wenqiang Feng: von198@gmail.com) for improvements.
+corrections, suggestions or feedback through email (Wenqiang Feng: von198@gmail.com and Di Zhen: dizhen318@gmail.com
+) for improvements.
