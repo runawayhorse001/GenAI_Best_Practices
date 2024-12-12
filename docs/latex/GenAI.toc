@@ -41,5 +41,8 @@
 \contentsline {section}{\numberline {5.4}Generation}{19}{section.5.4}%
 \contentsline {chapter}{\numberline {6}Fine Tuning}{21}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{23}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Main Reference}{25}{chapter.8}%
-\contentsline {chapter}{Bibliography}{27}{chapter*.4}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{25}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers}{25}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{25}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{27}{chapter.9}%
+\contentsline {chapter}{Bibliography}{29}{chapter*.4}%

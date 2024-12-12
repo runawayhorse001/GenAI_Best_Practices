@@ -12,7 +12,7 @@ continuous vector space where similar words are located closer together.
 
 
 
-.. _fig_logo:
+.. _fig_embedding:
 .. figure:: images/embedding_diagram.png
     :align: center
 

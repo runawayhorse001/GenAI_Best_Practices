@@ -471,7 +471,8 @@ Google Colab
 
 **Google Colab** (short for Colaboratory) is a free, cloud-based platform that provides users with the ability to write 
 and execute Python code in an interactive notebook environment. It is based on Jupyter notebooks and is powered by 
-Google Cloud services, allowing for seamless integration with Google Drive and other Google services.
+Google Cloud services, allowing for seamless integration with Google Drive and other Google services. We will primarily 
+use Google Colab with free T4 GPU runtime throughout this book.
 
 - Key Features
 

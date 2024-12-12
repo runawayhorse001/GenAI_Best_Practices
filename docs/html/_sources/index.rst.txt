@@ -23,4 +23,5 @@ Contents
    rag
    finetuning
    pretraining
+   evaluation
    reference 
