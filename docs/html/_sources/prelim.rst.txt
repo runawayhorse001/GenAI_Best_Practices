@@ -463,6 +463,119 @@ analysis in NLP tasks.
 
   3. **Deep Learning-Based Tokenization**: Modern tokenization models, such as those used in transformers (e.g., BERT, GPT), may rely on subword tokenization and neural networks to handle complex tokenization tasks.
 
+
+BERT Tokenization
+-----------------
+
+- Vocabulary: The BERT Tokenizer’s vocabulary contains 30,522 unique tokens.
+
+  .. code-block:: python
+
+    from transformers import BertTokenizer, BertModel
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    # model = BertModel.from_pretrained("bert-base-uncased")
+
+    # vocabulary size
+    print(tokenizer.vocab_size)
+
+    # vocabulary
+    print(tokenizer.vocab)
+
+
+  .. code-block:: python
+
+    # vocabulary size 
+    30522
+
+    # vocabulary
+    OrderedDict([('[PAD]', 0), ('[unused0]', 1)
+                  ...........,
+                  ('writing', 3015), ('bay', 3016),
+                  ...........,
+                  ('##？', 30520), ('##～', 30521)])
+
+- Tokens and IDs 
+
+  - Tokens to IDs
+
+    .. code-block:: python
+
+      text = "Gen AI is awesome"
+      encoded_input = tokenizer(text, return_tensors='pt')
+
+      # tokens to ids
+      print(encoded_input)
+
+      # output 
+      {'input_ids': tensor([[  101,  8991,  9932,  2003, 12476,   102]]), \
+      'token_type_ids': tensor([[0, 0, 0, 0, 0, 0]]), \
+      'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
+    
+    You might notice that there are only four words, yet we have six token IDs. 
+    This is due to the inclusion of two additional special tokens ``[CLS]`` and ``[SEP]``. 
+
+
+    .. code-block:: python
+    
+      print({x : tokenizer.encode(x, add_special_tokens=False) for x in ['[CLS]']+ text.split()+ ['[SEP]']})
+
+      ### output 
+      {'[CLS]': [101], 'Gen': [8991], 'AI': [9932], 'is': [2003], 'awesome': [12476], '[SEP]': [102]}
+
+  - Special Tokens
+
+    .. code-block:: python
+
+      # Special tokens
+      print({x : tokenizer.encode(x, add_special_tokens=False) for x in ['[CLS]', '[SEP]', '[MASK]', '[EOS]']})
+
+      # tokens to ids
+      {'[CLS]': [101], '[SEP]': [102], '[MASK]': [103], '[EOS]': [1031, 1041, 2891, 1033]}
+
+  - IDs to tokens 
+
+    .. code-block:: python
+
+      # ids to tokens
+      token_id = encoded_input['input_ids'].tolist()[0]
+      print({tokenizer.convert_ids_to_tokens(id, skip_special_tokens=False):id \
+            for id in token_id})
+
+      ### output 
+      {'[CLS]': 101, 'gen': 8991, 'ai': 9932, 'is': 2003, 'awesome': 12476, '[SEP]': 102}
+  
+  - Out-of-vocabulary tokens
+
+    .. code-block:: python
+
+      text = "Gen AI is awesome 👍"
+      encoded_input = tokenizer(text, return_tensors='pt')
+
+      print({x : tokenizer.encode(x, add_special_tokens=False) for x in ['[CLS]']+ text.split()+ ['[SEP]']})
+      print(tokenizer.convert_ids_to_tokens(100, skip_special_tokens=False))
+
+      ### output 
+      {'[CLS]': [101], 'Gen': [8991], 'AI': [9932], 'is': [2003], 'awesome': [12476], '👍': [100], '[SEP]': [102]}
+      [UNK]
+
+
+
+  - Subword Tokenization
+
+    .. code-block:: python
+
+      # Subword Tokenization
+      text = "GenAI is awesome 👍"
+      print({x : tokenizer.encode(x, add_special_tokens=False) for x in ['[CLS]']+ text.split()+ ['[SEP]']})
+      print(tokenizer.convert_ids_to_tokens(100, skip_special_tokens=False))
+
+      # output 
+      {'[CLS]': [101], 'GenAI': [8991, 4886], 'is': [2003], 'awesome': [12476], '👍': [100], '[SEP]': [102]}
+      [UNK]
+ 
+
+
+
 Platform and Packages
 +++++++++++++++++++++
 

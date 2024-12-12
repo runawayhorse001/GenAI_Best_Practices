@@ -1076,6 +1076,130 @@ Techniques for Tokenization
 \end{itemize}
 
 
+\subsection{BERT Tokenization}
+\label{\detokenize{prelim:bert-tokenization}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Vocabulary: The BERT Tokenizer’s vocabulary contains 30,522 unique tokens.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{transformers} \PYG{k+kn}{import} \PYG{n}{BertTokenizer}\PYG{p}{,} \PYG{n}{BertModel}
+\PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{BertTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bert\PYGZhy{}base\PYGZhy{}uncased}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} model = BertModel.from\PYGZus{}pretrained(\PYGZdq{}bert\PYGZhy{}base\PYGZhy{}uncased\PYGZdq{})}
+
+\PYG{c+c1}{\PYGZsh{} vocabulary size}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{vocab\PYGZus{}size}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} vocabulary}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{vocab}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} vocabulary size}
+\PYG{l+m+mi}{30522}
+
+\PYG{c+c1}{\PYGZsh{} vocabulary}
+\PYG{n}{OrderedDict}\PYG{p}{(}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[PAD]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[unused0]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}
+              \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}
+              \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{writing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{3015}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bay}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{3016}\PYG{p}{)}\PYG{p}{,}
+              \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}
+              \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}？}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30520}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}～}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30521}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Tokens and IDs
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Tokens to IDs
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Gen AI is awesome}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} tokens to ids}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} output}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,}  \PYG{l+m+mi}{8991}\PYG{p}{,}  \PYG{l+m+mi}{9932}\PYG{p}{,}  \PYG{l+m+mi}{2003}\PYG{p}{,} \PYG{l+m+mi}{12476}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYGZbs{}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{token\PYGZus{}type\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYGZbs{}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+You might notice that there are only four words, yet we have six token IDs.
+This is due to the inclusion of two additional special tokens \sphinxcode{\sphinxupquote{{[}CLS{]}}} and \sphinxcode{\sphinxupquote{{[}SEP{]}}}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{x} \PYG{p}{:} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{o}{+} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} output}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{101}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{8991}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{9932}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{2003}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{12476}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Special Tokens
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Special tokens}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{x} \PYG{p}{:} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[MASK]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[EOS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} tokens to ids}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{101}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[MASK]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{103}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[EOS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{1031}\PYG{p}{,} \PYG{l+m+mi}{1041}\PYG{p}{,} \PYG{l+m+mi}{2891}\PYG{p}{,} \PYG{l+m+mi}{1033}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+IDs to tokens
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} ids to tokens}
+\PYG{n}{token\PYGZus{}id} \PYG{o}{=} \PYG{n}{encoded\PYGZus{}input}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tolist}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{convert\PYGZus{}ids\PYGZus{}to\PYGZus{}tokens}\PYG{p}{(}\PYG{n+nb}{id}\PYG{p}{,} \PYG{n}{skip\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}\PYG{p}{:}\PYG{n+nb}{id} \PYGZbs{}
+      \PYG{k}{for} \PYG{n+nb}{id} \PYG{o+ow}{in} \PYG{n}{token\PYGZus{}id}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} output}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{101}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{8991}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{9932}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{2003}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{12476}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{102}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Out\sphinxhyphen{}of\sphinxhyphen{}vocabulary tokens
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Gen AI is awesome 👍}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{x} \PYG{p}{:} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{o}{+} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{convert\PYGZus{}ids\PYGZus{}to\PYGZus{}tokens}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{skip\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} output}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{101}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{8991}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{9932}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{2003}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{12476}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{👍}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{100}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+\PYG{p}{[}\PYG{n}{UNK}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Subword Tokenization
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Subword Tokenization}
+\PYG{n}{text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GenAI is awesome 👍}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{x} \PYG{p}{:} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{o}{+} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{convert\PYGZus{}ids\PYGZus{}to\PYGZus{}tokens}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{skip\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} output}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{101}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{GenAI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{8991}\PYG{p}{,} \PYG{l+m+mi}{4886}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{2003}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{12476}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{👍}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{100}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+\PYG{p}{[}\PYG{n}{UNK}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\end{itemize}
+
+\end{itemize}
+
+
 \section{Platform and Packages}
 \label{\detokenize{prelim:platform-and-packages}}
 

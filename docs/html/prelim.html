@@ -59,6 +59,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tagging">2.2.2. Tagging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lemmatization">2.2.3. Lemmatization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tokenization">2.2.4. Tokenization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bert-tokenization">2.2.5. BERT Tokenization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#platform-and-packages">2.3. Platform and Packages</a><ul>
@@ -647,6 +648,106 @@ or quotes be treated as separate tokens or grouped with adjacent words?</p></li>
 <li><p><strong>Statistical and Machine Learning-Based Tokenization</strong>: Uses trained models to predict token boundaries based on patterns learned from large corpora.</p></li>
 <li><p><strong>Deep Learning-Based Tokenization</strong>: Modern tokenization models, such as those used in transformers (e.g., BERT, GPT), may rely on subword tokenization and neural networks to handle complex tokenization tasks.</p></li>
 </ol>
+</li>
+</ul>
+</section>
+<section id="bert-tokenization">
+<h3><span class="section-number">2.2.5. </span>BERT Tokenization<a class="headerlink" href="#bert-tokenization" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Vocabulary: The BERT Tokenizer’s vocabulary contains 30,522 unique tokens.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertModel</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">)</span>
+<span class="c1"># model = BertModel.from_pretrained(&quot;bert-base-uncased&quot;)</span>
+
+<span class="c1"># vocabulary size</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">)</span>
+
+<span class="c1"># vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># vocabulary size</span>
+<span class="mi">30522</span>
+
+<span class="c1"># vocabulary</span>
+<span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;[PAD]&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[unused0]&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+              <span class="o">...........</span><span class="p">,</span>
+              <span class="p">(</span><span class="s1">&#39;writing&#39;</span><span class="p">,</span> <span class="mi">3015</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bay&#39;</span><span class="p">,</span> <span class="mi">3016</span><span class="p">),</span>
+              <span class="o">...........</span><span class="p">,</span>
+              <span class="p">(</span><span class="s1">&#39;##？&#39;</span><span class="p">,</span> <span class="mi">30520</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;##～&#39;</span><span class="p">,</span> <span class="mi">30521</span><span class="p">)])</span>
+</pre></div>
+</div>
+</li>
+<li><p>Tokens and IDs</p>
+<ul>
+<li><p>Tokens to IDs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Gen AI is awesome&quot;</span>
+<span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+
+<span class="c1"># tokens to ids</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">)</span>
+
+<span class="c1"># output</span>
+<span class="p">{</span><span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span>  <span class="mi">101</span><span class="p">,</span>  <span class="mi">8991</span><span class="p">,</span>  <span class="mi">9932</span><span class="p">,</span>  <span class="mi">2003</span><span class="p">,</span> <span class="mi">12476</span><span class="p">,</span>   <span class="mi">102</span><span class="p">]]),</span> \
+<span class="s1">&#39;token_type_ids&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> \
+<span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])}</span>
+</pre></div>
+</div>
+<p>You might notice that there are only four words, yet we have six token IDs.
+This is due to the inclusion of two additional special tokens <code class="docutils literal notranslate"><span class="pre">[CLS]</span></code> and <code class="docutils literal notranslate"><span class="pre">[SEP]</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">({</span><span class="n">x</span> <span class="p">:</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">]</span><span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">]})</span>
+
+<span class="c1">### output</span>
+<span class="p">{</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">],</span> <span class="s1">&#39;Gen&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8991</span><span class="p">],</span> <span class="s1">&#39;AI&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9932</span><span class="p">],</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2003</span><span class="p">],</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12476</span><span class="p">],</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">]}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Special Tokens</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Special tokens</span>
+<span class="nb">print</span><span class="p">({</span><span class="n">x</span> <span class="p">:</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">,</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">,</span> <span class="s1">&#39;[MASK]&#39;</span><span class="p">,</span> <span class="s1">&#39;[EOS]&#39;</span><span class="p">]})</span>
+
+<span class="c1"># tokens to ids</span>
+<span class="p">{</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">],</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">],</span> <span class="s1">&#39;[MASK]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">103</span><span class="p">],</span> <span class="s1">&#39;[EOS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1031</span><span class="p">,</span> <span class="mi">1041</span><span class="p">,</span> <span class="mi">2891</span><span class="p">,</span> <span class="mi">1033</span><span class="p">]}</span>
+</pre></div>
+</div>
+</li>
+<li><p>IDs to tokens</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ids to tokens</span>
+<span class="n">token_id</span> <span class="o">=</span> <span class="n">encoded_input</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">({</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_ids_to_tokens</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span><span class="nb">id</span> \
+      <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">token_id</span><span class="p">})</span>
+
+<span class="c1">### output</span>
+<span class="p">{</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span> <span class="s1">&#39;gen&#39;</span><span class="p">:</span> <span class="mi">8991</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span> <span class="mi">9932</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="mi">2003</span><span class="p">,</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="mi">12476</span><span class="p">,</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">:</span> <span class="mi">102</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Out-of-vocabulary tokens</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Gen AI is awesome 👍&quot;</span>
+<span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">({</span><span class="n">x</span> <span class="p">:</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">]</span><span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_ids_to_tokens</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1">### output</span>
+<span class="p">{</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">],</span> <span class="s1">&#39;Gen&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8991</span><span class="p">],</span> <span class="s1">&#39;AI&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9932</span><span class="p">],</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2003</span><span class="p">],</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12476</span><span class="p">],</span> <span class="s1">&#39;👍&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">],</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">]}</span>
+<span class="p">[</span><span class="n">UNK</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Subword Tokenization</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subword Tokenization</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;GenAI is awesome 👍&quot;</span>
+<span class="nb">print</span><span class="p">({</span><span class="n">x</span> <span class="p">:</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">]</span><span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_ids_to_tokens</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># output</span>
+<span class="p">{</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">],</span> <span class="s1">&#39;GenAI&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8991</span><span class="p">,</span> <span class="mi">4886</span><span class="p">],</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2003</span><span class="p">],</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12476</span><span class="p">],</span> <span class="s1">&#39;👍&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">],</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">]}</span>
+<span class="p">[</span><span class="n">UNK</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </li>
 </ul>
 </section>
