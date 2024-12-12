@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 11, 2024}
+\date{December 12, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -178,6 +178,10 @@ The work of Wenqiang Feng was supported by the IMA, while working at IMA. Howeve
 and conclusions or recommendations expressed in this material are those of the author and do not necessarily
 reflect the views of the IMA, UTK and DST.
 
+\sphinxAtStartPar
+ChatGPT has been extensively used in the creation of this book. If you notice that your work has not been
+cited or has been cited incorrectly, please notify us.
+
 \end{itemize}
 
 
@@ -204,9 +208,9 @@ used in Generative AI.
 \subsection{Vector}
 \label{\detokenize{prelim:vector}}
 \sphinxAtStartPar
-A vector is a mathematical representation of data that has both magnitude and direction.
-Each data point is represented as a feature vector, where each component of the vector
-corresponds to a specific feature or attribute of the data.
+A vector is a mathematical representation of data characterized by both magnitude and
+direction. In this context, each data point is represented as a feature vector, with
+each component corresponding to a specific feature or attribute of the data.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
@@ -250,10 +254,10 @@ corresponds to a specific feature or attribute of the data.
 \subsection{Norm}
 \label{\detokenize{prelim:norm}}
 \sphinxAtStartPar
-Norm is a function that maps a vector to a single positive value, representing its
-magnitude. Norms are used to calculate distances between vectors, which is vital
-for measuring prediction errors in models, performing feature
-selection, and applying regularization techniques.
+A norm is a function that maps a vector to a single positive value, representing its
+magnitude. Norms are essential for calculating distances between vectors, which play
+a crucial role in measuring prediction errors, performing feature selection, and
+applying regularization techniques in models.
 
 \begin{figure}[htbp]
 \centering
@@ -314,7 +318,9 @@ Manhattan Distance (\(\displaystyle \ell^1\) Distance)
 \begin{quote}
 
 \sphinxAtStartPar
-Also known as taxicab or city block distance, Manhattan distance measures the absolute differences between the components of two vectors. It calculates the distance a point would travel along the grid lines in a Cartesian plane, as if navigating through a city.
+Also known as taxicab or city block distance, Manhattan distance measures the absolute differences
+between the components of two vectors. It represents the distance a point would travel along grid
+lines in a Cartesian plane, similar to navigating through city streets.
 
 \sphinxAtStartPar
 For two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\), the
@@ -329,10 +335,12 @@ Euclidean Distance (\(\displaystyle \ell^2\) Distance)
 \begin{quote}
 
 \sphinxAtStartPar
-Euclidean distance is the most common way to measure the distance between two points (vectors) in space. It is essentially the straight\sphinxhyphen{}line distance between them, calculated using the Pythagorean theorem.
+Euclidean distance is the most common way to measure the distance between two points (vectors) in space.
+It is essentially the straight\sphinxhyphen{}line distance between them, calculated using the Pythagorean theorem.
 
 \sphinxAtStartPar
-For two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\), the Euclidean Distance distance \(d(\vec{u},\vec{v})\) is
+For two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\), the
+Euclidean Distance distance \(d(\vec{u},\vec{v})\) is
 \begin{equation*}
 \begin{split}d(\vec{u},\vec{v}) = ||\vec{u}-\vec{v}||_2 = \sqrt{(u_1-v_1)^2 + (u_2-v_2)^2+ \cdots +(u_n-v_n)^2}\end{split}
 \end{equation*}\end{quote}
@@ -343,7 +351,8 @@ Minkowski Distance (\(\displaystyle \ell^p\) Distance)
 \begin{quote}
 
 \sphinxAtStartPar
-Minkowski distance is a generalization of both Euclidean and Manhattan distances. It introduces a parameter \(p\) that allows you to adjust the sensitivity of the distance metric.
+Minkowski distance is a generalization of both Euclidean and Manhattan distances. It incorporates a parameter,
+\(p\), which allows for adjusting the sensitivity of the distance metric.
 \end{quote}
 
 \item {} 
@@ -352,7 +361,10 @@ Cos Similarity
 \begin{quote}
 
 \sphinxAtStartPar
-Cosine similarity measures the angle between two vectors rather than their straight\sphinxhyphen{}line distance. It is used to determine how similar two vectors are by focusing on their orientation rather than their magnitude. This makes it particularly useful for high\sphinxhyphen{}dimensional data, such as text, where the magnitude of the vectors may not be as important as the direction.
+Cosine similarity measures the angle between two vectors rather than their straight\sphinxhyphen{}line distance.
+It evaluates the similarity of two vectors by focusing on their orientation rather than their magnitude.
+This makes it particularly useful for high\sphinxhyphen{}dimensional data, such as text, where the direction of the
+vectors is often more significant than their magnitude.
 
 \sphinxAtStartPar
 The Cos similarity for two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\vec{v} = (v_1, v_2, \cdots, v_n)\) is
@@ -409,22 +421,748 @@ The Cos similarity for two vector \(\vec{u} = (u_1, u_2, \cdots, u_n)\) and \(\v
 
 \subsection{Vocabulary}
 \label{\detokenize{prelim:vocabulary}}
+\sphinxAtStartPar
+In Natural Language Processing (NLP), \sphinxstylestrong{vocabulary} refers to the complete set of unique words or tokens
+that a model recognizes or works with during training and inference. Vocabulary plays a critical role in
+text processing and understanding, as it defines the scope of linguistic units a model can handle.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Types of Vocabulary in NLP
+\begin{quote}
+
+\sphinxAtStartPar
+1. \sphinxstylestrong{Word\sphinxhyphen{}level Vocabulary}:
+\sphinxhyphen{} Each word in the text is treated as a unique token.
+\sphinxhyphen{} For example, the sentence “I love NLP” would generate the vocabulary: \sphinxcode{\sphinxupquote{\{I, love, NLP\}}}.
+
+\sphinxAtStartPar
+2. \sphinxstylestrong{Subword\sphinxhyphen{}level Vocabulary}:
+\sphinxhyphen{} Text is broken down into smaller units like prefixes, suffixes, or character sequences.
+\sphinxhyphen{} For example, the word “loving” might be split into \sphinxcode{\sphinxupquote{\{lov, ing\}}} using techniques like Byte Pair Encoding (BPE) or SentencePiece.
+\sphinxhyphen{} Subword vocabularies handle rare or unseen words more effectively.
+
+\sphinxAtStartPar
+3. \sphinxstylestrong{Character\sphinxhyphen{}level Vocabulary}:
+\sphinxhyphen{} Each character is treated as a token.
+\sphinxhyphen{} For example, the word “love” would generate the vocabulary: \sphinxcode{\sphinxupquote{\{l, o, v, e\}}}.
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Importance of Vocabulary
+\begin{quote}
+
+\sphinxAtStartPar
+1. \sphinxstylestrong{Text Representation}:
+\sphinxhyphen{} Vocabulary is the basis for converting text into numerical representations like one\sphinxhyphen{}hot vectors, embeddings, or input IDs for machine learning models.
+
+\sphinxAtStartPar
+2. \sphinxstylestrong{Model Efficiency}:
+\sphinxhyphen{} A larger vocabulary increases the model’s memory and computational requirements.
+\sphinxhyphen{} A smaller vocabulary may lack the capacity to represent all words effectively, leading to a loss of meaning.
+
+\sphinxAtStartPar
+3. \sphinxstylestrong{Handling Out\sphinxhyphen{}of\sphinxhyphen{}Vocabulary (OOV) Words}:
+\sphinxhyphen{} Words not present in the vocabulary are either replaced with a special token like \sphinxcode{\sphinxupquote{\textless{}UNK\textgreater{}}} or processed using subword/character\sphinxhyphen{}based techniques.
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Building a Vocabulary
+\begin{quote}
+
+\sphinxAtStartPar
+Common practices include:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+Tokenizing the text into words, subwords, or characters.
+
+\item {} 
+\sphinxAtStartPar
+Counting the frequency of tokens.
+
+\item {} 
+\sphinxAtStartPar
+Keeping only the most frequent tokens up to a predefined size (e.g., top 50,000 tokens).
+
+\item {} 
+\sphinxAtStartPar
+Adding special tokens like \sphinxcode{\sphinxupquote{\textless{}PAD\textgreater{}}}, \sphinxcode{\sphinxupquote{\textless{}UNK\textgreater{}}}, \sphinxcode{\sphinxupquote{\textless{}BOS\textgreater{}}} (beginning of sentence), and \sphinxcode{\sphinxupquote{\textless{}EOS\textgreater{}}} (end of sentence).
+
+\end{enumerate}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Challenges
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Balancing Vocabulary Size}:
+A larger vocabulary increases the richness of representation but requires more computational resources.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Domain\sphinxhyphen{}specific Vocabularies}:
+In specialized fields like medicine or law, standard vocabularies may not be sufficient, requiring domain\sphinxhyphen{}specific tokenization strategies.
+
+\end{itemize}
+
 
 \subsection{Tagging}
 \label{\detokenize{prelim:tagging}}
+\sphinxAtStartPar
+Tagging in NLP refers to the process of assigning labels or annotations
+to words, phrases, or other linguistic units in a text. These labels provide additional information about
+the syntactic, semantic, or structural role of the elements in the text.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Types of Tagging
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Part\sphinxhyphen{}of\sphinxhyphen{}Speech (POS) Tagging}:
+\sphinxhyphen{} Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
+\sphinxhyphen{} Example: For the sentence “The dog barks,” the tags might be:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{The/DET}} (Determiner)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{dog/NOUN}} (Noun)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{barks/VERB}} (Verb).
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Named Entity Recognition (NER) Tagging}:
+\sphinxhyphen{} Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
+\sphinxhyphen{} Example: In the sentence “John works at Google in California,” the tags might be:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{John/PERSON}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{Google/ORGANIZATION}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{California/LOCATION}}.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Chunking (Syntactic Tagging)}:
+\sphinxhyphen{} Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
+\sphinxhyphen{} Example: For the sentence “The quick brown fox jumps,” a chunking result might be:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{{[}NP The quick brown fox{]} {[}VP jumps{]}}}.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Sentiment Tagging}:
+\sphinxhyphen{} Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
+\sphinxhyphen{} Example: The word “happy” might be tagged as \sphinxcode{\sphinxupquote{positive}}, while “sad” might be tagged as \sphinxcode{\sphinxupquote{negative}}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Dependency Parsing Tags}:
+\sphinxhyphen{} Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
+\sphinxhyphen{} Example: In “She enjoys cooking,” the tags might show:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{She/nsubj}} (nominal subject)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{enjoys/ROOT}} (root of the sentence)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{cooking/dobj}} (direct object).
+
+\end{itemize}
+
+\end{enumerate}
+
+\item {} 
+\sphinxAtStartPar
+Importance of Tagging
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Understanding Language Structure}: Tags help NLP models understand the grammatical and syntactic structure of text.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Improving Downstream Tasks}: Tagging is foundational for tasks like machine
+translation, sentiment analysis, question answering, and summarization.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Feature Engineering}: Tags serve as features for training machine learning models in
+text classification or sequence labeling tasks.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Tagging Techniques
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Rule\sphinxhyphen{}based Tagging}: Relies on predefined linguistic rules to assign tags.
+Example: Using dictionaries or regular expressions to match specific patterns.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Statistical Tagging}: Uses probabilistic models like Hidden Markov Models (HMMs)
+to predict tags based on word sequences.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Neural Network\sphinxhyphen{}based Tagging}: Employs deep learning models like LSTMs, GRUs, or Transformers
+to tag text with high accuracy.
+
+\end{enumerate}
+
+\item {} 
+\sphinxAtStartPar
+Challenges
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Ambiguity}:Words with multiple meanings can lead to incorrect tagging.
+Example: The word “bank” could mean a financial institution or a riverbank.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Domain\sphinxhyphen{}Specific Language}: General tagging models may fail to perform well on specialized text
+like medical or legal documents.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Data Sparsity}: Rare words or phrases may lack sufficient training data for accurate tagging.
+
+\end{itemize}
+
+\end{itemize}
+
 
 \subsection{Lemmatization}
 \label{\detokenize{prelim:lemmatization}}
+\sphinxAtStartPar
+Lemmatization in NLP is the process of reducing a word to its base or dictionary form, known as
+the \sphinxstylestrong{lemma}. Unlike stemming, which simply removes word suffixes, lemmatization considers
+the context and grammatical role of the word to produce a linguistically accurate root form.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+How Lemmatization Works
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Contextual Analysis}:
+\sphinxhyphen{} Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word’s base form.
+\sphinxhyphen{} For example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{running}} \(\rightarrow\) \sphinxcode{\sphinxupquote{run}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{better}} \(\rightarrow\) \sphinxcode{\sphinxupquote{good}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Part\sphinxhyphen{}of\sphinxhyphen{}Speech (POS) Tagging}:
+\sphinxhyphen{} The process uses POS tags to determine the correct lemma for a word.
+\sphinxhyphen{} Example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{barking}} (verb) \(\rightarrow\) \sphinxcode{\sphinxupquote{bark}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{barking}} (adjective, as in “barking dog”) \(\rightarrow\) \sphinxcode{\sphinxupquote{barking}}.
+
+\end{itemize}
+
+\end{enumerate}
+
+\item {} 
+\sphinxAtStartPar
+Importance of Lemmatization
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Improves Text Normalization}:
+\sphinxhyphen{} Lemmatization helps normalize text by grouping different forms of a word into a single representation.
+\sphinxhyphen{} Example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{run}}, \sphinxcode{\sphinxupquote{running}}, and \sphinxcode{\sphinxupquote{ran}} \(\rightarrow\) \sphinxcode{\sphinxupquote{run}}.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Enhances NLP Applications}:
+\sphinxhyphen{} Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Reduces Vocabulary Size}:
+\sphinxhyphen{} By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.
+
+\end{enumerate}
+
+\item {} 
+\sphinxAtStartPar
+Lemmatization vs. Stemming
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Lemmatization}:
+\sphinxhyphen{} Produces linguistically accurate root forms.
+\sphinxhyphen{} Considers the word’s context and POS.
+\sphinxhyphen{} Example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{studies}} \(\rightarrow\) \sphinxcode{\sphinxupquote{study}}.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Stemming}:
+\sphinxhyphen{} Applies heuristic rules to strip word suffixes without considering context.
+\sphinxhyphen{} May produce non\sphinxhyphen{}dictionary forms.
+\sphinxhyphen{} Example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{studies}} \(\rightarrow\) \sphinxcode{\sphinxupquote{studi}}.
+
+\end{itemize}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Techniques for Lemmatization
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Rule\sphinxhyphen{}Based Lemmatization}:
+\sphinxhyphen{} Relies on predefined linguistic rules and dictionaries.
+\sphinxhyphen{} Example: WordNet\sphinxhyphen{}based lemmatizers.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Statistical Lemmatization}:
+\sphinxhyphen{} Uses probabilistic models to predict lemmas based on the context.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Deep Learning\sphinxhyphen{}Based Lemmatization}:
+\sphinxhyphen{} Employs neural networks and sequence\sphinxhyphen{}to\sphinxhyphen{}sequence models for highly accurate lemmatization in complex contexts.
+
+\end{enumerate}
+
+\item {} 
+\sphinxAtStartPar
+Challenges
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Ambiguity}:
+Words with multiple meanings may result in incorrect lemmatization without proper context.
+\sphinxhyphen{} Example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{left}} (verb) \(\rightarrow\) \sphinxcode{\sphinxupquote{leave}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{left}} (noun/adjective) \(\rightarrow\) \sphinxcode{\sphinxupquote{left}}.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Language\sphinxhyphen{}Specific Complexity}:
+Lemmatization rules vary widely across languages, requiring language\sphinxhyphen{}specific tools and resources.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Resource Dependency}:
+Lemmatizers require extensive lexicons and morphological rules, which can be resource\sphinxhyphen{}intensive to develop.
+
+\end{itemize}
+
+\end{itemize}
+
 
 \subsection{Tokenization}
 \label{\detokenize{prelim:tokenization}}
 \sphinxAtStartPar
-Out\sphinxhyphen{}of\sphinxhyphen{}vocabulary tokens
-Subword Tokenization
+Tokenization in NLP refers to the process of splitting a text into smaller units, called \sphinxstylestrong{tokens}, which
+can be words, subwords, sentences, or characters. These tokens serve as the basic building blocks for further
+analysis in NLP tasks.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Types of Tokenization
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Word Tokenization}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Splits the text into individual words or terms.
+
+\item {} \begin{description}
+\sphinxlineitem{Example:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Sentence: “I love NLP.”
+
+\item {} 
+\sphinxAtStartPar
+Tokens: \sphinxcode{\sphinxupquote{{[}"I", "love", "NLP"{]}}}.
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Sentence Tokenization}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Divides a text into sentences.
+
+\item {} \begin{description}
+\sphinxlineitem{Example:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Text: “I love NLP. It’s amazing.”
+
+\item {} 
+\sphinxAtStartPar
+Tokens: \sphinxcode{\sphinxupquote{{[}"I love NLP.", "It’s amazing."{]}}}.
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{2}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Subword Tokenization}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Breaks words into smaller units, often using methods like Byte Pair Encoding (BPE) or SentencePiece.
+
+\item {} \begin{description}
+\sphinxlineitem{Example:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Word: \sphinxcode{\sphinxupquote{unhappiness}}.
+
+\item {} 
+\sphinxAtStartPar
+Tokens: \sphinxcode{\sphinxupquote{{[}"un", "happiness"{]}}} (or subword units like \sphinxcode{\sphinxupquote{{[}"un", "happi", "ness"{]}}}).
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{3}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Character Tokenization}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Treats each character in a word as a separate token.
+
+\item {} \begin{description}
+\sphinxlineitem{Example:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Word: \sphinxcode{\sphinxupquote{hello}}.
+
+\item {} 
+\sphinxAtStartPar
+Tokens: \sphinxcode{\sphinxupquote{{[}"h", "e", "l", "l", "o"{]}}}.
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Importance of Tokenization
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Text Preprocessing}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Tokenization is the first step in many NLP tasks like text classification, translation, and
+summarization, as it converts text into manageable pieces.
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Text Representation}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Tokens are converted into numerical representations (e.g., word embeddings) for model input
+in tasks like sentiment analysis, named entity recognition (NER), or language modeling.
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{2}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Improving Accuracy}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Proper tokenization ensures that a model processes text at the correct granularity (e.g.,
+words or subwords), improving accuracy for tasks like machine translation or text generation.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Challenges of Tokenization
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Ambiguity}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Certain words or phrases can be tokenized differently based on context.
+
+\item {} 
+\sphinxAtStartPar
+Example: “New York” can be treated as one token (location) or two separate tokens (\sphinxcode{\sphinxupquote{{[}"New", "York"{]}}}).
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Handling Punctuation}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Deciding how to treat punctuation marks can be challenging. For example, should commas, periods,
+or quotes be treated as separate tokens or grouped with adjacent words?
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{2}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Multi\sphinxhyphen{}word Expressions (MWEs)}:
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Some expressions consist of multiple words that should be treated as a single token, such as “New York” or “machine learning.”
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Techniques for Tokenization
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Rule\sphinxhyphen{}Based Tokenization}: Uses predefined rules to split text based on spaces, punctuation, and other delimiters.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Statistical and Machine Learning\sphinxhyphen{}Based Tokenization}: Uses trained models to predict token boundaries based on patterns learned from large corpora.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Deep Learning\sphinxhyphen{}Based Tokenization}: Modern tokenization models, such as those used in transformers (e.g., BERT, GPT), may rely on subword tokenization and neural networks to handle complex tokenization tasks.
+
+\end{enumerate}
+
+\end{itemize}
 
 
 \section{Platform and Packages}
 \label{\detokenize{prelim:platform-and-packages}}
+
+\subsection{Google Colab}
+\label{\detokenize{prelim:google-colab}}
+\sphinxAtStartPar
+\sphinxstylestrong{Google Colab} (short for Colaboratory) is a free, cloud\sphinxhyphen{}based platform that provides users with the ability to write
+and execute Python code in an interactive notebook environment. It is based on Jupyter notebooks and is powered by
+Google Cloud services, allowing for seamless integration with Google Drive and other Google services.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Key Features
+
+\end{itemize}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Free Access to GPUs and TPUs}
+Colab offers free access to Graphics Processing Units (GPUs) and Tensor Processing Units (TPUs), making it an ideal environment for machine learning, deep learning, and other computationally intensive tasks.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Integration with Google Drive}
+You can store and access notebooks directly from your Google Drive, making it easy to collaborate with others and keep your projects organized.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{No Setup Required}
+Since Colab is entirely cloud\sphinxhyphen{}based, you don’t need to worry about setting up an environment or managing dependencies. Everything is ready to go out of the box.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Support for Python Libraries}
+Colab comes pre\sphinxhyphen{}installed with many popular Python libraries, including TensorFlow, PyTorch, Keras, and OpenCV, among others. You can also install any additional libraries using \sphinxtitleref{pip}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Collaborative Features}
+Multiple users can work on the same notebook simultaneously, making it ideal for collaboration. Changes are synchronized in real\sphinxhyphen{}time.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Rich Media Support}
+Colab supports the inclusion of rich media, such as images, videos, and LaTeX equations, directly within the notebook. This makes it a great tool for data analysis, visualization, and educational purposes.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Easy Sharing}
+Notebooks can be easily shared with others via a shareable link, just like Google Docs. Permissions can be set for viewing or editing the document.
+
+\end{enumerate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GPU Activation
+\sphinxcode{\sphinxupquote{Runtime \sphinxhyphen{}\sphinxhyphen{}\textgreater{} change runtime type \sphinxhyphen{}\sphinxhyphen{}\textgreater{} T4/A100 GPU}}
+
+\end{itemize}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithborderlessstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TT}
+\sphinxtoprule
+\sphinxtableatstartofbodyhook
+\noindent\sphinxincludegraphics[width=1.000\linewidth]{{runtime}.png}
+&
+\noindent\sphinxincludegraphics[width=1.000\linewidth]{{T4}.png}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\subsection{HuggingFace}
+\label{\detokenize{prelim:huggingface}}
+
+\subsection{Ollama}
+\label{\detokenize{prelim:ollama}}
+
+\subsection{langchain}
+\label{\detokenize{prelim:langchain}}
 \sphinxstepscope
 
 

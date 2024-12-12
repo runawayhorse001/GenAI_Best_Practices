@@ -61,7 +61,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#tokenization">2.2.4. Tokenization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#platform-and-packages">2.3. Platform and Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-and-packages">2.3. Platform and Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#google-colab">2.3.1. Google Colab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#huggingface">2.3.2. HuggingFace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ollama">2.3.3. Ollama</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#langchain">2.3.4. langchain</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">3. Word and Sentence Embedding</a></li>
@@ -104,9 +110,9 @@ used in Generative AI.</p>
 <h2><span class="section-number">2.1. </span>Math Preliminary<a class="headerlink" href="#math-preliminary" title="Link to this heading"></a></h2>
 <section id="vector">
 <h3><span class="section-number">2.1.1. </span>Vector<a class="headerlink" href="#vector" title="Link to this heading"></a></h3>
-<p>A vector is a mathematical representation of data that has both magnitude and direction.
-Each data point is represented as a feature vector, where each component of the vector
-corresponds to a specific feature or attribute of the data.</p>
+<p>A vector is a mathematical representation of data characterized by both magnitude and
+direction. In this context, each data point is represented as a feature vector, with
+each component corresponding to a specific feature or attribute of the data.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">gensim.downloader</span> <span class="k">as</span> <span class="nn">api</span>
 <span class="c1"># Download pre-trained GloVe model</span>
@@ -145,10 +151,10 @@ corresponds to a specific feature or attribute of the data.</p>
 </section>
 <section id="norm">
 <h3><span class="section-number">2.1.2. </span>Norm<a class="headerlink" href="#norm" title="Link to this heading"></a></h3>
-<p>Norm is a function that maps a vector to a single positive value, representing its
-magnitude. Norms are used to calculate distances between vectors, which is vital
-for measuring prediction errors in models, performing feature
-selection, and applying regularization techniques.</p>
+<p>A norm is a function that maps a vector to a single positive value, representing its
+magnitude. Norms are essential for calculating distances between vectors, which play
+a crucial role in measuring prediction errors, performing feature selection, and
+applying regularization techniques in models.</p>
 <figure class="align-center" id="id3">
 <span id="id1"></span><img alt="_images/1Bauo.png" src="_images/1Bauo.png" />
 <figcaption>
@@ -191,7 +197,9 @@ selection, and applying regularization techniques.</p>
 <ul>
 <li><p>Manhattan Distance (<span class="math notranslate nohighlight">\(\displaystyle \ell^1\)</span> Distance)</p>
 <blockquote>
-<div><p>Also known as taxicab or city block distance, Manhattan distance measures the absolute differences between the components of two vectors. It calculates the distance a point would travel along the grid lines in a Cartesian plane, as if navigating through a city.</p>
+<div><p>Also known as taxicab or city block distance, Manhattan distance measures the absolute differences
+between the components of two vectors. It represents the distance a point would travel along grid
+lines in a Cartesian plane, similar to navigating through city streets.</p>
 <p>For two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span>, the
 Manhattan Distance distance <span class="math notranslate nohighlight">\(d(\vec{u},\vec{v})\)</span> is</p>
 <div class="math notranslate nohighlight">
@@ -200,20 +208,26 @@ Manhattan Distance distance <span class="math notranslate nohighlight">\(d(\vec{
 </li>
 <li><p>Euclidean Distance (<span class="math notranslate nohighlight">\(\displaystyle \ell^2\)</span> Distance)</p>
 <blockquote>
-<div><p>Euclidean distance is the most common way to measure the distance between two points (vectors) in space. It is essentially the straight-line distance between them, calculated using the Pythagorean theorem.</p>
-<p>For two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span>, the Euclidean Distance distance <span class="math notranslate nohighlight">\(d(\vec{u},\vec{v})\)</span> is</p>
+<div><p>Euclidean distance is the most common way to measure the distance between two points (vectors) in space.
+It is essentially the straight-line distance between them, calculated using the Pythagorean theorem.</p>
+<p>For two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span>, the
+Euclidean Distance distance <span class="math notranslate nohighlight">\(d(\vec{u},\vec{v})\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[d(\vec{u},\vec{v}) = ||\vec{u}-\vec{v}||_2 = \sqrt{(u_1-v_1)^2 + (u_2-v_2)^2+ \cdots +(u_n-v_n)^2}\]</div>
 </div></blockquote>
 </li>
 <li><p>Minkowski Distance (<span class="math notranslate nohighlight">\(\displaystyle \ell^p\)</span> Distance)</p>
 <blockquote>
-<div><p>Minkowski distance is a generalization of both Euclidean and Manhattan distances. It introduces a parameter <span class="math notranslate nohighlight">\(p\)</span> that allows you to adjust the sensitivity of the distance metric.</p>
+<div><p>Minkowski distance is a generalization of both Euclidean and Manhattan distances. It incorporates a parameter,
+<span class="math notranslate nohighlight">\(p\)</span>, which allows for adjusting the sensitivity of the distance metric.</p>
 </div></blockquote>
 </li>
 <li><p>Cos Similarity</p>
 <blockquote>
-<div><p>Cosine similarity measures the angle between two vectors rather than their straight-line distance. It is used to determine how similar two vectors are by focusing on their orientation rather than their magnitude. This makes it particularly useful for high-dimensional data, such as text, where the magnitude of the vectors may not be as important as the direction.</p>
+<div><p>Cosine similarity measures the angle between two vectors rather than their straight-line distance.
+It evaluates the similarity of two vectors by focusing on their orientation rather than their magnitude.
+This makes it particularly useful for high-dimensional data, such as text, where the direction of the
+vectors is often more significant than their magnitude.</p>
 <p>The Cos similarity for two vector <span class="math notranslate nohighlight">\(\vec{u} = (u_1, u_2, \cdots, u_n)\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (v_1, v_2, \cdots, v_n)\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[cos(\theta) = \frac{\vec{u}\cdot\vec{v}}{||\vec{u}|| ||\vec{v}||}\]</div>
@@ -255,21 +269,440 @@ Manhattan Distance distance <span class="math notranslate nohighlight">\(d(\vec{
 <h2><span class="section-number">2.2. </span>NLP Preliminary<a class="headerlink" href="#nlp-preliminary" title="Link to this heading"></a></h2>
 <section id="vocabulary">
 <h3><span class="section-number">2.2.1. </span>Vocabulary<a class="headerlink" href="#vocabulary" title="Link to this heading"></a></h3>
+<p>In Natural Language Processing (NLP), <strong>vocabulary</strong> refers to the complete set of unique words or tokens
+that a model recognizes or works with during training and inference. Vocabulary plays a critical role in
+text processing and understanding, as it defines the scope of linguistic units a model can handle.</p>
+<ul>
+<li><p>Types of Vocabulary in NLP</p>
+<blockquote>
+<div><p>1. <strong>Word-level Vocabulary</strong>:
+- Each word in the text is treated as a unique token.
+- For example, the sentence “I love NLP” would generate the vocabulary: <code class="docutils literal notranslate"><span class="pre">{I,</span> <span class="pre">love,</span> <span class="pre">NLP}</span></code>.</p>
+<p>2. <strong>Subword-level Vocabulary</strong>:
+- Text is broken down into smaller units like prefixes, suffixes, or character sequences.
+- For example, the word “loving” might be split into <code class="docutils literal notranslate"><span class="pre">{lov,</span> <span class="pre">ing}</span></code> using techniques like Byte Pair Encoding (BPE) or SentencePiece.
+- Subword vocabularies handle rare or unseen words more effectively.</p>
+<p>3. <strong>Character-level Vocabulary</strong>:
+- Each character is treated as a token.
+- For example, the word “love” would generate the vocabulary: <code class="docutils literal notranslate"><span class="pre">{l,</span> <span class="pre">o,</span> <span class="pre">v,</span> <span class="pre">e}</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Importance of Vocabulary</p>
+<blockquote>
+<div><p>1. <strong>Text Representation</strong>:
+- Vocabulary is the basis for converting text into numerical representations like one-hot vectors, embeddings, or input IDs for machine learning models.</p>
+<p>2. <strong>Model Efficiency</strong>:
+- A larger vocabulary increases the model’s memory and computational requirements.
+- A smaller vocabulary may lack the capacity to represent all words effectively, leading to a loss of meaning.</p>
+<p>3. <strong>Handling Out-of-Vocabulary (OOV) Words</strong>:
+- Words not present in the vocabulary are either replaced with a special token like <code class="docutils literal notranslate"><span class="pre">&lt;UNK&gt;</span></code> or processed using subword/character-based techniques.</p>
+</div></blockquote>
+</li>
+<li><p>Building a Vocabulary</p>
+<blockquote>
+<div><p>Common practices include:</p>
+<ol class="arabic simple">
+<li><p>Tokenizing the text into words, subwords, or characters.</p></li>
+<li><p>Counting the frequency of tokens.</p></li>
+<li><p>Keeping only the most frequent tokens up to a predefined size (e.g., top 50,000 tokens).</p></li>
+<li><p>Adding special tokens like <code class="docutils literal notranslate"><span class="pre">&lt;PAD&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;UNK&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;BOS&gt;</span></code> (beginning of sentence), and <code class="docutils literal notranslate"><span class="pre">&lt;EOS&gt;</span></code> (end of sentence).</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Challenges</p></li>
+<li><p><strong>Balancing Vocabulary Size</strong>:
+A larger vocabulary increases the richness of representation but requires more computational resources.</p></li>
+<li><p><strong>Domain-specific Vocabularies</strong>:
+In specialized fields like medicine or law, standard vocabularies may not be sufficient, requiring domain-specific tokenization strategies.</p></li>
+</ul>
 </section>
 <section id="tagging">
 <h3><span class="section-number">2.2.2. </span>Tagging<a class="headerlink" href="#tagging" title="Link to this heading"></a></h3>
+<p>Tagging in NLP refers to the process of assigning labels or annotations
+to words, phrases, or other linguistic units in a text. These labels provide additional information about
+the syntactic, semantic, or structural role of the elements in the text.</p>
+<ul>
+<li><p>Types of Tagging</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p><strong>Part-of-Speech (POS) Tagging</strong>:
+- Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
+- Example: For the sentence “The dog barks,” the tags might be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">The/DET</span></code> (Determiner)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dog/NOUN</span></code> (Noun)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">barks/VERB</span></code> (Verb).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Named Entity Recognition (NER) Tagging</strong>:
+- Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
+- Example: In the sentence “John works at Google in California,” the tags might be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">John/PERSON</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Google/ORGANIZATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">California/LOCATION</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Chunking (Syntactic Tagging)</strong>:
+- Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
+- Example: For the sentence “The quick brown fox jumps,” a chunking result might be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[NP</span> <span class="pre">The</span> <span class="pre">quick</span> <span class="pre">brown</span> <span class="pre">fox]</span> <span class="pre">[VP</span> <span class="pre">jumps]</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Sentiment Tagging</strong>:
+- Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
+- Example: The word “happy” might be tagged as <code class="docutils literal notranslate"><span class="pre">positive</span></code>, while “sad” might be tagged as <code class="docutils literal notranslate"><span class="pre">negative</span></code>.</p></li>
+<li><p><strong>Dependency Parsing Tags</strong>:
+- Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
+- Example: In “She enjoys cooking,” the tags might show:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">She/nsubj</span></code> (nominal subject)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enjoys/ROOT</span></code> (root of the sentence)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cooking/dobj</span></code> (direct object).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Importance of Tagging</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Understanding Language Structure</strong>: Tags help NLP models understand the grammatical and syntactic structure of text.</p></li>
+<li><p><strong>Improving Downstream Tasks</strong>: Tagging is foundational for tasks like machine
+translation, sentiment analysis, question answering, and summarization.</p></li>
+<li><p><strong>Feature Engineering</strong>: Tags serve as features for training machine learning models in
+text classification or sequence labeling tasks.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Tagging Techniques</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Rule-based Tagging</strong>: Relies on predefined linguistic rules to assign tags.
+Example: Using dictionaries or regular expressions to match specific patterns.</p></li>
+<li><p><strong>Statistical Tagging</strong>: Uses probabilistic models like Hidden Markov Models (HMMs)
+to predict tags based on word sequences.</p></li>
+<li><p><strong>Neural Network-based Tagging</strong>: Employs deep learning models like LSTMs, GRUs, or Transformers
+to tag text with high accuracy.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Challenges</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Ambiguity</strong>:Words with multiple meanings can lead to incorrect tagging.
+Example: The word “bank” could mean a financial institution or a riverbank.</p></li>
+<li><p><strong>Domain-Specific Language</strong>: General tagging models may fail to perform well on specialized text
+like medical or legal documents.</p></li>
+<li><p><strong>Data Sparsity</strong>: Rare words or phrases may lack sufficient training data for accurate tagging.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 </section>
 <section id="lemmatization">
 <h3><span class="section-number">2.2.3. </span>Lemmatization<a class="headerlink" href="#lemmatization" title="Link to this heading"></a></h3>
+<p>Lemmatization in NLP is the process of reducing a word to its base or dictionary form, known as
+the <strong>lemma</strong>. Unlike stemming, which simply removes word suffixes, lemmatization considers
+the context and grammatical role of the word to produce a linguistically accurate root form.</p>
+<ul>
+<li><p>How Lemmatization Works</p>
+<ol class="arabic">
+<li><p><strong>Contextual Analysis</strong>:
+- Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word’s base form.
+- For example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">running</span></code> → <code class="docutils literal notranslate"><span class="pre">run</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">better</span></code> → <code class="docutils literal notranslate"><span class="pre">good</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Part-of-Speech (POS) Tagging</strong>:
+- The process uses POS tags to determine the correct lemma for a word.
+- Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">barking</span></code> (verb) → <code class="docutils literal notranslate"><span class="pre">bark</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">barking</span></code> (adjective, as in “barking dog”) → <code class="docutils literal notranslate"><span class="pre">barking</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</li>
+<li><p>Importance of Lemmatization</p>
+<ol class="arabic">
+<li><p><strong>Improves Text Normalization</strong>:
+- Lemmatization helps normalize text by grouping different forms of a word into a single representation.
+- Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">running</span></code>, and <code class="docutils literal notranslate"><span class="pre">ran</span></code> → <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Enhances NLP Applications</strong>:
+- Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.</p></li>
+<li><p><strong>Reduces Vocabulary Size</strong>:
+- By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.</p></li>
+</ol>
+</li>
+<li><p>Lemmatization vs. Stemming</p>
+<ul>
+<li><p><strong>Lemmatization</strong>:
+- Produces linguistically accurate root forms.
+- Considers the word’s context and POS.
+- Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">studies</span></code> → <code class="docutils literal notranslate"><span class="pre">study</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Stemming</strong>:
+- Applies heuristic rules to strip word suffixes without considering context.
+- May produce non-dictionary forms.
+- Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">studies</span></code> → <code class="docutils literal notranslate"><span class="pre">studi</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>Techniques for Lemmatization</p>
+<ol class="arabic simple">
+<li><p><strong>Rule-Based Lemmatization</strong>:
+- Relies on predefined linguistic rules and dictionaries.
+- Example: WordNet-based lemmatizers.</p></li>
+<li><p><strong>Statistical Lemmatization</strong>:
+- Uses probabilistic models to predict lemmas based on the context.</p></li>
+<li><p><strong>Deep Learning-Based Lemmatization</strong>:
+- Employs neural networks and sequence-to-sequence models for highly accurate lemmatization in complex contexts.</p></li>
+</ol>
+</li>
+<li><p>Challenges</p>
+<ul>
+<li><p><strong>Ambiguity</strong>:
+Words with multiple meanings may result in incorrect lemmatization without proper context.
+- Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code> (verb) → <code class="docutils literal notranslate"><span class="pre">leave</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code> (noun/adjective) → <code class="docutils literal notranslate"><span class="pre">left</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Language-Specific Complexity</strong>:
+Lemmatization rules vary widely across languages, requiring language-specific tools and resources.</p></li>
+<li><p><strong>Resource Dependency</strong>:
+Lemmatizers require extensive lexicons and morphological rules, which can be resource-intensive to develop.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="tokenization">
 <h3><span class="section-number">2.2.4. </span>Tokenization<a class="headerlink" href="#tokenization" title="Link to this heading"></a></h3>
-<p>Out-of-vocabulary tokens
-Subword Tokenization</p>
+<p>Tokenization in NLP refers to the process of splitting a text into smaller units, called <strong>tokens</strong>, which
+can be words, subwords, sentences, or characters. These tokens serve as the basic building blocks for further
+analysis in NLP tasks.</p>
+<ul>
+<li><p>Types of Tokenization</p>
+<ol class="arabic simple">
+<li><p><strong>Word Tokenization</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Splits the text into individual words or terms.</p></li>
+<li><dl class="simple">
+<dt>Example:</dt><dd><ul>
+<li><p>Sentence: “I love NLP.”</p></li>
+<li><p>Tokens: <code class="docutils literal notranslate"><span class="pre">[&quot;I&quot;,</span> <span class="pre">&quot;love&quot;,</span> <span class="pre">&quot;NLP&quot;]</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Sentence Tokenization</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Divides a text into sentences.</p></li>
+<li><dl class="simple">
+<dt>Example:</dt><dd><ul>
+<li><p>Text: “I love NLP. It’s amazing.”</p></li>
+<li><p>Tokens: <code class="docutils literal notranslate"><span class="pre">[&quot;I</span> <span class="pre">love</span> <span class="pre">NLP.&quot;,</span> <span class="pre">&quot;It’s</span> <span class="pre">amazing.&quot;]</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Subword Tokenization</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Breaks words into smaller units, often using methods like Byte Pair Encoding (BPE) or SentencePiece.</p></li>
+<li><dl class="simple">
+<dt>Example:</dt><dd><ul>
+<li><p>Word: <code class="docutils literal notranslate"><span class="pre">unhappiness</span></code>.</p></li>
+<li><p>Tokens: <code class="docutils literal notranslate"><span class="pre">[&quot;un&quot;,</span> <span class="pre">&quot;happiness&quot;]</span></code> (or subword units like <code class="docutils literal notranslate"><span class="pre">[&quot;un&quot;,</span> <span class="pre">&quot;happi&quot;,</span> <span class="pre">&quot;ness&quot;]</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p><strong>Character Tokenization</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Treats each character in a word as a separate token.</p></li>
+<li><dl class="simple">
+<dt>Example:</dt><dd><ul>
+<li><p>Word: <code class="docutils literal notranslate"><span class="pre">hello</span></code>.</p></li>
+<li><p>Tokens: <code class="docutils literal notranslate"><span class="pre">[&quot;h&quot;,</span> <span class="pre">&quot;e&quot;,</span> <span class="pre">&quot;l&quot;,</span> <span class="pre">&quot;l&quot;,</span> <span class="pre">&quot;o&quot;]</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Importance of Tokenization</p>
+<ol class="arabic simple">
+<li><p><strong>Text Preprocessing</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tokenization is the first step in many NLP tasks like text classification, translation, and
+summarization, as it converts text into manageable pieces.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Text Representation</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tokens are converted into numerical representations (e.g., word embeddings) for model input
+in tasks like sentiment analysis, named entity recognition (NER), or language modeling.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Improving Accuracy</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Proper tokenization ensures that a model processes text at the correct granularity (e.g.,
+words or subwords), improving accuracy for tasks like machine translation or text generation.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Challenges of Tokenization</p>
+<ol class="arabic simple">
+<li><p><strong>Ambiguity</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Certain words or phrases can be tokenized differently based on context.</p></li>
+<li><p>Example: “New York” can be treated as one token (location) or two separate tokens (<code class="docutils literal notranslate"><span class="pre">[&quot;New&quot;,</span> <span class="pre">&quot;York&quot;]</span></code>).</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Handling Punctuation</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Deciding how to treat punctuation marks can be challenging. For example, should commas, periods,
+or quotes be treated as separate tokens or grouped with adjacent words?</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Multi-word Expressions (MWEs)</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Some expressions consist of multiple words that should be treated as a single token, such as “New York” or “machine learning.”</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Techniques for Tokenization</p>
+<ol class="arabic simple">
+<li><p><strong>Rule-Based Tokenization</strong>: Uses predefined rules to split text based on spaces, punctuation, and other delimiters.</p></li>
+<li><p><strong>Statistical and Machine Learning-Based Tokenization</strong>: Uses trained models to predict token boundaries based on patterns learned from large corpora.</p></li>
+<li><p><strong>Deep Learning-Based Tokenization</strong>: Modern tokenization models, such as those used in transformers (e.g., BERT, GPT), may rely on subword tokenization and neural networks to handle complex tokenization tasks.</p></li>
+</ol>
+</li>
+</ul>
 </section>
 </section>
 <section id="platform-and-packages">
 <h2><span class="section-number">2.3. </span>Platform and Packages<a class="headerlink" href="#platform-and-packages" title="Link to this heading"></a></h2>
+<section id="google-colab">
+<h3><span class="section-number">2.3.1. </span>Google Colab<a class="headerlink" href="#google-colab" title="Link to this heading"></a></h3>
+<p><strong>Google Colab</strong> (short for Colaboratory) is a free, cloud-based platform that provides users with the ability to write
+and execute Python code in an interactive notebook environment. It is based on Jupyter notebooks and is powered by
+Google Cloud services, allowing for seamless integration with Google Drive and other Google services.</p>
+<ul class="simple">
+<li><p>Key Features</p></li>
+</ul>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Free Access to GPUs and TPUs</strong>
+Colab offers free access to Graphics Processing Units (GPUs) and Tensor Processing Units (TPUs), making it an ideal environment for machine learning, deep learning, and other computationally intensive tasks.</p></li>
+<li><p><strong>Integration with Google Drive</strong>
+You can store and access notebooks directly from your Google Drive, making it easy to collaborate with others and keep your projects organized.</p></li>
+<li><p><strong>No Setup Required</strong>
+Since Colab is entirely cloud-based, you don’t need to worry about setting up an environment or managing dependencies. Everything is ready to go out of the box.</p></li>
+<li><p><strong>Support for Python Libraries</strong>
+Colab comes pre-installed with many popular Python libraries, including TensorFlow, PyTorch, Keras, and OpenCV, among others. You can also install any additional libraries using <cite>pip</cite>.</p></li>
+<li><p><strong>Collaborative Features</strong>
+Multiple users can work on the same notebook simultaneously, making it ideal for collaboration. Changes are synchronized in real-time.</p></li>
+<li><p><strong>Rich Media Support</strong>
+Colab supports the inclusion of rich media, such as images, videos, and LaTeX equations, directly within the notebook. This makes it a great tool for data analysis, visualization, and educational purposes.</p></li>
+<li><p><strong>Easy Sharing</strong>
+Notebooks can be easily shared with others via a shareable link, just like Google Docs. Permissions can be set for viewing or editing the document.</p></li>
+</ol>
+</div></blockquote>
+<ul class="simple">
+<li><p>GPU Activation
+<code class="docutils literal notranslate"><span class="pre">Runtime</span> <span class="pre">--&gt;</span> <span class="pre">change</span> <span class="pre">runtime</span> <span class="pre">type</span> <span class="pre">--&gt;</span> <span class="pre">T4/A100</span> <span class="pre">GPU</span></code></p></li>
+</ul>
+<table class="borderless docutils align-default" style="width: 100%">
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/runtime.png"><img alt="_images/runtime.png" src="_images/runtime.png" style="width: 100%;" />
+</a>
+</td>
+<td><a class="reference internal image-reference" href="_images/T4.png"><img alt="_images/T4.png" src="_images/T4.png" style="width: 100%;" />
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="huggingface">
+<h3><span class="section-number">2.3.2. </span>HuggingFace<a class="headerlink" href="#huggingface" title="Link to this heading"></a></h3>
+</section>
+<section id="ollama">
+<h3><span class="section-number">2.3.3. </span>Ollama<a class="headerlink" href="#ollama" title="Link to this heading"></a></h3>
+</section>
+<section id="langchain">
+<h3><span class="section-number">2.3.4. </span>langchain<a class="headerlink" href="#langchain" title="Link to this heading"></a></h3>
+</section>
 </section>
 </section>
 
@@ -285,7 +718,7 @@ Subword Tokenization</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 10, 2024.
+      <span class="lastupdated">Last updated on Dec 12, 2024.
       </span></p>
   </div>
 

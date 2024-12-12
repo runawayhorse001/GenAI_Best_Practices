@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  10 DEC 2024 22:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  12 DEC 2024 03:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,7 +825,7 @@ Package hyperref Info: Link coloring ON on input line 72.
 \openout5 = `GenAI.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 80.
-<logo.png, id=165, 496.85625pt x 308.15125pt>
+<logo.png, id=181, 496.85625pt x 308.15125pt>
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 8
 0.
 
@@ -922,11 +922,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4]
 Chapter 2.
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10.95> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 212.
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 216.
 LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10.95> not available
-(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 214.
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 218.
 LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
-225.
+229.
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
 File: ts1txtt.fd 2000/12/15 v3.1
 )
@@ -934,15 +934,15 @@ File: ts1txtt.fd 2000/12/15 v3.1
 [5
 
 ]
-<vector.png, id=270, 720.44156pt x 458.46281pt>
+<vector.png, id=290, 720.44156pt x 458.46281pt>
 File: vector.png Graphic file (type png)
 <use vector.png>
-Package pdftex.def Info: vector.png  used on input line 246.
+Package pdftex.def Info: vector.png  used on input line 250.
 (pdftex.def)             Requested size: 469.75453pt x 298.94868pt.
-<1Bauo.png, id=271, 697.8572pt x 186.6975pt>
+<1Bauo.png, id=291, 697.8572pt x 186.6975pt>
 File: 1Bauo.png Graphic file (type png)
 <use 1Bauo.png>
-Package pdftex.def Info: 1Bauo.png  used on input line 262.
+Package pdftex.def Info: 1Bauo.png  used on input line 266.
 (pdftex.def)             Requested size: 469.75546pt x 125.67351pt.
 
 
@@ -994,18 +994,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[10
-
-]
-Chapter 3.
-<embedding_diagram.png, id=306, 601.4972pt x 356.83313pt>
-File: embedding_diagram.png Graphic file (type png)
-<use embedding_diagram.png>
-Package pdftex.def Info: embedding_diagram.png  used on input line 443.
-(pdftex.def)             Requested size: 469.77168pt x 278.69351pt.
+[10]
 
 
-[11 <./embedding_diagram.png>]
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 922--924
+[]\T1/qtm/m/n/10.95 To-kens: \T1/txtt/m/n/10.95 ["un", "happiness"] \T1/qtm/m/n
+/10.95 (or sub-word units like \T1/txtt/m/n/10.95 ["un", "happi",
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1016,44 +1021,72 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[13]
+<runtime.png, id=372, 1395.71437pt x 788.9475pt>
+File: runtime.png Graphic file (type png)
+<use runtime.png>
+Package pdftex.def Info: runtime.png  used on input line 1153.
+(pdftex.def)             Requested size: 469.75502pt x 265.52997pt.
+<T4.png, id=373, 1395.71437pt x 788.9475pt>
+File: T4.png Graphic file (type png)
+<use T4.png>
+Package pdftex.def Info: T4.png  used on input line 1153.
+(pdftex.def)             Requested size: 469.75502pt x 265.52997pt.
+File: runtime.png Graphic file (type png)
+<use runtime.png>
+Package pdftex.def Info: runtime.png  used on input line 1153.
+(pdftex.def)             Requested size: 222.87845pt x 125.98137pt.
+File: T4.png Graphic file (type png)
+<use T4.png>
+Package pdftex.def Info: T4.png  used on input line 1153.
+(pdftex.def)             Requested size: 222.87845pt x 125.98137pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[14 <./runtime.png> <./T4.png>]
+Chapter 3.
+<embedding_diagram.png, id=388, 601.4972pt x 356.83313pt>
+File: embedding_diagram.png Graphic file (type png)
+<use embedding_diagram.png>
+Package pdftex.def Info: embedding_diagram.png  used on input line 1181.
+(pdftex.def)             Requested size: 469.77168pt x 278.69351pt.
+
+
+[15
+
+ <./embedding_diagram.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[16]
 Chapter 4.
 
 
-[13
+[17
 
 ]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[14
-
-]
-Chapter 5.
-
-
-[15]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[16
-
-]
-Chapter 6.
-
-
-[17]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1066,7 +1099,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [18
 
 ]
-Chapter 7.
+Chapter 5.
 
 
 [19]
@@ -1082,7 +1115,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [20
 
 ]
-Chapter 8.
+Chapter 6.
 
 
 [21]
@@ -1097,9 +1130,41 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [22
 
+]
+Chapter 7.
+
+
+[23]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[24
+
+]
+Chapter 8.
+
+
+[25]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[26
+
 ] (./GenAI.ind)
 
-[23
+[27
 
 ] (./GenAI.aux)
  ***********
@@ -1107,16 +1172,16 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
  ***********
 Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: 02A93F387DF089CC64D34CDB379B88AE;5042.
+(rerunfilecheck)             Checksum: 6F25D4EECF597E82CC8DFD86BC09CC7A;5483.
  ) 
 Here is how much of TeX's memory you used:
- 17123 strings out of 475544
- 289888 string characters out of 5777741
- 1982905 words of memory out of 5000000
- 39288 multiletter control sequences out of 15000+600000
- 613687 words of font info for 93 fonts, out of 8000000 for 9000
+ 17212 strings out of 475544
+ 290993 string characters out of 5777741
+ 1983905 words of memory out of 5000000
+ 39327 multiletter control sequences out of 15000+600000
+ 616502 words of font info for 94 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,20n,83p,1194b,672s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,20n,83p,1194b,710s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
@@ -1128,14 +1193,15 @@ blic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></us
 r/share/texmf/fonts/type1/public/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/typ
 e1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/txfonts/tcxtt.pfb>
-Output written on GenAI.pdf (27 pages, 851245 bytes).
+pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
+xfonts/tcxtt.pfb>
+Output written on GenAI.pdf (31 pages, 1181522 bytes).
 PDF statistics:
- 452 PDF objects out of 1000 (max. 8388607)
- 387 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
- 361 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 547 PDF objects out of 1000 (max. 8388607)
+ 472 compressed objects within 5 object streams
+ 127 named destinations out of 1000 (max. 500000)
+ 403 words of extra memory for PDF output out of 10000 (max. 10000000)
 

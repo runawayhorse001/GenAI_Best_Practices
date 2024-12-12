@@ -15,9 +15,9 @@ Math Preliminary
 Vector 
 ------
 
-A vector is a mathematical representation of data that has both magnitude and direction. 
-Each data point is represented as a feature vector, where each component of the vector 
-corresponds to a specific feature or attribute of the data.
+A vector is a mathematical representation of data characterized by both magnitude and 
+direction. In this context, each data point is represented as a feature vector, with 
+each component corresponding to a specific feature or attribute of the data.
 
 .. code-block:: python 
 
@@ -61,10 +61,10 @@ corresponds to a specific feature or attribute of the data.
 Norm
 ----
 
-Norm is a function that maps a vector to a single positive value, representing its 
-magnitude. Norms are used to calculate distances between vectors, which is vital 
-for measuring prediction errors in models, performing feature
-selection, and applying regularization techniques.
+A norm is a function that maps a vector to a single positive value, representing its 
+magnitude. Norms are essential for calculating distances between vectors, which play 
+a crucial role in measuring prediction errors, performing feature selection, and 
+applying regularization techniques in models.
 
 .. _fig_logo:
 .. figure:: images/1Bauo.png
@@ -107,7 +107,9 @@ Distances
 - Manhattan Distance (:math:`\displaystyle \ell^1` Distance)
 
 
-    Also known as taxicab or city block distance, Manhattan distance measures the absolute differences between the components of two vectors. It calculates the distance a point would travel along the grid lines in a Cartesian plane, as if navigating through a city.
+    Also known as taxicab or city block distance, Manhattan distance measures the absolute differences 
+    between the components of two vectors. It represents the distance a point would travel along grid 
+    lines in a Cartesian plane, similar to navigating through city streets.
 
     For two vector :math:`\vec{u} = (u_1, u_2, \cdots, u_n)` and :math:`\vec{v} = (v_1, v_2, \cdots, v_n)`, the 
     Manhattan Distance distance :math:`d(\vec{u},\vec{v})` is
@@ -118,9 +120,11 @@ Distances
 
 - Euclidean Distance (:math:`\displaystyle \ell^2` Distance)
 
-    Euclidean distance is the most common way to measure the distance between two points (vectors) in space. It is essentially the straight-line distance between them, calculated using the Pythagorean theorem.
+    Euclidean distance is the most common way to measure the distance between two points (vectors) in space. 
+    It is essentially the straight-line distance between them, calculated using the Pythagorean theorem.
 
-    For two vector :math:`\vec{u} = (u_1, u_2, \cdots, u_n)` and :math:`\vec{v} = (v_1, v_2, \cdots, v_n)`, the Euclidean Distance distance :math:`d(\vec{u},\vec{v})` is
+    For two vector :math:`\vec{u} = (u_1, u_2, \cdots, u_n)` and :math:`\vec{v} = (v_1, v_2, \cdots, v_n)`, the 
+    Euclidean Distance distance :math:`d(\vec{u},\vec{v})` is
     
     .. math::
 
@@ -128,11 +132,16 @@ Distances
 
 - Minkowski Distance (:math:`\displaystyle \ell^p` Distance)
 
-    Minkowski distance is a generalization of both Euclidean and Manhattan distances. It introduces a parameter :math:`p` that allows you to adjust the sensitivity of the distance metric.
+
+    Minkowski distance is a generalization of both Euclidean and Manhattan distances. It incorporates a parameter,
+    :math:`p`, which allows for adjusting the sensitivity of the distance metric.
 
 - Cos Similarity
 
-    Cosine similarity measures the angle between two vectors rather than their straight-line distance. It is used to determine how similar two vectors are by focusing on their orientation rather than their magnitude. This makes it particularly useful for high-dimensional data, such as text, where the magnitude of the vectors may not be as important as the direction.
+    Cosine similarity measures the angle between two vectors rather than their straight-line distance. 
+    It evaluates the similarity of two vectors by focusing on their orientation rather than their magnitude. 
+    This makes it particularly useful for high-dimensional data, such as text, where the direction of the 
+    vectors is often more significant than their magnitude.
 
     The Cos similarity for two vector :math:`\vec{u} = (u_1, u_2, \cdots, u_n)` and :math:`\vec{v} = (v_1, v_2, \cdots, v_n)` is
 
@@ -180,25 +189,335 @@ NLP Preliminary
 Vocabulary
 ----------
 
+In Natural Language Processing (NLP), **vocabulary** refers to the complete set of unique words or tokens 
+that a model recognizes or works with during training and inference. Vocabulary plays a critical role in 
+text processing and understanding, as it defines the scope of linguistic units a model can handle.
+
+- Types of Vocabulary in NLP
+
+
+    1. **Word-level Vocabulary**:
+    - Each word in the text is treated as a unique token.
+    - For example, the sentence "I love NLP" would generate the vocabulary: ``{I, love, NLP}``.
+
+    2. **Subword-level Vocabulary**:
+    - Text is broken down into smaller units like prefixes, suffixes, or character sequences.
+    - For example, the word "loving" might be split into ``{lov, ing}`` using techniques like Byte Pair Encoding (BPE) or SentencePiece.
+    - Subword vocabularies handle rare or unseen words more effectively.
+
+    3. **Character-level Vocabulary**:
+    - Each character is treated as a token.
+    - For example, the word "love" would generate the vocabulary: ``{l, o, v, e}``.
+
+- Importance of Vocabulary
+
+
+    1. **Text Representation**:
+    - Vocabulary is the basis for converting text into numerical representations like one-hot vectors, embeddings, or input IDs for machine learning models.
+
+    2. **Model Efficiency**:
+    - A larger vocabulary increases the model's memory and computational requirements.
+    - A smaller vocabulary may lack the capacity to represent all words effectively, leading to a loss of meaning.
+
+    3. **Handling Out-of-Vocabulary (OOV) Words**:
+    - Words not present in the vocabulary are either replaced with a special token like ``<UNK>`` or processed using subword/character-based techniques.
+
+- Building a Vocabulary
+
+
+    Common practices include:
+
+    1. Tokenizing the text into words, subwords, or characters.
+    2. Counting the frequency of tokens.
+    3. Keeping only the most frequent tokens up to a predefined size (e.g., top 50,000 tokens).
+    4. Adding special tokens like ``<PAD>``, ``<UNK>``, ``<BOS>`` (beginning of sentence), and ``<EOS>`` (end of sentence).
+
+- Challenges
+
+
+- **Balancing Vocabulary Size**:
+  A larger vocabulary increases the richness of representation but requires more computational resources.
+
+- **Domain-specific Vocabularies**:
+  In specialized fields like medicine or law, standard vocabularies may not be sufficient, requiring domain-specific tokenization strategies.
+
+
 Tagging
 -------
+
+Tagging in NLP refers to the process of assigning labels or annotations 
+to words, phrases, or other linguistic units in a text. These labels provide additional information about 
+the syntactic, semantic, or structural role of the elements in the text.
+
+- Types of Tagging
+
+    1. **Part-of-Speech (POS) Tagging**:
+       - Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
+       - Example: For the sentence "The dog barks," the tags might be:
+         - ``The/DET`` (Determiner)
+         - ``dog/NOUN`` (Noun)
+         - ``barks/VERB`` (Verb).
+
+    2. **Named Entity Recognition (NER) Tagging**:
+       - Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
+       - Example: In the sentence "John works at Google in California," the tags might be:
+         - ``John/PERSON``
+         - ``Google/ORGANIZATION``
+         - ``California/LOCATION``.
+
+    3. **Chunking (Syntactic Tagging)**:
+       - Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
+       - Example: For the sentence "The quick brown fox jumps," a chunking result might be:
+         - ``[NP The quick brown fox] [VP jumps]``.
+
+    4. **Sentiment Tagging**:
+       - Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
+       - Example: The word "happy" might be tagged as ``positive``, while "sad" might be tagged as ``negative``.
+
+    5. **Dependency Parsing Tags**:
+       - Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
+       - Example: In "She enjoys cooking," the tags might show:
+            - ``She/nsubj`` (nominal subject)
+            - ``enjoys/ROOT`` (root of the sentence)
+            - ``cooking/dobj`` (direct object).
+
+- Importance of Tagging
+
+
+    - **Understanding Language Structure**: Tags help NLP models understand the grammatical and syntactic structure of text.
+
+    - **Improving Downstream Tasks**: Tagging is foundational for tasks like machine 
+      translation, sentiment analysis, question answering, and summarization.
+
+    - **Feature Engineering**: Tags serve as features for training machine learning models in 
+      text classification or sequence labeling tasks.
+
+- Tagging Techniques
+
+
+    1. **Rule-based Tagging**: Relies on predefined linguistic rules to assign tags.
+       Example: Using dictionaries or regular expressions to match specific patterns.
+
+    2. **Statistical Tagging**: Uses probabilistic models like Hidden Markov Models (HMMs) 
+       to predict tags based on word sequences.
+
+    3. **Neural Network-based Tagging**: Employs deep learning models like LSTMs, GRUs, or Transformers 
+       to tag text with high accuracy.
+
+- Challenges
+
+
+    - **Ambiguity**:Words with multiple meanings can lead to incorrect tagging.
+      Example: The word "bank" could mean a financial institution or a riverbank.
+
+    - **Domain-Specific Language**: General tagging models may fail to perform well on specialized text 
+      like medical or legal documents.
+
+    - **Data Sparsity**: Rare words or phrases may lack sufficient training data for accurate tagging.
+
 
 
 Lemmatization
 -------------
 
+Lemmatization in NLP is the process of reducing a word to its base or dictionary form, known as 
+the **lemma**. Unlike stemming, which simply removes word suffixes, lemmatization considers 
+the context and grammatical role of the word to produce a linguistically accurate root form.
+
+- How Lemmatization Works
+
+
+  1. **Contextual Analysis**:
+     - Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word's base form.
+     - For example:
+       - ``running`` → ``run``
+       - ``better`` → ``good``
+
+  2. **Part-of-Speech (POS) Tagging**:
+     - The process uses POS tags to determine the correct lemma for a word.
+     - Example:
+       - ``barking`` (verb) → ``bark``
+       - ``barking`` (adjective, as in "barking dog") → ``barking``.
+
+- Importance of Lemmatization
+
+  1. **Improves Text Normalization**:
+     - Lemmatization helps normalize text by grouping different forms of a word into a single representation.
+     - Example:
+       - ``run``, ``running``, and ``ran`` → ``run``.
+
+  2. **Enhances NLP Applications**:
+     - Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.
+
+  3. **Reduces Vocabulary Size**:
+     - By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.
+
+- Lemmatization vs. Stemming
+
+  - **Lemmatization**:
+    - Produces linguistically accurate root forms.
+    - Considers the word's context and POS.
+    - Example:
+      - ``studies`` → ``study``.
+
+  - **Stemming**:
+    - Applies heuristic rules to strip word suffixes without considering context.
+    - May produce non-dictionary forms.
+    - Example:
+      - ``studies`` → ``studi``.
+
+- Techniques for Lemmatization
+
+  1. **Rule-Based Lemmatization**:
+     - Relies on predefined linguistic rules and dictionaries.
+     - Example: WordNet-based lemmatizers.
+
+  2. **Statistical Lemmatization**:
+     - Uses probabilistic models to predict lemmas based on the context.
+
+  3. **Deep Learning-Based Lemmatization**:
+     - Employs neural networks and sequence-to-sequence models for highly accurate lemmatization in complex contexts.
+
+- Challenges
+
+  - **Ambiguity**:
+    Words with multiple meanings may result in incorrect lemmatization without proper context.
+    - Example:
+      - ``left`` (verb) → ``leave``
+      - ``left`` (noun/adjective) → ``left``.
+
+  - **Language-Specific Complexity**:
+    Lemmatization rules vary widely across languages, requiring language-specific tools and resources.
+
+  - **Resource Dependency**:
+    Lemmatizers require extensive lexicons and morphological rules, which can be resource-intensive to develop.
+
 
 Tokenization
 ------------
 
-Out-of-vocabulary tokens 
-Subword Tokenization 
+Tokenization in NLP refers to the process of splitting a text into smaller units, called **tokens**, which 
+can be words, subwords, sentences, or characters. These tokens serve as the basic building blocks for further
+analysis in NLP tasks.
+
+- Types of Tokenization
+
+  1. **Word Tokenization**:
+    - Splits the text into individual words or terms.
+    - Example: 
+        - Sentence: "I love NLP."
+        - Tokens: ``["I", "love", "NLP"]``.
+
+  2. **Sentence Tokenization**:
+    - Divides a text into sentences.
+    - Example: 
+        - Text: "I love NLP. It’s amazing."
+        - Tokens: ``["I love NLP.", "It’s amazing."]``.
+
+  3. **Subword Tokenization**:
+    - Breaks words into smaller units, often using methods like Byte Pair Encoding (BPE) or SentencePiece.
+    - Example:
+        - Word: ``unhappiness``.
+        - Tokens: ``["un", "happiness"]`` (or subword units like ``["un", "happi", "ness"]``).
+
+  4. **Character Tokenization**:
+    - Treats each character in a word as a separate token.
+    - Example:
+        - Word: ``hello``.
+        - Tokens: ``["h", "e", "l", "l", "o"]``.
+
+- Importance of Tokenization
 
 
+  1. **Text Preprocessing**:
+    - Tokenization is the first step in many NLP tasks like text classification, translation, and 
+      summarization, as it converts text into manageable pieces.
+
+  2. **Text Representation**:
+    - Tokens are converted into numerical representations (e.g., word embeddings) for model input 
+      in tasks like sentiment analysis, named entity recognition (NER), or language modeling.
+
+  3. **Improving Accuracy**:
+    - Proper tokenization ensures that a model processes text at the correct granularity (e.g., 
+      words or subwords), improving accuracy for tasks like machine translation or text generation.
+
+- Challenges of Tokenization
+
+  1. **Ambiguity**:
+    - Certain words or phrases can be tokenized differently based on context.
+    - Example: “New York” can be treated as one token (location) or two separate tokens (``["New", "York"]``).
+
+  2. **Handling Punctuation**:
+    - Deciding how to treat punctuation marks can be challenging. For example, should commas, periods, 
+      or quotes be treated as separate tokens or grouped with adjacent words?
+
+  3. **Multi-word Expressions (MWEs)**:
+    - Some expressions consist of multiple words that should be treated as a single token, such as “New York” or “machine learning.”
+
+- Techniques for Tokenization
 
 
+  1. **Rule-Based Tokenization**: Uses predefined rules to split text based on spaces, punctuation, and other delimiters.
 
+  2. **Statistical and Machine Learning-Based Tokenization**: Uses trained models to predict token boundaries based on patterns learned from large corpora.
+
+  3. **Deep Learning-Based Tokenization**: Modern tokenization models, such as those used in transformers (e.g., BERT, GPT), may rely on subword tokenization and neural networks to handle complex tokenization tasks.
 
 Platform and Packages
 +++++++++++++++++++++
 
+Google Colab
+------------
+
+**Google Colab** (short for Colaboratory) is a free, cloud-based platform that provides users with the ability to write 
+and execute Python code in an interactive notebook environment. It is based on Jupyter notebooks and is powered by 
+Google Cloud services, allowing for seamless integration with Google Drive and other Google services.
+
+- Key Features
+
+ 1. **Free Access to GPUs and TPUs**  
+    Colab offers free access to Graphics Processing Units (GPUs) and Tensor Processing Units (TPUs), making it an ideal environment for machine learning, deep learning, and other computationally intensive tasks.
+
+ 2. **Integration with Google Drive**  
+    You can store and access notebooks directly from your Google Drive, making it easy to collaborate with others and keep your projects organized.
+
+ 3. **No Setup Required**  
+    Since Colab is entirely cloud-based, you don't need to worry about setting up an environment or managing dependencies. Everything is ready to go out of the box.
+
+ 4. **Support for Python Libraries**  
+    Colab comes pre-installed with many popular Python libraries, including TensorFlow, PyTorch, Keras, and OpenCV, among others. You can also install any additional libraries using `pip`.
+
+ 5. **Collaborative Features**  
+    Multiple users can work on the same notebook simultaneously, making it ideal for collaboration. Changes are synchronized in real-time.
+
+ 6. **Rich Media Support**  
+    Colab supports the inclusion of rich media, such as images, videos, and LaTeX equations, directly within the notebook. This makes it a great tool for data analysis, visualization, and educational purposes.
+
+ 7. **Easy Sharing**  
+    Notebooks can be easily shared with others via a shareable link, just like Google Docs. Permissions can be set for viewing or editing the document.
+
+- GPU Activation 
+  ``Runtime --> change runtime type --> T4/A100 GPU``
+ 
+.. list-table::
+   :width: 100%
+   :class: borderless
+
+   * - .. image:: images/runtime.png
+        :width: 100%
+            
+     - .. image:: images/T4.png
+        :width: 100%
+
+
+HuggingFace
+-----------
+
+
+Ollama
+------
+
+
+
+langchain
+---------

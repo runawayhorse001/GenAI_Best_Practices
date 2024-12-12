@@ -71,6 +71,10 @@ About the authors
   and conclusions or recommendations expressed in this material are those of the author and do not necessarily
   reflect the views of the IMA, UTK and DST.
 
+
+  ChatGPT has been extensively used in the creation of this book. If you notice that your work has not been 
+  cited or has been cited incorrectly, please notify us.
+
 Feedback and suggestions
 ++++++++++++++++++++++++
 
