@@ -57,12 +57,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#static-word-embeddings">3.2. Static word embeddings</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#word2vec">3.2.1. Word2Vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#glove">3.2.2. GloVE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fast-text">3.2.3. Fast Text</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#glove">3.3. GloVE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fast-text">3.4. Fast Text</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#contextual-word-embeddings">3.5. Contextual word embeddings</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bert">3.5.1. BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contextual-word-embeddings">3.3. Contextual word embeddings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bert">3.3.1. BERT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gte-large-en-v1-5">3.3.2. gte-large-en-v1.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bge-base-en-v1-5">3.3.3. bge-base-en-v1.5</a></li>
 </ul>
 </li>
 </ul>
@@ -554,9 +556,8 @@ usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe,
 </pre></div>
 </div>
 </section>
-</section>
 <section id="glove">
-<h2><span class="section-number">3.3. </span>GloVE<a class="headerlink" href="#glove" title="Link to this heading"></a></h2>
+<h3><span class="section-number">3.2.2. </span>GloVE<a class="headerlink" href="#glove" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span> <span class="k">as</span> <span class="nn">api</span>
 <span class="c1"># Download pre-trained GloVe model</span>
 <span class="n">glove_vectors</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;glove-wiki-gigaword-50&quot;</span><span class="p">)</span>
@@ -595,7 +596,7 @@ usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe,
 </div>
 </section>
 <section id="fast-text">
-<h2><span class="section-number">3.4. </span>Fast Text<a class="headerlink" href="#fast-text" title="Link to this heading"></a></h2>
+<h3><span class="section-number">3.2.3. </span>Fast Text<a class="headerlink" href="#fast-text" title="Link to this heading"></a></h3>
 <p>Fast Text incorporates subword information (useful for handling rare or unseen words)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">FastText</span>
 
@@ -661,14 +662,15 @@ usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe,
 </pre></div>
 </div>
 </section>
+</section>
 <section id="contextual-word-embeddings">
-<h2><span class="section-number">3.5. </span>Contextual word embeddings<a class="headerlink" href="#contextual-word-embeddings" title="Link to this heading"></a></h2>
+<h2><span class="section-number">3.3. </span>Contextual word embeddings<a class="headerlink" href="#contextual-word-embeddings" title="Link to this heading"></a></h2>
 <p>Contextual word embeddings are word representations where the embedding of a word
 changes depending on its context in a sentence or document. These embeddings capture
 the meaning of a word as influenced by its surrounding words, addressing the limitations
 of static embeddings by incorporating contextual nuances.</p>
 <section id="bert">
-<h3><span class="section-number">3.5.1. </span>BERT<a class="headerlink" href="#bert" title="Link to this heading"></a></h3>
+<h3><span class="section-number">3.3.1. </span>BERT<a class="headerlink" href="#bert" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertModel</span>
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">BertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
@@ -692,6 +694,14 @@ of static embeddings by incorporating contextual nuances.</p>
       <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">NativeLayerNormBackward0</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="gte-large-en-v1-5">
+<h3><span class="section-number">3.3.2. </span>gte-large-en-v1.5<a class="headerlink" href="#gte-large-en-v1-5" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5">https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5</a></p>
+</section>
+<section id="bge-base-en-v1-5">
+<h3><span class="section-number">3.3.3. </span>bge-base-en-v1.5<a class="headerlink" href="#bge-base-en-v1-5" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://huggingface.co/BAAI/bge-base-en-v1.5">https://huggingface.co/BAAI/bge-base-en-v1.5</a></p>
 </section>
 </section>
 </section>

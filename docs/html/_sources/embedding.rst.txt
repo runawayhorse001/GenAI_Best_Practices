@@ -483,7 +483,7 @@ Word2Vec
 
 
 GloVE
-+++++
+-----
 
 .. code-block:: python  
 
@@ -525,7 +525,7 @@ GloVE
    Cosine similarity between 'king' and 'queen': 0.7839043140411377
 
 Fast Text 
-+++++++++
+---------
 
 Fast Text incorporates subword information (useful for handling rare or unseen words)
 
@@ -630,3 +630,17 @@ BERT
             [-0.0187, -0.7320, -0.3420,  ...,  0.4028,  0.1425, -0.2014],
             [ 0.5493, -0.1029, -0.1571,  ...,  0.3503, -0.7601, -0.1398]]],
          grad_fn=<NativeLayerNormBackward0>)        
+
+
+gte-large-en-v1.5
+-----------------
+
+https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5
+
+
+
+bge-base-en-v1.5
+----------------
+
+https://huggingface.co/BAAI/bge-base-en-v1.5
+
