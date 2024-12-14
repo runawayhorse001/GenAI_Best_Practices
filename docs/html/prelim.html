@@ -799,12 +799,140 @@ Notebooks can be easily shared with others via a shareable link, just like Googl
 </section>
 <section id="huggingface">
 <h3><span class="section-number">2.3.2. </span>HuggingFace<a class="headerlink" href="#huggingface" title="Link to this heading"></a></h3>
+<p><strong>Hugging Face</strong> is a company and open-source community focused on providing tools and resources for NLP
+and machine learning. It is best known for its popular <strong>Transformers</strong> library, which allows easy access
+to pre-trained models for a wide variety of NLP tasks. MOreover,  Hugging Face’s libraries provide simple
+Python APIs that make it easy to load models, preprocess data, and run inference. This simplicity allows
+both beginners and advanced users to leverage cutting-edge NLP models. We will mainly use the embedding models
+and Large Language Models (LLMs) from <strong>Hugging Face Model Hub</strong> central repository.</p>
 </section>
 <section id="ollama">
 <h3><span class="section-number">2.3.3. </span>Ollama<a class="headerlink" href="#ollama" title="Link to this heading"></a></h3>
+<p>Ollama is a package designed to run LLMs locally on your personal device or
+server, rather than relying on external cloud services. It provides a simple
+interface to download and use AI models tailored for various tasks, ensuring
+privacy and control over data while still leveraging the power of LLMs.</p>
+<ul class="simple">
+<li><p>Key features of Ollama:</p>
+<ul>
+<li><p>Local Execution: Models run entirely on your hardware, making it ideal for users who prioritize data privacy.</p></li>
+<li><p>Pre-trained Models: Offers a curated set of LLMs optimized for local usage.</p></li>
+<li><p>Cross-Platform: Compatible with macOS, Linux, and other operating systems, depending on hardware specifications.</p></li>
+<li><p>Ease of Use: Designed to make setting up and using local AI models simple for non-technical users.</p></li>
+<li><p>Efficiency: Focused on lightweight models optimized for local performance without needing extensive computational resources.</p></li>
+</ul>
+</li>
+</ul>
+<p>To simplify the management of access tokens for various LLMs, we will use Ollama in Google Colab.</p>
+<ul>
+<li><p>Ollama installation in Google Colab</p>
+<ol class="arabic simple">
+<li><p>colab-xterm</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>colab-xterm
+%load_ext<span class="w"> </span>colabxterm
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>download ollama</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/content#<span class="w"> </span>curl<span class="w"> </span>https://ollama.ai/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+</div>
+<figure class="align-center" id="fig-ollama-download">
+<img alt="_images/ollama_download.png" src="_images/ollama_download.png" />
+</figure>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>launch Ollama serve</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/content#<span class="w"> </span>ollama<span class="w"> </span>serve
+</pre></div>
+</div>
+<figure class="align-center" id="fig-ollama-serve">
+<img alt="_images/ollama_serve.png" src="_images/ollama_serve.png" />
+</figure>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>download models</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/content#<span class="w"> </span>ollama<span class="w"> </span>pull<span class="w"> </span>mistral<span class="w"> </span><span class="c1">#llama3.2 #bge-m3</span>
+</pre></div>
+</div>
+<figure class="align-center" id="fig-ollama-pull">
+<img alt="_images/pull_models.png" src="_images/pull_models.png" />
+</figure>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>check</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!ollama<span class="w"> </span>list
+
+<span class="c1">####</span>
+NAME<span class="w">               </span>ID<span class="w">              </span>SIZE<span class="w">      </span>MODIFIED
+llama3.2:latest<span class="w">    </span>a80c4f17acd5<span class="w">    </span><span class="m">2</span>.0<span class="w"> </span>GB<span class="w">    </span><span class="m">14</span><span class="w"> </span>seconds<span class="w"> </span>ago
+mistral:latest<span class="w">     </span>f974a74358d6<span class="w">    </span><span class="m">4</span>.1<span class="w"> </span>GB<span class="w">    </span>About<span class="w"> </span>a<span class="w"> </span>minute<span class="w"> </span>ago
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
 </section>
 <section id="langchain">
 <h3><span class="section-number">2.3.4. </span>langchain<a class="headerlink" href="#langchain" title="Link to this heading"></a></h3>
+<p>LangChain is a powerful framework for building AI applications that combine the
+capabilities of large language models with external tools, memory, and custom
+workflows. It enables developers to create intelligent, context-aware,
+and dynamic applications with ease.</p>
+<p>It has widely applied in:</p>
+<ol class="arabic simple">
+<li><p><strong>Conversational AI</strong>
+Create chatbots or virtual assistants that maintain context, integrate with APIs, and provide intelligent responses.</p></li>
+<li><p><strong>Knowledge Management</strong>
+Combine LLMs with external knowledge bases or databases to answer complex questions or summarize documents.</p></li>
+<li><p><strong>Automation</strong>
+Automate workflows by chaining LLMs with tools for decision-making, data extraction, or content generation.</p></li>
+<li><p><strong>Creative Applications</strong>
+Use LangChain for generating stories, crafting marketing copy, or producing artistic content.</p></li>
+</ol>
+<p>We will primarily use LangChain in this book. For instance, to work with downloaded Ollama LLMs, the <code class="docutils literal notranslate"><span class="pre">langchain_ollama</span></code>
+package is required.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># chain of thought prompting</span>
+<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">CommaSeparatedListOutputParser</span>
+
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Question: </span><span class="si">{question}</span>
+
+<span class="s2">Answer: Let&#39;s think step by step.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">OllamaLLM</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;mistral&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
+<span class="n">output_parser</span> <span class="o">=</span> <span class="n">CommaSeparatedListOutputParser</span><span class="p">()</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span> <span class="o">|</span> <span class="n">output_parser</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What is Mixture of Experts(MoE) in AI?&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;{&quot;answer&quot;:&quot;MoE&#39;</span><span class="p">,</span> <span class="s1">&#39;or Mixture of Experts&#39;</span><span class="p">,</span> <span class="s2">&quot;is a neural network architecture that allows for </span><span class="se">\</span>
+<span class="s2">    efficient computation and model parallelism. It consists of multiple &#39;experts&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;each of </span><span class="se">\</span>
+<span class="s1">    which is a smaller neural network that specializes in handling different parts of the input </span><span class="se">\</span>
+<span class="s1">    data. The final output is obtained by combining the outputs of these experts based on their </span><span class="se">\</span>
+<span class="s1">    expertise relevance to the input. This architecture is particularly useful in tasks where </span><span class="se">\</span>
+<span class="s1">    the data exhibits complex and diverse patterns.&quot;}&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;</span><span class="se">\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</span><span class="s1">&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -821,7 +949,7 @@ Notebooks can be easily shared with others via a shareable link, just like Googl
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 12, 2024.
+      <span class="lastupdated">Last updated on Dec 13, 2024.
       </span></p>
   </div>
 

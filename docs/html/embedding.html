@@ -18,6 +18,7 @@
       <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -48,16 +49,22 @@
 <li class="toctree-l1"><a class="reference internal" href="preface.html">1. Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prelim.html">2. Preliminary</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Word and Sentence Embedding</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#bag-of-word">3.1. Bag-of-Word</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#traditional-word-embeddings">3.1. Traditional word embeddings</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#one-hot-encoder">3.1.1. One Hot Encoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#countvectorizer">3.1.2. CountVectorizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tf-idf">3.1.3. TF-IDF</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#tf-idf">3.2. TF-IDF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#word2vec">3.3. Word2Vec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#glove">3.4. GloVE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fast-text">3.5. Fast Text</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bert">3.6. BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#static-word-embeddings">3.2. Static word embeddings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#word2vec">3.2.1. Word2Vec</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#glove">3.3. GloVE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fast-text">3.4. Fast Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contextual-word-embeddings">3.5. Contextual word embeddings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bert">3.5.1. BERT</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
@@ -104,9 +111,11 @@ continuous vector space where similar words are located closer together.</p>
 <p><span class="caption-text">Embedding Diagram</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<section id="bag-of-word">
-<h2><span class="section-number">3.1. </span>Bag-of-Word<a class="headerlink" href="#bag-of-word" title="Link to this heading"></a></h2>
-<p><strong>Bag of Words (BoW)</strong> is a simple and widely used text representation technique in natural language processing (NLP). It represents a text (e.g., a document or a sentence) as a collection of words, ignoring grammar, order, and context but keeping their frequency.</p>
+<section id="traditional-word-embeddings">
+<h2><span class="section-number">3.1. </span>Traditional word embeddings<a class="headerlink" href="#traditional-word-embeddings" title="Link to this heading"></a></h2>
+<p><strong>Bag of Words (BoW)</strong> is a simple and widely used text representation technique in natural
+language processing (NLP). It represents a text (e.g., a document or a sentence) as a collection
+of words, ignoring grammar, order, and context but keeping their frequency.</p>
 <p>Key Features of Bag of Words:</p>
 <ol class="arabic simple">
 <li><p><strong>Vocabulary Creation</strong>:
@@ -138,26 +147,547 @@ continuous vector space where similar words are located closer together.</p>
 </ol>
 <section id="one-hot-encoder">
 <h3><span class="section-number">3.1.1. </span>One Hot Encoder<a class="headerlink" href="#one-hot-encoder" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>import numpy as np
+import pandas as pd
+from collections import Counter
+from sklearn.preprocessing import OneHotEncoder</p>
+<p># sample corpus
+data = pd.DataFrame({‘word’:[‘python’, ‘pyspark’, ‘genai’, ‘pyspark’, ‘python’, ‘pyspark’]})</p>
+<p># corpus frequency
+print(‘Vocabulary frequency:’)
+print(dict(Counter(data[‘word’])))</p>
+<p># corpus order
+print(’nVocabulary order:’)
+print(sorted(set(data[‘word’])))</p>
+<p># One-hot encode the data
+onehot_encoder = OneHotEncoder(sparse_output=False)
+onehot_encoded = onehot_encoder.fit_transform(data[[‘word’]])</p>
+<p># the encoded order base on the order of the copus
+print(’nEncoded representation:’)
+print(onehot_encoded)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>Vocabulary frequency:
+{‘python’: 2, ‘pyspark’: 3, ‘genai’: 1}</p>
+<p>Vocabulary order:
+[‘genai’, ‘pyspark’, ‘python’]</p>
+<p>Encoded representation:
+[[0. 0. 1.]
+[0. 1. 0.]
+[1. 0. 0.]
+[0. 1. 0.]
+[0. 0. 1.]
+[0. 1. 0.]]</p>
 </section>
 <section id="countvectorizer">
 <h3><span class="section-number">3.1.2. </span>CountVectorizer<a class="headerlink" href="#countvectorizer" title="Link to this heading"></a></h3>
-<p>To overcome these limitations, advanced techniques like <strong>TF-IDF</strong>, <strong>word embeddings</strong> (e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.</p>
-</section>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="c1"># sample corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;Gen AI is awesome&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is fun&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is hot&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Initialize the CountVectorizer</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+
+<span class="c1"># Fit and transform</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vocabulary:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Embedded representation:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Vocabulary</span><span class="p">:</span>
+<span class="p">[</span><span class="s1">&#39;ai&#39;</span> <span class="s1">&#39;awesome&#39;</span> <span class="s1">&#39;fun&#39;</span> <span class="s1">&#39;gen&#39;</span> <span class="s1">&#39;hot&#39;</span> <span class="s1">&#39;is&#39;</span><span class="p">]</span>
+
+<span class="n">Embedded</span> <span class="n">representation</span><span class="p">:</span>
+<span class="p">[[</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>To overcome these limitations, advanced techniques like <strong>TF-IDF</strong>, <strong>word embeddings</strong>
+(e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.</p>
 </section>
 <section id="tf-idf">
-<h2><span class="section-number">3.2. </span>TF-IDF<a class="headerlink" href="#tf-idf" title="Link to this heading"></a></h2>
+<h3><span class="section-number">3.1.3. </span>TF-IDF<a class="headerlink" href="#tf-idf" title="Link to this heading"></a></h3>
+<p><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong> is a statistical measure used
+in text analysis to evaluate the importance of a word in a document relative to a
+collection (or corpus) of documents. It builds upon the <strong>Bag of Words (BoW)</strong> model
+by not only considering the frequency of a word in a document but also taking
+into account how common or rare the word is across the corpus.</p>
+<ul>
+<li><p>Components of TF-ID</p></li>
+<li><p><strong>t</strong>: the term in corpus.</p></li>
+<li><p><strong>d</strong>: the document.</p></li>
+<li><p><strong>D</strong>: the corpus.</p></li>
+<li><p><strong>|D|</strong>: the length of the corpus or total number of documents.</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Document Frequency (DF)</strong>:</p></li>
+<li><p><span class="math notranslate nohighlight">\(DF(t,D)\)</span>: the number of documents that contains term <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><dl>
+<dt><strong>Term Frequency (TF)</strong>:</dt><dd><ul class="simple">
+<li><p>Measures how frequently a term appears in a document. The higher the frequency, the more important the term is assumed to be to that document.</p></li>
+<li><p>Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[TF(t, d) = \frac{\text{Number of occurrences of term } t \text{ in document } d}{\text{Total number of terms in document } d}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Inverse Document Frequency (IDF)</strong>:</dt><dd><ul class="simple">
+<li><p>Measures how important a term is by reducing the weight of common terms (like “the” or “and”) that appear in many documents.</p></li>
+<li><p>Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[IDF(t, D) = \log\left(\frac{|D|+1}{DF(t,D) + 1}\right) + 1\]</div>
+<ul class="simple">
+<li><p>Adding 1 to the denominator avoids division by zero when a term is present in all documents.</p></li>
+<li><p>Note that the IDF formula above differs from the standard textbook notation that defines the IDF</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The IDF formula above differs from the standard textbook notation that defines the IDF as</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
+<p>IDF(t) = log [ <a href="#id2"><span class="problematic" id="id3">|D|</span></a> / (DF(t,D) + 1) ]).</p>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>TF-IDF Score</strong>:</dt><dd><ul class="simple">
+<li><p>The final score is the product of TF and IDF.</p></li>
+<li><p>Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[TF\text{-}IDF(t, d, D) = TF(t, d) \cdot IDF(t, D)\]</div>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="c1"># sample corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;Gen AI is awesome&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is fun&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is hot&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Initialize the TfidfVectorizer</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span> <span class="c1"># norm default norm=&#39;l2&#39;</span>
+
+<span class="c1"># Fit and transform</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vocabulary:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="c1"># [item for row in matrix for item in row]</span>
+<span class="n">corpus_flatted</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sub_list</span> <span class="ow">in</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">]</span>
+                     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sub_list</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Vocabulary frequency:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">corpus_flatted</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Embedded representation:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Vocabulary</span><span class="p">:</span>
+<span class="p">[</span><span class="s1">&#39;ai&#39;</span> <span class="s1">&#39;awesome&#39;</span> <span class="s1">&#39;fun&#39;</span> <span class="s1">&#39;gen&#39;</span> <span class="s1">&#39;hot&#39;</span> <span class="s1">&#39;is&#39;</span><span class="p">]</span>
+
+<span class="n">Vocabulary</span> <span class="n">frequency</span><span class="p">:</span>
+<span class="p">{</span><span class="s1">&#39;Gen&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="n">Embedded</span> <span class="n">representation</span><span class="p">:</span>
+<span class="p">[[</span><span class="mf">0.41285857</span> <span class="mf">0.69903033</span> <span class="mf">0.</span>         <span class="mf">0.41285857</span> <span class="mf">0.</span>         <span class="mf">0.41285857</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.41285857</span> <span class="mf">0.</span>         <span class="mf">0.69903033</span> <span class="mf">0.41285857</span> <span class="mf">0.</span>         <span class="mf">0.41285857</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.41285857</span> <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.41285857</span> <span class="mf">0.69903033</span> <span class="mf">0.41285857</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>The above results can be validated by the following steps (IDF in document 1):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Vocabulary  `[&#39;ai&#39; &#39;awesome&#39; &#39;fun&#39; &#39;gen&#39; &#39;hot&#39; &#39;is&#39;]`</span>
+
+<span class="n">tf_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;term&#39;</span><span class="p">:</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()})</span>\
+         <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;term&#39;</span><span class="p">)</span>
+
+<span class="c1"># Step 2: |D|</span>
+<span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;|D|&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="c1"># Step 3: Compute TF for doc 1:  Gen AI is awesome</span>
+<span class="c1"># - TF for &quot;ai&quot; in Document 1 = 1 (appears once doc 1)</span>
+<span class="c1"># - TF for &quot;awesome&quot; in Document 1 = 1 (appears once in doc 1)</span>
+<span class="c1"># - TF for &quot;fun&quot; in Document 1 = 0 (does not appear in doc 1)</span>
+<span class="c1"># - TF for &quot;gen&quot; in Document 1 = 1 (appear oncein doc 1 )</span>
+<span class="c1"># - TF for &quot;hot&quot; in Document 1 = 0 (does not appear doc 1 )</span>
+<span class="c1"># - TF for &quot;is&quot; in Document 1 = 1 (appear once in doc 1 )</span>
+
+<span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;TF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Step 4:  Compute DF for doc 1</span>
+<span class="c1"># - DF For &quot;ai&quot;: Appears in all 3 documents.</span>
+<span class="c1"># - DF For &quot;awesome&quot;: Appears in 1 document.</span>
+<span class="c1"># - DF For &quot;fun&quot;: Appears in 1 document.</span>
+<span class="c1"># - DF For &quot;Gen&quot;: Appears in all 3 documents.</span>
+<span class="c1"># - DF For &quot;hot&quot;: Appears in 1 document.</span>
+<span class="c1"># - DF For &quot;is&quot;: Appears in all 3 documents.</span>
+
+<span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;DF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># Step 5: Compute IDF</span>
+<span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;IDF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;|D|&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;DF&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="c1"># Step 6: Compute TF-IDF</span>
+<span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;TF-IDF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;TF&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;IDF&#39;</span><span class="p">]</span>
+
+<span class="c1"># Step 7: l2 normlization</span>
+<span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;TF-IDF(l2)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;TF-IDF&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tf_idf</span><span class="p">[</span><span class="s1">&#39;TF-IDF&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tf_idf</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>         <span class="o">|</span><span class="n">D</span><span class="o">|</span>  <span class="n">TF</span>  <span class="n">DF</span>       <span class="n">IDF</span>    <span class="n">TF</span><span class="o">-</span><span class="n">IDF</span>  <span class="n">TF</span><span class="o">-</span><span class="n">IDF</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+<span class="n">term</span>
+<span class="n">ai</span>         <span class="mi">3</span>   <span class="mi">1</span>   <span class="mi">3</span>  <span class="mf">1.000000</span>  <span class="mf">1.000000</span>    <span class="mf">0.412859</span>
+<span class="n">awesome</span>    <span class="mi">3</span>   <span class="mi">1</span>   <span class="mi">1</span>  <span class="mf">1.693147</span>  <span class="mf">1.693147</span>    <span class="mf">0.699030</span>
+<span class="n">fun</span>        <span class="mi">3</span>   <span class="mi">0</span>   <span class="mi">1</span>  <span class="mf">1.693147</span>  <span class="mf">0.000000</span>    <span class="mf">0.000000</span>
+<span class="n">gen</span>        <span class="mi">3</span>   <span class="mi">1</span>   <span class="mi">3</span>  <span class="mf">1.000000</span>  <span class="mf">1.000000</span>    <span class="mf">0.412859</span>
+<span class="n">hot</span>        <span class="mi">3</span>   <span class="mi">0</span>   <span class="mi">1</span>  <span class="mf">1.693147</span>  <span class="mf">0.000000</span>    <span class="mf">0.000000</span>
+<span class="ow">is</span>         <span class="mi">3</span>   <span class="mi">1</span>   <span class="mi">3</span>  <span class="mf">1.000000</span>  <span class="mf">1.000000</span>    <span class="mf">0.412859</span>
+</pre></div>
+</div>
+<div class="admonition-fun-fact admonition">
+<p class="admonition-title">Fun Fact</p>
+<p>TfidfVectorizer is equivalent to CountVectorizer followed by TfidfTransformer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="c1"># sample corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;Gen AI is awesome&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is fun&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is hot&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># pipeline</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">lowercase</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+               <span class="p">(</span><span class="s1">&#39;tfid&#39;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">())])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span>
+
+<span class="c1"># TF</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+
+<span class="c1"># IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;tfid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idf_</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;tfid&#39;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">())])</span>
+<span class="p">[[</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="p">[</span><span class="mf">1.</span>         <span class="mf">1.69314718</span> <span class="mf">1.69314718</span> <span class="mf">1.</span>         <span class="mf">1.69314718</span> <span class="mf">1.</span>        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Applications of TF-IDF</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Information Retrieval</strong>: Ranking documents based on relevance to a query.</p></li>
+<li><p><strong>Text Classification</strong>: Feature extraction for machine learning models.</p></li>
+<li><p><strong>Document Similarity</strong>: Comparing documents by their weighted term vectors.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Advantages</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Highlights important terms while reducing the weight of common terms.</p></li>
+<li><p>Simple to implement and effective for many tasks.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Limitations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Does not capture semantic relationships or word order.</p></li>
+<li><p>Less effective for very large corpora or when working with very short documents.</p></li>
+<li><p>Sparse representation due to high-dimensional feature vectors.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>For more advanced representations, embeddings like <strong>Word2Vec</strong> or <strong>BERT</strong> are often used.</p>
 </section>
+</section>
+<section id="static-word-embeddings">
+<h2><span class="section-number">3.2. </span>Static word embeddings<a class="headerlink" href="#static-word-embeddings" title="Link to this heading"></a></h2>
+<p>Static word embeddings are word representations that assign a fixed vector to each word,
+regardless of its context in a sentence or paragraph. These embeddings are pre-trained on
+large corpora and remain unchanged during usage, making them “static.” These embeddings are
+usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe, or FastText.</p>
 <section id="word2vec">
-<h2><span class="section-number">3.3. </span>Word2Vec<a class="headerlink" href="#word2vec" title="Link to this heading"></a></h2>
+<h3><span class="section-number">3.2.1. </span>Word2Vec<a class="headerlink" href="#word2vec" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The Context Window</p></li>
+<li><p>CBOW and Skip-Gram Model</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
+
+<span class="c1"># sample corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;Gen AI is awesome&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is fun&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is hot&#39;</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">tokenize_gensim</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+
+   <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="c1"># iterate through each sentence in the corpus</span>
+   <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+
+      <span class="c1"># tokenize the sentence into words</span>
+      <span class="n">temp</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">lowercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deacc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> \
+                                    <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">,</span> <span class="n">to_lower</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> \
+                                    <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+      <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span>
+
+   <span class="k">return</span> <span class="n">tokens</span>
+
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenize_gensim</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="c1"># Create Word2Vec model</span>
+<span class="c1"># sg ({0, 1}, optional) – Training algorithm: 1 for skip-gram; otherwise CBOW.</span>
+<span class="c1"># CBOW</span>
+<span class="n">model1</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                              <span class="n">vector_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">())</span>
+
+<span class="c1"># Print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;gen&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;ai&#39; - Word2Vec(CBOW) : &quot;</span><span class="p">,</span>
+      <span class="n">model1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;gen&#39;</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">))</span>
+
+
+<span class="c1"># Create Word2Vec model</span>
+<span class="c1"># sg ({0, 1}, optional) – Training algorithm: 1 for skip-gram; otherwise CBOW.</span>
+<span class="c1"># skip-gram</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                              <span class="n">vector_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">())</span>
+
+<span class="c1"># Print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;gen&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;ai&#39; - Word2Vec(skip-gram) : &quot;</span><span class="p">,</span>
+      <span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;gen&#39;</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;gen&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="p">[[</span><span class="o">-</span><span class="mf">0.02660277</span>  <span class="mf">0.0117296</span>   <span class="mf">0.25318226</span>  <span class="mf">0.44695902</span> <span class="o">-</span><span class="mf">0.4615286</span>  <span class="o">-</span><span class="mf">0.35307196</span>
+   <span class="mf">0.3204311</span>   <span class="mf">0.4451589</span>  <span class="o">-</span><span class="mf">0.24882038</span> <span class="o">-</span><span class="mf">0.18670462</span><span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.41619968</span> <span class="o">-</span><span class="mf">0.08647515</span> <span class="o">-</span><span class="mf">0.2558276</span>   <span class="mf">0.3695945</span>  <span class="o">-</span><span class="mf">0.274073</span>   <span class="o">-</span><span class="mf">0.10240843</span>
+   <span class="mf">0.1622154</span>   <span class="mf">0.05593351</span> <span class="o">-</span><span class="mf">0.46721786</span> <span class="o">-</span><span class="mf">0.5328355</span> <span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.43418837</span>  <span class="mf">0.30108306</span>  <span class="mf">0.40128633</span>  <span class="mf">0.0453006</span>   <span class="mf">0.37712952</span> <span class="o">-</span><span class="mf">0.20221795</span>
+<span class="o">-</span><span class="mf">0.05619935</span>  <span class="mf">0.34255028</span> <span class="o">-</span><span class="mf">0.44665098</span> <span class="o">-</span><span class="mf">0.2337343</span> <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.41098067</span> <span class="o">-</span><span class="mf">0.05088534</span>  <span class="mf">0.5218584</span>  <span class="o">-</span><span class="mf">0.40045303</span> <span class="o">-</span><span class="mf">0.12768732</span> <span class="o">-</span><span class="mf">0.10601949</span>
+   <span class="mf">0.44194022</span> <span class="o">-</span><span class="mf">0.32449666</span>  <span class="mf">0.00247097</span> <span class="o">-</span><span class="mf">0.2600907</span> <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.44081825</span>  <span class="mf">0.22984274</span> <span class="o">-</span><span class="mf">0.40207896</span> <span class="o">-</span><span class="mf">0.20159177</span> <span class="o">-</span><span class="mf">0.00161115</span> <span class="o">-</span><span class="mf">0.0135952</span>
+<span class="o">-</span><span class="mf">0.3516631</span>   <span class="mf">0.44133204</span>  <span class="mf">0.2286844</span>   <span class="mf">0.423816</span>  <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.42753762</span>  <span class="mf">0.23561442</span> <span class="o">-</span><span class="mf">0.21681462</span>  <span class="mf">0.04321203</span>  <span class="mf">0.44539306</span> <span class="o">-</span><span class="mf">0.23385239</span>
+   <span class="mf">0.23675178</span> <span class="o">-</span><span class="mf">0.35568893</span> <span class="o">-</span><span class="mf">0.18596812</span>  <span class="mf">0.49255413</span><span class="p">]]</span>
+<span class="n">Cosine</span> <span class="n">similarity</span> <span class="n">between</span> <span class="s1">&#39;gen&#39;</span> <span class="ow">and</span> <span class="s1">&#39;ai&#39;</span> <span class="o">-</span> <span class="n">Word2Vec</span><span class="p">(</span><span class="n">CBOW</span><span class="p">)</span> <span class="p">:</span>  <span class="mf">0.32937223</span>
+<span class="p">{</span><span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;gen&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="p">[[</span><span class="o">-</span><span class="mf">0.02660277</span>  <span class="mf">0.0117296</span>   <span class="mf">0.25318226</span>  <span class="mf">0.44695902</span> <span class="o">-</span><span class="mf">0.4615286</span>  <span class="o">-</span><span class="mf">0.35307196</span>
+   <span class="mf">0.3204311</span>   <span class="mf">0.4451589</span>  <span class="o">-</span><span class="mf">0.24882038</span> <span class="o">-</span><span class="mf">0.18670462</span><span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.41619968</span> <span class="o">-</span><span class="mf">0.08647515</span> <span class="o">-</span><span class="mf">0.2558276</span>   <span class="mf">0.3695945</span>  <span class="o">-</span><span class="mf">0.274073</span>   <span class="o">-</span><span class="mf">0.10240843</span>
+   <span class="mf">0.1622154</span>   <span class="mf">0.05593351</span> <span class="o">-</span><span class="mf">0.46721786</span> <span class="o">-</span><span class="mf">0.5328355</span> <span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.43418837</span>  <span class="mf">0.30108306</span>  <span class="mf">0.40128633</span>  <span class="mf">0.0453006</span>   <span class="mf">0.37712952</span> <span class="o">-</span><span class="mf">0.20221795</span>
+<span class="o">-</span><span class="mf">0.05619935</span>  <span class="mf">0.34255028</span> <span class="o">-</span><span class="mf">0.44665098</span> <span class="o">-</span><span class="mf">0.2337343</span> <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.41098067</span> <span class="o">-</span><span class="mf">0.05088534</span>  <span class="mf">0.5218584</span>  <span class="o">-</span><span class="mf">0.40045303</span> <span class="o">-</span><span class="mf">0.12768732</span> <span class="o">-</span><span class="mf">0.10601949</span>
+   <span class="mf">0.44194022</span> <span class="o">-</span><span class="mf">0.32449666</span>  <span class="mf">0.00247097</span> <span class="o">-</span><span class="mf">0.2600907</span> <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.44081825</span>  <span class="mf">0.22984274</span> <span class="o">-</span><span class="mf">0.40207896</span> <span class="o">-</span><span class="mf">0.20159177</span> <span class="o">-</span><span class="mf">0.00161115</span> <span class="o">-</span><span class="mf">0.0135952</span>
+<span class="o">-</span><span class="mf">0.3516631</span>   <span class="mf">0.44133204</span>  <span class="mf">0.2286844</span>   <span class="mf">0.423816</span>  <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.42753762</span>  <span class="mf">0.23561442</span> <span class="o">-</span><span class="mf">0.21681462</span>  <span class="mf">0.04321203</span>  <span class="mf">0.44539306</span> <span class="o">-</span><span class="mf">0.23385239</span>
+   <span class="mf">0.23675178</span> <span class="o">-</span><span class="mf">0.35568893</span> <span class="o">-</span><span class="mf">0.18596812</span>  <span class="mf">0.49255413</span><span class="p">]]</span>
+<span class="n">Cosine</span> <span class="n">similarity</span> <span class="n">between</span> <span class="s1">&#39;gen&#39;</span> <span class="ow">and</span> <span class="s1">&#39;ai&#39;</span> <span class="o">-</span> <span class="n">Word2Vec</span><span class="p">(</span><span class="n">skip</span><span class="o">-</span><span class="n">gram</span><span class="p">)</span> <span class="p">:</span>  <span class="mf">0.32937223</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="glove">
-<h2><span class="section-number">3.4. </span>GloVE<a class="headerlink" href="#glove" title="Link to this heading"></a></h2>
+<h2><span class="section-number">3.3. </span>GloVE<a class="headerlink" href="#glove" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span> <span class="k">as</span> <span class="nn">api</span>
+<span class="c1"># Download pre-trained GloVe model</span>
+<span class="n">glove_vectors</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;glove-wiki-gigaword-50&quot;</span><span class="p">)</span>
+<span class="c1"># Get word vectors (embeddings)</span>
+<span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;king&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;queen&quot;</span>
+<span class="n">vector1</span> <span class="o">=</span> <span class="n">glove_vectors</span><span class="p">[</span><span class="n">word1</span><span class="p">]</span>
+<span class="n">vector2</span> <span class="o">=</span> <span class="n">glove_vectors</span><span class="p">[</span><span class="n">word2</span><span class="p">]</span>
+<span class="c1"># Compute cosine similarity between the two word vectors</span>
+<span class="n">similarity</span> <span class="o">=</span> <span class="n">glove_vectors</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word vectors for &#39;</span><span class="si">{</span><span class="n">word1</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">vector1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word vectors for &#39;</span><span class="si">{</span><span class="n">word2</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">vector2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cosine similarity between &#39;</span><span class="si">{</span><span class="n">word1</span><span class="si">}</span><span class="s2">&#39; and &#39;</span><span class="si">{</span><span class="n">word2</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">similarity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.0</span><span class="o">%</span> <span class="mf">66.0</span><span class="o">/</span><span class="mf">66.0</span><span class="n">MB</span> <span class="n">downloaded</span>
+<span class="n">Word</span> <span class="n">vectors</span> <span class="k">for</span> <span class="s1">&#39;king&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.50451</span>   <span class="mf">0.68607</span>  <span class="o">-</span><span class="mf">0.59517</span>  <span class="o">-</span><span class="mf">0.022801</span>  <span class="mf">0.60046</span>  <span class="o">-</span><span class="mf">0.13498</span>  <span class="o">-</span><span class="mf">0.08813</span>
+<span class="mf">0.47377</span>  <span class="o">-</span><span class="mf">0.61798</span>  <span class="o">-</span><span class="mf">0.31012</span>  <span class="o">-</span><span class="mf">0.076666</span>  <span class="mf">1.493</span>    <span class="o">-</span><span class="mf">0.034189</span> <span class="o">-</span><span class="mf">0.98173</span>
+<span class="mf">0.68229</span>   <span class="mf">0.81722</span>  <span class="o">-</span><span class="mf">0.51874</span>  <span class="o">-</span><span class="mf">0.31503</span>  <span class="o">-</span><span class="mf">0.55809</span>   <span class="mf">0.66421</span>   <span class="mf">0.1961</span>
+<span class="o">-</span><span class="mf">0.13495</span>  <span class="o">-</span><span class="mf">0.11476</span>  <span class="o">-</span><span class="mf">0.30344</span>   <span class="mf">0.41177</span>  <span class="o">-</span><span class="mf">2.223</span>    <span class="o">-</span><span class="mf">1.0756</span>   <span class="o">-</span><span class="mf">1.0783</span>
+<span class="o">-</span><span class="mf">0.34354</span>   <span class="mf">0.33505</span>   <span class="mf">1.9927</span>   <span class="o">-</span><span class="mf">0.04234</span>  <span class="o">-</span><span class="mf">0.64319</span>   <span class="mf">0.71125</span>   <span class="mf">0.49159</span>
+<span class="mf">0.16754</span>   <span class="mf">0.34344</span>  <span class="o">-</span><span class="mf">0.25663</span>  <span class="o">-</span><span class="mf">0.8523</span>    <span class="mf">0.1661</span>    <span class="mf">0.40102</span>   <span class="mf">1.1685</span>
+<span class="o">-</span><span class="mf">1.0137</span>   <span class="o">-</span><span class="mf">0.21585</span>  <span class="o">-</span><span class="mf">0.15155</span>   <span class="mf">0.78321</span>  <span class="o">-</span><span class="mf">0.91241</span>  <span class="o">-</span><span class="mf">1.6106</span>   <span class="o">-</span><span class="mf">0.64426</span>
+<span class="o">-</span><span class="mf">0.51042</span> <span class="p">]</span>
+<span class="n">Word</span> <span class="n">vectors</span> <span class="k">for</span> <span class="s1">&#39;queen&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.37854</span>    <span class="mf">1.8233</span>    <span class="o">-</span><span class="mf">1.2648</span>    <span class="o">-</span><span class="mf">0.1043</span>     <span class="mf">0.35829</span>    <span class="mf">0.60029</span>
+<span class="o">-</span><span class="mf">0.17538</span>    <span class="mf">0.83767</span>   <span class="o">-</span><span class="mf">0.056798</span>  <span class="o">-</span><span class="mf">0.75795</span>    <span class="mf">0.22681</span>    <span class="mf">0.98587</span>
+<span class="mf">0.60587</span>   <span class="o">-</span><span class="mf">0.31419</span>    <span class="mf">0.28877</span>    <span class="mf">0.56013</span>   <span class="o">-</span><span class="mf">0.77456</span>    <span class="mf">0.071421</span>
+<span class="o">-</span><span class="mf">0.5741</span>     <span class="mf">0.21342</span>    <span class="mf">0.57674</span>    <span class="mf">0.3868</span>    <span class="o">-</span><span class="mf">0.12574</span>    <span class="mf">0.28012</span>
+<span class="mf">0.28135</span>   <span class="o">-</span><span class="mf">1.8053</span>    <span class="o">-</span><span class="mf">1.0421</span>    <span class="o">-</span><span class="mf">0.19255</span>   <span class="o">-</span><span class="mf">0.55375</span>   <span class="o">-</span><span class="mf">0.054526</span>
+<span class="mf">1.5574</span>     <span class="mf">0.39296</span>   <span class="o">-</span><span class="mf">0.2475</span>     <span class="mf">0.34251</span>    <span class="mf">0.45365</span>    <span class="mf">0.16237</span>
+<span class="mf">0.52464</span>   <span class="o">-</span><span class="mf">0.070272</span>  <span class="o">-</span><span class="mf">0.83744</span>   <span class="o">-</span><span class="mf">1.0326</span>     <span class="mf">0.45946</span>    <span class="mf">0.25302</span>
+<span class="o">-</span><span class="mf">0.17837</span>   <span class="o">-</span><span class="mf">0.73398</span>   <span class="o">-</span><span class="mf">0.20025</span>    <span class="mf">0.2347</span>    <span class="o">-</span><span class="mf">0.56095</span>   <span class="o">-</span><span class="mf">2.2839</span>
+<span class="mf">0.0092753</span> <span class="o">-</span><span class="mf">0.60284</span>  <span class="p">]</span>
+<span class="n">Cosine</span> <span class="n">similarity</span> <span class="n">between</span> <span class="s1">&#39;king&#39;</span> <span class="ow">and</span> <span class="s1">&#39;queen&#39;</span><span class="p">:</span> <span class="mf">0.7839043140411377</span>
+</pre></div>
+</div>
 </section>
 <section id="fast-text">
-<h2><span class="section-number">3.5. </span>Fast Text<a class="headerlink" href="#fast-text" title="Link to this heading"></a></h2>
+<h2><span class="section-number">3.4. </span>Fast Text<a class="headerlink" href="#fast-text" title="Link to this heading"></a></h2>
+<p>Fast Text incorporates subword information (useful for handling rare or unseen words)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">FastText</span>
+
+<span class="kn">import</span> <span class="nn">gensim</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+
+<span class="c1"># sample corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;Gen AI is awesome&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is fun&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Gen AI is hot&#39;</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">tokenize_gensim</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+
+   <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="c1"># iterate through each sentence in the corpus</span>
+   <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+
+      <span class="c1"># tokenize the sentence into words</span>
+      <span class="n">temp</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">lowercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deacc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> \
+                                    <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">,</span> <span class="n">to_lower</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> \
+                                    <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+      <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span>
+
+   <span class="k">return</span> <span class="n">tokens</span>
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenize_gensim</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="c1"># create FastText model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">FastText</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Train the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">total_examples</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">())</span>
+
+<span class="c1"># Print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;gen&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;ai&#39; - Word2Vec : &quot;</span><span class="p">,</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;gen&#39;</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span><span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">word2vec</span><span class="p">:</span><span class="n">Effective</span> <span class="s1">&#39;alpha&#39;</span> <span class="n">higher</span> <span class="n">than</span> <span class="n">previous</span> <span class="n">training</span> <span class="n">cycles</span>
+<span class="p">{</span><span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;gen&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="p">[[</span><span class="o">-</span><span class="mf">0.01875759</span>  <span class="mf">0.086543</span>   <span class="o">-</span><span class="mf">0.25080433</span>  <span class="mf">0.2824868</span>  <span class="o">-</span><span class="mf">0.23755953</span> <span class="o">-</span><span class="mf">0.11316587</span>
+   <span class="mf">0.473383</span>    <span class="mf">0.39204055</span> <span class="o">-</span><span class="mf">0.30422893</span> <span class="o">-</span><span class="mf">0.5566626</span> <span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.5088161</span>  <span class="o">-</span><span class="mf">0.3323528</span>  <span class="o">-</span><span class="mf">0.128698</span>   <span class="o">-</span><span class="mf">0.11877266</span> <span class="o">-</span><span class="mf">0.38699347</span>  <span class="mf">0.20977001</span>
+   <span class="mf">0.05947014</span> <span class="o">-</span><span class="mf">0.05622245</span> <span class="o">-</span><span class="mf">0.36257952</span> <span class="o">-</span><span class="mf">0.5177341</span> <span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.18038039</span>  <span class="mf">0.51484865</span>  <span class="mf">0.40694886</span>  <span class="mf">0.05965518</span> <span class="o">-</span><span class="mf">0.05985437</span> <span class="o">-</span><span class="mf">0.10832689</span>
+   <span class="mf">0.37992737</span>  <span class="mf">0.5992712</span>   <span class="mf">0.01503773</span>  <span class="mf">0.1192203</span> <span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.5694013</span>   <span class="mf">0.23560704</span>  <span class="mf">0.0265804</span>  <span class="o">-</span><span class="mf">0.41392225</span> <span class="o">-</span><span class="mf">0.00285366</span> <span class="o">-</span><span class="mf">0.3076269</span>
+   <span class="mf">0.2076883</span>  <span class="o">-</span><span class="mf">0.425648</span>    <span class="mf">0.29903153</span>  <span class="mf">0.19965051</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.23892775</span>  <span class="mf">0.10744874</span> <span class="o">-</span><span class="mf">0.03730153</span> <span class="o">-</span><span class="mf">0.23521401</span>  <span class="mf">0.32083488</span>  <span class="mf">0.21598674</span>
+<span class="o">-</span><span class="mf">0.29570717</span> <span class="o">-</span><span class="mf">0.03044808</span>  <span class="mf">0.75250715</span>  <span class="mf">0.26538488</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.31881964</span> <span class="o">-</span><span class="mf">0.06544963</span> <span class="o">-</span><span class="mf">0.44274488</span>  <span class="mf">0.15485793</span>  <span class="mf">0.39120612</span> <span class="o">-</span><span class="mf">0.05415314</span>
+   <span class="mf">0.15772066</span> <span class="o">-</span><span class="mf">0.05987714</span> <span class="o">-</span><span class="mf">0.6986104</span>   <span class="mf">0.03967094</span><span class="p">]]</span>
+<span class="n">Cosine</span> <span class="n">similarity</span> <span class="n">between</span> <span class="s1">&#39;gen&#39;</span> <span class="ow">and</span> <span class="s1">&#39;ai&#39;</span> <span class="o">-</span> <span class="n">Word2Vec</span> <span class="p">:</span>  <span class="o">-</span><span class="mf">0.21662527</span>
+</pre></div>
+</div>
 </section>
+<section id="contextual-word-embeddings">
+<h2><span class="section-number">3.5. </span>Contextual word embeddings<a class="headerlink" href="#contextual-word-embeddings" title="Link to this heading"></a></h2>
+<p>Contextual word embeddings are word representations where the embedding of a word
+changes depending on its context in a sentence or document. These embeddings capture
+the meaning of a word as influenced by its surrounding words, addressing the limitations
+of static embeddings by incorporating contextual nuances.</p>
 <section id="bert">
-<h2><span class="section-number">3.6. </span>BERT<a class="headerlink" href="#bert" title="Link to this heading"></a></h2>
+<h3><span class="section-number">3.5.1. </span>BERT<a class="headerlink" href="#bert" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertModel</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">BertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Gen AI is awesome&quot;</span>
+<span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">encoded_input</span><span class="p">)</span><span class="o">.</span><span class="n">last_hidden_state</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">768</span><span class="p">])</span>
+<span class="n">tensor</span><span class="p">([[[</span><span class="o">-</span><span class="mf">0.1129</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1477</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0056</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1335</span><span class="p">,</span>  <span class="mf">0.2605</span><span class="p">,</span>  <span class="mf">0.2113</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.6841</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1196</span><span class="p">,</span>  <span class="mf">0.3349</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5958</span><span class="p">,</span>  <span class="mf">0.1657</span><span class="p">,</span>  <span class="mf">0.6988</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.5385</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2649</span><span class="p">,</span>  <span class="mf">0.2639</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1544</span><span class="p">,</span>  <span class="mf">0.2532</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1363</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.1794</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6086</span><span class="p">,</span>  <span class="mf">0.1292</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1620</span><span class="p">,</span>  <span class="mf">0.1721</span><span class="p">,</span>  <span class="mf">0.4356</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.0187</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7320</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3420</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.4028</span><span class="p">,</span>  <span class="mf">0.1425</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2014</span><span class="p">],</span>
+         <span class="p">[</span> <span class="mf">0.5493</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1029</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1571</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.3503</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7601</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1398</span><span class="p">]]],</span>
+      <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">NativeLayerNormBackward0</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -173,7 +703,7 @@ continuous vector space where similar words are located closer together.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 12, 2024.
+      <span class="lastupdated">Last updated on Dec 14, 2024.
       </span></p>
   </div>
 

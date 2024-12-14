@@ -627,11 +627,143 @@ use Google Colab with free T4 GPU runtime throughout this book.
 HuggingFace
 -----------
 
+**Hugging Face** is a company and open-source community focused on providing tools and resources for NLP
+and machine learning. It is best known for its popular **Transformers** library, which allows easy access
+to pre-trained models for a wide variety of NLP tasks. MOreover,  Hugging Face's libraries provide simple 
+Python APIs that make it easy to load models, preprocess data, and run inference. This simplicity allows 
+both beginners and advanced users to leverage cutting-edge NLP models. We will mainly use the embedding models
+and Large Language Models (LLMs) from **Hugging Face Model Hub** central repository.
+
 
 Ollama
 ------
 
+Ollama is a package designed to run LLMs locally on your personal device or 
+server, rather than relying on external cloud services. It provides a simple
+interface to download and use AI models tailored for various tasks, ensuring
+privacy and control over data while still leveraging the power of LLMs.
 
+- Key features of Ollama:
+
+  - Local Execution: Models run entirely on your hardware, making it ideal for users who prioritize data privacy.
+  - Pre-trained Models: Offers a curated set of LLMs optimized for local usage.
+  - Cross-Platform: Compatible with macOS, Linux, and other operating systems, depending on hardware specifications.
+  - Ease of Use: Designed to make setting up and using local AI models simple for non-technical users.
+  - Efficiency: Focused on lightweight models optimized for local performance without needing extensive computational resources.
+
+To simplify the management of access tokens for various LLMs, we will use Ollama in Google Colab.
+
+- Ollama installation in Google Colab
+
+  1. colab-xterm
+
+    .. code-block:: bash 
+
+      !pip install colab-xterm 
+      %load_ext colabxterm
+
+  2. download ollama
+
+    .. code-block:: bash 
+
+       /content# curl https://ollama.ai/install.sh | sh
+
+    .. _fig_ollama_download:
+    .. figure:: images/ollama_download.png
+        :align: center      
+
+
+  3. launch Ollama serve
+
+    .. code-block:: bash 
+
+       /content# ollama serve
+
+    .. _fig_ollama_serve:
+    .. figure:: images/ollama_serve.png
+        :align: center    
+
+  4. download models 
+
+    .. code-block:: bash 
+
+       /content# ollama pull mistral #llama3.2 #bge-m3    
+
+    .. _fig_ollama_pull:
+    .. figure:: images/pull_models.png
+        :align: center    
+
+  5. check 
+
+    .. code-block:: bash 
+
+       !ollama list
+
+       ####
+       NAME               ID              SIZE      MODIFIED           
+       llama3.2:latest    a80c4f17acd5    2.0 GB    14 seconds ago        
+       mistral:latest     f974a74358d6    4.1 GB    About a minute ago      
 
 langchain
 ---------
+
+LangChain is a powerful framework for building AI applications that combine the 
+capabilities of large language models with external tools, memory, and custom 
+workflows. It enables developers to create intelligent, context-aware, 
+and dynamic applications with ease.
+
+It has widely applied in:
+
+1. **Conversational AI**  
+   Create chatbots or virtual assistants that maintain context, integrate with APIs, and provide intelligent responses.
+
+2. **Knowledge Management**  
+   Combine LLMs with external knowledge bases or databases to answer complex questions or summarize documents.
+
+3. **Automation**  
+   Automate workflows by chaining LLMs with tools for decision-making, data extraction, or content generation.
+
+4. **Creative Applications**  
+   Use LangChain for generating stories, crafting marketing copy, or producing artistic content.
+
+
+We will primarily use LangChain in this book. For instance, to work with downloaded Ollama LLMs, the ``langchain_ollama``
+package is required.
+
+
+.. code-block:: python 
+
+  # chain of thought prompting
+  from langchain_ollama.llms import OllamaLLM
+  from langchain_core.prompts import ChatPromptTemplate
+  from langchain.output_parsers import CommaSeparatedListOutputParser
+
+
+  template = """Question: {question}
+
+  Answer: Let's think step by step.
+  """
+
+  prompt = ChatPromptTemplate.from_template(template)
+  model = OllamaLLM(temperature=0.0, model='mistral', format='json')
+  output_parser = CommaSeparatedListOutputParser()
+
+  chain = prompt | model | output_parser
+
+  response = chain.invoke({"question": "What is Mixture of Experts(MoE) in AI?"})
+  print(response)
+
+.. code-block:: python 
+
+  ['{"answer":"MoE', 'or Mixture of Experts', "is a neural network architecture that allows for \
+      efficient computation and model parallelism. It consists of multiple 'experts'", 'each of \
+      which is a smaller neural network that specializes in handling different parts of the input \
+      data. The final output is obtained by combining the outputs of these experts based on their \
+      expertise relevance to the input. This architecture is particularly useful in tasks where \
+      the data exhibits complex and diverse patterns."}', 
+      '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t']
+
+
+
+
+

@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 12, 2024}
+\date{December 14, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -1282,12 +1282,224 @@ GPU Activation
 
 \subsection{HuggingFace}
 \label{\detokenize{prelim:huggingface}}
+\sphinxAtStartPar
+\sphinxstylestrong{Hugging Face} is a company and open\sphinxhyphen{}source community focused on providing tools and resources for NLP
+and machine learning. It is best known for its popular \sphinxstylestrong{Transformers} library, which allows easy access
+to pre\sphinxhyphen{}trained models for a wide variety of NLP tasks. MOreover,  Hugging Face’s libraries provide simple
+Python APIs that make it easy to load models, preprocess data, and run inference. This simplicity allows
+both beginners and advanced users to leverage cutting\sphinxhyphen{}edge NLP models. We will mainly use the embedding models
+and Large Language Models (LLMs) from \sphinxstylestrong{Hugging Face Model Hub} central repository.
+
 
 \subsection{Ollama}
 \label{\detokenize{prelim:ollama}}
+\sphinxAtStartPar
+Ollama is a package designed to run LLMs locally on your personal device or
+server, rather than relying on external cloud services. It provides a simple
+interface to download and use AI models tailored for various tasks, ensuring
+privacy and control over data while still leveraging the power of LLMs.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Key features of Ollama:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Local Execution: Models run entirely on your hardware, making it ideal for users who prioritize data privacy.
+
+\item {} 
+\sphinxAtStartPar
+Pre\sphinxhyphen{}trained Models: Offers a curated set of LLMs optimized for local usage.
+
+\item {} 
+\sphinxAtStartPar
+Cross\sphinxhyphen{}Platform: Compatible with macOS, Linux, and other operating systems, depending on hardware specifications.
+
+\item {} 
+\sphinxAtStartPar
+Ease of Use: Designed to make setting up and using local AI models simple for non\sphinxhyphen{}technical users.
+
+\item {} 
+\sphinxAtStartPar
+Efficiency: Focused on lightweight models optimized for local performance without needing extensive computational resources.
+
+\end{itemize}
+
+\end{itemize}
+
+\sphinxAtStartPar
+To simplify the management of access tokens for various LLMs, we will use Ollama in Google Colab.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Ollama installation in Google Colab
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+colab\sphinxhyphen{}xterm
+
+\end{enumerate}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+!pip\PYG{+w}{ }install\PYG{+w}{ }colab\PYGZhy{}xterm
+\PYGZpc{}load\PYGZus{}ext\PYG{+w}{ }colabxterm
+\end{sphinxVerbatim}
+\end{quote}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+\sphinxAtStartPar
+download ollama
+
+\end{enumerate}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/content\PYGZsh{}\PYG{+w}{ }curl\PYG{+w}{ }https://ollama.ai/install.sh\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }sh
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{ollama_download}.png}
+\end{figure}
+\end{quote}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{2}
+\item {} 
+\sphinxAtStartPar
+launch Ollama serve
+
+\end{enumerate}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/content\PYGZsh{}\PYG{+w}{ }ollama\PYG{+w}{ }serve
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{ollama_serve}.png}
+\end{figure}
+\end{quote}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{3}
+\item {} 
+\sphinxAtStartPar
+download models
+
+\end{enumerate}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/content\PYGZsh{}\PYG{+w}{ }ollama\PYG{+w}{ }pull\PYG{+w}{ }mistral\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{}llama3.2 \PYGZsh{}bge\PYGZhy{}m3}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{pull_models}.png}
+\end{figure}
+\end{quote}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{4}
+\item {} 
+\sphinxAtStartPar
+check
+
+\end{enumerate}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+!ollama\PYG{+w}{ }list
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+NAME\PYG{+w}{               }ID\PYG{+w}{              }SIZE\PYG{+w}{      }MODIFIED
+llama3.2:latest\PYG{+w}{    }a80c4f17acd5\PYG{+w}{    }\PYG{l+m}{2}.0\PYG{+w}{ }GB\PYG{+w}{    }\PYG{l+m}{14}\PYG{+w}{ }seconds\PYG{+w}{ }ago
+mistral:latest\PYG{+w}{     }f974a74358d6\PYG{+w}{    }\PYG{l+m}{4}.1\PYG{+w}{ }GB\PYG{+w}{    }About\PYG{+w}{ }a\PYG{+w}{ }minute\PYG{+w}{ }ago
+\end{sphinxVerbatim}
+\end{quote}
+
+\end{itemize}
+
 
 \subsection{langchain}
 \label{\detokenize{prelim:langchain}}
+\sphinxAtStartPar
+LangChain is a powerful framework for building AI applications that combine the
+capabilities of large language models with external tools, memory, and custom
+workflows. It enables developers to create intelligent, context\sphinxhyphen{}aware,
+and dynamic applications with ease.
+
+\sphinxAtStartPar
+It has widely applied in:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Conversational AI}
+Create chatbots or virtual assistants that maintain context, integrate with APIs, and provide intelligent responses.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Knowledge Management}
+Combine LLMs with external knowledge bases or databases to answer complex questions or summarize documents.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Automation}
+Automate workflows by chaining LLMs with tools for decision\sphinxhyphen{}making, data extraction, or content generation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Creative Applications}
+Use LangChain for generating stories, crafting marketing copy, or producing artistic content.
+
+\end{enumerate}
+
+\sphinxAtStartPar
+We will primarily use LangChain in this book. For instance, to work with downloaded Ollama LLMs, the \sphinxcode{\sphinxupquote{langchain\_ollama}}
+package is required.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} chain of thought prompting}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{ChatPromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{CommaSeparatedListOutputParser}
+
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{Question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+
+\PYG{l+s+s2}{Answer: Let}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s think step by step.}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mistral}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model} \PYG{o}{|} \PYG{n}{output\PYGZus{}parser}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is Mixture of Experts(MoE) in AI?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{answer}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{:}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{MoE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{or Mixture of Experts}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{is a neural network architecture that allows for }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{    efficient computation and model parallelism. It consists of multiple }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{experts}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{each of }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s1}{    which is a smaller neural network that specializes in handling different parts of the input }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s1}{    data. The final output is obtained by combining the outputs of these experts based on their }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s1}{    expertise relevance to the input. This architecture is particularly useful in tasks where }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s1}{    the data exhibits complex and diverse patterns.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
 \sphinxstepscope
 
 
@@ -1307,10 +1519,12 @@ continuous vector space where similar words are located closer together.
 \caption{Embedding Diagram}\label{\detokenize{embedding:id1}}\label{\detokenize{embedding:fig-embedding}}\end{figure}
 
 
-\section{Bag\sphinxhyphen{}of\sphinxhyphen{}Word}
-\label{\detokenize{embedding:bag-of-word}}
+\section{Traditional word embeddings}
+\label{\detokenize{embedding:traditional-word-embeddings}}
 \sphinxAtStartPar
-\sphinxstylestrong{Bag of Words (BoW)} is a simple and widely used text representation technique in natural language processing (NLP). It represents a text (e.g., a document or a sentence) as a collection of words, ignoring grammar, order, and context but keeping their frequency.
+\sphinxstylestrong{Bag of Words (BoW)} is a simple and widely used text representation technique in natural
+language processing (NLP). It represents a text (e.g., a document or a sentence) as a collection
+of words, ignoring grammar, order, and context but keeping their frequency.
 
 \sphinxAtStartPar
 Key Features of Bag of Words:
@@ -1379,47 +1593,1176 @@ Limitations:
 
 \subsection{One Hot Encoder}
 \label{\detokenize{embedding:one-hot-encoder}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+import numpy as np
+import pandas as pd
+from collections import Counter
+from sklearn.preprocessing import OneHotEncoder
+
+\sphinxAtStartPar
+\# sample corpus
+data = pd.DataFrame(\{‘word’:{[}‘python’, ‘pyspark’, ‘genai’, ‘pyspark’, ‘python’, ‘pyspark’{]}\})
+
+\sphinxAtStartPar
+\# corpus frequency
+print(‘Vocabulary frequency:’)
+print(dict(Counter(data{[}‘word’{]})))
+
+\sphinxAtStartPar
+\# corpus order
+print(’nVocabulary order:’)
+print(sorted(set(data{[}‘word’{]})))
+
+\sphinxAtStartPar
+\# One\sphinxhyphen{}hot encode the data
+onehot\_encoder = OneHotEncoder(sparse\_output=False)
+onehot\_encoded = onehot\_encoder.fit\_transform(data{[}{[}‘word’{]}{]})
+
+\sphinxAtStartPar
+\# the encoded order base on the order of the copus
+print(’nEncoded representation:’)
+print(onehot\_encoded)
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Vocabulary frequency:
+\{‘python’: 2, ‘pyspark’: 3, ‘genai’: 1\}
+
+\sphinxAtStartPar
+Vocabulary order:
+{[}‘genai’, ‘pyspark’, ‘python’{]}
+
+\sphinxAtStartPar
+Encoded representation:
+{[}{[}0. 0. 1.{]}
+{[}0. 1. 0.{]}
+{[}1. 0. 0.{]}
+{[}0. 1. 0.{]}
+{[}0. 0. 1.{]}
+{[}0. 1. 0.{]}{]}
+
 
 \subsection{CountVectorizer}
 \label{\detokenize{embedding:countvectorizer}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{feature\PYGZus{}extraction}\PYG{n+nn}{.}\PYG{n+nn}{text} \PYG{k+kn}{import} \PYG{n}{CountVectorizer}
+
+\PYG{c+c1}{\PYGZsh{} sample corpus}
+\PYG{n}{corpus} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Initialize the CountVectorizer}
+\PYG{n}{vectorizer} \PYG{o}{=} \PYG{n}{CountVectorizer}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Fit and transform}
+\PYG{n}{X} \PYG{o}{=} \PYG{n}{vectorizer}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}
+
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Vocabulary:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{vectorizer}\PYG{o}{.}\PYG{n}{get\PYGZus{}feature\PYGZus{}names\PYGZus{}out}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Embedded representation:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{toarray}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Vocabulary}\PYG{p}{:}
+\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hot}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+
+\PYG{n}{Embedded} \PYG{n}{representation}\PYG{p}{:}
+\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}
+\end{sphinxVerbatim}
+
 \sphinxAtStartPar
-To overcome these limitations, advanced techniques like \sphinxstylestrong{TF\sphinxhyphen{}IDF}, \sphinxstylestrong{word embeddings} (e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.
+To overcome these limitations, advanced techniques like \sphinxstylestrong{TF\sphinxhyphen{}IDF}, \sphinxstylestrong{word embeddings}
+(e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.
 
 
-\section{TF\sphinxhyphen{}IDF}
+\subsection{TF\sphinxhyphen{}IDF}
 \label{\detokenize{embedding:tf-idf}}
+\sphinxAtStartPar
+\sphinxstylestrong{TF\sphinxhyphen{}IDF (Term Frequency\sphinxhyphen{}Inverse Document Frequency)} is a statistical measure used
+in text analysis to evaluate the importance of a word in a document relative to a
+collection (or corpus) of documents. It builds upon the \sphinxstylestrong{Bag of Words (BoW)} model
+by not only considering the frequency of a word in a document but also taking
+into account how common or rare the word is across the corpus.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Components of TF\sphinxhyphen{}ID
 
-\section{Word2Vec}
-\label{\detokenize{embedding:word2vec}}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{t}: the term in corpus.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{d}: the document.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{D}: the corpus.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{|D|}: the length of the corpus or total number of documents.
+\begin{quote}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Document Frequency (DF)}:
+
+\item {} 
+\sphinxAtStartPar
+\(DF(t,D)\): the number of documents that contains term \(t\).
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Term Frequency (TF)}:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Measures how frequently a term appears in a document. The higher the frequency, the more important the term is assumed to be to that document.
+
+\item {} 
+\sphinxAtStartPar
+Formula:
+
+\end{itemize}
+\begin{equation*}
+\begin{split}TF(t, d) = \frac{\text{Number of occurrences of term } t \text{ in document } d}{\text{Total number of terms in document } d}\end{split}
+\end{equation*}
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Inverse Document Frequency (IDF)}:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Measures how important a term is by reducing the weight of common terms (like “the” or “and”) that appear in many documents.
+
+\item {} 
+\sphinxAtStartPar
+Formula:
+
+\end{itemize}
+\begin{equation*}
+\begin{split}IDF(t, D) = \log\left(\frac{|D|+1}{DF(t,D) + 1}\right) + 1\end{split}
+\end{equation*}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Adding 1 to the denominator avoids division by zero when a term is present in all documents.
+
+\item {} 
+\sphinxAtStartPar
+Note that the IDF formula above differs from the standard textbook notation that defines the IDF
+
+\end{itemize}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The IDF formula above differs from the standard textbook notation that defines the IDF as
+
+\sphinxAtStartPar
+IDF(t) = log {[} {\color{red}\bfseries{}|D|} / (DF(t,D) + 1) {]}).
+\end{sphinxadmonition}
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{TF\sphinxhyphen{}IDF Score}:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The final score is the product of TF and IDF.
+
+\item {} 
+\sphinxAtStartPar
+Formula:
+
+\end{itemize}
+\begin{equation*}
+\begin{split}TF\text{-}IDF(t, d, D) = TF(t, d) \cdot IDF(t, D)\end{split}
+\end{equation*}
+\end{description}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{Counter}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{feature\PYGZus{}extraction}\PYG{n+nn}{.}\PYG{n+nn}{text} \PYG{k+kn}{import} \PYG{n}{TfidfVectorizer}
+
+\PYG{c+c1}{\PYGZsh{} sample corpus}
+\PYG{n}{corpus} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Initialize the TfidfVectorizer}
+\PYG{n}{vectorizer} \PYG{o}{=} \PYG{n}{TfidfVectorizer}\PYG{p}{(}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} norm default norm=\PYGZsq{}l2\PYGZsq{}}
+
+\PYG{c+c1}{\PYGZsh{} Fit and transform}
+\PYG{n}{X} \PYG{o}{=} \PYG{n}{vectorizer}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Vocabulary:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{vectorizer}\PYG{o}{.}\PYG{n}{get\PYGZus{}feature\PYGZus{}names\PYGZus{}out}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} [item for row in matrix for item in row]}
+\PYG{n}{corpus\PYGZus{}flatted} \PYG{o}{=} \PYG{p}{[}\PYG{n}{item} \PYG{k}{for} \PYG{n}{sub\PYGZus{}list} \PYG{o+ow}{in} \PYG{p}{[}\PYG{n}{s}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ }\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n}{corpus}\PYG{p}{]}
+                     \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{sub\PYGZus{}list}\PYG{p}{]}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Vocabulary frequency:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n+nb}{dict}\PYG{p}{(}\PYG{n}{Counter}\PYG{p}{(}\PYG{n}{corpus\PYGZus{}flatted}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Embedded representation:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{toarray}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Vocabulary}\PYG{p}{:}
+\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hot}\PYG{l+s+s1}{\PYGZsq{}} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+
+\PYG{n}{Vocabulary} \PYG{n}{frequency}\PYG{p}{:}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Embedded} \PYG{n}{representation}\PYG{p}{:}
+\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{0.41285857} \PYG{l+m+mf}{0.69903033} \PYG{l+m+mf}{0.}         \PYG{l+m+mf}{0.41285857} \PYG{l+m+mf}{0.}         \PYG{l+m+mf}{0.41285857}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{0.41285857} \PYG{l+m+mf}{0.}         \PYG{l+m+mf}{0.69903033} \PYG{l+m+mf}{0.41285857} \PYG{l+m+mf}{0.}         \PYG{l+m+mf}{0.41285857}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{0.41285857} \PYG{l+m+mf}{0.}         \PYG{l+m+mf}{0.}         \PYG{l+m+mf}{0.41285857} \PYG{l+m+mf}{0.69903033} \PYG{l+m+mf}{0.41285857}\PYG{p}{]}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The above results can be validated by the following steps (IDF in document 1):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Step 1: Vocabulary  `[\PYGZsq{}ai\PYGZsq{} \PYGZsq{}awesome\PYGZsq{} \PYGZsq{}fun\PYGZsq{} \PYGZsq{}gen\PYGZsq{} \PYGZsq{}hot\PYGZsq{} \PYGZsq{}is\PYGZsq{}]`}
+
+\PYG{n}{tf\PYGZus{}idf} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{term}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{n}{vectorizer}\PYG{o}{.}\PYG{n}{get\PYGZus{}feature\PYGZus{}names\PYGZus{}out}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYGZbs{}
+         \PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{term}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 2: |D|}
+\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{|D|}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}\PYG{p}{]}\PYG{o}{*}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{vectorizer}\PYG{o}{.}\PYG{n}{get\PYGZus{}feature\PYGZus{}names\PYGZus{}out}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 3: Compute TF for doc 1:  Gen AI is awesome}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} TF for \PYGZdq{}ai\PYGZdq{} in Document 1 = 1 (appears once doc 1)}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} TF for \PYGZdq{}awesome\PYGZdq{} in Document 1 = 1 (appears once in doc 1)}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} TF for \PYGZdq{}fun\PYGZdq{} in Document 1 = 0 (does not appear in doc 1)}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} TF for \PYGZdq{}gen\PYGZdq{} in Document 1 = 1 (appear oncein doc 1 )}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} TF for \PYGZdq{}hot\PYGZdq{} in Document 1 = 0 (does not appear doc 1 )}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} TF for \PYGZdq{}is\PYGZdq{} in Document 1 = 1 (appear once in doc 1 )}
+
+\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Step 4:  Compute DF for doc 1}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} DF For \PYGZdq{}ai\PYGZdq{}: Appears in all 3 documents.}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} DF For \PYGZdq{}awesome\PYGZdq{}: Appears in 1 document.}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} DF For \PYGZdq{}fun\PYGZdq{}: Appears in 1 document.}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} DF For \PYGZdq{}Gen\PYGZdq{}: Appears in all 3 documents.}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} DF For \PYGZdq{}hot\PYGZdq{}: Appears in 1 document.}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{} DF For \PYGZdq{}is\PYGZdq{}: Appears in all 3 documents.}
+
+\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Step 5: Compute IDF}
+\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{IDF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{p}{(}\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{|D|}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZsh{} Step 6: Compute TF\PYGZhy{}IDF}
+\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TF\PYGZhy{}IDF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{*}\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{IDF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Step 7: l2 normlization}
+\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TF\PYGZhy{}IDF(l2)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TF\PYGZhy{}IDF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{/}\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{tf\PYGZus{}idf}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TF\PYGZhy{}IDF}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{tf\PYGZus{}idf}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+         \PYG{o}{|}\PYG{n}{D}\PYG{o}{|}  \PYG{n}{TF}  \PYG{n}{DF}       \PYG{n}{IDF}    \PYG{n}{TF}\PYG{o}{\PYGZhy{}}\PYG{n}{IDF}  \PYG{n}{TF}\PYG{o}{\PYGZhy{}}\PYG{n}{IDF}\PYG{p}{(}\PYG{n}{l2}\PYG{p}{)}
+\PYG{n}{term}
+\PYG{n}{ai}         \PYG{l+m+mi}{3}   \PYG{l+m+mi}{1}   \PYG{l+m+mi}{3}  \PYG{l+m+mf}{1.000000}  \PYG{l+m+mf}{1.000000}    \PYG{l+m+mf}{0.412859}
+\PYG{n}{awesome}    \PYG{l+m+mi}{3}   \PYG{l+m+mi}{1}   \PYG{l+m+mi}{1}  \PYG{l+m+mf}{1.693147}  \PYG{l+m+mf}{1.693147}    \PYG{l+m+mf}{0.699030}
+\PYG{n}{fun}        \PYG{l+m+mi}{3}   \PYG{l+m+mi}{0}   \PYG{l+m+mi}{1}  \PYG{l+m+mf}{1.693147}  \PYG{l+m+mf}{0.000000}    \PYG{l+m+mf}{0.000000}
+\PYG{n}{gen}        \PYG{l+m+mi}{3}   \PYG{l+m+mi}{1}   \PYG{l+m+mi}{3}  \PYG{l+m+mf}{1.000000}  \PYG{l+m+mf}{1.000000}    \PYG{l+m+mf}{0.412859}
+\PYG{n}{hot}        \PYG{l+m+mi}{3}   \PYG{l+m+mi}{0}   \PYG{l+m+mi}{1}  \PYG{l+m+mf}{1.693147}  \PYG{l+m+mf}{0.000000}    \PYG{l+m+mf}{0.000000}
+\PYG{o+ow}{is}         \PYG{l+m+mi}{3}   \PYG{l+m+mi}{1}   \PYG{l+m+mi}{3}  \PYG{l+m+mf}{1.000000}  \PYG{l+m+mf}{1.000000}    \PYG{l+m+mf}{0.412859}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Fun Fact}
+
+\sphinxAtStartPar
+TfidfVectorizer is equivalent to CountVectorizer followed by TfidfTransformer.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{feature\PYGZus{}extraction}\PYG{n+nn}{.}\PYG{n+nn}{text} \PYG{k+kn}{import} \PYG{n}{CountVectorizer}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{feature\PYGZus{}extraction}\PYG{n+nn}{.}\PYG{n+nn}{text} \PYG{k+kn}{import} \PYG{n}{TfidfTransformer}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{pipeline} \PYG{k+kn}{import} \PYG{n}{Pipeline}
+
+\PYG{c+c1}{\PYGZsh{} sample corpus}
+\PYG{n}{corpus} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} pipeline}
+\PYG{n}{pipe} \PYG{o}{=} \PYG{n}{Pipeline}\PYG{p}{(}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{count}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{CountVectorizer}\PYG{p}{(}\PYG{n}{lowercase}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
+               \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tfid}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{TfidfTransformer}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{pipe}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} TF}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{pipe}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{count}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{transform}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}\PYG{o}{.}\PYG{n}{toarray}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} IDF}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{pipe}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tfid}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{idf\PYGZus{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Pipeline}\PYG{p}{(}\PYG{n}{steps}\PYG{o}{=}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{count}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{CountVectorizer}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tfid}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{TfidfTransformer}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
+\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{1.}         \PYG{l+m+mf}{1.69314718} \PYG{l+m+mf}{1.69314718} \PYG{l+m+mf}{1.}         \PYG{l+m+mf}{1.69314718} \PYG{l+m+mf}{1.}        \PYG{p}{]}
+\end{sphinxVerbatim}
+\end{sphinxadmonition}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+Applications of TF\sphinxhyphen{}IDF
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Information Retrieval}: Ranking documents based on relevance to a query.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Text Classification}: Feature extraction for machine learning models.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Document Similarity}: Comparing documents by their weighted term vectors.
+
+\end{enumerate}
+
+\item {} 
+\sphinxAtStartPar
+Advantages
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Highlights important terms while reducing the weight of common terms.
+
+\item {} 
+\sphinxAtStartPar
+Simple to implement and effective for many tasks.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Limitations
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Does not capture semantic relationships or word order.
+
+\item {} 
+\sphinxAtStartPar
+Less effective for very large corpora or when working with very short documents.
+
+\item {} 
+\sphinxAtStartPar
+Sparse representation due to high\sphinxhyphen{}dimensional feature vectors.
+
+\end{itemize}
+
+\end{itemize}
+
+\sphinxAtStartPar
+For more advanced representations, embeddings like \sphinxstylestrong{Word2Vec} or \sphinxstylestrong{BERT} are often used.
+
+
+\section{Static word embeddings}
+\label{\detokenize{embedding:static-word-embeddings}}
+\sphinxAtStartPar
+Static word embeddings are word representations that assign a fixed vector to each word,
+regardless of its context in a sentence or paragraph. These embeddings are pre\sphinxhyphen{}trained on
+large corpora and remain unchanged during usage, making them “static.” These embeddings are
+usually pre\sphinxhyphen{}trained on large text corpora using algorithms like Word2Vec, GloVe, or FastText.
+
+
+\subsection{Word2Vec}
+\label{\detokenize{embedding:word2vec}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The Context Window
+
+\item {} 
+\sphinxAtStartPar
+CBOW and Skip\sphinxhyphen{}Gram Model
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{gensim}
+\PYG{k+kn}{from} \PYG{n+nn}{gensim}\PYG{n+nn}{.}\PYG{n+nn}{models} \PYG{k+kn}{import} \PYG{n}{Word2Vec}
+\PYG{k+kn}{from} \PYG{n+nn}{nltk}\PYG{n+nn}{.}\PYG{n+nn}{tokenize} \PYG{k+kn}{import} \PYG{n}{sent\PYGZus{}tokenize}\PYG{p}{,} \PYG{n}{word\PYGZus{}tokenize}
+
+\PYG{c+c1}{\PYGZsh{} sample corpus}
+\PYG{n}{corpus} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+
+
+\PYG{k}{def} \PYG{n+nf}{tokenize\PYGZus{}gensim}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}\PYG{p}{:}
+
+   \PYG{n}{tokens} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+   \PYG{c+c1}{\PYGZsh{} iterate through each sentence in the corpus}
+   \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n}{corpus}\PYG{p}{:}
+
+      \PYG{c+c1}{\PYGZsh{} tokenize the sentence into words}
+      \PYG{n}{temp} \PYG{o}{=} \PYG{n}{gensim}\PYG{o}{.}\PYG{n}{utils}\PYG{o}{.}\PYG{n}{tokenize}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{n}{lowercase}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{deacc}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{n}{errors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{strict}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{to\PYGZus{}lower}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{n}{lower}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+
+      \PYG{n}{tokens}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{temp}\PYG{p}{)}\PYG{p}{)}
+
+   \PYG{k}{return} \PYG{n}{tokens}
+
+
+\PYG{n}{tokens} \PYG{o}{=} \PYG{n}{tokenize\PYGZus{}gensim}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Create Word2Vec model}
+\PYG{c+c1}{\PYGZsh{} sg (\PYGZob{}0, 1\PYGZcb{}, optional) \textendash{} Training algorithm: 1 for skip\PYGZhy{}gram; otherwise CBOW.}
+\PYG{c+c1}{\PYGZsh{} CBOW}
+\PYG{n}{model1} \PYG{o}{=} \PYG{n}{gensim}\PYG{o}{.}\PYG{n}{models}\PYG{o}{.}\PYG{n}{Word2Vec}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{,} \PYG{n}{sg}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{min\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}
+                              \PYG{n}{vector\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{window}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Vocabulary}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{model1}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{key\PYGZus{}to\PYGZus{}index}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{model1}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{get\PYGZus{}normed\PYGZus{}vectors}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Print results}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Cosine similarity between }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{gen}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{and }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ai}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ \PYGZhy{} Word2Vec(CBOW) : }\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+      \PYG{n}{model1}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{similarity}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Create Word2Vec model}
+\PYG{c+c1}{\PYGZsh{} sg (\PYGZob{}0, 1\PYGZcb{}, optional) \textendash{} Training algorithm: 1 for skip\PYGZhy{}gram; otherwise CBOW.}
+\PYG{c+c1}{\PYGZsh{} skip\PYGZhy{}gram}
+\PYG{n}{model2} \PYG{o}{=} \PYG{n}{gensim}\PYG{o}{.}\PYG{n}{models}\PYG{o}{.}\PYG{n}{Word2Vec}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{,} \PYG{n}{sg}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{min\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}
+                              \PYG{n}{vector\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{window}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Vocabulary}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{model2}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{key\PYGZus{}to\PYGZus{}index}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{model2}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{get\PYGZus{}normed\PYGZus{}vectors}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Print results}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Cosine similarity between }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{gen}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{and }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ai}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ \PYGZhy{} Word2Vec(skip\PYGZhy{}gram) : }\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+      \PYG{n}{model2}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{similarity}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{5}\PYG{p}{\PYGZcb{}}
+\PYG{p}{[}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.02660277}  \PYG{l+m+mf}{0.0117296}   \PYG{l+m+mf}{0.25318226}  \PYG{l+m+mf}{0.44695902} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.4615286}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.35307196}
+   \PYG{l+m+mf}{0.3204311}   \PYG{l+m+mf}{0.4451589}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.24882038} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.18670462}\PYG{p}{]}
+\PYG{p}{[} \PYG{l+m+mf}{0.41619968} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.08647515} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2558276}   \PYG{l+m+mf}{0.3695945}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.274073}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.10240843}
+   \PYG{l+m+mf}{0.1622154}   \PYG{l+m+mf}{0.05593351} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.46721786} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5328355} \PYG{p}{]}
+\PYG{p}{[} \PYG{l+m+mf}{0.43418837}  \PYG{l+m+mf}{0.30108306}  \PYG{l+m+mf}{0.40128633}  \PYG{l+m+mf}{0.0453006}   \PYG{l+m+mf}{0.37712952} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20221795}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05619935}  \PYG{l+m+mf}{0.34255028} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.44665098} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2337343} \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.41098067} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05088534}  \PYG{l+m+mf}{0.5218584}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.40045303} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.12768732} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.10601949}
+   \PYG{l+m+mf}{0.44194022} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.32449666}  \PYG{l+m+mf}{0.00247097} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2600907} \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.44081825}  \PYG{l+m+mf}{0.22984274} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.40207896} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20159177} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00161115} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0135952}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3516631}   \PYG{l+m+mf}{0.44133204}  \PYG{l+m+mf}{0.2286844}   \PYG{l+m+mf}{0.423816}  \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.42753762}  \PYG{l+m+mf}{0.23561442} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.21681462}  \PYG{l+m+mf}{0.04321203}  \PYG{l+m+mf}{0.44539306} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.23385239}
+   \PYG{l+m+mf}{0.23675178} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.35568893} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.18596812}  \PYG{l+m+mf}{0.49255413}\PYG{p}{]}\PYG{p}{]}
+\PYG{n}{Cosine} \PYG{n}{similarity} \PYG{n}{between} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{and} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZhy{}} \PYG{n}{Word2Vec}\PYG{p}{(}\PYG{n}{CBOW}\PYG{p}{)} \PYG{p}{:}  \PYG{l+m+mf}{0.32937223}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{5}\PYG{p}{\PYGZcb{}}
+\PYG{p}{[}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.02660277}  \PYG{l+m+mf}{0.0117296}   \PYG{l+m+mf}{0.25318226}  \PYG{l+m+mf}{0.44695902} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.4615286}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.35307196}
+   \PYG{l+m+mf}{0.3204311}   \PYG{l+m+mf}{0.4451589}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.24882038} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.18670462}\PYG{p}{]}
+\PYG{p}{[} \PYG{l+m+mf}{0.41619968} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.08647515} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2558276}   \PYG{l+m+mf}{0.3695945}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.274073}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.10240843}
+   \PYG{l+m+mf}{0.1622154}   \PYG{l+m+mf}{0.05593351} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.46721786} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5328355} \PYG{p}{]}
+\PYG{p}{[} \PYG{l+m+mf}{0.43418837}  \PYG{l+m+mf}{0.30108306}  \PYG{l+m+mf}{0.40128633}  \PYG{l+m+mf}{0.0453006}   \PYG{l+m+mf}{0.37712952} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20221795}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05619935}  \PYG{l+m+mf}{0.34255028} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.44665098} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2337343} \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.41098067} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05088534}  \PYG{l+m+mf}{0.5218584}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.40045303} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.12768732} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.10601949}
+   \PYG{l+m+mf}{0.44194022} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.32449666}  \PYG{l+m+mf}{0.00247097} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2600907} \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.44081825}  \PYG{l+m+mf}{0.22984274} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.40207896} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20159177} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00161115} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0135952}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3516631}   \PYG{l+m+mf}{0.44133204}  \PYG{l+m+mf}{0.2286844}   \PYG{l+m+mf}{0.423816}  \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.42753762}  \PYG{l+m+mf}{0.23561442} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.21681462}  \PYG{l+m+mf}{0.04321203}  \PYG{l+m+mf}{0.44539306} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.23385239}
+   \PYG{l+m+mf}{0.23675178} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.35568893} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.18596812}  \PYG{l+m+mf}{0.49255413}\PYG{p}{]}\PYG{p}{]}
+\PYG{n}{Cosine} \PYG{n}{similarity} \PYG{n}{between} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{and} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZhy{}} \PYG{n}{Word2Vec}\PYG{p}{(}\PYG{n}{skip}\PYG{o}{\PYGZhy{}}\PYG{n}{gram}\PYG{p}{)} \PYG{p}{:}  \PYG{l+m+mf}{0.32937223}
+\end{sphinxVerbatim}
+
 
 \section{GloVE}
 \label{\detokenize{embedding:glove}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{gensim}\PYG{n+nn}{.}\PYG{n+nn}{downloader} \PYG{k}{as} \PYG{n+nn}{api}
+\PYG{c+c1}{\PYGZsh{} Download pre\PYGZhy{}trained GloVe model}
+\PYG{n}{glove\PYGZus{}vectors} \PYG{o}{=} \PYG{n}{api}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{glove\PYGZhy{}wiki\PYGZhy{}gigaword\PYGZhy{}50}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Get word vectors (embeddings)}
+\PYG{n}{word1} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{king}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{word2} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{queen}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{vector1} \PYG{o}{=} \PYG{n}{glove\PYGZus{}vectors}\PYG{p}{[}\PYG{n}{word1}\PYG{p}{]}
+\PYG{n}{vector2} \PYG{o}{=} \PYG{n}{glove\PYGZus{}vectors}\PYG{p}{[}\PYG{n}{word2}\PYG{p}{]}
+\PYG{c+c1}{\PYGZsh{} Compute cosine similarity between the two word vectors}
+\PYG{n}{similarity} \PYG{o}{=} \PYG{n}{glove\PYGZus{}vectors}\PYG{o}{.}\PYG{n}{similarity}\PYG{p}{(}\PYG{n}{word1}\PYG{p}{,} \PYG{n}{word2}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Word vectors for }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{vector1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Word vectors for }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word2}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{vector2}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Cosine similarity between }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word2}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{similarity}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{o}{==}\PYG{p}{]} \PYG{l+m+mf}{100.0}\PYG{o}{\PYGZpc{}} \PYG{l+m+mf}{66.0}\PYG{o}{/}\PYG{l+m+mf}{66.0}\PYG{n}{MB} \PYG{n}{downloaded}
+\PYG{n}{Word} \PYG{n}{vectors} \PYG{k}{for} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{king}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[} \PYG{l+m+mf}{0.50451}   \PYG{l+m+mf}{0.68607}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.59517}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.022801}  \PYG{l+m+mf}{0.60046}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.13498}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.08813}
+\PYG{l+m+mf}{0.47377}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.61798}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.31012}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.076666}  \PYG{l+m+mf}{1.493}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.034189} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.98173}
+\PYG{l+m+mf}{0.68229}   \PYG{l+m+mf}{0.81722}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.51874}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.31503}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.55809}   \PYG{l+m+mf}{0.66421}   \PYG{l+m+mf}{0.1961}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.13495}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11476}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.30344}   \PYG{l+m+mf}{0.41177}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.223}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0756}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0783}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.34354}   \PYG{l+m+mf}{0.33505}   \PYG{l+m+mf}{1.9927}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.04234}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.64319}   \PYG{l+m+mf}{0.71125}   \PYG{l+m+mf}{0.49159}
+\PYG{l+m+mf}{0.16754}   \PYG{l+m+mf}{0.34344}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.25663}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.8523}    \PYG{l+m+mf}{0.1661}    \PYG{l+m+mf}{0.40102}   \PYG{l+m+mf}{1.1685}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0137}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.21585}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.15155}   \PYG{l+m+mf}{0.78321}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.91241}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.6106}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.64426}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.51042} \PYG{p}{]}
+\PYG{n}{Word} \PYG{n}{vectors} \PYG{k}{for} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{queen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[} \PYG{l+m+mf}{0.37854}    \PYG{l+m+mf}{1.8233}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.2648}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1043}     \PYG{l+m+mf}{0.35829}    \PYG{l+m+mf}{0.60029}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.17538}    \PYG{l+m+mf}{0.83767}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.056798}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.75795}    \PYG{l+m+mf}{0.22681}    \PYG{l+m+mf}{0.98587}
+\PYG{l+m+mf}{0.60587}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.31419}    \PYG{l+m+mf}{0.28877}    \PYG{l+m+mf}{0.56013}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.77456}    \PYG{l+m+mf}{0.071421}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5741}     \PYG{l+m+mf}{0.21342}    \PYG{l+m+mf}{0.57674}    \PYG{l+m+mf}{0.3868}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.12574}    \PYG{l+m+mf}{0.28012}
+\PYG{l+m+mf}{0.28135}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.8053}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0421}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.19255}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.55375}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.054526}
+\PYG{l+m+mf}{1.5574}     \PYG{l+m+mf}{0.39296}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2475}     \PYG{l+m+mf}{0.34251}    \PYG{l+m+mf}{0.45365}    \PYG{l+m+mf}{0.16237}
+\PYG{l+m+mf}{0.52464}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.070272}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.83744}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0326}     \PYG{l+m+mf}{0.45946}    \PYG{l+m+mf}{0.25302}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.17837}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.73398}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20025}    \PYG{l+m+mf}{0.2347}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.56095}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.2839}
+\PYG{l+m+mf}{0.0092753} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.60284}  \PYG{p}{]}
+\PYG{n}{Cosine} \PYG{n}{similarity} \PYG{n}{between} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{king}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{and} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{queen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{0.7839043140411377}
+\end{sphinxVerbatim}
+
 
 \section{Fast Text}
 \label{\detokenize{embedding:fast-text}}
+\sphinxAtStartPar
+Fast Text incorporates subword information (useful for handling rare or unseen words)
 
-\section{BERT}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{gensim}\PYG{n+nn}{.}\PYG{n+nn}{models} \PYG{k+kn}{import} \PYG{n}{FastText}
+
+\PYG{k+kn}{import} \PYG{n+nn}{gensim}
+\PYG{k+kn}{from} \PYG{n+nn}{gensim}\PYG{n+nn}{.}\PYG{n+nn}{models} \PYG{k+kn}{import} \PYG{n}{Word2Vec}
+
+\PYG{c+c1}{\PYGZsh{} sample corpus}
+\PYG{n}{corpus} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+
+
+\PYG{k}{def} \PYG{n+nf}{tokenize\PYGZus{}gensim}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}\PYG{p}{:}
+
+   \PYG{n}{tokens} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+   \PYG{c+c1}{\PYGZsh{} iterate through each sentence in the corpus}
+   \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n}{corpus}\PYG{p}{:}
+
+      \PYG{c+c1}{\PYGZsh{} tokenize the sentence into words}
+      \PYG{n}{temp} \PYG{o}{=} \PYG{n}{gensim}\PYG{o}{.}\PYG{n}{utils}\PYG{o}{.}\PYG{n}{tokenize}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{n}{lowercase}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{deacc}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{n}{errors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{strict}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{to\PYGZus{}lower}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{n}{lower}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+
+      \PYG{n}{tokens}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{temp}\PYG{p}{)}\PYG{p}{)}
+
+   \PYG{k}{return} \PYG{n}{tokens}
+
+\PYG{n}{tokens} \PYG{o}{=} \PYG{n}{tokenize\PYGZus{}gensim}\PYG{p}{(}\PYG{n}{corpus}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} create FastText model}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{FastText}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{,} \PYG{n}{vector\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{window}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{min\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{workers}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Train the model}
+\PYG{n}{model}\PYG{o}{.}\PYG{n}{train}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{,} \PYG{n}{total\PYGZus{}examples}\PYG{o}{=}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{)}\PYG{p}{,} \PYG{n}{epochs}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Vocabulary}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{model}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{key\PYGZus{}to\PYGZus{}index}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{model}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{get\PYGZus{}normed\PYGZus{}vectors}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Print results}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Cosine similarity between }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{gen}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{and }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ai}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ \PYGZhy{} Word2Vec : }\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+      \PYG{n}{model}\PYG{o}{.}\PYG{n}{wv}\PYG{o}{.}\PYG{n}{similarity}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{WARNING}\PYG{p}{:}\PYG{n}{gensim}\PYG{o}{.}\PYG{n}{models}\PYG{o}{.}\PYG{n}{word2vec}\PYG{p}{:}\PYG{n}{Effective} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alpha}\PYG{l+s+s1}{\PYGZsq{}} \PYG{n}{higher} \PYG{n}{than} \PYG{n}{previous} \PYG{n}{training} \PYG{n}{cycles}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{5}\PYG{p}{\PYGZcb{}}
+\PYG{p}{[}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.01875759}  \PYG{l+m+mf}{0.086543}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.25080433}  \PYG{l+m+mf}{0.2824868}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.23755953} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11316587}
+   \PYG{l+m+mf}{0.473383}    \PYG{l+m+mf}{0.39204055} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.30422893} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5566626} \PYG{p}{]}
+\PYG{p}{[} \PYG{l+m+mf}{0.5088161}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3323528}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.128698}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.11877266} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.38699347}  \PYG{l+m+mf}{0.20977001}
+   \PYG{l+m+mf}{0.05947014} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05622245} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.36257952} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5177341} \PYG{p}{]}
+\PYG{p}{[} \PYG{l+m+mf}{0.18038039}  \PYG{l+m+mf}{0.51484865}  \PYG{l+m+mf}{0.40694886}  \PYG{l+m+mf}{0.05965518} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05985437} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.10832689}
+   \PYG{l+m+mf}{0.37992737}  \PYG{l+m+mf}{0.5992712}   \PYG{l+m+mf}{0.01503773}  \PYG{l+m+mf}{0.1192203} \PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5694013}   \PYG{l+m+mf}{0.23560704}  \PYG{l+m+mf}{0.0265804}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.41392225} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00285366} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3076269}
+   \PYG{l+m+mf}{0.2076883}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.425648}    \PYG{l+m+mf}{0.29903153}  \PYG{l+m+mf}{0.19965051}\PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.23892775}  \PYG{l+m+mf}{0.10744874} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.03730153} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.23521401}  \PYG{l+m+mf}{0.32083488}  \PYG{l+m+mf}{0.21598674}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.29570717} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.03044808}  \PYG{l+m+mf}{0.75250715}  \PYG{l+m+mf}{0.26538488}\PYG{p}{]}
+\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.31881964} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.06544963} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.44274488}  \PYG{l+m+mf}{0.15485793}  \PYG{l+m+mf}{0.39120612} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05415314}
+   \PYG{l+m+mf}{0.15772066} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.05987714} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6986104}   \PYG{l+m+mf}{0.03967094}\PYG{p}{]}\PYG{p}{]}
+\PYG{n}{Cosine} \PYG{n}{similarity} \PYG{n}{between} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gen}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{and} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ai}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZhy{}} \PYG{n}{Word2Vec} \PYG{p}{:}  \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.21662527}
+\end{sphinxVerbatim}
+
+
+\section{Contextual word embeddings}
+\label{\detokenize{embedding:contextual-word-embeddings}}
+\sphinxAtStartPar
+Contextual word embeddings are word representations where the embedding of a word
+changes depending on its context in a sentence or document. These embeddings capture
+the meaning of a word as influenced by its surrounding words, addressing the limitations
+of static embeddings by incorporating contextual nuances.
+
+
+\subsection{BERT}
 \label{\detokenize{embedding:bert}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{transformers} \PYG{k+kn}{import} \PYG{n}{BertTokenizer}\PYG{p}{,} \PYG{n}{BertModel}
+\PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{BertTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bert\PYGZhy{}base\PYGZhy{}uncased}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{BertModel}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bert\PYGZhy{}base\PYGZhy{}uncased}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{n}{text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Gen AI is awesome}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{embeddings} \PYG{o}{=} \PYG{n}{model}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}\PYG{o}{.}\PYG{n}{last\PYGZus{}hidden\PYGZus{}state}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{torch}\PYG{o}{.}\PYG{n}{Size}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{768}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1129}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1477}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0056}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1335}\PYG{p}{,}  \PYG{l+m+mf}{0.2605}\PYG{p}{,}  \PYG{l+m+mf}{0.2113}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6841}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.1196}\PYG{p}{,}  \PYG{l+m+mf}{0.3349}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5958}\PYG{p}{,}  \PYG{l+m+mf}{0.1657}\PYG{p}{,}  \PYG{l+m+mf}{0.6988}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5385}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2649}\PYG{p}{,}  \PYG{l+m+mf}{0.2639}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1544}\PYG{p}{,}  \PYG{l+m+mf}{0.2532}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1363}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1794}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6086}\PYG{p}{,}  \PYG{l+m+mf}{0.1292}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1620}\PYG{p}{,}  \PYG{l+m+mf}{0.1721}\PYG{p}{,}  \PYG{l+m+mf}{0.4356}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0187}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.7320}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3420}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.4028}\PYG{p}{,}  \PYG{l+m+mf}{0.1425}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2014}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[} \PYG{l+m+mf}{0.5493}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1029}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1571}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.3503}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.7601}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1398}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+      \PYG{n}{grad\PYGZus{}fn}\PYG{o}{=}\PYG{o}{\PYGZlt{}}\PYG{n}{NativeLayerNormBackward0}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
 \sphinxstepscope
 
 
 \chapter{Prompt Engineering}
 \label{\detokenize{prompt:prompt-engineering}}\label{\detokenize{prompt:prompt}}\label{\detokenize{prompt::doc}}
 
-\section{Background about LLM and Prompt}
-\label{\detokenize{prompt:background-about-llm-and-prompt}}
+\section{Prompt}
+\label{\detokenize{prompt:id1}}
+\sphinxAtStartPar
+A prompt is the input or query given to an LLM to elicit a specific response.
+It acts as the user’s way of “programming” the model without code, simply by
+phrasing questions or tasks appropriately.
 
-\section{Prompt Engineering Basics}
-\label{\detokenize{prompt:prompt-engineering-basics}}
 
-\subsection{Prompt Components}
-\label{\detokenize{prompt:prompt-components}}
+\section{Prompt Engineering}
+\label{\detokenize{prompt:id2}}
 
-\subsection{Prompt Engineering Principles}
-\label{\detokenize{prompt:prompt-engineering-principles}}
+\subsection{What’s Prompt Engineering}
+\label{\detokenize{prompt:what-s-prompt-engineering}}
+\sphinxAtStartPar
+Prompt engineering is the practice of designing and refining input prompts to
+guide LLMs to produce desired outputs effectively and consistently.
+It involves crafting queries, commands, or instructions that align with
+the model’s capabilities and the task’s requirements.
+
+
+\subsection{Key Elements of a Prompt}
+\label{\detokenize{prompt:key-elements-of-a-prompt}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Clarity: A clear and unambiguous prompt ensures the model understands the task.
+
+\item {} 
+\sphinxAtStartPar
+Specificity: Including details like tone, format, length, or audience helps tailor the response.
+
+\item {} 
+\sphinxAtStartPar
+Context:Providing background information ensures the model generates relevant outputs.
+
+\end{itemize}
+
 
 \section{Advanced Prompt Engineering}
 \label{\detokenize{prompt:advanced-prompt-engineering}}
+
+\subsection{Role Assignment}
+\label{\detokenize{prompt:role-assignment}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Assign a specific role or persona to the AI to shape its style and expertise.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+\begin{quote}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“You are a professional data scientist. Explain how to build a machine learning model to a beginner.”}
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} You are a professional data scientist. Explain how to build a machine}
+\PYG{c+c1}{\PYGZsh{} learning model to a beginner.}
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{Role: you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{Answer:}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model} \PYG{o}{|} \PYG{n}{output\PYGZus{}parser}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{data scientist}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{task}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Explain how to build a machine }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                            learning model to a beginner}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+ \PYG{p}{\PYGZob{}}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{role}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{assistant}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{content}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{To build a machine learning model, let}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s follow these steps as a beginner: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{1. **Define the Problem**: Understand what problem you are trying to solve. This could be anything from predicting house prices, recognizing images, or even recommending products. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{2. **Collect and Prepare Data**: Gather relevant data for your problem. This might involve web scraping, APIs, or using existing datasets. Once you have the data, clean it by handling missing values, outliers, and errors. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{3. **Explore and Visualize Data**: Understand the structure of your data, its distribution, and relationships between variables. This can help in identifying patterns and making informed decisions about the next steps. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{4. **Feature Engineering**: Create new features that might be useful for the model to make accurate predictions. This could involve creating interactions between existing features or using techniques like one\PYGZhy{}hot encoding. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{5. **Split Data**: Split your data into training, validation, and testing sets. The training set is used to train the model, the validation set is used to tune hyperparameters, and the testing set is used to evaluate the final performance of the model. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{6. **Choose a Model**: Select a machine learning algorithm that suits your problem. Some common algorithms include linear regression for regression problems, logistic regression for binary classification problems, decision trees, random forests, support vector machines (SVM), and neural networks for more complex tasks. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{7. **Train the Model**: Use your training data to train the chosen model. This involves feeding the data into the model and adjusting its parameters based on the error it makes. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{8. **Tune Hyperparameters**: Adjust the hyperparameters of the model to improve its performance. This could involve changing learning rates, number of layers in a neural network, or the complexity of a decision tree. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{9. **Evaluate the Model**: Use your testing data to evaluate the performance of the model. Common metrics include accuracy for classification problems, mean squared error for regression problems, and precision, recall, and F1 score for imbalanced datasets. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{10. **Deploy the Model**: Once you are satisfied with the performance of your model, deploy it to a production environment where it can make predictions on new data.}\PYG{l+s+s2}{\PYGZdq{}}
+ \PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Contextual Setup}
+\label{\detokenize{prompt:contextual-setup}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Provide sufficient background or context for the AI to understand the task.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+\begin{quote}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“I am planing to write a book about GenAI best practice, help me draft the contents for the book.”}
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Contextual Setup}
+
+\PYG{c+c1}{\PYGZsh{} I am planing to write a book about GenAI best practice, help me draft the}
+\PYG{c+c1}{\PYGZsh{} contents for the book.}
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{Role: you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{Answer:}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model} \PYG{o}{|} \PYG{n}{output\PYGZus{}parser}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{book writer}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{task}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{I am planing to write a book about }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                        GenAI best practice, help me draft the }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                        contents for the book.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{1. Introduction}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Introduction to General Artificial Intelligence (GenAI) and its significance in today}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s world.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2. Chapter 1 \PYGZhy{} Understanding AI}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Exploring the basics of Artificial Intelligence, its history, and evolution.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{3. Chapter 2 \PYGZhy{} Types of AI}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Detailed discussion on various types of AI such as Narrow AI, General AI, and Superintelligent AI.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{4. Chapter 3 \PYGZhy{} GenAI Architecture}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Exploring the architecture of General AI systems, including neural networks, deep learning, and reinforcement learning.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{5. Chapter 4 \PYGZhy{} Ethics in AI Development}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Discussing the ethical considerations involved in developing GenAI, such as privacy, bias, and accountability.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{6. Chapter 5 \PYGZhy{} Data Collection and Management}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Understanding the importance of data in AI development, best practices for data collection, and responsible data management.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{7. Chapter 6 \PYGZhy{} Model Training and Optimization}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Exploring techniques for training AI models effectively, including hyperparameter tuning, regularization, and optimization strategies.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{8. Chapter 7 \PYGZhy{} Testing and Validation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Discussing the importance of testing and validation in ensuring the reliability and accuracy of GenAI systems.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{9. Chapter 8 \PYGZhy{} Deployment and Maintenance}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Exploring best practices for deploying AI models into production environments, as well as ongoing maintenance and updates.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{10. Case Studies}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Real\PYGZhy{}world examples of successful GenAI implementations across various industries, highlighting key takeaways and lessons learned.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{11. Future Trends in GenAI}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Exploring emerging trends in the field of General AI, such as quantum computing, explainable AI, and human\PYGZhy{}AI collaboration.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{12. Conclusion}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Summarizing the key points discussed in the book and looking forward to the future of General AI.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Explicit Instructions}
+\label{\detokenize{prompt:explicit-instructions}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Clearly specify the format, tone, style, or structure you want in the response.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+\begin{quote}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“Explain the concept of word embeddings in 100 words, using simple language suitable for a high school student.”}
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Explicit Instructions}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{ChatPromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{CommaSeparatedListOutputParser}
+
+
+\PYG{c+c1}{\PYGZsh{} Explain the concept of word embeddings in 100 words, using simple}
+\PYG{c+c1}{\PYGZsh{} language suitable for a high school student}
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{instruction: }\PYG{l+s+si}{\PYGZob{}instruction\PYGZcb{}}
+\PYG{l+s+s2}{Answer: Let}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s think step by step.}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AI engineer}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{task}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Explain the concept of word embeddings in }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                100 words}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{instruction}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{using simple }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                language suitable for a high school student}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{assistant}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{message}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Word Embeddings are like giving words a special address in a big library. Each word gets its own unique location, and words that are used in similar ways get placed close together. This helps the computer understand the meaning of words better when it}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s reading text. For example, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{king}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ might be near }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{queen}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{, because they are both types of royalty. And }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{apple}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ might be near }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{fruit}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{, because they are related concepts.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Chain of Thought (CoT) Prompting}
+\label{\detokenize{prompt:chain-of-thought-cot-prompting}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Encourage step\sphinxhyphen{}by\sphinxhyphen{}step reasoning for complex problems.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+\begin{quote}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“Solve this math problem step by step: A train travels 60 miles in 1.5 hours. What is its average speed?”}
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} CoT}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{ChatPromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{CommaSeparatedListOutputParser}
+
+
+\PYG{c+c1}{\PYGZsh{} Solve this math problem step by step: A train travels 60 miles in 1.5 hours.}
+\PYG{c+c1}{\PYGZsh{} What is its average speed?}
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{Answer: Let}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s think step by step.}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{math student}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{task}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Solve this math problem step by step: }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                A train travels 60 miles in 1.5 hours.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{question}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is its average speed per minute?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+ \PYG{p}{\PYGZob{}}
+\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Solution}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Step 1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{First, let}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s find the average speed of the train per hour.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Step 2}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The train travels 60 miles in 1.5 hours. So, its speed per hour is 60 miles / 1.5 hours = 40 miles/hour.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Step 3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Now, let}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s find the average speed of the train per minute. Since there are 60 minutes in an hour, the speed per minute would be the speed per hour multiplied by the number of minutes in an hour divided by 60.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Step 4}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{So, the average speed of the train per minute is (40 miles/hour * (1 hour / 60)) = (40/60) miles/minute = 2/3 miles/minute.}\PYG{l+s+s2}{\PYGZdq{}}
+             \PYG{p}{\PYGZcb{}}
+ \PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Few\sphinxhyphen{}Shot Prompting}
+\label{\detokenize{prompt:few-shot-prompting}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Provide examples to guide the AI on how to respond.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+\begin{quote}
+\begin{description}
+\sphinxlineitem{{\color{red}\bfseries{}*}”Here are examples of loan application decision:}
+\sphinxAtStartPar
+‘example’: \{‘input’: \{‘fico’:800, ‘income’:100000,’loan\_amount’: 10000\}
+‘decision’: “accept”
+Now Help me to make a decision to accpet or reject the loan application and
+give the reason.
+‘input’: “\{‘fico’:820, ‘income’:100000, ‘loan\_amount’: 1,000\}””*
+
+\end{description}
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Few\PYGZhy{}Shot Prompting}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{ChatPromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{CommaSeparatedListOutputParser}
+
+
+\PYG{c+c1}{\PYGZsh{} Here are examples of loan application decision:}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}example\PYGZsq{}: \PYGZob{}\PYGZsq{}input\PYGZsq{}: \PYGZob{}\PYGZsq{}fico\PYGZsq{}:800, \PYGZsq{}income\PYGZsq{}:100000,\PYGZsq{}loan\PYGZus{}amount\PYGZsq{}: 10000\PYGZcb{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}decision\PYGZsq{}: \PYGZdq{}accept\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Now Help me to make a decision to accpet or reject the loan application and}
+\PYG{c+c1}{\PYGZsh{} give the reason.}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}input\PYGZsq{}: \PYGZdq{}\PYGZob{}\PYGZsq{}fico\PYGZsq{}:820, \PYGZsq{}income\PYGZsq{}:100000, \PYGZsq{}loan\PYGZus{}amount\PYGZsq{}: 1,000\PYGZcb{}\PYGZdq{}}
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{examples: }\PYG{l+s+si}{\PYGZob{}example\PYGZcb{}}
+\PYG{l+s+s2}{input: }\PYG{l+s+si}{\PYGZob{}input\PYGZcb{}}
+\PYG{l+s+s2}{decision:}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{banker}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{task}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Help me to make a decision to accpet or }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                reject the loan application }\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{example}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fico}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{income}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{100000}\PYG{p}{,}\PYGZbs{}
+                                            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{loan\PYGZus{}amount}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{10000}\PYG{p}{\PYGZcb{}}\PYG{p}{,}\PYGZbs{}
+                                    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{decision}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{accept}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fico}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{820}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{income}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{100000}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{loan\PYGZus{}amount}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1000}\PYG{p}{\PYGZcb{}}
+                        \PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{decision}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{accept}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Iterative Prompting}
+\label{\detokenize{prompt:iterative-prompting}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Build on the AI’s response by asking follow\sphinxhyphen{}up questions or refining the output.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleemphasis{Initial Prompt:} “ Help me to make a decision to accpet or reject the loan application.”
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleemphasis{Follow\sphinxhyphen{}Up:} “give me the reason”
+
+\end{itemize}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Few\PYGZhy{}Shot Prompting}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{ChatPromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{CommaSeparatedListOutputParser}
+
+
+\PYG{c+c1}{\PYGZsh{} Here are examples of loan application decision:}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}example\PYGZsq{}: \PYGZob{}\PYGZsq{}input\PYGZsq{}: \PYGZob{}\PYGZsq{}fico\PYGZsq{}:800, \PYGZsq{}income\PYGZsq{}:100000,\PYGZsq{}loan\PYGZus{}amount\PYGZsq{}: 10000\PYGZcb{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}decision\PYGZsq{}: \PYGZdq{}accept\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Now Help me to make a decision to accpet or reject the loan application and}
+\PYG{c+c1}{\PYGZsh{} give the reason.}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}input\PYGZsq{}: \PYGZdq{}\PYGZob{}\PYGZsq{}fico\PYGZsq{}:820, \PYGZsq{}income\PYGZsq{}:100000, \PYGZsq{}loan\PYGZus{}amount\PYGZsq{}: 1,000\PYGZcb{}\PYGZdq{}}
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{examples: }\PYG{l+s+si}{\PYGZob{}example\PYGZcb{}}
+\PYG{l+s+s2}{input: }\PYG{l+s+si}{\PYGZob{}input\PYGZcb{}}
+\PYG{l+s+s2}{decision:}
+\PYG{l+s+s2}{reason:}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{banker}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{task}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Help me to make a decision to accpet or }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                reject the loan application and }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                give the reason.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{example}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fico}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{income}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{100000}\PYG{p}{,}\PYGZbs{}
+                                            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{loan\PYGZus{}amount}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{10000}\PYG{p}{\PYGZcb{}}\PYG{p}{,}\PYGZbs{}
+                                    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{decision}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{accept}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fico}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{820}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{income}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{100000}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{loan\PYGZus{}amount}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1000}\PYG{p}{\PYGZcb{}}
+                        \PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{decision}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{accept}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{reason}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The applicant has a high credit score (FICO 820), a stable income of \PYGZdl{}100,000, and is requesting a relatively small loan amount (\PYGZdl{}1000). These factors indicate a low risk for the bank.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Instructional Chaining}
+\label{\detokenize{prompt:instructional-chaining}}\begin{quote}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Break down a task into a sequence of smaller prompts.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+
+\end{itemize}
+\begin{quote}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“Step 1: Identify the key challenges of generative AI in safety.
+Step 2: Propose three strategies to mitigate these challenges.
+Step 3: Conclude with the most feasible strategy and explain why.”}
+\end{quote}
+\end{quote}
+
+
+\subsection{Use Constraints}
+\label{\detokenize{prompt:use-constraints}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Impose constraints to keep responses concise and on\sphinxhyphen{}topic.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“List 5 key trends in AI in bullet points, each under 15 words.”}
+
+\end{itemize}
+
+
+\subsection{Creative Prompting}
+\label{\detokenize{prompt:creative-prompting}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Encourage unique or unconventional ideas by framing the task creatively.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“Pretend you are a time traveler from the year 2124. How would you describe AI advancements to someone today?”}
+
+\end{itemize}
+
+
+\subsection{Feedback Incorporation}
+\label{\detokenize{prompt:feedback-incorporation}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+If the response isn’t perfect, guide the AI to refine or retry.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“This is too general. Could you provide more specific examples for the education industry?”}
+
+\end{itemize}
+
+
+\subsection{Scenario\sphinxhyphen{}Based Prompts}
+\label{\detokenize{prompt:scenario-based-prompts}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Frame the query within a scenario for a contextual response.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“Imagine you’re a teacher explaining ChatGPT to students. How would you introduce its uses and limitations?”}
+
+\end{itemize}
+
+
+\subsection{Multimodal Prompting}
+\label{\detokenize{prompt:multimodal-prompting}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Use prompts designed for mixed text/image inputs (or outputs if using models like DALL·E).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Example:}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{“Generate an image prompt for a futuristic cityscape, vibrant, with flying cars and greenery.”}
+
+\end{itemize}
+
 \sphinxstepscope
 
 

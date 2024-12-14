@@ -125,26 +125,46 @@ can be downloaded from <a class="reference external" href="../latex/GenAI.pdf">H
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">3. Word and Sentence Embedding</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="embedding.html#bag-of-word">3.1. Bag-of-Word</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="embedding.html#traditional-word-embeddings">3.1. Traditional word embeddings</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="embedding.html#one-hot-encoder">3.1.1. One Hot Encoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="embedding.html#countvectorizer">3.1.2. CountVectorizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedding.html#tf-idf">3.1.3. TF-IDF</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="embedding.html#tf-idf">3.2. TF-IDF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="embedding.html#word2vec">3.3. Word2Vec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="embedding.html#glove">3.4. GloVE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="embedding.html#fast-text">3.5. Fast Text</a></li>
-<li class="toctree-l2"><a class="reference internal" href="embedding.html#bert">3.6. BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="embedding.html#static-word-embeddings">3.2. Static word embeddings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedding.html#word2vec">3.2.1. Word2Vec</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="embedding.html#glove">3.3. GloVE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="embedding.html#fast-text">3.4. Fast Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="embedding.html#contextual-word-embeddings">3.5. Contextual word embeddings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedding.html#bert">3.5.1. BERT</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prompt.html#background-about-llm-and-prompt">4.1. Background about LLM and Prompt</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prompt.html#prompt-engineering-basics">4.2. Prompt Engineering Basics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="prompt.html#prompt-components">4.2.1. Prompt Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="prompt.html#prompt-engineering-principles">4.2.2. Prompt Engineering Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt.html#id1">4.1. Prompt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt.html#id2">4.2. Prompt Engineering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#what-s-prompt-engineering">4.2.1. What’s Prompt Engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#key-elements-of-a-prompt">4.2.2. Key Elements of a Prompt</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="prompt.html#advanced-prompt-engineering">4.3. Advanced Prompt Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt.html#advanced-prompt-engineering">4.3. Advanced Prompt Engineering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#role-assignment">4.3.1. Role Assignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#contextual-setup">4.3.2. Contextual Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#explicit-instructions">4.3.3. Explicit Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#chain-of-thought-cot-prompting">4.3.4. Chain of Thought (CoT) Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#few-shot-prompting">4.3.5. Few-Shot Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#iterative-prompting">4.3.6. Iterative Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#instructional-chaining">4.3.7. Instructional Chaining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#use-constraints">4.3.8. Use Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#creative-prompting">4.3.9. Creative Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#feedback-incorporation">4.3.10. Feedback Incorporation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#scenario-based-prompts">4.3.11. Scenario-Based Prompts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt.html#multimodal-prompting">4.3.12. Multimodal Prompting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a><ul>
@@ -177,7 +197,7 @@ can be downloaded from <a class="reference external" href="../latex/GenAI.pdf">H
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 12, 2024.
+      <span class="lastupdated">Last updated on Dec 14, 2024.
       </span></p>
   </div>
 
