@@ -64,45 +64,45 @@ One Hot Encoder
 
 .. code-block:: python 
 
-import numpy as np
-import pandas as pd
-from collections import Counter
-from sklearn.preprocessing import OneHotEncoder
+   import numpy as np
+   import pandas as pd
+   from collections import Counter
+   from sklearn.preprocessing import OneHotEncoder
 
-# sample corpus
-data = pd.DataFrame({'word':['python', 'pyspark', 'genai', 'pyspark', 'python', 'pyspark']})
+   # sample corpus
+   data = pd.DataFrame({'word':['python', 'pyspark', 'genai', 'pyspark', 'python', 'pyspark']})
 
-# corpus frequency
-print('Vocabulary frequency:')
-print(dict(Counter(data['word'])))
+   # corpus frequency
+   print('Vocabulary frequency:')
+   print(dict(Counter(data['word'])))
 
-# corpus order
-print('\nVocabulary order:')
-print(sorted(set(data['word'])))
+   # corpus order
+   print('\nVocabulary order:')
+   print(sorted(set(data['word'])))
 
-# One-hot encode the data
-onehot_encoder = OneHotEncoder(sparse_output=False)
-onehot_encoded = onehot_encoder.fit_transform(data[['word']])
+   # One-hot encode the data
+   onehot_encoder = OneHotEncoder(sparse_output=False)
+   onehot_encoded = onehot_encoder.fit_transform(data[['word']])
 
-# the encoded order base on the order of the copus
-print('\nEncoded representation:')
-print(onehot_encoded)
+   # the encoded order base on the order of the copus
+   print('\nEncoded representation:')
+   print(onehot_encoded)
 
 .. code-block:: python 
 
-Vocabulary frequency:
-{'python': 2, 'pyspark': 3, 'genai': 1}
+   Vocabulary frequency:
+   {'python': 2, 'pyspark': 3, 'genai': 1}
 
-Vocabulary order:
-['genai', 'pyspark', 'python']
+   Vocabulary order:
+   ['genai', 'pyspark', 'python']
 
-Encoded representation:
-[[0. 0. 1.]
-[0. 1. 0.]
-[1. 0. 0.]
-[0. 1. 0.]
-[0. 0. 1.]
-[0. 1. 0.]]   
+   Encoded representation:
+   [[0. 0. 1.]
+   [0. 1. 0.]
+   [1. 0. 0.]
+   [0. 1. 0.]
+   [0. 0. 1.]
+   [0. 1. 0.]]   
 
 CountVectorizer
 ---------------

@@ -1594,59 +1594,46 @@ Limitations:
 \subsection{One Hot Encoder}
 \label{\detokenize{embedding:one-hot-encoder}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{Counter}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{preprocessing} \PYG{k+kn}{import} \PYG{n}{OneHotEncoder}
 
+\PYG{c+c1}{\PYGZsh{} sample corpus}
+\PYG{n}{data} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{word}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{python}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pyspark}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{genai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pyspark}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{python}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pyspark}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} corpus frequency}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Vocabulary frequency:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n+nb}{dict}\PYG{p}{(}\PYG{n}{Counter}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{word}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} corpus order}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Vocabulary order:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n+nb}{sorted}\PYG{p}{(}\PYG{n+nb}{set}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{word}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} One\PYGZhy{}hot encode the data}
+\PYG{n}{onehot\PYGZus{}encoder} \PYG{o}{=} \PYG{n}{OneHotEncoder}\PYG{p}{(}\PYG{n}{sparse\PYGZus{}output}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{onehot\PYGZus{}encoded} \PYG{o}{=} \PYG{n}{onehot\PYGZus{}encoder}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{word}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} the encoded order base on the order of the copus}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Encoded representation:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{onehot\PYGZus{}encoded}\PYG{p}{)}
 \end{sphinxVerbatim}
-
-\sphinxAtStartPar
-import numpy as np
-import pandas as pd
-from collections import Counter
-from sklearn.preprocessing import OneHotEncoder
-
-\sphinxAtStartPar
-\# sample corpus
-data = pd.DataFrame(\{‘word’:{[}‘python’, ‘pyspark’, ‘genai’, ‘pyspark’, ‘python’, ‘pyspark’{]}\})
-
-\sphinxAtStartPar
-\# corpus frequency
-print(‘Vocabulary frequency:’)
-print(dict(Counter(data{[}‘word’{]})))
-
-\sphinxAtStartPar
-\# corpus order
-print(’nVocabulary order:’)
-print(sorted(set(data{[}‘word’{]})))
-
-\sphinxAtStartPar
-\# One\sphinxhyphen{}hot encode the data
-onehot\_encoder = OneHotEncoder(sparse\_output=False)
-onehot\_encoded = onehot\_encoder.fit\_transform(data{[}{[}‘word’{]}{]})
-
-\sphinxAtStartPar
-\# the encoded order base on the order of the copus
-print(’nEncoded representation:’)
-print(onehot\_encoded)
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Vocabulary} \PYG{n}{frequency}\PYG{p}{:}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{python}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pyspark}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{genai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}
 
+\PYG{n}{Vocabulary} \PYG{n}{order}\PYG{p}{:}
+\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{genai}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pyspark}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{python}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+
+\PYG{n}{Encoded} \PYG{n}{representation}\PYG{p}{:}
+\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{0.} \PYG{l+m+mf}{0.} \PYG{l+m+mf}{1.}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{0.} \PYG{l+m+mf}{1.} \PYG{l+m+mf}{0.}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{1.} \PYG{l+m+mf}{0.} \PYG{l+m+mf}{0.}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{0.} \PYG{l+m+mf}{1.} \PYG{l+m+mf}{0.}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{0.} \PYG{l+m+mf}{0.} \PYG{l+m+mf}{1.}\PYG{p}{]}
+\PYG{p}{[}\PYG{l+m+mf}{0.} \PYG{l+m+mf}{1.} \PYG{l+m+mf}{0.}\PYG{p}{]}\PYG{p}{]}
 \end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Vocabulary frequency:
-\{‘python’: 2, ‘pyspark’: 3, ‘genai’: 1\}
-
-\sphinxAtStartPar
-Vocabulary order:
-{[}‘genai’, ‘pyspark’, ‘python’{]}
-
-\sphinxAtStartPar
-Encoded representation:
-{[}{[}0. 0. 1.{]}
-{[}0. 1. 0.{]}
-{[}1. 0. 0.{]}
-{[}0. 1. 0.{]}
-{[}0. 0. 1.{]}
-{[}0. 1. 0.{]}{]}
 
 
 \subsection{CountVectorizer}

@@ -147,41 +147,46 @@ of words, ignoring grammar, order, and context but keeping their frequency.</p>
 </ol>
 <section id="one-hot-encoder">
 <h3><span class="section-number">3.1.1. </span>One Hot Encoder<a class="headerlink" href="#one-hot-encoder" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+
+<span class="c1"># sample corpus</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;word&#39;</span><span class="p">:[</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;pyspark&#39;</span><span class="p">,</span> <span class="s1">&#39;genai&#39;</span><span class="p">,</span> <span class="s1">&#39;pyspark&#39;</span><span class="p">,</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;pyspark&#39;</span><span class="p">]})</span>
+
+<span class="c1"># corpus frequency</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vocabulary frequency:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">])))</span>
+
+<span class="c1"># corpus order</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Vocabulary order:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">])))</span>
+
+<span class="c1"># One-hot encode the data</span>
+<span class="n">onehot_encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">onehot_encoded</span> <span class="o">=</span> <span class="n">onehot_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s1">&#39;word&#39;</span><span class="p">]])</span>
+
+<span class="c1"># the encoded order base on the order of the copus</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Encoded representation:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">onehot_encoded</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>import numpy as np
-import pandas as pd
-from collections import Counter
-from sklearn.preprocessing import OneHotEncoder</p>
-<p># sample corpus
-data = pd.DataFrame({‘word’:[‘python’, ‘pyspark’, ‘genai’, ‘pyspark’, ‘python’, ‘pyspark’]})</p>
-<p># corpus frequency
-print(‘Vocabulary frequency:’)
-print(dict(Counter(data[‘word’])))</p>
-<p># corpus order
-print(’nVocabulary order:’)
-print(sorted(set(data[‘word’])))</p>
-<p># One-hot encode the data
-onehot_encoder = OneHotEncoder(sparse_output=False)
-onehot_encoded = onehot_encoder.fit_transform(data[[‘word’]])</p>
-<p># the encoded order base on the order of the copus
-print(’nEncoded representation:’)
-print(onehot_encoded)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Vocabulary</span> <span class="n">frequency</span><span class="p">:</span>
+<span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;pyspark&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;genai&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="n">Vocabulary</span> <span class="n">order</span><span class="p">:</span>
+<span class="p">[</span><span class="s1">&#39;genai&#39;</span><span class="p">,</span> <span class="s1">&#39;pyspark&#39;</span><span class="p">,</span> <span class="s1">&#39;python&#39;</span><span class="p">]</span>
+
+<span class="n">Encoded</span> <span class="n">representation</span><span class="p">:</span>
+<span class="p">[[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]]</span>
 </pre></div>
 </div>
-<p>Vocabulary frequency:
-{‘python’: 2, ‘pyspark’: 3, ‘genai’: 1}</p>
-<p>Vocabulary order:
-[‘genai’, ‘pyspark’, ‘python’]</p>
-<p>Encoded representation:
-[[0. 0. 1.]
-[0. 1. 0.]
-[1. 0. 0.]
-[0. 1. 0.]
-[0. 0. 1.]
-[0. 1. 0.]]</p>
 </section>
 <section id="countvectorizer">
 <h3><span class="section-number">3.1.2. </span>CountVectorizer<a class="headerlink" href="#countvectorizer" title="Link to this heading"></a></h3>
