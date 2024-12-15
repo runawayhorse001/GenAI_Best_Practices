@@ -33,33 +33,33 @@
 \contentsline {subsection}{\numberline {3.3.1}BERT}{33}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}gte\sphinxhyphen {}large\sphinxhyphen {}en\sphinxhyphen {}v1.5}{33}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}bge\sphinxhyphen {}base\sphinxhyphen {}en\sphinxhyphen {}v1.5}{34}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Prompt Engineering}{35}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Prompt}{35}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Prompt Engineering}{35}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}What’s Prompt Engineering}{35}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Key Elements of a Prompt}{35}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{35}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Role Assignment}{35}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Contextual Setup}{37}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Explicit Instructions}{38}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Chain of Thought (CoT) Prompting}{39}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Few\sphinxhyphen {}Shot Prompting}{40}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Iterative Prompting}{41}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}Instructional Chaining}{42}{subsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.3.8}Use Constraints}{43}{subsection.4.3.8}%
-\contentsline {subsection}{\numberline {4.3.9}Creative Prompting}{43}{subsection.4.3.9}%
-\contentsline {subsection}{\numberline {4.3.10}Feedback Incorporation}{43}{subsection.4.3.10}%
-\contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{43}{subsection.4.3.11}%
-\contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{43}{subsection.4.3.12}%
-\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{45}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{45}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Indexing}{45}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Retrieval}{45}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Generation}{45}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Fine Tuning}{47}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{49}{chapter.7}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{51}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers}{51}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{51}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{53}{chapter.9}%
-\contentsline {chapter}{Bibliography}{55}{chapter*.4}%
+\contentsline {chapter}{\numberline {4}Prompt Engineering}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Prompt}{37}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Prompt Engineering}{37}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}What’s Prompt Engineering}{37}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Key Elements of a Prompt}{37}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{37}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Role Assignment}{37}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Contextual Setup}{39}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Explicit Instructions}{40}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Chain of Thought (CoT) Prompting}{41}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Few\sphinxhyphen {}Shot Prompting}{42}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Iterative Prompting}{43}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}Instructional Chaining}{44}{subsection.4.3.7}%
+\contentsline {subsection}{\numberline {4.3.8}Use Constraints}{46}{subsection.4.3.8}%
+\contentsline {subsection}{\numberline {4.3.9}Creative Prompting}{46}{subsection.4.3.9}%
+\contentsline {subsection}{\numberline {4.3.10}Feedback Incorporation}{46}{subsection.4.3.10}%
+\contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{46}{subsection.4.3.11}%
+\contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{46}{subsection.4.3.12}%
+\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Overview}{47}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Indexing}{47}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Retrieval}{47}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Generation}{47}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{49}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{51}{chapter.7}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{53}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers}{53}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{53}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{55}{chapter.9}%
+\contentsline {chapter}{Bibliography}{57}{chapter*.4}%

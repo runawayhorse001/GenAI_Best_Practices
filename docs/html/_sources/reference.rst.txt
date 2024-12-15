@@ -4,6 +4,12 @@
 Main Reference 
 ==============
 
-.. [AutoFeatures] Wenqiang Feng and Ming Chen.
-                 `Python Data Audit Library API <https://runawayhorse001.github.io/AutoFeatures/>`_, 2019.
+
+
+.. [GenAI] Wenqiang Feng, Di Zhen.
+                 `GenAI: Best Practices  <https://runawayhorse001.github.io/GenAI_Best_Practices>`_, 2024.
+
+.. [PySpark] Wenqiang Feng.
+                 `Learning Apache Spark with Python  <https://runawayhorse001.github.io/LearningApacheSpark>`_, 2017.
+
 

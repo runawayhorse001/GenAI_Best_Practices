@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 14, 2024}
+\date{December 15, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -114,13 +114,16 @@ Good tools are prerequisite to the successful execution of a job. \textendash{} 
 \subsection{About this book}
 \label{\detokenize{preface:about-this-book}}
 \sphinxAtStartPar
-This is the book for our Generative AI: Best practics \sphinxcite{reference:autofeatures} API.
-The PDF version can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}. \sphinxstylestrong{You may download and distribute it. Please beaware,
+This is the book for our Generative AI: Best practics \sphinxcite{reference:genai}.
+The PDF version can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}.
+\sphinxstylestrong{You may download and distribute it. Please beaware,
 however, that the note contains typos as well as inaccurate or incorrect description.}
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{API}} assumes that the reader has a preliminary knowledge of \sphinxcode{\sphinxupquote{python}} programing and \sphinxcode{\sphinxupquote{Linux}}. And this
-document is generated automatically by using \sphinxhref{http://sphinx.pocoo.org}{sphinx}.
+In this book, I aim to demonstrate best practices for Generative AI
+through detailed demo code and practical examples. If you notice that
+your work has not been properly cited, please do not hesitate to
+reach out and let me know.
 
 
 \subsection{About the authors}
@@ -131,7 +134,7 @@ document is generated automatically by using \sphinxhref{http://sphinx.pocoo.org
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Sr. Data Scientist and PhD in Mathematics
+Sr. Mgr Data Enginner and PhD in Mathematics
 
 \item {} 
 \sphinxAtStartPar
@@ -152,22 +155,29 @@ Email: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com}
 \sphinxstylestrong{Biography}
 
 \sphinxAtStartPar
-Wenqiang Feng is Data Scientist within DST’s Applied Analytics Group. Dr. Feng’s responsibilities include providing
-DST clients with access to cutting\sphinxhyphen{}edge skills and technologies, including Big Data analytic solutions, advanced
-analytic and data enhancement techniques and modeling.
+Wenqiang Feng is the Senior Manager of Data Engineering and former Director of
+AI Engineering/Data Science at American Express (AMEX). Before his tenure at
+AMEX, Dr. Feng served as a Senior Data Scientist in the Machine Learning Lab
+at H\&R Block and as a Data Scientist at Applied Analytics Group, DST (now SS\&C).
+Throughout his career, Dr. Feng has focused on equipping clients with cutting\sphinxhyphen{}edge
+skills and technologies, including Big Data analytics, advanced modeling
+techniques, and data enhancement strategies.
 
 \sphinxAtStartPar
-Dr. Feng has deep analytic expertise in data mining, analytic systems, machine learning algorithms, business
-intelligence, and applying Big Data tools to strategically solve industry problems in a cross\sphinxhyphen{}functional business.
-Before joining DST, Dr. Feng was an IMA Data Science Fellow at The Institute for Mathematics and its
-Applications (IMA) at the University of Minnesota. While there, he helped startup companies make marketing
-decisions based on deep predictive analytics.
+Dr. Feng brings extensive expertise in data mining, analytic systems, machine
+learning algorithms, business intelligence, and the application of Big Data
+tools to solve complex, cross\sphinxhyphen{}functional industry challenges. Prior to his
+role at DST, Dr. Feng was an IMA Data Science Fellow at the Institute for
+Mathematics and its Applications (IMA) at the University of Minnesota.
+In this capacity, he collaborated with startups to develop predictive
+analytics solutions that informed strategic marketing decisions.
 
 \sphinxAtStartPar
-Dr. Feng graduated from University of Tennessee, Knoxville, with Ph.D. in Computational Mathematics and Master’s
-degree in Statistics. He also holds Master’s degree in Computational Mathematics from Missouri University of
-Science and Technology (MST) and Master’s degree in Applied Mathematics from the University of Science and
-Technology of China (USTC).
+Dr. Feng holds a Ph.D. in Computational Mathematics and a Master’s degree
+in Statistics from the University of Tennessee, Knoxville. He also earned a
+Master’s degree in Computational Mathematics from Missouri University
+of Science and Technology (MST) and a Master’s degree in Applied
+Mathematics from the University of Science and Technology of China (USTC).
 
 \item {} 
 \sphinxAtStartPar
@@ -178,9 +188,12 @@ The work of Wenqiang Feng was supported by the IMA, while working at IMA. Howeve
 and conclusions or recommendations expressed in this material are those of the author and do not necessarily
 reflect the views of the IMA, UTK and DST.
 
+\begin{sphinxadmonition}{note}{Caution}
+
 \sphinxAtStartPar
 ChatGPT has been extensively used in the creation of this book. If you notice that your work has not been
 cited or has been cited incorrectly, please notify us.
+\end{sphinxadmonition}
 
 \end{itemize}
 
@@ -189,7 +202,8 @@ cited or has been cited incorrectly, please notify us.
 \label{\detokenize{preface:feedback-and-suggestions}}
 \sphinxAtStartPar
 Your comments and suggestions are highly appreciated. I am more than happy to receive
-corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com} and Di Zhen: \sphinxhref{mailto:dizhen318@gmail.com}{dizhen318@gmail.com}
+corrections, suggestions or feedback through email (Wenqiang Feng: \sphinxhref{mailto:von198@gmail.com}{von198@gmail.com} and
+Di Zhen: \sphinxhref{mailto:dizhen318@gmail.com}{dizhen318@gmail.com}
 ) for improvements.
 
 \sphinxstepscope
@@ -2231,34 +2245,99 @@ of static embeddings by incorporating contextual nuances.
 
 \PYG{n}{text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Gen AI is awesome}\PYG{l+s+s2}{\PYGZdq{}}
 \PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{embeddings} \PYG{o}{=} \PYG{n}{model}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}\PYG{o}{.}\PYG{n}{last\PYGZus{}hidden\PYGZus{}state}
 
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{x} \PYG{p}{:} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{o}{+} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[EOS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{torch}\PYG{o}{.}\PYG{n}{Size}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{768}\PYG{p}{]}\PYG{p}{)}
-\PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1129}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1477}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0056}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1335}\PYG{p}{,}  \PYG{l+m+mf}{0.2605}\PYG{p}{,}  \PYG{l+m+mf}{0.2113}\PYG{p}{]}\PYG{p}{,}
-         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6841}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.1196}\PYG{p}{,}  \PYG{l+m+mf}{0.3349}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5958}\PYG{p}{,}  \PYG{l+m+mf}{0.1657}\PYG{p}{,}  \PYG{l+m+mf}{0.6988}\PYG{p}{]}\PYG{p}{,}
-         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5385}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2649}\PYG{p}{,}  \PYG{l+m+mf}{0.2639}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1544}\PYG{p}{,}  \PYG{l+m+mf}{0.2532}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1363}\PYG{p}{]}\PYG{p}{,}
-         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1794}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6086}\PYG{p}{,}  \PYG{l+m+mf}{0.1292}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1620}\PYG{p}{,}  \PYG{l+m+mf}{0.1721}\PYG{p}{,}  \PYG{l+m+mf}{0.4356}\PYG{p}{]}\PYG{p}{,}
-         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0187}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.7320}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3420}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.4028}\PYG{p}{,}  \PYG{l+m+mf}{0.1425}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2014}\PYG{p}{]}\PYG{p}{,}
-         \PYG{p}{[} \PYG{l+m+mf}{0.5493}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1029}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1571}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.3503}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.7601}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1398}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-      \PYG{n}{grad\PYGZus{}fn}\PYG{o}{=}\PYG{o}{\PYGZlt{}}\PYG{n}{NativeLayerNormBackward0}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\PYG{n}{t}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,}  \PYG{l+m+mi}{8991}\PYG{p}{,}  \PYG{l+m+mi}{9932}\PYG{p}{,}  \PYG{l+m+mi}{2003}\PYG{p}{,} \PYG{l+m+mi}{12476}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{token\PYGZus{}type\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{101}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{8991}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{9932}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{2003}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{12476}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[EOS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{1031}\PYG{p}{,} \PYG{l+m+mi}{1041}\PYG{p}{,} \PYG{l+m+mi}{2891}\PYG{p}{,} \PYG{l+m+mi}{1033}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
 \subsection{gte\sphinxhyphen{}large\sphinxhyphen{}en\sphinxhyphen{}v1.5}
 \label{\detokenize{embedding:gte-large-en-v1-5}}
 \sphinxAtStartPar
-\sphinxurl{https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5}
+The \sphinxcode{\sphinxupquote{gte\sphinxhyphen{}large\sphinxhyphen{}en\sphinxhyphen{}v1.5}} is a state\sphinxhyphen{}of\sphinxhyphen{}the\sphinxhyphen{}art text embedding model developed
+by Alibaba’s Institute for Intelligent Computing. It’s designed for natural
+language processing tasks and excels in generating dense vector representations
+(embeddings) of text for applications such as text retrieval, classification,
+clustering, and reranking.
+
+\sphinxAtStartPar
+It can handle up to 8192 tokens, making it suitable for long\sphinxhyphen{}context tasks. More
+details can be found at: \sphinxurl{https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5} .
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{torch}\PYG{n+nn}{.}\PYG{n+nn}{nn}\PYG{n+nn}{.}\PYG{n+nn}{functional} \PYG{k}{as} \PYG{n+nn}{F}
+\PYG{k+kn}{from} \PYG{n+nn}{transformers} \PYG{k+kn}{import} \PYG{n}{AutoModel}\PYG{p}{,} \PYG{n}{AutoTokenizer}
+
+\PYG{n}{input\PYGZus{}texts} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+
+\PYG{n}{model\PYGZus{}path} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Alibaba\PYGZhy{}NLP/gte\PYGZhy{}large\PYGZhy{}en\PYGZhy{}v1.5}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{AutoTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{n}{model\PYGZus{}path}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Tokenize the input texts}
+\PYG{n}{batch\PYGZus{}dict} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{input\PYGZus{}texts}\PYG{p}{,} \PYG{n}{max\PYGZus{}length}\PYG{o}{=}\PYG{l+m+mi}{8192}\PYG{p}{,} \PYG{n}{padding}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYGZbs{}
+                     \PYG{n}{truncation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{batch\PYGZus{}dict}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,}  \PYG{l+m+mi}{8991}\PYG{p}{,}  \PYG{l+m+mi}{9932}\PYG{p}{,}  \PYG{l+m+mi}{2003}\PYG{p}{,} \PYG{l+m+mi}{12476}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,}  \PYG{l+m+mi}{8991}\PYG{p}{,}  \PYG{l+m+mi}{9932}\PYG{p}{,}  \PYG{l+m+mi}{2003}\PYG{p}{,}  \PYG{l+m+mi}{4569}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,}  \PYG{l+m+mi}{8991}\PYG{p}{,}  \PYG{l+m+mi}{9932}\PYG{p}{,}  \PYG{l+m+mi}{2003}\PYG{p}{,}  \PYG{l+m+mi}{2980}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{token\PYGZus{}type\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
 
 
 \subsection{bge\sphinxhyphen{}base\sphinxhyphen{}en\sphinxhyphen{}v1.5}
 \label{\detokenize{embedding:bge-base-en-v1-5}}
 \sphinxAtStartPar
-\sphinxurl{https://huggingface.co/BAAI/bge-base-en-v1.5}
+The \sphinxcode{\sphinxupquote{bge\sphinxhyphen{}base\sphinxhyphen{}en\sphinxhyphen{}v1.5}} model is a general\sphinxhyphen{}purpose text embedding model developed
+by the Beijing Academy of Artificial Intelligence (BAAI). It transforms input text
+into 768\sphinxhyphen{}dimensional vector embeddings, making it useful for tasks like semantic
+search, text similarity, and clustering. This model is fine\sphinxhyphen{}tuned using contrastive
+learning, which helps improve its ability to distinguish between similar and
+dissimilar sentences effectively. More details can be found
+at: \sphinxurl{https://huggingface.co/BAAI/bge-base-en-v1.5} .
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{transformers} \PYG{k+kn}{import} \PYG{n}{AutoTokenizer}\PYG{p}{,} \PYG{n}{AutoModel}
+\PYG{k+kn}{import} \PYG{n+nn}{torch}
+
+\PYG{c+c1}{\PYGZsh{} Sentences we want sentence embeddings for}
+\PYG{n}{sentences} \PYG{o}{=} \PYG{p}{[}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen AI is hot}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{p}{]}
+\PYG{c+c1}{\PYGZsh{} Load model from HuggingFace Hub}
+\PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{AutoTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{BAAI/bge\PYGZhy{}large\PYGZhy{}zh\PYGZhy{}v1.5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Tokenize sentences}
+\PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{sentences}\PYG{p}{,} \PYG{n}{padding}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{truncation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,} \PYG{l+m+mi}{10234}\PYG{p}{,}  \PYG{l+m+mi}{8171}\PYG{p}{,}  \PYG{l+m+mi}{8578}\PYG{p}{,}  \PYG{l+m+mi}{8310}\PYG{p}{,}   \PYG{l+m+mi}{143}\PYG{p}{,} \PYG{l+m+mi}{11722}\PYG{p}{,}  \PYG{l+m+mi}{9974}\PYG{p}{,}  \PYG{l+m+mi}{8505}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{,}
+     \PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,} \PYG{l+m+mi}{10234}\PYG{p}{,}  \PYG{l+m+mi}{8171}\PYG{p}{,}  \PYG{l+m+mi}{8578}\PYG{p}{,}  \PYG{l+m+mi}{8310}\PYG{p}{,}  \PYG{l+m+mi}{9575}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{,}     \PYG{l+m+mi}{0}\PYG{p}{,}     \PYG{l+m+mi}{0}\PYG{p}{,}     \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
+     \PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,} \PYG{l+m+mi}{10234}\PYG{p}{,}  \PYG{l+m+mi}{8171}\PYG{p}{,}  \PYG{l+m+mi}{8578}\PYG{p}{,}  \PYG{l+m+mi}{8310}\PYG{p}{,}  \PYG{l+m+mi}{9286}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{,}     \PYG{l+m+mi}{0}\PYG{p}{,}     \PYG{l+m+mi}{0}\PYG{p}{,}     \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{token\PYGZus{}type\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
+     \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
+     \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+     \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
+     \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
 
 \sphinxstepscope
 
@@ -2662,8 +2741,7 @@ Build on the AI’s response by asking follow\sphinxhyphen{}up questions or refi
 
 
 \subsection{Instructional Chaining}
-\label{\detokenize{prompt:instructional-chaining}}\begin{quote}
-\begin{itemize}
+\label{\detokenize{prompt:instructional-chaining}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 Break down a task into a sequence of smaller prompts.
@@ -2671,16 +2749,79 @@ Break down a task into a sequence of smaller prompts.
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Example:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+step 1: check the fico score
+
+\item {} 
+\sphinxAtStartPar
+step 2: check the income,
+
+\item {} 
+\sphinxAtStartPar
+step 3: check the loan amount,
+
+\item {} 
+\sphinxAtStartPar
+step 4: make a decision,
+
+\item {} 
+\sphinxAtStartPar
+step 5: give the reason.
 
 \end{itemize}
-\begin{quote}
 
-\sphinxAtStartPar
-\sphinxstyleemphasis{“Step 1: Identify the key challenges of generative AI in safety.
-Step 2: Propose three strategies to mitigate these challenges.
-Step 3: Conclude with the most feasible strategy and explain why.”}
-\end{quote}
-\end{quote}
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Instructional Chaining}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{ChatPromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{CommaSeparatedListOutputParser}
+
+
+\PYG{c+c1}{\PYGZsh{} Now Help me to make a decision to accpet or reject the loan application and}
+\PYG{c+c1}{\PYGZsh{} give the reason.}
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}\PYGZsq{}input\PYGZsq{}: \PYGZob{}\PYGZsq{}fico\PYGZsq{}:320, \PYGZsq{}income\PYGZsq{}:10000, \PYGZsq{}loan\PYGZus{}amount\PYGZsq{}: 100000\PYGZcb{}}
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{you are a }\PYG{l+s+si}{\PYGZob{}role\PYGZcb{}}
+\PYG{l+s+s2}{task: }\PYG{l+s+si}{\PYGZob{}task\PYGZcb{}}
+\PYG{l+s+s2}{instruction: }\PYG{l+s+si}{\PYGZob{}instruction\PYGZcb{}}
+\PYG{l+s+s2}{input: }\PYG{l+s+si}{\PYGZob{}input\PYGZcb{}}
+\PYG{l+s+s2}{decision:}
+\PYG{l+s+s2}{reason:}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{n}{MODEL}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{output\PYGZus{}parser} \PYG{o}{=} \PYG{n}{CommaSeparatedListOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{model}
+
+\PYG{n}{response} \PYG{o}{=} \PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{role}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{banker}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{task}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Help me to make a decision to accpet or }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                reject the loan application and }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                give the reason.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{instruction}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{step 1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{check the fico score}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{step 2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{check the income}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{step 3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{check the loan amount}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{step 4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{make a decision}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
+                                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{step 5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{give the reason}\PYG{l+s+s2}{\PYGZdq{}}
+                                        \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+                        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fico}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{320}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{income}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{10000}\PYG{p}{,} \PYGZbs{}
+                                    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{loan\PYGZus{}amount}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{100000}\PYG{p}{\PYGZcb{}}
+                        \PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{decision}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{reject}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{reason}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Based on the provided information, the applicant}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s FICO score is 320 which falls below our minimum acceptable credit score. Additionally, the proposed loan amount of \PYGZdl{}100,000 exceeds the income level of \PYGZdl{}10,000 per year, making it difficult for the borrower to repay the loan.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
 
 
 \subsection{Use Constraints}
@@ -2805,11 +2946,15 @@ Use prompts designed for mixed text/image inputs (or outputs if using models lik
 
 \chapter{Main Reference}
 \label{\detokenize{reference:main-reference}}\label{\detokenize{reference:reference}}\label{\detokenize{reference::doc}}
-\begin{sphinxthebibliography}{AutoFeat}
-\bibitem[AutoFeatures]{reference:autofeatures}
+\begin{sphinxthebibliography}{PySpark}
+\bibitem[GenAI]{reference:genai}
 \sphinxAtStartPar
-Wenqiang Feng and Ming Chen.
-\sphinxhref{https://runawayhorse001.github.io/AutoFeatures/}{Python Data Audit Library API}, 2019.
+Wenqiang Feng, Di Zhen.
+\sphinxhref{https://runawayhorse001.github.io/GenAI\_Best\_Practices}{GenAI: Best Practices}, 2024.
+\bibitem[PySpark]{reference:pyspark}
+\sphinxAtStartPar
+Wenqiang Feng.
+\sphinxhref{https://runawayhorse001.github.io/LearningApacheSpark}{Learning Apache Spark with Python}, 2017.
 \end{sphinxthebibliography}
 
 

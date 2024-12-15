@@ -435,14 +435,64 @@ give the reason.
 <blockquote>
 <div><ul class="simple">
 <li><p>Break down a task into a sequence of smaller prompts.</p></li>
-<li><p><strong>Example:</strong></p></li>
+<li><p><strong>Example:</strong></p>
+<ul>
+<li><p>step 1: check the fico score</p></li>
+<li><p>step 2: check the income,</p></li>
+<li><p>step 3: check the loan amount,</p></li>
+<li><p>step 4: make a decision,</p></li>
+<li><p>step 5: give the reason.</p></li>
 </ul>
-<blockquote>
-<div><p><em>“Step 1: Identify the key challenges of generative AI in safety.
-Step 2: Propose three strategies to mitigate these challenges.
-Step 3: Conclude with the most feasible strategy and explain why.”</em></p>
+</li>
+</ul>
 </div></blockquote>
-</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instructional Chaining</span>
+<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">CommaSeparatedListOutputParser</span>
+
+
+<span class="c1"># Now Help me to make a decision to accpet or reject the loan application and</span>
+<span class="c1"># give the reason.</span>
+<span class="c1"># &#39;&#39;input&#39;: {&#39;fico&#39;:320, &#39;income&#39;:10000, &#39;loan_amount&#39;: 100000}</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;you are a </span><span class="si">{role}</span>
+<span class="s2">task: </span><span class="si">{task}</span>
+<span class="s2">instruction: </span><span class="si">{instruction}</span>
+<span class="s2">input: </span><span class="si">{input}</span>
+<span class="s2">decision:</span>
+<span class="s2">reason:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">OllamaLLM</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">MODEL</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
+<span class="n">output_parser</span> <span class="o">=</span> <span class="n">CommaSeparatedListOutputParser</span><span class="p">()</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;banker&#39;</span><span class="p">,</span> \
+                        <span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s2">&quot;Help me to make a decision to accpet or </span><span class="se">\</span>
+<span class="s2">                                reject the loan application and </span><span class="se">\</span>
+<span class="s2">                                give the reason.&quot;</span><span class="p">,</span>\
+                        <span class="s1">&#39;instruction&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;step 1&#39;</span><span class="p">:</span> <span class="s2">&quot;check the fico score&quot;</span><span class="p">,</span>\
+                                        <span class="s1">&#39;step 2&#39;</span><span class="p">:</span> <span class="s2">&quot;check the income&quot;</span><span class="p">,</span>\
+                                        <span class="s1">&#39;step 3&#39;</span><span class="p">:</span> <span class="s2">&quot;check the loan amount&quot;</span><span class="p">,</span>\
+                                        <span class="s1">&#39;step 4&#39;</span><span class="p">:</span> <span class="s2">&quot;make a decision&quot;</span><span class="p">,</span>\
+                                        <span class="s1">&#39;step 5&#39;</span><span class="p">:</span> <span class="s2">&quot;give the reason&quot;</span>
+                                        <span class="p">},</span>
+                        <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;fico&#39;</span><span class="p">:</span><span class="mi">320</span><span class="p">,</span> <span class="s1">&#39;income&#39;</span><span class="p">:</span><span class="mi">10000</span><span class="p">,</span> \
+                                    <span class="s1">&#39;loan_amount&#39;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">}</span>
+                        <span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;decision&quot;</span><span class="p">:</span> <span class="s2">&quot;reject&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Based on the provided information, the applicant&#39;s FICO score is 320 which falls below our minimum acceptable credit score. Additionally, the proposed loan amount of $100,000 exceeds the income level of $10,000 per year, making it difficult for the borrower to repay the loan.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="use-constraints">
 <h3><span class="section-number">4.3.8. </span>Use Constraints<a class="headerlink" href="#use-constraints" title="Link to this heading"></a></h3>

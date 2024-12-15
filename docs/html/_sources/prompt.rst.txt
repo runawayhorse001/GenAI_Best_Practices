@@ -342,9 +342,60 @@ Instructional Chaining
    - Break down a task into a sequence of smaller prompts.
    - **Example:**  
 
-    *"Step 1: Identify the key challenges of generative AI in safety.  
-    Step 2: Propose three strategies to mitigate these challenges.  
-    Step 3: Conclude with the most feasible strategy and explain why."*
+     - step 1: check the fico score
+     - step 2: check the income,
+     - step 3: check the loan amount,
+     - step 4: make a decision,
+     - step 5: give the reason.
+
+.. code-block:: python  
+
+    # Instructional Chaining
+    from langchain_ollama.llms import OllamaLLM
+    from langchain_core.prompts import ChatPromptTemplate
+    from langchain.output_parsers import CommaSeparatedListOutputParser
+
+
+    # Now Help me to make a decision to accpet or reject the loan application and
+    # give the reason.
+    # ''input': {'fico':320, 'income':10000, 'loan_amount': 100000}
+
+    template = """you are a {role}
+    task: {task}
+    instruction: {instruction}
+    input: {input}
+    decision:
+    reason:
+    """
+
+    prompt = ChatPromptTemplate.from_template(template)
+    model = OllamaLLM(temperature=0.0, model=MODEL, format='json')
+    output_parser = CommaSeparatedListOutputParser()
+
+    chain = prompt | model
+
+    response = chain.invoke({'role': 'banker', \
+                            'task': "Help me to make a decision to accpet or \
+                                    reject the loan application and \
+                                    give the reason.",\
+                            'instruction': {'step 1': "check the fico score",\
+                                            'step 2': "check the income",\
+                                            'step 3': "check the loan amount",\
+                                            'step 4': "make a decision",\
+                                            'step 5': "give the reason"
+                                            },
+                            'input': {'fico':320, 'income':10000, \
+                                        'loan_amount': 100000}
+                            })
+
+    print(response)
+
+.. code-block:: python      
+
+   {
+      "decision": "reject",
+      "reason": "Based on the provided information, the applicant's FICO score is 320 which falls below our minimum acceptable credit score. Additionally, the proposed loan amount of $100,000 exceeds the income level of $10,000 per year, making it difficult for the borrower to repay the loan."
+   }
 
 Use Constraints
 ---------------

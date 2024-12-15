@@ -614,33 +614,95 @@ BERT
 
    text = "Gen AI is awesome"
    encoded_input = tokenizer(text, return_tensors='pt')
-   embeddings = model(**encoded_input).last_hidden_state
-
-   print(embeddings.shape)
-   print(embeddings)
+   
+   print(encoded_input)
+   print({x : tokenizer.encode(x, add_special_tokens=False) for x in ['[CLS]']+ text.split()+ ['[SEP]', '[EOS]']})
 
 
 .. code-block:: python
 
-   torch.Size([1, 6, 768])
-   tensor([[[-0.1129, -0.1477, -0.0056,  ..., -0.1335,  0.2605,  0.2113],
-            [-0.6841, -1.1196,  0.3349,  ..., -0.5958,  0.1657,  0.6988],
-            [-0.5385, -0.2649,  0.2639,  ..., -0.1544,  0.2532, -0.1363],
-            [-0.1794, -0.6086,  0.1292,  ..., -0.1620,  0.1721,  0.4356],
-            [-0.0187, -0.7320, -0.3420,  ...,  0.4028,  0.1425, -0.2014],
-            [ 0.5493, -0.1029, -0.1571,  ...,  0.3503, -0.7601, -0.1398]]],
-         grad_fn=<NativeLayerNormBackward0>)        
+   t{'input_ids': tensor([[  101,  8991,  9932,  2003, 12476,   102]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
+   {'[CLS]': [101], 'Gen': [8991], 'AI': [9932], 'is': [2003], 'awesome': [12476], '[SEP]': [102], '[EOS]': [1031, 1041, 2891, 1033]}    
 
 
 gte-large-en-v1.5
 -----------------
 
-https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5
+The ``gte-large-en-v1.5`` is a state-of-the-art text embedding model developed
+by Alibaba's Institute for Intelligent Computing. It's designed for natural 
+language processing tasks and excels in generating dense vector representations 
+(embeddings) of text for applications such as text retrieval, classification, 
+clustering, and reranking.
+
+It can handle up to 8192 tokens, making it suitable for long-context tasks. More 
+details can be found at: https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5 .
+
+.. code-block:: python
+
+   import torch.nn.functional as F
+   from transformers import AutoModel, AutoTokenizer
+
+   input_texts = [
+   'Gen AI is awesome',
+   'Gen AI is fun',
+   'Gen AI is hot'
+   ]
+
+   model_path = 'Alibaba-NLP/gte-large-en-v1.5'
+   tokenizer = AutoTokenizer.from_pretrained(model_path)
+
+   # Tokenize the input texts
+   batch_dict = tokenizer(input_texts, max_length=8192, padding=True, \
+                        truncation=True, return_tensors='pt')
+
+   print(batch_dict)
 
 
+.. code-block:: python
+
+   {'input_ids': tensor([[  101,  8991,  9932,  2003, 12476,   102],
+         [  101,  8991,  9932,  2003,  4569,   102],
+         [  101,  8991,  9932,  2003,  2980,   102]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1]])}
 
 bge-base-en-v1.5
 ----------------
 
-https://huggingface.co/BAAI/bge-base-en-v1.5
+The ``bge-base-en-v1.5`` model is a general-purpose text embedding model developed
+by the Beijing Academy of Artificial Intelligence (BAAI). It transforms input text
+into 768-dimensional vector embeddings, making it useful for tasks like semantic 
+search, text similarity, and clustering. This model is fine-tuned using contrastive
+learning, which helps improve its ability to distinguish between similar and 
+dissimilar sentences effectively. More details can be found 
+at: https://huggingface.co/BAAI/bge-base-en-v1.5 .
 
+.. code-block:: python
+
+   from transformers import AutoTokenizer, AutoModel
+   import torch
+
+   # Sentences we want sentence embeddings for
+   sentences = [
+   'Gen AI is awesome',
+   'Gen AI is fun',
+   'Gen AI is hot'
+   ]
+   # Load model from HuggingFace Hub
+   tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-large-zh-v1.5')
+
+   # Tokenize sentences
+   encoded_input = tokenizer(sentences, padding=True, truncation=True, return_tensors='pt')
+   print(encoded_input)
+
+.. code-block:: python  
+
+   {'input_ids': tensor([[  101, 10234,  8171,  8578,  8310,   143, 11722,  9974,  8505,   102],
+        [  101, 10234,  8171,  8578,  8310,  9575,   102,     0,     0,     0],
+        [  101, 10234,  8171,  8578,  8310,  9286,   102,     0,     0,     0]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0]])} 
