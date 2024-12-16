@@ -151,7 +151,8 @@ TF-IDF
 in text analysis to evaluate the importance of a word in a document relative to a 
 collection (or corpus) of documents. It builds upon the **Bag of Words (BoW)** model
 by not only considering the frequency of a word in a document but also taking 
-into account how common or rare the word is across the corpus.
+into account how common or rare the word is across the corpus. The pyspark implementation
+can be found at [PySpark]_.
 
 - Components of TF-ID
 
@@ -194,7 +195,7 @@ into account how common or rare the word is across the corpus.
          
          .. math::
 
-         IDF(t) = \log [ |D| / (DF(t,D) + 1) ]).
+            IDF(t) = \log [ |D| / (DF(t,D) + 1) ]).
 
 
    - **TF-IDF Score**:
@@ -614,16 +615,28 @@ BERT
 
    text = "Gen AI is awesome"
    encoded_input = tokenizer(text, return_tensors='pt')
+   embeddings = model(**encoded_input).last_hidden_state
    
    print(encoded_input)
    print({x : tokenizer.encode(x, add_special_tokens=False) for x in ['[CLS]']+ text.split()+ ['[SEP]', '[EOS]']})
 
+   print(embeddings.shape)
+   print(embeddings)
 
 .. code-block:: python
 
    t{'input_ids': tensor([[  101,  8991,  9932,  2003, 12476,   102]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1]])}
    {'[CLS]': [101], 'Gen': [8991], 'AI': [9932], 'is': [2003], 'awesome': [12476], '[SEP]': [102], '[EOS]': [1031, 1041, 2891, 1033]}    
 
+
+   torch.Size([1, 6, 768])
+   tensor([[[-0.1129, -0.1477, -0.0056,  ..., -0.1335,  0.2605,  0.2113],
+            [-0.6841, -1.1196,  0.3349,  ..., -0.5958,  0.1657,  0.6988],
+            [-0.5385, -0.2649,  0.2639,  ..., -0.1544,  0.2532, -0.1363],
+            [-0.1794, -0.6086,  0.1292,  ..., -0.1620,  0.1721,  0.4356],
+            [-0.0187, -0.7320, -0.3420,  ...,  0.4028,  0.1425, -0.2014],
+            [ 0.5493, -0.1029, -0.1571,  ...,  0.3503, -0.7601, -0.1398]]],
+       grad_fn=<NativeLayerNormBackward0>)
 
 gte-large-en-v1.5
 -----------------
@@ -639,6 +652,8 @@ details can be found at: https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5 .
 
 .. code-block:: python
 
+   # Requires transformers>=4.36.0
+
    import torch.nn.functional as F
    from transformers import AutoModel, AutoTokenizer
 
@@ -650,12 +665,23 @@ details can be found at: https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5 .
 
    model_path = 'Alibaba-NLP/gte-large-en-v1.5'
    tokenizer = AutoTokenizer.from_pretrained(model_path)
+   model = AutoModel.from_pretrained(model_path, trust_remote_code=True)
 
    # Tokenize the input texts
    batch_dict = tokenizer(input_texts, max_length=8192, padding=True, \
                         truncation=True, return_tensors='pt')
 
    print(batch_dict)
+
+
+   outputs = model(**batch_dict)
+   embeddings = outputs.last_hidden_state[:, 0]
+   
+   # (Optionally) normalize embeddings
+   embeddings = F.normalize(embeddings, p=2, dim=1)
+   scores = (embeddings[:1] @ embeddings[1:].T) * 100
+   print(embeddings)
+   print(scores.tolist())
 
 
 .. code-block:: python
@@ -667,6 +693,12 @@ details can be found at: https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5 .
          [0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1]])}
+
+   tensor([[ 0.0079,  0.0008, -0.0001,  ...,  0.0418, -0.0138, -0.0236],
+         [ 0.0079,  0.0218, -0.0171,  ...,  0.0412, -0.0230, -0.0237],
+         [ 0.0073, -0.0106, -0.0194,  ...,  0.0711, -0.0204, -0.0036]],
+         grad_fn=<DivBackward0>)
+   [[92.85284423828125, 92.81655883789062]]
 
 bge-base-en-v1.5
 ----------------
@@ -692,10 +724,21 @@ at: https://huggingface.co/BAAI/bge-base-en-v1.5 .
    ]
    # Load model from HuggingFace Hub
    tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-large-zh-v1.5')
+   model = AutoModel.from_pretrained('BAAI/bge-large-zh-v1.5')
+   model.eval()
 
    # Tokenize sentences
    encoded_input = tokenizer(sentences, padding=True, truncation=True, return_tensors='pt')
    print(encoded_input)
+
+   # Compute token embeddings
+   with torch.no_grad():
+      model_output = model(**encoded_input)
+      # Perform pooling. In this case, cls pooling.
+      sentence_embeddings = model_output[0][:, 0]
+   # normalize embeddings
+   sentence_embeddings = torch.nn.functional.normalize(sentence_embeddings, p=2, dim=1)
+   print("Sentence embeddings:", sentence_embeddings)
 
 .. code-block:: python  
 
@@ -706,3 +749,7 @@ at: https://huggingface.co/BAAI/bge-base-en-v1.5 .
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         [1, 1, 1, 1, 1, 1, 1, 0, 0, 0]])} 
+
+   Sentence embeddings: tensor([[ 0.0700,  0.0119,  0.0049,  ...,  0.0428, -0.0475,  0.0242],
+         [ 0.0800, -0.0065, -0.0519,  ...,  0.0057, -0.0770,  0.0119],
+         [ 0.0740, -0.0185, -0.0369,  ...,  0.0083, -0.0026,  0.0016]])        

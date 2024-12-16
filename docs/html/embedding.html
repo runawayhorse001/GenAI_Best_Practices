@@ -107,10 +107,10 @@
 vectors of real numbers, capturing semantic relationships between them. Instead of treating
 words as discrete symbols (like one-hot encoding), word embeddings map words into a
 continuous vector space where similar words are located closer together.</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <span id="fig-embedding"></span><img alt="_images/embedding_diagram.png" src="_images/embedding_diagram.png" />
 <figcaption>
-<p><span class="caption-text">Embedding Diagram</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text">Embedding Diagram</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="traditional-word-embeddings">
@@ -233,7 +233,8 @@ of words, ignoring grammar, order, and context but keeping their frequency.</p>
 in text analysis to evaluate the importance of a word in a document relative to a
 collection (or corpus) of documents. It builds upon the <strong>Bag of Words (BoW)</strong> model
 by not only considering the frequency of a word in a document but also taking
-into account how common or rare the word is across the corpus.</p>
+into account how common or rare the word is across the corpus. The pyspark implementation
+can be found at <a class="reference internal" href="reference.html#pyspark" id="id1"><span>[PySpark]</span></a>.</p>
 <ul>
 <li><p>Components of TF-ID</p></li>
 <li><p><strong>t</strong>: the term in corpus.</p></li>
@@ -269,8 +270,7 @@ into account how common or rare the word is across the corpus.</p>
 <p class="admonition-title">Note</p>
 <p>The IDF formula above differs from the standard textbook notation that defines the IDF as</p>
 <div class="math notranslate nohighlight">
-\[\]</div>
-<p>IDF(t) = log [ <a href="#id2"><span class="problematic" id="id3">|D|</span></a> / (DF(t,D) + 1) ]).</p>
+\[IDF(t) = \log [ |D| / (DF(t,D) + 1) ]).\]</div>
 </div>
 </dd>
 </dl>
@@ -678,13 +678,27 @@ of static embeddings by incorporating contextual nuances.</p>
 
 <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Gen AI is awesome&quot;</span>
 <span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">encoded_input</span><span class="p">)</span><span class="o">.</span><span class="n">last_hidden_state</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">({</span><span class="n">x</span> <span class="p">:</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">]</span><span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">,</span> <span class="s1">&#39;[EOS]&#39;</span><span class="p">]})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">{</span><span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span>  <span class="mi">101</span><span class="p">,</span>  <span class="mi">8991</span><span class="p">,</span>  <span class="mi">9932</span><span class="p">,</span>  <span class="mi">2003</span><span class="p">,</span> <span class="mi">12476</span><span class="p">,</span>   <span class="mi">102</span><span class="p">]]),</span> <span class="s1">&#39;token_type_ids&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])}</span>
 <span class="p">{</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">],</span> <span class="s1">&#39;Gen&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8991</span><span class="p">],</span> <span class="s1">&#39;AI&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9932</span><span class="p">],</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2003</span><span class="p">],</span> <span class="s1">&#39;awesome&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12476</span><span class="p">],</span> <span class="s1">&#39;[SEP]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">],</span> <span class="s1">&#39;[EOS]&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1031</span><span class="p">,</span> <span class="mi">1041</span><span class="p">,</span> <span class="mi">2891</span><span class="p">,</span> <span class="mi">1033</span><span class="p">]}</span>
+
+
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">768</span><span class="p">])</span>
+<span class="n">tensor</span><span class="p">([[[</span><span class="o">-</span><span class="mf">0.1129</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1477</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0056</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1335</span><span class="p">,</span>  <span class="mf">0.2605</span><span class="p">,</span>  <span class="mf">0.2113</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.6841</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1196</span><span class="p">,</span>  <span class="mf">0.3349</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5958</span><span class="p">,</span>  <span class="mf">0.1657</span><span class="p">,</span>  <span class="mf">0.6988</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.5385</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2649</span><span class="p">,</span>  <span class="mf">0.2639</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1544</span><span class="p">,</span>  <span class="mf">0.2532</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1363</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.1794</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6086</span><span class="p">,</span>  <span class="mf">0.1292</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1620</span><span class="p">,</span>  <span class="mf">0.1721</span><span class="p">,</span>  <span class="mf">0.4356</span><span class="p">],</span>
+         <span class="p">[</span><span class="o">-</span><span class="mf">0.0187</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7320</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3420</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.4028</span><span class="p">,</span>  <span class="mf">0.1425</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2014</span><span class="p">],</span>
+         <span class="p">[</span> <span class="mf">0.5493</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1029</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1571</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.3503</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7601</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1398</span><span class="p">]]],</span>
+    <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">NativeLayerNormBackward0</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -697,7 +711,9 @@ language processing tasks and excels in generating dense vector representations
 clustering, and reranking.</p>
 <p>It can handle up to 8192 tokens, making it suitable for long-context tasks. More
 details can be found at: <a class="reference external" href="https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5">https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5</a> .</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Requires transformers&gt;=4.36.0</span>
+
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModel</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
 <span class="n">input_texts</span> <span class="o">=</span> <span class="p">[</span>
@@ -708,12 +724,23 @@ details can be found at: <a class="reference external" href="https://huggingface
 
 <span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;Alibaba-NLP/gte-large-en-v1.5&#39;</span>
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">trust_remote_code</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Tokenize the input texts</span>
 <span class="n">batch_dict</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">input_texts</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> \
                      <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">batch_dict</span><span class="p">)</span>
+
+
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">batch_dict</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># (Optionally) normalize embeddings</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">embeddings</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">embeddings</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span>  <span class="mi">101</span><span class="p">,</span>  <span class="mi">8991</span><span class="p">,</span>  <span class="mi">9932</span><span class="p">,</span>  <span class="mi">2003</span><span class="p">,</span> <span class="mi">12476</span><span class="p">,</span>   <span class="mi">102</span><span class="p">],</span>
@@ -723,6 +750,12 @@ details can be found at: <a class="reference external" href="https://huggingface
       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])}</span>
+
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.0079</span><span class="p">,</span>  <span class="mf">0.0008</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0001</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0418</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0138</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0236</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.0079</span><span class="p">,</span>  <span class="mf">0.0218</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0171</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0412</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0230</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0237</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.0073</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0106</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0194</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0711</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0204</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0036</span><span class="p">]],</span>
+      <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">DivBackward0</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="p">[[</span><span class="mf">92.85284423828125</span><span class="p">,</span> <span class="mf">92.81655883789062</span><span class="p">]]</span>
 </pre></div>
 </div>
 </section>
@@ -746,10 +779,21 @@ at: <a class="reference external" href="https://huggingface.co/BAAI/bge-base-en-
 <span class="p">]</span>
 <span class="c1"># Load model from HuggingFace Hub</span>
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;BAAI/bge-large-zh-v1.5&#39;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;BAAI/bge-large-zh-v1.5&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
 <span class="c1"># Tokenize sentences</span>
 <span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">)</span>
+
+<span class="c1"># Compute token embeddings</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+   <span class="n">model_output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">encoded_input</span><span class="p">)</span>
+   <span class="c1"># Perform pooling. In this case, cls pooling.</span>
+   <span class="n">sentence_embeddings</span> <span class="o">=</span> <span class="n">model_output</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1"># normalize embeddings</span>
+<span class="n">sentence_embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">sentence_embeddings</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sentence embeddings:&quot;</span><span class="p">,</span> <span class="n">sentence_embeddings</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span>  <span class="mi">101</span><span class="p">,</span> <span class="mi">10234</span><span class="p">,</span>  <span class="mi">8171</span><span class="p">,</span>  <span class="mi">8578</span><span class="p">,</span>  <span class="mi">8310</span><span class="p">,</span>   <span class="mi">143</span><span class="p">,</span> <span class="mi">11722</span><span class="p">,</span>  <span class="mi">9974</span><span class="p">,</span>  <span class="mi">8505</span><span class="p">,</span>   <span class="mi">102</span><span class="p">],</span>
@@ -759,6 +803,10 @@ at: <a class="reference external" href="https://huggingface.co/BAAI/bge-base-en-
      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
      <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
      <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])}</span>
+
+<span class="n">Sentence</span> <span class="n">embeddings</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.0700</span><span class="p">,</span>  <span class="mf">0.0119</span><span class="p">,</span>  <span class="mf">0.0049</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0428</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0475</span><span class="p">,</span>  <span class="mf">0.0242</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.0800</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0065</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0519</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0057</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0770</span><span class="p">,</span>  <span class="mf">0.0119</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.0740</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0185</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0369</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0083</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0026</span><span class="p">,</span>  <span class="mf">0.0016</span><span class="p">]])</span>
 </pre></div>
 </div>
 </section>
@@ -777,7 +825,7 @@ at: <a class="reference external" href="https://huggingface.co/BAAI/bge-base-en-
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 14, 2024.
+      <span class="lastupdated">Last updated on Dec 16, 2024.
       </span></p>
   </div>
 

@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 15, 2024}
+\date{December 16, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -1530,7 +1530,7 @@ continuous vector space where similar words are located closer together.
 \capstart
 
 \noindent\sphinxincludegraphics{{embedding_diagram}.png}
-\caption{Embedding Diagram}\label{\detokenize{embedding:id1}}\label{\detokenize{embedding:fig-embedding}}\end{figure}
+\caption{Embedding Diagram}\label{\detokenize{embedding:id2}}\label{\detokenize{embedding:fig-embedding}}\end{figure}
 
 
 \section{Traditional word embeddings}
@@ -1698,7 +1698,8 @@ To overcome these limitations, advanced techniques like \sphinxstylestrong{TF\sp
 in text analysis to evaluate the importance of a word in a document relative to a
 collection (or corpus) of documents. It builds upon the \sphinxstylestrong{Bag of Words (BoW)} model
 by not only considering the frequency of a word in a document but also taking
-into account how common or rare the word is across the corpus.
+into account how common or rare the word is across the corpus. The pyspark implementation
+can be found at \sphinxcite{reference:pyspark}.
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -1772,10 +1773,9 @@ Note that the IDF formula above differs from the standard textbook notation that
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 The IDF formula above differs from the standard textbook notation that defines the IDF as
-
-\sphinxAtStartPar
-IDF(t) = log {[} {\color{red}\bfseries{}|D|} / (DF(t,D) + 1) {]}).
-\end{sphinxadmonition}
+\begin{equation*}
+\begin{split}IDF(t) = \log [ |D| / (DF(t,D) + 1) ]).\end{split}
+\end{equation*}\end{sphinxadmonition}
 
 \end{description}
 
@@ -2245,14 +2245,28 @@ of static embeddings by incorporating contextual nuances.
 
 \PYG{n}{text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Gen AI is awesome}\PYG{l+s+s2}{\PYGZdq{}}
 \PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{embeddings} \PYG{o}{=} \PYG{n}{model}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}\PYG{o}{.}\PYG{n}{last\PYGZus{}hidden\PYGZus{}state}
 
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{n}{x} \PYG{p}{:} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{+} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{o}{+} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[EOS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{t}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}  \PYG{l+m+mi}{101}\PYG{p}{,}  \PYG{l+m+mi}{8991}\PYG{p}{,}  \PYG{l+m+mi}{9932}\PYG{p}{,}  \PYG{l+m+mi}{2003}\PYG{p}{,} \PYG{l+m+mi}{12476}\PYG{p}{,}   \PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{token\PYGZus{}type\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[CLS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{101}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Gen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{8991}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{9932}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{2003}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{awesome}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{12476}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{102}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[EOS]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{1031}\PYG{p}{,} \PYG{l+m+mi}{1041}\PYG{p}{,} \PYG{l+m+mi}{2891}\PYG{p}{,} \PYG{l+m+mi}{1033}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{n}{torch}\PYG{o}{.}\PYG{n}{Size}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{768}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1129}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1477}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0056}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1335}\PYG{p}{,}  \PYG{l+m+mf}{0.2605}\PYG{p}{,}  \PYG{l+m+mf}{0.2113}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6841}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.1196}\PYG{p}{,}  \PYG{l+m+mf}{0.3349}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5958}\PYG{p}{,}  \PYG{l+m+mf}{0.1657}\PYG{p}{,}  \PYG{l+m+mf}{0.6988}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5385}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2649}\PYG{p}{,}  \PYG{l+m+mf}{0.2639}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1544}\PYG{p}{,}  \PYG{l+m+mf}{0.2532}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1363}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1794}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.6086}\PYG{p}{,}  \PYG{l+m+mf}{0.1292}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1620}\PYG{p}{,}  \PYG{l+m+mf}{0.1721}\PYG{p}{,}  \PYG{l+m+mf}{0.4356}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0187}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.7320}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.3420}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.4028}\PYG{p}{,}  \PYG{l+m+mf}{0.1425}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.2014}\PYG{p}{]}\PYG{p}{,}
+         \PYG{p}{[} \PYG{l+m+mf}{0.5493}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1029}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1571}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.3503}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.7601}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1398}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{grad\PYGZus{}fn}\PYG{o}{=}\PYG{o}{\PYGZlt{}}\PYG{n}{NativeLayerNormBackward0}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -2270,6 +2284,8 @@ It can handle up to 8192 tokens, making it suitable for long\sphinxhyphen{}conte
 details can be found at: \sphinxurl{https://huggingface.co/Alibaba-NLP/gte-large-en-v1.5} .
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Requires transformers\PYGZgt{}=4.36.0}
+
 \PYG{k+kn}{import} \PYG{n+nn}{torch}\PYG{n+nn}{.}\PYG{n+nn}{nn}\PYG{n+nn}{.}\PYG{n+nn}{functional} \PYG{k}{as} \PYG{n+nn}{F}
 \PYG{k+kn}{from} \PYG{n+nn}{transformers} \PYG{k+kn}{import} \PYG{n}{AutoModel}\PYG{p}{,} \PYG{n}{AutoTokenizer}
 
@@ -2281,12 +2297,23 @@ details can be found at: \sphinxurl{https://huggingface.co/Alibaba-NLP/gte-large
 
 \PYG{n}{model\PYGZus{}path} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Alibaba\PYGZhy{}NLP/gte\PYGZhy{}large\PYGZhy{}en\PYGZhy{}v1.5}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{AutoTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{n}{model\PYGZus{}path}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{AutoModel}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{n}{model\PYGZus{}path}\PYG{p}{,} \PYG{n}{trust\PYGZus{}remote\PYGZus{}code}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 
 \PYG{c+c1}{\PYGZsh{} Tokenize the input texts}
 \PYG{n}{batch\PYGZus{}dict} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{input\PYGZus{}texts}\PYG{p}{,} \PYG{n}{max\PYGZus{}length}\PYG{o}{=}\PYG{l+m+mi}{8192}\PYG{p}{,} \PYG{n}{padding}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYGZbs{}
                      \PYG{n}{truncation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{batch\PYGZus{}dict}\PYG{p}{)}
+
+
+\PYG{n}{outputs} \PYG{o}{=} \PYG{n}{model}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{batch\PYGZus{}dict}\PYG{p}{)}
+\PYG{n}{embeddings} \PYG{o}{=} \PYG{n}{outputs}\PYG{o}{.}\PYG{n}{last\PYGZus{}hidden\PYGZus{}state}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} (Optionally) normalize embeddings}
+\PYG{n}{embeddings} \PYG{o}{=} \PYG{n}{F}\PYG{o}{.}\PYG{n}{normalize}\PYG{p}{(}\PYG{n}{embeddings}\PYG{p}{,} \PYG{n}{p}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{scores} \PYG{o}{=} \PYG{p}{(}\PYG{n}{embeddings}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{@} \PYG{n}{embeddings}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{p}{]}\PYG{o}{.}\PYG{n}{T}\PYG{p}{)} \PYG{o}{*} \PYG{l+m+mi}{100}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{embeddings}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{scores}\PYG{o}{.}\PYG{n}{tolist}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -2297,6 +2324,12 @@ details can be found at: \sphinxurl{https://huggingface.co/Alibaba-NLP/gte-large
       \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
       \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
       \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[} \PYG{l+m+mf}{0.0079}\PYG{p}{,}  \PYG{l+m+mf}{0.0008}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0001}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0418}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0138}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0236}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[} \PYG{l+m+mf}{0.0079}\PYG{p}{,}  \PYG{l+m+mf}{0.0218}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0171}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0412}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0230}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0237}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[} \PYG{l+m+mf}{0.0073}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0106}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0194}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0711}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0204}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0036}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+      \PYG{n}{grad\PYGZus{}fn}\PYG{o}{=}\PYG{o}{\PYGZlt{}}\PYG{n}{DivBackward0}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{92.85284423828125}\PYG{p}{,} \PYG{l+m+mf}{92.81655883789062}\PYG{p}{]}\PYG{p}{]}
 \end{sphinxVerbatim}
 
 
@@ -2323,10 +2356,21 @@ at: \sphinxurl{https://huggingface.co/BAAI/bge-base-en-v1.5} .
 \PYG{p}{]}
 \PYG{c+c1}{\PYGZsh{} Load model from HuggingFace Hub}
 \PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{AutoTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{BAAI/bge\PYGZhy{}large\PYGZhy{}zh\PYGZhy{}v1.5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{AutoModel}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{BAAI/bge\PYGZhy{}large\PYGZhy{}zh\PYGZhy{}v1.5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{model}\PYG{o}{.}\PYG{n}{eval}\PYG{p}{(}\PYG{p}{)}
 
 \PYG{c+c1}{\PYGZsh{} Tokenize sentences}
 \PYG{n}{encoded\PYGZus{}input} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{sentences}\PYG{p}{,} \PYG{n}{padding}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{truncation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Compute token embeddings}
+\PYG{k}{with} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{no\PYGZus{}grad}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+   \PYG{n}{model\PYGZus{}output} \PYG{o}{=} \PYG{n}{model}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{encoded\PYGZus{}input}\PYG{p}{)}
+   \PYG{c+c1}{\PYGZsh{} Perform pooling. In this case, cls pooling.}
+   \PYG{n}{sentence\PYGZus{}embeddings} \PYG{o}{=} \PYG{n}{model\PYGZus{}output}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}
+\PYG{c+c1}{\PYGZsh{} normalize embeddings}
+\PYG{n}{sentence\PYGZus{}embeddings} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{functional}\PYG{o}{.}\PYG{n}{normalize}\PYG{p}{(}\PYG{n}{sentence\PYGZus{}embeddings}\PYG{p}{,} \PYG{n}{p}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sentence embeddings:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{sentence\PYGZus{}embeddings}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -2337,6 +2381,10 @@ at: \sphinxurl{https://huggingface.co/BAAI/bge-base-en-v1.5} .
      \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{attention\PYGZus{}mask}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
      \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}
      \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Sentence} \PYG{n}{embeddings}\PYG{p}{:} \PYG{n}{tensor}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[} \PYG{l+m+mf}{0.0700}\PYG{p}{,}  \PYG{l+m+mf}{0.0119}\PYG{p}{,}  \PYG{l+m+mf}{0.0049}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0428}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0475}\PYG{p}{,}  \PYG{l+m+mf}{0.0242}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[} \PYG{l+m+mf}{0.0800}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0065}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0519}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0057}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0770}\PYG{p}{,}  \PYG{l+m+mf}{0.0119}\PYG{p}{]}\PYG{p}{,}
+      \PYG{p}{[} \PYG{l+m+mf}{0.0740}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0185}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0369}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0083}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0026}\PYG{p}{,}  \PYG{l+m+mf}{0.0016}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \sphinxstepscope
@@ -2908,15 +2956,78 @@ Use prompts designed for mixed text/image inputs (or outputs if using models lik
 
 \chapter{Retrieval\sphinxhyphen{}Augmented Generation}
 \label{\detokenize{rag:retrieval-augmented-generation}}\label{\detokenize{rag:rag}}\label{\detokenize{rag::doc}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{RAG_diagram}.png}
+\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id1}}\label{\detokenize{rag:fig-rag}}\end{figure}
+
 
 \section{Overview}
 \label{\detokenize{rag:overview}}
+\sphinxAtStartPar
+Retrieval\sphinxhyphen{}Augmented Generation (RAG) is a framework that enhances large language models (LLMs)
+by combining their generative capabilities with external knowledge retrieval. The goal of RAG
+is to improve accuracy, relevance, and factuality by providing the LLM with specific, up\sphinxhyphen{}to\sphinxhyphen{}date,
+or domain\sphinxhyphen{}specific context from a knowledge base or database during the generation process.
+
+\sphinxAtStartPar
+As you can see in {\hyperref[\detokenize{rag:fig-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Retrieval\sphinxhyphen{}Augmented Generation Diagram}}}}}, the RAG has there main  components
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Indexer: The indexer processes raw text or other forms of unstructured data and creates an
+efficient structure (called an index) that allows for fast and accurate retrieval
+by the retriever when a query is made.
+
+\item {} 
+\sphinxAtStartPar
+Retriever: Responsible for finding relevant information from an external knowledge source,
+such as a document database, a vector database, or the web.
+
+\item {} 
+\sphinxAtStartPar
+Generator: An LLM (like GPT\sphinxhyphen{}4, T5, or similar) that uses the retrieved context to generate a response.
+The model is “augmented” with the retrieved information, which reduces hallucination and enhances factual accuracy.
+
+\end{itemize}
+
 
 \section{Indexing}
 \label{\detokenize{rag:indexing}}
 
+\subsection{Chunking}
+\label{\detokenize{rag:chunking}}
+\sphinxAtStartPar
+Chunking in Retrieval\sphinxhyphen{}Augmented Generation (RAG) involves splitting documents or knowledge bases
+into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).
+
+
+\subsection{Embedding}
+\label{\detokenize{rag:embedding}}
+
+\subsection{Vector Database}
+\label{\detokenize{rag:vector-database}}
+
 \section{Retrieval}
 \label{\detokenize{rag:retrieval}}
+\sphinxAtStartPar
+Common retrieval methods:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Sparse Search: Traditional keyword\sphinxhyphen{}based retrieval (e.g., TF\sphinxhyphen{}IDF, BM25).
+
+\item {} 
+\sphinxAtStartPar
+Dense Retrieval: Vector\sphinxhyphen{}based search using embeddings (e.g., FAISS, Pinecone).
+
+\end{itemize}
+
+\sphinxAtStartPar
+The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.
+
 
 \section{Generation}
 \label{\detokenize{rag:generation}}

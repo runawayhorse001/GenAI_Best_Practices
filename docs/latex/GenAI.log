@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  15 DEC 2024 00:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  16 DEC 2024 15:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1350,6 +1350,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [32]
+Overfull \vbox (1.07988pt too high) detected at line 2270
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1389,14 +1393,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[36
-
-]
+[36]
 Chapter 4.
 
 
-[37]
-Underfull \vbox (badness 10000) detected at line 2430
+[37
+
+]
+Underfull \vbox (badness 10000) detected at line 2478
  []
 
 
@@ -1420,7 +1424,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [39]
-Overfull \vbox (1.09633pt too high) detected at line 2535
+Overfull \vbox (1.09633pt too high) detected at line 2583
  []
 
 
@@ -1495,11 +1499,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [46]
 Chapter 5.
+<RAG_diagram.png, id=655, 1810.51407pt x 813.0375pt>
+File: RAG_diagram.png Graphic file (type png)
+<use RAG_diagram.png>
+Package pdftex.def Info: RAG_diagram.png  used on input line 2963.
+(pdftex.def)             Requested size: 469.75565pt x 210.95056pt.
 
 
 [47
 
-]
+ <./RAG_diagram.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1509,13 +1518,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[48
-
-]
+[48]
 Chapter 6.
 
 
-[49]
+[49
+
+]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1584,17 +1593,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
  ***********
-Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: 8C70D5DCF4CB62D86ECA0E4414EB131F;8721.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `GenAI.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `GenAI.out':
+(rerunfilecheck)             Before: 8C70D5DCF4CB62D86ECA0E4414EB131F;8721
+(rerunfilecheck)             After:  A2B5F40635AE608E8D52AC96AE3D854C;9070.
  ) 
 Here is how much of TeX's memory you used:
- 17361 strings out of 475544
- 293447 string characters out of 5777741
+ 17378 strings out of 475544
+ 293759 string characters out of 5777741
  2048905 words of memory out of 5000000
- 39406 multiletter control sequences out of 15000+600000
+ 39419 multiletter control sequences out of 15000+600000
  625197 words of font info for 100 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,20n,83p,3152b,824s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,20n,83p,3152b,822s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
@@ -1612,10 +1631,10 @@ t/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
 xfonts/tcxtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pf
 b>
-Output written on GenAI.pdf (61 pages, 1389593 bytes).
+Output written on GenAI.pdf (61 pages, 1738880 bytes).
 PDF statistics:
- 815 PDF objects out of 1000 (max. 8388607)
- 700 compressed objects within 7 object streams
- 190 named destinations out of 1000 (max. 500000)
- 578 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 825 PDF objects out of 1000 (max. 8388607)
+ 707 compressed objects within 8 object streams
+ 194 named destinations out of 1000 (max. 500000)
+ 583 words of extra memory for PDF output out of 10000 (max. 10000000)
 

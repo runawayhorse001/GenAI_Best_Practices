@@ -51,7 +51,12 @@
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. Retrieval-Augmented Generation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#indexing">5.2. Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indexing">5.2. Indexing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chunking">5.2.1. Chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#embedding">5.2.2. Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vector-database">5.2.3. Vector Database</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#retrieval">5.3. Retrieval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#generation">5.4. Generation</a></li>
 </ul>
@@ -88,14 +93,51 @@
              
   <section id="retrieval-augmented-generation">
 <span id="rag"></span><h1><span class="section-number">5. </span>Retrieval-Augmented Generation<a class="headerlink" href="#retrieval-augmented-generation" title="Link to this heading"></a></h1>
+<figure class="align-center" id="id1">
+<span id="fig-rag"></span><img alt="_images/RAG_diagram.png" src="_images/RAG_diagram.png" />
+<figcaption>
+<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <section id="overview">
 <h2><span class="section-number">5.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Retrieval-Augmented Generation (RAG) is a framework that enhances large language models (LLMs)
+by combining their generative capabilities with external knowledge retrieval. The goal of RAG
+is to improve accuracy, relevance, and factuality by providing the LLM with specific, up-to-date,
+or domain-specific context from a knowledge base or database during the generation process.</p>
+<p>As you can see in <a class="reference internal" href="#fig-rag"><span class="std std-ref">Retrieval-Augmented Generation Diagram</span></a>, the RAG has there main  components</p>
+<ul class="simple">
+<li><p>Indexer: The indexer processes raw text or other forms of unstructured data and creates an
+efficient structure (called an index) that allows for fast and accurate retrieval
+by the retriever when a query is made.</p></li>
+<li><p>Retriever: Responsible for finding relevant information from an external knowledge source,
+such as a document database, a vector database, or the web.</p></li>
+<li><p>Generator: An LLM (like GPT-4, T5, or similar) that uses the retrieved context to generate a response.
+The model is “augmented” with the retrieved information, which reduces hallucination and enhances factual accuracy.</p></li>
+</ul>
 </section>
 <section id="indexing">
 <h2><span class="section-number">5.2. </span>Indexing<a class="headerlink" href="#indexing" title="Link to this heading"></a></h2>
+<section id="chunking">
+<h3><span class="section-number">5.2.1. </span>Chunking<a class="headerlink" href="#chunking" title="Link to this heading"></a></h3>
+<p>Chunking in Retrieval-Augmented Generation (RAG) involves splitting documents or knowledge bases
+into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).</p>
+</section>
+<section id="embedding">
+<h3><span class="section-number">5.2.2. </span>Embedding<a class="headerlink" href="#embedding" title="Link to this heading"></a></h3>
+</section>
+<section id="vector-database">
+<h3><span class="section-number">5.2.3. </span>Vector Database<a class="headerlink" href="#vector-database" title="Link to this heading"></a></h3>
+</section>
 </section>
 <section id="retrieval">
 <h2><span class="section-number">5.3. </span>Retrieval<a class="headerlink" href="#retrieval" title="Link to this heading"></a></h2>
+<p>Common retrieval methods:</p>
+<ul class="simple">
+<li><p>Sparse Search: Traditional keyword-based retrieval (e.g., TF-IDF, BM25).</p></li>
+<li><p>Dense Retrieval: Vector-based search using embeddings (e.g., FAISS, Pinecone).</p></li>
+</ul>
+<p>The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.</p>
 </section>
 <section id="generation">
 <h2><span class="section-number">5.4. </span>Generation<a class="headerlink" href="#generation" title="Link to this heading"></a></h2>
@@ -114,7 +156,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 12, 2024.
+      <span class="lastupdated">Last updated on Dec 16, 2024.
       </span></p>
   </div>
 
