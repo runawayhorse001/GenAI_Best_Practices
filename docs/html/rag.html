@@ -18,6 +18,7 @@
       <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -53,11 +54,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#indexing">5.2. Indexing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#chunking">5.2.1. Chunking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#embedding">5.2.2. Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-indexing">5.2.2. Types of Indexing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vector-database">5.2.3. Vector Database</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#retrieval">5.3. Retrieval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#retrieval">5.3. Retrieval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-retrieval-methods">5.3.1. Common retrieval methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reciprocal-rank-fusion">5.3.2. Reciprocal Rank Fusion</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#generation">5.4. Generation</a></li>
 </ul>
 </li>
@@ -118,29 +123,596 @@ The model is “augmented” with the retrieved information, which reduces hallu
 </section>
 <section id="indexing">
 <h2><span class="section-number">5.2. </span>Indexing<a class="headerlink" href="#indexing" title="Link to this heading"></a></h2>
+<p>The indexing processes raw text or other forms of unstructured data and creates an efficient structure
+(called an index) that allows for fast and accurate retrieval by the retriever when a query is made.</p>
+<figure class="align-center" id="fig-indexing">
+<img alt="_images/indexer.png" src="_images/indexer.png" />
+</figure>
 <section id="chunking">
 <h3><span class="section-number">5.2.1. </span>Chunking<a class="headerlink" href="#chunking" title="Link to this heading"></a></h3>
 <p>Chunking in Retrieval-Augmented Generation (RAG) involves splitting documents or knowledge bases
 into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).</p>
+<p>Below are the common chunking strategies used in RAG workflows:</p>
+<ol class="arabic">
+<li><p><strong>Fixed-Length Chunking</strong></p>
+<ul class="simple">
+<li><p>Chunks are created with a predefined, fixed length (e.g., 200 words or 512 tokens).</p></li>
+<li><p>Simple and easy to implement but might split content mid-sentence or lose semantic coherence.</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fixed_length_chunking</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">chunk_size</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="n">chunk_size</span><span class="p">)</span>
+    <span class="p">]</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">document</span> <span class="o">=</span> <span class="s2">&quot;This is a sample document with multiple sentences to demonstrate fixed-length chunking.&quot;</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">fixed_length_chunking</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk </span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Chunk 1: This is a sample document with multiple sentences to demonstrate</p></li>
+<li><p>Chunk 2: fixed-length chunking.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Sliding Window Chunking</strong></p>
+<ul class="simple">
+<li><p>Creates overlapping chunks to preserve context across splits.</p></li>
+<li><p>Ensures important information in overlapping regions is retained.</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sliding_window_chunking</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">overlap_size</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="n">chunk_size</span> <span class="o">-</span> <span class="n">overlap_size</span><span class="p">):</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">chunk_size</span><span class="p">])</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">document</span> <span class="o">=</span> <span class="s2">&quot;This is a sample document with multiple sentences to demonstrate sliding window chunking.&quot;</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">sliding_window_chunking</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">overlap_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk </span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>Output</strong>:</dt><dd><ul class="simple">
+<li><p>Chunk 1: This is a sample document with multiple sentences to demonstrate</p></li>
+<li><p>Chunk 2: with multiple sentences to demonstrate sliding window chunking.</p></li>
+<li><p>Chunk 3: sliding window chunking.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Semantic Chunking</strong></p>
+<ul class="simple">
+<li><p>Splits text based on natural language boundaries such as paragraphs, sentences, or specific delimiters (e.g., headings).</p></li>
+<li><p>Retains semantic coherence, ideal for better retrieval and generation accuracy.</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt_tab&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">semantic_chunking</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sentence_len</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">sentence_len</span><span class="p">:</span>
+            <span class="n">chunk</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">sentence</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">chunk</span> <span class="o">=</span> <span class="n">sentence</span>
+    <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">document</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;This is a sample document. It is split based on semantic boundaries. &quot;</span>
+            <span class="s2">&quot;Each chunk will have coherent meaning for better retrieval.&quot;</span><span class="p">)</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">semantic_chunking</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk </span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Chunk 1: This is a sample document.</p></li>
+<li><p>Chunk 2: It is split based on semantic boundaries.</p></li>
+<li><p>Chunk 3: Each chunk will have coherent meaning for better retrieval.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Dynamic Chunking</strong></p>
+<ul class="simple">
+<li><p>Adapts chunk sizes based on content properties such as token count, content density, or specific criteria.</p></li>
+<li><p>Useful when handling diverse document types with varying information density.</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="k">def</span> <span class="nf">dynamic_chunking</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">tokenizer_name</span><span class="o">=</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">):</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">tokenizer_name</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">),</span> <span class="n">max_tokens</span><span class="p">):</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">max_tokens</span><span class="p">]</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">chunk</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">document</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;This is a sample document to demonstrate dynamic chunking. &quot;</span>
+            <span class="s2">&quot;The tokenizer adapts the chunks based on token limits.&quot;</span><span class="p">)</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">dynamic_chunking</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk </span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>Output</strong>:</dt><dd><ul class="simple">
+<li><p>Chunk 1: this is a sample document to demonstrate dynamic chunking</p></li>
+<li><p>Chunk 2: . the tokenizer adapts the chunks based on</p></li>
+<li><p>Chunk 3: token limits.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Comparison of Strategies</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Strategy</p></th>
+<th class="head"><p>Pros</p></th>
+<th class="head"><p>Cons</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fixed-Length Chunking</p></td>
+<td><p>Simple, fast</p></td>
+<td><p>May split text mid-sentence
+or lose coherence.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sliding Window Chunking</p></td>
+<td><p>Preserves context</p></td>
+<td><p>Overlapping increases redundancy.</p></td>
+</tr>
+<tr class="row-even"><td><p>Semantic Chunking</p></td>
+<td><p>Coherent chunks</p></td>
+<td><p>Requires NLP preprocessing.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dynamic Chunking</p></td>
+<td><p>Adapts to content</p></td>
+<td><p>Computationally intensive.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each strategy has its strengths and weaknesses. Select based on the task requirements, context, and available computational resources.</p>
+<p>The optimal chunk length depends on the type of content being processed and the intended use case.
+Below are recommendations for chunk lengths based on different context types, along with their rationale:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Context Type</p></th>
+<th class="head"><p>Chunk Length (Tokens)</p></th>
+<th class="head"><p>Rationale</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FAQs or Short Texts</p></td>
+<td><p>100-200</p></td>
+<td><p>Short enough to handle specific queries.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Articles or Blog Posts</p></td>
+<td><p>300-500</p></td>
+<td><p>Covers logical sections while fitting multiple
+chunks in the LLM context.</p></td>
+</tr>
+<tr class="row-even"><td><p>Research Papers or Reports</p></td>
+<td><p>500-700</p></td>
+<td><p>Captures detailed sections like methodology
+or results.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Legal or Technical Texts</p></td>
+<td><p>200-300</p></td>
+<td><p>Maintains precision due to dense information.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The valuating Chunking Strategies for Retrieval can be found at: <a class="reference external" href="https://research.trychroma.com/evaluating-chunking">https://research.trychroma.com/evaluating-chunking</a></p>
 </section>
-<section id="embedding">
-<h3><span class="section-number">5.2.2. </span>Embedding<a class="headerlink" href="#embedding" title="Link to this heading"></a></h3>
+<section id="types-of-indexing">
+<h3><span class="section-number">5.2.2. </span>Types of Indexing<a class="headerlink" href="#types-of-indexing" title="Link to this heading"></a></h3>
+<p>The embedding methods we introduced in Chapter <a class="reference internal" href="embedding.html#embedding"><span class="std std-ref">Word and Sentence Embedding</span></a> can be applied here to convert each chunk
+into embeddings and create indexing. These indexings(embeddings) will be used to retrieve relevant documents or information.</p>
+<ul>
+<li><p>Sparse Indexing:</p>
+<p>Uses traditional keyword-based methods (e.g., TF-IDF, BM25).
+Index stores the frequency of terms and their associations with documents.</p>
+<ul class="simple">
+<li><p>Advantages:Easy to understand and deploy and works well for exact matches or keyword-heavy queries.</p></li>
+<li><p>Disadvantages: Struggles with semantic understanding or paraphrased queries.</p></li>
+</ul>
+</li>
+<li><p>Dense Indexing:</p>
+<p>Uses vector embeddings to capture semantic meaning. Documents are represented as vectors in a
+high-dimensional space, enabling similarity search.</p>
+<ul class="simple">
+<li><p>Advantages: Excellent for semantic search, handling synonyms, and paraphrasing.</p></li>
+<li><p>Disadvantages: Requires more computational resources for storage and retrieval.</p></li>
+</ul>
+</li>
+<li><p>Hybrid Indexing:</p>
+<p>Combines sparse and dense indexing for more robust search capabilities. For example, Elasticsearch
+can integrate BM25 with vector search.</p>
+</li>
+</ul>
 </section>
 <section id="vector-database">
 <h3><span class="section-number">5.2.3. </span>Vector Database<a class="headerlink" href="#vector-database" title="Link to this heading"></a></h3>
+<p>Vector databases are essential for Retrieval-Augmented Generation (RAG) systems, enabling
+efficient similarity search on dense vector embeddings. Below is a comprehensive overview
+of popular vector databases for RAG workflows:</p>
+<ol class="arabic simple">
+<li><p><strong>FAISS (Facebook AI Similarity Search)</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- An open-source library developed by Facebook AI for efficient similarity search and clustering of dense vectors.</p></li>
+<li><p><strong>Features</strong>:
+- High performance and scalability.
+- Supports various indexing methods like <code class="docutils literal notranslate"><span class="pre">Flat</span></code>, <code class="docutils literal notranslate"><span class="pre">IVF</span></code>, and <code class="docutils literal notranslate"><span class="pre">HNSW</span></code>.
+- GPU acceleration for faster searches.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Research and prototyping.
+- Scenarios requiring custom implementations.</p></li>
+<li><p><strong>Limitations</strong>:
+- File-based storage; lacks a built-in distributed or managed cloud solution.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://github.com/facebookresearch/faiss">FAISS GitHub</a></p></li>
+</ul>
+</li>
+<li><p><strong>Pinecone</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- A fully managed vector database designed for production-scale workloads.</p></li>
+<li><p><strong>Features</strong>:
+- Scalable and serverless architecture.
+- Automatic scaling and optimization of indexes.
+- Hybrid search (combining vector and keyword search).
+- Integrates with popular frameworks like LangChain and OpenAI.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Enterprise-grade applications.
+- Handling large datasets with minimal operational overhead.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://www.pinecone.io/">Pinecone</a></p></li>
+</ul>
+</li>
+<li><p><strong>Weaviate</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- An open-source vector search engine with a strong focus on modularity and customization.</p></li>
+<li><p><strong>Features</strong>:
+- Supports hybrid search and symbolic reasoning.
+- Schema-based data organization.
+- Plugin support for pre-built and custom vectorization modules.
+- Cloud-managed and self-hosted options.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Applications requiring hybrid search capabilities.
+- Knowledge graphs and semantically rich data.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://weaviate.io/">Weaviate</a></p></li>
+</ul>
+</li>
+<li><p><strong>Milvus</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- An open-source, high-performance vector database designed for similarity search on large datasets.</p></li>
+<li><p><strong>Features</strong>:
+- Distributed and scalable architecture.
+- Integration with FAISS, Annoy, and HNSW indexing techniques.
+- Built-in support for time travel queries (searching historical data).</p></li>
+<li><p><strong>Use Cases</strong>:
+- Video, audio, and image search applications.
+- Large-scale datasets requiring real-time indexing and retrieval.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://milvus.io/">Milvus</a></p></li>
+</ul>
+</li>
+<li><p><strong>Qdrant</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- An open-source, lightweight vector database focused on ease of use and modern developer needs.</p></li>
+<li><p><strong>Features</strong>:
+- Supports HNSW for efficient vector search.
+- Advanced filtering capabilities for combining metadata with vector queries.
+- REST and gRPC APIs for integration.
+- Docker-ready deployment.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Scenarios requiring metadata-rich search.
+- Lightweight deployments with simplicity in mind.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://qdrant.tech/">Qdrant</a></p></li>
+</ul>
+</li>
+<li><p><strong>Redis (with Vector Similarity Search Module)</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- A popular in-memory database with a module for vector similarity search.</p></li>
+<li><p><strong>Features</strong>:
+- Combines vector search with traditional key-value storage.
+- Supports hybrid search and metadata filtering.
+- High throughput and low latency due to in-memory architecture.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Applications requiring real-time, low-latency search.
+- Integrating vector search with existing Redis-based systems.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://redis.io/docs/stack/search/">Redis Vector Search</a></p></li>
+</ul>
+</li>
+<li><p><strong>Zilliz</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- A cloud-native vector database built on Milvus for scalable and managed vector storage.</p></li>
+<li><p><strong>Features</strong>:
+- Fully managed service for vector data.
+- Seamless scaling and distributed indexing.
+- Integration with machine learning pipelines.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Large-scale enterprise deployments.
+- Cloud-native solutions with minimal infrastructure management.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://zilliz.com/">Zilliz</a></p></li>
+</ul>
+</li>
+<li><p><strong>Vespa</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- A real-time serving engine supporting vector and hybrid search.</p></li>
+<li><p><strong>Features</strong>:
+- Combines vector search with advanced ranking and filtering.
+- Scales to large datasets with support for distributed clusters.
+- Powerful query configuration options.</p></li>
+<li><p><strong>Use Cases</strong>:
+- E-commerce and recommendation systems.
+- Applications with complex ranking requirements.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://vespa.ai/">Vespa</a></p></li>
+</ul>
+</li>
+<li><p><strong>Chroma</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>:
+- An open-source, user-friendly vector database built for LLMs and embedding-based applications.</p></li>
+<li><p><strong>Features</strong>:
+- Designed specifically for RAG workflows.
+- Simple Python API for seamless integration with AI models.
+- Efficient and customizable vector storage for embedding data.</p></li>
+<li><p><strong>Use Cases</strong>:
+- Prototyping and experimentation for LLM-based applications.
+- Lightweight deployments for small to medium-scale RAG systems.</p></li>
+<li><p><strong>Official Website</strong>: <a class="reference external" href="https://www.trychroma.com/">Chroma</a></p></li>
+</ul>
+</li>
+</ol>
+<p>Comparison of Vector Databases:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Database</strong></p></th>
+<th class="head"><p><strong>Open Source</strong></p></th>
+<th class="head"><p><strong>Managed Service</strong></p></th>
+<th class="head"><p><strong>Key Features</strong></p></th>
+<th class="head"><p><strong>Best For</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FAISS</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>High performance, GPU acceleration</p></td>
+<td><p>Research, prototyping</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pinecone</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Serverless, automatic scaling</p></td>
+<td><p>Enterprise-scale applications</p></td>
+</tr>
+<tr class="row-even"><td><p>Weaviate</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Hybrid search, modularity</p></td>
+<td><p>Knowledge graphs</p></td>
+</tr>
+<tr class="row-odd"><td><p>Milvus</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>Distributed, high performance</p></td>
+<td><p>Large-scale datasets</p></td>
+</tr>
+<tr class="row-even"><td><p>Qdrant</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>Lightweight, metadata filtering</p></td>
+<td><p>Small to medium-scale apps</p></td>
+</tr>
+<tr class="row-odd"><td><p>Redis</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>In-memory performance, hybrid search</p></td>
+<td><p>Real-time apps</p></td>
+</tr>
+<tr class="row-even"><td><p>Zilliz</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Fully managed Milvus</p></td>
+<td><p>Enterprise cloud solutions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vespa</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>Hybrid search, real-time ranking</p></td>
+<td><p>E-commerce, recommendations</p></td>
+</tr>
+<tr class="row-even"><td><p>Chroma</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>LLM-focused, simple API</p></td>
+<td><p>Prototyping, lightweight apps</p></td>
+</tr>
+</tbody>
+</table>
+<p>Choosing a Vector Database</p>
+<ul class="simple">
+<li><p><strong>For Research or Small Projects</strong>: FAISS, Qdrant, Milvus, or Chroma.</p></li>
+<li><p><strong>For Enterprise or Cloud-Native Workflows</strong>: Pinecone, Zilliz, or Weaviate.</p></li>
+<li><p><strong>For Real-Time Use Cases</strong>: Redis or Vespa.</p></li>
+</ul>
+<p>Each database has unique strengths and is suited for specific RAG use cases. The choice depends on scalability, integration needs, and budget.</p>
 </section>
 </section>
 <section id="retrieval">
 <h2><span class="section-number">5.3. </span>Retrieval<a class="headerlink" href="#retrieval" title="Link to this heading"></a></h2>
-<p>Common retrieval methods:</p>
-<ul class="simple">
-<li><p>Sparse Search: Traditional keyword-based retrieval (e.g., TF-IDF, BM25).</p></li>
-<li><p>Dense Retrieval: Vector-based search using embeddings (e.g., FAISS, Pinecone).</p></li>
-</ul>
 <p>The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.</p>
+<figure class="align-center" id="fig-retriever">
+<a class="reference internal image-reference" href="_images/retriever.png"><img alt="_images/retriever.png" src="_images/retriever.png" style="width: 369.0px; height: 515.5px;" />
+</a>
+</figure>
+<section id="common-retrieval-methods">
+<h3><span class="section-number">5.3.1. </span>Common retrieval methods<a class="headerlink" href="#common-retrieval-methods" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Sparse Vector Search: Traditional keyword-based retrieval (e.g., TF-IDF, BM25).</p></li>
+<li><p>Dense Vector Search: Vector-based search using embeddings e.g.</p>
+<ul>
+<li><dl class="simple">
+<dt>Approximate Nearest Neighbor (ANN) Search:</dt><dd><ul>
+<li><p>HNSW (Hierarchical Navigable Small World): Graph-based approach</p></li>
+<li><p>IVF (Inverted File Index): Clusters embeddings into groups and searches within relevant clusters.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Exact Nearest Neighbor Search: Computes similarities exhaustively for all vectors in the corpus</p></li>
+</ul>
+</li>
+<li><p>Hybrid Search: the combination of Sparse and Dense vector search.</p></li>
+</ul>
+<p>Summary of Common Algorithms:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Metric/Algorithm</strong></p></th>
+<th class="head"><p><strong>Purpose</strong></p></th>
+<th class="head"><p><strong>Common Use</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>TF-IDF</strong></p></td>
+<td><p>Keyword matching with term weighting.</p></td>
+<td><p>Effective for small-scale or structured corpora.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>BM25</strong></p></td>
+<td><p>Advanced keyword matching with term frequency
+saturation and document length normalization.</p></td>
+<td><p>Widely used in sparse search; default in tools like
+Elasticsearch and Solr.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cosine Similarity</strong></p></td>
+<td><p>Measures orientation (ignores magnitude).</p></td>
+<td><p>Widely used; works well with normalized vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Dot Product Similarity</strong></p></td>
+<td><p>Measures magnitude and direction.</p></td>
+<td><p>Preferred in embeddings like OpenAI’s models.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Euclidean Distance</strong></p></td>
+<td><p>Measures absolute distance between vectors.</p></td>
+<td><p>Less common but used in some specific cases.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>HNSW (ANN)</strong></p></td>
+<td><p>Fast and scalable nearest neighbor search.</p></td>
+<td><p>Default for large-scale systems (e.g., FAISS).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>IVF (ANN)</strong></p></td>
+<td><p>Efficient clustering-based search.</p></td>
+<td><p>Often combined with product quantization.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reciprocal-rank-fusion">
+<h3><span class="section-number">5.3.2. </span>Reciprocal Rank Fusion<a class="headerlink" href="#reciprocal-rank-fusion" title="Link to this heading"></a></h3>
+<p>Reciprocal Rank Fusion (RRF) is a ranking technique commonly used in information retrieval
+and ensemble learning. Although it is not specific to large language models (LLMs), it can
+be applied to scenarios where multiple ranking systems (or scoring mechanisms) produce
+different rankings, and you want to combine them into a single, unified ranking.</p>
+<dl class="simple">
+<dt>The reciprocal rank of an item in a ranked list is calculated as <span class="math notranslate nohighlight">\(\frac{1}{k+r}\)</span>, where</dt><dd><ul class="simple">
+<li><p>r is the rank of the item (1 for the top rank, 2 for the second rank, etc.).</p></li>
+<li><p>k is a small constant (often set to 60 or another fixed value) to control how much weight is given to higher ranks.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<p>Suppose two retrieval models give ranked lists for query responses:</p>
+<ul class="simple">
+<li><p>Model 1 ranks documents as: [A,B,C,D]</p></li>
+<li><p>Model 2 ranks documents as: [B,A,D,C]</p></li>
+</ul>
+<p>RRF combines these rankings by assigning each document a combined score:</p>
+<ul class="simple">
+<li><p>Document A: <span class="math notranslate nohighlight">\(\frac{1}{60+1} +\frac{1}{60+2}=0.03252247488101534\)</span></p></li>
+<li><p>Document B: <span class="math notranslate nohighlight">\(\frac{1}{60+2} +\frac{1}{60+1}=0.03252247488101534\)</span></p></li>
+<li><p>Document C: <span class="math notranslate nohighlight">\(\frac{1}{60+3} +\frac{1}{60+4}=0.03149801587301587\)</span></p></li>
+<li><p>Document D: <span class="math notranslate nohighlight">\(\frac{1}{60+4} +\frac{1}{60+3}=0.03149801587301587\)</span></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="k">def</span> <span class="nf">reciprocal_rank_fusion</span><span class="p">(</span><span class="n">ranked_results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fuse rank from multiple retrieval systems using Reciprocal Rank Fusion.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    ranked_results: Ranked results from different retrieval system.</span>
+<span class="sd">    k (int): A constant used in the RRF formula (default is 60).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    Tuple of list of sorted documents by score and sorted documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Dictionary to store RRF mapping</span>
+    <span class="n">rrf_map</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># Calculate RRF score for each result in each list</span>
+    <span class="k">for</span> <span class="n">rank_list</span> <span class="ow">in</span> <span class="n">ranked_results</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rank_list</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">rrf_map</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">rank</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="c1"># Sort items based on their RRF scores in descending order</span>
+    <span class="n">sorted_items</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rrf_map</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Return tuple of list of sorted documents by score and sorted documents</span>
+    <span class="k">return</span> <span class="n">sorted_items</span><span class="p">,</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">sorted_items</span><span class="p">]</span>
+
+<span class="c1"># Example ranked lists from different sources</span>
+<span class="n">ranked_a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">ranked_b</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># Combine the lists using RRF</span>
+<span class="n">combined_list</span> <span class="o">=</span> <span class="n">reciprocal_rank_fusion</span><span class="p">([</span><span class="n">ranked_a</span><span class="p">,</span> <span class="n">ranked_b</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">([(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mf">0.03252247488101534</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mf">0.03252247488101534</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mf">0.03149801587301587</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mf">0.03149801587301587</span><span class="p">)],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="generation">
 <h2><span class="section-number">5.4. </span>Generation<a class="headerlink" href="#generation" title="Link to this heading"></a></h2>
+<p>Finally, the retrieved relevant information will be feed back into the LLMs to generate responses.</p>
+<figure class="align-center" id="fig-generator">
+<img alt="_images/generator.png" src="_images/generator.png" />
+</figure>
 </section>
 </section>
 
@@ -156,7 +728,7 @@ into smaller, manageable pieces (chunks) that can be efficiently retrieved and u
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 16, 2024.
+      <span class="lastupdated">Last updated on Dec 17, 2024.
       </span></p>
   </div>
 

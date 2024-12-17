@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 16, 2024}
+\date{December 17, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -2996,6 +2996,16 @@ The model is “augmented” with the retrieved information, which reduces hallu
 
 \section{Indexing}
 \label{\detokenize{rag:indexing}}
+\sphinxAtStartPar
+The indexing processes raw text or other forms of unstructured data and creates an efficient structure
+(called an index) that allows for fast and accurate retrieval by the retriever when a query is made.
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{indexer}.png}
+\end{figure}
+
 
 \subsection{Chunking}
 \label{\detokenize{rag:chunking}}
@@ -3003,34 +3013,1141 @@ The model is “augmented” with the retrieved information, which reduces hallu
 Chunking in Retrieval\sphinxhyphen{}Augmented Generation (RAG) involves splitting documents or knowledge bases
 into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).
 
-
-\subsection{Embedding}
-\label{\detokenize{rag:embedding}}
-
-\subsection{Vector Database}
-\label{\detokenize{rag:vector-database}}
-
-\section{Retrieval}
-\label{\detokenize{rag:retrieval}}
 \sphinxAtStartPar
-Common retrieval methods:
+Below are the common chunking strategies used in RAG workflows:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Fixed\sphinxhyphen{}Length Chunking}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Sparse Search: Traditional keyword\sphinxhyphen{}based retrieval (e.g., TF\sphinxhyphen{}IDF, BM25).
+Chunks are created with a predefined, fixed length (e.g., 200 words or 512 tokens).
 
 \item {} 
 \sphinxAtStartPar
-Dense Retrieval: Vector\sphinxhyphen{}based search using embeddings (e.g., FAISS, Pinecone).
+Simple and easy to implement but might split content mid\sphinxhyphen{}sentence or lose semantic coherence.
 
 \end{itemize}
 
 \sphinxAtStartPar
+\sphinxstylestrong{Example}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{fixed\PYGZus{}length\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{words} \PYG{o}{=} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{words}\PYG{p}{[}\PYG{n}{i}\PYG{p}{:}\PYG{n}{i} \PYG{o}{+} \PYG{n}{chunk\PYGZus{}size}\PYG{p}{]}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{words}\PYG{p}{)}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}size}\PYG{p}{)}
+    \PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Example Usage}
+\PYG{n}{document} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{This is a sample document with multiple sentences to demonstrate fixed\PYGZhy{}length chunking.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{chunks} \PYG{o}{=} \PYG{n}{fixed\PYGZus{}length\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{document}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{)}
+\PYG{k}{for} \PYG{n}{idx}\PYG{p}{,} \PYG{n}{chunk} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Chunk }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{idx}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chunk}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Output}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Chunk 1: This is a sample document with multiple sentences to demonstrate
+
+\item {} 
+\sphinxAtStartPar
+Chunk 2: fixed\sphinxhyphen{}length chunking.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Sliding Window Chunking}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Creates overlapping chunks to preserve context across splits.
+
+\item {} 
+\sphinxAtStartPar
+Ensures important information in overlapping regions is retained.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Example}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{sliding\PYGZus{}window\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{overlap\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{words} \PYG{o}{=} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}
+    \PYG{n}{chunks} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{words}\PYG{p}{)}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}size} \PYG{o}{\PYGZhy{}} \PYG{n}{overlap\PYGZus{}size}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n}{chunk} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{words}\PYG{p}{[}\PYG{n}{i}\PYG{p}{:}\PYG{n}{i} \PYG{o}{+} \PYG{n}{chunk\PYGZus{}size}\PYG{p}{]}\PYG{p}{)}
+        \PYG{n}{chunks}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{chunk}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{chunks}
+
+\PYG{c+c1}{\PYGZsh{} Example Usage}
+\PYG{n}{document} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{This is a sample document with multiple sentences to demonstrate sliding window chunking.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{chunks} \PYG{o}{=} \PYG{n}{sliding\PYGZus{}window\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{document}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{overlap\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{k}{for} \PYG{n}{idx}\PYG{p}{,} \PYG{n}{chunk} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Chunk }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{idx}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chunk}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{description}
+\sphinxlineitem{\sphinxstylestrong{Output}:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Chunk 1: This is a sample document with multiple sentences to demonstrate
+
+\item {} 
+\sphinxAtStartPar
+Chunk 2: with multiple sentences to demonstrate sliding window chunking.
+
+\item {} 
+\sphinxAtStartPar
+Chunk 3: sliding window chunking.
+
+\end{itemize}
+
+\end{description}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Semantic Chunking}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Splits text based on natural language boundaries such as paragraphs, sentences, or specific delimiters (e.g., headings).
+
+\item {} 
+\sphinxAtStartPar
+Retains semantic coherence, ideal for better retrieval and generation accuracy.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Example}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{nltk}
+\PYG{n}{nltk}\PYG{o}{.}\PYG{n}{download}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{punkt\PYGZus{}tab}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{semantic\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{sentence\PYGZus{}len}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{sentences} \PYG{o}{=} \PYG{n}{nltk}\PYG{o}{.}\PYG{n}{sent\PYGZus{}tokenize}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}
+
+    \PYG{n}{chunks} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{n}{chunk} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{for} \PYG{n}{sentence} \PYG{o+ow}{in} \PYG{n}{sentences}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{chunk}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{sentence}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{sentence\PYGZus{}len}\PYG{p}{:}
+            \PYG{n}{chunk} \PYG{o}{+}\PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+} \PYG{n}{sentence}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{chunks}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{chunk}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+            \PYG{n}{chunk} \PYG{o}{=} \PYG{n}{sentence}
+    \PYG{k}{if} \PYG{n}{chunk}\PYG{p}{:}
+        \PYG{n}{chunks}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{chunk}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{chunks}
+
+\PYG{c+c1}{\PYGZsh{} Example Usage}
+\PYG{n}{document} \PYG{o}{=} \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{This is a sample document. It is split based on semantic boundaries. }\PYG{l+s+s2}{\PYGZdq{}}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Each chunk will have coherent meaning for better retrieval.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{chunks} \PYG{o}{=} \PYG{n}{semantic\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{document}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
+\PYG{k}{for} \PYG{n}{idx}\PYG{p}{,} \PYG{n}{chunk} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Chunk }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{idx}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chunk}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Output}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Chunk 1: This is a sample document.
+
+\item {} 
+\sphinxAtStartPar
+Chunk 2: It is split based on semantic boundaries.
+
+\item {} 
+\sphinxAtStartPar
+Chunk 3: Each chunk will have coherent meaning for better retrieval.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Dynamic Chunking}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Adapts chunk sizes based on content properties such as token count, content density, or specific criteria.
+
+\item {} 
+\sphinxAtStartPar
+Useful when handling diverse document types with varying information density.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Example}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{transformers} \PYG{k+kn}{import} \PYG{n}{AutoTokenizer}
+
+\PYG{k}{def} \PYG{n+nf}{dynamic\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{max\PYGZus{}tokens}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,} \PYG{n}{tokenizer\PYGZus{}name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bert\PYGZhy{}base\PYGZhy{}uncased}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{AutoTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{n}{tokenizer\PYGZus{}name}\PYG{p}{)}
+    \PYG{n}{tokens} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{chunks} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{)}\PYG{p}{,} \PYG{n}{max\PYGZus{}tokens}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n}{chunk} \PYG{o}{=} \PYG{n}{tokens}\PYG{p}{[}\PYG{n}{i}\PYG{p}{:}\PYG{n}{i} \PYG{o}{+} \PYG{n}{max\PYGZus{}tokens}\PYG{p}{]}
+        \PYG{n}{chunks}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{(}\PYG{n}{chunk}\PYG{p}{)}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{chunks}
+
+\PYG{c+c1}{\PYGZsh{} Example Usage}
+\PYG{n}{document} \PYG{o}{=} \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{This is a sample document to demonstrate dynamic chunking. }\PYG{l+s+s2}{\PYGZdq{}}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The tokenizer adapts the chunks based on token limits.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{chunks} \PYG{o}{=} \PYG{n}{dynamic\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{document}\PYG{p}{,} \PYG{n}{max\PYGZus{}tokens}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{)}
+\PYG{k}{for} \PYG{n}{idx}\PYG{p}{,} \PYG{n}{chunk} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Chunk }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{idx}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chunk}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{description}
+\sphinxlineitem{\sphinxstylestrong{Output}:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Chunk 1: this is a sample document to demonstrate dynamic chunking
+
+\item {} 
+\sphinxAtStartPar
+Chunk 2: . the tokenizer adapts the chunks based on
+
+\item {} 
+\sphinxAtStartPar
+Chunk 3: token limits.
+
+\end{itemize}
+
+\end{description}
+
+\end{enumerate}
+
+\sphinxAtStartPar
+Comparison of Strategies
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Strategy
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Pros
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Cons
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Fixed\sphinxhyphen{}Length Chunking
+&
+\sphinxAtStartPar
+Simple, fast
+&
+\sphinxAtStartPar
+May split text mid\sphinxhyphen{}sentence
+or lose coherence.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Sliding Window Chunking
+&
+\sphinxAtStartPar
+Preserves context
+&
+\sphinxAtStartPar
+Overlapping increases redundancy.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Semantic Chunking
+&
+\sphinxAtStartPar
+Coherent chunks
+&
+\sphinxAtStartPar
+Requires NLP preprocessing.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Dynamic Chunking
+&
+\sphinxAtStartPar
+Adapts to content
+&
+\sphinxAtStartPar
+Computationally intensive.
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+Each strategy has its strengths and weaknesses. Select based on the task requirements, context, and available computational resources.
+
+\sphinxAtStartPar
+The optimal chunk length depends on the type of content being processed and the intended use case.
+Below are recommendations for chunk lengths based on different context types, along with their rationale:
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Context Type
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Chunk Length (Tokens)
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Rationale
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+FAQs or Short Texts
+&
+\sphinxAtStartPar
+100\sphinxhyphen{}200
+&
+\sphinxAtStartPar
+Short enough to handle specific queries.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Articles or Blog Posts
+&
+\sphinxAtStartPar
+300\sphinxhyphen{}500
+&
+\sphinxAtStartPar
+Covers logical sections while fitting multiple
+chunks in the LLM context.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Research Papers or Reports
+&
+\sphinxAtStartPar
+500\sphinxhyphen{}700
+&
+\sphinxAtStartPar
+Captures detailed sections like methodology
+or results.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Legal or Technical Texts
+&
+\sphinxAtStartPar
+200\sphinxhyphen{}300
+&
+\sphinxAtStartPar
+Maintains precision due to dense information.
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+The valuating Chunking Strategies for Retrieval can be found at: \sphinxurl{https://research.trychroma.com/evaluating-chunking}
+
+
+\subsection{Types of Indexing}
+\label{\detokenize{rag:types-of-indexing}}
+\sphinxAtStartPar
+The embedding methods we introduced in Chapter {\hyperref[\detokenize{embedding:embedding}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Word and Sentence Embedding}}}}} can be applied here to convert each chunk
+into embeddings and create indexing. These indexings(embeddings) will be used to retrieve relevant documents or information.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Sparse Indexing:
+
+\sphinxAtStartPar
+Uses traditional keyword\sphinxhyphen{}based methods (e.g., TF\sphinxhyphen{}IDF, BM25).
+Index stores the frequency of terms and their associations with documents.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Advantages:Easy to understand and deploy and works well for exact matches or keyword\sphinxhyphen{}heavy queries.
+
+\item {} 
+\sphinxAtStartPar
+Disadvantages: Struggles with semantic understanding or paraphrased queries.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Dense Indexing:
+
+\sphinxAtStartPar
+Uses vector embeddings to capture semantic meaning. Documents are represented as vectors in a
+high\sphinxhyphen{}dimensional space, enabling similarity search.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Advantages: Excellent for semantic search, handling synonyms, and paraphrasing.
+
+\item {} 
+\sphinxAtStartPar
+Disadvantages: Requires more computational resources for storage and retrieval.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Hybrid Indexing:
+
+\sphinxAtStartPar
+Combines sparse and dense indexing for more robust search capabilities. For example, Elasticsearch
+can integrate BM25 with vector search.
+
+\end{itemize}
+
+
+\subsection{Vector Database}
+\label{\detokenize{rag:vector-database}}
+\sphinxAtStartPar
+Vector databases are essential for Retrieval\sphinxhyphen{}Augmented Generation (RAG) systems, enabling
+efficient similarity search on dense vector embeddings. Below is a comprehensive overview
+of popular vector databases for RAG workflows:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{FAISS (Facebook AI Similarity Search)}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} An open\sphinxhyphen{}source library developed by Facebook AI for efficient similarity search and clustering of dense vectors.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} High performance and scalability.
+\sphinxhyphen{} Supports various indexing methods like \sphinxcode{\sphinxupquote{Flat}}, \sphinxcode{\sphinxupquote{IVF}}, and \sphinxcode{\sphinxupquote{HNSW}}.
+\sphinxhyphen{} GPU acceleration for faster searches.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Research and prototyping.
+\sphinxhyphen{} Scenarios requiring custom implementations.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Limitations}:
+\sphinxhyphen{} File\sphinxhyphen{}based storage; lacks a built\sphinxhyphen{}in distributed or managed cloud solution.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://github.com/facebookresearch/faiss}{FAISS GitHub}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Pinecone}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} A fully managed vector database designed for production\sphinxhyphen{}scale workloads.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Scalable and serverless architecture.
+\sphinxhyphen{} Automatic scaling and optimization of indexes.
+\sphinxhyphen{} Hybrid search (combining vector and keyword search).
+\sphinxhyphen{} Integrates with popular frameworks like LangChain and OpenAI.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Enterprise\sphinxhyphen{}grade applications.
+\sphinxhyphen{} Handling large datasets with minimal operational overhead.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://www.pinecone.io/}{Pinecone}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Weaviate}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} An open\sphinxhyphen{}source vector search engine with a strong focus on modularity and customization.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Supports hybrid search and symbolic reasoning.
+\sphinxhyphen{} Schema\sphinxhyphen{}based data organization.
+\sphinxhyphen{} Plugin support for pre\sphinxhyphen{}built and custom vectorization modules.
+\sphinxhyphen{} Cloud\sphinxhyphen{}managed and self\sphinxhyphen{}hosted options.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Applications requiring hybrid search capabilities.
+\sphinxhyphen{} Knowledge graphs and semantically rich data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://weaviate.io/}{Weaviate}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Milvus}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} An open\sphinxhyphen{}source, high\sphinxhyphen{}performance vector database designed for similarity search on large datasets.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Distributed and scalable architecture.
+\sphinxhyphen{} Integration with FAISS, Annoy, and HNSW indexing techniques.
+\sphinxhyphen{} Built\sphinxhyphen{}in support for time travel queries (searching historical data).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Video, audio, and image search applications.
+\sphinxhyphen{} Large\sphinxhyphen{}scale datasets requiring real\sphinxhyphen{}time indexing and retrieval.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://milvus.io/}{Milvus}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Qdrant}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} An open\sphinxhyphen{}source, lightweight vector database focused on ease of use and modern developer needs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Supports HNSW for efficient vector search.
+\sphinxhyphen{} Advanced filtering capabilities for combining metadata with vector queries.
+\sphinxhyphen{} REST and gRPC APIs for integration.
+\sphinxhyphen{} Docker\sphinxhyphen{}ready deployment.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Scenarios requiring metadata\sphinxhyphen{}rich search.
+\sphinxhyphen{} Lightweight deployments with simplicity in mind.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://qdrant.tech/}{Qdrant}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Redis (with Vector Similarity Search Module)}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} A popular in\sphinxhyphen{}memory database with a module for vector similarity search.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Combines vector search with traditional key\sphinxhyphen{}value storage.
+\sphinxhyphen{} Supports hybrid search and metadata filtering.
+\sphinxhyphen{} High throughput and low latency due to in\sphinxhyphen{}memory architecture.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Applications requiring real\sphinxhyphen{}time, low\sphinxhyphen{}latency search.
+\sphinxhyphen{} Integrating vector search with existing Redis\sphinxhyphen{}based systems.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://redis.io/docs/stack/search/}{Redis Vector Search}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Zilliz}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} A cloud\sphinxhyphen{}native vector database built on Milvus for scalable and managed vector storage.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Fully managed service for vector data.
+\sphinxhyphen{} Seamless scaling and distributed indexing.
+\sphinxhyphen{} Integration with machine learning pipelines.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Large\sphinxhyphen{}scale enterprise deployments.
+\sphinxhyphen{} Cloud\sphinxhyphen{}native solutions with minimal infrastructure management.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://zilliz.com/}{Zilliz}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Vespa}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} A real\sphinxhyphen{}time serving engine supporting vector and hybrid search.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Combines vector search with advanced ranking and filtering.
+\sphinxhyphen{} Scales to large datasets with support for distributed clusters.
+\sphinxhyphen{} Powerful query configuration options.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} E\sphinxhyphen{}commerce and recommendation systems.
+\sphinxhyphen{} Applications with complex ranking requirements.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://vespa.ai/}{Vespa}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Chroma}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}:
+\sphinxhyphen{} An open\sphinxhyphen{}source, user\sphinxhyphen{}friendly vector database built for LLMs and embedding\sphinxhyphen{}based applications.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Features}:
+\sphinxhyphen{} Designed specifically for RAG workflows.
+\sphinxhyphen{} Simple Python API for seamless integration with AI models.
+\sphinxhyphen{} Efficient and customizable vector storage for embedding data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Use Cases}:
+\sphinxhyphen{} Prototyping and experimentation for LLM\sphinxhyphen{}based applications.
+\sphinxhyphen{} Lightweight deployments for small to medium\sphinxhyphen{}scale RAG systems.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Official Website}: \sphinxhref{https://www.trychroma.com/}{Chroma}
+
+\end{itemize}
+
+\end{enumerate}
+
+\sphinxAtStartPar
+Comparison of Vector Databases:
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTTTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Database}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Open Source}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Managed Service}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Key Features}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Best For}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+FAISS
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+High performance, GPU acceleration
+&
+\sphinxAtStartPar
+Research, prototyping
+\\
+\sphinxhline
+\sphinxAtStartPar
+Pinecone
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+Serverless, automatic scaling
+&
+\sphinxAtStartPar
+Enterprise\sphinxhyphen{}scale applications
+\\
+\sphinxhline
+\sphinxAtStartPar
+Weaviate
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+Hybrid search, modularity
+&
+\sphinxAtStartPar
+Knowledge graphs
+\\
+\sphinxhline
+\sphinxAtStartPar
+Milvus
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Distributed, high performance
+&
+\sphinxAtStartPar
+Large\sphinxhyphen{}scale datasets
+\\
+\sphinxhline
+\sphinxAtStartPar
+Qdrant
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Lightweight, metadata filtering
+&
+\sphinxAtStartPar
+Small to medium\sphinxhyphen{}scale apps
+\\
+\sphinxhline
+\sphinxAtStartPar
+Redis
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+In\sphinxhyphen{}memory performance, hybrid search
+&
+\sphinxAtStartPar
+Real\sphinxhyphen{}time apps
+\\
+\sphinxhline
+\sphinxAtStartPar
+Zilliz
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+Fully managed Milvus
+&
+\sphinxAtStartPar
+Enterprise cloud solutions
+\\
+\sphinxhline
+\sphinxAtStartPar
+Vespa
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Hybrid search, real\sphinxhyphen{}time ranking
+&
+\sphinxAtStartPar
+E\sphinxhyphen{}commerce, recommendations
+\\
+\sphinxhline
+\sphinxAtStartPar
+Chroma
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+LLM\sphinxhyphen{}focused, simple API
+&
+\sphinxAtStartPar
+Prototyping, lightweight apps
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+Choosing a Vector Database
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{For Research or Small Projects}: FAISS, Qdrant, Milvus, or Chroma.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{For Enterprise or Cloud\sphinxhyphen{}Native Workflows}: Pinecone, Zilliz, or Weaviate.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{For Real\sphinxhyphen{}Time Use Cases}: Redis or Vespa.
+
+\end{itemize}
+
+\sphinxAtStartPar
+Each database has unique strengths and is suited for specific RAG use cases. The choice depends on scalability, integration needs, and budget.
+
+
+\section{Retrieval}
+\label{\detokenize{rag:retrieval}}
+\sphinxAtStartPar
 The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics[scale=0.5]{{retriever}.png}
+\end{figure}
+
+
+\subsection{Common retrieval methods}
+\label{\detokenize{rag:common-retrieval-methods}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Sparse Vector Search: Traditional keyword\sphinxhyphen{}based retrieval (e.g., TF\sphinxhyphen{}IDF, BM25).
+
+\item {} 
+\sphinxAtStartPar
+Dense Vector Search: Vector\sphinxhyphen{}based search using embeddings e.g.
+\begin{itemize}
+\item {} \begin{description}
+\sphinxlineitem{Approximate Nearest Neighbor (ANN) Search:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+HNSW (Hierarchical Navigable Small World): Graph\sphinxhyphen{}based approach
+
+\item {} 
+\sphinxAtStartPar
+IVF (Inverted File Index): Clusters embeddings into groups and searches within relevant clusters.
+
+\end{itemize}
+
+\end{description}
+
+\item {} 
+\sphinxAtStartPar
+Exact Nearest Neighbor Search: Computes similarities exhaustively for all vectors in the corpus
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Hybrid Search: the combination of Sparse and Dense vector search.
+
+\end{itemize}
+
+\sphinxAtStartPar
+Summary of Common Algorithms:
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Metric/Algorithm}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Purpose}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Common Use}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstylestrong{TF\sphinxhyphen{}IDF}
+&
+\sphinxAtStartPar
+Keyword matching with term weighting.
+&
+\sphinxAtStartPar
+Effective for small\sphinxhyphen{}scale or structured corpora.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{BM25}
+&
+\sphinxAtStartPar
+Advanced keyword matching with term frequency
+saturation and document length normalization.
+&
+\sphinxAtStartPar
+Widely used in sparse search; default in tools like
+Elasticsearch and Solr.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Cosine Similarity}
+&
+\sphinxAtStartPar
+Measures orientation (ignores magnitude).
+&
+\sphinxAtStartPar
+Widely used; works well with normalized vectors.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Dot Product Similarity}
+&
+\sphinxAtStartPar
+Measures magnitude and direction.
+&
+\sphinxAtStartPar
+Preferred in embeddings like OpenAI’s models.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Euclidean Distance}
+&
+\sphinxAtStartPar
+Measures absolute distance between vectors.
+&
+\sphinxAtStartPar
+Less common but used in some specific cases.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{HNSW (ANN)}
+&
+\sphinxAtStartPar
+Fast and scalable nearest neighbor search.
+&
+\sphinxAtStartPar
+Default for large\sphinxhyphen{}scale systems (e.g., FAISS).
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{IVF (ANN)}
+&
+\sphinxAtStartPar
+Efficient clustering\sphinxhyphen{}based search.
+&
+\sphinxAtStartPar
+Often combined with product quantization.
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\subsection{Reciprocal Rank Fusion}
+\label{\detokenize{rag:reciprocal-rank-fusion}}
+\sphinxAtStartPar
+Reciprocal Rank Fusion (RRF) is a ranking technique commonly used in information retrieval
+and ensemble learning. Although it is not specific to large language models (LLMs), it can
+be applied to scenarios where multiple ranking systems (or scoring mechanisms) produce
+different rankings, and you want to combine them into a single, unified ranking.
+\begin{description}
+\sphinxlineitem{The reciprocal rank of an item in a ranked list is calculated as \(\frac{1}{k+r}\), where}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+r is the rank of the item (1 for the top rank, 2 for the second rank, etc.).
+
+\item {} 
+\sphinxAtStartPar
+k is a small constant (often set to 60 or another fixed value) to control how much weight is given to higher ranks.
+
+\end{itemize}
+
+\end{description}
+
+\sphinxAtStartPar
+Example:
+
+\sphinxAtStartPar
+Suppose two retrieval models give ranked lists for query responses:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Model 1 ranks documents as: {[}A,B,C,D{]}
+
+\item {} 
+\sphinxAtStartPar
+Model 2 ranks documents as: {[}B,A,D,C{]}
+
+\end{itemize}
+
+\sphinxAtStartPar
+RRF combines these rankings by assigning each document a combined score:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Document A: \(\frac{1}{60+1} +\frac{1}{60+2}=0.03252247488101534\)
+
+\item {} 
+\sphinxAtStartPar
+Document B: \(\frac{1}{60+2} +\frac{1}{60+1}=0.03252247488101534\)
+
+\item {} 
+\sphinxAtStartPar
+Document C: \(\frac{1}{60+3} +\frac{1}{60+4}=0.03149801587301587\)
+
+\item {} 
+\sphinxAtStartPar
+Document D: \(\frac{1}{60+4} +\frac{1}{60+3}=0.03149801587301587\)
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{defaultdict}
+
+\PYG{k}{def} \PYG{n+nf}{reciprocal\PYGZus{}rank\PYGZus{}fusion}\PYG{p}{(}\PYG{n}{ranked\PYGZus{}results}\PYG{p}{:} \PYG{n+nb}{list}\PYG{p}{[}\PYG{n+nb}{list}\PYG{p}{]}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{60}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Fuse rank from multiple retrieval systems using Reciprocal Rank Fusion.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{    ranked\PYGZus{}results: Ranked results from different retrieval system.}
+\PYG{l+s+sd}{    k (int): A constant used in the RRF formula (default is 60).}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{    Tuple of list of sorted documents by score and sorted documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{c+c1}{\PYGZsh{} Dictionary to store RRF mapping}
+    \PYG{n}{rrf\PYGZus{}map} \PYG{o}{=} \PYG{n}{defaultdict}\PYG{p}{(}\PYG{n+nb}{float}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Calculate RRF score for each result in each list}
+    \PYG{k}{for} \PYG{n}{rank\PYGZus{}list} \PYG{o+ow}{in} \PYG{n}{ranked\PYGZus{}results}\PYG{p}{:}
+        \PYG{k}{for} \PYG{n}{rank}\PYG{p}{,} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{rank\PYGZus{}list}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{:}
+            \PYG{n}{rrf\PYGZus{}map}\PYG{p}{[}\PYG{n}{item}\PYG{p}{]} \PYG{o}{+}\PYG{o}{=} \PYG{l+m+mi}{1} \PYG{o}{/} \PYG{p}{(}\PYG{n}{rank} \PYG{o}{+} \PYG{n}{k}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Sort items based on their RRF scores in descending order}
+    \PYG{n}{sorted\PYGZus{}items} \PYG{o}{=} \PYG{n+nb}{sorted}\PYG{p}{(}\PYG{n}{rrf\PYGZus{}map}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{reverse}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Return tuple of list of sorted documents by score and sorted documents}
+    \PYG{k}{return} \PYG{n}{sorted\PYGZus{}items}\PYG{p}{,} \PYG{p}{[}\PYG{n}{item} \PYG{k}{for} \PYG{n}{item}\PYG{p}{,} \PYG{n}{score} \PYG{o+ow}{in} \PYG{n}{sorted\PYGZus{}items}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Example ranked lists from different sources}
+\PYG{n}{ranked\PYGZus{}a} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{C}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{n}{ranked\PYGZus{}b} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{C}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+
+
+\PYG{c+c1}{\PYGZsh{} Combine the lists using RRF}
+\PYG{n}{combined\PYGZus{}list} \PYG{o}{=} \PYG{n}{reciprocal\PYGZus{}rank\PYGZus{}fusion}\PYG{p}{(}\PYG{p}{[}\PYG{n}{ranked\PYGZus{}a}\PYG{p}{,} \PYG{n}{ranked\PYGZus{}b}\PYG{p}{]}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{combined\PYGZus{}list}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{0.03252247488101534}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{0.03252247488101534}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{C}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{0.03149801587301587}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{0.03149801587301587}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{C}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 
 \section{Generation}
 \label{\detokenize{rag:generation}}
+\sphinxAtStartPar
+Finally, the retrieved relevant information will be feed back into the LLMs to generate responses.
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{generator}.png}
+\end{figure}
+
 \sphinxstepscope
 
 
