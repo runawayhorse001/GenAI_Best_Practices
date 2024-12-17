@@ -67,10 +67,20 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#embedding-model-fine-tuning">6.3. Embedding Model Fine-Tuning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#results-comparison">6.3.1. Results Comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-dataset">6.3.1. Prepare Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-and-evaluate-pretrained-baseline-model">6.3.2. Import and Evaluate Pretrained Baseline Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loss-function-with-matryoshka-representation">6.3.3. Loss Function with Matryoshka Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-tune-embedding-model">6.3.4. Fine-tune Embedding Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#evaluate-fine-tuned-model">6.3.5. Evaluate Fine-tuned Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results-comparison">6.3.6. Results Comparison</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#llm-fine-tuning">6.4. LLM Fine-Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llm-fine-tuning">6.4. LLM Fine-Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-dataset-and-pretrained-model">6.4.1. Load Dataset and Pretrained Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-tuning-configuration">6.4.2. Fine-tuning Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-tune-model">6.4.3. Fine-tune model</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
@@ -304,8 +314,23 @@ primarily focused on updating the entire model or selected components.</p>
 <section id="embedding-model-fine-tuning">
 <h2><span class="section-number">6.3. </span>Embedding Model Fine-Tuning<a class="headerlink" href="#embedding-model-fine-tuning" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="reference.html#finetuneembedding" id="id2"><span>[fineTuneEmbedding]</span></a></p>
+<section id="prepare-dataset">
+<h3><span class="section-number">6.3.1. </span>Prepare Dataset<a class="headerlink" href="#prepare-dataset" title="Link to this heading"></a></h3>
+</section>
+<section id="import-and-evaluate-pretrained-baseline-model">
+<h3><span class="section-number">6.3.2. </span>Import and Evaluate Pretrained Baseline Model<a class="headerlink" href="#import-and-evaluate-pretrained-baseline-model" title="Link to this heading"></a></h3>
+</section>
+<section id="loss-function-with-matryoshka-representation">
+<h3><span class="section-number">6.3.3. </span>Loss Function with Matryoshka Representation<a class="headerlink" href="#loss-function-with-matryoshka-representation" title="Link to this heading"></a></h3>
+</section>
+<section id="fine-tune-embedding-model">
+<h3><span class="section-number">6.3.4. </span>Fine-tune Embedding Model<a class="headerlink" href="#fine-tune-embedding-model" title="Link to this heading"></a></h3>
+</section>
+<section id="evaluate-fine-tuned-model">
+<h3><span class="section-number">6.3.5. </span>Evaluate Fine-tuned Model<a class="headerlink" href="#evaluate-fine-tuned-model" title="Link to this heading"></a></h3>
+</section>
 <section id="results-comparison">
-<h3><span class="section-number">6.3.1. </span>Results Comparison<a class="headerlink" href="#results-comparison" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.6. </span>Results Comparison<a class="headerlink" href="#results-comparison" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Dimension</p></th>
@@ -346,7 +371,16 @@ primarily focused on updating the entire model or selected components.</p>
 </section>
 <section id="llm-fine-tuning">
 <h2><span class="section-number">6.4. </span>LLM Fine-Tuning<a class="headerlink" href="#llm-fine-tuning" title="Link to this heading"></a></h2>
+<section id="load-dataset-and-pretrained-model">
+<h3><span class="section-number">6.4.1. </span>Load Dataset and Pretrained Model<a class="headerlink" href="#load-dataset-and-pretrained-model" title="Link to this heading"></a></h3>
+</section>
+<section id="fine-tuning-configuration">
+<h3><span class="section-number">6.4.2. </span>Fine-tuning Configuration<a class="headerlink" href="#fine-tuning-configuration" title="Link to this heading"></a></h3>
+</section>
+<section id="fine-tune-model">
+<h3><span class="section-number">6.4.3. </span>Fine-tune model<a class="headerlink" href="#fine-tune-model" title="Link to this heading"></a></h3>
 <p><a class="reference internal" href="reference.html#finetunellm" id="id3"><span>[fineTuneLLM]</span></a></p>
+</section>
 </section>
 </section>
 

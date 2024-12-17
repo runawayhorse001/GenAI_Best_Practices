@@ -75,8 +75,16 @@
 \contentsline {subsection}{\numberline {6.2.3}\sphinxstylestrong {Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}}{65}{subsection.6.2.3}%
 \contentsline {subsection}{\numberline {6.2.4}\sphinxstylestrong {Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}}{65}{subsection.6.2.4}%
 \contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{65}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Results Comparison}{66}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{66}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{66}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{66}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{66}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{66}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{66}{subsection.6.3.6}%
 \contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{66}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{66}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{66}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{66}{subsection.6.4.3}%
 \contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{67}{chapter.7}%
 \contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{69}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Statistical Scorers}{69}{section.8.1}%

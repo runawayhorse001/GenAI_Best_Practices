@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  17 DEC 2024 14:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  17 DEC 2024 14:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,7 +825,7 @@ Package hyperref Info: Link coloring ON on input line 72.
 \openout5 = `GenAI.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 80.
-<logo.png, id=342, 496.85625pt x 308.15125pt>
+<logo.png, id=362, 496.85625pt x 308.15125pt>
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 8
 0.
 
@@ -938,12 +938,12 @@ File: ts1txtt.fd 2000/12/15 v3.1
 [5
 
 ]
-<vector.png, id=499, 720.44156pt x 458.46281pt>
+<vector.png, id=524, 720.44156pt x 458.46281pt>
 File: vector.png Graphic file (type png)
 <use vector.png>
 Package pdftex.def Info: vector.png  used on input line 263.
 (pdftex.def)             Requested size: 469.75453pt x 298.94868pt.
-<1Bauo.png, id=500, 697.8572pt x 186.6975pt>
+<1Bauo.png, id=525, 697.8572pt x 186.6975pt>
 File: 1Bauo.png Graphic file (type png)
 <use 1Bauo.png>
 Package pdftex.def Info: 1Bauo.png  used on input line 279.
@@ -1115,12 +1115,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [16]
-<runtime.png, id=600, 1395.71437pt x 788.9475pt>
+<runtime.png, id=626, 1395.71437pt x 788.9475pt>
 File: runtime.png Graphic file (type png)
 <use runtime.png>
 Package pdftex.def Info: runtime.png  used on input line 1344.
 (pdftex.def)             Requested size: 469.75502pt x 265.52997pt.
-<T4.png, id=601, 1395.71437pt x 788.9475pt>
+<T4.png, id=627, 1395.71437pt x 788.9475pt>
 File: T4.png Graphic file (type png)
 <use T4.png>
 Package pdftex.def Info: T4.png  used on input line 1344.
@@ -1144,17 +1144,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [17 <./runtime.png> <./T4.png>]
-<ollama_download.png, id=610, 959.83594pt x 301.125pt>
+<ollama_download.png, id=636, 959.83594pt x 301.125pt>
 File: ollama_download.png Graphic file (type png)
 <use ollama_download.png>
 Package pdftex.def Info: ollama_download.png  used on input line 1433.
 (pdftex.def)             Requested size: 469.75253pt x 147.37793pt.
-<ollama_serve.png, id=611, 808.52063pt x 186.6975pt>
+<ollama_serve.png, id=637, 808.52063pt x 186.6975pt>
 File: ollama_serve.png Graphic file (type png)
 <use ollama_serve.png>
 Package pdftex.def Info: ollama_serve.png  used on input line 1453.
 (pdftex.def)             Requested size: 469.75655pt x 108.47264pt.
-<pull_models.png, id=612, 808.52063pt x 295.85532pt>
+<pull_models.png, id=638, 808.52063pt x 295.85532pt>
 File: pull_models.png Graphic file (type png)
 <use pull_models.png>
 Package pdftex.def Info: pull_models.png  used on input line 1473.
@@ -1191,7 +1191,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [20]
 Chapter 3.
-<embedding_diagram.png, id=638, 601.4972pt x 356.83313pt>
+<embedding_diagram.png, id=663, 601.4972pt x 356.83313pt>
 File: embedding_diagram.png Graphic file (type png)
 <use embedding_diagram.png>
 Package pdftex.def Info: embedding_diagram.png  used on input line 1584.
@@ -1484,7 +1484,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [46]
 Chapter 5.
-<RAG_diagram.png, id=764, 1810.51407pt x 813.0375pt>
+<RAG_diagram.png, id=789, 1810.51407pt x 813.0375pt>
 File: RAG_diagram.png Graphic file (type png)
 <use RAG_diagram.png>
 Package pdftex.def Info: RAG_diagram.png  used on input line 3015.
@@ -1494,7 +1494,7 @@ Package pdftex.def Info: RAG_diagram.png  used on input line 3015.
 [47
 
  <./RAG_diagram.png>]
-<indexer.png, id=774, 1252.68pt x 238.64156pt>
+<indexer.png, id=799, 1252.68pt x 238.64156pt>
 File: indexer.png Graphic file (type png)
 <use indexer.png>
 Package pdftex.def Info: indexer.png  used on input line 3064.
@@ -1539,7 +1539,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3423--3423
 []\T1/qtm/m/n/10.95 Le-gal or Tech-ni-cal
  []
 
-<late_chunking.png, id=794, 792.9625pt x 686.565pt>
+<late_chunking.png, id=819, 792.9625pt x 686.565pt>
 File: late_chunking.png Graphic file (type png)
 <use late_chunking.png>
 Package pdftex.def Info: late_chunking.png  used on input line 3437.
@@ -1625,7 +1625,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [55]
-<retriever.png, id=840, 555.57562pt x 776.14969pt>
+<retriever.png, id=866, 555.57562pt x 776.14969pt>
 File: retriever.png Graphic file (type png)
 <use retriever.png>
 Package pdftex.def Info: retriever.png  used on input line 3968.
@@ -1686,7 +1686,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [57]
-<generator.png, id=851, 1492.8272pt x 204.765pt>
+<generator.png, id=876, 1492.8272pt x 204.765pt>
 File: generator.png Graphic file (type png)
 <use generator.png>
 Package pdftex.def Info: generator.png  used on input line 4216.
@@ -1725,12 +1725,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 ]
 Chapter 6.
-<fine_tuning.png, id=865, 2402.9775pt x 837.1275pt>
+<fine_tuning.png, id=890, 2402.9775pt x 837.1275pt>
 File: fine_tuning.png Graphic file (type png)
 <use fine_tuning.png>
 Package pdftex.def Info: fine_tuning.png  used on input line 4235.
 (pdftex.def)             Requested size: 469.73372pt x 163.64157pt.
-<lora.png, id=867, 1204.5pt x 505.89pt>
+<lora.png, id=892, 1204.5pt x 505.89pt>
 File: lora.png Graphic file (type png)
 <use lora.png>
 Package pdftex.def Info: lora.png  used on input line 4256.
@@ -1738,12 +1738,12 @@ Package pdftex.def Info: lora.png  used on input line 4256.
 
 
 [61 <./fine_tuning.png (PNG copy)>]
-<peft_1.png, id=875, 840.13875pt x 576.65437pt>
+<peft_1.png, id=900, 840.13875pt x 576.65437pt>
 File: peft_1.png Graphic file (type png)
 <use peft_1.png>
 Package pdftex.def Info: peft_1.png  used on input line 4340.
 (pdftex.def)             Requested size: 469.75502pt x 322.43149pt.
-<peft_2.png, id=876, 837.88031pt x 516.42938pt>
+<peft_2.png, id=901, 837.88031pt x 516.42938pt>
 File: peft_2.png Graphic file (type png)
 <use peft_2.png>
 Package pdftex.def Info: peft_2.png  used on input line 4340.
@@ -1767,11 +1767,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [62 <./lora.png>]
-
-LaTeX Warning: Citation `reference:peft' on page 63 undefined on input line 434
-5.
-
-
 Overfull \hbox (1.82991pt too wide) in paragraph at lines 4476--4476
 []\T1/qtm/b/n/10.95 Method| 
  []
@@ -1882,19 +1877,22 @@ L3 programming layer <2024-05-27>
  ***********
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: 599F68C035211CA30DD2892A59D4CAF0;12404.
+
+Package rerunfilecheck Warning: File `GenAI.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `GenAI.out':
+(rerunfilecheck)             Before: A25FA6F5BA4B4850818418ABB96D9973;13526
+(rerunfilecheck)             After:  034DFBA7B51D228F1FAB114BE506B557;14095.
  ) 
 Here is how much of TeX's memory you used:
- 17563 strings out of 475544
- 296985 string characters out of 5777741
+ 17582 strings out of 475544
+ 297506 string characters out of 5777741
  2048905 words of memory out of 5000000
- 39549 multiletter control sequences out of 15000+600000
+ 39560 multiletter control sequences out of 15000+600000
  625197 words of font info for 100 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  72i,20n,83p,3152b,822s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1915,10 +1913,10 @@ public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txf
 onts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on GenAI.pdf (79 pages, 2949280 bytes).
+Output written on GenAI.pdf (79 pages, 2950288 bytes).
 PDF statistics:
- 1080 PDF objects out of 1200 (max. 8388607)
- 927 compressed objects within 10 object streams
- 249 named destinations out of 1000 (max. 500000)
- 783 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1111 PDF objects out of 1200 (max. 8388607)
+ 958 compressed objects within 10 object streams
+ 257 named destinations out of 1000 (max. 500000)
+ 823 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -219,6 +219,25 @@ Embedding Model Fine-Tuning
 
 [fineTuneEmbedding]_
 
+
+Prepare Dataset
+---------------
+
+
+Import and Evaluate Pretrained Baseline Model
+---------------------------------------------
+
+
+Loss Function with Matryoshka Representation
+--------------------------------------------
+
+
+Fine-tune Embedding Model 
+-------------------------
+
+Evaluate Fine-tuned Model
+-------------------------
+
 Results Comparison
 ------------------
 
@@ -238,6 +257,16 @@ Results Comparison
 
 LLM Fine-Tuning
 +++++++++++++++
+
+Load Dataset and Pretrained Model 
+---------------------------------
+
+Fine-tuning Configuration
+-------------------------
+
+
+Fine-tune model
+---------------
 
 [fineTuneLLM]_
 
