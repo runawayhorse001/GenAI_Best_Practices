@@ -54,17 +54,21 @@
 \contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{47}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Overview}{47}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Indexing}{48}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Chunking}{48}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Types of Indexing}{51}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Vector Database}{52}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Retrieval}{55}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Common retrieval methods}{55}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Reciprocal Rank Fusion}{56}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Generation}{57}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Fine Tuning}{59}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{61}{chapter.7}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{63}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers}{63}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{63}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{65}{chapter.9}%
-\contentsline {chapter}{Bibliography}{67}{chapter*.4}%
+\contentsline {subsection}{\numberline {5.2.1}Naive Chunking}{48}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Late Chunking}{51}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Types of Indexing}{51}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Vector Database}{53}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Retrieval}{56}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Common retrieval methods}{56}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Reciprocal Rank Fusion}{57}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Generation}{58}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{61}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Embedding Model Fine\sphinxhyphen {}Tuning}{61}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Results Comparison}{61}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}LLM Fine\sphinxhyphen {}Tuning}{61}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{63}{chapter.7}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{65}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers}{65}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{65}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{67}{chapter.9}%
+\contentsline {chapter}{Bibliography}{69}{chapter*.4}%

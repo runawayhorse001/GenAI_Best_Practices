@@ -188,8 +188,7 @@ The work of Wenqiang Feng was supported by the IMA, while working at IMA. Howeve
 and conclusions or recommendations expressed in this material are those of the author and do not necessarily
 reflect the views of the IMA, UTK and DST.
 
-\begin{sphinxadmonition}{note}{Caution}
-
+\begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
 ChatGPT has been extensively used in the creation of this book. If you notice that your work has not been
 cited or has been cited incorrectly, please notify us.
@@ -2961,7 +2960,13 @@ Use prompts designed for mixed text/image inputs (or outputs if using models lik
 \capstart
 
 \noindent\sphinxincludegraphics{{RAG_diagram}.png}
-\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id1}}\label{\detokenize{rag:fig-rag}}\end{figure}
+\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id2}}\label{\detokenize{rag:fig-rag}}\end{figure}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The naive chunking strategy was used in the diagram above. More advanced strategies,
+such as Late Chunking \sphinxcite{reference:latechunking} (or Chunked Pooling), are discussed later in this chapter.
+\end{sphinxadmonition}
 
 
 \section{Overview}
@@ -3007,8 +3012,8 @@ The indexing processes raw text or other forms of unstructured data and creates 
 \end{figure}
 
 
-\subsection{Chunking}
-\label{\detokenize{rag:chunking}}
+\subsection{Naive Chunking}
+\label{\detokenize{rag:naive-chunking}}
 \sphinxAtStartPar
 Chunking in Retrieval\sphinxhyphen{}Augmented Generation (RAG) involves splitting documents or knowledge bases
 into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).
@@ -3368,6 +3373,16 @@ Maintains precision due to dense information.
 
 \sphinxAtStartPar
 The valuating Chunking Strategies for Retrieval can be found at: \sphinxurl{https://research.trychroma.com/evaluating-chunking}
+
+
+\subsection{Late Chunking}
+\label{\detokenize{rag:late-chunking}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{late_chunking}.png}
+\caption{Naive chunking v.s. late chunking (Souce \sphinxhref{https://www.marktechpost.com/2024/08/27/jina-ai-introduced-late-chunking-a-simple-ai-approach-to-embed-short-chunks-by-leveraging-the-power-of-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id3}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
 
 
 \subsection{Types of Indexing}
@@ -4153,6 +4168,111 @@ Finally, the retrieved relevant information will be feed back into the LLMs to g
 
 \chapter{Fine Tuning}
 \label{\detokenize{finetuning:fine-tuning}}\label{\detokenize{finetuning:finetuning}}\label{\detokenize{finetuning::doc}}
+
+\section{Embedding Model Fine\sphinxhyphen{}Tuning}
+\label{\detokenize{finetuning:embedding-model-fine-tuning}}
+\sphinxAtStartPar
+\sphinxcite{reference:finetuneembedding}
+
+
+\subsection{Results Comparison}
+\label{\detokenize{finetuning:results-comparison}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Dimension
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Baseline
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuned
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Improvement
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+768
+&
+\sphinxAtStartPar
+0.75490
+&
+\sphinxAtStartPar
+0.76503
+&
+\sphinxAtStartPar
+1.34\%
+\\
+\sphinxhline
+\sphinxAtStartPar
+512
+&
+\sphinxAtStartPar
+0.75492
+&
+\sphinxAtStartPar
+0.76040
+&
+\sphinxAtStartPar
+0.73\%
+\\
+\sphinxhline
+\sphinxAtStartPar
+256
+&
+\sphinxAtStartPar
+0.74547
+&
+\sphinxAtStartPar
+0.75474
+&
+\sphinxAtStartPar
+1.24\%
+\\
+\sphinxhline
+\sphinxAtStartPar
+128
+&
+\sphinxAtStartPar
+0.71167
+&
+\sphinxAtStartPar
+0.72053
+&
+\sphinxAtStartPar
+1.24\%
+\\
+\sphinxhline
+\sphinxAtStartPar
+64
+&
+\sphinxAtStartPar
+0.64772
+&
+\sphinxAtStartPar
+0.66091
+&
+\sphinxAtStartPar
+2.04\%
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\section{LLM Fine\sphinxhyphen{}Tuning}
+\label{\detokenize{finetuning:llm-fine-tuning}}
+\sphinxAtStartPar
+\sphinxcite{reference:finetunellm}
+
 \sphinxstepscope
 
 
@@ -4174,7 +4294,7 @@ Finally, the retrieved relevant information will be feed back into the LLMs to g
 
 \chapter{Main Reference}
 \label{\detokenize{reference:main-reference}}\label{\detokenize{reference:reference}}\label{\detokenize{reference::doc}}
-\begin{sphinxthebibliography}{PySpark}
+\begin{sphinxthebibliography}{fineTune}
 \bibitem[GenAI]{reference:genai}
 \sphinxAtStartPar
 Wenqiang Feng, Di Zhen.
@@ -4183,6 +4303,19 @@ Wenqiang Feng, Di Zhen.
 \sphinxAtStartPar
 Wenqiang Feng.
 \sphinxhref{https://runawayhorse001.github.io/LearningApacheSpark}{Learning Apache Spark with Python}, 2017.
+\bibitem[lateChunking]{reference:latechunking}
+\sphinxAtStartPar
+Michael Gunther etc.
+{\color{red}\bfseries{}\textasciigrave{}Late Chunking: Contextual Chunk Embeddings Using Long\sphinxhyphen{}Context Embedding Models
+\textless{}https://arxiv.org/pdf/2409.04701\textasciigrave{}\_}, 2024.
+\bibitem[fineTuneEmbedding]{reference:finetuneembedding}
+\sphinxAtStartPar
+Philipp Schmid.
+\sphinxhref{https://www.philschmid.de/fine-tune-embedding-model-for-rag}{Fine\sphinxhyphen{}tune Embedding models for Retrieval Augmented Generation (RAG)}, 2017.
+\bibitem[fineTuneLLM]{reference:finetunellm}
+\sphinxAtStartPar
+Maxime Labonne.
+\sphinxhref{https://mlabonne.github.io/blog/posts/Fine\_Tune\_Your\_Own\_Llama\_2\_Model\_in\_a\_Colab\_Notebook.html}{Fine\sphinxhyphen{}Tune Your Own Llama 2 Model in a Colab Notebook}, 2024.
 \end{sphinxthebibliography}
 
 

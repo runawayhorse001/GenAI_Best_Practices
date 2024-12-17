@@ -50,7 +50,14 @@
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">3. Word and Sentence Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Fine Tuning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Fine Tuning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#embedding-model-fine-tuning">6.1. Embedding Model Fine-Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#results-comparison">6.1.1. Results Comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#llm-fine-tuning">6.2. LLM Fine-Tuning</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference.html">9. Main Reference</a></li>
@@ -82,6 +89,53 @@
              
   <section id="fine-tuning">
 <span id="finetuning"></span><h1><span class="section-number">6. </span>Fine Tuning<a class="headerlink" href="#fine-tuning" title="Link to this heading"></a></h1>
+<section id="embedding-model-fine-tuning">
+<h2><span class="section-number">6.1. </span>Embedding Model Fine-Tuning<a class="headerlink" href="#embedding-model-fine-tuning" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="reference.html#finetuneembedding" id="id1"><span>[fineTuneEmbedding]</span></a></p>
+<section id="results-comparison">
+<h3><span class="section-number">6.1.1. </span>Results Comparison<a class="headerlink" href="#results-comparison" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dimension</p></th>
+<th class="head"><p>Baseline</p></th>
+<th class="head"><p>Fine-tuned</p></th>
+<th class="head"><p>Improvement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>768</p></td>
+<td><p>0.75490</p></td>
+<td><p>0.76503</p></td>
+<td><p>1.34%</p></td>
+</tr>
+<tr class="row-odd"><td><p>512</p></td>
+<td><p>0.75492</p></td>
+<td><p>0.76040</p></td>
+<td><p>0.73%</p></td>
+</tr>
+<tr class="row-even"><td><p>256</p></td>
+<td><p>0.74547</p></td>
+<td><p>0.75474</p></td>
+<td><p>1.24%</p></td>
+</tr>
+<tr class="row-odd"><td><p>128</p></td>
+<td><p>0.71167</p></td>
+<td><p>0.72053</p></td>
+<td><p>1.24%</p></td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>0.64772</p></td>
+<td><p>0.66091</p></td>
+<td><p>2.04%</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="llm-fine-tuning">
+<h2><span class="section-number">6.2. </span>LLM Fine-Tuning<a class="headerlink" href="#llm-fine-tuning" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="reference.html#finetunellm" id="id2"><span>[fineTuneLLM]</span></a></p>
+</section>
 </section>
 
 
@@ -96,7 +150,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 16, 2024.
+      <span class="lastupdated">Last updated on Dec 17, 2024.
       </span></p>
   </div>
 

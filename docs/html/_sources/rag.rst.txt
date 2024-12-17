@@ -12,6 +12,12 @@ Retrieval-Augmented Generation
 
     Retrieval-Augmented Generation Diagram
 
+.. note::
+
+
+  The naive chunking strategy was used in the diagram above. More advanced strategies, 
+  such as Late Chunking [lateChunking]_ (or Chunked Pooling), are discussed later in this chapter.
+
 Overview
 ++++++++
 
@@ -42,8 +48,8 @@ The indexing processes raw text or other forms of unstructured data and creates 
 .. figure:: images/indexer.png
     :align: center
 
-Chunking
---------
+Naive Chunking
+--------------
 
 Chunking in Retrieval-Augmented Generation (RAG) involves splitting documents or knowledge bases 
 into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).
@@ -215,6 +221,18 @@ Below are recommendations for chunk lengths based on different context types, al
 +-----------------------------+-------------------------+----------------------------------------------------+
 
 The valuating Chunking Strategies for Retrieval can be found at: https://research.trychroma.com/evaluating-chunking
+
+
+Late Chunking
+-------------
+
+.. _fig_late_chunk:
+.. figure:: images/late_chunking.png
+    :align: center
+
+    Naive chunking v.s. late chunking (Souce `Jina AI`_)
+
+.. _Jina AI: https://www.marktechpost.com/2024/08/27/jina-ai-introduced-late-chunking-a-simple-ai-approach-to-embed-short-chunks-by-leveraging-the-power-of-long-context-embedding-models/
 
 Types of Indexing
 -----------------

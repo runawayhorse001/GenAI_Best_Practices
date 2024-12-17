@@ -53,9 +53,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. Retrieval-Augmented Generation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#indexing">5.2. Indexing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chunking">5.2.1. Chunking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#types-of-indexing">5.2.2. Types of Indexing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vector-database">5.2.3. Vector Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#naive-chunking">5.2.1. Naive Chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#late-chunking">5.2.2. Late Chunking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-indexing">5.2.3. Types of Indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vector-database">5.2.4. Vector Database</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#retrieval">5.3. Retrieval</a><ul>
@@ -98,12 +99,17 @@
              
   <section id="retrieval-augmented-generation">
 <span id="rag"></span><h1><span class="section-number">5. </span>Retrieval-Augmented Generation<a class="headerlink" href="#retrieval-augmented-generation" title="Link to this heading"></a></h1>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <span id="fig-rag"></span><img alt="_images/RAG_diagram.png" src="_images/RAG_diagram.png" />
 <figcaption>
-<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The naive chunking strategy was used in the diagram above. More advanced strategies,
+such as Late Chunking <a class="reference internal" href="reference.html#latechunking" id="id1"><span>[lateChunking]</span></a> (or Chunked Pooling), are discussed later in this chapter.</p>
+</div>
 <section id="overview">
 <h2><span class="section-number">5.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>Retrieval-Augmented Generation (RAG) is a framework that enhances large language models (LLMs)
@@ -128,8 +134,8 @@ The model is “augmented” with the retrieved information, which reduces hallu
 <figure class="align-center" id="fig-indexing">
 <img alt="_images/indexer.png" src="_images/indexer.png" />
 </figure>
-<section id="chunking">
-<h3><span class="section-number">5.2.1. </span>Chunking<a class="headerlink" href="#chunking" title="Link to this heading"></a></h3>
+<section id="naive-chunking">
+<h3><span class="section-number">5.2.1. </span>Naive Chunking<a class="headerlink" href="#naive-chunking" title="Link to this heading"></a></h3>
 <p>Chunking in Retrieval-Augmented Generation (RAG) involves splitting documents or knowledge bases
 into smaller, manageable pieces (chunks) that can be efficiently retrieved and used by a language model (LLM).</p>
 <p>Below are the common chunking strategies used in RAG workflows:</p>
@@ -329,8 +335,17 @@ or results.</p></td>
 </table>
 <p>The valuating Chunking Strategies for Retrieval can be found at: <a class="reference external" href="https://research.trychroma.com/evaluating-chunking">https://research.trychroma.com/evaluating-chunking</a></p>
 </section>
+<section id="late-chunking">
+<h3><span class="section-number">5.2.2. </span>Late Chunking<a class="headerlink" href="#late-chunking" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id3">
+<span id="fig-late-chunk"></span><img alt="_images/late_chunking.png" src="_images/late_chunking.png" />
+<figcaption>
+<p><span class="caption-text">Naive chunking v.s. late chunking (Souce <a class="reference external" href="https://www.marktechpost.com/2024/08/27/jina-ai-introduced-late-chunking-a-simple-ai-approach-to-embed-short-chunks-by-leveraging-the-power-of-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
 <section id="types-of-indexing">
-<h3><span class="section-number">5.2.2. </span>Types of Indexing<a class="headerlink" href="#types-of-indexing" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.3. </span>Types of Indexing<a class="headerlink" href="#types-of-indexing" title="Link to this heading"></a></h3>
 <p>The embedding methods we introduced in Chapter <a class="reference internal" href="embedding.html#embedding"><span class="std std-ref">Word and Sentence Embedding</span></a> can be applied here to convert each chunk
 into embeddings and create indexing. These indexings(embeddings) will be used to retrieve relevant documents or information.</p>
 <ul>
@@ -357,7 +372,7 @@ can integrate BM25 with vector search.</p>
 </ul>
 </section>
 <section id="vector-database">
-<h3><span class="section-number">5.2.3. </span>Vector Database<a class="headerlink" href="#vector-database" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.4. </span>Vector Database<a class="headerlink" href="#vector-database" title="Link to this heading"></a></h3>
 <p>Vector databases are essential for Retrieval-Augmented Generation (RAG) systems, enabling
 efficient similarity search on dense vector embeddings. Below is a comprehensive overview
 of popular vector databases for RAG workflows:</p>

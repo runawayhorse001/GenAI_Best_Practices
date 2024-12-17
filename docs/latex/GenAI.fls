@@ -484,6 +484,15 @@ INPUT ./indexer.png
 INPUT ./indexer.png
 INPUT ./indexer.png
 INPUT ./indexer.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
+INPUT ./late_chunking.png
 INPUT ./retriever.png
 INPUT ./retriever.png
 INPUT ./retriever.png
@@ -502,6 +511,7 @@ INPUT ./generator.png
 INPUT ./generator.png
 INPUT ./generator.png
 INPUT ./generator.png
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmb.tfm
 INPUT ./GenAI.ind
 INPUT ./GenAI.ind
 INPUT GenAI.ind
