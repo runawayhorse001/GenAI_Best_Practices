@@ -51,11 +51,26 @@
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. Fine Tuning</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#embedding-model-fine-tuning">6.1. Embedding Model Fine-Tuning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#results-comparison">6.1.1. Results Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cutting-edge-strategies-for-llm-fine-tuning">6.1. Cutting-Edge Strategies for LLM Fine-Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lora-low-rank-adaptation">6.1.1. <strong>LoRA (Low-Rank Adaptation)</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qlora-quantized-low-rank-adaptation">6.1.2. <strong>QLoRA (Quantized Low-Rank Adaptation)</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peft-parameter-efficient-fine-tuning">6.1.3. <strong>PEFT (Parameter-Efficient Fine-Tuning)</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sft-supervised-fine-tuning">6.1.4. <strong>SFT (Supervised Fine-Tuning)</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-table">6.1.5. Summary Table</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#llm-fine-tuning">6.2. LLM Fine-Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-early-fine-tuning-methods">6.2. Key Early Fine-Tuning Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#full-fine-tuning">6.2.1. <strong>Full Fine-Tuning</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-based-approach">6.2.2. <strong>Feature-Based Approach</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#layer-specific-fine-tuning">6.2.3. <strong>Layer-Specific Fine-Tuning</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-adaptive-pre-training">6.2.4. <strong>Task-Adaptive Pre-training</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#embedding-model-fine-tuning">6.3. Embedding Model Fine-Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#results-comparison">6.3.1. Results Comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#llm-fine-tuning">6.4. LLM Fine-Tuning</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
@@ -89,11 +104,208 @@
              
   <section id="fine-tuning">
 <span id="finetuning"></span><h1><span class="section-number">6. </span>Fine Tuning<a class="headerlink" href="#fine-tuning" title="Link to this heading"></a></h1>
+<p>Fine-tuning is a machine learning technique where a pre-trained model (like a large
+language model or neural network) is further trained on a smaller, specific dataset
+to adapt it to a particular task or domain. Instead of training a model from scratch,
+fine-tuning leverages the knowledge already embedded in the pre-trained model,
+saving time, computational resources, and data requirements.</p>
+<figure class="align-center" id="id4">
+<span id="fig-fine-tuning"></span><img alt="_images/fine_tuning.png" src="_images/fine_tuning.png" />
+<figcaption>
+<p><span class="caption-text">The three conventional feature-based and finetuning approaches (Souce <a class="reference external" href="https://magazine.sebastianraschka.com/p/finetuning-large-language-models">Finetuning Sebastian</a>).</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="cutting-edge-strategies-for-llm-fine-tuning">
+<h2><span class="section-number">6.1. </span>Cutting-Edge Strategies for LLM Fine-Tuning<a class="headerlink" href="#cutting-edge-strategies-for-llm-fine-tuning" title="Link to this heading"></a></h2>
+<p>Over the past year, fine-tuning methods have made remarkable strides. Modern methods
+for fine-tuning LLMs focus on efficiency, scalability, and resource optimization.
+The following strategies are at the forefront:</p>
+<section id="lora-low-rank-adaptation">
+<h3><span class="section-number">6.1.1. </span><strong>LoRA (Low-Rank Adaptation)</strong><a class="headerlink" href="#lora-low-rank-adaptation" title="Link to this heading"></a></h3>
+<p><strong>LoRA</strong> reduces the number of trainable parameters by introducing <strong>low-rank decomposition</strong> into the fine-tuning process.</p>
+<figure class="align-center" id="id5">
+<span id="fig-lora"></span><img alt="_images/lora.png" src="_images/lora.png" />
+<figcaption>
+<p><span class="caption-text">Weight update matrix (Souce <a class="reference external" href="https://magazine.sebastianraschka.com/p/practical-tips-for-finetuning-llms">LORA Sebastian</a>).</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>Instead of updating all model weights, LoRA injects <strong>low-rank adapters</strong> into the model’s layers.</p></li>
+<li><p>The original pre-trained weights remain frozen; only the low-rank parameters are optimized.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Reduces memory and computational requirements.</p></li>
+<li><p>Enables fine-tuning on resource-constrained hardware.</p></li>
+</ul>
+</section>
+<section id="qlora-quantized-low-rank-adaptation">
+<h3><span class="section-number">6.1.2. </span><strong>QLoRA (Quantized Low-Rank Adaptation)</strong><a class="headerlink" href="#qlora-quantized-low-rank-adaptation" title="Link to this heading"></a></h3>
+<p><strong>QLoRA</strong> combines <strong>low-rank adaptation</strong> with <strong>4-bit quantization</strong> of the pre-trained model.</p>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>The LLM is quantized to <strong>4-bit precision</strong> to reduce memory usage.</p></li>
+<li><p>LoRA adapters are applied to the quantized model for fine-tuning.</p></li>
+<li><p>Precision is maintained using methods like <strong>NF4 (Normalized Float 4)</strong> and double backpropagation.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Further reduces memory usage compared to LoRA.</p></li>
+<li><p>Enables fine-tuning of massive models on consumer-grade GPUs.</p></li>
+</ul>
+</section>
+<section id="peft-parameter-efficient-fine-tuning">
+<h3><span class="section-number">6.1.3. </span><strong>PEFT (Parameter-Efficient Fine-Tuning)</strong><a class="headerlink" href="#peft-parameter-efficient-fine-tuning" title="Link to this heading"></a></h3>
+<p><strong>PEFT</strong> is a general framework for fine-tuning LLMs with minimal trainable parameters.</p>
+<table class="borderless docutils align-default" style="width: 100%">
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/peft_1.png"><img alt="_images/peft_1.png" src="_images/peft_1.png" style="width: 100%;" />
+</a>
+</td>
+<td><a class="reference internal image-reference" href="_images/peft_2.png"><img alt="_images/peft_2.png" src="_images/peft_2.png" style="width: 100%;" />
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Source: <a class="reference internal" href="reference.html#peft" id="id1"><span>[PEFT]</span></a></p>
+<p><strong>Techniques Under PEFT</strong>:</p>
+<ul class="simple">
+<li><p><strong>LoRA</strong>: Low-rank adaptation of weights.</p></li>
+<li><p><strong>Adapters</strong>: Small trainable layers inserted into the model.</p></li>
+<li><p><strong>Prefix Tuning</strong>: Fine-tuning input prefixes instead of weights.</p></li>
+<li><p><strong>Prompt Tuning</strong>: Optimizing soft prompts in the input space.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Reduces the number of trainable parameters.</p></li>
+<li><p>Faster training and lower hardware requirements.</p></li>
+</ul>
+</section>
+<section id="sft-supervised-fine-tuning">
+<h3><span class="section-number">6.1.4. </span><strong>SFT (Supervised Fine-Tuning)</strong><a class="headerlink" href="#sft-supervised-fine-tuning" title="Link to this heading"></a></h3>
+<p><strong>SFT</strong> adapts an LLM using a labeled dataset in a fully supervised manner.</p>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>The model is initialized with pre-trained weights.</p></li>
+<li><p>It is fine-tuned on a task-specific dataset with a supervised loss function (e.g., cross-entropy).</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Achieves high performance on specific tasks.</p></li>
+<li><p>Essential for aligning models with labeled datasets.</p></li>
+</ul>
+</section>
+<section id="summary-table">
+<h3><span class="section-number">6.1.5. </span>Summary Table<a class="headerlink" href="#summary-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Method</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+<td><p><strong>Key Benefit</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>LoRA</strong></p></td>
+<td><p>Low-rank adapters for parameter-efficient
+tuning.</p></td>
+<td><p>Reduces trainable parameters significantly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>QLoRA</strong></p></td>
+<td><p>LoRA with 4-bit quantization of the model.</p></td>
+<td><p>Fine-tunes massive models on smaller
+hardware.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PEFT</strong></p></td>
+<td><p>General framework for efficient fine-tuning.</p></td>
+<td><p>Includes LoRA, Adapters, Prefix Tuning,
+etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SFT</strong></p></td>
+<td><p>Supervised fine-tuning with labeled data.</p></td>
+<td><p>High performance on task-specific datasets</p></td>
+</tr>
+</tbody>
+</table>
+<p>These strategies represent the forefront of <strong>LLM fine-tuning</strong>, offering efficient and scalable solutions for
+real-world applications. To choose the most suitable strategy, consider the following factors:</p>
+<ul class="simple">
+<li><p><strong>Resource-Constrained Environments</strong>: Use <strong>LoRA</strong> or <strong>QLoRA</strong>.</p></li>
+<li><p><strong>Large-Scale Models</strong>: <strong>QLoRA</strong> for low-memory fine-tuning.</p></li>
+<li><p><strong>High Performance with Labeled Data</strong>: <strong>SFT</strong>.</p></li>
+<li><p><strong>Minimal Setup</strong>: <strong>Zero-shot</strong> or <strong>Few-shot</strong> learning.</p></li>
+<li><p><strong>General Efficiency</strong>: Use <strong>PEFT</strong> frameworks.</p></li>
+</ul>
+</section>
+</section>
+<section id="key-early-fine-tuning-methods">
+<h2><span class="section-number">6.2. </span>Key Early Fine-Tuning Methods<a class="headerlink" href="#key-early-fine-tuning-methods" title="Link to this heading"></a></h2>
+<p>Early fine-tuning methods laid the foundation for current approaches. These methods
+primarily focused on updating the entire model or selected components.</p>
+<section id="full-fine-tuning">
+<h3><span class="section-number">6.2.1. </span><strong>Full Fine-Tuning</strong><a class="headerlink" href="#full-fine-tuning" title="Link to this heading"></a></h3>
+<p>All the parameters of a pre-trained model are updated using task-specific data <a class="reference internal" href="#fig-fine-tuning"><span class="std std-ref">The three conventional feature-based and finetuning approaches (Souce Finetuning Sebastian).</span></a> (right).</p>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>The pre-trained model serves as the starting point.</p></li>
+<li><p>Fine-tuning is conducted on a smaller, labeled dataset using a supervised loss function.</p></li>
+<li><p>A low learning rate is used to prevent <strong>catastrophic forgetting</strong>.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Effective at adapting models to specific tasks.</p></li>
+</ul>
+<p><strong>Challenges</strong>:</p>
+<ul class="simple">
+<li><p>Computationally expensive.</p></li>
+<li><p>Risk of overfitting on small datasets.</p></li>
+</ul>
+</section>
+<section id="feature-based-approach">
+<h3><span class="section-number">6.2.2. </span><strong>Feature-Based Approach</strong><a class="headerlink" href="#feature-based-approach" title="Link to this heading"></a></h3>
+<p>The pre-trained model is used as a <strong>feature extractor</strong>, while only a task-specific head is trained <a class="reference internal" href="#fig-fine-tuning"><span class="std std-ref">The three conventional feature-based and finetuning approaches (Souce Finetuning Sebastian).</span></a> (left).</p>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>The model processes inputs and extracts features (embeddings).</p></li>
+<li><p>A separate classifier (e.g., linear or MLP) is trained on top of these features.</p></li>
+<li><p>The pre-trained model weights remain <strong>frozen</strong>.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Computationally efficient since only the task-specific head is trained.</p></li>
+</ul>
+</section>
+<section id="layer-specific-fine-tuning">
+<h3><span class="section-number">6.2.3. </span><strong>Layer-Specific Fine-Tuning</strong><a class="headerlink" href="#layer-specific-fine-tuning" title="Link to this heading"></a></h3>
+<p>Only certain layers of the pre-trained model are fine-tuned while the rest remain frozen <a class="reference internal" href="#fig-fine-tuning"><span class="std std-ref">The three conventional feature-based and finetuning approaches (Souce Finetuning Sebastian).</span></a> (middle).</p>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>Earlier layers (which capture general features) are frozen.</p></li>
+<li><p>Later layers (closer to the output) are fine-tuned on task-specific data.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Balances computational efficiency and task adaptation.</p></li>
+</ul>
+</section>
+<section id="task-adaptive-pre-training">
+<h3><span class="section-number">6.2.4. </span><strong>Task-Adaptive Pre-training</strong><a class="headerlink" href="#task-adaptive-pre-training" title="Link to this heading"></a></h3>
+<p>Before fine-tuning on a specific task, the model undergoes additional <strong>pre-training</strong> on a domain-specific corpus.</p>
+<p><strong>How It Works</strong>:</p>
+<ul class="simple">
+<li><p>A general pre-trained model is further pre-trained (unsupervised) on domain-specific data.</p></li>
+<li><p>Fine-tuning is then performed on the downstream task.</p></li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Provides a better starting point for domain-specific tasks.</p></li>
+</ul>
+</section>
+</section>
 <section id="embedding-model-fine-tuning">
-<h2><span class="section-number">6.1. </span>Embedding Model Fine-Tuning<a class="headerlink" href="#embedding-model-fine-tuning" title="Link to this heading"></a></h2>
-<p><a class="reference internal" href="reference.html#finetuneembedding" id="id1"><span>[fineTuneEmbedding]</span></a></p>
+<h2><span class="section-number">6.3. </span>Embedding Model Fine-Tuning<a class="headerlink" href="#embedding-model-fine-tuning" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="reference.html#finetuneembedding" id="id2"><span>[fineTuneEmbedding]</span></a></p>
 <section id="results-comparison">
-<h3><span class="section-number">6.1.1. </span>Results Comparison<a class="headerlink" href="#results-comparison" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.1. </span>Results Comparison<a class="headerlink" href="#results-comparison" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Dimension</p></th>
@@ -133,8 +345,8 @@
 </section>
 </section>
 <section id="llm-fine-tuning">
-<h2><span class="section-number">6.2. </span>LLM Fine-Tuning<a class="headerlink" href="#llm-fine-tuning" title="Link to this heading"></a></h2>
-<p><a class="reference internal" href="reference.html#finetunellm" id="id2"><span>[fineTuneLLM]</span></a></p>
+<h2><span class="section-number">6.4. </span>LLM Fine-Tuning<a class="headerlink" href="#llm-fine-tuning" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="reference.html#finetunellm" id="id3"><span>[fineTuneLLM]</span></a></p>
 </section>
 </section>
 

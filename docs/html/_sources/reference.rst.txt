@@ -12,7 +12,11 @@ Main Reference
 
 .. [lateChunking] Michael Gunther etc.
                  `Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models
-                 <https://arxiv.org/pdf/2409.04701`_, 2024.
+                 <https://arxiv.org/pdf/2409.04701>`_, 2024.
+
+.. [PEFT] Yunho Mo etc.
+                 `Parameter-Efficient Fine-Tuning Method for Task-Oriented Dialogue Systems
+                 <https://www.mdpi.com/2227-7390/11/14/3048>`_, 2023.
 
 .. [fineTuneEmbedding] Philipp Schmid.
                  `Fine-tune Embedding models for Retrieval Augmented Generation (RAG)

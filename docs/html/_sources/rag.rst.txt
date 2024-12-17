@@ -14,7 +14,6 @@ Retrieval-Augmented Generation
 
 .. note::
 
-
   The naive chunking strategy was used in the diagram above. More advanced strategies, 
   such as Late Chunking [lateChunking]_ (or Chunked Pooling), are discussed later in this chapter.
 

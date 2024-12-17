@@ -66,7 +66,7 @@ magnitude. Norms are essential for calculating distances between vectors, which 
 a crucial role in measuring prediction errors, performing feature selection, and 
 applying regularization techniques in models.
 
-.. _fig_logo:
+.. _fig_1Bauo:
 .. figure:: images/1Bauo.png
     :align: center
 
@@ -252,6 +252,7 @@ the syntactic, semantic, or structural role of the elements in the text.
 - Types of Tagging
 
     1. **Part-of-Speech (POS) Tagging**:
+
        - Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
        - Example: For the sentence "The dog barks," the tags might be:
          - ``The/DET`` (Determiner)
@@ -259,6 +260,7 @@ the syntactic, semantic, or structural role of the elements in the text.
          - ``barks/VERB`` (Verb).
 
     2. **Named Entity Recognition (NER) Tagging**:
+    
        - Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
        - Example: In the sentence "John works at Google in California," the tags might be:
          - ``John/PERSON``
@@ -266,15 +268,18 @@ the syntactic, semantic, or structural role of the elements in the text.
          - ``California/LOCATION``.
 
     3. **Chunking (Syntactic Tagging)**:
+    
        - Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
        - Example: For the sentence "The quick brown fox jumps," a chunking result might be:
          - ``[NP The quick brown fox] [VP jumps]``.
 
     4. **Sentiment Tagging**:
+    
        - Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
        - Example: The word "happy" might be tagged as ``positive``, while "sad" might be tagged as ``negative``.
 
     5. **Dependency Parsing Tags**:
+    
        - Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
        - Example: In "She enjoys cooking," the tags might show:
             - ``She/nsubj`` (nominal subject)
@@ -328,12 +333,14 @@ the context and grammatical role of the word to produce a linguistically accurat
 
 
   1. **Contextual Analysis**:
+
      - Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word's base form.
      - For example:
        - ``running`` → ``run``
        - ``better`` → ``good``
 
   2. **Part-of-Speech (POS) Tagging**:
+  
      - The process uses POS tags to determine the correct lemma for a word.
      - Example:
        - ``barking`` (verb) → ``bark``
@@ -342,25 +349,30 @@ the context and grammatical role of the word to produce a linguistically accurat
 - Importance of Lemmatization
 
   1. **Improves Text Normalization**:
+  
      - Lemmatization helps normalize text by grouping different forms of a word into a single representation.
      - Example:
        - ``run``, ``running``, and ``ran`` → ``run``.
 
   2. **Enhances NLP Applications**:
+  
      - Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.
 
   3. **Reduces Vocabulary Size**:
+  
      - By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.
 
 - Lemmatization vs. Stemming
 
   - **Lemmatization**:
+  
     - Produces linguistically accurate root forms.
     - Considers the word's context and POS.
     - Example:
       - ``studies`` → ``study``.
 
   - **Stemming**:
+  
     - Applies heuristic rules to strip word suffixes without considering context.
     - May produce non-dictionary forms.
     - Example:
@@ -369,19 +381,23 @@ the context and grammatical role of the word to produce a linguistically accurat
 - Techniques for Lemmatization
 
   1. **Rule-Based Lemmatization**:
+  
      - Relies on predefined linguistic rules and dictionaries.
      - Example: WordNet-based lemmatizers.
 
   2. **Statistical Lemmatization**:
+  
      - Uses probabilistic models to predict lemmas based on the context.
 
   3. **Deep Learning-Based Lemmatization**:
+  
      - Employs neural networks and sequence-to-sequence models for highly accurate lemmatization in complex contexts.
 
 - Challenges
 
   - **Ambiguity**:
     Words with multiple meanings may result in incorrect lemmatization without proper context.
+  
     - Example:
       - ``left`` (verb) → ``leave``
       - ``left`` (noun/adjective) → ``left``.
@@ -403,24 +419,28 @@ analysis in NLP tasks.
 - Types of Tokenization
 
   1. **Word Tokenization**:
+  
     - Splits the text into individual words or terms.
     - Example: 
         - Sentence: "I love NLP."
         - Tokens: ``["I", "love", "NLP"]``.
 
   2. **Sentence Tokenization**:
+
     - Divides a text into sentences.
     - Example: 
         - Text: "I love NLP. It’s amazing."
         - Tokens: ``["I love NLP.", "It’s amazing."]``.
 
   3. **Subword Tokenization**:
+  
     - Breaks words into smaller units, often using methods like Byte Pair Encoding (BPE) or SentencePiece.
     - Example:
         - Word: ``unhappiness``.
         - Tokens: ``["un", "happiness"]`` (or subword units like ``["un", "happi", "ness"]``).
 
   4. **Character Tokenization**:
+  
     - Treats each character in a word as a separate token.
     - Example:
         - Word: ``hello``.
@@ -430,28 +450,34 @@ analysis in NLP tasks.
 
 
   1. **Text Preprocessing**:
+
     - Tokenization is the first step in many NLP tasks like text classification, translation, and 
       summarization, as it converts text into manageable pieces.
 
   2. **Text Representation**:
+  
     - Tokens are converted into numerical representations (e.g., word embeddings) for model input 
       in tasks like sentiment analysis, named entity recognition (NER), or language modeling.
 
   3. **Improving Accuracy**:
+  
     - Proper tokenization ensures that a model processes text at the correct granularity (e.g., 
       words or subwords), improving accuracy for tasks like machine translation or text generation.
 
 - Challenges of Tokenization
 
   1. **Ambiguity**:
+
     - Certain words or phrases can be tokenized differently based on context.
     - Example: “New York” can be treated as one token (location) or two separate tokens (``["New", "York"]``).
 
   2. **Handling Punctuation**:
+
     - Deciding how to treat punctuation marks can be challenging. For example, should commas, periods, 
       or quotes be treated as separate tokens or grouped with adjacent words?
 
   3. **Multi-word Expressions (MWEs)**:
+
     - Some expressions consist of multiple words that should be treated as a single token, such as “New York” or “machine learning.”
 
 - Techniques for Tokenization
@@ -492,7 +518,7 @@ BERT Tokenization
                   ...........,
                   ('writing', 3015), ('bay', 3016),
                   ...........,
-                  ('##？', 30520), ('##～', 30521)])
+                  ('##?', 30520), ('##~', 30521)])
 
 - Tokens and IDs 
 

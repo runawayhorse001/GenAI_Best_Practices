@@ -261,7 +261,7 @@ each component corresponding to a specific feature or attribute of the data.
 \capstart
 
 \noindent\sphinxincludegraphics{{vector}.png}
-\caption{Vector}\label{\detokenize{prelim:id2}}\label{\detokenize{prelim:fig-logo}}\end{figure}
+\caption{Vector}\label{\detokenize{prelim:id1}}\label{\detokenize{prelim:fig-logo}}\end{figure}
 
 
 \subsection{Norm}
@@ -277,7 +277,7 @@ applying regularization techniques in models.
 \capstart
 
 \noindent\sphinxincludegraphics{{1Bauo}.png}
-\caption{Geometrical Interpretation of Norm (\sphinxhref{https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent}{source\_1})}\label{\detokenize{prelim:id3}}\label{\detokenize{prelim:id1}}\end{figure}
+\caption{Geometrical Interpretation of Norm (\sphinxhref{https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent}{source\_1})}\label{\detokenize{prelim:id2}}\label{\detokenize{prelim:fig-1bauo}}\end{figure}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -540,67 +540,76 @@ Types of Tagging
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Part\sphinxhyphen{}of\sphinxhyphen{}Speech (POS) Tagging}:
-\sphinxhyphen{} Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
-\sphinxhyphen{} Example: For the sentence “The dog barks,” the tags might be:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{The/DET}} (Determiner)
+Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{dog/NOUN}} (Noun)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{barks/VERB}} (Verb).
+Example: For the sentence “The dog barks,” the tags might be:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{The/DET}} (Determiner)
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{dog/NOUN}} (Noun)
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{barks/VERB}} (Verb).
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Named Entity Recognition (NER) Tagging}:
-\sphinxhyphen{} Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
-\sphinxhyphen{} Example: In the sentence “John works at Google in California,” the tags might be:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{John/PERSON}}
+Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Google/ORGANIZATION}}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{California/LOCATION}}.
+Example: In the sentence “John works at Google in California,” the tags might be:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{John/PERSON}}
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{Google/ORGANIZATION}}
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{California/LOCATION}}.
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Chunking (Syntactic Tagging)}:
-\sphinxhyphen{} Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
-\sphinxhyphen{} Example: For the sentence “The quick brown fox jumps,” a chunking result might be:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{{[}NP The quick brown fox{]} {[}VP jumps{]}}}.
+Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
+
+\item {} 
+\sphinxAtStartPar
+Example: For the sentence “The quick brown fox jumps,” a chunking result might be:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{{[}NP The quick brown fox{]} {[}VP jumps{]}}}.
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Sentiment Tagging}:
-\sphinxhyphen{} Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
-\sphinxhyphen{} Example: The word “happy” might be tagged as \sphinxcode{\sphinxupquote{positive}}, while “sad” might be tagged as \sphinxcode{\sphinxupquote{negative}}.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
+
+\item {} 
+\sphinxAtStartPar
+Example: The word “happy” might be tagged as \sphinxcode{\sphinxupquote{positive}}, while “sad” might be tagged as \sphinxcode{\sphinxupquote{negative}}.
+
+\end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Dependency Parsing Tags}:
-\sphinxhyphen{} Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
-\sphinxhyphen{} Example: In “She enjoys cooking,” the tags might show:
 \begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
+
+\item {} \begin{description}
+\sphinxlineitem{Example: In “She enjoys cooking,” the tags might show:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{She/nsubj}} (nominal subject)
@@ -612,6 +621,10 @@ Types of Tagging
 \item {} 
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{cooking/dobj}} (direct object).
+
+\end{itemize}
+
+\end{description}
 
 \end{itemize}
 
@@ -697,32 +710,32 @@ How Lemmatization Works
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Contextual Analysis}:
-\sphinxhyphen{} Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word’s base form.
-\sphinxhyphen{} For example:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{running}} \(\rightarrow\) \sphinxcode{\sphinxupquote{run}}
+Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word’s base form.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{better}} \(\rightarrow\) \sphinxcode{\sphinxupquote{good}}
+For example:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{running}} \(\rightarrow\) \sphinxcode{\sphinxupquote{run}}
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{better}} \(\rightarrow\) \sphinxcode{\sphinxupquote{good}}
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Part\sphinxhyphen{}of\sphinxhyphen{}Speech (POS) Tagging}:
-\sphinxhyphen{} The process uses POS tags to determine the correct lemma for a word.
-\sphinxhyphen{} Example:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{barking}} (verb) \(\rightarrow\) \sphinxcode{\sphinxupquote{bark}}
+The process uses POS tags to determine the correct lemma for a word.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{barking}} (adjective, as in “barking dog”) \(\rightarrow\) \sphinxcode{\sphinxupquote{barking}}.
+Example:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{barking}} (verb) \(\rightarrow\) \sphinxcode{\sphinxupquote{bark}}
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{barking}} (adjective, as in “barking dog”) \(\rightarrow\) \sphinxcode{\sphinxupquote{barking}}.
 
 \end{itemize}
 
@@ -736,24 +749,37 @@ Importance of Lemmatization
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Improves Text Normalization}:
-\sphinxhyphen{} Lemmatization helps normalize text by grouping different forms of a word into a single representation.
-\sphinxhyphen{} Example:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{run}}, \sphinxcode{\sphinxupquote{running}}, and \sphinxcode{\sphinxupquote{ran}} \(\rightarrow\) \sphinxcode{\sphinxupquote{run}}.
+Lemmatization helps normalize text by grouping different forms of a word into a single representation.
+
+\item {} 
+\sphinxAtStartPar
+Example:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{run}}, \sphinxcode{\sphinxupquote{running}}, and \sphinxcode{\sphinxupquote{ran}} \(\rightarrow\) \sphinxcode{\sphinxupquote{run}}.
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Enhances NLP Applications}:
-\sphinxhyphen{} Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.
+
+\end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Reduces Vocabulary Size}:
-\sphinxhyphen{} By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.
+
+\end{itemize}
 
 \end{enumerate}
 
@@ -764,26 +790,38 @@ Lemmatization vs. Stemming
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Lemmatization}:
-\sphinxhyphen{} Produces linguistically accurate root forms.
-\sphinxhyphen{} Considers the word’s context and POS.
-\sphinxhyphen{} Example:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{studies}} \(\rightarrow\) \sphinxcode{\sphinxupquote{study}}.
+Produces linguistically accurate root forms.
+
+\item {} 
+\sphinxAtStartPar
+Considers the word’s context and POS.
+
+\item {} 
+\sphinxAtStartPar
+Example:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{studies}} \(\rightarrow\) \sphinxcode{\sphinxupquote{study}}.
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Stemming}:
-\sphinxhyphen{} Applies heuristic rules to strip word suffixes without considering context.
-\sphinxhyphen{} May produce non\sphinxhyphen{}dictionary forms.
-\sphinxhyphen{} Example:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{studies}} \(\rightarrow\) \sphinxcode{\sphinxupquote{studi}}.
+Applies heuristic rules to strip word suffixes without considering context.
+
+\item {} 
+\sphinxAtStartPar
+May produce non\sphinxhyphen{}dictionary forms.
+
+\item {} 
+\sphinxAtStartPar
+Example:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{studies}} \(\rightarrow\) \sphinxcode{\sphinxupquote{studi}}.
 
 \end{itemize}
 
@@ -797,18 +835,36 @@ Techniques for Lemmatization
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Rule\sphinxhyphen{}Based Lemmatization}:
-\sphinxhyphen{} Relies on predefined linguistic rules and dictionaries.
-\sphinxhyphen{} Example: WordNet\sphinxhyphen{}based lemmatizers.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Relies on predefined linguistic rules and dictionaries.
+
+\item {} 
+\sphinxAtStartPar
+Example: WordNet\sphinxhyphen{}based lemmatizers.
+
+\end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Statistical Lemmatization}:
-\sphinxhyphen{} Uses probabilistic models to predict lemmas based on the context.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Uses probabilistic models to predict lemmas based on the context.
+
+\end{itemize}
 
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Deep Learning\sphinxhyphen{}Based Lemmatization}:
-\sphinxhyphen{} Employs neural networks and sequence\sphinxhyphen{}to\sphinxhyphen{}sequence models for highly accurate lemmatization in complex contexts.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Employs neural networks and sequence\sphinxhyphen{}to\sphinxhyphen{}sequence models for highly accurate lemmatization in complex contexts.
+
+\end{itemize}
 
 \end{enumerate}
 
@@ -820,15 +876,12 @@ Challenges
 \sphinxAtStartPar
 \sphinxstylestrong{Ambiguity}:
 Words with multiple meanings may result in incorrect lemmatization without proper context.
-\sphinxhyphen{} Example:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{left}} (verb) \(\rightarrow\) \sphinxcode{\sphinxupquote{leave}}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{left}} (noun/adjective) \(\rightarrow\) \sphinxcode{\sphinxupquote{left}}.
+Example:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{left}} (verb) \(\rightarrow\) \sphinxcode{\sphinxupquote{leave}}
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{left}} (noun/adjective) \(\rightarrow\) \sphinxcode{\sphinxupquote{left}}.
 
 \end{itemize}
 
@@ -1116,7 +1169,7 @@ Vocabulary: The BERT Tokenizer’s vocabulary contains 30,522 unique tokens.
               \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}
               \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{writing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{3015}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bay}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{3016}\PYG{p}{)}\PYG{p}{,}
               \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}
-              \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}？}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30520}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}～}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30521}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
+              \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}?}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30520}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}\PYGZti{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30521}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \item {} 
@@ -4168,6 +4221,428 @@ Finally, the retrieved relevant information will be feed back into the LLMs to g
 
 \chapter{Fine Tuning}
 \label{\detokenize{finetuning:fine-tuning}}\label{\detokenize{finetuning:finetuning}}\label{\detokenize{finetuning::doc}}
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuning is a machine learning technique where a pre\sphinxhyphen{}trained model (like a large
+language model or neural network) is further trained on a smaller, specific dataset
+to adapt it to a particular task or domain. Instead of training a model from scratch,
+fine\sphinxhyphen{}tuning leverages the knowledge already embedded in the pre\sphinxhyphen{}trained model,
+saving time, computational resources, and data requirements.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{fine_tuning}.png}
+\caption{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce \sphinxhref{https://magazine.sebastianraschka.com/p/finetuning-large-language-models}{Finetuning Sebastian}).}\label{\detokenize{finetuning:id4}}\label{\detokenize{finetuning:fig-fine-tuning}}\end{figure}
+
+
+\section{Cutting\sphinxhyphen{}Edge Strategies for LLM Fine\sphinxhyphen{}Tuning}
+\label{\detokenize{finetuning:cutting-edge-strategies-for-llm-fine-tuning}}
+\sphinxAtStartPar
+Over the past year, fine\sphinxhyphen{}tuning methods have made remarkable strides. Modern methods
+for fine\sphinxhyphen{}tuning LLMs focus on efficiency, scalability, and resource optimization.
+The following strategies are at the forefront:
+
+
+\subsection{\sphinxstylestrong{LoRA (Low\sphinxhyphen{}Rank Adaptation)}}
+\label{\detokenize{finetuning:lora-low-rank-adaptation}}
+\sphinxAtStartPar
+\sphinxstylestrong{LoRA} reduces the number of trainable parameters by introducing \sphinxstylestrong{low\sphinxhyphen{}rank decomposition} into the fine\sphinxhyphen{}tuning process.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{lora}.png}
+\caption{Weight update matrix (Souce \sphinxhref{https://magazine.sebastianraschka.com/p/practical-tips-for-finetuning-llms}{LORA Sebastian}).}\label{\detokenize{finetuning:id5}}\label{\detokenize{finetuning:fig-lora}}\end{figure}
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Instead of updating all model weights, LoRA injects \sphinxstylestrong{low\sphinxhyphen{}rank adapters} into the model’s layers.
+
+\item {} 
+\sphinxAtStartPar
+The original pre\sphinxhyphen{}trained weights remain frozen; only the low\sphinxhyphen{}rank parameters are optimized.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Reduces memory and computational requirements.
+
+\item {} 
+\sphinxAtStartPar
+Enables fine\sphinxhyphen{}tuning on resource\sphinxhyphen{}constrained hardware.
+
+\end{itemize}
+
+
+\subsection{\sphinxstylestrong{QLoRA (Quantized Low\sphinxhyphen{}Rank Adaptation)}}
+\label{\detokenize{finetuning:qlora-quantized-low-rank-adaptation}}
+\sphinxAtStartPar
+\sphinxstylestrong{QLoRA} combines \sphinxstylestrong{low\sphinxhyphen{}rank adaptation} with \sphinxstylestrong{4\sphinxhyphen{}bit quantization} of the pre\sphinxhyphen{}trained model.
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The LLM is quantized to \sphinxstylestrong{4\sphinxhyphen{}bit precision} to reduce memory usage.
+
+\item {} 
+\sphinxAtStartPar
+LoRA adapters are applied to the quantized model for fine\sphinxhyphen{}tuning.
+
+\item {} 
+\sphinxAtStartPar
+Precision is maintained using methods like \sphinxstylestrong{NF4 (Normalized Float 4)} and double backpropagation.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Further reduces memory usage compared to LoRA.
+
+\item {} 
+\sphinxAtStartPar
+Enables fine\sphinxhyphen{}tuning of massive models on consumer\sphinxhyphen{}grade GPUs.
+
+\end{itemize}
+
+
+\subsection{\sphinxstylestrong{PEFT (Parameter\sphinxhyphen{}Efficient Fine\sphinxhyphen{}Tuning)}}
+\label{\detokenize{finetuning:peft-parameter-efficient-fine-tuning}}
+\sphinxAtStartPar
+\sphinxstylestrong{PEFT} is a general framework for fine\sphinxhyphen{}tuning LLMs with minimal trainable parameters.
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithborderlessstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TT}
+\sphinxtoprule
+\sphinxtableatstartofbodyhook
+\noindent\sphinxincludegraphics[width=1.000\linewidth]{{peft_1}.png}
+&
+\noindent\sphinxincludegraphics[width=1.000\linewidth]{{peft_2}.png}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+Source: \sphinxcite{reference:peft}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Techniques Under PEFT}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{LoRA}: Low\sphinxhyphen{}rank adaptation of weights.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Adapters}: Small trainable layers inserted into the model.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Prefix Tuning}: Fine\sphinxhyphen{}tuning input prefixes instead of weights.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Prompt Tuning}: Optimizing soft prompts in the input space.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Reduces the number of trainable parameters.
+
+\item {} 
+\sphinxAtStartPar
+Faster training and lower hardware requirements.
+
+\end{itemize}
+
+
+\subsection{\sphinxstylestrong{SFT (Supervised Fine\sphinxhyphen{}Tuning)}}
+\label{\detokenize{finetuning:sft-supervised-fine-tuning}}
+\sphinxAtStartPar
+\sphinxstylestrong{SFT} adapts an LLM using a labeled dataset in a fully supervised manner.
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The model is initialized with pre\sphinxhyphen{}trained weights.
+
+\item {} 
+\sphinxAtStartPar
+It is fine\sphinxhyphen{}tuned on a task\sphinxhyphen{}specific dataset with a supervised loss function (e.g., cross\sphinxhyphen{}entropy).
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Achieves high performance on specific tasks.
+
+\item {} 
+\sphinxAtStartPar
+Essential for aligning models with labeled datasets.
+
+\end{itemize}
+
+
+\subsection{Summary Table}
+\label{\detokenize{finetuning:summary-table}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstylestrong{Method}
+&
+\sphinxAtStartPar
+\sphinxstylestrong{Description}
+&
+\sphinxAtStartPar
+\sphinxstylestrong{Key Benefit}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{LoRA}
+&
+\sphinxAtStartPar
+Low\sphinxhyphen{}rank adapters for parameter\sphinxhyphen{}efficient
+tuning.
+&
+\sphinxAtStartPar
+Reduces trainable parameters significantly.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{QLoRA}
+&
+\sphinxAtStartPar
+LoRA with 4\sphinxhyphen{}bit quantization of the model.
+&
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tunes massive models on smaller
+hardware.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{PEFT}
+&
+\sphinxAtStartPar
+General framework for efficient fine\sphinxhyphen{}tuning.
+&
+\sphinxAtStartPar
+Includes LoRA, Adapters, Prefix Tuning,
+etc.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{SFT}
+&
+\sphinxAtStartPar
+Supervised fine\sphinxhyphen{}tuning with labeled data.
+&
+\sphinxAtStartPar
+High performance on task\sphinxhyphen{}specific datasets
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+These strategies represent the forefront of \sphinxstylestrong{LLM fine\sphinxhyphen{}tuning}, offering efficient and scalable solutions for
+real\sphinxhyphen{}world applications. To choose the most suitable strategy, consider the following factors:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Resource\sphinxhyphen{}Constrained Environments}: Use \sphinxstylestrong{LoRA} or \sphinxstylestrong{QLoRA}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Large\sphinxhyphen{}Scale Models}: \sphinxstylestrong{QLoRA} for low\sphinxhyphen{}memory fine\sphinxhyphen{}tuning.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{High Performance with Labeled Data}: \sphinxstylestrong{SFT}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Minimal Setup}: \sphinxstylestrong{Zero\sphinxhyphen{}shot} or \sphinxstylestrong{Few\sphinxhyphen{}shot} learning.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{General Efficiency}: Use \sphinxstylestrong{PEFT} frameworks.
+
+\end{itemize}
+
+
+\section{Key Early Fine\sphinxhyphen{}Tuning Methods}
+\label{\detokenize{finetuning:key-early-fine-tuning-methods}}
+\sphinxAtStartPar
+Early fine\sphinxhyphen{}tuning methods laid the foundation for current approaches. These methods
+primarily focused on updating the entire model or selected components.
+
+
+\subsection{\sphinxstylestrong{Full Fine\sphinxhyphen{}Tuning}}
+\label{\detokenize{finetuning:full-fine-tuning}}
+\sphinxAtStartPar
+All the parameters of a pre\sphinxhyphen{}trained model are updated using task\sphinxhyphen{}specific data {\hyperref[\detokenize{finetuning:fig-fine-tuning}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce Finetuning Sebastian).}}}}} (right).
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The pre\sphinxhyphen{}trained model serves as the starting point.
+
+\item {} 
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuning is conducted on a smaller, labeled dataset using a supervised loss function.
+
+\item {} 
+\sphinxAtStartPar
+A low learning rate is used to prevent \sphinxstylestrong{catastrophic forgetting}.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Effective at adapting models to specific tasks.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Challenges}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Computationally expensive.
+
+\item {} 
+\sphinxAtStartPar
+Risk of overfitting on small datasets.
+
+\end{itemize}
+
+
+\subsection{\sphinxstylestrong{Feature\sphinxhyphen{}Based Approach}}
+\label{\detokenize{finetuning:feature-based-approach}}
+\sphinxAtStartPar
+The pre\sphinxhyphen{}trained model is used as a \sphinxstylestrong{feature extractor}, while only a task\sphinxhyphen{}specific head is trained {\hyperref[\detokenize{finetuning:fig-fine-tuning}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce Finetuning Sebastian).}}}}} (left).
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The model processes inputs and extracts features (embeddings).
+
+\item {} 
+\sphinxAtStartPar
+A separate classifier (e.g., linear or MLP) is trained on top of these features.
+
+\item {} 
+\sphinxAtStartPar
+The pre\sphinxhyphen{}trained model weights remain \sphinxstylestrong{frozen}.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Computationally efficient since only the task\sphinxhyphen{}specific head is trained.
+
+\end{itemize}
+
+
+\subsection{\sphinxstylestrong{Layer\sphinxhyphen{}Specific Fine\sphinxhyphen{}Tuning}}
+\label{\detokenize{finetuning:layer-specific-fine-tuning}}
+\sphinxAtStartPar
+Only certain layers of the pre\sphinxhyphen{}trained model are fine\sphinxhyphen{}tuned while the rest remain frozen {\hyperref[\detokenize{finetuning:fig-fine-tuning}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce Finetuning Sebastian).}}}}} (middle).
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Earlier layers (which capture general features) are frozen.
+
+\item {} 
+\sphinxAtStartPar
+Later layers (closer to the output) are fine\sphinxhyphen{}tuned on task\sphinxhyphen{}specific data.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Balances computational efficiency and task adaptation.
+
+\end{itemize}
+
+
+\subsection{\sphinxstylestrong{Task\sphinxhyphen{}Adaptive Pre\sphinxhyphen{}training}}
+\label{\detokenize{finetuning:task-adaptive-pre-training}}
+\sphinxAtStartPar
+Before fine\sphinxhyphen{}tuning on a specific task, the model undergoes additional \sphinxstylestrong{pre\sphinxhyphen{}training} on a domain\sphinxhyphen{}specific corpus.
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+A general pre\sphinxhyphen{}trained model is further pre\sphinxhyphen{}trained (unsupervised) on domain\sphinxhyphen{}specific data.
+
+\item {} 
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuning is then performed on the downstream task.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Provides a better starting point for domain\sphinxhyphen{}specific tasks.
+
+\end{itemize}
+
 
 \section{Embedding Model Fine\sphinxhyphen{}Tuning}
 \label{\detokenize{finetuning:embedding-model-fine-tuning}}
@@ -4306,8 +4781,11 @@ Wenqiang Feng.
 \bibitem[lateChunking]{reference:latechunking}
 \sphinxAtStartPar
 Michael Gunther etc.
-{\color{red}\bfseries{}\textasciigrave{}Late Chunking: Contextual Chunk Embeddings Using Long\sphinxhyphen{}Context Embedding Models
-\textless{}https://arxiv.org/pdf/2409.04701\textasciigrave{}\_}, 2024.
+\sphinxhref{https://arxiv.org/pdf/2409.04701}{Late Chunking: Contextual Chunk Embeddings Using Long\sphinxhyphen{}Context Embedding Models}, 2024.
+\bibitem[PEFT]{reference:peft}
+\sphinxAtStartPar
+Yunho Mo etc.
+\sphinxhref{https://www.mdpi.com/2227-7390/11/14/3048}{Parameter\sphinxhyphen{}Efficient Fine\sphinxhyphen{}Tuning Method for Task\sphinxhyphen{}Oriented Dialogue Systems}, 2023.
 \bibitem[fineTuneEmbedding]{reference:finetuneembedding}
 \sphinxAtStartPar
 Philipp Schmid.

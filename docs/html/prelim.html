@@ -144,10 +144,10 @@ each component corresponding to a specific feature or attribute of the data.</p>
 <span class="mf">0.4594</span>   <span class="o">-</span><span class="mf">0.39955</span>  <span class="o">-</span><span class="mf">0.40371</span>   <span class="mf">0.31828</span> <span class="p">]</span>
 </pre></div>
 </div>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id1">
 <span id="fig-logo"></span><img alt="_images/vector.png" src="_images/vector.png" />
 <figcaption>
-<p><span class="caption-text">Vector</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text">Vector</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -157,10 +157,10 @@ each component corresponding to a specific feature or attribute of the data.</p>
 magnitude. Norms are essential for calculating distances between vectors, which play
 a crucial role in measuring prediction errors, performing feature selection, and
 applying regularization techniques in models.</p>
-<figure class="align-center" id="id3">
-<span id="id1"></span><img alt="_images/1Bauo.png" src="_images/1Bauo.png" />
+<figure class="align-center" id="id2">
+<span id="fig-1bauo"></span><img alt="_images/1Bauo.png" src="_images/1Bauo.png" />
 <figcaption>
-<p><span class="caption-text">Geometrical Interpretation of Norm (<a class="reference external" href="https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent">source_1</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">Geometrical Interpretation of Norm (<a class="reference external" href="https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent">source_1</a>)</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ul>
@@ -326,51 +326,51 @@ the syntactic, semantic, or structural role of the elements in the text.</p>
 <ul>
 <li><p>Types of Tagging</p>
 <blockquote>
-<div><ol class="arabic">
-<li><p><strong>Part-of-Speech (POS) Tagging</strong>:
-- Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.
-- Example: For the sentence “The dog barks,” the tags might be:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">The/DET</span></code> (Determiner)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dog/NOUN</span></code> (Noun)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">barks/VERB</span></code> (Verb).</p></li>
+<div><ol class="arabic simple">
+<li><p><strong>Part-of-Speech (POS) Tagging</strong>:</p>
+<ul class="simple">
+<li><p>Assigns grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.</p></li>
+<li><p>Example: For the sentence “The dog barks,” the tags might be:
+- <code class="docutils literal notranslate"><span class="pre">The/DET</span></code> (Determiner)
+- <code class="docutils literal notranslate"><span class="pre">dog/NOUN</span></code> (Noun)
+- <code class="docutils literal notranslate"><span class="pre">barks/VERB</span></code> (Verb).</p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><p><strong>Named Entity Recognition (NER) Tagging</strong>:
-- Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.
-- Example: In the sentence “John works at Google in California,” the tags might be:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">John/PERSON</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Google/ORGANIZATION</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">California/LOCATION</span></code>.</p></li>
+<li><p><strong>Named Entity Recognition (NER) Tagging</strong>:</p>
+<ul class="simple">
+<li><p>Identifies and classifies named entities in a text, such as names of people, organizations, locations, dates, or monetary values.</p></li>
+<li><p>Example: In the sentence “John works at Google in California,” the tags might be:
+- <code class="docutils literal notranslate"><span class="pre">John/PERSON</span></code>
+- <code class="docutils literal notranslate"><span class="pre">Google/ORGANIZATION</span></code>
+- <code class="docutils literal notranslate"><span class="pre">California/LOCATION</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><p><strong>Chunking (Syntactic Tagging)</strong>:
-- Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).
-- Example: For the sentence “The quick brown fox jumps,” a chunking result might be:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[NP</span> <span class="pre">The</span> <span class="pre">quick</span> <span class="pre">brown</span> <span class="pre">fox]</span> <span class="pre">[VP</span> <span class="pre">jumps]</span></code>.</p></li>
+<li><p><strong>Chunking (Syntactic Tagging)</strong>:</p>
+<ul class="simple">
+<li><p>Groups words into syntactic chunks like noun phrases (NP) or verb phrases (VP).</p></li>
+<li><p>Example: For the sentence “The quick brown fox jumps,” a chunking result might be:
+- <code class="docutils literal notranslate"><span class="pre">[NP</span> <span class="pre">The</span> <span class="pre">quick</span> <span class="pre">brown</span> <span class="pre">fox]</span> <span class="pre">[VP</span> <span class="pre">jumps]</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><p><strong>Sentiment Tagging</strong>:
-- Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.
-- Example: The word “happy” might be tagged as <code class="docutils literal notranslate"><span class="pre">positive</span></code>, while “sad” might be tagged as <code class="docutils literal notranslate"><span class="pre">negative</span></code>.</p></li>
-<li><p><strong>Dependency Parsing Tags</strong>:
-- Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.
-- Example: In “She enjoys cooking,” the tags might show:</p>
-<blockquote>
-<div><ul class="simple">
+<li><p><strong>Sentiment Tagging</strong>:</p>
+<ul class="simple">
+<li><p>Assigns sentiment labels (e.g., positive, negative, neutral) to words, phrases, or entire documents.</p></li>
+<li><p>Example: The word “happy” might be tagged as <code class="docutils literal notranslate"><span class="pre">positive</span></code>, while “sad” might be tagged as <code class="docutils literal notranslate"><span class="pre">negative</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Dependency Parsing Tags</strong>:</p>
+<ul class="simple">
+<li><p>Identifies the grammatical relationships between words in a sentence, such as subject, object, or modifier.</p></li>
+<li><dl class="simple">
+<dt>Example: In “She enjoys cooking,” the tags might show:</dt><dd><ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">She/nsubj</span></code> (nominal subject)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">enjoys/ROOT</span></code> (root of the sentence)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cooking/dobj</span></code> (direct object).</p></li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
 </li>
 </ol>
 </div></blockquote>
@@ -416,94 +416,97 @@ like medical or legal documents.</p></li>
 <p>Lemmatization in NLP is the process of reducing a word to its base or dictionary form, known as
 the <strong>lemma</strong>. Unlike stemming, which simply removes word suffixes, lemmatization considers
 the context and grammatical role of the word to produce a linguistically accurate root form.</p>
-<ul>
+<ul class="simple">
 <li><p>How Lemmatization Works</p>
-<ol class="arabic">
-<li><p><strong>Contextual Analysis</strong>:
-- Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word’s base form.
-- For example:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">running</span></code> → <code class="docutils literal notranslate"><span class="pre">run</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">better</span></code> → <code class="docutils literal notranslate"><span class="pre">good</span></code></p></li>
+<ol class="arabic simple">
+<li><p><strong>Contextual Analysis</strong>:</p>
+<ul>
+<li><p>Lemmatization relies on a vocabulary (lexicon) and morphological analysis to identify a word’s base form.</p></li>
+<li><p>For example:
+- <code class="docutils literal notranslate"><span class="pre">running</span></code> → <code class="docutils literal notranslate"><span class="pre">run</span></code>
+- <code class="docutils literal notranslate"><span class="pre">better</span></code> → <code class="docutils literal notranslate"><span class="pre">good</span></code></p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><p><strong>Part-of-Speech (POS) Tagging</strong>:
-- The process uses POS tags to determine the correct lemma for a word.
-- Example:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">barking</span></code> (verb) → <code class="docutils literal notranslate"><span class="pre">bark</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">barking</span></code> (adjective, as in “barking dog”) → <code class="docutils literal notranslate"><span class="pre">barking</span></code>.</p></li>
+<li><p><strong>Part-of-Speech (POS) Tagging</strong>:</p>
+<ul>
+<li><p>The process uses POS tags to determine the correct lemma for a word.</p></li>
+<li><p>Example:
+- <code class="docutils literal notranslate"><span class="pre">barking</span></code> (verb) → <code class="docutils literal notranslate"><span class="pre">bark</span></code>
+- <code class="docutils literal notranslate"><span class="pre">barking</span></code> (adjective, as in “barking dog”) → <code class="docutils literal notranslate"><span class="pre">barking</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
 </ol>
 </li>
 <li><p>Importance of Lemmatization</p>
-<ol class="arabic">
-<li><p><strong>Improves Text Normalization</strong>:
-- Lemmatization helps normalize text by grouping different forms of a word into a single representation.
-- Example:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">running</span></code>, and <code class="docutils literal notranslate"><span class="pre">ran</span></code> → <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p></li>
+<ol class="arabic simple">
+<li><p><strong>Improves Text Normalization</strong>:</p>
+<ul>
+<li><p>Lemmatization helps normalize text by grouping different forms of a word into a single representation.</p></li>
+<li><p>Example:
+- <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">running</span></code>, and <code class="docutils literal notranslate"><span class="pre">ran</span></code> → <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><p><strong>Enhances NLP Applications</strong>:
-- Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.</p></li>
-<li><p><strong>Reduces Vocabulary Size</strong>:
-- By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.</p></li>
+<li><p><strong>Enhances NLP Applications</strong>:</p>
+<ul>
+<li><p>Lemmatized text improves the performance of tasks like information retrieval, text classification, and sentiment analysis.</p></li>
+</ul>
+</li>
+<li><p><strong>Reduces Vocabulary Size</strong>:</p>
+<ul>
+<li><p>By mapping inflected forms to their base form, lemmatization reduces redundancy in text, resulting in a smaller vocabulary.</p></li>
+</ul>
+</li>
 </ol>
 </li>
 <li><p>Lemmatization vs. Stemming</p>
 <ul>
-<li><p><strong>Lemmatization</strong>:
-- Produces linguistically accurate root forms.
-- Considers the word’s context and POS.
-- Example:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">studies</span></code> → <code class="docutils literal notranslate"><span class="pre">study</span></code>.</p></li>
+<li><p><strong>Lemmatization</strong>:</p>
+<ul>
+<li><p>Produces linguistically accurate root forms.</p></li>
+<li><p>Considers the word’s context and POS.</p></li>
+<li><p>Example:
+- <code class="docutils literal notranslate"><span class="pre">studies</span></code> → <code class="docutils literal notranslate"><span class="pre">study</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><p><strong>Stemming</strong>:
-- Applies heuristic rules to strip word suffixes without considering context.
-- May produce non-dictionary forms.
-- Example:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">studies</span></code> → <code class="docutils literal notranslate"><span class="pre">studi</span></code>.</p></li>
+<li><p><strong>Stemming</strong>:</p>
+<ul>
+<li><p>Applies heuristic rules to strip word suffixes without considering context.</p></li>
+<li><p>May produce non-dictionary forms.</p></li>
+<li><p>Example:
+- <code class="docutils literal notranslate"><span class="pre">studies</span></code> → <code class="docutils literal notranslate"><span class="pre">studi</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
 </ul>
 </li>
 <li><p>Techniques for Lemmatization</p>
 <ol class="arabic simple">
-<li><p><strong>Rule-Based Lemmatization</strong>:
-- Relies on predefined linguistic rules and dictionaries.
-- Example: WordNet-based lemmatizers.</p></li>
-<li><p><strong>Statistical Lemmatization</strong>:
-- Uses probabilistic models to predict lemmas based on the context.</p></li>
-<li><p><strong>Deep Learning-Based Lemmatization</strong>:
-- Employs neural networks and sequence-to-sequence models for highly accurate lemmatization in complex contexts.</p></li>
+<li><p><strong>Rule-Based Lemmatization</strong>:</p>
+<ul>
+<li><p>Relies on predefined linguistic rules and dictionaries.</p></li>
+<li><p>Example: WordNet-based lemmatizers.</p></li>
+</ul>
+</li>
+<li><p><strong>Statistical Lemmatization</strong>:</p>
+<ul>
+<li><p>Uses probabilistic models to predict lemmas based on the context.</p></li>
+</ul>
+</li>
+<li><p><strong>Deep Learning-Based Lemmatization</strong>:</p>
+<ul>
+<li><p>Employs neural networks and sequence-to-sequence models for highly accurate lemmatization in complex contexts.</p></li>
+</ul>
+</li>
 </ol>
 </li>
 <li><p>Challenges</p>
 <ul>
 <li><p><strong>Ambiguity</strong>:
-Words with multiple meanings may result in incorrect lemmatization without proper context.
-- Example:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code> (verb) → <code class="docutils literal notranslate"><span class="pre">leave</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code> (noun/adjective) → <code class="docutils literal notranslate"><span class="pre">left</span></code>.</p></li>
+Words with multiple meanings may result in incorrect lemmatization without proper context.</p>
+<ul>
+<li><p>Example:
+- <code class="docutils literal notranslate"><span class="pre">left</span></code> (verb) → <code class="docutils literal notranslate"><span class="pre">leave</span></code>
+- <code class="docutils literal notranslate"><span class="pre">left</span></code> (noun/adjective) → <code class="docutils literal notranslate"><span class="pre">left</span></code>.</p></li>
 </ul>
-</div></blockquote>
 </li>
 <li><p><strong>Language-Specific Complexity</strong>:
 Lemmatization rules vary widely across languages, requiring language-specific tools and resources.</p></li>
@@ -674,7 +677,7 @@ or quotes be treated as separate tokens or grouped with adjacent words?</p></li>
               <span class="o">...........</span><span class="p">,</span>
               <span class="p">(</span><span class="s1">&#39;writing&#39;</span><span class="p">,</span> <span class="mi">3015</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bay&#39;</span><span class="p">,</span> <span class="mi">3016</span><span class="p">),</span>
               <span class="o">...........</span><span class="p">,</span>
-              <span class="p">(</span><span class="s1">&#39;##？&#39;</span><span class="p">,</span> <span class="mi">30520</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;##～&#39;</span><span class="p">,</span> <span class="mi">30521</span><span class="p">)])</span>
+              <span class="p">(</span><span class="s1">&#39;##?&#39;</span><span class="p">,</span> <span class="mi">30520</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;##~&#39;</span><span class="p">,</span> <span class="mi">30521</span><span class="p">)])</span>
 </pre></div>
 </div>
 </li>
@@ -949,7 +952,7 @@ package is required.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 16, 2024.
+      <span class="lastupdated">Last updated on Dec 17, 2024.
       </span></p>
   </div>
 
