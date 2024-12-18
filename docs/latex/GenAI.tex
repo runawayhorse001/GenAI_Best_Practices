@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 17, 2024}
+\date{December 18, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -3031,7 +3031,7 @@ is to improve accuracy, relevance, and factuality by providing the LLM with spec
 or domain\sphinxhyphen{}specific context from a knowledge base or database during the generation process.
 
 \sphinxAtStartPar
-As you can see in {\hyperref[\detokenize{rag:fig-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Retrieval\sphinxhyphen{}Augmented Generation Diagram}}}}}, the RAG has there main  components
+As you can see in {\hyperref[\detokenize{pretraining:fig-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Ilya Sutskever at neurips 2024}}}}}, the RAG has there main  components
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -3435,7 +3435,215 @@ The valuating Chunking Strategies for Retrieval can be found at: \sphinxurl{http
 \capstart
 
 \noindent\sphinxincludegraphics{{late_chunking}.png}
-\caption{Naive chunking v.s. late chunking (Souce \sphinxhref{https://www.marktechpost.com/2024/08/27/jina-ai-introduced-late-chunking-a-simple-ai-approach-to-embed-short-chunks-by-leveraging-the-power-of-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id3}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
+\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id3}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Late Chunking} refers to a strategy in Retrieval\sphinxhyphen{}Augmented Generation (RAG) where chunking of
+data is \sphinxstylestrong{deferred until query time}. Unlike pre\sphinxhyphen{}chunking, where documents are split into chunks
+during preprocessing, late chunking dynamically extracts relevant content when a query is made.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Key Concepts of Late Chunking
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Dynamic Chunk Creation}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Full documents or large sections are stored in the vector database.
+
+\item {} 
+\sphinxAtStartPar
+Relevant chunks are dynamically extracted at query time based on the query and similarity match.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Query\sphinxhyphen{}Time Optimization}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The system identifies relevant content using similarity search or semantic analysis.
+
+\item {} 
+\sphinxAtStartPar
+Only the most relevant content is chunked and passed to the language model.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Reduced Preprocessing Time}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Eliminates extensive preprocessing and fixed chunking during data ingestion.
+
+\item {} 
+\sphinxAtStartPar
+Higher computational cost occurs during query\sphinxhyphen{}time retrieval.
+
+\end{itemize}
+
+\end{itemize}
+
+\end{itemize}
+
+\sphinxAtStartPar
+The folloing implementations are from \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI}, and the copyright belongs to the original author.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{chunk\PYGZus{}by\PYGZus{}sentences}\PYG{p}{(}\PYG{n}{input\PYGZus{}text}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{tokenizer}\PYG{p}{:} \PYG{n+nb}{callable}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Split the input text into sentences using the tokenizer}
+\PYG{l+s+sd}{    :param input\PYGZus{}text: The text snippet to split into sentences}
+\PYG{l+s+sd}{    :param tokenizer: The tokenizer to use}
+\PYG{l+s+sd}{    :return: A tuple containing the list of text chunks and their corresponding token spans}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{inputs} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{input\PYGZus{}text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{return\PYGZus{}offsets\PYGZus{}mapping}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n}{punctuation\PYGZus{}mark\PYGZus{}id} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{convert\PYGZus{}tokens\PYGZus{}to\PYGZus{}ids}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{sep\PYGZus{}id} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{convert\PYGZus{}tokens\PYGZus{}to\PYGZus{}ids}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[SEP]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{token\PYGZus{}offsets} \PYG{o}{=} \PYG{n}{inputs}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{offset\PYGZus{}mapping}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{n}{token\PYGZus{}ids} \PYG{o}{=} \PYG{n}{inputs}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{input\PYGZus{}ids}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{n}{chunk\PYGZus{}positions} \PYG{o}{=} \PYG{p}{[}
+        \PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{start} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{i}\PYG{p}{,} \PYG{p}{(}\PYG{n}{token\PYGZus{}id}\PYG{p}{,} \PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{end}\PYG{p}{)}\PYG{p}{)} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{token\PYGZus{}ids}\PYG{p}{,} \PYG{n}{token\PYGZus{}offsets}\PYG{p}{)}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{token\PYGZus{}id} \PYG{o}{==} \PYG{n}{punctuation\PYGZus{}mark\PYGZus{}id}
+        \PYG{o+ow}{and} \PYG{p}{(}
+            \PYG{n}{token\PYGZus{}offsets}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{token\PYGZus{}offsets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}
+            \PYG{o+ow}{or} \PYG{n}{token\PYGZus{}ids}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{==} \PYG{n}{sep\PYGZus{}id}
+        \PYG{p}{)}
+    \PYG{p}{]}
+    \PYG{n}{chunks} \PYG{o}{=} \PYG{p}{[}
+        \PYG{n}{input\PYGZus{}text}\PYG{p}{[}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{p}{:} \PYG{n}{y}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}
+        \PYG{k}{for} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{]} \PYG{o}{+} \PYG{n}{chunk\PYGZus{}positions}\PYG{p}{[}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}positions}\PYG{p}{)}
+    \PYG{p}{]}
+    \PYG{n}{span\PYGZus{}annotations} \PYG{o}{=} \PYG{p}{[}
+        \PYG{p}{(}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)} \PYG{k}{for} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{]} \PYG{o}{+} \PYG{n}{chunk\PYGZus{}positions}\PYG{p}{[}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}positions}\PYG{p}{)}
+    \PYG{p}{]}
+    \PYG{k}{return} \PYG{n}{chunks}\PYG{p}{,} \PYG{n}{span\PYGZus{}annotations}
+
+\PYG{k}{def} \PYG{n+nf}{late\PYGZus{}chunking}\PYG{p}{(}
+    \PYG{n}{model\PYGZus{}output}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{BatchEncoding}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{span\PYGZus{}annotation}\PYG{p}{:} \PYG{n+nb}{list}\PYG{p}{,} \PYG{n}{max\PYGZus{}length}\PYG{o}{=}\PYG{k+kc}{None}
+\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{token\PYGZus{}embeddings} \PYG{o}{=} \PYG{n}{model\PYGZus{}output}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{n}{outputs} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{embeddings}\PYG{p}{,} \PYG{n}{annotations} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{token\PYGZus{}embeddings}\PYG{p}{,} \PYG{n}{span\PYGZus{}annotation}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{if} \PYG{p}{(}
+            \PYG{n}{max\PYGZus{}length} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None}
+        \PYG{p}{)}\PYG{p}{:}  \PYG{c+c1}{\PYGZsh{} remove annotations which go bejond the max\PYGZhy{}length of the model}
+            \PYG{n}{annotations} \PYG{o}{=} \PYG{p}{[}
+                \PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{end}\PYG{p}{,} \PYG{n}{max\PYGZus{}length} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
+                \PYG{k}{for} \PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{end}\PYG{p}{)} \PYG{o+ow}{in} \PYG{n}{annotations}
+                \PYG{k}{if} \PYG{n}{start} \PYG{o}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{max\PYGZus{}length} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}
+            \PYG{p}{]}
+        \PYG{n}{pooled\PYGZus{}embeddings} \PYG{o}{=} \PYG{p}{[}
+            \PYG{n}{embeddings}\PYG{p}{[}\PYG{n}{start}\PYG{p}{:}\PYG{n}{end}\PYG{p}{]}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{end} \PYG{o}{\PYGZhy{}} \PYG{n}{start}\PYG{p}{)}
+            \PYG{k}{for} \PYG{n}{start}\PYG{p}{,} \PYG{n}{end} \PYG{o+ow}{in} \PYG{n}{annotations}
+            \PYG{k}{if} \PYG{p}{(}\PYG{n}{end} \PYG{o}{\PYGZhy{}} \PYG{n}{start}\PYG{p}{)} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{l+m+mi}{1}
+        \PYG{p}{]}
+        \PYG{n}{pooled\PYGZus{}embeddings} \PYG{o}{=} \PYG{p}{[}
+            \PYG{n}{embedding}\PYG{o}{.}\PYG{n}{detach}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{cpu}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{numpy}\PYG{p}{(}\PYG{p}{)} \PYG{k}{for} \PYG{n}{embedding} \PYG{o+ow}{in} \PYG{n}{pooled\PYGZus{}embeddings}
+        \PYG{p}{]}
+        \PYG{n}{outputs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{pooled\PYGZus{}embeddings}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{outputs}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{input\PYGZus{}text} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Berlin is the capital and largest city of Germany, both by area and by population. Its more than 3.85 million inhabitants make it the European Union}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s most populous city, as measured by population within city limits. The city is also one of the states of Germany, and is the third smallest state in the country in terms of area.}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} determine chunks}
+\PYG{n}{chunks}\PYG{p}{,} \PYG{n}{span\PYGZus{}annotations} \PYG{o}{=} \PYG{n}{chunk\PYGZus{}by\PYGZus{}sentences}\PYG{p}{(}\PYG{n}{input\PYGZus{}text}\PYG{p}{,} \PYG{n}{tokenizer}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Chunks:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZhy{} }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZhy{} }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} chunk before}
+\PYG{n}{embeddings\PYGZus{}traditional\PYGZus{}chunking} \PYG{o}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} chunk afterwards (context\PYGZhy{}sensitive chunked pooling)}
+\PYG{n}{inputs} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{p}{(}\PYG{n}{input\PYGZus{}text}\PYG{p}{,} \PYG{n}{return\PYGZus{}tensors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{model\PYGZus{}output} \PYG{o}{=} \PYG{n}{model}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{inputs}\PYG{p}{)}
+\PYG{n}{embeddings} \PYG{o}{=} \PYG{n}{late\PYGZus{}chunking}\PYG{p}{(}\PYG{n}{model\PYGZus{}output}\PYG{p}{,} \PYG{p}{[}\PYG{n}{span\PYGZus{}annotations}\PYG{p}{]}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+
+\PYG{n}{cos\PYGZus{}sim} \PYG{o}{=} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{y}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n}{berlin\PYGZus{}embedding} \PYG{o}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Berlin}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{k}{for} \PYG{n}{chunk}\PYG{p}{,} \PYG{n}{new\PYGZus{}embedding}\PYG{p}{,} \PYG{n}{trad\PYGZus{}embeddings} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{chunks}\PYG{p}{,} \PYG{n}{embeddings}\PYG{p}{,} \PYG{n}{embeddings\PYGZus{}traditional\PYGZus{}chunking}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{similarity\PYGZus{}new(}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Berlin}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{, }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chunk}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{):}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{cos\PYGZus{}sim}\PYG{p}{(}\PYG{n}{berlin\PYGZus{}embedding}\PYG{p}{,} \PYG{n}{new\PYGZus{}embedding}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{similarity\PYGZus{}trad(}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Berlin}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{, }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chunk}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{):}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{cos\PYGZus{}sim}\PYG{p}{(}\PYG{n}{berlin\PYGZus{}embedding}\PYG{p}{,} \PYG{n}{trad\PYGZus{}embeddings}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Query
+&
+\sphinxAtStartPar
+Chunk
+&
+\sphinxAtStartPar
+\sphinxstylestrong{similarity\_new}
+&
+\sphinxAtStartPar
+\sphinxstylestrong{similarity\_trad}
+\\
+\sphinxhline
+\sphinxAtStartPar
+Berlin
+&
+\sphinxAtStartPar
+Berlin is the capital and largest city of Germany, both by area and by population.
+&
+\sphinxAtStartPar
+0.849546
+&
+\sphinxAtStartPar
+0.8486219
+\\
+\sphinxhline
+\sphinxAtStartPar
+Berlin
+&
+\sphinxAtStartPar
+Its more than 3.85 million inhabitants make it the European Union’s most populous city,
+as measured by population within city limits.”
+&
+\sphinxAtStartPar
+0.82489026
+&
+\sphinxAtStartPar
+0.70843387
+\\
+\sphinxhline
+\sphinxAtStartPar
+Berlin
+&
+\sphinxAtStartPar
+The city is also one of the states of Germany, and is the third smallest state in the
+country in terms of area.”
+&
+\sphinxAtStartPar
+0.8498009
+&
+\sphinxAtStartPar
+0.75345534
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
 
 
 \subsection{Types of Indexing}
@@ -4244,7 +4452,7 @@ for fine\sphinxhyphen{}tuning LLMs focus on efficiency, scalability, and resourc
 The following strategies are at the forefront:
 
 
-\subsection{\sphinxstylestrong{LoRA (Low\sphinxhyphen{}Rank Adaptation)}}
+\subsection{LoRA (Low\sphinxhyphen{}Rank Adaptation)}
 \label{\detokenize{finetuning:lora-low-rank-adaptation}}
 \sphinxAtStartPar
 \sphinxstylestrong{LoRA} reduces the number of trainable parameters by introducing \sphinxstylestrong{low\sphinxhyphen{}rank decomposition} into the fine\sphinxhyphen{}tuning process.
@@ -4283,7 +4491,7 @@ Enables fine\sphinxhyphen{}tuning on resource\sphinxhyphen{}constrained hardware
 \end{itemize}
 
 
-\subsection{\sphinxstylestrong{QLoRA (Quantized Low\sphinxhyphen{}Rank Adaptation)}}
+\subsection{QLoRA (Quantized Low\sphinxhyphen{}Rank Adaptation)}
 \label{\detokenize{finetuning:qlora-quantized-low-rank-adaptation}}
 \sphinxAtStartPar
 \sphinxstylestrong{QLoRA} combines \sphinxstylestrong{low\sphinxhyphen{}rank adaptation} with \sphinxstylestrong{4\sphinxhyphen{}bit quantization} of the pre\sphinxhyphen{}trained model.
@@ -4319,7 +4527,7 @@ Enables fine\sphinxhyphen{}tuning of massive models on consumer\sphinxhyphen{}gr
 \end{itemize}
 
 
-\subsection{\sphinxstylestrong{PEFT (Parameter\sphinxhyphen{}Efficient Fine\sphinxhyphen{}Tuning)}}
+\subsection{PEFT (Parameter\sphinxhyphen{}Efficient Fine\sphinxhyphen{}Tuning)}
 \label{\detokenize{finetuning:peft-parameter-efficient-fine-tuning}}
 \sphinxAtStartPar
 \sphinxstylestrong{PEFT} is a general framework for fine\sphinxhyphen{}tuning LLMs with minimal trainable parameters.
@@ -4379,7 +4587,7 @@ Faster training and lower hardware requirements.
 \end{itemize}
 
 
-\subsection{\sphinxstylestrong{SFT (Supervised Fine\sphinxhyphen{}Tuning)}}
+\subsection{SFT (Supervised Fine\sphinxhyphen{}Tuning)}
 \label{\detokenize{finetuning:sft-supervised-fine-tuning}}
 \sphinxAtStartPar
 \sphinxstylestrong{SFT} adapts an LLM using a labeled dataset in a fully supervised manner.
@@ -4511,7 +4719,7 @@ Early fine\sphinxhyphen{}tuning methods laid the foundation for current approach
 primarily focused on updating the entire model or selected components.
 
 
-\subsection{\sphinxstylestrong{Full Fine\sphinxhyphen{}Tuning}}
+\subsection{Full Fine\sphinxhyphen{}Tuning}
 \label{\detokenize{finetuning:full-fine-tuning}}
 \sphinxAtStartPar
 All the parameters of a pre\sphinxhyphen{}trained model are updated using task\sphinxhyphen{}specific data {\hyperref[\detokenize{finetuning:fig-fine-tuning}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce Finetuning Sebastian).}}}}} (right).
@@ -4556,7 +4764,7 @@ Risk of overfitting on small datasets.
 \end{itemize}
 
 
-\subsection{\sphinxstylestrong{Feature\sphinxhyphen{}Based Approach}}
+\subsection{Feature\sphinxhyphen{}Based Approach}
 \label{\detokenize{finetuning:feature-based-approach}}
 \sphinxAtStartPar
 The pre\sphinxhyphen{}trained model is used as a \sphinxstylestrong{feature extractor}, while only a task\sphinxhyphen{}specific head is trained {\hyperref[\detokenize{finetuning:fig-fine-tuning}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce Finetuning Sebastian).}}}}} (left).
@@ -4588,7 +4796,7 @@ Computationally efficient since only the task\sphinxhyphen{}specific head is tra
 \end{itemize}
 
 
-\subsection{\sphinxstylestrong{Layer\sphinxhyphen{}Specific Fine\sphinxhyphen{}Tuning}}
+\subsection{Layer\sphinxhyphen{}Specific Fine\sphinxhyphen{}Tuning}
 \label{\detokenize{finetuning:layer-specific-fine-tuning}}
 \sphinxAtStartPar
 Only certain layers of the pre\sphinxhyphen{}trained model are fine\sphinxhyphen{}tuned while the rest remain frozen {\hyperref[\detokenize{finetuning:fig-fine-tuning}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{The three conventional feature\sphinxhyphen{}based and finetuning approaches (Souce Finetuning Sebastian).}}}}} (middle).
@@ -4616,7 +4824,7 @@ Balances computational efficiency and task adaptation.
 \end{itemize}
 
 
-\subsection{\sphinxstylestrong{Task\sphinxhyphen{}Adaptive Pre\sphinxhyphen{}training}}
+\subsection{Task\sphinxhyphen{}Adaptive Pre\sphinxhyphen{}training}
 \label{\detokenize{finetuning:task-adaptive-pre-training}}
 \sphinxAtStartPar
 Before fine\sphinxhyphen{}tuning on a specific task, the model undergoes additional \sphinxstylestrong{pre\sphinxhyphen{}training} on a domain\sphinxhyphen{}specific corpus.
@@ -4647,26 +4855,260 @@ Provides a better starting point for domain\sphinxhyphen{}specific tasks.
 \section{Embedding Model Fine\sphinxhyphen{}Tuning}
 \label{\detokenize{finetuning:embedding-model-fine-tuning}}
 \sphinxAtStartPar
-\sphinxcite{reference:finetuneembedding}
+In the chapter {\hyperref[\detokenize{rag:rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Retrieval\sphinxhyphen{}Augmented Generation}}}}}, we discussed how embedding models are crucial for the success of RAG applications.
+However, their general\sphinxhyphen{}purpose training often limits their effectiveness for company\sphinxhyphen{} or domain\sphinxhyphen{}specific
+use cases. Customizing embeddings with domain\sphinxhyphen{}specific data can significantly improve the retrieval
+performance of your RAG application.
+
+\sphinxAtStartPar
+In this chapter, we will demonstrate how to fine\sphinxhyphen{}tune embedding models using the
+\sphinxcode{\sphinxupquote{SentenceTransformersTrainer}}, building on insights shared in the blog \sphinxcite{reference:finetuneembedding}. Our main
+contribution was introducing LoRA to enable functionality on NVIDIA T4 GPUs, while the rest of the
+pipeline and code remained almost unchanged.
 
 
 \subsection{Prepare Dataset}
 \label{\detokenize{finetuning:prepare-dataset}}
+\sphinxAtStartPar
+We are going to directly use the synthetic dataset \sphinxcode{\sphinxupquote{philschmid/finanical\sphinxhyphen{}rag\sphinxhyphen{}embedding\sphinxhyphen{}dataset}}, which includes 7,000
+positive text pairs of questions and corresponding context from the \sphinxhref{https://stocklight.com/stocks/us/nasdaq-nvda/nvidia/annual-reports/nasdaq-nvda-2023-10K-23668751.pdf}{2023\_10 NVIDIA SEC Filing}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{datasets} \PYG{k+kn}{import} \PYG{n}{load\PYGZus{}dataset}
+
+\PYG{c+c1}{\PYGZsh{} Load dataset from the hub}
+\PYG{n}{dataset} \PYG{o}{=} \PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{philschmid/finanical\PYGZhy{}rag\PYGZhy{}embedding\PYGZhy{}dataset}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{split}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} rename columns}
+\PYG{n}{dataset} \PYG{o}{=} \PYG{n}{dataset}\PYG{o}{.}\PYG{n}{rename\PYGZus{}column}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{anchor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{dataset} \PYG{o}{=} \PYG{n}{dataset}\PYG{o}{.}\PYG{n}{rename\PYGZus{}column}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{context}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{positive}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Add an id column to the dataset}
+\PYG{n}{dataset} \PYG{o}{=} \PYG{n}{dataset}\PYG{o}{.}\PYG{n}{add\PYGZus{}column}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{id}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{dataset}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} split dataset into a 10\PYGZpc{} test set}
+\PYG{n}{dataset} \PYG{o}{=} \PYG{n}{dataset}\PYG{o}{.}\PYG{n}{train\PYGZus{}test\PYGZus{}split}\PYG{p}{(}\PYG{n}{test\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} save datasets to disk}
+\PYG{n}{dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{to\PYGZus{}json}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{orient}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{records}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{test}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{to\PYGZus{}json}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{test\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{orient}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{records}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
 
 \subsection{Import and Evaluate Pretrained Baseline Model}
 \label{\detokenize{finetuning:import-and-evaluate-pretrained-baseline-model}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{torch}
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers} \PYG{k+kn}{import} \PYG{n}{SentenceTransformer}
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers}\PYG{n+nn}{.}\PYG{n+nn}{evaluation} \PYG{k+kn}{import} \PYG{p}{(}
+    \PYG{n}{InformationRetrievalEvaluator}\PYG{p}{,}
+    \PYG{n}{SequentialEvaluator}\PYG{p}{,}
+\PYG{p}{)}
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers}\PYG{n+nn}{.}\PYG{n+nn}{util} \PYG{k+kn}{import} \PYG{n}{cos\PYGZus{}sim}
+\PYG{k+kn}{from} \PYG{n+nn}{datasets} \PYG{k+kn}{import} \PYG{n}{load\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{concatenate\PYGZus{}datasets}
+\PYG{k+kn}{from} \PYG{n+nn}{peft} \PYG{k+kn}{import} \PYG{n}{LoraConfig}\PYG{p}{,} \PYG{n}{TaskType}
+
+\PYG{n}{model\PYGZus{}id} \PYG{o}{=}  \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BAAI/bge\PYGZhy{}base\PYGZhy{}en\PYGZhy{}v1.5}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{matryoshka\PYGZus{}dimensions} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{768}\PYG{p}{,} \PYG{l+m+mi}{512}\PYG{p}{,} \PYG{l+m+mi}{256}\PYG{p}{,} \PYG{l+m+mi}{128}\PYG{p}{,} \PYG{l+m+mi}{64}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} Important: large to small}
+
+\PYG{c+c1}{\PYGZsh{} Load a model}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{SentenceTransformer}\PYG{p}{(}
+    \PYG{n}{model\PYGZus{}id}\PYG{p}{,}
+    \PYG{n}{trust\PYGZus{}remote\PYGZus{}code}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
+    \PYG{n}{device}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cuda}\PYG{l+s+s2}{\PYGZdq{}} \PYG{k}{if} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cuda}\PYG{o}{.}\PYG{n}{is\PYGZus{}available}\PYG{p}{(}\PYG{p}{)} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cpu}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} load test dataset}
+\PYG{n}{test\PYGZus{}dataset} \PYG{o}{=} \PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data\PYGZus{}files}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{test\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{split}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{train\PYGZus{}dataset} \PYG{o}{=} \PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data\PYGZus{}files}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{split}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{corpus\PYGZus{}dataset} \PYG{o}{=} \PYG{n}{concatenate\PYGZus{}datasets}\PYG{p}{(}\PYG{p}{[}\PYG{n}{train\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{test\PYGZus{}dataset}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Convert the datasets to dictionaries}
+\PYG{n}{corpus} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{(}
+    \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{corpus\PYGZus{}dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{id}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{corpus\PYGZus{}dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{positive}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Our corpus (cid =\PYGZgt{} document)}
+\PYG{n}{queries} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{(}
+    \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{test\PYGZus{}dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{id}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{test\PYGZus{}dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{anchor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Our queries (qid =\PYGZgt{} question)}
+
+\PYG{c+c1}{\PYGZsh{} Create a mapping of relevant document (1 in our case) for each query}
+\PYG{n}{relevant\PYGZus{}docs} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{p}{\PYGZcb{}}  \PYG{c+c1}{\PYGZsh{} Query ID to relevant documents (qid =\PYGZgt{} set([relevant\PYGZus{}cids])}
+\PYG{k}{for} \PYG{n}{q\PYGZus{}id} \PYG{o+ow}{in} \PYG{n}{queries}\PYG{p}{:}
+    \PYG{n}{relevant\PYGZus{}docs}\PYG{p}{[}\PYG{n}{q\PYGZus{}id}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{n}{q\PYGZus{}id}\PYG{p}{]}
+
+
+\PYG{n}{matryoshka\PYGZus{}evaluators} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+\PYG{c+c1}{\PYGZsh{} Iterate over the different dimensions}
+\PYG{k}{for} \PYG{n}{dim} \PYG{o+ow}{in} \PYG{n}{matryoshka\PYGZus{}dimensions}\PYG{p}{:}
+    \PYG{n}{ir\PYGZus{}evaluator} \PYG{o}{=} \PYG{n}{InformationRetrievalEvaluator}\PYG{p}{(}
+        \PYG{n}{queries}\PYG{o}{=}\PYG{n}{queries}\PYG{p}{,}
+        \PYG{n}{corpus}\PYG{o}{=}\PYG{n}{corpus}\PYG{p}{,}
+        \PYG{n}{relevant\PYGZus{}docs}\PYG{o}{=}\PYG{n}{relevant\PYGZus{}docs}\PYG{p}{,}
+        \PYG{n}{name}\PYG{o}{=}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{dim\PYGZus{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{dim}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{truncate\PYGZus{}dim}\PYG{o}{=}\PYG{n}{dim}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} Truncate the embeddings to a certain dimension}
+        \PYG{n}{score\PYGZus{}functions}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cosine}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{cos\PYGZus{}sim}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+    \PYG{p}{)}
+    \PYG{n}{matryoshka\PYGZus{}evaluators}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{ir\PYGZus{}evaluator}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Create a sequential evaluator}
+\PYG{n}{evaluator} \PYG{o}{=} \PYG{n}{SequentialEvaluator}\PYG{p}{(}\PYG{n}{matryoshka\PYGZus{}evaluators}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+If you encounter the error \sphinxcode{\sphinxupquote{Cannot import name \textquotesingle{}EncoderDecoderCache\textquotesingle{} from \textquotesingle{}transformers\textquotesingle{}}},
+ensure that the package versions are set to\textasciigrave{}\textasciigrave{}peft==0.10.0\textasciigrave{}\textasciigrave{} and \sphinxcode{\sphinxupquote{transformers==4.37.2}}.
+\end{sphinxadmonition}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Evaluate the model}
+\PYG{n}{results} \PYG{o}{=} \PYG{n}{evaluator}\PYG{p}{(}\PYG{n}{model}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Print the main score}
+\PYG{k}{for} \PYG{n}{dim} \PYG{o+ow}{in} \PYG{n}{matryoshka\PYGZus{}dimensions}\PYG{p}{:}
+    \PYG{n}{key} \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{dim\PYGZus{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{dim}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZus{}cosine\PYGZus{}ndcg@10}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{n+nb}{print}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{key}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{results}\PYG{p}{[}\PYG{n}{key}\PYG{p}{]}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{dim\PYGZus{}768\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.754897248109794}
+\PYG{n}{dim\PYGZus{}512\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.7549275773474213}
+\PYG{n}{dim\PYGZus{}256\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.7454714780163237}
+\PYG{n}{dim\PYGZus{}128\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.7116728650043451}
+\PYG{n}{dim\PYGZus{}64\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.6477174937632066}
+\end{sphinxVerbatim}
+
 
 \subsection{Loss Function with Matryoshka Representation}
 \label{\detokenize{finetuning:loss-function-with-matryoshka-representation}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers} \PYG{k+kn}{import} \PYG{n}{SentenceTransformerModelCardData}\PYG{p}{,} \PYG{n}{SentenceTransformer}
+
+\PYG{c+c1}{\PYGZsh{} Hugging Face model ID: https://huggingface.co/BAAI/bge\PYGZhy{}base\PYGZhy{}en\PYGZhy{}v1.5}
+\PYG{n}{model\PYGZus{}id} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BAAI/bge\PYGZhy{}base\PYGZhy{}en\PYGZhy{}v1.5}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} load model with SDPA for using Flash Attention 2}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{SentenceTransformer}\PYG{p}{(}
+    \PYG{n}{model\PYGZus{}id}\PYG{p}{,}
+    \PYG{n}{model\PYGZus{}kwargs}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{attn\PYGZus{}implementation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{sdpa}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+    \PYG{n}{model\PYGZus{}card\PYGZus{}data}\PYG{o}{=}\PYG{n}{SentenceTransformerModelCardData}\PYG{p}{(}
+        \PYG{n}{language}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{en}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{license}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{apache\PYGZhy{}2.0}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{model\PYGZus{}name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BGE base Financial Matryoshka}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{p}{)}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Apply PEFT with PromptTuningConfig}
+\PYG{n}{peft\PYGZus{}config} \PYG{o}{=} \PYG{n}{LoraConfig}\PYG{p}{(}
+    \PYG{n}{task\PYGZus{}type}\PYG{o}{=}\PYG{n}{TaskType}\PYG{o}{.}\PYG{n}{FEATURE\PYGZus{}EXTRACTION}\PYG{p}{,}
+    \PYG{n}{inference\PYGZus{}mode}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
+    \PYG{n}{r}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{,}
+    \PYG{n}{lora\PYGZus{}alpha}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,}
+    \PYG{n}{lora\PYGZus{}dropout}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{model}\PYG{o}{.}\PYG{n}{add\PYGZus{}adapter}\PYG{p}{(}\PYG{n}{peft\PYGZus{}config}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{dense}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} train loss}
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers}\PYG{n+nn}{.}\PYG{n+nn}{losses} \PYG{k+kn}{import} \PYG{n}{MatryoshkaLoss}\PYG{p}{,} \PYG{n}{MultipleNegativesRankingLoss}
+
+\PYG{n}{matryoshka\PYGZus{}dimensions} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{768}\PYG{p}{,} \PYG{l+m+mi}{512}\PYG{p}{,} \PYG{l+m+mi}{256}\PYG{p}{,} \PYG{l+m+mi}{128}\PYG{p}{,} \PYG{l+m+mi}{64}\PYG{p}{]}  \PYG{c+c1}{\PYGZsh{} Important: large to small}
+\PYG{n}{inner\PYGZus{}train\PYGZus{}loss} \PYG{o}{=} \PYG{n}{MultipleNegativesRankingLoss}\PYG{p}{(}\PYG{n}{model}\PYG{p}{)}
+\PYG{n}{train\PYGZus{}loss} \PYG{o}{=} \PYG{n}{MatryoshkaLoss}\PYG{p}{(}\PYG{n}{model}\PYG{p}{,}
+                            \PYG{n}{inner\PYGZus{}train\PYGZus{}loss}\PYG{p}{,}
+                            \PYG{n}{matryoshka\PYGZus{}dims}\PYG{o}{=}\PYG{n}{matryoshka\PYGZus{}dimensions}\PYG{p}{)}
+\end{sphinxVerbatim}
+
 
 \subsection{Fine\sphinxhyphen{}tune Embedding Model}
 \label{\detokenize{finetuning:fine-tune-embedding-model}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers} \PYG{k+kn}{import} \PYG{n}{SentenceTransformerTrainingArguments}
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers}\PYG{n+nn}{.}\PYG{n+nn}{training\PYGZus{}args} \PYG{k+kn}{import} \PYG{n}{BatchSamplers}
+
+\PYG{c+c1}{\PYGZsh{} load train dataset again}
+\PYG{n}{train\PYGZus{}dataset} \PYG{o}{=} \PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data\PYGZus{}files}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{split}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} define training arguments}
+\PYG{n}{args} \PYG{o}{=} \PYG{n}{SentenceTransformerTrainingArguments}\PYG{p}{(}
+    \PYG{n}{output\PYGZus{}dir}\PYG{o}{=}\PYG{n}{output\PYGZus{}dir}\PYG{p}{,} \PYG{c+c1}{\PYGZsh{} output directory and hugging face model ID}
+    \PYG{n}{num\PYGZus{}train\PYGZus{}epochs}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}                         \PYG{c+c1}{\PYGZsh{} number of epochs}
+    \PYG{n}{per\PYGZus{}device\PYGZus{}train\PYGZus{}batch\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,}             \PYG{c+c1}{\PYGZsh{} train batch size}
+    \PYG{n}{gradient\PYGZus{}accumulation\PYGZus{}steps}\PYG{o}{=}\PYG{l+m+mi}{16}\PYG{p}{,}             \PYG{c+c1}{\PYGZsh{} for a global batch size of 512}
+    \PYG{n}{per\PYGZus{}device\PYGZus{}eval\PYGZus{}batch\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{16}\PYG{p}{,}              \PYG{c+c1}{\PYGZsh{} evaluation batch size}
+    \PYG{n}{warmup\PYGZus{}ratio}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}                           \PYG{c+c1}{\PYGZsh{} warmup ratio}
+    \PYG{n}{learning\PYGZus{}rate}\PYG{o}{=}\PYG{l+m+mf}{2e\PYGZhy{}5}\PYG{p}{,}                         \PYG{c+c1}{\PYGZsh{} learning rate, 2e\PYGZhy{}5 is a good value}
+    \PYG{n}{lr\PYGZus{}scheduler\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cosine}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}                 \PYG{c+c1}{\PYGZsh{} use constant learning rate scheduler}
+    \PYG{n}{optim}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{adamw\PYGZus{}torch\PYGZus{}fused}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}                  \PYG{c+c1}{\PYGZsh{} use fused adamw optimizer}
+    \PYG{n}{tf32}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}                                  \PYG{c+c1}{\PYGZsh{} use tf32 precision}
+    \PYG{n}{bf16}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}                                  \PYG{c+c1}{\PYGZsh{} use bf16 precision}
+    \PYG{n}{batch\PYGZus{}sampler}\PYG{o}{=}\PYG{n}{BatchSamplers}\PYG{o}{.}\PYG{n}{NO\PYGZus{}DUPLICATES}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} MultipleNegativesRankingLoss benefits from no duplicate samples in a batch}
+    \PYG{n}{eval\PYGZus{}strategy}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{epoch}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}                      \PYG{c+c1}{\PYGZsh{} evaluate after each epoch}
+    \PYG{n}{save\PYGZus{}strategy}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{epoch}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}                      \PYG{c+c1}{\PYGZsh{} save after each epoch}
+    \PYG{n}{logging\PYGZus{}steps}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}                           \PYG{c+c1}{\PYGZsh{} log every 10 steps}
+    \PYG{n}{save\PYGZus{}total\PYGZus{}limit}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}                         \PYG{c+c1}{\PYGZsh{} save only the last 3 models}
+    \PYG{n}{load\PYGZus{}best\PYGZus{}model\PYGZus{}at\PYGZus{}end}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}                \PYG{c+c1}{\PYGZsh{} load the best model when training ends}
+    \PYG{n}{metric\PYGZus{}for\PYGZus{}best\PYGZus{}model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{eval\PYGZus{}dim\PYGZus{}128\PYGZus{}cosine\PYGZus{}ndcg@10}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} Optimizing for the best ndcg@10 score for the 128 dimension}
+    \PYG{n}{greater\PYGZus{}is\PYGZus{}better}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}                     \PYG{c+c1}{\PYGZsh{} maximize the ndcg@10 score}
+\PYG{p}{)}
+
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers} \PYG{k+kn}{import} \PYG{n}{SentenceTransformerTrainer}
+
+\PYG{n}{trainer} \PYG{o}{=} \PYG{n}{SentenceTransformerTrainer}\PYG{p}{(}
+    \PYG{n}{model}\PYG{o}{=}\PYG{n}{model}\PYG{p}{,} \PYG{c+c1}{\PYGZsh{} bg\PYGZhy{}base\PYGZhy{}en\PYGZhy{}v1}
+    \PYG{n}{args}\PYG{o}{=}\PYG{n}{args}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} training arguments}
+    \PYG{n}{train\PYGZus{}dataset}\PYG{o}{=}\PYG{n}{train\PYGZus{}dataset}\PYG{o}{.}\PYG{n}{select\PYGZus{}columns}\PYG{p}{(}
+        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{anchor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{positive}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{p}{)}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} training dataset}
+    \PYG{n}{loss}\PYG{o}{=}\PYG{n}{train\PYGZus{}loss}\PYG{p}{,}
+    \PYG{n}{evaluator}\PYG{o}{=}\PYG{n}{evaluator}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} start training}
+\PYG{n}{trainer}\PYG{o}{.}\PYG{n}{train}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} save the best model}
+\PYG{c+c1}{\PYGZsh{}trainer.save\PYGZus{}model()}
+\PYG{n}{trainer}\PYG{o}{.}\PYG{n}{model}\PYG{o}{.}\PYG{n}{save\PYGZus{}pretrained}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bge\PYGZhy{}base\PYGZhy{}finetuning}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
 
 \subsection{Evaluate Fine\sphinxhyphen{}tuned Model}
 \label{\detokenize{finetuning:evaluate-fine-tuned-model}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sentence\PYGZus{}transformers} \PYG{k+kn}{import} \PYG{n}{SentenceTransformer}
+
+\PYG{n}{fine\PYGZus{}tuned\PYGZus{}model} \PYG{o}{=} \PYG{n}{SentenceTransformer}\PYG{p}{(}
+    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bge\PYGZhy{}base\PYGZhy{}finetuning}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{device}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cuda}\PYG{l+s+s2}{\PYGZdq{}} \PYG{k}{if} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cuda}\PYG{o}{.}\PYG{n}{is\PYGZus{}available}\PYG{p}{(}\PYG{p}{)} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cpu}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Evaluate the model}
+\PYG{n}{results} \PYG{o}{=} \PYG{n}{evaluator}\PYG{p}{(}\PYG{n}{fine\PYGZus{}tuned\PYGZus{}model}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} \PYGZsh{} COMMENT IN for full results}
+\PYG{c+c1}{\PYGZsh{} print(results)}
+
+\PYG{c+c1}{\PYGZsh{} Print the main score}
+\PYG{k}{for} \PYG{n}{dim} \PYG{o+ow}{in} \PYG{n}{matryoshka\PYGZus{}dimensions}\PYG{p}{:}
+    \PYG{n}{key} \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{dim\PYGZus{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{dim}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZus{}cosine\PYGZus{}ndcg@10}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{key}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{results}\PYG{p}{[}\PYG{n}{key}\PYG{p}{]}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{dim\PYGZus{}768\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.7650276801072632}
+\PYG{n}{dim\PYGZus{}512\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.7603951540556889}
+\PYG{n}{dim\PYGZus{}256\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.754743133407988}
+\PYG{n}{dim\PYGZus{}128\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.7205317098443929}
+\PYG{n}{dim\PYGZus{}64\PYGZus{}cosine\PYGZus{}ndcg}\PYG{o}{@}\PYG{l+m+mi}{10}\PYG{p}{:} \PYG{l+m+mf}{0.6609117856061502}
+\end{sphinxVerbatim}
+
 
 \subsection{Results Comparison}
 \label{\detokenize{finetuning:results-comparison}}
+\sphinxAtStartPar
+Although we did not observe the significant performance boost reported in the original
+blog, the fine\sphinxhyphen{}tuned model outperformed the baseline model across all dimensions using
+only 6.3k samples and partial parameter fine\sphinxhyphen{}tuning. MOre details can be found as follows:
+
 
 \begin{savenotes}\sphinxattablestart
 \sphinxthistablewithglobalstyle
@@ -4757,26 +5199,165 @@ Improvement
 \sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{fine_tuning_wandb}.png}
+\caption{Epoch, Training Loss/steps in Wandb}\label{\detokenize{finetuning:id6}}\label{\detokenize{finetuning:fig-wandb}}\end{figure}
+
 
 \section{LLM Fine\sphinxhyphen{}Tuning}
 \label{\detokenize{finetuning:llm-fine-tuning}}
+\sphinxAtStartPar
+In this chapter, we will demonstrate how to fine\sphinxhyphen{}tune a Llama 2 model with 7 billion parameters using
+a T4 GPU with 16 GB of VRAM. Due to VRAM limitations, traditional fine\sphinxhyphen{}tuning is not feasible,
+making parameter\sphinxhyphen{}efficient fine\sphinxhyphen{}tuning (PEFT) techniques like LoRA or QLoRA essential. For this
+demonstration, we use QLoRA, which leverages 4\sphinxhyphen{}bit precision to significantly reduce VRAM consumption.
+
+\sphinxAtStartPar
+The folloing code is from notebook \sphinxcite{reference:finetunellm}, and the copyright belongs to the original author.
+
 
 \subsection{Load Dataset and Pretrained Model}
 \label{\detokenize{finetuning:load-dataset-and-pretrained-model}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Step 1 : Load dataset (you can process it here)}
+\PYG{n}{dataset} \PYG{o}{=} \PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{n}{dataset\PYGZus{}name}\PYG{p}{,} \PYG{n}{split}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 2 :Load tokenizer and model with QLoRA configuration}
+\PYG{n}{compute\PYGZus{}dtype} \PYG{o}{=} \PYG{n+nb}{getattr}\PYG{p}{(}\PYG{n}{torch}\PYG{p}{,} \PYG{n}{bnb\PYGZus{}4bit\PYGZus{}compute\PYGZus{}dtype}\PYG{p}{)}
+
+\PYG{n}{bnb\PYGZus{}config} \PYG{o}{=} \PYG{n}{BitsAndBytesConfig}\PYG{p}{(}
+    \PYG{n}{load\PYGZus{}in\PYGZus{}4bit}\PYG{o}{=}\PYG{n}{use\PYGZus{}4bit}\PYG{p}{,}
+    \PYG{n}{bnb\PYGZus{}4bit\PYGZus{}quant\PYGZus{}type}\PYG{o}{=}\PYG{n}{bnb\PYGZus{}4bit\PYGZus{}quant\PYGZus{}type}\PYG{p}{,}
+    \PYG{n}{bnb\PYGZus{}4bit\PYGZus{}compute\PYGZus{}dtype}\PYG{o}{=}\PYG{n}{compute\PYGZus{}dtype}\PYG{p}{,}
+    \PYG{n}{bnb\PYGZus{}4bit\PYGZus{}use\PYGZus{}double\PYGZus{}quant}\PYG{o}{=}\PYG{n}{use\PYGZus{}nested\PYGZus{}quant}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 3 :Check GPU compatibility with bfloat16}
+\PYG{k}{if} \PYG{n}{compute\PYGZus{}dtype} \PYG{o}{==} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{float16} \PYG{o+ow}{and} \PYG{n}{use\PYGZus{}4bit}\PYG{p}{:}
+    \PYG{n}{major}\PYG{p}{,} \PYG{n}{\PYGZus{}} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cuda}\PYG{o}{.}\PYG{n}{get\PYGZus{}device\PYGZus{}capability}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{major} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{:}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{=}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{*} \PYG{l+m+mi}{80}\PYG{p}{)}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Your GPU supports bfloat16: accelerate training with bf16=True}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{=}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{*} \PYG{l+m+mi}{80}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 4 :Load base model}
+\PYG{n}{model} \PYG{o}{=} \PYG{n}{AutoModelForCausalLM}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}
+    \PYG{n}{model\PYGZus{}name}\PYG{p}{,}
+    \PYG{n}{quantization\PYGZus{}config}\PYG{o}{=}\PYG{n}{bnb\PYGZus{}config}\PYG{p}{,}
+    \PYG{n}{device\PYGZus{}map}\PYG{o}{=}\PYG{n}{device\PYGZus{}map}
+\PYG{p}{)}
+\PYG{n}{model}\PYG{o}{.}\PYG{n}{config}\PYG{o}{.}\PYG{n}{use\PYGZus{}cache} \PYG{o}{=} \PYG{k+kc}{False}
+\PYG{n}{model}\PYG{o}{.}\PYG{n}{config}\PYG{o}{.}\PYG{n}{pretraining\PYGZus{}tp} \PYG{o}{=} \PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZsh{} Step 5 :Load LLaMA tokenizer}
+\PYG{n}{tokenizer} \PYG{o}{=} \PYG{n}{AutoTokenizer}\PYG{o}{.}\PYG{n}{from\PYGZus{}pretrained}\PYG{p}{(}\PYG{n}{model\PYGZus{}name}\PYG{p}{,} \PYG{n}{trust\PYGZus{}remote\PYGZus{}code}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{add\PYGZus{}special\PYGZus{}tokens}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pad\PYGZus{}token}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{[PAD]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{pad\PYGZus{}token} \PYG{o}{=} \PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{eos\PYGZus{}token}
+\PYG{n}{tokenizer}\PYG{o}{.}\PYG{n}{padding\PYGZus{}side} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{right}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
+
 
 \subsection{Fine\sphinxhyphen{}tuning Configuration}
 \label{\detokenize{finetuning:fine-tuning-configuration}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Step 6 :Load LoRA configuration}
+\PYG{n}{peft\PYGZus{}config} \PYG{o}{=} \PYG{n}{LoraConfig}\PYG{p}{(}
+    \PYG{n}{lora\PYGZus{}alpha}\PYG{o}{=}\PYG{n}{lora\PYGZus{}alpha}\PYG{p}{,}
+    \PYG{n}{lora\PYGZus{}dropout}\PYG{o}{=}\PYG{n}{lora\PYGZus{}dropout}\PYG{p}{,}
+    \PYG{n}{r}\PYG{o}{=}\PYG{n}{lora\PYGZus{}r}\PYG{p}{,}
+    \PYG{n}{bias}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{none}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{task\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{CAUSAL\PYGZus{}LM}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 7 :Set training parameters}
+\PYG{n}{training\PYGZus{}arguments} \PYG{o}{=} \PYG{n}{TrainingArguments}\PYG{p}{(}
+    \PYG{n}{output\PYGZus{}dir}\PYG{o}{=}\PYG{n}{output\PYGZus{}dir}\PYG{p}{,}
+    \PYG{n}{num\PYGZus{}train\PYGZus{}epochs}\PYG{o}{=}\PYG{n}{num\PYGZus{}train\PYGZus{}epochs}\PYG{p}{,}
+    \PYG{n}{per\PYGZus{}device\PYGZus{}train\PYGZus{}batch\PYGZus{}size}\PYG{o}{=}\PYG{n}{per\PYGZus{}device\PYGZus{}train\PYGZus{}batch\PYGZus{}size}\PYG{p}{,}
+    \PYG{n}{gradient\PYGZus{}accumulation\PYGZus{}steps}\PYG{o}{=}\PYG{n}{gradient\PYGZus{}accumulation\PYGZus{}steps}\PYG{p}{,}
+    \PYG{n}{optim}\PYG{o}{=}\PYG{n}{optim}\PYG{p}{,}
+    \PYG{n}{save\PYGZus{}steps}\PYG{o}{=}\PYG{n}{save\PYGZus{}steps}\PYG{p}{,}
+    \PYG{n}{logging\PYGZus{}steps}\PYG{o}{=}\PYG{n}{logging\PYGZus{}steps}\PYG{p}{,}
+    \PYG{n}{learning\PYGZus{}rate}\PYG{o}{=}\PYG{n}{learning\PYGZus{}rate}\PYG{p}{,}
+    \PYG{n}{weight\PYGZus{}decay}\PYG{o}{=}\PYG{n}{weight\PYGZus{}decay}\PYG{p}{,}
+    \PYG{n}{fp16}\PYG{o}{=}\PYG{n}{fp16}\PYG{p}{,}
+    \PYG{n}{bf16}\PYG{o}{=}\PYG{n}{bf16}\PYG{p}{,}
+    \PYG{n}{max\PYGZus{}grad\PYGZus{}norm}\PYG{o}{=}\PYG{n}{max\PYGZus{}grad\PYGZus{}norm}\PYG{p}{,}
+    \PYG{n}{max\PYGZus{}steps}\PYG{o}{=}\PYG{n}{max\PYGZus{}steps}\PYG{p}{,}
+    \PYG{n}{warmup\PYGZus{}ratio}\PYG{o}{=}\PYG{n}{warmup\PYGZus{}ratio}\PYG{p}{,}
+    \PYG{n}{group\PYGZus{}by\PYGZus{}length}\PYG{o}{=}\PYG{n}{group\PYGZus{}by\PYGZus{}length}\PYG{p}{,}
+    \PYG{n}{lr\PYGZus{}scheduler\PYGZus{}type}\PYG{o}{=}\PYG{n}{lr\PYGZus{}scheduler\PYGZus{}type}\PYG{p}{,}
+    \PYG{n}{report\PYGZus{}to}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tensorboard}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
 
 \subsection{Fine\sphinxhyphen{}tune model}
 \label{\detokenize{finetuning:fine-tune-model}}
-\sphinxAtStartPar
-\sphinxcite{reference:finetunellm}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Step 8 :Set supervised fine\PYGZhy{}tuning parameters}
+\PYG{n}{trainer} \PYG{o}{=} \PYG{n}{SFTTrainer}\PYG{p}{(}
+    \PYG{n}{model}\PYG{o}{=}\PYG{n}{model}\PYG{p}{,}
+    \PYG{n}{train\PYGZus{}dataset}\PYG{o}{=}\PYG{n}{dataset}\PYG{p}{,}
+    \PYG{n}{peft\PYGZus{}config}\PYG{o}{=}\PYG{n}{peft\PYGZus{}config}\PYG{p}{,}
+    \PYG{n}{dataset\PYGZus{}text\PYGZus{}field}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{text}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{max\PYGZus{}seq\PYGZus{}length}\PYG{o}{=}\PYG{n}{max\PYGZus{}seq\PYGZus{}length}\PYG{p}{,}
+    \PYG{n}{tokenizer}\PYG{o}{=}\PYG{n}{tokenizer}\PYG{p}{,}
+    \PYG{n}{args}\PYG{o}{=}\PYG{n}{training\PYGZus{}arguments}\PYG{p}{,}
+    \PYG{n}{packing}\PYG{o}{=}\PYG{n}{packing}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 9 :Train model}
+\PYG{n}{trainer}\PYG{o}{.}\PYG{n}{train}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Step 10 :Save trained model}
+\PYG{n}{trainer}\PYG{o}{.}\PYG{n}{model}\PYG{o}{.}\PYG{n}{save\PYGZus{}pretrained}\PYG{p}{(}\PYG{n}{new\PYGZus{}model}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{fine_tuning_llm}.png}
+\caption{Llama 2 Model Fine\sphinxhyphen{}Tuning TensorBoard}\label{\detokenize{finetuning:id7}}\label{\detokenize{finetuning:fig-fine-tuning-llm}}\end{figure}
 
 \sphinxstepscope
 
 
 \chapter{Pre\sphinxhyphen{}training}
 \label{\detokenize{pretraining:pre-training}}\label{\detokenize{pretraining:pretraining}}\label{\detokenize{pretraining::doc}}
+\begin{sphinxadmonition}{note}{Proverb}
+
+\sphinxAtStartPar
+Pre\sphinxhyphen{}training as we know it will end. \textendash{} Ilya Sutskever at neurips 2024
+\end{sphinxadmonition}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{ilya_sutskever}.png}
+\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id1}}\label{\detokenize{pretraining:fig-rag}}\end{figure}
+
+\sphinxAtStartPar
+In industry, most companies focus primarily on prompt engineering, RAG, and fine\sphinxhyphen{}tuning,
+while advanced techniques like pre\sphinxhyphen{}training from scratch or deep model customization
+remain less common due to the significant resources and expertise required.
+
+\sphinxAtStartPar
+LLMs, like GPT (Generative Pre\sphinxhyphen{}trained Transformer), BERT (Bidirectional Encoder
+Representations from Transformers), and others, are large\sphinxhyphen{}scale models built using
+the transformer architecture. These models are trained on vast amounts of text data to
+learn patterns in language, enabling them to generate human\sphinxhyphen{}like text, answer questions,
+summarize information, and perform other natural language processing tasks.
+
+\sphinxAtStartPar
+This chapter delves into transformer models, drawing on insights from
+\sphinxhref{https://nlp.seas.harvard.edu/annotated-transformer/}{The Annotated Transformer} and \sphinxhref{https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c}{Tracing the Transformer in Diagrams}, to explore their underlying architecture and practical applications.
+
 \sphinxstepscope
 
 

@@ -56,38 +56,38 @@
 \contentsline {section}{\numberline {5.2}Indexing}{48}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Naive Chunking}{48}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Late Chunking}{51}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Types of Indexing}{51}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Vector Database}{53}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Retrieval}{56}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Common retrieval methods}{56}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Reciprocal Rank Fusion}{57}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Generation}{58}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Fine Tuning}{61}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{61}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}\sphinxstylestrong {LoRA (Low\sphinxhyphen {}Rank Adaptation)}}{61}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}\sphinxstylestrong {QLoRA (Quantized Low\sphinxhyphen {}Rank Adaptation)}}{62}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}\sphinxstylestrong {PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}}{63}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}\sphinxstylestrong {SFT (Supervised Fine\sphinxhyphen {}Tuning)}}{63}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}Summary Table}{64}{subsection.6.1.5}%
-\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{64}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}\sphinxstylestrong {Full Fine\sphinxhyphen {}Tuning}}{64}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}\sphinxstylestrong {Feature\sphinxhyphen {}Based Approach}}{65}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}\sphinxstylestrong {Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}}{65}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}\sphinxstylestrong {Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}}{65}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{65}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{66}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{66}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{66}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{66}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{66}{subsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{66}{subsection.6.3.6}%
-\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{66}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{66}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{66}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{66}{subsection.6.4.3}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{67}{chapter.7}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{69}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers}{69}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{69}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{71}{chapter.9}%
-\contentsline {chapter}{Bibliography}{73}{chapter*.4}%
+\contentsline {subsection}{\numberline {5.2.3}Types of Indexing}{55}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Vector Database}{56}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Retrieval}{58}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Common retrieval methods}{60}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Reciprocal Rank Fusion}{60}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Generation}{62}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{63}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{63}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}LoRA (Low\sphinxhyphen {}Rank Adaptation)}{63}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}QLoRA (Quantized Low\sphinxhyphen {}Rank Adaptation)}{64}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{65}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{65}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}Summary Table}{66}{subsection.6.1.5}%
+\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{66}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{66}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{67}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{67}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{67}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{67}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{68}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{68}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{70}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{71}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{72}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{73}{subsection.6.3.6}%
+\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{73}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{74}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{74}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{75}{subsection.6.4.3}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{77}{chapter.7}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{79}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers}{79}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{79}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{81}{chapter.9}%
+\contentsline {chapter}{Bibliography}{83}{chapter*.4}%

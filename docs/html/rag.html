@@ -340,9 +340,146 @@ or results.</p></td>
 <figure class="align-center" id="id3">
 <span id="fig-late-chunk"></span><img alt="_images/late_chunking.png" src="_images/late_chunking.png" />
 <figcaption>
-<p><span class="caption-text">Naive chunking v.s. late chunking (Souce <a class="reference external" href="https://www.marktechpost.com/2024/08/27/jina-ai-introduced-late-chunking-a-simple-ai-approach-to-embed-short-chunks-by-leveraging-the-power-of-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce <a class="reference external" href="https://jina.ai/news/late-chunking-in-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<p><strong>Late Chunking</strong> refers to a strategy in Retrieval-Augmented Generation (RAG) where chunking of
+data is <strong>deferred until query time</strong>. Unlike pre-chunking, where documents are split into chunks
+during preprocessing, late chunking dynamically extracts relevant content when a query is made.</p>
+<ul class="simple">
+<li><p>Key Concepts of Late Chunking</p>
+<ul>
+<li><p><strong>Dynamic Chunk Creation</strong>:</p>
+<ul>
+<li><p>Full documents or large sections are stored in the vector database.</p></li>
+<li><p>Relevant chunks are dynamically extracted at query time based on the query and similarity match.</p></li>
+</ul>
+</li>
+<li><p><strong>Query-Time Optimization</strong>:</p>
+<ul>
+<li><p>The system identifies relevant content using similarity search or semantic analysis.</p></li>
+<li><p>Only the most relevant content is chunked and passed to the language model.</p></li>
+</ul>
+</li>
+<li><p><strong>Reduced Preprocessing Time</strong>:</p>
+<ul>
+<li><p>Eliminates extensive preprocessing and fixed chunking during data ingestion.</p></li>
+<li><p>Higher computational cost occurs during query-time retrieval.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The folloing implementations are from <a class="reference external" href="https://jina.ai/news/late-chunking-in-long-context-embedding-models/">Jina AI</a>, and the copyright belongs to the original author.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chunk_by_sentences</span><span class="p">(</span><span class="n">input_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">callable</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Split the input text into sentences using the tokenizer</span>
+<span class="sd">    :param input_text: The text snippet to split into sentences</span>
+<span class="sd">    :param tokenizer: The tokenizer to use</span>
+<span class="sd">    :return: A tuple containing the list of text chunks and their corresponding token spans</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">input_text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span> <span class="n">return_offsets_mapping</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">punctuation_mark_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_tokens_to_ids</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">sep_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_tokens_to_ids</span><span class="p">(</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">)</span>
+    <span class="n">token_offsets</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;offset_mapping&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">token_ids</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">chunk_positions</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">token_id</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">token_ids</span><span class="p">,</span> <span class="n">token_offsets</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">token_id</span> <span class="o">==</span> <span class="n">punctuation_mark_id</span>
+        <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">token_offsets</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">token_offsets</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="ow">or</span> <span class="n">token_ids</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">sep_id</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">input_text</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="n">chunk_positions</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">chunk_positions</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">span_annotations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="n">chunk_positions</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">chunk_positions</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">span_annotations</span>
+
+<span class="k">def</span> <span class="nf">late_chunking</span><span class="p">(</span>
+    <span class="n">model_output</span><span class="p">:</span> <span class="s1">&#39;BatchEncoding&#39;</span><span class="p">,</span> <span class="n">span_annotation</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
+    <span class="n">token_embeddings</span> <span class="o">=</span> <span class="n">model_output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">annotations</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">token_embeddings</span><span class="p">,</span> <span class="n">span_annotation</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">max_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="p">):</span>  <span class="c1"># remove annotations which go bejond the max-length of the model</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">max_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="n">annotations</span>
+                <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">max_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="n">pooled_embeddings</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">embeddings</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">annotations</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+        <span class="p">]</span>
+        <span class="n">pooled_embeddings</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">embedding</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">embedding</span> <span class="ow">in</span> <span class="n">pooled_embeddings</span>
+        <span class="p">]</span>
+        <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pooled_embeddings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_text</span> <span class="o">=</span> <span class="s2">&quot;Berlin is the capital and largest city of Germany, both by area and by population. Its more than 3.85 million inhabitants make it the European Union&#39;s most populous city, as measured by population within city limits. The city is also one of the states of Germany, and is the third smallest state in the country in terms of area.&quot;</span>
+
+<span class="c1"># determine chunks</span>
+<span class="n">chunks</span><span class="p">,</span> <span class="n">span_annotations</span> <span class="o">=</span> <span class="n">chunk_by_sentences</span><span class="p">(</span><span class="n">input_text</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Chunks:</span><span class="se">\n</span><span class="s1">- &quot;&#39;</span> <span class="o">+</span> <span class="s1">&#39;&quot;</span><span class="se">\n</span><span class="s1">- &quot;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># chunk before</span>
+<span class="n">embeddings_traditional_chunking</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+
+<span class="c1"># chunk afterwards (context-sensitive chunked pooling)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">input_text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+<span class="n">model_output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">late_chunking</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="p">[</span><span class="n">span_annotations</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">cos_sim</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="n">berlin_embedding</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;Berlin&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">new_embedding</span><span class="p">,</span> <span class="n">trad_embeddings</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">embeddings_traditional_chunking</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;similarity_new(&quot;Berlin&quot;, &quot;</span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s1">&quot;):&#39;</span><span class="p">,</span> <span class="n">cos_sim</span><span class="p">(</span><span class="n">berlin_embedding</span><span class="p">,</span> <span class="n">new_embedding</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;similarity_trad(&quot;Berlin&quot;, &quot;</span><span class="si">{</span><span class="n">chunk</span><span class="si">}</span><span class="s1">&quot;):&#39;</span><span class="p">,</span> <span class="n">cos_sim</span><span class="p">(</span><span class="n">berlin_embedding</span><span class="p">,</span> <span class="n">trad_embeddings</span><span class="p">))</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Query</p></td>
+<td><p>Chunk</p></td>
+<td><p><strong>similarity_new</strong></p></td>
+<td><p><strong>similarity_trad</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Berlin</p></td>
+<td><p>Berlin is the capital and largest city of Germany, both by area and by population.</p></td>
+<td><p>0.849546</p></td>
+<td><p>0.8486219</p></td>
+</tr>
+<tr class="row-odd"><td><p>Berlin</p></td>
+<td><p>Its more than 3.85 million inhabitants make it the European Union’s most populous city,
+as measured by population within city limits.”</p></td>
+<td><p>0.82489026</p></td>
+<td><p>0.70843387</p></td>
+</tr>
+<tr class="row-even"><td><p>Berlin</p></td>
+<td><p>The city is also one of the states of Germany, and is the third smallest state in the
+country in terms of area.”</p></td>
+<td><p>0.8498009</p></td>
+<td><p>0.75345534</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="types-of-indexing">
 <h3><span class="section-number">5.2.3. </span>Types of Indexing<a class="headerlink" href="#types-of-indexing" title="Link to this heading"></a></h3>
@@ -743,7 +880,7 @@ different rankings, and you want to combine them into a single, unified ranking.
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 17, 2024.
+      <span class="lastupdated">Last updated on Dec 18, 2024.
       </span></p>
   </div>
 
