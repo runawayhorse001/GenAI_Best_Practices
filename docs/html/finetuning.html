@@ -318,9 +318,23 @@ However, their general-purpose training often limits their effectiveness for com
 use cases. Customizing embeddings with domain-specific data can significantly improve the retrieval
 performance of your RAG application.</p>
 <p>In this chapter, we will demonstrate how to fine-tune embedding models using the
-<code class="docutils literal notranslate"><span class="pre">SentenceTransformersTrainer</span></code>, building on insights shared in the blog <a class="reference internal" href="reference.html#finetuneembedding" id="id2"><span>[fineTuneEmbedding]</span></a>. Our main
-contribution was introducing LoRA to enable functionality on NVIDIA T4 GPUs, while the rest of the
-pipeline and code remained almost unchanged.</p>
+<code class="docutils literal notranslate"><span class="pre">SentenceTransformersTrainer</span></code>, building on insights shared in the blog <a class="reference internal" href="reference.html#finetuneembedding" id="id2"><span>[fineTuneEmbedding]</span></a> and
+Sentence Transformer <a class="reference external" href="https://sbert.net/docs/sentence_transformer/training_overview.html#dataset-format">Training Overview</a>. Our main contribution was introducing LoRA to enable functionality on
+NVIDIA T4 GPUs, while the rest of the pipeline and code remained almost unchanged.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please ensure that the package versions are set as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span>  <span class="s2">&quot;torch==2.1.2&quot;</span> <span class="n">tensorboard</span>
+
+<span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> \
+    <span class="n">sentence</span><span class="o">-</span><span class="n">transformers</span><span class="o">&gt;=</span><span class="mi">3</span> \
+    <span class="n">datasets</span><span class="o">==</span><span class="mf">2.19.1</span>  \
+    <span class="n">transformers</span><span class="o">==</span><span class="mf">4.41.2</span> \
+    <span class="n">peft</span><span class="o">==</span><span class="mf">0.10.0</span>
+</pre></div>
+</div>
+<p>Otherwise, you may encounter the error.</p>
+</div>
 <section id="prepare-dataset">
 <h3><span class="section-number">6.3.1. </span>Prepare Dataset<a class="headerlink" href="#prepare-dataset" title="Link to this heading"></a></h3>
 <p>We are going to directly use the synthetic dataset <code class="docutils literal notranslate"><span class="pre">philschmid/finanical-rag-embedding-dataset</span></code>, which includes 7,000
@@ -344,6 +358,26 @@ positive text pairs of questions and corresponding context from the <a class="re
 <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">&quot;train_dataset.json&quot;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">&quot;test_dataset.json&quot;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In practice, most dataset configurations will take one of four forms:</p>
+<ul class="simple">
+<li><p><strong>Positive Pair</strong>: A pair of related sentences. This can be used both for symmetric tasks
+(semantic textual similarity) or asymmetric tasks (semantic search), with examples
+including pairs of paraphrases, pairs of full texts and their summaries, pairs of
+duplicate questions, pairs of <code class="docutils literal notranslate"><span class="pre">(query,</span> <span class="pre">response)</span></code>, or pairs of
+<code class="docutils literal notranslate"><span class="pre">(source_language,</span> <span class="pre">target_language)</span></code>.
+Natural Language Inference datasets can also be formatted this way by pairing entailing sentences.</p></li>
+<li><p><strong>Triplets</strong>: <code class="docutils literal notranslate"><span class="pre">(anchor,</span> <span class="pre">positive,</span> <span class="pre">negative)</span></code> text triplets. These datasets don’t need labels.</p></li>
+<li><p><strong>Pair with Similarity Score</strong>: A pair of sentences with a score indicating their similarity.
+Common examples are “Semantic Textual Similarity” datasets.</p></li>
+<li><p><strong>Texts with Classes</strong>: A text with its corresponding class. This data format is easily
+converted by loss functions into three sentences (triplets) where the first is an “anchor”,
+the second a “positive” of the same class as the anchor, and the third a “negative” of a different class.</p></li>
+</ul>
+<p>Note that it is often simple to transform a dataset from one format to another, such that it works with
+your loss function of choice.</p>
 </div>
 </section>
 <section id="import-and-evaluate-pretrained-baseline-model">
@@ -407,7 +441,7 @@ positive text pairs of questions and corresponding context from the <a class="re
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you encounter the error <code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">import</span> <span class="pre">name</span> <span class="pre">'EncoderDecoderCache'</span> <span class="pre">from</span> <span class="pre">'transformers'</span></code>,
-ensure that the package versions are set to``peft==0.10.0`` and <code class="docutils literal notranslate"><span class="pre">transformers==4.37.2</span></code>.</p>
+ensure that the package versions are set to <code class="docutils literal notranslate"><span class="pre">peft==0.10.0</span></code> and <code class="docutils literal notranslate"><span class="pre">transformers==4.37.2</span></code>.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate the model</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">evaluator</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -464,6 +498,67 @@ ensure that the package versions are set to``peft==0.10.0`` and <code class="doc
                             <span class="n">inner_train_loss</span><span class="p">,</span>
                             <span class="n">matryoshka_dims</span><span class="o">=</span><span class="n">matryoshka_dimensions</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Loss functions play a critical role in the performance of your fine-tuned model.
+Sadly, there is no “one size fits all” loss function. Ideally,
+this table should help narrow down your choice of loss function(s) by matching
+them to your data formats.</p>
+<p>You can often convert one training data format into another, allowing more loss
+functions to be viable for your scenario. For example,</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Inputs</p></th>
+<th class="head"><p>Labels</p></th>
+<th class="head"><p>Appropriate Loss Functions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">single</span> <span class="pre">sentences</span></code></p></td>
+<td><p><cite>class</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BatchAllTripletLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">BatchHardSoftMarginTripletLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">BatchHardTripletLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">BatchSemiHardTripletLoss</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">single</span> <span class="pre">sentences</span></code></p></td>
+<td><p><cite>none</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContrastiveTensionLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">DenoisingAutoEncoderLoss</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(anchor,</span> <span class="pre">anchor)</span></code> pairs</p></td>
+<td><p><cite>none</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContrastiveTensionLossInBatchNegatives</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(damaged_sentence,</span> <span class="pre">original_sentence)</span></code> pairs</p></td>
+<td><p><cite>none</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DenoisingAutoEncoderLoss</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(sentence_A,</span> <span class="pre">sentence_B)</span></code> pairs</p></td>
+<td><p><cite>class</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SoftmaxLoss</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(anchor,</span> <span class="pre">positive)</span></code> pairs</p></td>
+<td><p><cite>none</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MultipleNegativesRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">CachedMultipleNegativesRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">MultipleNegativesSymmetricRankingLoss</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CachedMultipleNegativesSymmetricRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">MegaBatchMarginLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">GISTEmbedLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">CachedGISTEmbedLoss</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(anchor,</span> <span class="pre">positive/negative)</span></code> pairs</p></td>
+<td><p><cite>1 if positive, 0 if negative</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ContrastiveLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">OnlineContrastiveLoss</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(sentence_A,</span> <span class="pre">sentence_B)</span></code> pairs</p></td>
+<td><p><cite>float similarity score</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CoSENTLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">AnglELoss</span></code>, <code class="docutils literal notranslate"><span class="pre">CosineSimilarityLoss</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(anchor,</span> <span class="pre">positive,</span> <span class="pre">negative)</span></code> triplets</p></td>
+<td><p><cite>none</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MultipleNegativesRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">CachedMultipleNegativesRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">TripletLoss</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CachedGISTEmbedLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">GISTEmbedLoss</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>(anchor, positive, negative_1, …, negative_n)`</cite></p></td>
+<td><p><cite>none</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MultipleNegativesRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">CachedMultipleNegativesRankingLoss</span></code>, <code class="docutils literal notranslate"><span class="pre">CachedGISTEmbedLoss</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 <section id="fine-tune-embedding-model">
@@ -718,7 +813,7 @@ demonstration, we use QLoRA, which leverages 4-bit precision to significantly re
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 17, 2024.
+      <span class="lastupdated">Last updated on Dec 18, 2024.
       </span></p>
   </div>
 

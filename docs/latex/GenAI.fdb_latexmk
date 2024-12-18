@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex GenAI.idx"] 1733885069.49638 "GenAI.idx" "GenAI.ind" "GenAI" 1734501885.3337 0
-  "GenAI.idx" 1734501878.57792 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex GenAI.idx"] 1733885069.49638 "GenAI.idx" "GenAI.ind" "GenAI" 1734533067.24106 0
+  "GenAI.idx" 1734533061.40044 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "GenAI.ilg"
   "GenAI.ind"
   (rewritten before read)
-["pdflatex"] 1734501877.90695 "GenAI.tex" "GenAI.pdf" "GenAI" 1734501885.3339 2
+["pdflatex"] 1734533060.88877 "GenAI.tex" "GenAI.pdf" "GenAI" 1734533067.24126 2
   "/etc/texmf/web2c/texmf.cnf" 1733500287.93404 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -160,6 +160,7 @@
   "/usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmr.tfm" 1480098718 11504 0b76b46eb90907e684139293e03c466a ""
   "/usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmri.tfm" 1480098718 11356 da1519f442d8a49b81c86cbaf25ef79f ""
   "/usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm" 1480098718 1600 20cdf11dab97d5d39e847571f9314407 ""
+  "/usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmri.tfm" 1480098718 1744 236018a0ac3444bdc221f881182030d8 ""
   "/usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb" 1480098745 112164 176018dd42fcc60204173fa10e357da5 ""
   "/usr/share/texmf/fonts/type1/public/tex-gyre/qhvbi.pfb" 1480098745 104926 77ce2f0433ac7fd33dbe9968d127e4fb ""
   "/usr/share/texmf/fonts/type1/public/tex-gyre/qhvr.pfb" 1480098745 110045 c159829aa6d7d99f1777bb40c90b8157 ""
@@ -175,11 +176,11 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1733500419 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1733500426 6829263 f2202ecc5b89caf9e5a5a9209267cb3e ""
   "1Bauo.png" 1733883657.04928 75520 6488cbedf23e3ac3dd586979a7ad78ef ""
-  "GenAI.aux" 1734501885.11557 28125 61d91650328a6a254af057e010ec596d "pdflatex"
+  "GenAI.aux" 1734533067.04037 28125 1aa06534cdfa784986772e05bf75fa85 "pdflatex"
   "GenAI.ind" 1733885069.50972 0 d41d8cd98f00b204e9800998ecf8427e "makeindex GenAI.idx"
-  "GenAI.out" 1734501885.11957 14095 034dfba7b51d228f1fab114be506b557 "pdflatex"
-  "GenAI.tex" 1734501877.71297 281378 6efee29eceb3e048a3e485bd0425877c ""
-  "GenAI.toc" 1734501885.11957 8345 cfd88518a2ae313313d75dffebaae402 "pdflatex"
+  "GenAI.out" 1734533067.04337 14095 034dfba7b51d228f1fab114be506b557 "pdflatex"
+  "GenAI.tex" 1734533060.74433 288013 53ef06ff7291ab59608a7ba4ac332e6c ""
+  "GenAI.toc" 1734533067.04337 8345 6bab82dd146c4b0d9de3885467b7c4db "pdflatex"
   "RAG_diagram.png" 1734416349.55705 494181 5d8713cb090b3935d9f172b40a71c2e8 ""
   "T4.png" 1733990707.40286 207521 f17cf6a2d96851fec5dac48b0625bfa8 ""
   "embedding_diagram.png" 1733885474.74645 63996 835279b23b4f0efc14581bd98f52bc97 ""
@@ -200,7 +201,7 @@
   "retriever.png" 1734417601.55086 100508 a5ae24438311fe67d31539ffc415af27 ""
   "runtime.png" 1733990687.83503 191189 a999d56d9d9a4b17f88fe86a0755ec5e ""
   "sphinx.sty" 1733500209.89951 54119 967a674353157928503df7cae9b6165e ""
-  "sphinxhighlight.sty" 1734501877.28799 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1734533060.39427 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxlatexadmonitions.sty" 1733500209.89951 19110 2855832b1a32f04033523b9919260ac9 ""
   "sphinxlatexcontainers.sty" 1733500209.90051 900 d61f923db071a7b54d3cee8a1e6935d3 ""
   "sphinxlatexgraphics.sty" 1733500209.90051 4918 c9266041d02bc615d54b890e96e3acd3 ""
@@ -215,7 +216,7 @@
   "sphinxlatexstyletext.sty" 1733500209.90151 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1733500209.90151 57643 7f1013c2fa11942370d867527bdda568 ""
   "sphinxmanual.cls" 1733500209.90151 4241 7b0d7a37df7b5715fb0dbd585c52ecdb ""
-  "sphinxmessages.sty" 1734501877.72997 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1734533060.75733 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1733500209.90151 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1733500209.90251 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1733500209.90251 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""

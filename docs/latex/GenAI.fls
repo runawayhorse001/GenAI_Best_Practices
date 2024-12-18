@@ -563,6 +563,7 @@ INPUT ./peft_2.png
 INPUT ./peft_2.png
 INPUT ./peft_2.png
 INPUT ./peft_2.png
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmri.tfm
 INPUT ./fine_tuning_wandb.png
 INPUT ./fine_tuning_wandb.png
 INPUT ./fine_tuning_wandb.png

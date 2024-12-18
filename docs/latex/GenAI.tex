@@ -4862,9 +4862,27 @@ performance of your RAG application.
 
 \sphinxAtStartPar
 In this chapter, we will demonstrate how to fine\sphinxhyphen{}tune embedding models using the
-\sphinxcode{\sphinxupquote{SentenceTransformersTrainer}}, building on insights shared in the blog \sphinxcite{reference:finetuneembedding}. Our main
-contribution was introducing LoRA to enable functionality on NVIDIA T4 GPUs, while the rest of the
-pipeline and code remained almost unchanged.
+\sphinxcode{\sphinxupquote{SentenceTransformersTrainer}}, building on insights shared in the blog \sphinxcite{reference:finetuneembedding} and
+Sentence Transformer \sphinxhref{https://sbert.net/docs/sentence\_transformer/training\_overview.html\#dataset-format}{Training Overview}. Our main contribution was introducing LoRA to enable functionality on
+NVIDIA T4 GPUs, while the rest of the pipeline and code remained almost unchanged.
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+Please ensure that the package versions are set as follows:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pip} \PYG{n}{install}  \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{torch==2.1.2}\PYG{l+s+s2}{\PYGZdq{}} \PYG{n}{tensorboard}
+
+\PYG{n}{pip} \PYG{n}{install} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{upgrade} \PYGZbs{}
+    \PYG{n}{sentence}\PYG{o}{\PYGZhy{}}\PYG{n}{transformers}\PYG{o}{\PYGZgt{}}\PYG{o}{=}\PYG{l+m+mi}{3} \PYGZbs{}
+    \PYG{n}{datasets}\PYG{o}{==}\PYG{l+m+mf}{2.19}\PYG{l+m+mf}{.1}  \PYGZbs{}
+    \PYG{n}{transformers}\PYG{o}{==}\PYG{l+m+mf}{4.41}\PYG{l+m+mf}{.2} \PYGZbs{}
+    \PYG{n}{peft}\PYG{o}{==}\PYG{l+m+mf}{0.10}\PYG{l+m+mf}{.0}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Otherwise, you may encounter the error.
+\end{sphinxadmonition}
 
 
 \subsection{Prepare Dataset}
@@ -4893,6 +4911,41 @@ positive text pairs of questions and corresponding context from the \sphinxhref{
 \PYG{n}{dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{to\PYGZus{}json}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{orient}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{records}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \PYG{n}{dataset}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{test}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{to\PYGZus{}json}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{test\PYGZus{}dataset.json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{orient}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{records}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+In practice, most dataset configurations will take one of four forms:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Positive Pair}: A pair of related sentences. This can be used both for symmetric tasks
+(semantic textual similarity) or asymmetric tasks (semantic search), with examples
+including pairs of paraphrases, pairs of full texts and their summaries, pairs of
+duplicate questions, pairs of \sphinxcode{\sphinxupquote{(query, response)}}, or pairs of
+\sphinxcode{\sphinxupquote{(source\_language, target\_language)}}.
+Natural Language Inference datasets can also be formatted this way by pairing entailing sentences.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Triplets}: \sphinxcode{\sphinxupquote{(anchor, positive, negative)}} text triplets. These datasets don’t need labels.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Pair with Similarity Score}: A pair of sentences with a score indicating their similarity.
+Common examples are “Semantic Textual Similarity” datasets.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Texts with Classes}: A text with its corresponding class. This data format is easily
+converted by loss functions into three sentences (triplets) where the first is an “anchor”,
+the second a “positive” of the same class as the anchor, and the third a “negative” of a different class.
+
+\end{itemize}
+
+\sphinxAtStartPar
+Note that it is often simple to transform a dataset from one format to another, such that it works with
+your loss function of choice.
+\end{sphinxadmonition}
 
 
 \subsection{Import and Evaluate Pretrained Baseline Model}
@@ -4957,7 +5010,7 @@ positive text pairs of questions and corresponding context from the \sphinxhref{
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 If you encounter the error \sphinxcode{\sphinxupquote{Cannot import name \textquotesingle{}EncoderDecoderCache\textquotesingle{} from \textquotesingle{}transformers\textquotesingle{}}},
-ensure that the package versions are set to\textasciigrave{}\textasciigrave{}peft==0.10.0\textasciigrave{}\textasciigrave{} and \sphinxcode{\sphinxupquote{transformers==4.37.2}}.
+ensure that the package versions are set to \sphinxcode{\sphinxupquote{peft==0.10.0}} and \sphinxcode{\sphinxupquote{transformers==4.37.2}}.
 \end{sphinxadmonition}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -5018,6 +5071,142 @@ ensure that the package versions are set to\textasciigrave{}\textasciigrave{}pef
                             \PYG{n}{inner\PYGZus{}train\PYGZus{}loss}\PYG{p}{,}
                             \PYG{n}{matryoshka\PYGZus{}dims}\PYG{o}{=}\PYG{n}{matryoshka\PYGZus{}dimensions}\PYG{p}{)}
 \end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+Loss functions play a critical role in the performance of your fine\sphinxhyphen{}tuned model.
+Sadly, there is no “one size fits all” loss function. Ideally,
+this table should help narrow down your choice of loss function(s) by matching
+them to your data formats.
+
+\sphinxAtStartPar
+You can often convert one training data format into another, allowing more loss
+functions to be viable for your scenario. For example,
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Inputs
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Labels
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Appropriate Loss Functions
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{single sentences}}
+&
+\sphinxAtStartPar
+\sphinxtitleref{class}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{BatchAllTripletLoss}}, \sphinxcode{\sphinxupquote{BatchHardSoftMarginTripletLoss}}, \sphinxcode{\sphinxupquote{BatchHardTripletLoss}}, \sphinxcode{\sphinxupquote{BatchSemiHardTripletLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{single sentences}}
+&
+\sphinxAtStartPar
+\sphinxtitleref{none}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{ContrastiveTensionLoss}}, \sphinxcode{\sphinxupquote{DenoisingAutoEncoderLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(anchor, anchor)}} pairs
+&
+\sphinxAtStartPar
+\sphinxtitleref{none}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{ContrastiveTensionLossInBatchNegatives}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(damaged\_sentence, original\_sentence)}} pairs
+&
+\sphinxAtStartPar
+\sphinxtitleref{none}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{DenoisingAutoEncoderLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(sentence\_A, sentence\_B)}} pairs
+&
+\sphinxAtStartPar
+\sphinxtitleref{class}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{SoftmaxLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(anchor, positive)}} pairs
+&
+\sphinxAtStartPar
+\sphinxtitleref{none}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{MultipleNegativesRankingLoss}}, \sphinxcode{\sphinxupquote{CachedMultipleNegativesRankingLoss}}, \sphinxcode{\sphinxupquote{MultipleNegativesSymmetricRankingLoss}},
+\sphinxcode{\sphinxupquote{CachedMultipleNegativesSymmetricRankingLoss}}, \sphinxcode{\sphinxupquote{MegaBatchMarginLoss}}, \sphinxcode{\sphinxupquote{GISTEmbedLoss}}, \sphinxcode{\sphinxupquote{CachedGISTEmbedLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(anchor, positive/negative)}} pairs
+&
+\sphinxAtStartPar
+\sphinxtitleref{1 if positive, 0 if negative}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{ContrastiveLoss}}, \sphinxcode{\sphinxupquote{OnlineContrastiveLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(sentence\_A, sentence\_B)}} pairs
+&
+\sphinxAtStartPar
+\sphinxtitleref{float similarity score}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{CoSENTLoss}}, \sphinxcode{\sphinxupquote{AnglELoss}}, \sphinxcode{\sphinxupquote{CosineSimilarityLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{(anchor, positive, negative)}} triplets
+&
+\sphinxAtStartPar
+\sphinxtitleref{none}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{MultipleNegativesRankingLoss}}, \sphinxcode{\sphinxupquote{CachedMultipleNegativesRankingLoss}}, \sphinxcode{\sphinxupquote{TripletLoss}},
+\sphinxcode{\sphinxupquote{CachedGISTEmbedLoss}}, \sphinxcode{\sphinxupquote{GISTEmbedLoss}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxtitleref{(anchor, positive, negative\_1, …, negative\_n)\textasciigrave{}}
+&
+\sphinxAtStartPar
+\sphinxtitleref{none}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{MultipleNegativesRankingLoss}}, \sphinxcode{\sphinxupquote{CachedMultipleNegativesRankingLoss}}, \sphinxcode{\sphinxupquote{CachedGISTEmbedLoss}}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+\end{sphinxadmonition}
 
 
 \subsection{Fine\sphinxhyphen{}tune Embedding Model}
@@ -5394,7 +5583,7 @@ Yunho Mo etc.
 \bibitem[fineTuneEmbedding]{reference:finetuneembedding}
 \sphinxAtStartPar
 Philipp Schmid.
-\sphinxhref{https://www.philschmid.de/fine-tune-embedding-model-for-rag}{Fine\sphinxhyphen{}tune Embedding models for Retrieval Augmented Generation (RAG)}, 2017.
+\sphinxhref{https://www.philschmid.de/fine-tune-embedding-model-for-rag}{Fine\sphinxhyphen{}tune Embedding models for Retrieval Augmented Generation (RAG)}, 2024.
 \bibitem[fineTuneLLM]{reference:finetunellm}
 \sphinxAtStartPar
 Maxime Labonne.

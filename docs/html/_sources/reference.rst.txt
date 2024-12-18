@@ -20,7 +20,7 @@ Main Reference
 
 .. [fineTuneEmbedding] Philipp Schmid.
                  `Fine-tune Embedding models for Retrieval Augmented Generation (RAG)
-                 <https://www.philschmid.de/fine-tune-embedding-model-for-rag>`_, 2017.
+                 <https://www.philschmid.de/fine-tune-embedding-model-for-rag>`_, 2024.
 
 .. [fineTuneLLM] Maxime Labonne.
                  `Fine-Tune Your Own Llama 2 Model in a Colab Notebook

@@ -223,9 +223,27 @@ use cases. Customizing embeddings with domain-specific data can significantly im
 performance of your RAG application.
 
 In this chapter, we will demonstrate how to fine-tune embedding models using the 
-``SentenceTransformersTrainer``, building on insights shared in the blog [fineTuneEmbedding]_. Our main 
-contribution was introducing LoRA to enable functionality on NVIDIA T4 GPUs, while the rest of the 
-pipeline and code remained almost unchanged.
+``SentenceTransformersTrainer``, building on insights shared in the blog [fineTuneEmbedding]_ and 
+Sentence Transformer `Training Overview`_. Our main contribution was introducing LoRA to enable functionality on 
+NVIDIA T4 GPUs, while the rest of the pipeline and code remained almost unchanged.
+
+.. _`Training Overview`: https://sbert.net/docs/sentence_transformer/training_overview.html#dataset-format
+
+.. note::
+
+    Please ensure that the package versions are set as follows:
+    
+    .. code-block:: python 
+
+        pip install  "torch==2.1.2" tensorboard
+        
+        pip install --upgrade \
+            sentence-transformers>=3 \
+            datasets==2.19.1  \
+            transformers==4.41.2 \
+            peft==0.10.0
+
+    Otherwise, you may encounter the error.  
 
 
 Prepare Dataset
@@ -235,7 +253,6 @@ We are going to directly use the synthetic dataset ``philschmid/finanical-rag-em
 positive text pairs of questions and corresponding context from the `2023_10 NVIDIA SEC Filing`_.
 
 .. _2023_10 NVIDIA SEC Filing: https://stocklight.com/stocks/us/nasdaq-nvda/nvidia/annual-reports/nasdaq-nvda-2023-10K-23668751.pdf
-
 
 .. code-block:: python 
 
@@ -259,6 +276,25 @@ positive text pairs of questions and corresponding context from the `2023_10 NVI
     dataset["test"].to_json("test_dataset.json", orient="records")    
 
 
+.. note::
+
+    In practice, most dataset configurations will take one of four forms:
+
+    - **Positive Pair**: A pair of related sentences. This can be used both for symmetric tasks
+      (semantic textual similarity) or asymmetric tasks (semantic search), with examples 
+      including pairs of paraphrases, pairs of full texts and their summaries, pairs of 
+      duplicate questions, pairs of ``(query, response)``, or pairs of 
+      ``(source_language, target_language)``. 
+      Natural Language Inference datasets can also be formatted this way by pairing entailing sentences.
+    - **Triplets**: ``(anchor, positive, negative)`` text triplets. These datasets don't need labels.
+    - **Pair with Similarity Score**: A pair of sentences with a score indicating their similarity. 
+      Common examples are "Semantic Textual Similarity" datasets.
+    - **Texts with Classes**: A text with its corresponding class. This data format is easily 
+      converted by loss functions into three sentences (triplets) where the first is an "anchor", 
+      the second a "positive" of the same class as the anchor, and the third a "negative" of a different class.
+
+    Note that it is often simple to transform a dataset from one format to another, such that it works with 
+    your loss function of choice.
 
 Import and Evaluate Pretrained Baseline Model
 ---------------------------------------------
@@ -323,7 +359,7 @@ Import and Evaluate Pretrained Baseline Model
 .. note::
 
    If you encounter the error ``Cannot import name 'EncoderDecoderCache' from 'transformers'``, 
-   ensure that the package versions are set to``peft==0.10.0`` and ``transformers==4.37.2``.
+   ensure that the package versions are set to ``peft==0.10.0`` and ``transformers==4.37.2``.
 
 .. code-block:: python 
 
@@ -384,6 +420,43 @@ Loss Function with Matryoshka Representation
     train_loss = MatryoshkaLoss(model,
                                 inner_train_loss,
                                 matryoshka_dims=matryoshka_dimensions)
+
+.. note::
+
+    Loss functions play a critical role in the performance of your fine-tuned model. 
+    Sadly, there is no "one size fits all" loss function. Ideally, 
+    this table should help narrow down your choice of loss function(s) by matching 
+    them to your data formats.
+
+    You can often convert one training data format into another, allowing more loss 
+    functions to be viable for your scenario. For example, 
+
+    
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    | Inputs                                            | Labels                         | Appropriate Loss Functions                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    +===================================================+================================+=====================================================================================================================+
+    |``single sentences``                               | `class`                        | ``BatchAllTripletLoss``, ``BatchHardSoftMarginTripletLoss``, ``BatchHardTripletLoss``, ``BatchSemiHardTripletLoss`` |
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``single sentences``                               | `none`                         | ``ContrastiveTensionLoss``, ``DenoisingAutoEncoderLoss``                                                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(anchor, anchor)`` pairs                         | `none`                         | ``ContrastiveTensionLossInBatchNegatives``                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(damaged_sentence, original_sentence)`` pairs    | `none`                         | ``DenoisingAutoEncoderLoss``                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(sentence_A, sentence_B)`` pairs                 | `class`                        | ``SoftmaxLoss``                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(anchor, positive)`` pairs                       | `none`                         | ``MultipleNegativesRankingLoss``, ``CachedMultipleNegativesRankingLoss``, ``MultipleNegativesSymmetricRankingLoss``,| 
+    |                                                   |                                | ``CachedMultipleNegativesSymmetricRankingLoss``, ``MegaBatchMarginLoss``, ``GISTEmbedLoss``, ``CachedGISTEmbedLoss``|
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(anchor, positive/negative)`` pairs              | `1 if positive, 0 if negative` | ``ContrastiveLoss``, ``OnlineContrastiveLoss``                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(sentence_A, sentence_B)`` pairs                 | `float similarity score`       | ``CoSENTLoss``, ``AnglELoss``, ``CosineSimilarityLoss``                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |``(anchor, positive, negative)`` triplets          | `none`                         | ``MultipleNegativesRankingLoss``, ``CachedMultipleNegativesRankingLoss``, ``TripletLoss``,                          |
+    |                                                   |                                | ``CachedGISTEmbedLoss``, ``GISTEmbedLoss``                                                                          |                                                                                                                                                                                                                                                           
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
+    |`(anchor, positive, negative_1, ..., negative_n)`` | `none`                         | ``MultipleNegativesRankingLoss``, ``CachedMultipleNegativesRankingLoss``, ``CachedGISTEmbedLoss``                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    +---------------------------------------------------+--------------------------------+---------------------------------------------------------------------------------------------------------------------+
 
 Fine-tune Embedding Model 
 -------------------------

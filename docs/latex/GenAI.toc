@@ -76,18 +76,18 @@
 \contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{67}{subsection.6.2.4}%
 \contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{67}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{68}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{68}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{70}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{71}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{72}{subsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{73}{subsection.6.3.6}%
-\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{73}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{74}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{74}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{75}{subsection.6.4.3}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{77}{chapter.7}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{79}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers}{79}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{79}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{81}{chapter.9}%
-\contentsline {chapter}{Bibliography}{83}{chapter*.4}%
+\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{69}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{71}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{73}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{74}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{74}{subsection.6.3.6}%
+\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{75}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{75}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{76}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{77}{subsection.6.4.3}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{79}{chapter.7}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{81}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers}{81}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{81}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{83}{chapter.9}%
+\contentsline {chapter}{Bibliography}{85}{chapter*.4}%
