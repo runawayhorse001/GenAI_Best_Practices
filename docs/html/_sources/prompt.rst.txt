@@ -5,8 +5,13 @@
 Prompt Engineering 
 ==================
 
+.. admonition:: Proverb
+
+   Our master knows how to guide people skillfully and methodically. 
+   He broadens my mind with culture and restrains me with ritual. -- `Zi Han`_
 
 
+.. _Zi han: https://brownbeat.medium.com/analects-of-confucius-book-9-new-english-translation-c7244d159591
 
 Prompt
 ++++++
@@ -229,12 +234,12 @@ Few-Shot Prompting
 - Provide examples to guide the AI on how to respond.
 - **Example:**  
 
-    *"Here are examples of loan application decision:  
-     'example': {'input': {'fico':800, 'income':100000,'loan_amount': 10000} 
-     'decision': "accept" 
-     Now Help me to make a decision to accpet or reject the loan application and 
-     give the reason.
-     'input': "{'fico':820, 'income':100000, 'loan_amount': 1,000}""*
+    * "Here are examples of loan application decision:  
+      'example': {'input': {'fico':800, 'income':100000,'loan_amount': 10000} 
+      'decision': "accept" 
+      Now Help me to make a decision to accpet or reject the loan application and 
+      give the reason.
+      'input': "{'fico':820, 'income':100000, 'loan_amount': 1,000}" "*
 
 .. code-block:: python
 

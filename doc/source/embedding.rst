@@ -5,6 +5,12 @@
 Word and Sentence Embedding
 ===========================
 
+.. admonition:: Chinese proverb
+
+	Though the forms may vary, the essence remains unchanged. – old Chinese proverb
+
+
+
 Word embedding is a method in natural language processing (NLP) to represent words as dense 
 vectors of real numbers, capturing semantic relationships between them. Instead of treating 
 words as discrete symbols (like one-hot encoding), word embeddings map words into a 

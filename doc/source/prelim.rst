@@ -5,6 +5,11 @@
 Preliminary
 ===========
 
+.. admonition:: Chinese proverb
+
+	A journey of a thousand miles begins with a single step. – Lao Tzu
+
+
 In this chapter, we will introduce some math and NLP preliminaries which is highly
 used in Generative AI. 
 

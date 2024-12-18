@@ -5,6 +5,12 @@
 Fine Tuning
 ===========
 
+.. admonition:: Chinese proverb
+
+	Good tools are prerequisite to the successful execution of a job. – old Chinese proverb
+
+
+
 Fine-tuning is a machine learning technique where a pre-trained model (like a large 
 language model or neural network) is further trained on a smaller, specific dataset
 to adapt it to a particular task or domain. Instead of training a model from scratch, 
