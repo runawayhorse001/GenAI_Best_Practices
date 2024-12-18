@@ -17,77 +17,77 @@
 \contentsline {subsection}{\numberline {2.2.5}BERT Tokenization}{14}{subsection.2.2.5}%
 \contentsline {section}{\numberline {2.3}Platform and Packages}{16}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Google Colab}{16}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}HuggingFace}{17}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Ollama}{17}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}langchain}{19}{subsection.2.3.4}%
-\contentsline {chapter}{\numberline {3}Word and Sentence Embedding}{21}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Traditional word embeddings}{21}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}One Hot Encoder}{22}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{23}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}TF\sphinxhyphen {}IDF}{24}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Static word embeddings}{28}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Word2Vec}{28}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}GloVE}{30}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Fast Text}{31}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Contextual word embeddings}{33}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}BERT}{33}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}gte\sphinxhyphen {}large\sphinxhyphen {}en\sphinxhyphen {}v1.5}{34}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}bge\sphinxhyphen {}base\sphinxhyphen {}en\sphinxhyphen {}v1.5}{35}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Prompt Engineering}{37}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Prompt}{37}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Prompt Engineering}{37}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}What’s Prompt Engineering}{37}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Key Elements of a Prompt}{37}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{37}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Role Assignment}{37}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Contextual Setup}{39}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Explicit Instructions}{40}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Chain of Thought (CoT) Prompting}{41}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Few\sphinxhyphen {}Shot Prompting}{42}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Iterative Prompting}{43}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}Instructional Chaining}{44}{subsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.3.8}Use Constraints}{46}{subsection.4.3.8}%
-\contentsline {subsection}{\numberline {4.3.9}Creative Prompting}{46}{subsection.4.3.9}%
-\contentsline {subsection}{\numberline {4.3.10}Feedback Incorporation}{46}{subsection.4.3.10}%
-\contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{46}{subsection.4.3.11}%
-\contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{46}{subsection.4.3.12}%
-\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{47}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{47}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Indexing}{48}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Naive Chunking}{48}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Late Chunking}{51}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Types of Indexing}{55}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Vector Database}{56}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Retrieval}{58}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Common retrieval methods}{60}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Reciprocal Rank Fusion}{60}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Generation}{62}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Fine Tuning}{63}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{63}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}LoRA (Low\sphinxhyphen {}Rank Adaptation)}{63}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}QLoRA (Quantized Low\sphinxhyphen {}Rank Adaptation)}{64}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{65}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{65}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}Summary Table}{66}{subsection.6.1.5}%
-\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{66}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{66}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{67}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{67}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{67}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{67}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{68}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{69}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{71}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{73}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{74}{subsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{74}{subsection.6.3.6}%
-\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{75}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{75}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{76}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{77}{subsection.6.4.3}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{79}{chapter.7}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{81}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers}{81}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{81}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{83}{chapter.9}%
-\contentsline {chapter}{Bibliography}{85}{chapter*.4}%
+\contentsline {subsection}{\numberline {2.3.2}HuggingFace}{18}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Ollama}{18}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}langchain}{20}{subsection.2.3.4}%
+\contentsline {chapter}{\numberline {3}Word and Sentence Embedding}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Traditional word embeddings}{23}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}One Hot Encoder}{24}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{25}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}TF\sphinxhyphen {}IDF}{26}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Static word embeddings}{30}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Word2Vec}{30}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}GloVE}{32}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Fast Text}{33}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Contextual word embeddings}{35}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}BERT}{35}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}gte\sphinxhyphen {}large\sphinxhyphen {}en\sphinxhyphen {}v1.5}{36}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}bge\sphinxhyphen {}base\sphinxhyphen {}en\sphinxhyphen {}v1.5}{37}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Prompt Engineering}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Prompt}{39}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Prompt Engineering}{39}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}What’s Prompt Engineering}{39}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Key Elements of a Prompt}{39}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{39}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Role Assignment}{39}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Contextual Setup}{41}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Explicit Instructions}{42}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Chain of Thought (CoT) Prompting}{43}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Few\sphinxhyphen {}Shot Prompting}{44}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Iterative Prompting}{45}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}Instructional Chaining}{46}{subsection.4.3.7}%
+\contentsline {subsection}{\numberline {4.3.8}Use Constraints}{48}{subsection.4.3.8}%
+\contentsline {subsection}{\numberline {4.3.9}Creative Prompting}{48}{subsection.4.3.9}%
+\contentsline {subsection}{\numberline {4.3.10}Feedback Incorporation}{48}{subsection.4.3.10}%
+\contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{48}{subsection.4.3.11}%
+\contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{48}{subsection.4.3.12}%
+\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{49}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Overview}{49}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Indexing}{50}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Naive Chunking}{50}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Late Chunking}{53}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Types of Indexing}{57}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Vector Database}{58}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Retrieval}{60}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Common retrieval methods}{62}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Reciprocal Rank Fusion}{62}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Generation}{64}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{65}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{65}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}LoRA (Low\sphinxhyphen {}Rank Adaptation)}{65}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}QLoRA (Quantized Low\sphinxhyphen {}Rank Adaptation)}{66}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{67}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{67}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}Summary Table}{68}{subsection.6.1.5}%
+\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{68}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{68}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{69}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{69}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{69}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{69}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{70}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{71}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{73}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{75}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{76}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{76}{subsection.6.3.6}%
+\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{77}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{77}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{78}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{79}{subsection.6.4.3}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{81}{chapter.7}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{83}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers}{83}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers}{83}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{85}{chapter.9}%
+\contentsline {chapter}{Bibliography}{87}{chapter*.4}%

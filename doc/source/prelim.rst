@@ -649,6 +649,13 @@ use Google Colab with free T4 GPU runtime throughout this book.
      - .. image:: images/T4.png
         :width: 100%
 
+.. admonition:: Tips 
+
+   You can use the Gemini API for code troubleshooting in a Colab notebook for free.
+
+  .. _fig_gemini:
+  .. figure:: images/gemini.png
+      :align: center 
 
 HuggingFace
 -----------
