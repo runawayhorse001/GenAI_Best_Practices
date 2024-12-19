@@ -15,10 +15,15 @@ Prompt Engineering
 
 .. admonition:: Colab Notebook for This Chapter
 
-    - Prompt Engineering: |Prompt|
+    - Prompt Engineering with Local LLM: |Prompt|
+    - Prompt Engineering with OpenAI API: |Prompt_API|    
     
     .. |Prompt| image:: images/colab-badge.png 
         :target: https://colab.research.google.com/drive/19BnLVTnN5T3SIfFRaKUTGSviRwHlpDWf?usp=drive_link  
+
+    .. |Prompt_API| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1x2EV8xwiM0z71Mx3dZki1z-VmjwGFLvL?usp=drive_link  
+
 
 Prompt
 ++++++

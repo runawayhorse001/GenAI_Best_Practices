@@ -691,3 +691,29 @@ Finally, the retrieved relevant information will be feed back into the LLMs to g
     :align: center
 
 
+
+Advanced Topic
+++++++++++++++
+
+
+Corrective RAG
+--------------
+
+https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_crag_local/
+
+Self-RAG
+--------
+
+https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_self_rag_local/
+
+
+Adaptive RAG
+------------
+
+https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/
+https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/
+
+Agentic RAG
+-----------
+
+https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/
