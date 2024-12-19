@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 18, 2024}
+\date{December 19, 2024}
 \release{1.0}
 \author{Wenqiang Feng and Di Zhen}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -91,8 +91,9 @@
 \end{quote}
 
 \sphinxAtStartPar
-Welcome to our \sphinxstylestrong{GenAI: Best Practices}!!! The PDF version
-can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}.
+Welcome to our \sphinxstylestrong{GenAI: Best Practices}!!! For each chapter, we provide detailed
+Colab notebooks \sphinxincludegraphics{{colab-badge}.png} that you can open and run directly in Google Colab.
+The PDF version can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}.
 
 
 
@@ -101,12 +102,6 @@ can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}.
 
 \chapter{Preface}
 \label{\detokenize{preface:id1}}\label{\detokenize{preface::doc}}
-\begin{sphinxadmonition}{note}{Chinese proverb}
-
-\sphinxAtStartPar
-Good tools are prerequisite to the successful execution of a job. \textendash{} old Chinese proverb
-\end{sphinxadmonition}
-
 
 \section{About}
 \label{\detokenize{preface:about}}
@@ -120,10 +115,9 @@ The PDF version can be downloaded from \sphinxhref{../latex/GenAI.pdf}{HERE}.
 however, that the note contains typos as well as inaccurate or incorrect description.}
 
 \sphinxAtStartPar
-In this book, I aim to demonstrate best practices for Generative AI
-through detailed demo code and practical examples. If you notice that
-your work has not been properly cited, please do not hesitate to
-reach out and let me know.
+In this book, we aim to demonstrate best practices for Generative AI
+through detailed demo code and practical examples. For each chapter, we provide detailed
+Colab notebooks \sphinxincludegraphics{{colab-badge}.png} that you can open and run directly in Google Colab.
 
 
 \subsection{About the authors}
@@ -210,9 +204,32 @@ Di Zhen: \sphinxhref{mailto:dizhen318@gmail.com}{dizhen318@gmail.com}
 
 \chapter{Preliminary}
 \label{\detokenize{prelim:preliminary}}\label{\detokenize{prelim:prelim}}\label{\detokenize{prelim::doc}}
+\begin{sphinxadmonition}{note}{Chinese proverb}
+
+\sphinxAtStartPar
+A journey of a thousand miles begins with a single step. \textendash{} Lao Tzu
+\end{sphinxadmonition}
+
 \sphinxAtStartPar
 In this chapter, we will introduce some math and NLP preliminaries which is highly
 used in Generative AI.
+
+\begin{sphinxadmonition}{note}{Colab Notebook for This Chapter}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Math Preliminary: \sphinxhref{https://colab.research.google.com/drive/1V\_mBtDF1tTBv06-ipmkoeBWZ9JU-rnni?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+Ollama in Colab: \sphinxhref{https://colab.research.google.com/drive/1tALgzu-v6NnN5yUCY7fvyWehuPwQ9rHG?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+BERT Tokenization: \sphinxhref{https://colab.research.google.com/drive/16JUj0Tk8zBuCnZLGtN6kHHzwT-p4Ggr6?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\end{itemize}
+\end{sphinxadmonition}
 
 
 \section{Math Preliminary}
@@ -1585,11 +1602,26 @@ package is required.
 
 \chapter{Word and Sentence Embedding}
 \label{\detokenize{embedding:word-and-sentence-embedding}}\label{\detokenize{embedding:embedding}}\label{\detokenize{embedding::doc}}
+\begin{sphinxadmonition}{note}{Chinese proverb}
+
+\sphinxAtStartPar
+Though the forms may vary, the essence remains unchanged. \textendash{} old Chinese proverb
+\end{sphinxadmonition}
+
 \sphinxAtStartPar
 Word embedding is a method in natural language processing (NLP) to represent words as dense
 vectors of real numbers, capturing semantic relationships between them. Instead of treating
 words as discrete symbols (like one\sphinxhyphen{}hot encoding), word embeddings map words into a
 continuous vector space where similar words are located closer together.
+
+\begin{sphinxadmonition}{note}{Colab Notebook for This Chapter}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Word Embedding: \sphinxhref{https://colab.research.google.com/drive/1IZR9vRHAl-jHsHOkt2evsgJJ1\_hCICa?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\end{itemize}
+\end{sphinxadmonition}
 
 \begin{figure}[htbp]
 \centering
@@ -2453,11 +2485,34 @@ at: \sphinxurl{https://huggingface.co/BAAI/bge-base-en-v1.5} .
       \PYG{p}{[} \PYG{l+m+mf}{0.0740}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0185}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0369}\PYG{p}{,}  \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}  \PYG{l+m+mf}{0.0083}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0026}\PYG{p}{,}  \PYG{l+m+mf}{0.0016}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \end{sphinxVerbatim}
 
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{embedding2d}.png}
+\caption{t\sphinxhyphen{}SNE embeddings 2D}\label{\detokenize{embedding:id3}}\label{\detokenize{embedding:fig-embedding2d}}\end{figure}
+
 \sphinxstepscope
 
 
 \chapter{Prompt Engineering}
 \label{\detokenize{prompt:prompt-engineering}}\label{\detokenize{prompt:prompt}}\label{\detokenize{prompt::doc}}
+\begin{sphinxadmonition}{note}{Proverb}
+
+\sphinxAtStartPar
+Our master knows how to guide people skillfully and methodically.
+He broadens my mind with culture and restrains me with ritual. \textendash{} \sphinxhref{https://brownbeat.medium.com/analects-of-confucius-book-9-new-english-translation-c7244d159591}{Zi Han}
+\end{sphinxadmonition}
+
+\begin{sphinxadmonition}{note}{Colab Notebook for This Chapter}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Prompt Engineering: \sphinxhref{https://colab.research.google.com/drive/19BnLVTnN5T3SIfFRaKUTGSviRwHlpDWf?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\end{itemize}
+\end{sphinxadmonition}
+
 
 \section{Prompt}
 \label{\detokenize{prompt:id1}}
@@ -2725,18 +2780,17 @@ Provide examples to guide the AI on how to respond.
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Example:}
-\begin{quote}
-\begin{description}
-\sphinxlineitem{{\color{red}\bfseries{}*}”Here are examples of loan application decision:}
+\begin{itemize}
+\item {} 
 \sphinxAtStartPar
+“Here are examples of loan application decision:
 ‘example’: \{‘input’: \{‘fico’:800, ‘income’:100000,’loan\_amount’: 10000\}
 ‘decision’: “accept”
 Now Help me to make a decision to accpet or reject the loan application and
 give the reason.
-‘input’: “\{‘fico’:820, ‘income’:100000, ‘loan\_amount’: 1,000\}””*
+‘input’: “\{‘fico’:820, ‘income’:100000, ‘loan\_amount’: 1,000\}” “*
 
-\end{description}
-\end{quote}
+\end{itemize}
 
 \end{itemize}
 
@@ -3022,6 +3076,27 @@ Use prompts designed for mixed text/image inputs (or outputs if using models lik
 
 \chapter{Retrieval\sphinxhyphen{}Augmented Generation}
 \label{\detokenize{rag:retrieval-augmented-generation}}\label{\detokenize{rag:rag}}\label{\detokenize{rag::doc}}
+\begin{sphinxadmonition}{note}{Colab Notebook for This Chapter}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Naive Chunking: \sphinxhref{https://colab.research.google.com/drive/1r89QGmEDAS-ZJcfgYv6GKRrNDs4s\_lir?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+Late Chunking: \sphinxhref{https://colab.research.google.com/drive/1ZqxmK1YuvPcpJap1psscMTih2jnQVINT?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+Reciprocal Rank Fusion: \sphinxhref{https://colab.research.google.com/drive/1Vg7C5Z3Y7OlilnfQlQqkKyNrcnUR6Xry?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+RAG in colab: \sphinxhref{https://colab.research.google.com/drive/1jTkoER5eYQqBZs8RgOiCmTl8\_WDt67go?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\end{itemize}
+\end{sphinxadmonition}
+
 \begin{figure}[htbp]
 \centering
 \capstart
@@ -3045,7 +3120,7 @@ is to improve accuracy, relevance, and factuality by providing the LLM with spec
 or domain\sphinxhyphen{}specific context from a knowledge base or database during the generation process.
 
 \sphinxAtStartPar
-As you can see in {\hyperref[\detokenize{pretraining:fig-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Ilya Sutskever at neurips 2024}}}}}, the RAG has there main  components
+As you can see in {\hyperref[\detokenize{rag:fig-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Retrieval\sphinxhyphen{}Augmented Generation Diagram}}}}}, the RAG has there main  components
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -4443,6 +4518,25 @@ Finally, the retrieved relevant information will be feed back into the LLMs to g
 
 \chapter{Fine Tuning}
 \label{\detokenize{finetuning:fine-tuning}}\label{\detokenize{finetuning:finetuning}}\label{\detokenize{finetuning::doc}}
+\begin{sphinxadmonition}{note}{Chinese proverb}
+
+\sphinxAtStartPar
+Good tools are prerequisite to the successful execution of a job. \textendash{} old Chinese proverb
+\end{sphinxadmonition}
+
+\begin{sphinxadmonition}{note}{Colab Notebook for This Chapter}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Embedding Model Fine\sphinxhyphen{}tuning: \sphinxhref{https://colab.research.google.com/drive/14aYT8Ydm\_e-z47yGpctAfk246K\_PK1LC?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+LLM (Llama 2 7B) Model Fine\sphinxhyphen{}tuning: \sphinxhref{https://colab.research.google.com/drive/1GPu2vNRdcObf0dmP7r\_M42NYx0OXVD\_F?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\end{itemize}
+\end{sphinxadmonition}
+
 \sphinxAtStartPar
 Fine\sphinxhyphen{}tuning is a machine learning technique where a pre\sphinxhyphen{}trained model (like a large
 language model or neural network) is further trained on a smaller, specific dataset
@@ -5566,12 +5660,820 @@ This chapter delves into transformer models, drawing on insights from
 
 \chapter{LLM Evaluation Metrics}
 \label{\detokenize{evaluation:llm-evaluation-metrics}}\label{\detokenize{evaluation:evaluation}}\label{\detokenize{evaluation::doc}}
+\begin{sphinxadmonition}{note}{Colab Notebook for This Chapter}
 
-\section{Statistical Scorers}
-\label{\detokenize{evaluation:statistical-scorers}}
+\sphinxAtStartPar
+GEval with DeepEval: \sphinxhref{https://colab.research.google.com/drive/17aARKonCOzBzsfk1ceLESTboEPkKNJi1?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+\end{sphinxadmonition}
 
-\section{Model\sphinxhyphen{}Based Scorers}
-\label{\detokenize{evaluation:model-based-scorers}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{metrics_llm}.png}
+\caption{Types of metric scorers (Source: \sphinxhref{https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation}{LLM Evaluation Metrics: The Ultimate LLM Evaluation Guide})}\label{\detokenize{evaluation:id3}}\label{\detokenize{evaluation:fig-metrics-llm}}\end{figure}
+
+
+\section{Statistical Scorers (Traditional Metrics)}
+\label{\detokenize{evaluation:statistical-scorers-traditional-metrics}}
+\sphinxAtStartPar
+These metrics evaluate text outputs based on statistical comparisons to references
+or expected outputs.
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+I completely agree with the author of \sphinxhref{https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation}{LLM Evaluation Metrics: The Ultimate LLM Evaluation Guide}
+that statistical scoring methods are,
+in my opinion, non\sphinxhyphen{}essential to focus on. These methods tend to perform poorly
+whenever reasoning is required, making them too inaccurate as scorers for
+most LLM evaluation criteria. Additionally, more advanced metrics,
+such as GEval {\hyperref[\detokenize{evaluation:geval}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{GEval with DeepEval}}}}}, provide significantly better alternatives.
+\end{sphinxadmonition}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{BLEU (Bilingual Evaluation Understudy):}
+Measures overlap of n\sphinxhyphen{}grams between generated and reference texts.
+Common for translation tasks.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ROUGE (Recall\sphinxhyphen{}Oriented Understudy for Gisting Evaluation):}
+Focuses on recall of n\sphinxhyphen{}grams (ROUGE\sphinxhyphen{}N), longest common subsequences (ROUGE\sphinxhyphen{}L),
+and skip bigrams (ROUGE\sphinxhyphen{}S). Popular in summarization tasks.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{METEOR (Metric for Evaluation of Translation with Explicit ORdering):}
+Considers synonymy and paraphrasing via stemming and synonym matching.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{TER (Translation Edit Rate):}
+Measures the number of edits required to turn the generated output into the
+reference text.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CIDEr (Consensus\sphinxhyphen{}based Image Description Evaluation):}
+Designed for image captioning, using TF\sphinxhyphen{}IDF weighting of n\sphinxhyphen{}grams.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{BERTScore:}
+Leverages contextual embeddings (e.g., BERT) to compute similarity between
+generated and reference texts.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{GLEU (Google BLEU):}
+A variation of BLEU designed for grammatical error correction tasks.
+
+\end{itemize}
+
+
+\section{Model\sphinxhyphen{}Based Scorers (Learned Metrics)}
+\label{\detokenize{evaluation:model-based-scorers-learned-metrics}}
+\sphinxAtStartPar
+These metrics employ models trained to assess the quality of generated text,
+often based on human annotations.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{BLEURT:}
+Combines pre\sphinxhyphen{}trained models (e.g., BERT) with fine\sphinxhyphen{}tuning on human judgment data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{COMET (Cross\sphinxhyphen{}lingual Optimized Metric for Evaluation of Translation):}
+A neural network model trained on translation quality data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{PRISM:}
+Measures semantic similarity by paraphrasing both the hypothesis and reference into a shared space.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{UniEval:}
+A unified framework for evaluation across multiple tasks, focusing on both factual accuracy and linguistic quality.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Perplexity:}
+Estimates the likelihood of generated text under the original model’s probability distribution (lower is better).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{GPTScore:}
+Uses a large pre\sphinxhyphen{}trained LLM (e.g., GPT\sphinxhyphen{}4) to rate the quality of outputs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{MAUVE:}
+Measures the divergence between the distribution of generated text and that of human\sphinxhyphen{}written text.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{DRIFT:}
+Focuses on domain\sphinxhyphen{}specific evaluation, checking how well outputs align with domain\sphinxhyphen{}specific data distributions.
+
+\end{itemize}
+
+
+\section{Human\sphinxhyphen{}Centric Evaluations (Augmenting Metrics)}
+\label{\detokenize{evaluation:human-centric-evaluations-augmenting-metrics}}
+\sphinxAtStartPar
+While not automated, human evaluations are crucial for assessing subjective qualities such as:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Fluency}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Coherence}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Relevance}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Factuality}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Style Appropriateness}
+
+\end{itemize}
+
+\sphinxAtStartPar
+Both statistical and model\sphinxhyphen{}based scorers are often used in tandem with human evaluation to ensure a holistic assessment of LLM outputs.
+
+
+\section{GEval with DeepEval}
+\label{\detokenize{evaluation:geval-with-deepeval}}\label{\detokenize{evaluation:geval}}
+\sphinxAtStartPar
+G\sphinxhyphen{}Eval is a recently developed evaluation framework developed from paper \sphinxcite{reference:geval} to assess large language models (LLMs) using GPT\sphinxhyphen{}based evaluators.
+It leverages the capabilities of advanced LLMs (like GPT\sphinxhyphen{}4 or beyond) to rate and critique the outputs of other models, including themselves,
+across various tasks. This approach shifts the evaluation paradigm by relying on the intrinsic understanding and reasoning power of the models,
+rather than traditional metrics.
+
+
+\subsection{G\sphinxhyphen{}Eval Algorithm}
+\label{\detokenize{evaluation:g-eval-algorithm}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{geval}.png}
+\caption{G\sphinxhyphen{}Eval Algorithm (Source: \sphinxcite{reference:geval})}\label{\detokenize{evaluation:id4}}\label{\detokenize{evaluation:fig-geval}}\end{figure}
+
+
+\subsection{G\sphinxhyphen{}Eval with DeepEval}
+\label{\detokenize{evaluation:g-eval-with-deepeval}}
+\sphinxAtStartPar
+In \sphinxhref{https://docs.confident-ai.com/docs/metrics-introduction}{DeepEval},, a metric serves as a standard for measuring the performance
+of an LLM’s output based on specific criteria of interest. Essentially,
+while the metric functions as the “ruler”, a test case represents the
+subject being measured. \sphinxhref{https://docs.confident-ai.com/docs/metrics-introduction}{DeepEval}, provides a variety of default metrics
+to help you get started quickly, including:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+G\sphinxhyphen{}Eval
+
+\item {} 
+\sphinxAtStartPar
+Summarization
+
+\item {} 
+\sphinxAtStartPar
+Faithfulness
+
+\item {} 
+\sphinxAtStartPar
+Answer Relevancy
+
+\item {} 
+\sphinxAtStartPar
+Contextual Relevancy
+
+\item {} 
+\sphinxAtStartPar
+Contextual Precision
+
+\item {} 
+\sphinxAtStartPar
+Contextual Recall
+
+\item {} 
+\sphinxAtStartPar
+Ragas
+
+\item {} 
+\sphinxAtStartPar
+Hallucination
+
+\item {} 
+\sphinxAtStartPar
+Toxicity
+
+\item {} 
+\sphinxAtStartPar
+Bias
+
+\end{itemize}
+
+\sphinxAtStartPar
+DeepEval also provides conversational metrics, designed to evaluate entire
+conversations rather than individual, granular LLM interactions. These include:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Conversation Completeness
+
+\item {} 
+\sphinxAtStartPar
+Conversation Relevancy
+
+\item {} 
+\sphinxAtStartPar
+Knowledge Retention
+
+\end{itemize}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Set Up Local Model}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{deepeval} \PYG{n+nb}{set}\PYG{o}{\PYGZhy{}}\PYG{n}{local}\PYG{o}{\PYGZhy{}}\PYG{n}{model} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{model}\PYG{o}{\PYGZhy{}}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mistral}\PYG{l+s+s1}{\PYGZsq{}} \PYGZbs{}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{base}\PYG{o}{\PYGZhy{}}\PYG{n}{url}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{http://localhost:11434/v1/}\PYG{l+s+s2}{\PYGZdq{}} \PYGZbs{}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{api}\PYG{o}{\PYGZhy{}}\PYG{n}{key}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ollama}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Default Metrics}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+AnswerRelevancyMetric
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval} \PYG{k+kn}{import} \PYG{n}{evaluate}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{AnswerRelevancyMetric}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCase}
+
+\PYG{n}{answer\PYGZus{}relevancy\PYGZus{}metric} \PYG{o}{=} \PYG{n}{AnswerRelevancyMetric}\PYG{p}{(}\PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{)}
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What if these shoes don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t fit?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{} Replace this with the actual output from your LLM application}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{We offer a 30\PYGZhy{}day full refund at no extra costs.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{retrieval\PYGZus{}context}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{All customers are eligible for a 30 day full refund at no extra costs.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{evaluate}\PYG{p}{(}\PYG{p}{[}\PYG{n}{test\PYGZus{}case}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{n}{answer\PYGZus{}relevancy\PYGZus{}metric}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Metrics Summary
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Answer Relevancy (score: 1.0, threshold: 0.7, strict: False, evaluation model: local model,
+reason: The score is 1.00 because it directly and accurately answered the question about
+shoe fitting, making it highly relevant., error: None)
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+For test case:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+input: What if these shoes don’t fit?
+
+\item {} 
+\sphinxAtStartPar
+actual output: We offer a 30\sphinxhyphen{}day full refund at no extra costs.
+
+\item {} 
+\sphinxAtStartPar
+expected output: None
+
+\item {} 
+\sphinxAtStartPar
+context: None
+
+\item {} 
+\sphinxAtStartPar
+retrieval context: {[}‘All customers are eligible for a 30 day full refund at no extra costs.’{]}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Overall Metric Pass Rates
+\begin{quote}
+
+\sphinxAtStartPar
+Answer Relevancy: 100.00\% pass rate
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{EvaluationResult}\PYG{p}{(}\PYG{n}{test\PYGZus{}results}\PYG{o}{=}\PYG{p}{[}\PYG{n}{TestResult}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{test\PYGZus{}case\PYGZus{}0}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{success}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{metrics\PYGZus{}data}\PYG{o}{=}\PYG{p}{[}\PYG{n}{MetricData}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Answer Relevancy}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{n}{success}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{score}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{n}{reason}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The score is 1.00 because it directly and accurately answered the question about shoe fitting, making it highly relevant.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{strict\PYGZus{}mode}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{evaluation\PYGZus{}model}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{local model}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{error}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{evaluation\PYGZus{}cost}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{verbose\PYGZus{}logs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Statements:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{[}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{We offer a 30\PYGZhy{}day full refund}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The refund does not incur any additional costs}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{] }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{ }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Verdicts:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{[}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{verdict}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{reason}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The statements about the refund policy are relevant to addressing the input, which asks about what to do if the shoes don}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{t fit.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    \PYGZcb{},}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{verdict}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{reason}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The statement that the refund does not incur any additional costs is also relevant as it provides further information about the refund process.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    \PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,} \PYG{n}{conversational}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{multimodal}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n+nb}{input}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What if these shoes don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t fit?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{We offer a 30\PYGZhy{}day full refund at no extra costs.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{expected\PYGZus{}output}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{context}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{retrieval\PYGZus{}context}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{All customers are eligible for a 30 day full refund at no extra costs.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,} \PYG{n}{confident\PYGZus{}link}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+FaithfulnessMetric
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval} \PYG{k+kn}{import} \PYG{n}{evaluate}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{FaithfulnessMetric}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCase}
+
+
+\PYG{c+c1}{\PYGZsh{} input}
+\PYG{n+nb}{input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What if these shoes don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t fit?}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the actual output from your LLM application}
+\PYG{n}{actual\PYGZus{}output} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{We offer a 30\PYGZhy{}day full refund at no extra cost.}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the actual retrieved context from your RAG pipeline}
+\PYG{n}{retrieval\PYGZus{}context} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{All customers are eligible for a 30 day full refund at no extra cost.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+\PYG{n}{metric} \PYG{o}{=} \PYG{n}{FaithfulnessMetric}\PYG{p}{(}
+    \PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{}model=\PYGZdq{}gpt\PYGZhy{}4\PYGZdq{},}
+    \PYG{n}{include\PYGZus{}reason}\PYG{o}{=}\PYG{k+kc}{True}
+\PYG{p}{)}
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=}\PYG{n+nb}{input}\PYG{p}{,}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{n}{actual\PYGZus{}output}\PYG{p}{,}
+    \PYG{n}{retrieval\PYGZus{}context}\PYG{o}{=}\PYG{n}{retrieval\PYGZus{}context}
+\PYG{p}{)}
+
+\PYG{n}{metric}\PYG{o}{.}\PYG{n}{measure}\PYG{p}{(}\PYG{n}{test\PYGZus{}case}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{score}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{reason}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} or evaluate test cases in bulk}
+\PYG{n}{evaluate}\PYG{p}{(}\PYG{p}{[}\PYG{n}{test\PYGZus{}case}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{n}{metric}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Metrics Summary
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Faithfulness (score: 1.0, threshold: 0.7, strict: False, evaluation model:
+local model, reason: The faithfulness score is 1.00 because there are no
+contradictions found between the actual output and the retrieval context., error: None)
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+For test case:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+input: What if these shoes don’t fit?
+
+\item {} 
+\sphinxAtStartPar
+actual output: We offer a 30\sphinxhyphen{}day full refund at no extra cost.
+
+\item {} 
+\sphinxAtStartPar
+expected output: None
+
+\item {} 
+\sphinxAtStartPar
+context: None
+
+\item {} 
+\sphinxAtStartPar
+retrieval context: {[}‘All customers are eligible for a 30 day full refund at no extra cost.’{]}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Overall Metric Pass Rates
+\begin{quote}
+
+\sphinxAtStartPar
+Faithfulness: 100.00\% pass rate
+\end{quote}
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{EvaluationResult}\PYG{p}{(}\PYG{n}{test\PYGZus{}results}\PYG{o}{=}\PYG{p}{[}\PYG{n}{TestResult}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{test\PYGZus{}case\PYGZus{}0}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{success}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{metrics\PYGZus{}data}\PYG{o}{=}\PYG{p}{[}\PYG{n}{MetricData}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Faithfulness}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{n}{success}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{score}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{n}{reason}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The faithfulness score is 1.00 because there are no contradictions found between the actual output and the retrieval context.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{strict\PYGZus{}mode}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{evaluation\PYGZus{}model}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{local model}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{error}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{evaluation\PYGZus{}cost}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{verbose\PYGZus{}logs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Truths (limit=None):}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{[}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Customers are eligible for a 30 day full refund.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The refund is at no extra cost.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{] }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{ }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Claims:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{[}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The refund is offered for a period of 30 days.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The refund does not incur any additional costs.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{] }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{ }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Verdicts:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{[}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{verdict}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{reason}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: null}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    \PYGZcb{},}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    }\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{verdict}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{        }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{reason}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: null}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    \PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{]}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,} \PYG{n}{conversational}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{multimodal}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n+nb}{input}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What if these shoes don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t fit?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{We offer a 30\PYGZhy{}day full refund at no extra cost.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{expected\PYGZus{}output}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{context}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{retrieval\PYGZus{}context}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{All customers are eligible for a 30 day full refund at no extra cost.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,} \PYG{n}{confident\PYGZus{}link}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+ContextualPrecisionMetric
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval} \PYG{k+kn}{import} \PYG{n}{evaluate}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{ContextualPrecisionMetric}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCase}
+
+\PYG{c+c1}{\PYGZsh{} input}
+\PYG{n+nb}{input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What if these shoes don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t fit?}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the actual output from your LLM application}
+\PYG{n}{actual\PYGZus{}output} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{We offer a 30\PYGZhy{}day full refund at no extra cost.}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the expected output from your RAG generator}
+\PYG{n}{expected\PYGZus{}output} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{You are eligible for a 30 day full refund at no extra cost.}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the actual retrieved context from your RAG pipeline}
+\PYG{n}{retrieval\PYGZus{}context} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{All customers are eligible for a 30 day full refund at no extra cost.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+\PYG{n}{metric} \PYG{o}{=} \PYG{n}{ContextualPrecisionMetric}\PYG{p}{(}
+    \PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{}model=\PYGZdq{}gpt\PYGZhy{}4\PYGZdq{},}
+    \PYG{n}{include\PYGZus{}reason}\PYG{o}{=}\PYG{k+kc}{True}
+\PYG{p}{)}
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=}\PYG{n+nb}{input}\PYG{p}{,}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{n}{actual\PYGZus{}output}\PYG{p}{,}
+    \PYG{n}{expected\PYGZus{}output}\PYG{o}{=}\PYG{n}{expected\PYGZus{}output}\PYG{p}{,}
+    \PYG{n}{retrieval\PYGZus{}context}\PYG{o}{=}\PYG{n}{retrieval\PYGZus{}context}
+\PYG{p}{)}
+
+\PYG{n}{metric}\PYG{o}{.}\PYG{n}{measure}\PYG{p}{(}\PYG{n}{test\PYGZus{}case}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{score}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{reason}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} or evaluate test cases in bulk}
+\PYG{n}{evaluate}\PYG{p}{(}\PYG{p}{[}\PYG{n}{test\PYGZus{}case}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{n}{metric}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Metrics Summary
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Contextual Precision (score: 1.0, threshold: 0.7, strict: False, evaluation
+model: local model, reason: The contextual precision score is 1.00 because
+the node ranked first (with reason: ‘The text verifies that customers are
+indeed eligible for a 30 day full refund at no extra cost.’) is relevant
+and correctly placed as the highest\sphinxhyphen{}ranked response to the input
+‘What if these shoes don’t fit?’. All other nodes, if present,
+should be ranked lower due to their irrelevance to the question., error: None)
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+For test case:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+input: What if these shoes don’t fit?
+
+\item {} 
+\sphinxAtStartPar
+actual output: We offer a 30\sphinxhyphen{}day full refund at no extra cost.
+
+\item {} 
+\sphinxAtStartPar
+expected output: You are eligible for a 30 day full refund at no extra cost.
+
+\item {} 
+\sphinxAtStartPar
+context: None
+
+\item {} 
+\sphinxAtStartPar
+retrieval context: {[}‘All customers are eligible for a 30 day full refund at no extra cost.’{]}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Overall Metric Pass Rates
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Contextual Precision: 100.00\% pass rate
+
+\end{itemize}
+
+\end{itemize}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+ContextualRecallMetric
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval} \PYG{k+kn}{import} \PYG{n}{evaluate}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{ContextualRecallMetric}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCase}
+
+\PYG{n}{metric} \PYG{o}{=} \PYG{n}{ContextualRecallMetric}\PYG{p}{(}
+    \PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{,}
+    \PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{gpt\PYGZhy{}4}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{include\PYGZus{}reason}\PYG{o}{=}\PYG{k+kc}{True}
+\PYG{p}{)}
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=}\PYG{n+nb}{input}\PYG{p}{,}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{n}{actual\PYGZus{}output}\PYG{p}{,}
+    \PYG{n}{expected\PYGZus{}output}\PYG{o}{=}\PYG{n}{expected\PYGZus{}output}\PYG{p}{,}
+    \PYG{n}{retrieval\PYGZus{}context}\PYG{o}{=}\PYG{n}{retrieval\PYGZus{}context}
+\PYG{p}{)}
+
+\PYG{n}{metric}\PYG{o}{.}\PYG{n}{measure}\PYG{p}{(}\PYG{n}{test\PYGZus{}case}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{score}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{reason}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} or evaluate test cases in bulk}
+\PYG{n}{evaluate}\PYG{p}{(}\PYG{p}{[}\PYG{n}{test\PYGZus{}case}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{n}{metric}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Metrics Summary
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Contextual Recall (score: 1.0, threshold: 0.7, strict: False, evaluation
+model: local model, reason: The score is 1.00 because the expected output
+is exactly as stated in the retrieval context., error: None)
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+For test case:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+input: What if these shoes don’t fit?
+
+\item {} 
+\sphinxAtStartPar
+actual output: We offer a 30\sphinxhyphen{}day full refund at no extra cost.
+
+\item {} 
+\sphinxAtStartPar
+expected output: You are eligible for a 30 day full refund at no extra cost.
+
+\item {} 
+\sphinxAtStartPar
+context: None
+
+\item {} 
+\sphinxAtStartPar
+retrieval context: {[}‘All customers are eligible for a 30 day full refund at no extra cost.’{]}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Overall Metric Pass Rates
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Contextual Recall: 100.00\% pass rate
+
+\end{itemize}
+
+\end{itemize}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+HallucinationMetric
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval} \PYG{k+kn}{import} \PYG{n}{evaluate}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{HallucinationMetric}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCase}
+
+\PYG{c+c1}{\PYGZsh{} input}
+
+\PYG{n+nb}{input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What was the blond doing?}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the actual documents that you are passing as input to your LLM.}
+\PYG{n}{context}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{A man with blond\PYGZhy{}hair, and a brown shirt drinking out of a public water fountain.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Replace this with the actual output from your LLM application}
+\PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{A blond drinking water in public.}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=} \PYG{n+nb}{input}\PYG{p}{,}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{n}{actual\PYGZus{}output}\PYG{p}{,}
+    \PYG{n}{context}\PYG{o}{=}\PYG{n}{context}
+\PYG{p}{)}
+\PYG{n}{metric} \PYG{o}{=} \PYG{n}{HallucinationMetric}\PYG{p}{(}\PYG{n}{threshold}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{)}
+
+\PYG{n}{metric}\PYG{o}{.}\PYG{n}{measure}\PYG{p}{(}\PYG{n}{test\PYGZus{}case}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{score}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{metric}\PYG{o}{.}\PYG{n}{reason}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} or evaluate test cases in bulk}
+\PYG{n}{evaluate}\PYG{p}{(}\PYG{p}{[}\PYG{n}{test\PYGZus{}case}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{n}{metric}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Metrics Summary
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Hallucination (score: 0.0, threshold: 0.5, strict: False,
+evaluation model: local model, reason: The score is 0.00 because the actual
+output correctly aligns with the provided context., error: None)
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+For test case:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+input: What was the blond doing?
+
+\item {} 
+\sphinxAtStartPar
+actual output: A blond drinking water in public.
+
+\item {} 
+\sphinxAtStartPar
+expected output: None
+
+\item {} 
+\sphinxAtStartPar
+context: {[}‘A man with blond\sphinxhyphen{}hair, and a brown shirt drinking out of a public water fountain.’{]}
+
+\item {} 
+\sphinxAtStartPar
+retrieval context: None
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Overall Metric Pass Rates
+\begin{quote}
+
+\sphinxAtStartPar
+Hallucination: 100.00\% pass rate
+\end{quote}
+
+\end{itemize}
+\end{quote}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Custom Metrics}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{GEval}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCaseParams}
+
+\PYG{n}{correctness\PYGZus{}metric} \PYG{o}{=} \PYG{n}{GEval}\PYG{p}{(}
+    \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Correctness}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{criteria}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Determine whether the actual output is factually correct based on the expected output.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{} NOTE: you can only provide either criteria or evaluation\PYGZus{}steps, and not both}
+    \PYG{n}{evaluation\PYGZus{}steps}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Check whether the facts in }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{actual output}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ contradicts any facts in }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{expected output}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{You should also heavily penalize omission of detail}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Vague language, or contradicting OPINIONS, are OK}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{evaluation\PYGZus{}params}\PYG{o}{=}\PYG{p}{[}\PYG{n}{LLMTestCaseParams}\PYG{o}{.}\PYG{n}{INPUT}\PYG{p}{,} \PYG{n}{LLMTestCaseParams}\PYG{o}{.}\PYG{n}{ACTUAL\PYGZus{}OUTPUT}\PYG{p}{,} \PYG{n}{LLMTestCaseParams}\PYG{o}{.}\PYG{n}{EXPECTED\PYGZus{}OUTPUT}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The dog chased the cat up the tree, who ran up the tree?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{It depends, some might consider the cat, while others might argue the dog.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{expected\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The cat.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{n}{correctness\PYGZus{}metric}\PYG{o}{.}\PYG{n}{measure}\PYG{p}{(}\PYG{n}{test\PYGZus{}case}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{correctness\PYGZus{}metric}\PYG{o}{.}\PYG{n}{score}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{correctness\PYGZus{}metric}\PYG{o}{.}\PYG{n}{reason}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Event} \PYG{n}{loop} \PYG{o+ow}{is} \PYG{n}{already} \PYG{n}{running}\PYG{o}{.} \PYG{n}{Applying} \PYG{n}{nest\PYGZus{}asyncio} \PYG{n}{patch} \PYG{n}{to} \PYG{n}{allow} \PYG{k}{async} \PYG{n}{execution}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{l+m+mf}{0.1}
+\PYG{n}{The} \PYG{n}{actual} \PYG{n}{output} \PYG{n}{does} \PYG{o+ow}{not} \PYG{n}{match} \PYG{n}{the} \PYG{n}{expected} \PYG{n}{output} \PYG{o+ow}{and} \PYG{n}{omits} \PYG{n}{specific} \PYG{n}{details} \PYG{n}{about} \PYG{n}{which} \PYG{n}{animal} \PYG{n}{climbed} \PYG{n}{the} \PYG{n}{tree}\PYG{o}{.}
+\end{sphinxVerbatim}
+\end{quote}
+
+\end{itemize}
+
+\sphinxAtStartPar
+Evaluation Framework:
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval} \PYG{k+kn}{import} \PYG{n}{evaluate}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{metrics} \PYG{k+kn}{import} \PYG{n}{GEval}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCase}
+\PYG{k+kn}{from} \PYG{n+nn}{deepeval}\PYG{n+nn}{.}\PYG{n+nn}{test\PYGZus{}case} \PYG{k+kn}{import} \PYG{n}{LLMTestCaseParams}
+
+\PYG{n}{correctness\PYGZus{}metric} \PYG{o}{=} \PYG{n}{GEval}\PYG{p}{(}
+    \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Correctness}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{criteria}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Determine whether the actual output is factually correct based on the expected output.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{} NOTE: you can only provide either criteria or evaluation\PYGZus{}steps, and not both}
+    \PYG{n}{evaluation\PYGZus{}steps}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Check whether the facts in }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{actual output}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ contradicts any facts in }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{expected output}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{You should also heavily penalize omission of detail}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Vague language, or contradicting OPINIONS, are OK}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{evaluation\PYGZus{}params}\PYG{o}{=}\PYG{p}{[}\PYG{n}{LLMTestCaseParams}\PYG{o}{.}\PYG{n}{INPUT}\PYG{p}{,} \PYG{n}{LLMTestCaseParams}\PYG{o}{.}\PYG{n}{ACTUAL\PYGZus{}OUTPUT}\PYG{p}{,} \PYG{n}{LLMTestCaseParams}\PYG{o}{.}\PYG{n}{EXPECTED\PYGZus{}OUTPUT}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{test\PYGZus{}case} \PYG{o}{=} \PYG{n}{LLMTestCase}\PYG{p}{(}
+    \PYG{n+nb}{input}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The dog chased the cat up the tree, who ran up the tree?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{actual\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{It depends, some might consider the cat, while others might argue the dog.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{expected\PYGZus{}output}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The cat.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{n}{evaluate}\PYG{p}{(}\PYG{p}{[}\PYG{n}{test\PYGZus{}case}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{n}{correctness\PYGZus{}metric}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Metrics Summary
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Correctness (GEval) (score: 0.2, threshold: 0.5, strict: False, evaluation
+model: local model, reason: Actual output omits the expected detail (the cat)
+and contradicts the expected output., error: None)
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+For test case:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+input: The dog chased the cat up the tree, who ran up the tree?
+
+\item {} 
+\sphinxAtStartPar
+actual output: It depends, some might consider the cat, while others might argue the dog.
+
+\item {} 
+\sphinxAtStartPar
+expected output: The cat.
+
+\item {} 
+\sphinxAtStartPar
+context: None
+
+\item {} 
+\sphinxAtStartPar
+retrieval context: None
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Overall Metric Pass Rates
+\begin{quote}
+
+\sphinxAtStartPar
+Correctness (GEval): 0.00\% pass rate
+\end{quote}
+
+\end{itemize}
+\end{quote}
+
 \sphinxstepscope
 
 
@@ -5602,6 +6504,10 @@ Philipp Schmid.
 \sphinxAtStartPar
 Maxime Labonne.
 \sphinxhref{https://mlabonne.github.io/blog/posts/Fine\_Tune\_Your\_Own\_Llama\_2\_Model\_in\_a\_Colab\_Notebook.html}{Fine\sphinxhyphen{}Tune Your Own Llama 2 Model in a Colab Notebook}, 2024.
+\bibitem[GEval]{reference:geval}
+\sphinxAtStartPar
+Yang Liu.
+\sphinxhref{https://arxiv.org/pdf/2303.16634}{G\sphinxhyphen{}EVAL: NLG Evaluation using GPT\sphinxhyphen{}4 with Better Human Alignment}, 2023.
 \end{sphinxthebibliography}
 
 

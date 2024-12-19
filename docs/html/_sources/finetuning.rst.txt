@@ -9,6 +9,16 @@ Fine Tuning
 
 	Good tools are prerequisite to the successful execution of a job. – old Chinese proverb
 
+.. admonition:: Colab Notebook for This Chapter
+
+    - Embedding Model Fine-tuning: |e_tune|
+    - LLM (Llama 2 7B) Model Fine-tuning: |l_tune|
+    
+    .. |e_tune| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/14aYT8Ydm_e-z47yGpctAfk246K_PK1LC?usp=drive_link  
+
+    .. |l_tune| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1GPu2vNRdcObf0dmP7r_M42NYx0OXVD_F?usp=drive_link  
 
 
 Fine-tuning is a machine learning technique where a pre-trained model (like a large 

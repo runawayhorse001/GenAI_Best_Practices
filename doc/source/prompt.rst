@@ -13,6 +13,13 @@ Prompt Engineering
 
 .. _Zi han: https://brownbeat.medium.com/analects-of-confucius-book-9-new-english-translation-c7244d159591
 
+.. admonition:: Colab Notebook for This Chapter
+
+    - Prompt Engineering: |Prompt|
+    
+    .. |Prompt| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/19BnLVTnN5T3SIfFRaKUTGSviRwHlpDWf?usp=drive_link  
+
 Prompt
 ++++++
 

@@ -9,10 +9,23 @@ Preliminary
 
 	A journey of a thousand miles begins with a single step. – Lao Tzu
 
-
 In this chapter, we will introduce some math and NLP preliminaries which is highly
 used in Generative AI. 
 
+.. admonition:: Colab Notebook for This Chapter
+
+    - Math Preliminary: |Math Preliminary|
+    - Ollama in Colab: |Ollama in Colab|
+    - BERT Tokenization: |BERT Tokenization| 
+    
+    .. |Math Preliminary| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1V_mBtDF1tTBv06-ipmkoeBWZ9JU-rnni?usp=drive_link  
+
+    .. |Ollama in Colab| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1tALgzu-v6NnN5yUCY7fvyWehuPwQ9rHG?usp=drive_link  
+
+    .. |BERT Tokenization| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/16JUj0Tk8zBuCnZLGtN6kHHzwT-p4Ggr6?usp=drive_link  
 
 Math Preliminary
 ++++++++++++++++

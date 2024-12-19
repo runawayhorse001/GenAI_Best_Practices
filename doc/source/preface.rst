@@ -12,6 +12,7 @@
 .. |out| replace:: ``:: Ouput:``
 .. |eg| replace:: ``:: Example:``
 .. |syn| replace:: ``::syntax:``
+.. |Colab| image:: images/colab-badge.png   
 
 =======
 Preface
@@ -28,10 +29,9 @@ The PDF version can be downloaded from `HERE <../latex/GenAI.pdf>`_.
 **You may download and distribute it. Please beaware,
 however, that the note contains typos as well as inaccurate or incorrect description.**
 
-In this book, I aim to demonstrate best practices for Generative AI 
-through detailed demo code and practical examples. If you notice that
-your work has not been properly cited, please do not hesitate to 
-reach out and let me know.
+In this book, we aim to demonstrate best practices for Generative AI 
+through detailed demo code and practical examples. For each chapter, we provide detailed 
+Colab notebooks |Colab| that you can open and run directly in Google Colab. 
 
 About the authors
 -----------------

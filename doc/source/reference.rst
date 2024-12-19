@@ -25,4 +25,10 @@ Main Reference
 .. [fineTuneLLM] Maxime Labonne.
                  `Fine-Tune Your Own Llama 2 Model in a Colab Notebook
                  <https://mlabonne.github.io/blog/posts/Fine_Tune_Your_Own_Llama_2_Model_in_a_Colab_Notebook.html>`_, 2024.
+
+.. [GEval] Yang Liu.
+                 `G-EVAL: NLG Evaluation using GPT-4 with Better Human Alignment
+                 <https://arxiv.org/pdf/2303.16634>`_, 2023.
+
+                 
        

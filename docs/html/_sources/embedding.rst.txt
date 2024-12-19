@@ -16,7 +16,12 @@ vectors of real numbers, capturing semantic relationships between them. Instead 
 words as discrete symbols (like one-hot encoding), word embeddings map words into a 
 continuous vector space where similar words are located closer together.
 
+.. admonition:: Colab Notebook for This Chapter
 
+    - Word Embedding: |Word Embedding|
+    
+    .. |Word Embedding| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1IZR9vRHAl-jHsHOkt2evsgJJ1_hCICa?usp=drive_link  
 
 .. _fig_embedding:
 .. figure:: images/embedding_diagram.png
@@ -759,3 +764,10 @@ at: https://huggingface.co/BAAI/bge-base-en-v1.5 .
    Sentence embeddings: tensor([[ 0.0700,  0.0119,  0.0049,  ...,  0.0428, -0.0475,  0.0242],
          [ 0.0800, -0.0065, -0.0519,  ...,  0.0057, -0.0770,  0.0119],
          [ 0.0740, -0.0185, -0.0369,  ...,  0.0083, -0.0026,  0.0016]])        
+
+
+.. _fig_embedding2d:
+.. figure:: images/embedding2d.png
+    :align: center
+
+    t-SNE embeddings 2D

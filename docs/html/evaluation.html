@@ -53,8 +53,14 @@
 <li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">8. LLM Evaluation Metrics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#statistical-scorers">8.1. Statistical Scorers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#model-based-scorers">8.2. Model-Based Scorers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistical-scorers-traditional-metrics">8.1. Statistical Scorers (Traditional Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-based-scorers-learned-metrics">8.2. Model-Based Scorers (Learned Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#human-centric-evaluations-augmenting-metrics">8.3. Human-Centric Evaluations (Augmenting Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geval-with-deepeval">8.4. GEval with DeepEval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#g-eval-algorithm">8.4.1. G-Eval Algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#g-eval-with-deepeval">8.4.2. G-Eval with DeepEval</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference.html">9. Main Reference</a></li>
@@ -86,11 +92,543 @@
              
   <section id="llm-evaluation-metrics">
 <span id="evaluation"></span><h1><span class="section-number">8. </span>LLM Evaluation Metrics<a class="headerlink" href="#llm-evaluation-metrics" title="Link to this heading"></a></h1>
-<section id="statistical-scorers">
-<h2><span class="section-number">8.1. </span>Statistical Scorers<a class="headerlink" href="#statistical-scorers" title="Link to this heading"></a></h2>
+<div class="admonition-colab-notebook-for-this-chapter admonition">
+<p class="admonition-title">Colab Notebook for This Chapter</p>
+<p>GEval with DeepEval: <a class="reference external" href="https://colab.research.google.com/drive/17aARKonCOzBzsfk1ceLESTboEPkKNJi1?usp=drive_link"><img alt="GEval with DeepEval" src="_images/colab-badge.png" /></a></p>
+</div>
+<figure class="align-center" id="id3">
+<span id="fig-metrics-llm"></span><img alt="_images/metrics_llm.png" src="_images/metrics_llm.png" />
+<figcaption>
+<p><span class="caption-text">Types of metric scorers (Source: <a class="reference external" href="https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation">LLM Evaluation Metrics: The Ultimate LLM Evaluation Guide</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="statistical-scorers-traditional-metrics">
+<h2><span class="section-number">8.1. </span>Statistical Scorers (Traditional Metrics)<a class="headerlink" href="#statistical-scorers-traditional-metrics" title="Link to this heading"></a></h2>
+<p>These metrics evaluate text outputs based on statistical comparisons to references
+or expected outputs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I completely agree with the author of <a class="reference external" href="https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation">LLM Evaluation Metrics: The Ultimate LLM Evaluation Guide</a>
+that statistical scoring methods are,
+in my opinion, non-essential to focus on. These methods tend to perform poorly
+whenever reasoning is required, making them too inaccurate as scorers for
+most LLM evaluation criteria. Additionally, more advanced metrics,
+such as GEval <a class="reference internal" href="#geval"><span class="std std-ref">GEval with DeepEval</span></a>, provide significantly better alternatives.</p>
+</div>
+<ul class="simple">
+<li><p><strong>BLEU (Bilingual Evaluation Understudy):</strong>
+Measures overlap of n-grams between generated and reference texts.
+Common for translation tasks.</p></li>
+<li><p><strong>ROUGE (Recall-Oriented Understudy for Gisting Evaluation):</strong>
+Focuses on recall of n-grams (ROUGE-N), longest common subsequences (ROUGE-L),
+and skip bigrams (ROUGE-S). Popular in summarization tasks.</p></li>
+<li><p><strong>METEOR (Metric for Evaluation of Translation with Explicit ORdering):</strong>
+Considers synonymy and paraphrasing via stemming and synonym matching.</p></li>
+<li><p><strong>TER (Translation Edit Rate):</strong>
+Measures the number of edits required to turn the generated output into the
+reference text.</p></li>
+<li><p><strong>CIDEr (Consensus-based Image Description Evaluation):</strong>
+Designed for image captioning, using TF-IDF weighting of n-grams.</p></li>
+<li><p><strong>BERTScore:</strong>
+Leverages contextual embeddings (e.g., BERT) to compute similarity between
+generated and reference texts.</p></li>
+<li><p><strong>GLEU (Google BLEU):</strong>
+A variation of BLEU designed for grammatical error correction tasks.</p></li>
+</ul>
 </section>
-<section id="model-based-scorers">
-<h2><span class="section-number">8.2. </span>Model-Based Scorers<a class="headerlink" href="#model-based-scorers" title="Link to this heading"></a></h2>
+<section id="model-based-scorers-learned-metrics">
+<h2><span class="section-number">8.2. </span>Model-Based Scorers (Learned Metrics)<a class="headerlink" href="#model-based-scorers-learned-metrics" title="Link to this heading"></a></h2>
+<p>These metrics employ models trained to assess the quality of generated text,
+often based on human annotations.</p>
+<ul class="simple">
+<li><p><strong>BLEURT:</strong>
+Combines pre-trained models (e.g., BERT) with fine-tuning on human judgment data.</p></li>
+<li><p><strong>COMET (Cross-lingual Optimized Metric for Evaluation of Translation):</strong>
+A neural network model trained on translation quality data.</p></li>
+<li><p><strong>PRISM:</strong>
+Measures semantic similarity by paraphrasing both the hypothesis and reference into a shared space.</p></li>
+<li><p><strong>UniEval:</strong>
+A unified framework for evaluation across multiple tasks, focusing on both factual accuracy and linguistic quality.</p></li>
+<li><p><strong>Perplexity:</strong>
+Estimates the likelihood of generated text under the original model’s probability distribution (lower is better).</p></li>
+<li><p><strong>GPTScore:</strong>
+Uses a large pre-trained LLM (e.g., GPT-4) to rate the quality of outputs.</p></li>
+<li><p><strong>MAUVE:</strong>
+Measures the divergence between the distribution of generated text and that of human-written text.</p></li>
+<li><p><strong>DRIFT:</strong>
+Focuses on domain-specific evaluation, checking how well outputs align with domain-specific data distributions.</p></li>
+</ul>
+</section>
+<section id="human-centric-evaluations-augmenting-metrics">
+<h2><span class="section-number">8.3. </span>Human-Centric Evaluations (Augmenting Metrics)<a class="headerlink" href="#human-centric-evaluations-augmenting-metrics" title="Link to this heading"></a></h2>
+<p>While not automated, human evaluations are crucial for assessing subjective qualities such as:</p>
+<ul class="simple">
+<li><p><strong>Fluency</strong></p></li>
+<li><p><strong>Coherence</strong></p></li>
+<li><p><strong>Relevance</strong></p></li>
+<li><p><strong>Factuality</strong></p></li>
+<li><p><strong>Style Appropriateness</strong></p></li>
+</ul>
+<p>Both statistical and model-based scorers are often used in tandem with human evaluation to ensure a holistic assessment of LLM outputs.</p>
+</section>
+<section id="geval-with-deepeval">
+<span id="geval"></span><h2><span class="section-number">8.4. </span>GEval with DeepEval<a class="headerlink" href="#geval-with-deepeval" title="Link to this heading"></a></h2>
+<p>G-Eval is a recently developed evaluation framework developed from paper <a class="reference internal" href="reference.html#geval" id="id1"><span>[GEval]</span></a> to assess large language models (LLMs) using GPT-based evaluators.
+It leverages the capabilities of advanced LLMs (like GPT-4 or beyond) to rate and critique the outputs of other models, including themselves,
+across various tasks. This approach shifts the evaluation paradigm by relying on the intrinsic understanding and reasoning power of the models,
+rather than traditional metrics.</p>
+<section id="g-eval-algorithm">
+<h3><span class="section-number">8.4.1. </span>G-Eval Algorithm<a class="headerlink" href="#g-eval-algorithm" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id4">
+<span id="fig-geval"></span><img alt="_images/geval.png" src="_images/geval.png" />
+<figcaption>
+<p><span class="caption-text">G-Eval Algorithm (Source: <a class="reference internal" href="reference.html#geval" id="id2"><span>[GEval]</span></a>)</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="g-eval-with-deepeval">
+<h3><span class="section-number">8.4.2. </span>G-Eval with DeepEval<a class="headerlink" href="#g-eval-with-deepeval" title="Link to this heading"></a></h3>
+<p>In <a class="reference external" href="https://docs.confident-ai.com/docs/metrics-introduction">DeepEval</a>,, a metric serves as a standard for measuring the performance
+of an LLM’s output based on specific criteria of interest. Essentially,
+while the metric functions as the “ruler”, a test case represents the
+subject being measured. <a class="reference external" href="https://docs.confident-ai.com/docs/metrics-introduction">DeepEval</a>, provides a variety of default metrics
+to help you get started quickly, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>G-Eval</p></li>
+<li><p>Summarization</p></li>
+<li><p>Faithfulness</p></li>
+<li><p>Answer Relevancy</p></li>
+<li><p>Contextual Relevancy</p></li>
+<li><p>Contextual Precision</p></li>
+<li><p>Contextual Recall</p></li>
+<li><p>Ragas</p></li>
+<li><p>Hallucination</p></li>
+<li><p>Toxicity</p></li>
+<li><p>Bias</p></li>
+</ul>
+</div></blockquote>
+<p>DeepEval also provides conversational metrics, designed to evaluate entire
+conversations rather than individual, granular LLM interactions. These include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Conversation Completeness</p></li>
+<li><p>Conversation Relevancy</p></li>
+<li><p>Knowledge Retention</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p><strong>Set Up Local Model</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deepeval</span> <span class="nb">set</span><span class="o">-</span><span class="n">local</span><span class="o">-</span><span class="n">model</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mistral&#39;</span> \
+<span class="o">--</span><span class="n">base</span><span class="o">-</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span> \
+<span class="o">--</span><span class="n">api</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Default Metrics</strong></p>
+<blockquote>
+<div><ul>
+<li><p>AnswerRelevancyMetric</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">AnswerRelevancyMetric</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCase</span>
+
+<span class="n">answer_relevancy_metric</span> <span class="o">=</span> <span class="n">AnswerRelevancyMetric</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;What if these shoes don&#39;t fit?&quot;</span><span class="p">,</span>
+    <span class="c1"># Replace this with the actual output from your LLM application</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="s2">&quot;We offer a 30-day full refund at no extra costs.&quot;</span><span class="p">,</span>
+    <span class="n">retrieval_context</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;All customers are eligible for a 30 day full refund at no extra costs.&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">evaluate</span><span class="p">([</span><span class="n">test_case</span><span class="p">],</span> <span class="p">[</span><span class="n">answer_relevancy_metric</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Metrics Summary</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Answer Relevancy (score: 1.0, threshold: 0.7, strict: False, evaluation model: local model,
+reason: The score is 1.00 because it directly and accurately answered the question about
+shoe fitting, making it highly relevant., error: None)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For test case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input: What if these shoes don’t fit?</p></li>
+<li><p>actual output: We offer a 30-day full refund at no extra costs.</p></li>
+<li><p>expected output: None</p></li>
+<li><p>context: None</p></li>
+<li><p>retrieval context: [‘All customers are eligible for a 30 day full refund at no extra costs.’]</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Overall Metric Pass Rates</p>
+<blockquote>
+<div><p>Answer Relevancy: 100.00% pass rate</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EvaluationResult</span><span class="p">(</span><span class="n">test_results</span><span class="o">=</span><span class="p">[</span><span class="n">TestResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;test_case_0&#39;</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">metrics_data</span><span class="o">=</span><span class="p">[</span><span class="n">MetricData</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Answer Relevancy&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s1">&#39;The score is 1.00 because it directly and accurately answered the question about shoe fitting, making it highly relevant.&#39;</span><span class="p">,</span> <span class="n">strict_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">evaluation_model</span><span class="o">=</span><span class="s1">&#39;local model&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluation_cost</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">verbose_logs</span><span class="o">=</span><span class="s1">&#39;Statements:</span><span class="se">\n</span><span class="s1">[</span><span class="se">\n</span><span class="s1">    &quot;We offer a 30-day full refund&quot;,</span><span class="se">\n</span><span class="s1">    &quot;The refund does not incur any additional costs&quot;</span><span class="se">\n</span><span class="s1">] </span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">Verdicts:</span><span class="se">\n</span><span class="s1">[</span><span class="se">\n</span><span class="s1">    {</span><span class="se">\n</span><span class="s1">        &quot;verdict&quot;: &quot;yes&quot;,</span><span class="se">\n</span><span class="s1">        &quot;reason&quot;: &quot;The statements about the refund policy are relevant to addressing the input, which asks about what to do if the shoes don</span><span class="se">\&#39;</span><span class="s1">t fit.&quot;</span><span class="se">\n</span><span class="s1">    },</span><span class="se">\n</span><span class="s1">    {</span><span class="se">\n</span><span class="s1">        &quot;verdict&quot;: &quot;yes&quot;,</span><span class="se">\n</span><span class="s1">        &quot;reason&quot;: &quot;The statement that the refund does not incur any additional costs is also relevant as it provides further information about the refund process.&quot;</span><span class="se">\n</span><span class="s1">    }</span><span class="se">\n</span><span class="s1">]&#39;</span><span class="p">)],</span> <span class="n">conversational</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multimodal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;What if these shoes don&#39;t fit?&quot;</span><span class="p">,</span> <span class="n">actual_output</span><span class="o">=</span><span class="s1">&#39;We offer a 30-day full refund at no extra costs.&#39;</span><span class="p">,</span> <span class="n">expected_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retrieval_context</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;All customers are eligible for a 30 day full refund at no extra costs.&#39;</span><span class="p">])],</span> <span class="n">confident_link</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>FaithfulnessMetric</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">FaithfulnessMetric</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCase</span>
+
+
+<span class="c1"># input</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;What if these shoes don&#39;t fit?&quot;</span>
+
+<span class="c1"># Replace this with the actual output from your LLM application</span>
+<span class="n">actual_output</span> <span class="o">=</span> <span class="s2">&quot;We offer a 30-day full refund at no extra cost.&quot;</span>
+
+<span class="c1"># Replace this with the actual retrieved context from your RAG pipeline</span>
+<span class="n">retrieval_context</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;All customers are eligible for a 30 day full refund at no extra cost.&quot;</span><span class="p">]</span>
+
+<span class="n">metric</span> <span class="o">=</span> <span class="n">FaithfulnessMetric</span><span class="p">(</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="c1">#model=&quot;gpt-4&quot;,</span>
+    <span class="n">include_reason</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="n">actual_output</span><span class="p">,</span>
+    <span class="n">retrieval_context</span><span class="o">=</span><span class="n">retrieval_context</span>
+<span class="p">)</span>
+
+<span class="n">metric</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="c1"># or evaluate test cases in bulk</span>
+<span class="n">evaluate</span><span class="p">([</span><span class="n">test_case</span><span class="p">],</span> <span class="p">[</span><span class="n">metric</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Metrics Summary</p>
+<ul class="simple">
+<li><p>Faithfulness (score: 1.0, threshold: 0.7, strict: False, evaluation model:
+local model, reason: The faithfulness score is 1.00 because there are no
+contradictions found between the actual output and the retrieval context., error: None)</p></li>
+</ul>
+</li>
+<li><p>For test case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input: What if these shoes don’t fit?</p></li>
+<li><p>actual output: We offer a 30-day full refund at no extra cost.</p></li>
+<li><p>expected output: None</p></li>
+<li><p>context: None</p></li>
+<li><p>retrieval context: [‘All customers are eligible for a 30 day full refund at no extra cost.’]</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Overall Metric Pass Rates</p>
+<blockquote>
+<div><p>Faithfulness: 100.00% pass rate</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EvaluationResult</span><span class="p">(</span><span class="n">test_results</span><span class="o">=</span><span class="p">[</span><span class="n">TestResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;test_case_0&#39;</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">metrics_data</span><span class="o">=</span><span class="p">[</span><span class="n">MetricData</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Faithfulness&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s1">&#39;The faithfulness score is 1.00 because there are no contradictions found between the actual output and the retrieval context.&#39;</span><span class="p">,</span> <span class="n">strict_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">evaluation_model</span><span class="o">=</span><span class="s1">&#39;local model&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluation_cost</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">verbose_logs</span><span class="o">=</span><span class="s1">&#39;Truths (limit=None):</span><span class="se">\n</span><span class="s1">[</span><span class="se">\n</span><span class="s1">    &quot;Customers are eligible for a 30 day full refund.&quot;,</span><span class="se">\n</span><span class="s1">    &quot;The refund is at no extra cost.&quot;</span><span class="se">\n</span><span class="s1">] </span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">Claims:</span><span class="se">\n</span><span class="s1">[</span><span class="se">\n</span><span class="s1">    &quot;The refund is offered for a period of 30 days.&quot;,</span><span class="se">\n</span><span class="s1">    &quot;The refund does not incur any additional costs.&quot;</span><span class="se">\n</span><span class="s1">] </span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">Verdicts:</span><span class="se">\n</span><span class="s1">[</span><span class="se">\n</span><span class="s1">    {</span><span class="se">\n</span><span class="s1">        &quot;verdict&quot;: &quot;yes&quot;,</span><span class="se">\n</span><span class="s1">        &quot;reason&quot;: null</span><span class="se">\n</span><span class="s1">    },</span><span class="se">\n</span><span class="s1">    {</span><span class="se">\n</span><span class="s1">        &quot;verdict&quot;: &quot;yes&quot;,</span><span class="se">\n</span><span class="s1">        &quot;reason&quot;: null</span><span class="se">\n</span><span class="s1">    }</span><span class="se">\n</span><span class="s1">]&#39;</span><span class="p">)],</span> <span class="n">conversational</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multimodal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;What if these shoes don&#39;t fit?&quot;</span><span class="p">,</span> <span class="n">actual_output</span><span class="o">=</span><span class="s1">&#39;We offer a 30-day full refund at no extra cost.&#39;</span><span class="p">,</span> <span class="n">expected_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retrieval_context</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;All customers are eligible for a 30 day full refund at no extra cost.&#39;</span><span class="p">])],</span> <span class="n">confident_link</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>ContextualPrecisionMetric</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">ContextualPrecisionMetric</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCase</span>
+
+<span class="c1"># input</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;What if these shoes don&#39;t fit?&quot;</span>
+
+<span class="c1"># Replace this with the actual output from your LLM application</span>
+<span class="n">actual_output</span> <span class="o">=</span> <span class="s2">&quot;We offer a 30-day full refund at no extra cost.&quot;</span>
+
+<span class="c1"># Replace this with the expected output from your RAG generator</span>
+<span class="n">expected_output</span> <span class="o">=</span> <span class="s2">&quot;You are eligible for a 30 day full refund at no extra cost.&quot;</span>
+
+<span class="c1"># Replace this with the actual retrieved context from your RAG pipeline</span>
+<span class="n">retrieval_context</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;All customers are eligible for a 30 day full refund at no extra cost.&quot;</span><span class="p">]</span>
+
+<span class="n">metric</span> <span class="o">=</span> <span class="n">ContextualPrecisionMetric</span><span class="p">(</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="c1">#model=&quot;gpt-4&quot;,</span>
+    <span class="n">include_reason</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="n">actual_output</span><span class="p">,</span>
+    <span class="n">expected_output</span><span class="o">=</span><span class="n">expected_output</span><span class="p">,</span>
+    <span class="n">retrieval_context</span><span class="o">=</span><span class="n">retrieval_context</span>
+<span class="p">)</span>
+
+<span class="n">metric</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="c1"># or evaluate test cases in bulk</span>
+<span class="n">evaluate</span><span class="p">([</span><span class="n">test_case</span><span class="p">],</span> <span class="p">[</span><span class="n">metric</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Metrics Summary</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Contextual Precision (score: 1.0, threshold: 0.7, strict: False, evaluation
+model: local model, reason: The contextual precision score is 1.00 because
+the node ranked first (with reason: ‘The text verifies that customers are
+indeed eligible for a 30 day full refund at no extra cost.’) is relevant
+and correctly placed as the highest-ranked response to the input
+‘What if these shoes don’t fit?’. All other nodes, if present,
+should be ranked lower due to their irrelevance to the question., error: None)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For test case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input: What if these shoes don’t fit?</p></li>
+<li><p>actual output: We offer a 30-day full refund at no extra cost.</p></li>
+<li><p>expected output: You are eligible for a 30 day full refund at no extra cost.</p></li>
+<li><p>context: None</p></li>
+<li><p>retrieval context: [‘All customers are eligible for a 30 day full refund at no extra cost.’]</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Overall Metric Pass Rates</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Contextual Precision: 100.00% pass rate</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>ContextualRecallMetric</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">ContextualRecallMetric</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCase</span>
+
+<span class="n">metric</span> <span class="o">=</span> <span class="n">ContextualRecallMetric</span><span class="p">(</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+    <span class="n">include_reason</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="n">actual_output</span><span class="p">,</span>
+    <span class="n">expected_output</span><span class="o">=</span><span class="n">expected_output</span><span class="p">,</span>
+    <span class="n">retrieval_context</span><span class="o">=</span><span class="n">retrieval_context</span>
+<span class="p">)</span>
+
+<span class="n">metric</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="c1"># or evaluate test cases in bulk</span>
+<span class="n">evaluate</span><span class="p">([</span><span class="n">test_case</span><span class="p">],</span> <span class="p">[</span><span class="n">metric</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Metrics Summary</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Contextual Recall (score: 1.0, threshold: 0.7, strict: False, evaluation
+model: local model, reason: The score is 1.00 because the expected output
+is exactly as stated in the retrieval context., error: None)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For test case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input: What if these shoes don’t fit?</p></li>
+<li><p>actual output: We offer a 30-day full refund at no extra cost.</p></li>
+<li><p>expected output: You are eligible for a 30 day full refund at no extra cost.</p></li>
+<li><p>context: None</p></li>
+<li><p>retrieval context: [‘All customers are eligible for a 30 day full refund at no extra cost.’]</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Overall Metric Pass Rates</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Contextual Recall: 100.00% pass rate</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>HallucinationMetric</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">HallucinationMetric</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCase</span>
+
+<span class="c1"># input</span>
+
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;What was the blond doing?&quot;</span>
+
+<span class="c1"># Replace this with the actual documents that you are passing as input to your LLM.</span>
+<span class="n">context</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A man with blond-hair, and a brown shirt drinking out of a public water fountain.&quot;</span><span class="p">]</span>
+
+<span class="c1"># Replace this with the actual output from your LLM application</span>
+<span class="n">actual_output</span><span class="o">=</span><span class="s2">&quot;A blond drinking water in public.&quot;</span>
+
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span> <span class="nb">input</span><span class="p">,</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="n">actual_output</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="n">context</span>
+<span class="p">)</span>
+<span class="n">metric</span> <span class="o">=</span> <span class="n">HallucinationMetric</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">metric</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="c1"># or evaluate test cases in bulk</span>
+<span class="n">evaluate</span><span class="p">([</span><span class="n">test_case</span><span class="p">],</span> <span class="p">[</span><span class="n">metric</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Metrics Summary</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Hallucination (score: 0.0, threshold: 0.5, strict: False,
+evaluation model: local model, reason: The score is 0.00 because the actual
+output correctly aligns with the provided context., error: None)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For test case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input: What was the blond doing?</p></li>
+<li><p>actual output: A blond drinking water in public.</p></li>
+<li><p>expected output: None</p></li>
+<li><p>context: [‘A man with blond-hair, and a brown shirt drinking out of a public water fountain.’]</p></li>
+<li><p>retrieval context: None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Overall Metric Pass Rates</p>
+<blockquote>
+<div><p>Hallucination: 100.00% pass rate</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Custom Metrics</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">GEval</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCaseParams</span>
+
+<span class="n">correctness_metric</span> <span class="o">=</span> <span class="n">GEval</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Correctness&quot;</span><span class="p">,</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;Determine whether the actual output is factually correct based on the expected output.&quot;</span><span class="p">,</span>
+    <span class="c1"># NOTE: you can only provide either criteria or evaluation_steps, and not both</span>
+    <span class="n">evaluation_steps</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Check whether the facts in &#39;actual output&#39; contradicts any facts in &#39;expected output&#39;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;You should also heavily penalize omission of detail&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Vague language, or contradicting OPINIONS, are OK&quot;</span>
+    <span class="p">],</span>
+    <span class="n">evaluation_params</span><span class="o">=</span><span class="p">[</span><span class="n">LLMTestCaseParams</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">LLMTestCaseParams</span><span class="o">.</span><span class="n">ACTUAL_OUTPUT</span><span class="p">,</span> <span class="n">LLMTestCaseParams</span><span class="o">.</span><span class="n">EXPECTED_OUTPUT</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;The dog chased the cat up the tree, who ran up the tree?&quot;</span><span class="p">,</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="s2">&quot;It depends, some might consider the cat, while others might argue the dog.&quot;</span><span class="p">,</span>
+    <span class="n">expected_output</span><span class="o">=</span><span class="s2">&quot;The cat.&quot;</span>
+<span class="p">)</span>
+
+<span class="n">correctness_metric</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correctness_metric</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correctness_metric</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Event</span> <span class="n">loop</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">running</span><span class="o">.</span> <span class="n">Applying</span> <span class="n">nest_asyncio</span> <span class="n">patch</span> <span class="n">to</span> <span class="n">allow</span> <span class="k">async</span> <span class="n">execution</span><span class="o">...</span>
+<span class="mf">0.1</span>
+<span class="n">The</span> <span class="n">actual</span> <span class="n">output</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">match</span> <span class="n">the</span> <span class="n">expected</span> <span class="n">output</span> <span class="ow">and</span> <span class="n">omits</span> <span class="n">specific</span> <span class="n">details</span> <span class="n">about</span> <span class="n">which</span> <span class="n">animal</span> <span class="n">climbed</span> <span class="n">the</span> <span class="n">tree</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Evaluation Framework:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">deepeval</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">deepeval.metrics</span> <span class="kn">import</span> <span class="n">GEval</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCase</span>
+<span class="kn">from</span> <span class="nn">deepeval.test_case</span> <span class="kn">import</span> <span class="n">LLMTestCaseParams</span>
+
+<span class="n">correctness_metric</span> <span class="o">=</span> <span class="n">GEval</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Correctness&quot;</span><span class="p">,</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;Determine whether the actual output is factually correct based on the expected output.&quot;</span><span class="p">,</span>
+    <span class="c1"># NOTE: you can only provide either criteria or evaluation_steps, and not both</span>
+    <span class="n">evaluation_steps</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Check whether the facts in &#39;actual output&#39; contradicts any facts in &#39;expected output&#39;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;You should also heavily penalize omission of detail&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Vague language, or contradicting OPINIONS, are OK&quot;</span>
+    <span class="p">],</span>
+    <span class="n">evaluation_params</span><span class="o">=</span><span class="p">[</span><span class="n">LLMTestCaseParams</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">LLMTestCaseParams</span><span class="o">.</span><span class="n">ACTUAL_OUTPUT</span><span class="p">,</span> <span class="n">LLMTestCaseParams</span><span class="o">.</span><span class="n">EXPECTED_OUTPUT</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">test_case</span> <span class="o">=</span> <span class="n">LLMTestCase</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;The dog chased the cat up the tree, who ran up the tree?&quot;</span><span class="p">,</span>
+    <span class="n">actual_output</span><span class="o">=</span><span class="s2">&quot;It depends, some might consider the cat, while others might argue the dog.&quot;</span><span class="p">,</span>
+    <span class="n">expected_output</span><span class="o">=</span><span class="s2">&quot;The cat.&quot;</span>
+<span class="p">)</span>
+
+<span class="n">evaluate</span><span class="p">([</span><span class="n">test_case</span><span class="p">],</span> <span class="p">[</span><span class="n">correctness_metric</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Metrics Summary</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Correctness (GEval) (score: 0.2, threshold: 0.5, strict: False, evaluation
+model: local model, reason: Actual output omits the expected detail (the cat)
+and contradicts the expected output., error: None)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For test case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input: The dog chased the cat up the tree, who ran up the tree?</p></li>
+<li><p>actual output: It depends, some might consider the cat, while others might argue the dog.</p></li>
+<li><p>expected output: The cat.</p></li>
+<li><p>context: None</p></li>
+<li><p>retrieval context: None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Overall Metric Pass Rates</p>
+<blockquote>
+<div><p>Correctness (GEval): 0.00% pass rate</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
 </section>
 </section>
 
@@ -106,7 +644,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 16, 2024.
+      <span class="lastupdated">Last updated on Dec 19, 2024.
       </span></p>
   </div>
 

@@ -5,12 +5,33 @@
 Retrieval-Augmented Generation
 ==============================
 
+.. admonition:: Colab Notebook for This Chapter
+
+    - Naive Chunking: |Naive Chunking|
+    - Late Chunking: |Late Chunking|
+    - Reciprocal Rank Fusion: |RRF|
+    - RAG in colab: |rag|
+    
+    
+    .. |rag| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1jTkoER5eYQqBZs8RgOiCmTl8_WDt67go?usp=drive_link  
+
+    .. |Naive Chunking| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1r89QGmEDAS-ZJcfgYv6GKRrNDs4s_lir?usp=drive_link 
+
+    .. |Late Chunking| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1ZqxmK1YuvPcpJap1psscMTih2jnQVINT?usp=drive_link 
+
+    .. |RRF| image:: images/colab-badge.png 
+        :target: https://colab.research.google.com/drive/1Vg7C5Z3Y7OlilnfQlQqkKyNrcnUR6Xry?usp=drive_link 
+
 
 .. _fig_rag:
 .. figure:: images/RAG_diagram.png
     :align: center
 
     Retrieval-Augmented Generation Diagram
+
 
 .. note::
 
