@@ -504,5 +504,8 @@ Evaluation Framework:
 
         Correctness (GEval): 0.00% pass rate
 
+    .. code-block:: python
+        
+        EvaluationResult(test_results=[TestResult(name='test_case_0', success=False, metrics_data=[MetricData(name='Correctness (GEval)', threshold=0.5, success=False, score=0.2, reason='Actual output omits the expected detail (the cat) and contradicts the expected output.', strict_mode=False, evaluation_model='local model', error=None, evaluation_cost=0.0, verbose_logs='Criteria:\nDetermine whether the actual output is factually correct based on the expected output. \n \nEvaluation Steps:\n[\n    "Check whether the facts in \'actual output\' contradicts any facts in \'expected output\'",\n    "You should also heavily penalize omission of detail",\n    "Vague language, or contradicting OPINIONS, are OK"\n]')], conversational=False, multimodal=False, input='The dog chased the cat up the tree, who ran up the tree?', actual_output='It depends, some might consider the cat, while others might argue the dog.', expected_output='The cat.', context=None, retrieval_context=None)], confident_link=None)
 
 .. _`DeepEval`: https://docs.confident-ai.com/docs/metrics-introduction 
