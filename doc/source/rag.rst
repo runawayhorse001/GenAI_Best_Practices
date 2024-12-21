@@ -847,6 +847,7 @@ Finally, the retrieved relevant information will be feed back into the LLMs to g
 Advanced Topic
 ++++++++++++++
 
+.. _ch_self_rag:
 
 Self-RAG
 --------
@@ -1597,6 +1598,8 @@ In the paper [selfRAG]_, Four types decisions are made:
       'series analysis."\n'
       '   }')      
 
+.. _ch_c_rag:
+
 Corrective RAG
 --------------
 
@@ -2209,6 +2212,7 @@ Corrective RAG
         'web_search',
         'generate_answer']}
 
+.. _ch_a_rag:
 
 Adaptive RAG
 ------------
@@ -2222,6 +2226,7 @@ Adaptive RAG
 .. _Langgraph A-rag: https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/
 
 
+.. _ch_agentic_rag:
 
 Agentic RAG
 -----------
@@ -2287,6 +2292,69 @@ Agentic RAG
         embedding=OllamaEmbeddings(model="bge-m3"),
     )
     retriever = vectorstore.as_retriever(k=4)
+
+- Define Tool 
+
+  .. code:: python
+
+    from langchain.tools.retriever import create_retriever_tool
+
+    retriever_tool = create_retriever_tool(
+        retriever,
+        "retrieve_blog_posts",
+        "Search and return information about Lilian Weng blog posts on \
+        LLM agents, prompt engineering, and adversarial attacks on LLMs.",
+    )
+
+    tools = [retriever_tool]
+
+  .. note::
+
+    If you need web search, you can add web search tool we implement in :ref:`ch_c_rag` 
+    and :ref:`ch_a_rag`. More details related to Langchian Agent can be found at 
+    `Langchain Agents`_ and `Langchain build-in tools`_. 
+
+    .. _`Langchain Agents`: https://python.langchain.com/v0.1/docs/modules/agents/quick_start/
+    .. _`Langchain build-in tools`: https://python.langchain.com/v0.1/docs/integrations/tools/
+
+    .. code:: python
+
+      # define tools 
+
+      from langchain_google_community import GoogleSearchAPIWrapper, GoogleSearchResults
+
+      from google.colab import userdata
+      api_key = userdata.get('GOOGLE_API_KEY')
+      cx =  userdata.get('GOOGLE_CSE_ID')
+      # Replace with your actual API key and CX ID
+
+      # Create an instance of the GoogleSearchAPIWrapper
+      google_search_wrapper = GoogleSearchAPIWrapper(google_api_key=api_key, google_cse_id=cx)
+
+      # Pass the api_wrapper to GoogleSearchResults
+      web_search_tool = GoogleSearchResults(api_wrapper=google_search_wrapper, k=3)
+  
+      tools = [retriever_tool, web_search_tool]
+      
+      # define prompt and agent 
+
+      from langchain import hub
+
+      ## Get the prompt to use - you can modify this!
+      prompt = hub.pull("hwchase17/openai-functions-agent")
+      prompt.messages
+
+      ## agent  
+      from langchain.agents import create_tool_calling_agent
+
+      agent = create_tool_calling_agent(llm, tools, prompt)
+
+      # Agent executor 
+
+      from langchain.agents import AgentExecutor
+
+      agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+      agent_executor.invoke({"input": "whats the weather in sf?"})
 
 - Retrieval Grader
 

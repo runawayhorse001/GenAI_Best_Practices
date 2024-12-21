@@ -1031,7 +1031,7 @@ different rankings, and you want to combine them into a single, unified ranking.
 <section id="advanced-topic">
 <h2><span class="section-number">5.5. </span>Advanced Topic<a class="headerlink" href="#advanced-topic" title="Link to this heading"></a></h2>
 <section id="self-rag">
-<h3><span class="section-number">5.5.1. </span>Self-RAG<a class="headerlink" href="#self-rag" title="Link to this heading"></a></h3>
+<span id="ch-self-rag"></span><h3><span class="section-number">5.5.1. </span>Self-RAG<a class="headerlink" href="#self-rag" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id7">
 <span id="fig-self-rag-paper"></span><img alt="_images/self_rag_paper.png" src="_images/self_rag_paper.png" />
 <figcaption>
@@ -1773,7 +1773,7 @@ you will get error:</p>
 </ul>
 </section>
 <section id="corrective-rag">
-<h3><span class="section-number">5.5.2. </span>Corrective RAG<a class="headerlink" href="#corrective-rag" title="Link to this heading"></a></h3>
+<span id="ch-c-rag"></span><h3><span class="section-number">5.5.2. </span>Corrective RAG<a class="headerlink" href="#corrective-rag" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id10">
 <span id="fig-c-rag"></span><img alt="_images/corrective_rag.png" src="_images/corrective_rag.png" />
 <figcaption>
@@ -2358,7 +2358,7 @@ use web search.</p>
 </ul>
 </section>
 <section id="adaptive-rag">
-<h3><span class="section-number">5.5.3. </span>Adaptive RAG<a class="headerlink" href="#adaptive-rag" title="Link to this heading"></a></h3>
+<span id="ch-a-rag"></span><h3><span class="section-number">5.5.3. </span>Adaptive RAG<a class="headerlink" href="#adaptive-rag" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id12">
 <span id="fig-a-rag"></span><img alt="_images/adaptive_rag.png" src="_images/adaptive_rag.png" />
 <figcaption>
@@ -2367,7 +2367,7 @@ use web search.</p>
 </figure>
 </section>
 <section id="agentic-rag">
-<h3><span class="section-number">5.5.4. </span>Agentic RAG<a class="headerlink" href="#agentic-rag" title="Link to this heading"></a></h3>
+<span id="ch-agentic-rag"></span><h3><span class="section-number">5.5.4. </span>Agentic RAG<a class="headerlink" href="#agentic-rag" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id13">
 <span id="fig-agentic-rag"></span><img alt="_images/agentic_rag.png" src="_images/agentic_rag.png" />
 <figcaption>
@@ -2431,6 +2431,64 @@ you will get error:</p>
 </div>
 </div></blockquote>
 <ul>
+<li><p>Define Tool</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools.retriever</span> <span class="kn">import</span> <span class="n">create_retriever_tool</span>
+
+<span class="n">retriever_tool</span> <span class="o">=</span> <span class="n">create_retriever_tool</span><span class="p">(</span>
+    <span class="n">retriever</span><span class="p">,</span>
+    <span class="s2">&quot;retrieve_blog_posts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Search and return information about Lilian Weng blog posts on </span><span class="se">\</span>
+<span class="s2">    LLM agents, prompt engineering, and adversarial attacks on LLMs.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">retriever_tool</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need web search, you can add web search tool we implement in <a class="reference internal" href="#ch-c-rag"><span class="std std-ref">Corrective RAG</span></a>
+and <a class="reference internal" href="#ch-a-rag"><span class="std std-ref">Adaptive RAG</span></a>. More details related to Langchian Agent can be found at
+<a class="reference external" href="https://python.langchain.com/v0.1/docs/modules/agents/quick_start/">Langchain Agents</a> and <a class="reference external" href="https://python.langchain.com/v0.1/docs/integrations/tools/">Langchain build-in tools</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define tools</span>
+
+<span class="kn">from</span> <span class="nn">langchain_google_community</span> <span class="kn">import</span> <span class="n">GoogleSearchAPIWrapper</span><span class="p">,</span> <span class="n">GoogleSearchResults</span>
+
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">userdata</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;GOOGLE_API_KEY&#39;</span><span class="p">)</span>
+<span class="n">cx</span> <span class="o">=</span>  <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;GOOGLE_CSE_ID&#39;</span><span class="p">)</span>
+<span class="c1"># Replace with your actual API key and CX ID</span>
+
+<span class="c1"># Create an instance of the GoogleSearchAPIWrapper</span>
+<span class="n">google_search_wrapper</span> <span class="o">=</span> <span class="n">GoogleSearchAPIWrapper</span><span class="p">(</span><span class="n">google_api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span> <span class="n">google_cse_id</span><span class="o">=</span><span class="n">cx</span><span class="p">)</span>
+
+<span class="c1"># Pass the api_wrapper to GoogleSearchResults</span>
+<span class="n">web_search_tool</span> <span class="o">=</span> <span class="n">GoogleSearchResults</span><span class="p">(</span><span class="n">api_wrapper</span><span class="o">=</span><span class="n">google_search_wrapper</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">retriever_tool</span><span class="p">,</span> <span class="n">web_search_tool</span><span class="p">]</span>
+
+<span class="c1"># define prompt and agent</span>
+
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">hub</span>
+
+<span class="c1">## Get the prompt to use - you can modify this!</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="s2">&quot;hwchase17/openai-functions-agent&quot;</span><span class="p">)</span>
+<span class="n">prompt</span><span class="o">.</span><span class="n">messages</span>
+
+<span class="c1">## agent</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">create_tool_calling_agent</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">create_tool_calling_agent</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+
+<span class="c1"># Agent executor</span>
+
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentExecutor</span>
+
+<span class="n">agent_executor</span> <span class="o">=</span> <span class="n">AgentExecutor</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">agent_executor</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;whats the weather in sf?&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</li>
 <li><p>Retrieval Grader</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Retrieval Grader</span>
 
