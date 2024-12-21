@@ -33,7 +33,7 @@ or expected outputs.
     in my opinion, non-essential to focus on. These methods tend to perform poorly 
     whenever reasoning is required, making them too inaccurate as scorers for 
     most LLM evaluation criteria. Additionally, more advanced metrics, 
-    such as GEval :ref:`geval`, provide significantly better alternatives.
+    such as GEval :ref:`sec_geval`, provide significantly better alternatives.
 
 
 - **BLEU (Bilingual Evaluation Understudy):**
@@ -104,7 +104,7 @@ While not automated, human evaluations are crucial for assessing subjective qual
 
 Both statistical and model-based scorers are often used in tandem with human evaluation to ensure a holistic assessment of LLM outputs.
 
-.. _geval:
+.. _sec_geval:
 
 GEval with DeepEval
 +++++++++++++++++++

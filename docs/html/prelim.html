@@ -60,6 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#lemmatization">2.2.3. Lemmatization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tokenization">2.2.4. Tokenization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bert-tokenization">2.2.5. BERT Tokenization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modern-bert">2.2.6. Modern BERT</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#platform-and-packages">2.3. Platform and Packages</a><ul>
@@ -156,10 +157,10 @@ each component corresponding to a specific feature or attribute of the data.</p>
 <span class="mf">0.4594</span>   <span class="o">-</span><span class="mf">0.39955</span>  <span class="o">-</span><span class="mf">0.40371</span>   <span class="mf">0.31828</span> <span class="p">]</span>
 </pre></div>
 </div>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <span id="fig-logo"></span><img alt="_images/vector.png" src="_images/vector.png" />
 <figcaption>
-<p><span class="caption-text">Vector</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text">Vector</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -169,10 +170,10 @@ each component corresponding to a specific feature or attribute of the data.</p>
 magnitude. Norms are essential for calculating distances between vectors, which play
 a crucial role in measuring prediction errors, performing feature selection, and
 applying regularization techniques in models.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id3">
 <span id="fig-1bauo"></span><img alt="_images/1Bauo.png" src="_images/1Bauo.png" />
 <figcaption>
-<p><span class="caption-text">Geometrical Interpretation of Norm (<a class="reference external" href="https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent">source_1</a>)</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text">Geometrical Interpretation of Norm (<a class="reference external" href="https://math.stackexchange.com/questions/805954/what-does-the-dot-product-of-two-vectors-represent">source_1</a>)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ul>
@@ -766,6 +767,68 @@ This is due to the inclusion of two additional special tokens <code class="docut
 </li>
 </ul>
 </section>
+<section id="modern-bert">
+<h3><span class="section-number">2.2.6. </span>Modern BERT<a class="headerlink" href="#modern-bert" title="Link to this heading"></a></h3>
+<p>ModernBERT is an encoder-only model. It is based on the architecture of the original
+BERT (Bidirectional Encoder Representations from Transformers), which is designed
+to process and understand text by encoding it into dense numerical representations (embedding vectors).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><strong>encoder-only</strong> model is a type of transformer architecture designed primarily
+to understand and process input data by encoding it into a dense numerical representation,
+often called an embedding vector.</p></li>
+<li><p><strong>decoder-only</strong> model is a transformer architecture designed for generating or predicting sequences,
+such as text. such as GPT, Llama, and Claude.</p></li>
+</ul>
+</div>
+<p>The new architecture delivers significant improvements over its predecessors in both
+speed and accuracy (Fig. <a class="reference internal" href="#fig-mbert-curve"><span class="std std-ref">Modern BERT Pareto Curve (Source: Modern BERT)</span></a>).</p>
+<figure class="align-center" id="id4">
+<span id="fig-mbert-curve"></span><img alt="_images/modernbert_pareto_curve.png" src="_images/modernbert_pareto_curve.png" />
+<figcaption>
+<p><span class="caption-text">Modern BERT Pareto Curve (Source: <a class="reference external" href="https://huggingface.co/blog/modernbert">Modern BERT</a>)</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul>
+<li><p>Global and Local Attention</p>
+<p>One of ModernBERT’s most impactful features is Alternating Attention, rather than full global attention.</p>
+<figure class="align-center" id="id5">
+<span id="fig-mbert-attention"></span><img alt="_images/modernbert_alternating_attention.png" src="_images/modernbert_alternating_attention.png" />
+<figcaption>
+<p><span class="caption-text">ModernBERT Alternating Attention (Source: <a class="reference external" href="https://huggingface.co/blog/modernbert">Modern BERT</a>)</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Unpadding and Sequence Packing</p>
+<p>Another core mechanism contributing to ModernBERT’s efficiency is its use for Unpadding and Sequence packing.</p>
+<figure class="align-center" id="id6">
+<span id="fig-mbert-unpadding"></span><img alt="_images/modernbert_unpadding.png" src="_images/modernbert_unpadding.png" />
+<figcaption>
+<p><span class="caption-text">ModernBERT Unpadding (Source: <a class="reference external" href="https://huggingface.co/blog/modernbert">Modern BERT</a>)</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForMaskedLM</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="s2">&quot;answerdotai/ModernBERT-base&quot;</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMaskedLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The capital of France is [MASK].&quot;</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="c1"># To get predictions for the mask:</span>
+<span class="n">masked_index</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">mask_token_id</span><span class="p">)</span>
+<span class="n">predicted_token_id</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">masked_index</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">predicted_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">predicted_token_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted token:&quot;</span><span class="p">,</span> <span class="n">predicted_token</span><span class="p">)</span>
+<span class="c1"># Predicted token:  Paris</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="platform-and-packages">
 <h2><span class="section-number">2.3. </span>Platform and Packages<a class="headerlink" href="#platform-and-packages" title="Link to this heading"></a></h2>
@@ -972,8 +1035,8 @@ package is required.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Wenqiang Feng and Di Zhen.
-      <span class="lastupdated">Last updated on Dec 19, 2024.
+    <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
+      <span class="lastupdated">Last updated on Dec 20, 2024.
       </span></p>
   </div>
 

@@ -36,36 +36,77 @@ Colab notebooks |Colab| that you can open and run directly in Google Colab.
 About the authors
 -----------------
 
-* **Wenqiang Feng**
+* **Authors**
+  
+  - **Wenqiang Feng**
 
-  * Sr. Mgr Data Enginner and PhD in Mathematics
-  * University of Tennessee at Knoxville
-  * Webpage: http://web.utk.edu/~wfeng1/
-  * Email: von198@gmail.com
+    * Sr. Mgr Data Enginner and PhD in Mathematics
+    * University of Tennessee at Knoxville
+    * Webpage: https://github.com/runawayhorse001
+    * Email: von198@gmail.com
+
+  - **Di Zhen**  
+
+    * Sr. Analyst - Data Science and M.S. in Computational Biology
+    * Harvard University
+    * Email: dizhen318@gmail.com
+
+  - **Wenyun Wang**  
+
+    * Ph.D. candidate in Applied Physics 
+    * Harvard University
+    * Email: wenyunw08@gmail.com
+
 
 * **Biography**
 
-  Wenqiang Feng is the Senior Manager of Data Engineering and former Director of 
-  AI Engineering/Data Science at American Express (AMEX). Before his tenure at 
-  AMEX, Dr. Feng served as a Senior Data Scientist in the Machine Learning Lab
-  at H&R Block and as a Data Scientist at Applied Analytics Group, DST (now SS&C). 
-  Throughout his career, Dr. Feng has focused on equipping clients with cutting-edge
-  skills and technologies, including Big Data analytics, advanced modeling 
-  techniques, and data enhancement strategies.
+  - **Wenqiang Feng** is the Senior Manager of Data Engineering and former Director of 
+    AI Engineering/Data Science at American Express (AMEX). Before his tenure at 
+    AMEX, Dr. Feng served as a Senior Data Scientist in the Machine Learning Lab
+    at H&R Block and as a Data Scientist at Applied Analytics Group, DST (now SS&C). 
+    Throughout his career, Dr. Feng has focused on equipping clients with cutting-edge
+    skills and technologies, including Big Data analytics, advanced modeling 
+    techniques, and data enhancement strategies.
 
-  Dr. Feng brings extensive expertise in data mining, analytic systems, machine 
-  learning algorithms, business intelligence, and the application of Big Data 
-  tools to solve complex, cross-functional industry challenges. Prior to his 
-  role at DST, Dr. Feng was an IMA Data Science Fellow at the Institute for 
-  Mathematics and its Applications (IMA) at the University of Minnesota. 
-  In this capacity, he collaborated with startups to develop predictive 
-  analytics solutions that informed strategic marketing decisions.
+    Dr. Feng brings extensive expertise in data mining, analytic systems, machine 
+    learning algorithms, business intelligence, and the application of Big Data 
+    tools to solve complex, cross-functional industry challenges. Prior to his 
+    role at DST, Dr. Feng was an IMA Data Science Fellow at the Institute for 
+    Mathematics and its Applications (IMA) at the University of Minnesota. 
+    In this capacity, he collaborated with startups to develop predictive 
+    analytics solutions that informed strategic marketing decisions.
 
-  Dr. Feng holds a Ph.D. in Computational Mathematics and a Master’s degree 
-  in Statistics from the University of Tennessee, Knoxville. He also earned a
-  Master’s degree in Computational Mathematics from Missouri University 
-  of Science and Technology (MST) and a Master’s degree in Applied 
-  Mathematics from the University of Science and Technology of China (USTC).
+    Dr. Feng holds a Ph.D. in Computational Mathematics and a Master's degree 
+    in Statistics from the University of Tennessee, Knoxville. He also earned a
+    Master's degree in Computational Mathematics from Missouri University 
+    of Science and Technology (MST) and a Master's degree in Applied 
+    Mathematics from the University of Science and Technology of China (USTC).
+
+  - **Di Zhen** is a Senior Data Science Analyst at American Express, where she 
+    drives impactful business decisions by leveraging advanced analytics and 
+    cutting-edge technologies. Her expertise spans causal inference, predictive
+    modeling, natural language processing, and generative AI, with a focus on 
+    empowering sales enablement through data-driven insights.
+
+    Di earned her Master of Science in Computational Biology and Quantitative 
+    Genetics from Harvard University in 2023, where she developed a robust 
+    foundation in computation and statistical analysis. Passionate about 
+    solving complex, real-world problems, she combines technical precision 
+    with innovative thinking to deliver actionable solutions that enhance 
+    business performance and customer experiences. Dedicated to continuous 
+    learning, Di is committed to staying at the fore front of data science 
+    advancements to unlock new possibilities.
+
+  - **Wenyun Wang** is currently a Ph.D. candidate in Applied Physics at 
+    Harvard University. She also holds a Master's degree in Computational 
+    Science and Engineering from Harvard University. Her research interests 
+    lie at the intersection of data science, machine learning, and 
+    generative AI, with a focus on solving practical problems in scientific 
+    research and real-world applications. She is passionate about leveraging 
+    advanced computational techniques to extract insights from complex data 
+    and drive innovation across diverse domains.
+
+
 
 * **Declaration**
 
@@ -83,6 +124,5 @@ Feedback and suggestions
 ++++++++++++++++++++++++
 
 Your comments and suggestions are highly appreciated. I am more than happy to receive
-corrections, suggestions or feedback through email (Wenqiang Feng: von198@gmail.com and 
-Di Zhen: dizhen318@gmail.com
-) for improvements.
+corrections, suggestions or feedback through email (Wenqiang Feng: von198@gmail.com,  
+Di Zhen: dizhen318@gmail.com and Wenyun Wang: wenyunw08@gmail.com) for improvements.

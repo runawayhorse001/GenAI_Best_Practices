@@ -619,6 +619,75 @@ BERT Tokenization
  
 
 
+Modern BERT
+-----------
+
+ModernBERT is an encoder-only model. It is based on the architecture of the original 
+BERT (Bidirectional Encoder Representations from Transformers), which is designed 
+to process and understand text by encoding it into dense numerical representations (embedding vectors).
+
+
+.. note::
+
+  - **encoder-only** model is a type of transformer architecture designed primarily 
+    to understand and process input data by encoding it into a dense numerical representation, 
+    often called an embedding vector. 
+  - **decoder-only** model is a transformer architecture designed for generating or predicting sequences, 
+    such as text. such as GPT, Llama, and Claude. 
+
+
+The new architecture delivers significant improvements over its predecessors in both
+speed and accuracy (Fig. :ref:`fig_mbert_curve`).
+
+.. _fig_mbert_curve:
+.. figure:: images/modernbert_pareto_curve.png
+    :align: center 
+
+    Modern BERT Pareto Curve (Source: `Modern BERT`_)
+
+.. _`Modern BERT`: https://huggingface.co/blog/modernbert
+
+
+- Global and Local Attention
+  
+  One of ModernBERT's most impactful features is Alternating Attention, rather than full global attention.
+
+  .. _fig_mbert_attention:
+  .. figure:: images/modernbert_alternating_attention .png
+      :align: center 
+
+      ModernBERT Alternating Attention (Source: `Modern BERT`_)
+
+- Unpadding and Sequence Packing
+
+  Another core mechanism contributing to ModernBERT's efficiency is its use for Unpadding and Sequence packing.
+
+  .. _fig_mbert_unpadding:
+  .. figure:: images/modernbert_unpadding .png
+      :align: center 
+
+      ModernBERT Unpadding (Source: `Modern BERT`_)
+
+.. code-block:: python
+
+  from transformers import AutoTokenizer, AutoModelForMaskedLM
+
+  model_id = "answerdotai/ModernBERT-base"
+  tokenizer = AutoTokenizer.from_pretrained(model_id)
+  model = AutoModelForMaskedLM.from_pretrained(model_id)
+
+  text = "The capital of France is [MASK]."
+  inputs = tokenizer(text, return_tensors="pt")
+  outputs = model(**inputs)
+
+  # To get predictions for the mask:
+  masked_index = inputs["input_ids"][0].tolist().index(tokenizer.mask_token_id)
+  predicted_token_id = outputs.logits[0, masked_index].argmax(axis=-1)
+  predicted_token = tokenizer.decode(predicted_token_id)
+  print("Predicted token:", predicted_token)
+  # Predicted token:  Paris
+
+
 
 Platform and Packages
 +++++++++++++++++++++

@@ -14,6 +14,10 @@ Main Reference
                  `Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models
                  <https://arxiv.org/pdf/2409.04701>`_, 2024.
 
+.. [selfRAG] Akari Asai etc.
+                 `Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection
+                 <https://arxiv.org/pdf/2310.11511>`_, 2023.
+
 .. [PEFT] Yunho Mo etc.
                  `Parameter-Efficient Fine-Tuning Method for Task-Oriented Dialogue Systems
                  <https://www.mdpi.com/2227-7390/11/14/3048>`_, 2023.

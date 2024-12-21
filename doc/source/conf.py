@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'GenAI: Best Practices'
-copyright = '2024, Wenqiang Feng and Di Zhen'
-author = 'Wenqiang Feng and Di Zhen'
+copyright = '2024, Wenqiang Feng, Di Zhen and Wenyun Wang'
+author = 'Wenqiang Feng, Di Zhen and Wenyun Wang'
 
 
 # -- General configuration ---------------------------------------------------
@@ -99,7 +99,7 @@ latex_elements = {
 # [howto/manual]).
 latex_documents = [
   ('index', 'GenAI.tex', 'GenAI: Best Practices',
-   'Wenqiang Feng and Di Zhen', 'manual'),
+   'Wenqiang Feng, Di Zhen and Wenyun Wang', 'manual'),
 ]
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.

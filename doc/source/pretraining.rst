@@ -10,7 +10,7 @@ Pre-training
 
 	Pre-training as we know it will end. – Ilya Sutskever at neurips 2024
 
-.. _fig_rag:
+.. _fig_ilya:
 .. figure:: images/ilya_sutskever.png
     :align: center
 
