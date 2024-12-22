@@ -2477,8 +2477,6 @@ you will get error:</p>
                       <span class="n">structured_llm_router</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()}</span>
 <span class="p">)</span>
 
-
-
 <span class="n">question_router</span> <span class="o">=</span> <span class="n">route_prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">structured_llm_router</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> \
@@ -2486,59 +2484,65 @@ you will get error:</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> \
                               <span class="s2">&quot;What are the types of agent memory?&quot;</span><span class="p">}))</span>
-
-<span class="c1"># ### OR</span>
-<span class="c1"># ### Router</span>
-
-<span class="c1"># from langchain.prompts import PromptTemplate</span>
-<span class="c1"># from langchain_community.chat_models import ChatOllama</span>
-<span class="c1"># from langchain_core.output_parsers import JsonOutputParser</span>
-
-
-<span class="c1"># prompt = PromptTemplate(</span>
-<span class="c1">#     template=&quot;&quot;&quot;You are an expert at routing a</span>
-<span class="c1">#     user question to a vectorstore or web search. Use the vectorstore for</span>
-<span class="c1">#     questions on LLM agents, prompt engineering, prompting, and adversarial</span>
-<span class="c1">#     attacks. You can also use words that are similar to those,</span>
-<span class="c1">#     no need to have exactly those words. Otherwise, use web-search.</span>
-
-<span class="c1">#     Give a binary choice &#39;web_search&#39; or &#39;vectorstore&#39; based on the question.</span>
-<span class="c1">#     Return the a JSON with a single key &#39;datasource&#39; and</span>
-<span class="c1">#     no preamble or explanation.</span>
-
-<span class="c1">#     Examples:</span>
-<span class="c1">#     Question: When will the Euro of Football take place?</span>
-<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;web_search&quot;}}</span>
-
-<span class="c1">#     Question: What are the types of agent memory?</span>
-<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
-
-<span class="c1">#     Question: What are the basic approaches for prompt engineering?</span>
-<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
-
-<span class="c1">#     Question: What is prompt engineering?</span>
-<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
-
-<span class="c1">#     Question to route:</span>
-<span class="c1">#     {question}&quot;&quot;&quot;,</span>
-<span class="c1">#     input_variables=[&quot;question&quot;],</span>
-<span class="c1"># )</span>
-
-
-<span class="c1"># question_router = prompt | llm | JsonOutputParser()</span>
-
-<span class="c1"># print(question_router.invoke({&quot;question&quot;: &quot;When will the Euro of Football \</span>
-<span class="c1">#                                            take place?&quot;}))</span>
-<span class="c1"># print(question_router.invoke({&quot;question&quot;: &quot;What are the types of agent \</span>
-<span class="c1">#                                            memory?&quot;})) ### Index</span>
-
-<span class="c1"># print(question_router.invoke({&quot;question&quot;: &quot;What are the basic approaches for \</span>
-<span class="c1">#                                            prompt engineering?&quot;})) ### Index</span>
 </pre></div>
 </div>
 <p>Ouput:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datasource</span><span class="o">=</span><span class="s1">&#39;web_search&#39;</span>
 <span class="n">datasource</span><span class="o">=</span><span class="s1">&#39;vectorstore&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We introduced the new implementation with <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> Data Model for the
+output parser. You can still use the similar one we implemented in <a class="reference internal" href="#ch-self-rag"><span class="std std-ref">Self-RAG</span></a>.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### OR</span>
+<span class="c1">### Router</span>
+
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are an expert at routing a</span>
+<span class="s2">    user question to a vectorstore or web search. Use the vectorstore for</span>
+<span class="s2">    questions on LLM agents, prompt engineering, prompting, and adversarial</span>
+<span class="s2">    attacks. You can also use words that are similar to those,</span>
+<span class="s2">    no need to have exactly those words. Otherwise, use web-search.</span>
+
+<span class="s2">    Give a binary choice &#39;web_search&#39; or &#39;vectorstore&#39; based on the question.</span>
+<span class="s2">    Return the a JSON with a single key &#39;datasource&#39; and</span>
+<span class="s2">    no preamble or explanation.</span>
+
+<span class="s2">    Examples:</span>
+<span class="s2">    Question: When will the Euro of Football take place?</span>
+<span class="s2">    Answer: {{&quot;datasource&quot;: &quot;web_search&quot;}}</span>
+
+<span class="s2">    Question: What are the types of agent memory?</span>
+<span class="s2">    Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+
+<span class="s2">    Question: What are the basic approaches for prompt engineering?</span>
+<span class="s2">    Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+
+<span class="s2">    Question: What is prompt engineering?</span>
+<span class="s2">    Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+
+<span class="s2">    Question to route:</span>
+<span class="s2">    </span><span class="si">{question}</span><span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+
+<span class="n">question_router</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;When will the Euro of Football </span><span class="se">\</span>
+<span class="s2">                                           take place?&quot;</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What are the types of agent </span><span class="se">\</span>
+<span class="s2">                                           memory?&quot;</span><span class="p">}))</span> <span class="c1">### Index</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What are the basic approaches for </span><span class="se">\</span>
+<span class="s2">                                           prompt engineering?&quot;</span><span class="p">}))</span> <span class="c1">### Index</span>
 </pre></div>
 </div>
 </div></blockquote>

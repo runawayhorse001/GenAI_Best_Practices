@@ -6568,8 +6568,6 @@ Router
                       \PYG{n}{structured\PYGZus{}llm\PYGZus{}router}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
 \PYG{p}{)}
 
-
-
 \PYG{n}{question\PYGZus{}router} \PYG{o}{=} \PYG{n}{route\PYGZus{}prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{structured\PYGZus{}llm\PYGZus{}router}
 
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYGZbs{}
@@ -6577,54 +6575,6 @@ Router
 
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYGZbs{}
                               \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent memory?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{} OR}
-\PYG{c+c1}{\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
-
-\PYG{c+c1}{\PYGZsh{} from langchain.prompts import PromptTemplate}
-\PYG{c+c1}{\PYGZsh{} from langchain\PYGZus{}community.chat\PYGZus{}models import ChatOllama}
-\PYG{c+c1}{\PYGZsh{} from langchain\PYGZus{}core.output\PYGZus{}parsers import JsonOutputParser}
-
-
-\PYG{c+c1}{\PYGZsh{} prompt = PromptTemplate(}
-\PYG{c+c1}{\PYGZsh{}     template=\PYGZdq{}\PYGZdq{}\PYGZdq{}You are an expert at routing a}
-\PYG{c+c1}{\PYGZsh{}     user question to a vectorstore or web search. Use the vectorstore for}
-\PYG{c+c1}{\PYGZsh{}     questions on LLM agents, prompt engineering, prompting, and adversarial}
-\PYG{c+c1}{\PYGZsh{}     attacks. You can also use words that are similar to those,}
-\PYG{c+c1}{\PYGZsh{}     no need to have exactly those words. Otherwise, use web\PYGZhy{}search.}
-
-\PYG{c+c1}{\PYGZsh{}     Give a binary choice \PYGZsq{}web\PYGZus{}search\PYGZsq{} or \PYGZsq{}vectorstore\PYGZsq{} based on the question.}
-\PYG{c+c1}{\PYGZsh{}     Return the a JSON with a single key \PYGZsq{}datasource\PYGZsq{} and}
-\PYG{c+c1}{\PYGZsh{}     no preamble or explanation.}
-
-\PYG{c+c1}{\PYGZsh{}     Examples:}
-\PYG{c+c1}{\PYGZsh{}     Question: When will the Euro of Football take place?}
-\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}web\PYGZus{}search\PYGZdq{}\PYGZcb{}\PYGZcb{}}
-
-\PYG{c+c1}{\PYGZsh{}     Question: What are the types of agent memory?}
-\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}vectorstore\PYGZdq{}\PYGZcb{}\PYGZcb{}}
-
-\PYG{c+c1}{\PYGZsh{}     Question: What are the basic approaches for prompt engineering?}
-\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}vectorstore\PYGZdq{}\PYGZcb{}\PYGZcb{}}
-
-\PYG{c+c1}{\PYGZsh{}     Question: What is prompt engineering?}
-\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}vectorstore\PYGZdq{}\PYGZcb{}\PYGZcb{}}
-
-\PYG{c+c1}{\PYGZsh{}     Question to route:}
-\PYG{c+c1}{\PYGZsh{}     \PYGZob{}question\PYGZcb{}\PYGZdq{}\PYGZdq{}\PYGZdq{},}
-\PYG{c+c1}{\PYGZsh{}     input\PYGZus{}variables=[\PYGZdq{}question\PYGZdq{}],}
-\PYG{c+c1}{\PYGZsh{} )}
-
-
-\PYG{c+c1}{\PYGZsh{} question\PYGZus{}router = prompt | llm | JsonOutputParser()}
-
-\PYG{c+c1}{\PYGZsh{} print(question\PYGZus{}router.invoke(\PYGZob{}\PYGZdq{}question\PYGZdq{}: \PYGZdq{}When will the Euro of Football \PYGZbs{}}
-\PYG{c+c1}{\PYGZsh{}                                            take place?\PYGZdq{}\PYGZcb{}))}
-\PYG{c+c1}{\PYGZsh{} print(question\PYGZus{}router.invoke(\PYGZob{}\PYGZdq{}question\PYGZdq{}: \PYGZdq{}What are the types of agent \PYGZbs{}}
-\PYG{c+c1}{\PYGZsh{}                                            memory?\PYGZdq{}\PYGZcb{})) \PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
-
-\PYG{c+c1}{\PYGZsh{} print(question\PYGZus{}router.invoke(\PYGZob{}\PYGZdq{}question\PYGZdq{}: \PYGZdq{}What are the basic approaches for \PYGZbs{}}
-\PYG{c+c1}{\PYGZsh{}                                            prompt engineering?\PYGZdq{}\PYGZcb{})) \PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -6633,6 +6583,62 @@ Ouput:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{datasource}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{web\PYGZus{}search}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{datasource}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vectorstore}\PYG{l+s+s1}{\PYGZsq{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+We introduced the new implementation with \sphinxcode{\sphinxupquote{pydantic}} Data Model for the
+output parser. You can still use the similar one we implemented in {\hyperref[\detokenize{rag:ch-self-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Self\sphinxhyphen{}RAG}}}}}.
+\end{sphinxadmonition}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} OR}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{PromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{chat\PYGZus{}models} \PYG{k+kn}{import} \PYG{n}{ChatOllama}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{JsonOutputParser}
+
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are an expert at routing a}
+\PYG{l+s+s2}{    user question to a vectorstore or web search. Use the vectorstore for}
+\PYG{l+s+s2}{    questions on LLM agents, prompt engineering, prompting, and adversarial}
+\PYG{l+s+s2}{    attacks. You can also use words that are similar to those,}
+\PYG{l+s+s2}{    no need to have exactly those words. Otherwise, use web\PYGZhy{}search.}
+
+\PYG{l+s+s2}{    Give a binary choice }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ based on the question.}
+\PYG{l+s+s2}{    Return the a JSON with a single key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and}
+\PYG{l+s+s2}{    no preamble or explanation.}
+
+\PYG{l+s+s2}{    Examples:}
+\PYG{l+s+s2}{    Question: When will the Euro of Football take place?}
+\PYG{l+s+s2}{    Answer: }\PYG{l+s+s2}{\PYGZob{}\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZcb{}\PYGZcb{}}
+
+\PYG{l+s+s2}{    Question: What are the types of agent memory?}
+\PYG{l+s+s2}{    Answer: }\PYG{l+s+s2}{\PYGZob{}\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZcb{}\PYGZcb{}}
+
+\PYG{l+s+s2}{    Question: What are the basic approaches for prompt engineering?}
+\PYG{l+s+s2}{    Answer: }\PYG{l+s+s2}{\PYGZob{}\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZcb{}\PYGZcb{}}
+
+\PYG{l+s+s2}{    Question: What is prompt engineering?}
+\PYG{l+s+s2}{    Answer: }\PYG{l+s+s2}{\PYGZob{}\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZcb{}\PYGZcb{}}
+
+\PYG{l+s+s2}{    Question to route:}
+\PYG{l+s+s2}{    }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+
+\PYG{n}{question\PYGZus{}router} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{JsonOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{When will the Euro of Football }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                           take place?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                           memory?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the basic approaches for }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                                           prompt engineering?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
 \end{sphinxVerbatim}
 \end{quote}
 \begin{itemize}
