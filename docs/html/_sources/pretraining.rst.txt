@@ -10,11 +10,11 @@ Pre-training
 
 	Pre-training as we know it will end. – Ilya Sutskever at neurips 2024
 
-.. _fig_ilya:
-.. figure:: images/ilya_sutskever.png
-    :align: center
+        .. _fig_ilya:
+        .. figure:: images/ilya_sutskever.png
+            :align: center
 
-    Ilya Sutskever at neurips 2024
+            Ilya Sutskever at neurips 2024
 
 In industry, most companies focus primarily on prompt engineering, RAG, and fine-tuning, 
 while advanced techniques like pre-training from scratch or deep model customization 
