@@ -13,6 +13,11 @@ Retrieval-Augmented Generation
     - RAG in colab: |n-rag|
 
     -------------
+    
+    - Langchain Google Web Search |goog_search|
+    - Langchain SQL Query |sql_query|
+
+    -------------
 
     - Self-RAG: |S-RAG|
     - Corrective RAG: |C-RAG|
@@ -33,6 +38,12 @@ Retrieval-Augmented Generation
 
     .. |RRF| image:: images/colab-badge.png 
         :target: https://colab.research.google.com/drive/1Vg7C5Z3Y7OlilnfQlQqkKyNrcnUR6Xry?usp=drive_link 
+
+    .. |goog_search| image:: images/colab-badge.png 
+          :target: https://colab.research.google.com/drive/17vLeVzcESb-jkY9NdOP1fRaO6I16Yfuz?usp=drive_link 
+
+    .. |sql_query| image:: images/colab-badge.png 
+          :target: https://colab.research.google.com/drive/17vLeVzcESb-jkY9NdOP1fRaO6I16Yfuz?usp=drive_link 
 
     .. |S-RAG| image:: images/colab-badge.png 
         :target: https://colab.research.google.com/drive/1KbC4Wu-JUj6zbVuFkSNvtz3oVzWhEAZG?usp=drive_link 

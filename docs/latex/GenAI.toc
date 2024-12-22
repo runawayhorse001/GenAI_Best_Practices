@@ -53,7 +53,7 @@
 \contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{54}{subsection.4.3.11}%
 \contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{55}{subsection.4.3.12}%
 \contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{57}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{58}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Overview}{57}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Indexing}{58}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Naive Chunking}{58}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Late Chunking}{62}{subsection.5.2.2}%
