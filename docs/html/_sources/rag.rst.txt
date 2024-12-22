@@ -2354,58 +2354,58 @@ Adaptive RAG
 
   .. note::
 
-    We introduced the new implementation with ``pydantic`` Data Model for the 
-    output parser. You can still use the similar one we implemented in :ref:`ch_self_rag`.  
+    We introduced above new implementation with ``pydantic`` Data Model for the 
+    output parser. But, you can still use the similar one we implemented in :ref:`ch_c_rag`.  
 
-  .. code:: python    
-    
-    ### OR 
-    ### Router
+    .. code:: python    
+      
+      ### OR 
+      ### Router
 
-    from langchain.prompts import PromptTemplate
-    from langchain_community.chat_models import ChatOllama
-    from langchain_core.output_parsers import JsonOutputParser
-
-
-    prompt = PromptTemplate(
-        template="""You are an expert at routing a
-        user question to a vectorstore or web search. Use the vectorstore for
-        questions on LLM agents, prompt engineering, prompting, and adversarial
-        attacks. You can also use words that are similar to those,
-        no need to have exactly those words. Otherwise, use web-search.
-
-        Give a binary choice 'web_search' or 'vectorstore' based on the question.
-        Return the a JSON with a single key 'datasource' and
-        no preamble or explanation.
-
-        Examples:
-        Question: When will the Euro of Football take place?
-        Answer: {{"datasource": "web_search"}}
-
-        Question: What are the types of agent memory?
-        Answer: {{"datasource": "vectorstore"}}
-
-        Question: What are the basic approaches for prompt engineering?
-        Answer: {{"datasource": "vectorstore"}}
-
-        Question: What is prompt engineering?
-        Answer: {{"datasource": "vectorstore"}}
-
-        Question to route:
-        {question}""",
-        input_variables=["question"],
-    )
+      from langchain.prompts import PromptTemplate
+      from langchain_community.chat_models import ChatOllama
+      from langchain_core.output_parsers import JsonOutputParser
 
 
-    question_router = prompt | llm | JsonOutputParser()
+      prompt = PromptTemplate(
+          template="""You are an expert at routing a
+          user question to a vectorstore or web search. Use the vectorstore for
+          questions on LLM agents, prompt engineering, prompting, and adversarial
+          attacks. You can also use words that are similar to those,
+          no need to have exactly those words. Otherwise, use web-search.
 
-    print(question_router.invoke({"question": "When will the Euro of Football \
-                                               take place?"}))
-    print(question_router.invoke({"question": "What are the types of agent \
-                                               memory?"})) ### Index
+          Give a binary choice 'web_search' or 'vectorstore' based on the question.
+          Return the a JSON with a single key 'datasource' and
+          no preamble or explanation.
 
-    print(question_router.invoke({"question": "What are the basic approaches for \
-                                               prompt engineering?"})) ### Index
+          Examples:
+          Question: When will the Euro of Football take place?
+          Answer: {{"datasource": "web_search"}}
+
+          Question: What are the types of agent memory?
+          Answer: {{"datasource": "vectorstore"}}
+
+          Question: What are the basic approaches for prompt engineering?
+          Answer: {{"datasource": "vectorstore"}}
+
+          Question: What is prompt engineering?
+          Answer: {{"datasource": "vectorstore"}}
+
+          Question to route:
+          {question}""",
+          input_variables=["question"],
+      )
+
+
+      question_router = prompt | llm | JsonOutputParser()
+
+      print(question_router.invoke({"question": "When will the Euro of Football \
+                                                take place?"}))
+      print(question_router.invoke({"question": "What are the types of agent \
+                                                memory?"})) ### Index
+
+      print(question_router.invoke({"question": "What are the basic approaches for \
+                                                prompt engineering?"})) ### Index
 
 
 - Retrieval Grader

@@ -6587,9 +6587,8 @@ Ouput:
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-We introduced the new implementation with \sphinxcode{\sphinxupquote{pydantic}} Data Model for the
-output parser. You can still use the similar one we implemented in {\hyperref[\detokenize{rag:ch-self-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Self\sphinxhyphen{}RAG}}}}}.
-\end{sphinxadmonition}
+We introduced above new implementation with \sphinxcode{\sphinxupquote{pydantic}} Data Model for the
+output parser. But, you can still use the similar one we implemented in {\hyperref[\detokenize{rag:ch-c-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Corrective RAG}}}}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} OR}
@@ -6633,13 +6632,14 @@ output parser. You can still use the similar one we implemented in {\hyperref[\d
 \PYG{n}{question\PYGZus{}router} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{JsonOutputParser}\PYG{p}{(}\PYG{p}{)}
 
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{When will the Euro of Football }\PYG{l+s+se}{\PYGZbs{}}
-\PYG{l+s+s2}{                                           take place?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)}
+\PYG{l+s+s2}{                                          take place?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)}
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent }\PYG{l+s+se}{\PYGZbs{}}
-\PYG{l+s+s2}{                                           memory?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
+\PYG{l+s+s2}{                                          memory?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
 
 \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the basic approaches for }\PYG{l+s+se}{\PYGZbs{}}
-\PYG{l+s+s2}{                                           prompt engineering?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
+\PYG{l+s+s2}{                                          prompt engineering?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
 \end{sphinxVerbatim}
+\end{sphinxadmonition}
 \end{quote}
 \begin{itemize}
 \item {} 

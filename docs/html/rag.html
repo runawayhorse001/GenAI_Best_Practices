@@ -2493,9 +2493,8 @@ you will get error:</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We introduced the new implementation with <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> Data Model for the
-output parser. You can still use the similar one we implemented in <a class="reference internal" href="#ch-self-rag"><span class="std std-ref">Self-RAG</span></a>.</p>
-</div>
+<p>We introduced above new implementation with <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> Data Model for the
+output parser. But, you can still use the similar one we implemented in <a class="reference internal" href="#ch-c-rag"><span class="std std-ref">Corrective RAG</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### OR</span>
 <span class="c1">### Router</span>
 
@@ -2537,13 +2536,14 @@ output parser. You can still use the similar one we implemented in <a class="ref
 <span class="n">question_router</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;When will the Euro of Football </span><span class="se">\</span>
-<span class="s2">                                           take place?&quot;</span><span class="p">}))</span>
+<span class="s2">                                          take place?&quot;</span><span class="p">}))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What are the types of agent </span><span class="se">\</span>
-<span class="s2">                                           memory?&quot;</span><span class="p">}))</span> <span class="c1">### Index</span>
+<span class="s2">                                          memory?&quot;</span><span class="p">}))</span> <span class="c1">### Index</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What are the basic approaches for </span><span class="se">\</span>
-<span class="s2">                                           prompt engineering?&quot;</span><span class="p">}))</span> <span class="c1">### Index</span>
+<span class="s2">                                          prompt engineering?&quot;</span><span class="p">}))</span> <span class="c1">### Index</span>
 </pre></div>
+</div>
 </div>
 </div></blockquote>
 <ul>
