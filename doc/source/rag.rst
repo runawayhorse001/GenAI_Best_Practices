@@ -1380,6 +1380,10 @@ In the paper [selfRAG]_, Four types decisions are made:
             print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---")
             return "not supported"
 
+- Compile Graph
+
+  .. code:: python
+
     from langgraph.graph import END, StateGraph, START
 
     workflow = StateGraph(GraphState)
@@ -2101,6 +2105,9 @@ Corrective RAG
         else:
             return "generate"    
 
+- Compile Graph
+
+  .. code:: python
 
     from langgraph.graph import START, END, StateGraph
 
@@ -2224,6 +2231,751 @@ Adaptive RAG
     Adaptive-RAG langgraph diagram (source `Langgraph A-rag`_)
     
 .. _Langgraph A-rag: https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/
+
+
+- Load Models 
+
+  .. code:: python
+
+    from langchain_ollama import OllamaEmbeddings 
+    from langchain_ollama.llms import OllamaLLM
+
+    # embedding model
+    embedding = OllamaEmbeddings(model="bge-m3")
+
+    # LLM
+    llm = OllamaLLM(temperature=0.0, model='mistral', format='json')  
+
+  .. warning:: 
+
+    You need to specify ``format='json'`` when Initializing ``OllamaLLM``. otherwise
+    you will get error:
+
+      .. figure:: images/gemini.png
+        :align: center 
+
+-  Create Index
+
+  .. code:: python
+
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+    from langchain_community.document_loaders import WebBaseLoader
+    from langchain_community.vectorstores import Chroma
+    from langchain_ollama import OllamaEmbeddings  # Import OllamaEmbeddings instead
+
+
+    urls = [
+        "https://lilianweng.github.io/posts/2023-06-23-agent/",
+        "https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/",
+        "https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/",
+    ]
+
+    docs = [WebBaseLoader(url).load() for url in urls]
+    docs_list = [item for sublist in docs for item in sublist]
+
+    text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+        chunk_size=250, chunk_overlap=0
+    )
+    doc_splits = text_splitter.split_documents(docs_list)
+
+    # Add to vectorDB
+    vectorstore = Chroma.from_documents(
+        documents=doc_splits,
+        collection_name="rag-chroma",
+        embedding=OllamaEmbeddings(model="bge-m3"),
+    )
+    retriever = vectorstore.as_retriever(k=4)
+
+-  Router
+
+  .. code:: python
+
+    ### Router
+
+    from typing import Literal
+
+    from langchain_ollama.llms import OllamaLLM
+    from langchain.prompts import PromptTemplate
+    from langchain_community.chat_models import ChatOllama
+    from langchain_core.output_parsers import JsonOutputParser
+
+    from langchain.output_parsers import PydanticOutputParser
+    from pydantic import BaseModel, Field
+
+
+    # Data model
+    class RouteQuery(BaseModel):
+        """Route a user query to the most relevant datasource."""
+
+        datasource: Literal["vectorstore", "web_search"] = Field(
+            ...,
+            description="Given a user question choose to route it \
+                        to web search or a vectorstore.",
+        )
+
+
+    # LLM with function call
+    structured_llm_router = PydanticOutputParser(pydantic_object=RouteQuery)
+
+    # Prompt
+    route_prompt = PromptTemplate(
+        template="""You are an expert at routing a user question to a 
+                    vectorstore or web search. The vectorstore contains 
+                    documents related to agents, prompt engineering, 
+                    and adversarial attacks.
+                    Use the vectorstore for questions on these topics. 
+                    Otherwise, use web-search. \n
+                    Here is the user question: {question}. \n
+                    Respond with a JSON object containing only the key 'datasource' 
+                    and its value, which should be either 'vectorstore' or 'web_search'.
+                    
+                    Example:
+                    {{"datasource": "vectorstore"}} 
+                """,
+        input_variables=["question"],
+        partial_variables={"format_instructions": \
+                          structured_llm_router.get_format_instructions()}
+    )
+
+
+
+    question_router = route_prompt | llm | structured_llm_router
+
+    print(question_router.invoke({"question": \
+                            "Who will the Bears draft first in the NFL draft?"}))
+
+    print(question_router.invoke({"question": \
+                                  "What are the types of agent memory?"}))
+
+    # ### OR 
+    # ### Router
+
+    # from langchain.prompts import PromptTemplate
+    # from langchain_community.chat_models import ChatOllama
+    # from langchain_core.output_parsers import JsonOutputParser
+
+
+    # prompt = PromptTemplate(
+    #     template="""You are an expert at routing a
+    #     user question to a vectorstore or web search. Use the vectorstore for
+    #     questions on LLM agents, prompt engineering, prompting, and adversarial
+    #     attacks. You can also use words that are similar to those,
+    #     no need to have exactly those words. Otherwise, use web-search.
+
+    #     Give a binary choice 'web_search' or 'vectorstore' based on the question.
+    #     Return the a JSON with a single key 'datasource' and
+    #     no preamble or explanation.
+
+    #     Examples:
+    #     Question: When will the Euro of Football take place?
+    #     Answer: {{"datasource": "web_search"}}
+
+    #     Question: What are the types of agent memory?
+    #     Answer: {{"datasource": "vectorstore"}}
+
+    #     Question: What are the basic approaches for prompt engineering?
+    #     Answer: {{"datasource": "vectorstore"}}
+
+    #     Question: What is prompt engineering?
+    #     Answer: {{"datasource": "vectorstore"}}
+
+    #     Question to route:
+    #     {question}""",
+    #     input_variables=["question"],
+    # )
+
+
+    # question_router = prompt | llm | JsonOutputParser()
+
+    # print(question_router.invoke({"question": "When will the Euro of Football \
+    #                                            take place?"}))
+    # print(question_router.invoke({"question": "What are the types of agent \
+    #                                            memory?"})) ### Index
+
+    # print(question_router.invoke({"question": "What are the basic approaches for \
+    #                                            prompt engineering?"})) ### Index
+
+  Ouput:
+
+  .. code:: python
+
+    datasource='web_search'
+    datasource='vectorstore'
+
+
+
+- Retrieval Grader
+
+  .. code:: python
+
+    ### Retrieval Grader
+
+    from langchain_ollama.llms import OllamaLLM
+    from langchain.prompts import PromptTemplate
+    from langchain_community.chat_models import ChatOllama
+    from langchain_core.output_parsers import JsonOutputParser
+
+    # Import BaseModel and Field from langchain_core.pydantic_v1
+    # from langchain_core.pydantic_v1 import BaseModel, Field 
+    from pydantic import BaseModel, Field 
+    from langchain.output_parsers import PydanticOutputParser
+
+    # Data model
+    class GradeDocuments(BaseModel): 
+        """Binary score for relevance check on retrieved documents."""
+
+        score: str = Field(  # Changed field name to 'score'
+            description="Documents are relevant to the question, 'yes' or 'no'")
+
+    parser = PydanticOutputParser(pydantic_object=GradeDocuments)
+
+    prompt = PromptTemplate(
+        template="""You are a grader assessing relevance of a retrieved
+        document to a user question. \n
+        Here is the retrieved document: \n\n {document} \n\n
+        Here is the user question: {question} \n
+        If the document contains keywords related to the user question,
+        grade it as relevant. \n
+        It does not need to be a stringent test. The goal is to filter out
+        erroneous retrievals. \n
+        Give a binary score 'yes' or 'no' score to indicate whether the document
+        is relevant to the question. \n
+        Provide the binary score as a JSON with a single key 'score' and no
+        preamble or explanation.""",
+        input_variables=["question", "document"],
+        partial_variables={"format_instructions": parser.get_format_instructions()}
+    )
+
+    retrieval_grader = prompt | llm | parser
+    question = "agent memory"
+    docs = retriever.invoke(question)
+    doc_txt = docs[1].page_content
+    retrieval_grader.invoke({"question": question, "document": doc_txt})
+
+- Generate
+
+  .. code:: python
+
+    ### Generate
+
+    from langchain_core.output_parsers import StrOutputParser
+
+    # Prompt
+    prompt = PromptTemplate(
+        template="""You are an assistant for question-answering tasks.
+
+        Use the following documents to answer the question.
+
+        If you don't know the answer, just say that you don't know.
+
+        Use three sentences maximum and keep the answer concise:
+        Question: {question}
+        Documents: {documents}
+        Answer:
+        """,
+        input_variables=["question", "documents"],
+    )
+
+    # Chain
+    rag_chain = prompt | llm | StrOutputParser()
+
+    # Run
+    generation = rag_chain.invoke({"documents": docs, "question": question})
+    print(generation)
+
+  Ouput:
+
+  .. code:: python
+
+    {
+       "answer": [
+           {
+               "role": "assistant",
+               "content": "In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short-term Memory, and Long-term Memory. \n\nSensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It's the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). \n\nShort-term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. \n\nLong-term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah)."
+           }
+       ]
+    }
+
+- Hallucination Grader
+
+  .. code:: python
+
+    ### Hallucination Grader
+
+    # Data model
+    class GradeHallucinations(BaseModel):
+        """Binary score for hallucination present in generation answer."""
+
+        score: str = Field(
+            description="Answer is grounded in the facts, 'yes' or 'no'"
+        )
+
+    parser = PydanticOutputParser(pydantic_object=GradeHallucinations)
+        
+    # Prompt
+    prompt = PromptTemplate(
+        template="""You are a grader assessing whether an answer is grounded
+        in / supported by a set of facts. \n
+        Here are the facts:
+        \n ------- \n
+        {documents}
+        \n ------- \n
+        Here is the answer: {generation}
+        Give a binary score 'yes' or 'no' score to indicate whether the answer
+        is grounded in / supported by a set of facts. \n
+        Provide the binary score as a JSON with a single key 'score' and no
+        preamble or explanation.""",
+        input_variables=["generation", "documents"],
+    )
+
+    hallucination_grader = prompt | llm | parser
+    hallucination_grader.invoke({"documents": docs, "generation": generation})
+
+
+-  Answer Grader
+
+  .. code:: python
+
+    ### Answer Grader
+
+    # Data model
+    class GradeAnswer(BaseModel):
+        """Binary score to assess answer addresses question."""
+
+        score: str = Field(
+            description="Answer addresses the question, 'yes' or 'no'"
+        )
+
+    # parser
+    parser = PydanticOutputParser(pydantic_object=GradeAnswer)
+
+    # Prompt
+    prompt = PromptTemplate(
+        template="""You are a grader assessing whether an answer is useful to
+        resolve a question. \n
+        Here is the answer:
+        \n ------- \n
+        {generation}
+        \n ------- \n
+        Here is the question: {question}
+        Give a binary score 'yes' or 'no' to indicate whether the answer is
+        useful to resolve a question. \n
+        Provide the binary score as a JSON with a single key 'score' and no
+        preamble or explanation.""",
+        input_variables=["generation", "question"],
+    )
+
+    answer_grader = prompt | llm | parser
+    answer_grader.invoke({"question": question, "generation": generation})
+
+
+- Question Re-writer
+
+  .. code:: python
+
+    ### Question Re-writer
+
+    # Prompt
+    re_write_prompt = PromptTemplate(
+        template="""You a question re-writer that converts an input question to
+        a better version that is optimized \n
+        for vectorstore retrieval. Look at the initial and formulate an improved
+        question. \n
+        Here is the initial question: \n\n {question}. Improved question
+        with no preamble: \n """,
+        input_variables=["generation", "question"],
+    )
+
+    question_rewriter = re_write_prompt | llm | StrOutputParser()
+    question_rewriter.invoke({"question": question})
+
+
+- Google Web Search
+
+  .. code:: python
+
+    ## Google Web Search
+    from langchain_google_community import GoogleSearchAPIWrapper, GoogleSearchResults
+
+    from google.colab import userdata
+    api_key = userdata.get('GOOGLE_API_KEY')
+    cx =  userdata.get('GOOGLE_CSE_ID')
+    # Replace with your actual API key and CX ID
+
+    # Create an instance of the GoogleSearchAPIWrapper
+    google_search_wrapper = GoogleSearchAPIWrapper(google_api_key=api_key, \
+                                                  google_cse_id=cx)
+
+    # Pass the api_wrapper to GoogleSearchResults
+    web_search_tool = GoogleSearchResults(api_wrapper=google_search_wrapper, k=3)
+
+- Create the Graph
+
+  .. code:: python
+
+    from typing import List
+    from typing_extensions import TypedDict
+    from IPython.display import Image, display
+    from langchain.schema import Document
+    from langgraph.graph import START, END, StateGraph
+
+
+    class GraphState(TypedDict):
+        """
+        Represents the state of our graph.
+
+        Attributes:
+            question: question
+            generation: LLM generation
+            documents: list of documents
+        """
+
+        question: str
+        generation: str
+        documents: List[str]
+
+
+    def retrieve(state):
+        """
+        Retrieve documents
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            state (dict): New key added to state, 
+                          documents, that contains retrieved documents
+        """
+        print("---RETRIEVE---")
+        question = state["question"]
+
+        # Retrieval
+        documents = retriever.invoke(question)
+        return {"documents": documents, "question": question}
+
+    def generate(state):
+        """
+        Generate answer
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            state (dict): New key added to state, generation, 
+            that contains LLM generation
+        """
+        print("---GENERATE---")
+        question = state["question"]
+        documents = state["documents"]
+
+        # RAG generation
+        generation = rag_chain.invoke({"documents": documents, \
+                                      "question": question})
+        return {"documents": documents, \
+                "question": question,\
+                "generation": generation}
+
+
+    def grade_documents(state):
+        """
+        Determines whether the retrieved documents are relevant to the question.
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            state (dict): Updates documents key with only filtered relevant documents
+        """
+
+        print("---CHECK DOCUMENT RELEVANCE TO QUESTION---")
+        question = state["question"]
+        documents = state["documents"]
+
+        # Score each doc
+        filtered_docs = []
+        for d in documents:
+            score = retrieval_grader.invoke(
+                {"question": question, "document": d.page_content}
+            )
+            grade = score.score
+            if grade == "yes":
+                print("---GRADE: DOCUMENT RELEVANT---")
+                filtered_docs.append(d)
+            else:
+                print("---GRADE: DOCUMENT NOT RELEVANT---")
+                continue
+        return {"documents": filtered_docs, "question": question}
+
+    def transform_query(state):
+        """
+        Transform the query to produce a better question.
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            state (dict): Updates question key with a re-phrased question
+        """
+
+        print("---TRANSFORM QUERY---")
+        question = state["question"]
+        documents = state["documents"]
+
+        # Re-write question
+        better_question = question_rewriter.invoke({"question": question})
+        return {"documents": documents, "question": better_question}
+
+    def web_search(state):
+        """
+        Web search based on the re-phrased question.
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            state (dict): Updates documents key with appended web results
+        """
+
+        question = state["question"]
+        documents = state.get("documents", [])
+
+        web_results = web_search_tool.invoke({"query": question})
+        documents.extend(
+            [
+                Document(page_content=d["snippet"], metadata={"url": d["link"]})
+                for d in eval(web_results)
+            ]
+        )
+        return {"documents": documents, \
+                "question": grade_generation_v_documents_and_question}
+
+
+    ### Edges ###
+
+
+    def route_question(state):
+        """
+        Route question to web search or RAG.
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            str: Next node to call
+        """
+
+        print("---ROUTE QUESTION---")
+        question = state["question"]
+        source = question_router.invoke({"question": question})
+        if source.datasource == "web_search":
+            print("---ROUTE QUESTION TO WEB SEARCH---")
+            return "web_search"
+        elif source.datasource == "vectorstore":
+            print("---ROUTE QUESTION TO RAG---")
+            return "vectorstore"
+
+
+    def decide_to_generate(state):
+        """
+        Determines whether to generate an answer, or re-generate a question.
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            str: Binary decision for next node to call
+        """
+
+        print("---ASSESS GRADED DOCUMENTS---")
+        state["question"]
+        filtered_documents = state["documents"]
+
+        if not filtered_documents:
+            # All documents have been filtered check_relevance
+            # We will re-generate a new query
+            print("---DECISION: ALL DOCUMENTS ARE NOT RELEVANT TO QUESTION, \
+                  TRANSFORM QUERY---")
+            return "transform_query"
+        else:
+            # We have relevant documents, so generate answer
+            print("---DECISION: GENERATE---")
+            return "generate"
+
+
+    def grade_generation_v_documents_and_question(state):
+        """
+        Determines whether the generation is grounded in the document 
+        and answers question.
+
+        Args:
+            state (dict): The current graph state
+
+        Returns:
+            str: Decision for next node to call
+        """
+
+        print("---CHECK HALLUCINATIONS---")
+        question = state["question"]
+        documents = state["documents"]
+        generation = state["generation"]
+
+        score = hallucination_grader.invoke(
+            {"documents": documents, "generation": generation}
+        )
+        grade = score.score
+
+        # Check hallucination
+        if grade == "yes":
+            print("---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---")
+            # Check question-answering
+            print("---GRADE GENERATION vs QUESTION---")
+            score = answer_grader.invoke({"question": question, \
+                                          "generation": generation})
+            grade = score.score
+            if grade == "yes":
+                print("---DECISION: GENERATION ADDRESSES QUESTION---")
+                return "useful"
+            else:
+                print("---DECISION: GENERATION DOES NOT ADDRESS QUESTION---")
+                return "not useful"
+        else:
+            print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---")
+            return "not supported"
+
+- Compile Graph
+
+  .. code:: python
+
+    from langgraph.graph import END, StateGraph, START
+
+    workflow = StateGraph(GraphState)
+
+    # Define the nodes
+    workflow.add_node("web_search", web_search)  # web search
+    workflow.add_node("retrieve", retrieve)  # retrieve
+    workflow.add_node("grade_documents", grade_documents)  # grade documents
+    workflow.add_node("generate", generate)  # generatae
+    workflow.add_node("transform_query", transform_query)  # transform_query
+
+    # Build graph
+    workflow.add_conditional_edges(
+        START,
+        route_question,
+        {
+            "web_search": "web_search",
+            "vectorstore": "retrieve",
+        },
+    )
+    workflow.add_edge("web_search", "generate")
+    workflow.add_edge("retrieve", "grade_documents")
+    workflow.add_conditional_edges(
+        "grade_documents",
+        decide_to_generate,
+        {
+            "transform_query": "transform_query",
+            "generate": "generate",
+        },
+    )
+    workflow.add_edge("transform_query", "retrieve")
+    workflow.add_conditional_edges(
+        "generate",
+        grade_generation_v_documents_and_question,
+        {
+            "not supported": "generate",
+            "useful": END,
+            "not useful": "transform_query",
+        },
+    )
+
+    # Compile
+    app = workflow.compile()
+
+- Graph visualization
+
+  .. code:: python
+
+    from IPython.display import Image, display
+
+    try:
+        display(Image(app.get_graph(xray=True).draw_mermaid_png()))
+    except:
+        pass
+
+  Ouput
+
+  .. _fig_a_rag_graph:
+  .. figure:: images/a_rag_graph.png
+      :align: center
+
+      Adaptive-RAG Graph 
+
+- Test 
+
+  - Relevant retrieval
+
+    .. code:: python
+
+      import uuid 
+
+      example = {"input": "What is the capital of China?"}
+      config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+      state_dict = app.invoke({"question": example["input"], "steps": []}, config)
+      state_dict
+
+
+    Ouput:
+
+    .. code:: python
+
+      ---ROUTE QUESTION---
+      ---ROUTE QUESTION TO WEB SEARCH---
+      ---GENERATE---
+      ---CHECK HALLUCINATIONS---
+      ---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---
+      ---GRADE GENERATION vs QUESTION---
+      ---DECISION: GENERATION ADDRESSES QUESTION---
+      {'question': <function __main__.grade_generation_v_documents_and_question(state)>,
+      'generation': '{\n      "question": "<function grade_generation_v_documents_and_question at 0x7c7eb21f8670>",\n      "answer": "The capital city of China is Beijing, as mentioned in three documents. The first document states that Beijing served as China\'s capital city in 1261, the second document confirms it as the current capital with over 22 million residents, and the third document does not directly mention the capital but is related to a study conducted in China."\n    }',
+      'documents': [Document(metadata={'url': 'https://clintonwhitehouse3.archives.gov/WH/New/China/beijing.html'}, page_content='The modern day capital of China is Beijing (literally "Northern Capital"), which first served as China\'s capital city in 1261, when the Mongol ruler Kublai\xa0...'),
+        Document(metadata={'url': 'https://en.wikipedia.org/wiki/Beijing'}, page_content="Beijing, previously romanized as Peking, is the capital city of China. With more than 22 million residents, it is the world's most populous national capital\xa0..."),
+        Document(metadata={'url': 'https://pubmed.ncbi.nlm.nih.gov/38294063/'}, page_content='Supercritical and homogenous transmission of monkeypox in the capital of China. J Med Virol. 2024 Feb;96(2):e29442. doi: 10.1002/jmv.29442. Authors. Yunjun\xa0...'),
+        Document(metadata={'url': 'https://www.sciencedirect.com/science/article/pii/S0304387820301358'}, page_content='This paper investigates the impacts of fires on cognitive performance. We find that a one-standard-deviation increase in the difference between upwind and\xa0...')]}
+
+  - Irrelevant retrieval
+
+    .. code:: python
+
+      input = "What are the types of agent memory?"
+
+      example = {"input": input}
+      config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+      state_dict = app.invoke({"question": example["input"], "steps": []}, config)
+      state_dict
+
+    Ouput:
+
+    .. code:: python
+
+      ---ROUTE QUESTION---
+      ---ROUTE QUESTION TO RAG---
+      ---RETRIEVE---
+      ---CHECK DOCUMENT RELEVANCE TO QUESTION---
+      ---GRADE: DOCUMENT RELEVANT---
+      ---GRADE: DOCUMENT RELEVANT---
+      ---GRADE: DOCUMENT NOT RELEVANT---
+      ---GRADE: DOCUMENT RELEVANT---
+      ---ASSESS GRADED DOCUMENTS---
+      ---DECISION: GENERATE---
+      ---GENERATE---
+      ---CHECK HALLUCINATIONS---
+      ---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---
+      ---GRADE GENERATION vs QUESTION---
+      ---DECISION: GENERATION ADDRESSES QUESTION---
+      {'question': 'What are the types of agent memory?',
+      'generation': '{\n       "Short-term memory": "In-context learning, restricted by the finite context window length of Transformer",\n       "Long-term memory": "External vector store that the agent can attend to at query time, accessible via fast retrieval"\n    }',
+      'documents': [Document(metadata={'description': 'Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well-written copies, stories, essays and programs; it can be framed as a powerful general problem solver.\nAgent System Overview\nIn a LLM-powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:\n\nPlanning\n\nSubgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.\nReflection and refinement: The agent can do self-criticism and self-reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.\n\n\nMemory\n\nShort-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.\nLong-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.\n\n\nTool use\n\nThe agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.\n\n\n\n\nFig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.', 'language': 'en', 'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/', 'title': "LLM Powered Autonomous Agents | Lil'Log"}, page_content='Fig. 7. Comparison of AD, ED, source policy and RL^2 on environments that require memory and exploration. Only binary reward is assigned. The source policies are trained with A3C for "dark" environments and DQN for watermaze.(Image source: Laskin et al. 2023)\nComponent Two: Memory#\n(Big thank you to ChatGPT for helping me draft this section. I’ve learned a lot about the human brain and data structure for fast MIPS in my conversations with ChatGPT.)\nTypes of Memory#\nMemory can be defined as the processes used to acquire, store, retain, and later retrieve information. There are several types of memory in human brains.\n\n\nSensory Memory: This is the earliest stage of memory, providing the ability to retain impressions of sensory information (visual, auditory, etc) after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch).'),
+        Document(metadata={'description': 'Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well-written copies, stories, essays and programs; it can be framed as a powerful general problem solver.\nAgent System Overview\nIn a LLM-powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:\n\nPlanning\n\nSubgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.\nReflection and refinement: The agent can do self-criticism and self-reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.\n\n\nMemory\n\nShort-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.\nLong-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.\n\n\nTool use\n\nThe agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.\n\n\n\n\nFig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.', 'language': 'en', 'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/', 'title': "LLM Powered Autonomous Agents | Lil'Log"}, page_content='Short-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.\nLong-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.\n\n\nTool use\n\nThe agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.'),
+        Document(metadata={'description': 'Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well-written copies, stories, essays and programs; it can be framed as a powerful general problem solver.\nAgent System Overview\nIn a LLM-powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:\n\nPlanning\n\nSubgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.\nReflection and refinement: The agent can do self-criticism and self-reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.\n\n\nMemory\n\nShort-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.\nLong-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.\n\n\nTool use\n\nThe agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.\n\n\n\n\nFig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.', 'language': 'en', 'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/', 'title': "LLM Powered Autonomous Agents | Lil'Log"}, page_content='Sensory memory as learning embedding representations for raw inputs, including text, image or other modalities;\nShort-term memory as in-context learning. It is short and finite, as it is restricted by the finite context window length of Transformer.\nLong-term memory as the external vector store that the agent can attend to at query time, accessible via fast retrieval.\n\nMaximum Inner Product Search (MIPS)#\nThe external memory can alleviate the restriction of finite attention span.  A standard practice is to save the embedding representation of information into a vector store database that can support fast maximum inner-product search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN)\u200b algorithm to return approximately top k nearest neighbors to trade off a little accuracy lost for a huge speedup.\nA couple common choices of ANN algorithms for fast MIPS:')]}
 
 
 .. _ch_agentic_rag:
@@ -2577,6 +3329,9 @@ Agentic RAG
     # # Show what the prompt looks like
     # prompt = hub.pull("rlm/rag-prompt").pretty_print()
 
+- Compile Graph
+
+  .. code:: python
 
     from langgraph.graph import END, StateGraph, START
     from langgraph.prebuilt import ToolNode
@@ -2638,8 +3393,6 @@ Agentic RAG
       model = ChatOpenAI(temperature=0, streaming=True, model="gpt-4-turbo")
       model = model.bind_tools(tools)
       response = model.invoke(messages)
-
-
 
 - Graph visualization
 

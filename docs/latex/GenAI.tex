@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 21, 2024}
+\date{December 22, 2024}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -4901,7 +4901,7 @@ Web search engine: \sphinxcode{\sphinxupquote{Google}}
 \label{\detokenize{rag:advanced-topic}}
 
 \subsection{Self\sphinxhyphen{}RAG}
-\label{\detokenize{rag:self-rag}}
+\label{\detokenize{rag:self-rag}}\label{\detokenize{rag:ch-self-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
@@ -5530,7 +5530,13 @@ Create the Graph
     \PYG{k}{else}\PYG{p}{:}
         \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE\PYGZhy{}TRY\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
         \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not supported}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
 
+\item {} 
+\sphinxAtStartPar
+Compile Graph
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 
 \PYG{n}{workflow} \PYG{o}{=} \PYG{n}{StateGraph}\PYG{p}{(}\PYG{n}{GraphState}\PYG{p}{)}
@@ -5767,7 +5773,7 @@ Output:
 
 
 \subsection{Corrective RAG}
-\label{\detokenize{rag:corrective-rag}}
+\label{\detokenize{rag:corrective-rag}}\label{\detokenize{rag:ch-c-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
@@ -6296,8 +6302,13 @@ Create the Graph
         \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{search}\PYG{l+s+s2}{\PYGZdq{}}
     \PYG{k}{else}\PYG{p}{:}
         \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
 
+\item {} 
+\sphinxAtStartPar
+Compile Graph
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{START}\PYG{p}{,} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}
 
 
@@ -6427,23 +6438,13 @@ Ouput:
 
 
 \subsection{Adaptive RAG}
-\label{\detokenize{rag:adaptive-rag}}
+\label{\detokenize{rag:adaptive-rag}}\label{\detokenize{rag:ch-a-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{adaptive_rag}.png}
 \caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id12}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
-
-
-\subsection{Agentic RAG}
-\label{\detokenize{rag:agentic-rag}}
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics{{agentic_rag}.png}
-\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id13}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -6512,6 +6513,875 @@ Create Index
 \end{sphinxVerbatim}
 \end{quote}
 \begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Router
+
+\end{itemize}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
+
+\PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{Literal}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{PromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{chat\PYGZus{}models} \PYG{k+kn}{import} \PYG{n}{ChatOllama}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{JsonOutputParser}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{PydanticOutputParser}
+\PYG{k+kn}{from} \PYG{n+nn}{pydantic} \PYG{k+kn}{import} \PYG{n}{BaseModel}\PYG{p}{,} \PYG{n}{Field}
+
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{RouteQuery}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Route a user query to the most relevant datasource.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{datasource}\PYG{p}{:} \PYG{n}{Literal}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}
+        \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Given a user question choose to route it }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                    to web search or a vectorstore.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} LLM with function call}
+\PYG{n}{structured\PYGZus{}llm\PYGZus{}router} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{RouteQuery}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{route\PYGZus{}prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are an expert at routing a user question to a}
+\PYG{l+s+s2}{                vectorstore or web search. The vectorstore contains}
+\PYG{l+s+s2}{                documents related to agents, prompt engineering,}
+\PYG{l+s+s2}{                and adversarial attacks.}
+\PYG{l+s+s2}{                Use the vectorstore for questions on these topics.}
+\PYG{l+s+s2}{                Otherwise, use web\PYGZhy{}search. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Here is the user question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}\PYG{l+s+s2}{. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Respond with a JSON object containing only the key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZsq{}}
+\PYG{l+s+s2}{                and its value, which should be either }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{.}
+
+\PYG{l+s+s2}{                Example:}
+\PYG{l+s+s2}{                }\PYG{l+s+s2}{\PYGZob{}\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{datasource}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZcb{}\PYGZcb{}}
+\PYG{l+s+s2}{            }\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYGZbs{}
+                      \PYG{n}{structured\PYGZus{}llm\PYGZus{}router}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\PYG{p}{)}
+
+
+
+\PYG{n}{question\PYGZus{}router} \PYG{o}{=} \PYG{n}{route\PYGZus{}prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{structured\PYGZus{}llm\PYGZus{}router}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYGZbs{}
+                        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Who will the Bears draft first in the NFL draft?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYGZbs{}
+                              \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent memory?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{} OR}
+\PYG{c+c1}{\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
+
+\PYG{c+c1}{\PYGZsh{} from langchain.prompts import PromptTemplate}
+\PYG{c+c1}{\PYGZsh{} from langchain\PYGZus{}community.chat\PYGZus{}models import ChatOllama}
+\PYG{c+c1}{\PYGZsh{} from langchain\PYGZus{}core.output\PYGZus{}parsers import JsonOutputParser}
+
+
+\PYG{c+c1}{\PYGZsh{} prompt = PromptTemplate(}
+\PYG{c+c1}{\PYGZsh{}     template=\PYGZdq{}\PYGZdq{}\PYGZdq{}You are an expert at routing a}
+\PYG{c+c1}{\PYGZsh{}     user question to a vectorstore or web search. Use the vectorstore for}
+\PYG{c+c1}{\PYGZsh{}     questions on LLM agents, prompt engineering, prompting, and adversarial}
+\PYG{c+c1}{\PYGZsh{}     attacks. You can also use words that are similar to those,}
+\PYG{c+c1}{\PYGZsh{}     no need to have exactly those words. Otherwise, use web\PYGZhy{}search.}
+
+\PYG{c+c1}{\PYGZsh{}     Give a binary choice \PYGZsq{}web\PYGZus{}search\PYGZsq{} or \PYGZsq{}vectorstore\PYGZsq{} based on the question.}
+\PYG{c+c1}{\PYGZsh{}     Return the a JSON with a single key \PYGZsq{}datasource\PYGZsq{} and}
+\PYG{c+c1}{\PYGZsh{}     no preamble or explanation.}
+
+\PYG{c+c1}{\PYGZsh{}     Examples:}
+\PYG{c+c1}{\PYGZsh{}     Question: When will the Euro of Football take place?}
+\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}web\PYGZus{}search\PYGZdq{}\PYGZcb{}\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}     Question: What are the types of agent memory?}
+\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}vectorstore\PYGZdq{}\PYGZcb{}\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}     Question: What are the basic approaches for prompt engineering?}
+\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}vectorstore\PYGZdq{}\PYGZcb{}\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}     Question: What is prompt engineering?}
+\PYG{c+c1}{\PYGZsh{}     Answer: \PYGZob{}\PYGZob{}\PYGZdq{}datasource\PYGZdq{}: \PYGZdq{}vectorstore\PYGZdq{}\PYGZcb{}\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}     Question to route:}
+\PYG{c+c1}{\PYGZsh{}     \PYGZob{}question\PYGZcb{}\PYGZdq{}\PYGZdq{}\PYGZdq{},}
+\PYG{c+c1}{\PYGZsh{}     input\PYGZus{}variables=[\PYGZdq{}question\PYGZdq{}],}
+\PYG{c+c1}{\PYGZsh{} )}
+
+
+\PYG{c+c1}{\PYGZsh{} question\PYGZus{}router = prompt | llm | JsonOutputParser()}
+
+\PYG{c+c1}{\PYGZsh{} print(question\PYGZus{}router.invoke(\PYGZob{}\PYGZdq{}question\PYGZdq{}: \PYGZdq{}When will the Euro of Football \PYGZbs{}}
+\PYG{c+c1}{\PYGZsh{}                                            take place?\PYGZdq{}\PYGZcb{}))}
+\PYG{c+c1}{\PYGZsh{} print(question\PYGZus{}router.invoke(\PYGZob{}\PYGZdq{}question\PYGZdq{}: \PYGZdq{}What are the types of agent \PYGZbs{}}
+\PYG{c+c1}{\PYGZsh{}                                            memory?\PYGZdq{}\PYGZcb{})) \PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
+
+\PYG{c+c1}{\PYGZsh{} print(question\PYGZus{}router.invoke(\PYGZob{}\PYGZdq{}question\PYGZdq{}: \PYGZdq{}What are the basic approaches for \PYGZbs{}}
+\PYG{c+c1}{\PYGZsh{}                                            prompt engineering?\PYGZdq{}\PYGZcb{})) \PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{datasource}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{web\PYGZus{}search}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{n}{datasource}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vectorstore}\PYG{l+s+s1}{\PYGZsq{}}
+\end{sphinxVerbatim}
+\end{quote}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Retrieval Grader
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{prompts} \PYG{k+kn}{import} \PYG{n}{PromptTemplate}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{chat\PYGZus{}models} \PYG{k+kn}{import} \PYG{n}{ChatOllama}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{JsonOutputParser}
+
+\PYG{c+c1}{\PYGZsh{} Import BaseModel and Field from langchain\PYGZus{}core.pydantic\PYGZus{}v1}
+\PYG{c+c1}{\PYGZsh{} from langchain\PYGZus{}core.pydantic\PYGZus{}v1 import BaseModel, Field}
+\PYG{k+kn}{from} \PYG{n+nn}{pydantic} \PYG{k+kn}{import} \PYG{n}{BaseModel}\PYG{p}{,} \PYG{n}{Field}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{PydanticOutputParser}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{GradeDocuments}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score for relevance check on retrieved documents.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}  \PYG{c+c1}{\PYGZsh{} Changed field name to \PYGZsq{}score\PYGZsq{}}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Documents are relevant to the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeDocuments}\PYG{p}{)}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing relevance of a retrieved}
+\PYG{l+s+s2}{    document to a user question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the retrieved document: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}document\PYGZcb{}}\PYG{l+s+s2}{ }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the user question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}\PYG{l+s+s2}{ }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    If the document contains keywords related to the user question,}
+\PYG{l+s+s2}{    grade it as relevant. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    It does not need to be a stringent test. The goal is to filter out}
+\PYG{l+s+s2}{    erroneous retrievals. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ score to indicate whether the document}
+\PYG{l+s+s2}{    is relevant to the question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Provide the binary score as a JSON with a single key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no}
+\PYG{l+s+s2}{    preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{document}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\PYG{p}{)}
+
+\PYG{n}{retrieval\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+\PYG{n}{question} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{agent memory}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{docs} \PYG{o}{=} \PYG{n}{retriever}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}
+\PYG{n}{doc\PYGZus{}txt} \PYG{o}{=} \PYG{n}{docs}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{page\PYGZus{}content}
+\PYG{n}{retrieval\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{document}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{doc\PYGZus{}txt}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Generate
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}core}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{StrOutputParser}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are an assistant for question\PYGZhy{}answering tasks.}
+
+\PYG{l+s+s2}{    Use the following documents to answer the question.}
+
+\PYG{l+s+s2}{    If you don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t know the answer, just say that you don}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{t know.}
+
+\PYG{l+s+s2}{    Use three sentences maximum and keep the answer concise:}
+\PYG{l+s+s2}{    Question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{    Documents: }\PYG{l+s+si}{\PYGZob{}documents\PYGZcb{}}
+\PYG{l+s+s2}{    Answer:}
+\PYG{l+s+s2}{    }\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Chain}
+\PYG{n}{rag\PYGZus{}chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{StrOutputParser}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Run}
+\PYG{n}{generation} \PYG{o}{=} \PYG{n}{rag\PYGZus{}chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{docs}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{generation}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{answer}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
+       \PYG{p}{\PYGZob{}}
+           \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{role}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{assistant}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+           \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{content}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short\PYGZhy{}term Memory, and Long\PYGZhy{}term Memory. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Sensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Short\PYGZhy{}term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Long\PYGZhy{}term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah).}\PYG{l+s+s2}{\PYGZdq{}}
+       \PYG{p}{\PYGZcb{}}
+   \PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Hallucination Grader
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Hallucination Grader}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{GradeHallucinations}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score for hallucination present in generation answer.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Answer is grounded in the facts, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{)}
+
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeHallucinations}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is grounded}
+\PYG{l+s+s2}{    in / supported by a set of facts. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here are the facts:}
+\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    }\PYG{l+s+si}{\PYGZob{}documents\PYGZcb{}}
+\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the answer: }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
+\PYG{l+s+s2}{    Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ score to indicate whether the answer}
+\PYG{l+s+s2}{    is grounded in / supported by a set of facts. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Provide the binary score as a JSON with a single key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no}
+\PYG{l+s+s2}{    preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{hallucination\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+\PYG{n}{hallucination\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{docs}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Answer Grader
+
+\end{itemize}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score to assess answer addresses question.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Answer addresses the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} parser}
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
+\PYG{l+s+s2}{    resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the answer:}
+\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
+\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{    Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether the answer is}
+\PYG{l+s+s2}{    useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Provide the binary score as a JSON with a single key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no}
+\PYG{l+s+s2}{    preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{quote}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Question Re\sphinxhyphen{}writer
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Question Re\PYGZhy{}writer}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{re\PYGZus{}write\PYGZus{}prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You a question re\PYGZhy{}writer that converts an input question to}
+\PYG{l+s+s2}{    a better version that is optimized }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    for vectorstore retrieval. Look at the initial and formulate an improved}
+\PYG{l+s+s2}{    question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the initial question: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}\PYG{l+s+s2}{. Improved question}
+\PYG{l+s+s2}{    with no preamble: }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{question\PYGZus{}rewriter} \PYG{o}{=} \PYG{n}{re\PYGZus{}write\PYGZus{}prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{StrOutputParser}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{question\PYGZus{}rewriter}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Google Web Search
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Google Web Search}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}google\PYGZus{}community} \PYG{k+kn}{import} \PYG{n}{GoogleSearchAPIWrapper}\PYG{p}{,} \PYG{n}{GoogleSearchResults}
+
+\PYG{k+kn}{from} \PYG{n+nn}{google}\PYG{n+nn}{.}\PYG{n+nn}{colab} \PYG{k+kn}{import} \PYG{n}{userdata}
+\PYG{n}{api\PYGZus{}key} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{GOOGLE\PYGZus{}API\PYGZus{}KEY}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{cx} \PYG{o}{=}  \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{GOOGLE\PYGZus{}CSE\PYGZus{}ID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Replace with your actual API key and CX ID}
+
+\PYG{c+c1}{\PYGZsh{} Create an instance of the GoogleSearchAPIWrapper}
+\PYG{n}{google\PYGZus{}search\PYGZus{}wrapper} \PYG{o}{=} \PYG{n}{GoogleSearchAPIWrapper}\PYG{p}{(}\PYG{n}{google\PYGZus{}api\PYGZus{}key}\PYG{o}{=}\PYG{n}{api\PYGZus{}key}\PYG{p}{,} \PYGZbs{}
+                                              \PYG{n}{google\PYGZus{}cse\PYGZus{}id}\PYG{o}{=}\PYG{n}{cx}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Pass the api\PYGZus{}wrapper to GoogleSearchResults}
+\PYG{n}{web\PYGZus{}search\PYGZus{}tool} \PYG{o}{=} \PYG{n}{GoogleSearchResults}\PYG{p}{(}\PYG{n}{api\PYGZus{}wrapper}\PYG{o}{=}\PYG{n}{google\PYGZus{}search\PYGZus{}wrapper}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Create the Graph
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{List}
+\PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
+\PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{schema} \PYG{k+kn}{import} \PYG{n}{Document}
+\PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{START}\PYG{p}{,} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}
+
+
+\PYG{k}{class} \PYG{n+nc}{GraphState}\PYG{p}{(}\PYG{n}{TypedDict}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Represents the state of our graph.}
+
+\PYG{l+s+sd}{    Attributes:}
+\PYG{l+s+sd}{        question: question}
+\PYG{l+s+sd}{        generation: LLM generation}
+\PYG{l+s+sd}{        documents: list of documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{question}\PYG{p}{:} \PYG{n+nb}{str}
+    \PYG{n}{generation}\PYG{p}{:} \PYG{n+nb}{str}
+    \PYG{n}{documents}\PYG{p}{:} \PYG{n}{List}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{]}
+
+
+\PYG{k}{def} \PYG{n+nf}{retrieve}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Retrieve documents}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): New key added to state,}
+\PYG{l+s+sd}{                      documents, that contains retrieved documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}RETRIEVE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Retrieval}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{retriever}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{def} \PYG{n+nf}{generate}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Generate answer}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): New key added to state, generation,}
+\PYG{l+s+sd}{        that contains LLM generation}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GENERATE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} RAG generation}
+    \PYG{n}{generation} \PYG{o}{=} \PYG{n}{rag\PYGZus{}chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYGZbs{}
+                                  \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYGZbs{}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,}\PYGZbs{}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k}{def} \PYG{n+nf}{grade\PYGZus{}documents}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Determines whether the retrieved documents are relevant to the question.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): Updates documents key with only filtered relevant documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}CHECK DOCUMENT RELEVANCE TO QUESTION\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Score each doc}
+    \PYG{n}{filtered\PYGZus{}docs} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{d} \PYG{o+ow}{in} \PYG{n}{documents}\PYG{p}{:}
+        \PYG{n}{score} \PYG{o}{=} \PYG{n}{retrieval\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}
+            \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{document}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{d}\PYG{o}{.}\PYG{n}{page\PYGZus{}content}\PYG{p}{\PYGZcb{}}
+        \PYG{p}{)}
+        \PYG{n}{grade} \PYG{o}{=} \PYG{n}{score}\PYG{o}{.}\PYG{n}{score}
+        \PYG{k}{if} \PYG{n}{grade} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GRADE: DOCUMENT RELEVANT\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+            \PYG{n}{filtered\PYGZus{}docs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GRADE: DOCUMENT NOT RELEVANT\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{continue}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{filtered\PYGZus{}docs}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{def} \PYG{n+nf}{transform\PYGZus{}query}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Transform the query to produce a better question.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): Updates question key with a re\PYGZhy{}phrased question}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}TRANSFORM QUERY\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Re\PYGZhy{}write question}
+    \PYG{n}{better\PYGZus{}question} \PYG{o}{=} \PYG{n}{question\PYGZus{}rewriter}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{better\PYGZus{}question}\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{def} \PYG{n+nf}{web\PYGZus{}search}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Web search based on the re\PYGZhy{}phrased question.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): Updates documents key with appended web results}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{p}{[}\PYG{p}{]}\PYG{p}{)}
+
+    \PYG{n}{web\PYGZus{}results} \PYG{o}{=} \PYG{n}{web\PYGZus{}search\PYGZus{}tool}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+    \PYG{n}{documents}\PYG{o}{.}\PYG{n}{extend}\PYG{p}{(}
+        \PYG{p}{[}
+            \PYG{n}{Document}\PYG{p}{(}\PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{n}{d}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{snippet}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{url}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{d}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{link}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+            \PYG{k}{for} \PYG{n}{d} \PYG{o+ow}{in} \PYG{n+nb}{eval}\PYG{p}{(}\PYG{n}{web\PYGZus{}results}\PYG{p}{)}
+        \PYG{p}{]}
+    \PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYGZbs{}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{grade\PYGZus{}generation\PYGZus{}v\PYGZus{}documents\PYGZus{}and\PYGZus{}question}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Edges \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+
+\PYG{k}{def} \PYG{n+nf}{route\PYGZus{}question}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Route question to web search or RAG.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        str: Next node to call}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}ROUTE QUESTION\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{source} \PYG{o}{=} \PYG{n}{question\PYGZus{}router}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{source}\PYG{o}{.}\PYG{n}{datasource} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}ROUTE QUESTION TO WEB SEARCH\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{elif} \PYG{n}{source}\PYG{o}{.}\PYG{n}{datasource} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}ROUTE QUESTION TO RAG\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}
+
+
+\PYG{k}{def} \PYG{n+nf}{decide\PYGZus{}to\PYGZus{}generate}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Determines whether to generate an answer, or re\PYGZhy{}generate a question.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        str: Binary decision for next node to call}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}ASSESS GRADED DOCUMENTS\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{filtered\PYGZus{}documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{filtered\PYGZus{}documents}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} All documents have been filtered check\PYGZus{}relevance}
+        \PYG{c+c1}{\PYGZsh{} We will re\PYGZhy{}generate a new query}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: ALL DOCUMENTS ARE NOT RELEVANT TO QUESTION, }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{              TRANSFORM QUERY\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{transform\PYGZus{}query}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} We have relevant documents, so generate answer}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: GENERATE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}
+
+
+\PYG{k}{def} \PYG{n+nf}{grade\PYGZus{}generation\PYGZus{}v\PYGZus{}documents\PYGZus{}and\PYGZus{}question}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Determines whether the generation is grounded in the document}
+\PYG{l+s+sd}{    and answers question.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        str: Decision for next node to call}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}CHECK HALLUCINATIONS\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{generation} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{n}{score} \PYG{o}{=} \PYG{n}{hallucination\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}
+        \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}
+    \PYG{p}{)}
+    \PYG{n}{grade} \PYG{o}{=} \PYG{n}{score}\PYG{o}{.}\PYG{n}{score}
+
+    \PYG{c+c1}{\PYGZsh{} Check hallucination}
+    \PYG{k}{if} \PYG{n}{grade} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: GENERATION IS GROUNDED IN DOCUMENTS\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{} Check question\PYGZhy{}answering}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GRADE GENERATION vs QUESTION\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{score} \PYG{o}{=} \PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYGZbs{}
+                                      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+        \PYG{n}{grade} \PYG{o}{=} \PYG{n}{score}\PYG{o}{.}\PYG{n}{score}
+        \PYG{k}{if} \PYG{n}{grade} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: GENERATION ADDRESSES QUESTION\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{useful}\PYG{l+s+s2}{\PYGZdq{}}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: GENERATION DOES NOT ADDRESS QUESTION\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not useful}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE\PYGZhy{}TRY\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not supported}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Compile Graph
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
+
+\PYG{n}{workflow} \PYG{o}{=} \PYG{n}{StateGraph}\PYG{p}{(}\PYG{n}{GraphState}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Define the nodes}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{web\PYGZus{}search}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} web search}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{retrieve}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{retrieve}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} retrieve}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{grade\PYGZus{}documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{grade\PYGZus{}documents}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} grade documents}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{generate}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} generatae}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{transform\PYGZus{}query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{transform\PYGZus{}query}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} transform\PYGZus{}query}
+
+\PYG{c+c1}{\PYGZsh{} Build graph}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}conditional\PYGZus{}edges}\PYG{p}{(}
+    \PYG{n}{START}\PYG{p}{,}
+    \PYG{n}{route\PYGZus{}question}\PYG{p}{,}
+    \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vectorstore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{retrieve}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}edge}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{web\PYGZus{}search}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}edge}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{retrieve}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{grade\PYGZus{}documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}conditional\PYGZus{}edges}\PYG{p}{(}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{grade\PYGZus{}documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{decide\PYGZus{}to\PYGZus{}generate}\PYG{p}{,}
+    \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{transform\PYGZus{}query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{transform\PYGZus{}query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}edge}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{transform\PYGZus{}query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{retrieve}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{workflow}\PYG{o}{.}\PYG{n}{add\PYGZus{}conditional\PYGZus{}edges}\PYG{p}{(}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{grade\PYGZus{}generation\PYGZus{}v\PYGZus{}documents\PYGZus{}and\PYGZus{}question}\PYG{p}{,}
+    \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not supported}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{useful}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{END}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not useful}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{transform\PYGZus{}query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Compile}
+\PYG{n}{app} \PYG{o}{=} \PYG{n}{workflow}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Graph visualization
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
+
+\PYG{k}{try}\PYG{p}{:}
+    \PYG{n}{display}\PYG{p}{(}\PYG{n}{Image}\PYG{p}{(}\PYG{n}{app}\PYG{o}{.}\PYG{n}{get\PYGZus{}graph}\PYG{p}{(}\PYG{n}{xray}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}\PYG{o}{.}\PYG{n}{draw\PYGZus{}mermaid\PYGZus{}png}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+\PYG{k}{except}\PYG{p}{:}
+    \PYG{k}{pass}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{a_rag_graph}.png}
+\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id13}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
+
+\item {} 
+\sphinxAtStartPar
+Test
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Relevant retrieval
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{uuid}
+
+\PYG{n}{example} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is the capital of China?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+\PYG{n}{config} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{configurable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{thread\PYGZus{}id}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{uuid}\PYG{o}{.}\PYG{n}{uuid4}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{\PYGZcb{}}
+\PYG{n}{state\PYGZus{}dict} \PYG{o}{=} \PYG{n}{app}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{example}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{steps}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{config}\PYG{p}{)}
+\PYG{n}{state\PYGZus{}dict}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{ROUTE} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{ROUTE} \PYG{n}{QUESTION} \PYG{n}{TO} \PYG{n}{WEB} \PYG{n}{SEARCH}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GENERATE}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{CHECK} \PYG{n}{HALLUCINATIONS}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{DECISION}\PYG{p}{:} \PYG{n}{GENERATION} \PYG{n}{IS} \PYG{n}{GROUNDED} \PYG{n}{IN} \PYG{n}{DOCUMENTS}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GRADE} \PYG{n}{GENERATION} \PYG{n}{vs} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{DECISION}\PYG{p}{:} \PYG{n}{GENERATION} \PYG{n}{ADDRESSES} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{question}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{o}{\PYGZlt{}}\PYG{n}{function} \PYG{n}{\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}}\PYG{o}{.}\PYG{n}{grade\PYGZus{}generation\PYGZus{}v\PYGZus{}documents\PYGZus{}and\PYGZus{}question}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{generation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{      }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{question}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{\PYGZlt{}function grade\PYGZus{}generation\PYGZus{}v\PYGZus{}documents\PYGZus{}and\PYGZus{}question at 0x7c7eb21f8670\PYGZgt{}}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{      }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{answer}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{The capital city of China is Beijing, as mentioned in three documents. The first document states that Beijing served as China}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s capital city in 1261, the second document confirms it as the current capital with over 22 million residents, and the third document does not directly mention the capital but is related to a study conducted in China.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    \PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{documents}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{url}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://clintonwhitehouse3.archives.gov/WH/New/China/beijing.html}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The modern day capital of China is Beijing (literally }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Northern Capital}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{), which first served as China}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s capital city in 1261, when the Mongol ruler Kublai}\PYG{l+s+se}{\PYGZbs{}xa0}\PYG{l+s+s1}{...}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+  \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{url}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://en.wikipedia.org/wiki/Beijing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Beijing, previously romanized as Peking, is the capital city of China. With more than 22 million residents, it is the world}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s most populous national capital}\PYG{l+s+se}{\PYGZbs{}xa0}\PYG{l+s+s2}{...}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}
+  \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{url}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://pubmed.ncbi.nlm.nih.gov/38294063/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Supercritical and homogenous transmission of monkeypox in the capital of China. J Med Virol. 2024 Feb;96(2):e29442. doi: 10.1002/jmv.29442. Authors. Yunjun}\PYG{l+s+se}{\PYGZbs{}xa0}\PYG{l+s+s1}{...}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+  \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{url}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://www.sciencedirect.com/science/article/pii/S0304387820301358}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{This paper investigates the impacts of fires on cognitive performance. We find that a one\PYGZhy{}standard\PYGZhy{}deviation increase in the difference between upwind and}\PYG{l+s+se}{\PYGZbs{}xa0}\PYG{l+s+s1}{...}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Irrelevant retrieval
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent memory?}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{n}{example} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n+nb}{input}\PYG{p}{\PYGZcb{}}
+\PYG{n}{config} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{configurable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{thread\PYGZus{}id}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{uuid}\PYG{o}{.}\PYG{n}{uuid4}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{\PYGZcb{}}
+\PYG{n}{state\PYGZus{}dict} \PYG{o}{=} \PYG{n}{app}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{example}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{steps}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{config}\PYG{p}{)}
+\PYG{n}{state\PYGZus{}dict}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{ROUTE} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{ROUTE} \PYG{n}{QUESTION} \PYG{n}{TO} \PYG{n}{RAG}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{RETRIEVE}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{CHECK} \PYG{n}{DOCUMENT} \PYG{n}{RELEVANCE} \PYG{n}{TO} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GRADE}\PYG{p}{:} \PYG{n}{DOCUMENT} \PYG{n}{RELEVANT}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GRADE}\PYG{p}{:} \PYG{n}{DOCUMENT} \PYG{n}{RELEVANT}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GRADE}\PYG{p}{:} \PYG{n}{DOCUMENT} \PYG{n}{NOT} \PYG{n}{RELEVANT}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GRADE}\PYG{p}{:} \PYG{n}{DOCUMENT} \PYG{n}{RELEVANT}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{ASSESS} \PYG{n}{GRADED} \PYG{n}{DOCUMENTS}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{DECISION}\PYG{p}{:} \PYG{n}{GENERATE}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GENERATE}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{CHECK} \PYG{n}{HALLUCINATIONS}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{DECISION}\PYG{p}{:} \PYG{n}{GENERATION} \PYG{n}{IS} \PYG{n}{GROUNDED} \PYG{n}{IN} \PYG{n}{DOCUMENTS}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{GRADE} \PYG{n}{GENERATION} \PYG{n}{vs} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{DECISION}\PYG{p}{:} \PYG{n}{GENERATION} \PYG{n}{ADDRESSES} \PYG{n}{QUESTION}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{question}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{What are the types of agent memory?}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{generation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZob{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{       }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Short\PYGZhy{}term memory}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{In\PYGZhy{}context learning, restricted by the finite context window length of Transformer}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{       }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Long\PYGZhy{}term memory}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{: }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{External vector store that the agent can attend to at query time, accessible via fast retrieval}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{    \PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{documents}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{description}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Building agents with LLM (large language model) as its core controller is a cool concept. Several proof\PYGZhy{}of\PYGZhy{}concepts demos, such as AutoGPT, GPT\PYGZhy{}Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well\PYGZhy{}written copies, stories, essays and programs; it can be framed as a powerful general problem solver.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Agent System Overview}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In a LLM\PYGZhy{}powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Reflection and refinement: The agent can do self\PYGZhy{}criticism and self\PYGZhy{}reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Memory}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Fig. 1. Overview of a LLM\PYGZhy{}powered autonomous agent system.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Component One: Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{language}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{en}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{source}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://lilianweng.github.io/posts/2023\PYGZhy{}06\PYGZhy{}23\PYGZhy{}agent/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{title}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LLM Powered Autonomous Agents | Lil}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{Log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Fig. 7. Comparison of AD, ED, source policy and RL\PYGZca{}2 on environments that require memory and exploration. Only binary reward is assigned. The source policies are trained with A3C for }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{dark}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{ environments and DQN for watermaze.(Image source: Laskin et al. 2023)}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Component Two: Memory\PYGZsh{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{(Big thank you to ChatGPT for helping me draft this section. I’ve learned a lot about the human brain and data structure for fast MIPS in my conversations with ChatGPT.)}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Types of Memory\PYGZsh{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Memory can be defined as the processes used to acquire, store, retain, and later retrieve information. There are several types of memory in human brains.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Sensory Memory: This is the earliest stage of memory, providing the ability to retain impressions of sensory information (visual, auditory, etc) after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch).}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+  \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{description}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Building agents with LLM (large language model) as its core controller is a cool concept. Several proof\PYGZhy{}of\PYGZhy{}concepts demos, such as AutoGPT, GPT\PYGZhy{}Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well\PYGZhy{}written copies, stories, essays and programs; it can be framed as a powerful general problem solver.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Agent System Overview}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In a LLM\PYGZhy{}powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Reflection and refinement: The agent can do self\PYGZhy{}criticism and self\PYGZhy{}reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Memory}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Fig. 1. Overview of a LLM\PYGZhy{}powered autonomous agent system.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Component One: Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{language}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{en}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{source}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://lilianweng.github.io/posts/2023\PYGZhy{}06\PYGZhy{}23\PYGZhy{}agent/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{title}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LLM Powered Autonomous Agents | Lil}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{Log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+  \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{description}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Building agents with LLM (large language model) as its core controller is a cool concept. Several proof\PYGZhy{}of\PYGZhy{}concepts demos, such as AutoGPT, GPT\PYGZhy{}Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well\PYGZhy{}written copies, stories, essays and programs; it can be framed as a powerful general problem solver.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Agent System Overview}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In a LLM\PYGZhy{}powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Reflection and refinement: The agent can do self\PYGZhy{}criticism and self\PYGZhy{}reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Memory}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Fig. 1. Overview of a LLM\PYGZhy{}powered autonomous agent system.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Component One: Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{language}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{en}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{source}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://lilianweng.github.io/posts/2023\PYGZhy{}06\PYGZhy{}23\PYGZhy{}agent/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{title}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LLM Powered Autonomous Agents | Lil}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{Log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sensory memory as learning embedding representations for raw inputs, including text, image or other modalities;}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory as in\PYGZhy{}context learning. It is short and finite, as it is restricted by the finite context window length of Transformer.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory as the external vector store that the agent can attend to at query time, accessible via fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Maximum Inner Product Search (MIPS)\PYGZsh{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The external memory can alleviate the restriction of finite attention span.  A standard practice is to save the embedding representation of information into a vector store database that can support fast maximum inner\PYGZhy{}product search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN)}\PYG{l+s+se}{\PYGZbs{}u200b}\PYG{l+s+s1}{ algorithm to return approximately top k nearest neighbors to trade off a little accuracy lost for a huge speedup.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A couple common choices of ANN algorithms for fast MIPS:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{Agentic RAG}
+\label{\detokenize{rag:agentic-rag}}\label{\detokenize{rag:ch-agentic-rag}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{agentic_rag}.png}
+\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id14}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Load Models
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+
+\PYG{c+c1}{\PYGZsh{} embedding model}
+\PYG{n}{embedding} \PYG{o}{=} \PYG{n}{OllamaEmbeddings}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bge\PYGZhy{}m3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} LLM}
+\PYG{n}{llm} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mistral}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{warning}{Warning:}
+\sphinxAtStartPar
+You need to specify \sphinxcode{\sphinxupquote{format=\textquotesingle{}json\textquotesingle{}}} when Initializing \sphinxcode{\sphinxupquote{OllamaLLM}}. otherwise
+you will get error:
+\begin{quote}
+
+\begin{figure}[H]
+\centering
+
+\noindent\sphinxincludegraphics{{gemini}.png}
+\end{figure}
+\end{quote}
+\end{sphinxadmonition}
+
+\item {} 
+\sphinxAtStartPar
+Create Index
+
+\end{itemize}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{vectorstores} \PYG{k+kn}{import} \PYG{n}{Chroma}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}  \PYG{c+c1}{\PYGZsh{} Import OllamaEmbeddings instead}
+
+
+\PYG{n}{urls} \PYG{o}{=} \PYG{p}{[}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{https://lilianweng.github.io/posts/2023\PYGZhy{}06\PYGZhy{}23\PYGZhy{}agent/}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{https://lilianweng.github.io/posts/2023\PYGZhy{}03\PYGZhy{}15\PYGZhy{}prompt\PYGZhy{}engineering/}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{https://lilianweng.github.io/posts/2023\PYGZhy{}10\PYGZhy{}25\PYGZhy{}adv\PYGZhy{}attack\PYGZhy{}llm/}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{p}{]}
+
+\PYG{n}{docs} \PYG{o}{=} \PYG{p}{[}\PYG{n}{WebBaseLoader}\PYG{p}{(}\PYG{n}{url}\PYG{p}{)}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{p}{)} \PYG{k}{for} \PYG{n}{url} \PYG{o+ow}{in} \PYG{n}{urls}\PYG{p}{]}
+\PYG{n}{docs\PYGZus{}list} \PYG{o}{=} \PYG{p}{[}\PYG{n}{item} \PYG{k}{for} \PYG{n}{sublist} \PYG{o+ow}{in} \PYG{n}{docs} \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{sublist}\PYG{p}{]}
+
+\PYG{n}{text\PYGZus{}splitter} \PYG{o}{=} \PYG{n}{RecursiveCharacterTextSplitter}\PYG{o}{.}\PYG{n}{from\PYGZus{}tiktoken\PYGZus{}encoder}\PYG{p}{(}
+    \PYG{n}{chunk\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{250}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}overlap}\PYG{o}{=}\PYG{l+m+mi}{0}
+\PYG{p}{)}
+\PYG{n}{doc\PYGZus{}splits} \PYG{o}{=} \PYG{n}{text\PYGZus{}splitter}\PYG{o}{.}\PYG{n}{split\PYGZus{}documents}\PYG{p}{(}\PYG{n}{docs\PYGZus{}list}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Add to vectorDB}
+\PYG{n}{vectorstore} \PYG{o}{=} \PYG{n}{Chroma}\PYG{o}{.}\PYG{n}{from\PYGZus{}documents}\PYG{p}{(}
+    \PYG{n}{documents}\PYG{o}{=}\PYG{n}{doc\PYGZus{}splits}\PYG{p}{,}
+    \PYG{n}{collection\PYGZus{}name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{rag\PYGZhy{}chroma}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{embedding}\PYG{o}{=}\PYG{n}{OllamaEmbeddings}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bge\PYGZhy{}m3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{retriever} \PYG{o}{=} \PYG{n}{vectorstore}\PYG{o}{.}\PYG{n}{as\PYGZus{}retriever}\PYG{p}{(}\PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{quote}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Define Tool
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{tools}\PYG{n+nn}{.}\PYG{n+nn}{retriever} \PYG{k+kn}{import} \PYG{n}{create\PYGZus{}retriever\PYGZus{}tool}
+
+\PYG{n}{retriever\PYGZus{}tool} \PYG{o}{=} \PYG{n}{create\PYGZus{}retriever\PYGZus{}tool}\PYG{p}{(}
+    \PYG{n}{retriever}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{retrieve\PYGZus{}blog\PYGZus{}posts}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Search and return information about Lilian Weng blog posts on }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{    LLM agents, prompt engineering, and adversarial attacks on LLMs.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{tools} \PYG{o}{=} \PYG{p}{[}\PYG{n}{retriever\PYGZus{}tool}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+If you need web search, you can add web search tool we implement in {\hyperref[\detokenize{rag:ch-c-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Corrective RAG}}}}}
+and {\hyperref[\detokenize{rag:ch-a-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Adaptive RAG}}}}}. More details related to Langchian Agent can be found at
+\sphinxhref{https://python.langchain.com/v0.1/docs/modules/agents/quick\_start/}{Langchain Agents} and \sphinxhref{https://python.langchain.com/v0.1/docs/integrations/tools/}{Langchain build\sphinxhyphen{}in tools}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} define tools}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}google\PYGZus{}community} \PYG{k+kn}{import} \PYG{n}{GoogleSearchAPIWrapper}\PYG{p}{,} \PYG{n}{GoogleSearchResults}
+
+\PYG{k+kn}{from} \PYG{n+nn}{google}\PYG{n+nn}{.}\PYG{n+nn}{colab} \PYG{k+kn}{import} \PYG{n}{userdata}
+\PYG{n}{api\PYGZus{}key} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{GOOGLE\PYGZus{}API\PYGZus{}KEY}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{cx} \PYG{o}{=}  \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{GOOGLE\PYGZus{}CSE\PYGZus{}ID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Replace with your actual API key and CX ID}
+
+\PYG{c+c1}{\PYGZsh{} Create an instance of the GoogleSearchAPIWrapper}
+\PYG{n}{google\PYGZus{}search\PYGZus{}wrapper} \PYG{o}{=} \PYG{n}{GoogleSearchAPIWrapper}\PYG{p}{(}\PYG{n}{google\PYGZus{}api\PYGZus{}key}\PYG{o}{=}\PYG{n}{api\PYGZus{}key}\PYG{p}{,} \PYG{n}{google\PYGZus{}cse\PYGZus{}id}\PYG{o}{=}\PYG{n}{cx}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Pass the api\PYGZus{}wrapper to GoogleSearchResults}
+\PYG{n}{web\PYGZus{}search\PYGZus{}tool} \PYG{o}{=} \PYG{n}{GoogleSearchResults}\PYG{p}{(}\PYG{n}{api\PYGZus{}wrapper}\PYG{o}{=}\PYG{n}{google\PYGZus{}search\PYGZus{}wrapper}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+
+\PYG{n}{tools} \PYG{o}{=} \PYG{p}{[}\PYG{n}{retriever\PYGZus{}tool}\PYG{p}{,} \PYG{n}{web\PYGZus{}search\PYGZus{}tool}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} define prompt and agent}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain} \PYG{k+kn}{import} \PYG{n}{hub}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Get the prompt to use \PYGZhy{} you can modify this!}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{hub}\PYG{o}{.}\PYG{n}{pull}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{hwchase17/openai\PYGZhy{}functions\PYGZhy{}agent}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{prompt}\PYG{o}{.}\PYG{n}{messages}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} agent}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{agents} \PYG{k+kn}{import} \PYG{n}{create\PYGZus{}tool\PYGZus{}calling\PYGZus{}agent}
+
+\PYG{n}{agent} \PYG{o}{=} \PYG{n}{create\PYGZus{}tool\PYGZus{}calling\PYGZus{}agent}\PYG{p}{(}\PYG{n}{llm}\PYG{p}{,} \PYG{n}{tools}\PYG{p}{,} \PYG{n}{prompt}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Agent executor}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{agents} \PYG{k+kn}{import} \PYG{n}{AgentExecutor}
+
+\PYG{n}{agent\PYGZus{}executor} \PYG{o}{=} \PYG{n}{AgentExecutor}\PYG{p}{(}\PYG{n}{agent}\PYG{o}{=}\PYG{n}{agent}\PYG{p}{,} \PYG{n}{tools}\PYG{o}{=}\PYG{n}{tools}\PYG{p}{,} \PYG{n}{verbose}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{n}{agent\PYGZus{}executor}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{whats the weather in sf?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{sphinxadmonition}
+
 \item {} 
 \sphinxAtStartPar
 Retrieval Grader
@@ -6737,8 +7607,13 @@ Create the Graph
 \PYG{c+c1}{\PYGZsh{} print(\PYGZdq{}*\PYGZdq{} * 20 + \PYGZdq{}Prompt[rlm/rag\PYGZhy{}prompt]\PYGZdq{} + \PYGZdq{}*\PYGZdq{} * 20)}
 \PYG{c+c1}{\PYGZsh{} \PYGZsh{} Show what the prompt looks like}
 \PYG{c+c1}{\PYGZsh{} prompt = hub.pull(\PYGZdq{}rlm/rag\PYGZhy{}prompt\PYGZdq{}).pretty\PYGZus{}print()}
+\end{sphinxVerbatim}
 
+\item {} 
+\sphinxAtStartPar
+Compile Graph
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{prebuilt} \PYG{k+kn}{import} \PYG{n}{ToolNode}
 
@@ -6823,7 +7698,7 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag_graph}.png}
-\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id14}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
+\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id15}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar

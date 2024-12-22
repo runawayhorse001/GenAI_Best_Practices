@@ -1556,8 +1556,11 @@ you will get error:</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;not supported&quot;</span>
-
-<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compile Graph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
 
 <span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">GraphState</span><span class="p">)</span>
 
@@ -2247,9 +2250,11 @@ use web search.</p>
         <span class="k">return</span> <span class="s2">&quot;search&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;generate&quot;</span>
-
-
-<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compile Graph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span>
 
 
 <span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">GraphState</span><span class="p">)</span>
@@ -2365,13 +2370,743 @@ use web search.</p>
 <p><span class="caption-text">Adaptive-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/">Langgraph A-rag</a>)</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<ul>
+<li><p>Load Models</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">OllamaEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
+
+<span class="c1"># embedding model</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">OllamaEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;bge-m3&quot;</span><span class="p">)</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OllamaLLM</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;mistral&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You need to specify <code class="docutils literal notranslate"><span class="pre">format='json'</span></code> when Initializing <code class="docutils literal notranslate"><span class="pre">OllamaLLM</span></code>. otherwise
+you will get error:</p>
+<blockquote>
+<div><figure class="align-center">
+<img alt="_images/gemini.png" src="_images/gemini.png" />
+</figure>
+</div></blockquote>
+</div>
+</li>
+<li><p>Create Index</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain_community.document_loaders</span> <span class="kn">import</span> <span class="n">WebBaseLoader</span>
+<span class="kn">from</span> <span class="nn">langchain_community.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span>
+<span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">OllamaEmbeddings</span>  <span class="c1"># Import OllamaEmbeddings instead</span>
+
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">WebBaseLoader</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+<span class="n">docs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">docs</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="o">.</span><span class="n">from_tiktoken_encoder</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">doc_splits</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">docs_list</span><span class="p">)</span>
+
+<span class="c1"># Add to vectorDB</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span>
+    <span class="n">documents</span><span class="o">=</span><span class="n">doc_splits</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;rag-chroma&quot;</span><span class="p">,</span>
+    <span class="n">embedding</span><span class="o">=</span><span class="n">OllamaEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;bge-m3&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p>Router</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Router</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+
+
+<span class="c1"># Data model</span>
+<span class="k">class</span> <span class="nc">RouteQuery</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Route a user query to the most relevant datasource.&quot;&quot;&quot;</span>
+
+    <span class="n">datasource</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;vectorstore&quot;</span><span class="p">,</span> <span class="s2">&quot;web_search&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="o">...</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Given a user question choose to route it </span><span class="se">\</span>
+<span class="s2">                    to web search or a vectorstore.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># LLM with function call</span>
+<span class="n">structured_llm_router</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">RouteQuery</span><span class="p">)</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">route_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are an expert at routing a user question to a</span>
+<span class="s2">                vectorstore or web search. The vectorstore contains</span>
+<span class="s2">                documents related to agents, prompt engineering,</span>
+<span class="s2">                and adversarial attacks.</span>
+<span class="s2">                Use the vectorstore for questions on these topics.</span>
+<span class="s2">                Otherwise, use web-search. </span><span class="se">\n</span>
+<span class="s2">                Here is the user question: </span><span class="si">{question}</span><span class="s2">. </span><span class="se">\n</span>
+<span class="s2">                Respond with a JSON object containing only the key &#39;datasource&#39;</span>
+<span class="s2">                and its value, which should be either &#39;vectorstore&#39; or &#39;web_search&#39;.</span>
+
+<span class="s2">                Example:</span>
+<span class="s2">                {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">],</span>
+    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> \
+                      <span class="n">structured_llm_router</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()}</span>
+<span class="p">)</span>
+
+
+
+<span class="n">question_router</span> <span class="o">=</span> <span class="n">route_prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">structured_llm_router</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> \
+                        <span class="s2">&quot;Who will the Bears draft first in the NFL draft?&quot;</span><span class="p">}))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> \
+                              <span class="s2">&quot;What are the types of agent memory?&quot;</span><span class="p">}))</span>
+
+<span class="c1"># ### OR</span>
+<span class="c1"># ### Router</span>
+
+<span class="c1"># from langchain.prompts import PromptTemplate</span>
+<span class="c1"># from langchain_community.chat_models import ChatOllama</span>
+<span class="c1"># from langchain_core.output_parsers import JsonOutputParser</span>
+
+
+<span class="c1"># prompt = PromptTemplate(</span>
+<span class="c1">#     template=&quot;&quot;&quot;You are an expert at routing a</span>
+<span class="c1">#     user question to a vectorstore or web search. Use the vectorstore for</span>
+<span class="c1">#     questions on LLM agents, prompt engineering, prompting, and adversarial</span>
+<span class="c1">#     attacks. You can also use words that are similar to those,</span>
+<span class="c1">#     no need to have exactly those words. Otherwise, use web-search.</span>
+
+<span class="c1">#     Give a binary choice &#39;web_search&#39; or &#39;vectorstore&#39; based on the question.</span>
+<span class="c1">#     Return the a JSON with a single key &#39;datasource&#39; and</span>
+<span class="c1">#     no preamble or explanation.</span>
+
+<span class="c1">#     Examples:</span>
+<span class="c1">#     Question: When will the Euro of Football take place?</span>
+<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;web_search&quot;}}</span>
+
+<span class="c1">#     Question: What are the types of agent memory?</span>
+<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+
+<span class="c1">#     Question: What are the basic approaches for prompt engineering?</span>
+<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+
+<span class="c1">#     Question: What is prompt engineering?</span>
+<span class="c1">#     Answer: {{&quot;datasource&quot;: &quot;vectorstore&quot;}}</span>
+
+<span class="c1">#     Question to route:</span>
+<span class="c1">#     {question}&quot;&quot;&quot;,</span>
+<span class="c1">#     input_variables=[&quot;question&quot;],</span>
+<span class="c1"># )</span>
+
+
+<span class="c1"># question_router = prompt | llm | JsonOutputParser()</span>
+
+<span class="c1"># print(question_router.invoke({&quot;question&quot;: &quot;When will the Euro of Football \</span>
+<span class="c1">#                                            take place?&quot;}))</span>
+<span class="c1"># print(question_router.invoke({&quot;question&quot;: &quot;What are the types of agent \</span>
+<span class="c1">#                                            memory?&quot;})) ### Index</span>
+
+<span class="c1"># print(question_router.invoke({&quot;question&quot;: &quot;What are the basic approaches for \</span>
+<span class="c1">#                                            prompt engineering?&quot;})) ### Index</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datasource</span><span class="o">=</span><span class="s1">&#39;web_search&#39;</span>
+<span class="n">datasource</span><span class="o">=</span><span class="s1">&#39;vectorstore&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Retrieval Grader</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Retrieval Grader</span>
+
+<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+
+<span class="c1"># Import BaseModel and Field from langchain_core.pydantic_v1</span>
+<span class="c1"># from langchain_core.pydantic_v1 import BaseModel, Field</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
+
+<span class="c1"># Data model</span>
+<span class="k">class</span> <span class="nc">GradeDocuments</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary score for relevance check on retrieved documents.&quot;&quot;&quot;</span>
+
+    <span class="n">score</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>  <span class="c1"># Changed field name to &#39;score&#39;</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Documents are relevant to the question, &#39;yes&#39; or &#39;no&#39;&quot;</span><span class="p">)</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">GradeDocuments</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are a grader assessing relevance of a retrieved</span>
+<span class="s2">    document to a user question. </span><span class="se">\n</span>
+<span class="s2">    Here is the retrieved document: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{document}</span><span class="s2"> </span><span class="se">\n\n</span>
+<span class="s2">    Here is the user question: </span><span class="si">{question}</span><span class="s2"> </span><span class="se">\n</span>
+<span class="s2">    If the document contains keywords related to the user question,</span>
+<span class="s2">    grade it as relevant. </span><span class="se">\n</span>
+<span class="s2">    It does not need to be a stringent test. The goal is to filter out</span>
+<span class="s2">    erroneous retrievals. </span><span class="se">\n</span>
+<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; score to indicate whether the document</span>
+<span class="s2">    is relevant to the question. </span><span class="se">\n</span>
+<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no</span>
+<span class="s2">    preamble or explanation.&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
+    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()}</span>
+<span class="p">)</span>
+
+<span class="n">retrieval_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">parser</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">doc_txt</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
+<span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">doc_txt</span><span class="p">})</span>
+</pre></div>
+</div>
+</li>
+<li><p>Generate</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Generate</span>
+
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are an assistant for question-answering tasks.</span>
+
+<span class="s2">    Use the following documents to answer the question.</span>
+
+<span class="s2">    If you don&#39;t know the answer, just say that you don&#39;t know.</span>
+
+<span class="s2">    Use three sentences maximum and keep the answer concise:</span>
+<span class="s2">    Question: </span><span class="si">{question}</span>
+<span class="s2">    Documents: </span><span class="si">{documents}</span>
+<span class="s2">    Answer:</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;documents&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Chain</span>
+<span class="n">rag_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+
+<span class="c1"># Run</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="p">[</span>
+       <span class="p">{</span>
+           <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short-term Memory, and Long-term Memory. </span><span class="se">\n\n</span><span class="s2">Sensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It&#39;s the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). </span><span class="se">\n\n</span><span class="s2">Short-term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. </span><span class="se">\n\n</span><span class="s2">Long-term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah).&quot;</span>
+       <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Hallucination Grader</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Hallucination Grader</span>
+
+<span class="c1"># Data model</span>
+<span class="k">class</span> <span class="nc">GradeHallucinations</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary score for hallucination present in generation answer.&quot;&quot;&quot;</span>
+
+    <span class="n">score</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Answer is grounded in the facts, &#39;yes&#39; or &#39;no&#39;&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">GradeHallucinations</span><span class="p">)</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are a grader assessing whether an answer is grounded</span>
+<span class="s2">    in / supported by a set of facts. </span><span class="se">\n</span>
+<span class="s2">    Here are the facts:</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    </span><span class="si">{documents}</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    Here is the answer: </span><span class="si">{generation}</span>
+<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; score to indicate whether the answer</span>
+<span class="s2">    is grounded in / supported by a set of facts. </span><span class="se">\n</span>
+<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no</span>
+<span class="s2">    preamble or explanation.&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;documents&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">hallucination_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">parser</span>
+<span class="n">hallucination_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">})</span>
+</pre></div>
+</div>
+</li>
+<li><p>Answer Grader</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Answer Grader</span>
+
+<span class="c1"># Data model</span>
+<span class="k">class</span> <span class="nc">GradeAnswer</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary score to assess answer addresses question.&quot;&quot;&quot;</span>
+
+    <span class="n">score</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Answer addresses the question, &#39;yes&#39; or &#39;no&#39;&quot;</span>
+    <span class="p">)</span>
+
+<span class="c1"># parser</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">GradeAnswer</span><span class="p">)</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are a grader assessing whether an answer is useful to</span>
+<span class="s2">    resolve a question. </span><span class="se">\n</span>
+<span class="s2">    Here is the answer:</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    </span><span class="si">{generation}</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    Here is the question: </span><span class="si">{question}</span>
+<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; to indicate whether the answer is</span>
+<span class="s2">    useful to resolve a question. </span><span class="se">\n</span>
+<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no</span>
+<span class="s2">    preamble or explanation.&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">answer_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">parser</span>
+<span class="n">answer_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Question Re-writer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Question Re-writer</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">re_write_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You a question re-writer that converts an input question to</span>
+<span class="s2">    a better version that is optimized </span><span class="se">\n</span>
+<span class="s2">    for vectorstore retrieval. Look at the initial and formulate an improved</span>
+<span class="s2">    question. </span><span class="se">\n</span>
+<span class="s2">    Here is the initial question: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{question}</span><span class="s2">. Improved question</span>
+<span class="s2">    with no preamble: </span><span class="se">\n</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">question_rewriter</span> <span class="o">=</span> <span class="n">re_write_prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+<span class="n">question_rewriter</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+</pre></div>
+</div>
+</li>
+<li><p>Google Web Search</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Google Web Search</span>
+<span class="kn">from</span> <span class="nn">langchain_google_community</span> <span class="kn">import</span> <span class="n">GoogleSearchAPIWrapper</span><span class="p">,</span> <span class="n">GoogleSearchResults</span>
+
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">userdata</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;GOOGLE_API_KEY&#39;</span><span class="p">)</span>
+<span class="n">cx</span> <span class="o">=</span>  <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;GOOGLE_CSE_ID&#39;</span><span class="p">)</span>
+<span class="c1"># Replace with your actual API key and CX ID</span>
+
+<span class="c1"># Create an instance of the GoogleSearchAPIWrapper</span>
+<span class="n">google_search_wrapper</span> <span class="o">=</span> <span class="n">GoogleSearchAPIWrapper</span><span class="p">(</span><span class="n">google_api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span> \
+                                              <span class="n">google_cse_id</span><span class="o">=</span><span class="n">cx</span><span class="p">)</span>
+
+<span class="c1"># Pass the api_wrapper to GoogleSearchResults</span>
+<span class="n">web_search_tool</span> <span class="o">=</span> <span class="n">GoogleSearchResults</span><span class="p">(</span><span class="n">api_wrapper</span><span class="o">=</span><span class="n">google_search_wrapper</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create the Graph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span>
+
+
+<span class="k">class</span> <span class="nc">GraphState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents the state of our graph.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        question: question</span>
+<span class="sd">        generation: LLM generation</span>
+<span class="sd">        documents: list of documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">question</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">generation</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">documents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve documents</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): New key added to state,</span>
+<span class="sd">                      documents, that contains retrieved documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---RETRIEVE---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Retrieval</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate answer</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): New key added to state, generation,</span>
+<span class="sd">        that contains LLM generation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GENERATE---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="c1"># RAG generation</span>
+    <span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> \
+                                  <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> \
+            <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span>\
+            <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">grade_documents</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether the retrieved documents are relevant to the question.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): Updates documents key with only filtered relevant documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---CHECK DOCUMENT RELEVANCE TO QUESTION---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Score each doc</span>
+    <span class="n">filtered_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">page_content</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">score</span>
+        <span class="k">if</span> <span class="n">grade</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GRADE: DOCUMENT RELEVANT---&quot;</span><span class="p">)</span>
+            <span class="n">filtered_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GRADE: DOCUMENT NOT RELEVANT---&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">filtered_docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">transform_query</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform the query to produce a better question.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): Updates question key with a re-phrased question</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---TRANSFORM QUERY---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Re-write question</span>
+    <span class="n">better_question</span> <span class="o">=</span> <span class="n">question_rewriter</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">better_question</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">web_search</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Web search based on the re-phrased question.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): Updates documents key with appended web results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;documents&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="n">web_results</span> <span class="o">=</span> <span class="n">web_search_tool</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="n">documents</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;snippet&quot;</span><span class="p">],</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;link&quot;</span><span class="p">]})</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">web_results</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> \
+            <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">grade_generation_v_documents_and_question</span><span class="p">}</span>
+
+
+<span class="c1">### Edges ###</span>
+
+
+<span class="k">def</span> <span class="nf">route_question</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Route question to web search or RAG.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Next node to call</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ROUTE QUESTION---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">datasource</span> <span class="o">==</span> <span class="s2">&quot;web_search&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ROUTE QUESTION TO WEB SEARCH---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;web_search&quot;</span>
+    <span class="k">elif</span> <span class="n">source</span><span class="o">.</span><span class="n">datasource</span> <span class="o">==</span> <span class="s2">&quot;vectorstore&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ROUTE QUESTION TO RAG---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;vectorstore&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">decide_to_generate</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether to generate an answer, or re-generate a question.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Binary decision for next node to call</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ASSESS GRADED DOCUMENTS---&quot;</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">filtered_documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">filtered_documents</span><span class="p">:</span>
+        <span class="c1"># All documents have been filtered check_relevance</span>
+        <span class="c1"># We will re-generate a new query</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: ALL DOCUMENTS ARE NOT RELEVANT TO QUESTION, </span><span class="se">\</span>
+<span class="s2">              TRANSFORM QUERY---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;transform_query&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># We have relevant documents, so generate answer</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATE---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;generate&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">grade_generation_v_documents_and_question</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether the generation is grounded in the document</span>
+<span class="sd">    and answers question.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Decision for next node to call</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---CHECK HALLUCINATIONS---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+    <span class="n">generation</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">]</span>
+
+    <span class="n">score</span> <span class="o">=</span> <span class="n">hallucination_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">score</span>
+
+    <span class="c1"># Check hallucination</span>
+    <span class="k">if</span> <span class="n">grade</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---&quot;</span><span class="p">)</span>
+        <span class="c1"># Check question-answering</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GRADE GENERATION vs QUESTION---&quot;</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">answer_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> \
+                                      <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">})</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">score</span>
+        <span class="k">if</span> <span class="n">grade</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION ADDRESSES QUESTION---&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;useful&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION DOES NOT ADDRESS QUESTION---&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;not useful&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;not supported&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compile Graph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
+
+<span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">GraphState</span><span class="p">)</span>
+
+<span class="c1"># Define the nodes</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;web_search&quot;</span><span class="p">,</span> <span class="n">web_search</span><span class="p">)</span>  <span class="c1"># web search</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;retrieve&quot;</span><span class="p">,</span> <span class="n">retrieve</span><span class="p">)</span>  <span class="c1"># retrieve</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;grade_documents&quot;</span><span class="p">,</span> <span class="n">grade_documents</span><span class="p">)</span>  <span class="c1"># grade documents</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;generate&quot;</span><span class="p">,</span> <span class="n">generate</span><span class="p">)</span>  <span class="c1"># generatae</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;transform_query&quot;</span><span class="p">,</span> <span class="n">transform_query</span><span class="p">)</span>  <span class="c1"># transform_query</span>
+
+<span class="c1"># Build graph</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+    <span class="n">START</span><span class="p">,</span>
+    <span class="n">route_question</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;web_search&quot;</span><span class="p">:</span> <span class="s2">&quot;web_search&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vectorstore&quot;</span><span class="p">:</span> <span class="s2">&quot;retrieve&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;web_search&quot;</span><span class="p">,</span> <span class="s2">&quot;generate&quot;</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;retrieve&quot;</span><span class="p">,</span> <span class="s2">&quot;grade_documents&quot;</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+    <span class="s2">&quot;grade_documents&quot;</span><span class="p">,</span>
+    <span class="n">decide_to_generate</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;transform_query&quot;</span><span class="p">:</span> <span class="s2">&quot;transform_query&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;generate&quot;</span><span class="p">:</span> <span class="s2">&quot;generate&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;transform_query&quot;</span><span class="p">,</span> <span class="s2">&quot;retrieve&quot;</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+    <span class="s2">&quot;generate&quot;</span><span class="p">,</span>
+    <span class="n">grade_generation_v_documents_and_question</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;not supported&quot;</span><span class="p">:</span> <span class="s2">&quot;generate&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;useful&quot;</span><span class="p">:</span> <span class="n">END</span><span class="p">,</span>
+        <span class="s2">&quot;not useful&quot;</span><span class="p">:</span> <span class="s2">&quot;transform_query&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="c1"># Compile</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Graph visualization</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="n">xray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()))</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Ouput</p>
+<figure class="align-center" id="id13">
+<span id="fig-a-rag-graph"></span><img alt="_images/a_rag_graph.png" src="_images/a_rag_graph.png" />
+<figcaption>
+<p><span class="caption-text">Adaptive-RAG Graph</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Test</p>
+<ul>
+<li><p>Relevant retrieval</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of China?&quot;</span><span class="p">}</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())}}</span>
+<span class="n">state_dict</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">],</span> <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[]},</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">state_dict</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---</span><span class="n">ROUTE</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="o">---</span><span class="n">ROUTE</span> <span class="n">QUESTION</span> <span class="n">TO</span> <span class="n">WEB</span> <span class="n">SEARCH</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GENERATE</span><span class="o">---</span>
+<span class="o">---</span><span class="n">CHECK</span> <span class="n">HALLUCINATIONS</span><span class="o">---</span>
+<span class="o">---</span><span class="n">DECISION</span><span class="p">:</span> <span class="n">GENERATION</span> <span class="n">IS</span> <span class="n">GROUNDED</span> <span class="n">IN</span> <span class="n">DOCUMENTS</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GRADE</span> <span class="n">GENERATION</span> <span class="n">vs</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="o">---</span><span class="n">DECISION</span><span class="p">:</span> <span class="n">GENERATION</span> <span class="n">ADDRESSES</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">grade_generation_v_documents_and_question</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="s1">&#39;generation&#39;</span><span class="p">:</span> <span class="s1">&#39;{</span><span class="se">\n</span><span class="s1">      &quot;question&quot;: &quot;&lt;function grade_generation_v_documents_and_question at 0x7c7eb21f8670&gt;&quot;,</span><span class="se">\n</span><span class="s1">      &quot;answer&quot;: &quot;The capital city of China is Beijing, as mentioned in three documents. The first document states that Beijing served as China</span><span class="se">\&#39;</span><span class="s1">s capital city in 1261, the second document confirms it as the current capital with over 22 million residents, and the third document does not directly mention the capital but is related to a study conducted in China.&quot;</span><span class="se">\n</span><span class="s1">    }&#39;</span><span class="p">,</span>
+<span class="s1">&#39;documents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://clintonwhitehouse3.archives.gov/WH/New/China/beijing.html&#39;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;The modern day capital of China is Beijing (literally &quot;Northern Capital&quot;), which first served as China</span><span class="se">\&#39;</span><span class="s1">s capital city in 1261, when the Mongol ruler Kublai</span><span class="se">\xa0</span><span class="s1">...&#39;</span><span class="p">),</span>
+  <span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://en.wikipedia.org/wiki/Beijing&#39;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;Beijing, previously romanized as Peking, is the capital city of China. With more than 22 million residents, it is the world&#39;s most populous national capital</span><span class="se">\xa0</span><span class="s2">...&quot;</span><span class="p">),</span>
+  <span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://pubmed.ncbi.nlm.nih.gov/38294063/&#39;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;Supercritical and homogenous transmission of monkeypox in the capital of China. J Med Virol. 2024 Feb;96(2):e29442. doi: 10.1002/jmv.29442. Authors. Yunjun</span><span class="se">\xa0</span><span class="s1">...&#39;</span><span class="p">),</span>
+  <span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://www.sciencedirect.com/science/article/pii/S0304387820301358&#39;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;This paper investigates the impacts of fires on cognitive performance. We find that a one-standard-deviation increase in the difference between upwind and</span><span class="se">\xa0</span><span class="s1">...&#39;</span><span class="p">)]}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Irrelevant retrieval</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;What are the types of agent memory?&quot;</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="nb">input</span><span class="p">}</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())}}</span>
+<span class="n">state_dict</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">],</span> <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[]},</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">state_dict</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---</span><span class="n">ROUTE</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="o">---</span><span class="n">ROUTE</span> <span class="n">QUESTION</span> <span class="n">TO</span> <span class="n">RAG</span><span class="o">---</span>
+<span class="o">---</span><span class="n">RETRIEVE</span><span class="o">---</span>
+<span class="o">---</span><span class="n">CHECK</span> <span class="n">DOCUMENT</span> <span class="n">RELEVANCE</span> <span class="n">TO</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GRADE</span><span class="p">:</span> <span class="n">DOCUMENT</span> <span class="n">RELEVANT</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GRADE</span><span class="p">:</span> <span class="n">DOCUMENT</span> <span class="n">RELEVANT</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GRADE</span><span class="p">:</span> <span class="n">DOCUMENT</span> <span class="n">NOT</span> <span class="n">RELEVANT</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GRADE</span><span class="p">:</span> <span class="n">DOCUMENT</span> <span class="n">RELEVANT</span><span class="o">---</span>
+<span class="o">---</span><span class="n">ASSESS</span> <span class="n">GRADED</span> <span class="n">DOCUMENTS</span><span class="o">---</span>
+<span class="o">---</span><span class="n">DECISION</span><span class="p">:</span> <span class="n">GENERATE</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GENERATE</span><span class="o">---</span>
+<span class="o">---</span><span class="n">CHECK</span> <span class="n">HALLUCINATIONS</span><span class="o">---</span>
+<span class="o">---</span><span class="n">DECISION</span><span class="p">:</span> <span class="n">GENERATION</span> <span class="n">IS</span> <span class="n">GROUNDED</span> <span class="n">IN</span> <span class="n">DOCUMENTS</span><span class="o">---</span>
+<span class="o">---</span><span class="n">GRADE</span> <span class="n">GENERATION</span> <span class="n">vs</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="o">---</span><span class="n">DECISION</span><span class="p">:</span> <span class="n">GENERATION</span> <span class="n">ADDRESSES</span> <span class="n">QUESTION</span><span class="o">---</span>
+<span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="s1">&#39;What are the types of agent memory?&#39;</span><span class="p">,</span>
+<span class="s1">&#39;generation&#39;</span><span class="p">:</span> <span class="s1">&#39;{</span><span class="se">\n</span><span class="s1">       &quot;Short-term memory&quot;: &quot;In-context learning, restricted by the finite context window length of Transformer&quot;,</span><span class="se">\n</span><span class="s1">       &quot;Long-term memory&quot;: &quot;External vector store that the agent can attend to at query time, accessible via fast retrieval&quot;</span><span class="se">\n</span><span class="s1">    }&#39;</span><span class="p">,</span>
+<span class="s1">&#39;documents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well-written copies, stories, essays and programs; it can be framed as a powerful general problem solver.</span><span class="se">\n</span><span class="s1">Agent System Overview</span><span class="se">\n</span><span class="s1">In a LLM-powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:</span><span class="se">\n\n</span><span class="s1">Planning</span><span class="se">\n\n</span><span class="s1">Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.</span><span class="se">\n</span><span class="s1">Reflection and refinement: The agent can do self-criticism and self-reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.</span><span class="se">\n\n\n</span><span class="s1">Memory</span><span class="se">\n\n</span><span class="s1">Short-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.</span><span class="se">\n</span><span class="s1">Long-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.</span><span class="se">\n\n\n</span><span class="s1">Tool use</span><span class="se">\n\n</span><span class="s1">The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.</span><span class="se">\n\n\n\n\n</span><span class="s1">Fig. 1. Overview of a LLM-powered autonomous agent system.</span><span class="se">\n</span><span class="s1">Component One: Planning</span><span class="se">\n</span><span class="s1">A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.&#39;</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;https://lilianweng.github.io/posts/2023-06-23-agent/&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;LLM Powered Autonomous Agents | Lil&#39;Log&quot;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;Fig. 7. Comparison of AD, ED, source policy and RL^2 on environments that require memory and exploration. Only binary reward is assigned. The source policies are trained with A3C for &quot;dark&quot; environments and DQN for watermaze.(Image source: Laskin et al. 2023)</span><span class="se">\n</span><span class="s1">Component Two: Memory#</span><span class="se">\n</span><span class="s1">(Big thank you to ChatGPT for helping me draft this section. I’ve learned a lot about the human brain and data structure for fast MIPS in my conversations with ChatGPT.)</span><span class="se">\n</span><span class="s1">Types of Memory#</span><span class="se">\n</span><span class="s1">Memory can be defined as the processes used to acquire, store, retain, and later retrieve information. There are several types of memory in human brains.</span><span class="se">\n\n\n</span><span class="s1">Sensory Memory: This is the earliest stage of memory, providing the ability to retain impressions of sensory information (visual, auditory, etc) after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch).&#39;</span><span class="p">),</span>
+  <span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well-written copies, stories, essays and programs; it can be framed as a powerful general problem solver.</span><span class="se">\n</span><span class="s1">Agent System Overview</span><span class="se">\n</span><span class="s1">In a LLM-powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:</span><span class="se">\n\n</span><span class="s1">Planning</span><span class="se">\n\n</span><span class="s1">Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.</span><span class="se">\n</span><span class="s1">Reflection and refinement: The agent can do self-criticism and self-reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.</span><span class="se">\n\n\n</span><span class="s1">Memory</span><span class="se">\n\n</span><span class="s1">Short-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.</span><span class="se">\n</span><span class="s1">Long-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.</span><span class="se">\n\n\n</span><span class="s1">Tool use</span><span class="se">\n\n</span><span class="s1">The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.</span><span class="se">\n\n\n\n\n</span><span class="s1">Fig. 1. Overview of a LLM-powered autonomous agent system.</span><span class="se">\n</span><span class="s1">Component One: Planning</span><span class="se">\n</span><span class="s1">A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.&#39;</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;https://lilianweng.github.io/posts/2023-06-23-agent/&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;LLM Powered Autonomous Agents | Lil&#39;Log&quot;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;Short-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.</span><span class="se">\n</span><span class="s1">Long-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.</span><span class="se">\n\n\n</span><span class="s1">Tool use</span><span class="se">\n\n</span><span class="s1">The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.&#39;</span><span class="p">),</span>
+  <span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well-written copies, stories, essays and programs; it can be framed as a powerful general problem solver.</span><span class="se">\n</span><span class="s1">Agent System Overview</span><span class="se">\n</span><span class="s1">In a LLM-powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:</span><span class="se">\n\n</span><span class="s1">Planning</span><span class="se">\n\n</span><span class="s1">Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.</span><span class="se">\n</span><span class="s1">Reflection and refinement: The agent can do self-criticism and self-reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.</span><span class="se">\n\n\n</span><span class="s1">Memory</span><span class="se">\n\n</span><span class="s1">Short-term memory: I would consider all the in-context learning (See Prompt Engineering) as utilizing short-term memory of the model to learn.</span><span class="se">\n</span><span class="s1">Long-term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.</span><span class="se">\n\n\n</span><span class="s1">Tool use</span><span class="se">\n\n</span><span class="s1">The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre-training), including current information, code execution capability, access to proprietary information sources and more.</span><span class="se">\n\n\n\n\n</span><span class="s1">Fig. 1. Overview of a LLM-powered autonomous agent system.</span><span class="se">\n</span><span class="s1">Component One: Planning</span><span class="se">\n</span><span class="s1">A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.&#39;</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;https://lilianweng.github.io/posts/2023-06-23-agent/&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;LLM Powered Autonomous Agents | Lil&#39;Log&quot;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;Sensory memory as learning embedding representations for raw inputs, including text, image or other modalities;</span><span class="se">\n</span><span class="s1">Short-term memory as in-context learning. It is short and finite, as it is restricted by the finite context window length of Transformer.</span><span class="se">\n</span><span class="s1">Long-term memory as the external vector store that the agent can attend to at query time, accessible via fast retrieval.</span><span class="se">\n\n</span><span class="s1">Maximum Inner Product Search (MIPS)#</span><span class="se">\n</span><span class="s1">The external memory can alleviate the restriction of finite attention span.  A standard practice is to save the embedding representation of information into a vector store database that can support fast maximum inner-product search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN)</span><span class="se">\u200b</span><span class="s1"> algorithm to return approximately top k nearest neighbors to trade off a little accuracy lost for a huge speedup.</span><span class="se">\n</span><span class="s1">A couple common choices of ANN algorithms for fast MIPS:&#39;</span><span class="p">)]}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="agentic-rag">
 <span id="ch-agentic-rag"></span><h3><span class="section-number">5.5.4. </span>Agentic RAG<a class="headerlink" href="#agentic-rag" title="Link to this heading"></a></h3>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id14">
 <span id="fig-agentic-rag"></span><img alt="_images/agentic_rag.png" src="_images/agentic_rag.png" />
 <figcaption>
-<p><span class="caption-text">Agentic-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/">Langgraph Agentic-rag</a>)</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-text">Agentic-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/">Langgraph Agentic-rag</a>)</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ul>
@@ -2701,9 +3436,11 @@ and <a class="reference internal" href="#ch-a-rag"><span class="std std-ref">Ada
 <span class="c1"># print(&quot;*&quot; * 20 + &quot;Prompt[rlm/rag-prompt]&quot; + &quot;*&quot; * 20)</span>
 <span class="c1"># # Show what the prompt looks like</span>
 <span class="c1"># prompt = hub.pull(&quot;rlm/rag-prompt&quot;).pretty_print()</span>
-
-
-<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compile Graph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
 <span class="kn">from</span> <span class="nn">langgraph.prebuilt</span> <span class="kn">import</span> <span class="n">ToolNode</span>
 
 <span class="c1"># Define a new graph</span>
@@ -2772,10 +3509,10 @@ OllamaFunctions is initialized with the desired model name:</p>
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id14">
+<figure class="align-center" id="id15">
 <span id="fig-agentic-rag-graph"></span><img alt="_images/agentic_rag_graph.png" src="_images/agentic_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Agentic-RAG Graph</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-text">Agentic-RAG Graph</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
