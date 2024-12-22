@@ -43,7 +43,7 @@ Retrieval-Augmented Generation
           :target: https://colab.research.google.com/drive/17vLeVzcESb-jkY9NdOP1fRaO6I16Yfuz?usp=drive_link 
 
     .. |sql_query| image:: images/colab-badge.png 
-          :target: https://colab.research.google.com/drive/17vLeVzcESb-jkY9NdOP1fRaO6I16Yfuz?usp=drive_link 
+          :target: https://colab.research.google.com/drive/1H_EeFxWxXxX1KD8JupSsSMf1N-zfU8qR?usp=drive_link 
 
     .. |S-RAG| image:: images/colab-badge.png 
         :target: https://colab.research.google.com/drive/1KbC4Wu-JUj6zbVuFkSNvtz3oVzWhEAZG?usp=drive_link 
