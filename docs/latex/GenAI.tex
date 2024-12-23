@@ -8899,7 +8899,7 @@ Pre\sphinxhyphen{}training as we know it will end. \textendash{} Ilya Sutskever 
 \capstart
 
 \noindent\sphinxincludegraphics{{ilya_sutskever}.png}
-\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id1}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
+\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id2}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -8918,6 +8918,1743 @@ summarize information, and perform other natural language processing tasks.
 This chapter delves into transformer models, drawing on insights from
 \sphinxhref{https://nlp.seas.harvard.edu/annotated-transformer/}{The Annotated Transformer} and \sphinxhref{https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c}{Tracing the Transformer in Diagrams}, to explore their underlying architecture and practical applications.
 
+
+\section{Transformer Architecture}
+\label{\detokenize{pretraining:transformer-architecture}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{transformer_architecture}.png}
+\caption{Transformer Architecture}\label{\detokenize{pretraining:id3}}\end{figure}
+
+
+\subsection{Attention Is All You Need}
+\label{\detokenize{pretraining:attention-is-all-you-need}}
+\sphinxAtStartPar
+The Transformer is a deep learning model designed to handle sequential
+data, such as text, by relying entirely on attention mechanisms rather
+than recurrence or convolution. It consists of an \sphinxstylestrong{encoder\sphinxhyphen{}decoder
+structure}, where the \sphinxstylestrong{encoder} transforms an input sequence into a
+set of rich contextual representations, and the \sphinxstylestrong{decoder} generates
+the output sequence by attending to these representations and previously
+generated tokens. Both encoder and decoder are composed of stacked
+layers, each featuring \sphinxstylestrong{multi\sphinxhyphen{}head self\sphinxhyphen{}attention} (to capture
+relationships between tokens), \sphinxstylestrong{feedforward neural networks} (for
+non\sphinxhyphen{}linear transformations), and \sphinxstylestrong{residual connections with layer
+normalization} (to improve training stability). Positional encodings
+are added to token embeddings to retain sequence order information, and
+the architecture’s parallelism and scalability make it highly efficient
+for tasks like machine translation, summarization, and language
+modeling.
+
+\sphinxAtStartPar
+When the Transformer architecture was introduced in the paper
+\sphinxstyleemphasis{“Attention Is All You Need”} (Vaswani et al., 2017), the primary task
+it aimed to address was \sphinxstylestrong{machine translation}. The researchers wanted
+to develop a model that could translate text from one language to
+another more efficiently and effectively than the existing
+sequence\sphinxhyphen{}to\sphinxhyphen{}sequence (Seq2Seq) models, which relied heavily on recurrent
+neural networks (RNNs) or long short\sphinxhyphen{}term memory (LSTM) networks. RNNs /
+LSTMs suffer from slow training and inference, short\sphinxhyphen{}term memory, and
+vanishing / exploding gradients challenges, due to their sequentual
+nature and long\sphinxhyphen{}range dependencies. The Transformer with self\sphinxhyphen{}attention
+mechanism achieved to eliminate the sequential bottleneck of RNNs while
+retaining the ability to capture dependencies across the entire input
+sequence.
+
+
+\subsection{Encoder\sphinxhyphen{}Decoder}
+\label{\detokenize{pretraining:encoder-decoder}}
+\sphinxAtStartPar
+Transformer has an encoding component, a decoding component, and
+connections between them. The encoding component is a stack of encoders
+\sphinxhyphen{} usually 6\sphinxhyphen{}12 layers, though it can go higher (e.g. T5\sphinxhyphen{}large has 24
+encoder layers). The decoder component is a stack of decoders, usually
+in the same number of layers for balance.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Each \sphinxstylestrong{encoder} layer includes multi\sphinxhyphen{}head self\sphinxhyphen{}attention, feedforward
+neural network (FNN), add \& norm, and positional encoding. It reads
+the input sequence (e.g., a sentence in Chinese) and produces a
+context\sphinxhyphen{}aware representation.
+
+\item {} 
+\sphinxAtStartPar
+Each \sphinxstylestrong{decoder} layer includes masked multi\sphinxhyphen{}head self\sphinxhyphen{}attention,
+encoder\sphinxhyphen{}decoder attention, feedforward neural network (FFN), add \&
+norm, and positional encoding. It generates the output sequence (e.g.,
+a translation in English) using the encoder’s output and previously
+generated tokens.
+
+\end{itemize}
+
+\sphinxAtStartPar
+The encoder\sphinxhyphen{}decoder structure was inspired by earlier Seq2Seq models
+(Sutskever et al., 2014), which used separate RNNs or LSTMs for encoding
+the input sequence and decoding the output sequence. The innovation of
+the Transformer was replacing the recurrent nature of those models with
+an attention\sphinxhyphen{}based approach. The Transformer revolutionized not just
+machine translation but also the entire field of natural language
+processing (NLP). Its encoder\sphinxhyphen{}decoder structure provided a blueprint for
+subsequent models:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Encoder\sphinxhyphen{}only models} (e.g., BERT, RoBERTa, DistilBERT) for
+understanding tasks such as classification, sentiment analysis, named
+entity recognition, and question answering.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Unlike encoder\sphinxhyphen{}decoder or decoder\sphinxhyphen{}only models, encoder\sphinxhyphen{}only models
+don’t generate new sequences. Its architecture and training
+objectives are optimized for extracting contextual representations
+from input sequences. They focus solely on understanding and
+representing the input.
+
+\item {} 
+\sphinxAtStartPar
+Encoder\sphinxhyphen{}only models typically use \sphinxstylestrong{bidirectional self\sphinxhyphen{}attention},
+meaning each token can attend to all other tokens in the sequence
+(both before and after it). This contrasts with decoder\sphinxhyphen{}only models,
+which use causal masking and can only attend to past tokens.
+Bidirectionality provides a more holistic understanding of the
+input.
+
+\item {} 
+\sphinxAtStartPar
+Encoder\sphinxhyphen{}only models are often pretrained with tasks like \sphinxstylestrong{masked
+language modeling (MLM)}, where random tokens in the input are
+masked and the model learns to predict them based on context.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Decoder\sphinxhyphen{}only models} (e.g., GPT series, Transformer\sphinxhyphen{}XL) for text
+generation tasks.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Decoder\sphinxhyphen{}only models are trained with an \sphinxstylestrong{autoregressive
+objective}, meaning they predict the next token in a sequence based
+on the tokens seen so far. This makes them inherently suited for
+producing coherent, contextually relevant continuations.
+
+\item {} 
+\sphinxAtStartPar
+The self\sphinxhyphen{}attention mechanism in decoder\sphinxhyphen{}only models is \sphinxstylestrong{causal},
+meaning each token attends only to previous tokens (including
+itself). They are pretrained with \sphinxstylestrong{causal language modeling
+(CLM)}, where they learn to predict the next token given the
+previous ones.
+
+\item {} 
+\sphinxAtStartPar
+Decoder\sphinxhyphen{}only models are not constrained to fixed\sphinxhyphen{}length outputs and
+can generate sequences of arbitrary lengths, making them ideal for
+open\sphinxhyphen{}ended tasks such as story writing, dialogue generation, and
+summarization.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Encoder\sphinxhyphen{}decoder models} (e.g., Original Transformer, BART, T5) for
+sequence\sphinxhyphen{}to\sphinxhyphen{}sequence tasks such as machine translation, summarization,
+and text generation.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Encoder and decoder are designed to handle different parts of the
+task \sphinxhyphen{} creating a contextual representation and generating output
+sequence. This decoupling of encoding and decoding allows the model
+to flexibly handle inputs and outputs of different lengths.
+
+\item {} 
+\sphinxAtStartPar
+The \sphinxstylestrong{encoder\sphinxhyphen{}decoder attention mechanism} in the decoder allows
+the model to focus on specific parts of the encoded input sequence
+while generating the output sequence. This \sphinxstylestrong{cross\sphinxhyphen{}attention}
+mechanism helps maintain the relationship between the input and
+output sequences.
+
+\item {} 
+\sphinxAtStartPar
+In many encoder\sphinxhyphen{}decoder models (such as those based on
+Transformers), the encoder processes the input sequence
+\sphinxstylestrong{bidirectionally}, meaning it can attend to both preceding and
+succeeding tokens when creating the representations. This ensures a
+comprehensive understanding of the input sequence before it is
+passed to the decoder.
+
+\item {} 
+\sphinxAtStartPar
+During training, the encoder\sphinxhyphen{}decoder model is typically provided
+with a sequence of \sphinxstylestrong{input\sphinxhyphen{}output pairs} (e.g., a Chinese sentence
+and its English translation). This paired structure makes the model
+highly suited for tasks like translation, where the goal is to map
+input sequences in one language to corresponding output sequences in
+another language.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{Positional Encoding}
+\label{\detokenize{pretraining:positional-encoding}}
+\sphinxAtStartPar
+\sphinxstylestrong{Positional encoding} is a mechanism used in transformers to provide
+information about the order of tokens in a sequence. Unlike recurrent
+neural networks (RNNs), transformers process all tokens in parallel, and
+therefore lack a built\sphinxhyphen{}in way to capture sequential information.
+Positional encoding solves this by injecting position\sphinxhyphen{}dependent
+information into the input embeddings.
+
+
+\subsubsection{Sinusoidal Positional Encodings}
+\label{\detokenize{pretraining:sinusoidal-positional-encodings}}
+\sphinxAtStartPar
+Sinusoidal positional encoding adds a vector to the embedding of each
+token, with the vector values derived using \sphinxstylestrong{sinusoidal functions}.
+For a token at position \(pos\) in the sequence and a specific
+dimension \(i\) of the embedding:
+\begin{equation*}
+\begin{split}PE(pos,2i) = \sin\Big({pos\over 10000^{2i/d}}\Big)\\
+PE(pos,2i+1) = \cos\Big({pos\over 10000^{2i/d}}\Big)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\(pos\): Position of the token in the sequence.
+
+\item {} 
+\sphinxAtStartPar
+\(i\): Index of the embedding dimension.
+
+\item {} 
+\sphinxAtStartPar
+\(d\): Total dimension of the embedding vector.
+
+\end{itemize}
+
+\sphinxAtStartPar
+The positional encodings are added directly to the token embeddings:
+\begin{equation*}
+\begin{split}\text{Input to Transformer} = \text{Token Embedding} + \text{Positional Encoding}\end{split}
+\end{equation*}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{position_embedding}.png}
+\caption{Positional Embedding}\label{\detokenize{pretraining:id4}}\end{figure}
+
+
+\subsubsection{Rotary Positional Embeddings (RoPE)}
+\label{\detokenize{pretraining:rotary-positional-embeddings-rope}}
+\sphinxAtStartPar
+Rotary positional embedding is a modern variant that introduces
+positional information through rotation in a complex vector space. It
+encodes positional information by rotating the query and key vectors in
+the attention mechanism using a transformation in a complex vector
+space. RoPE mitigates the limitations of absolute positional encodings
+by focusing on relative relationships, enabling smooth transitions and
+better handling of long sequences. This makes it particularly
+advantageous in large\sphinxhyphen{}scale language models like GPT\sphinxhyphen{}4, LLaMA, where
+long\sphinxhyphen{}range dependencies and adaptability are crucial.
+
+\sphinxAtStartPar
+Given a token vector \(x\) with positional encoding, RoPE applies a
+rotation:
+\begin{equation*}
+\begin{split}\text{RoPE} = R(pos)\cdot x\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where \(R(pos)\) is the rotation matrix determined by the token’s
+position.
+
+\sphinxAtStartPar
+Specifically, for a rotation by an angle \(\theta\), the 2D rotation
+matrix is
+\begin{equation*}
+\begin{split}R(\theta) = \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta)\end{bmatrix}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+For each pair of dimensions \((x_{even}, x_{odd})\), the rotation is
+performed as
+\begin{equation*}
+\begin{split}\begin{bmatrix}x'_{even} \\x'_{odd} \end{bmatrix} = \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta)\end{bmatrix} \cdot \begin{bmatrix}x_{even} \\x_{odd} \end{bmatrix}\end{split}
+\end{equation*}
+
+\subsubsection{\sphinxstylestrong{Learnable Positional Encodings}}
+\label{\detokenize{pretraining:learnable-positional-encodings}}
+\sphinxAtStartPar
+Learnable Positional Encodings are a type of positional encoding used in
+transformer\sphinxhyphen{}based models where the positional information is not fixed
+(like in \sphinxstylestrong{sinusoidal} encoding) but is \sphinxstylestrong{learned during training}.
+These encodings are treated as trainable parameters and are updated
+through backpropagation, just like other parameters in the model.
+
+
+\subsubsection{Summary}
+\label{\detokenize{pretraining:summary}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Feature
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Sinusoidal
+Positional Encoding
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Rotary Positional
+Embeddings (RoPE)
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Learnable
+Positional
+Encodings
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Type
+&
+\sphinxAtStartPar
+Absolute
+&
+\sphinxAtStartPar
+Relative
+&
+\sphinxAtStartPar
+Absolute
+\\
+\sphinxhline
+\sphinxAtStartPar
+Learnable
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+No
+&
+\sphinxAtStartPar
+Yes
+\\
+\sphinxhline
+\sphinxAtStartPar
+Advantages
+&
+\sphinxAtStartPar
+Fixed, no trainable
+parameters;
+Generalizes to
+unseen sequence
+lengths;
+Computationally
+simple.
+&
+\sphinxAtStartPar
+Encodes relative
+positional
+relationships;
+Scales efficiently
+to long sequences;
+Smooth handling of
+long\sphinxhyphen{}range
+dependencies.
+&
+\sphinxAtStartPar
+Flexible for
+task\sphinxhyphen{}specific
+adaptation;
+Optimized during
+training.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Disadvantages
+&
+\sphinxAtStartPar
+Fixed, cannot adapt
+to data; Encodes
+only absolute
+positions; Less
+flexible for
+relative tasks.
+&
+\sphinxAtStartPar
+More complex to
+implement;
+Relatively new,
+less widespread for
+general tasks.
+&
+\sphinxAtStartPar
+Limited to a fixed
+maximum sequence
+length; No inherent
+relative
+positioning;
+Requires more
+parameters.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Usage
+&
+\sphinxAtStartPar
+Early models (e.g.,
+original
+Transformer);
+S
+equence\sphinxhyphen{}to\sphinxhyphen{}sequence
+tasks like
+translation.
+&
+\sphinxAtStartPar
+Modern LLMs (e.g.,
+GPT\sphinxhyphen{}4, LLaMA) with
+long context
+lengths; Tasks
+requiring
+long\sphinxhyphen{}range
+dependencies.
+&
+\sphinxAtStartPar
+Popular in earlier
+models like GPT\sphinxhyphen{}2,
+BERT; Tasks with
+shorter sequences.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Best For
+&
+\sphinxAtStartPar
+Simplicity,
+generalization to
+unseen data.
+&
+\sphinxAtStartPar
+Long\sphinxhyphen{}context tasks,
+relative
+dependencies,
+efficient scaling.
+&
+\sphinxAtStartPar
+Task\sphinxhyphen{}specific
+optimization,
+shorter context
+tasks.
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\subsection{Embedding Matrix}
+\label{\detokenize{pretraining:embedding-matrix}}
+\sphinxAtStartPar
+\sphinxstylestrong{Embedding} refers to the process of converting \sphinxstylestrong{discrete tokens
+(words, subwords, or characters)} into \sphinxstylestrong{continuous vector
+representations} in a high\sphinxhyphen{}dimensional space. These vectors capture the
+semantic and syntactic properties of tokens, allowing the model to
+process and understand language more effectively. Embedding layer is a
+necessary component because:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Discrete symbols are not directly understandable by the model.
+Embeddings transform these discrete tokens into continuous vectors.
+Neural networks process continuous numbers more effectively than
+discrete symbols.
+
+\item {} 
+\sphinxAtStartPar
+Embeddings help the model learn relationships between words. By
+learning the \sphinxstylestrong{semantic properties} of tokens during training, words
+with similar meanings (e.g. “king” and “queen”) should have similar
+vector representations.
+
+\item {} 
+\sphinxAtStartPar
+In Transformer based models, embeddings are not just static
+representations but can be adjusted as the model learns from the
+context of a sentence to capture subtle semantic nuances and
+dependencies between words.
+
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{word_embedding_matrix}.png}
+\caption{Word Embedding}\label{\detokenize{pretraining:id5}}\end{figure}
+
+\sphinxAtStartPar
+Take an example of embedding matrix \(W_E\) with \textasciitilde{}50k vocabulary
+size, each token in the vocabulary has a corresponding vector, typically
+initialized \sphinxstylestrong{randomly} at the beginning of training. Embedding matrix
+does not only represent individual words. They also encode the
+information about the position of the word. And through training process
+(passing through self\sphinxhyphen{}attention and multiple layers), these embeddings
+are transformed into \sphinxstylestrong{contextual embeddings}, encoding not only the
+individual word but also its relationship to other words in the
+sequence.
+
+\sphinxAtStartPar
+The reason why a model predicting the next word requires efficient
+context incorporation, is that the meaning of a word is clearly informed
+by its surroundings, sometimes this includes context from a long
+distance away. For example, with contextual embeddings, the dot products
+of pieces of this sentence “\sphinxstyleemphasis{Harry Potter attends Hogwarts School of
+Witchcraft and Wizardry, retrieves the Philosopher’s Stone, battles a
+basilisk, and ultimately leads a final battle at Hogwarts, defeating
+Voldemort and bringing peace to the wizarding world}” results in the
+following projections in embedding space:
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{contextual_embedding}.png}
+\caption{Contextual Embedding}\label{\detokenize{pretraining:id6}}\end{figure}
+
+\sphinxAtStartPar
+Embedding matrix contains vectors of all words in the vocabulary. It’s
+the first pile of weights in our model. If the vocabulary size is
+\(V\) and the embedding dimension is \(d\), the embedding matrix
+\(W_E\) has dimensions \(d \times V\). The total number of
+parameters in this embedding matrix is calculated by \(d \times V\).
+
+
+\subsection{Attention Mechanism}
+\label{\detokenize{pretraining:attention-mechanism}}
+
+\subsubsection{Self\sphinxhyphen{}Attention}
+\label{\detokenize{pretraining:self-attention}}
+\sphinxAtStartPar
+A \sphinxstylestrong{self\sphinxhyphen{}attention} is called single\sphinxhyphen{}head attention, which enables the
+model to effectively capture relationships and dependencies between
+different tokens within the same input sequence. Multi\sphinxhyphen{}headed attention
+has multiple self\sphinxhyphen{}attentions running in parallel. The goal of
+self\sphinxhyphen{}attention is to produce a refined embedding where each word has
+ingested contextual meanings from other words by a series of
+computations. For example, in the input of “The brave wizard cast a
+powerful spell”, the refined embedding E3’ of ‘wizard’ should contain
+the meaning of ‘brave’, and the refined embedding E7’ of ‘spell’ should
+contain the meaning of ‘powerful’.
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{selfattention_goal}.png}
+\end{figure}
+
+\sphinxAtStartPar
+The computation involved in self\sphinxhyphen{}attention in transformers consists of
+several key steps: generating query, key, and value representations,
+calculating attention scores, applying softmax, and computing a weighted
+sum of the values.
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Linear Projection to Query space}
+
+\sphinxAtStartPar
+Given an input represention with dimension of \((d \times N)\)
+where \(d\) is the embedding dimension and \(N\) is the token
+number. Query matrix \(W_Q\) with dimension of
+\((N \times d_q)\) (\(d_q\) is usually small e.g. 128)
+contains learnable parameters. It is used to project input
+representation \(W_E\) to the smaller query space \(Q\) by
+matrix multiplication.
+\begin{equation*}
+\begin{split}Q = W_E W_Q\\ \space(N\times d)(d\times d_q) \rightarrow (N \times d_q)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Conceptually, the query matrix aims to ask each word a question
+regarding what kinds of relationship it has with each of the other
+words.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{query_projection}.png}
+\caption{Query Projection}\label{\detokenize{pretraining:id7}}\end{figure}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Linear Projection to Key space}
+
+\sphinxAtStartPar
+Key matrix \(W_k\) with dimension of \((N \times d_k)\)
+contains learnable parameters. It is used to project input
+representation \(W_E\) to the smaller key space \(K\) by
+matrix multiplication.
+\begin{equation*}
+\begin{split}K = W_E W_K \\ \space (N \times d) (d \times d_k) \rightarrow (N \times d_k)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Conceptually, the keys are answering the queries by matching the
+queries whenever they closely align with each other. In our example
+of “The brave wizard cast a powerful spell”, the key metrix maps the
+word ‘brave’ to vectors that are closely aligned with the query
+produced by the word ‘wizard’.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{key_projection}.png}
+\caption{Key Projection}\label{\detokenize{pretraining:id8}}\end{figure}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Compute Attention Scores}
+
+\sphinxAtStartPar
+Attention scores are calculated by taking the \sphinxstylestrong{dot product} of the
+query vectors with the key vectors. These scores as a measurement of
+relationship represent how well each key matches each query. They can
+be values from negative infinity to positive infinity.
+\begin{equation*}
+\begin{split}\text{Attention Score} = QK^T\end{split}
+\end{equation*}
+\sphinxAtStartPar
+In our example, the attention score produced by \(K_2 \cdot Q_3\)
+is expected to be a large positive value because ‘brave’ is an
+adjective to ‘wizard’. In other words, the embedding of ‘brave’
+\sphinxstylestrong{attends to} the embedding of ‘wizard’.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{attention_score}.png}
+\caption{Attention Score}\label{\detokenize{pretraining:id9}}\end{figure}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Scaling and softmax normalization}
+
+\sphinxAtStartPar
+To prevent large values in the attention scores (which could lead to
+very small gradients), the scores are often scaled by the square root
+of the dimension of the key vectors \(\sqrt{d_k}\). This scaling
+helps stabilize the softmax function used in the next step.
+\begin{equation*}
+\begin{split}\text{Scaled Attention Score} = {QK^T \over \sqrt{d_k}}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+The attention scores are passed through a \sphinxstylestrong{softmax} function, which
+normalizes them into a probability distribution. This ensures that
+each column of the attention matrix sums to 1, so each token has a
+clear distribution of “attention” over all tokens.
+\begin{equation*}
+\begin{split}\text{Attention Weights} = \text{softmax}\Big({QK^T\over{\sqrt{d_k}}}\Big)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Note that for a \sphinxstylestrong{masked} self attention, the bottom left triangle
+of attention scores are set to negative infinity before softmax
+normalization. The purpose is to mask those information as latter
+words are not allowed to influence earlier words. After softmax
+normalization, those masked attention information becomes zero and
+the columns stay normalized. This process is called \sphinxstylestrong{masking}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Computing weighted sum of values}
+
+\sphinxAtStartPar
+In the attention score matrix with dimension of \(N \times N\),
+each column is giving weights according to how relevant the word in
+key space (on the left in the figure) is to the correpsonding word in
+query space (on the top in the figure). This matrix is also called
+\sphinxstylestrong{attention pattern}.
+
+\sphinxAtStartPar
+The size of attention pattern is the square of the context size,
+therefore, context size is a huge bottleneck for LLMs. Recent years,
+some variations of attention mechanism are developed such as Sparse
+Attention Mechanism, Blockwise Attention, Linformer, Reformer,
+Longformer, etc, aiming to make context more scalable.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Linear Projection to Value space}
+
+\sphinxAtStartPar
+Value matrix \(W_v\) with dimension of \((N \times d_v)\)
+contains learnable parameters. It is used to project input
+representation \(W_E\) to the smaller value space \(V\) by
+matrix multiplication.
+\begin{equation*}
+\begin{split}V = W_E W_V \\ \space (N \times d) (d \times d_v) \rightarrow (N \times d_v)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Conceptually, by maping the embedding of a word to the value space,
+it’s trying to figure out what should be added to the embedding of
+other words, if this word is relevant to adjusting the meaning of
+other words.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Compute Weighted Sum of Values}
+
+\sphinxAtStartPar
+Each token’s output is computed by taking a \sphinxstylestrong{weighted sum} of the
+value vectors, where the weights come from the attention distribution
+obtained in the previous step.
+\begin{equation*}
+\begin{split}\text{Output} = \text{Attention Weights} \times V\\
+(N \times N) (N \times d_v) \rightarrow (N \times d_v)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+This results in a matrix of size \(N \times d_v\) where for each
+word there is a weighted sum of the value vectors \(\Delta E\)
+based on the attention distribution. Conceptually, this is the change
+going to be added to the original embedding, resulting in a more
+refined vector, encoding contextually rich meaning.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{value_projection_weighted_sum}.png}
+\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id10}}\end{figure}
+
+\end{enumerate}
+
+\sphinxAtStartPar
+To sum up, given \(W_E\) input matrix (\(N \times d\)),
+\(W_Q, W_K, W_V\) as weight matrices
+(\(d\times d_q, d\times d_k, d\times d_v\)), the matrix form of the
+full self\sphinxhyphen{}attention process can be written as:
+\begin{equation*}
+\begin{split}\text{Output} = \text{softmax}\Big({(W_EW_Q)(W_EW_K)^T \over \sqrt{d_k}}\Big) \times (W_EW_V)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where the final output matrix is \(N \times d_v\).
+
+\sphinxAtStartPar
+A full attention block inside a transformer consists of \sphinxstylestrong{multi\sphinxhyphen{}head
+attention}, where self\sphinxhyphen{}attention operations run in parallel, each with
+its own distinct Key, Query, Value matrices.
+
+\sphinxAtStartPar
+To update embedding matrix, the weighted sum of values is passed through
+a linear transformation (via \(W_O\)), and then added to the
+original input embeddings via a residual connection.
+\begin{equation*}
+\begin{split}\text{Final output} = \text{Output} \times W_o\end{split}
+\end{equation*}
+\sphinxAtStartPar
+The number of parameters involved in Attention Mechanism:
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TT}
+\sphinxtoprule
+
+\sphinxAtStartPar
+
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\# Parameters
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Embedding Matrix
+&
+\sphinxAtStartPar
+d\_embed * n\_vocab
+\\
+\sphinxhline
+\sphinxAtStartPar
+Key Matrix
+&
+\sphinxAtStartPar
+d\_key * d\_embed * n\_heads * n\_layers
+\\
+\sphinxhline
+\sphinxAtStartPar
+Query Matrix
+&
+\sphinxAtStartPar
+d\_query * d\_embed * n\_heads * n\_layers
+\\
+\sphinxhline
+\sphinxAtStartPar
+Value Matrix
+&
+\sphinxAtStartPar
+d\_value * d\_embed * n\_heads * n\_layers
+\\
+\sphinxhline
+\sphinxAtStartPar
+Output Matrix
+&
+\sphinxAtStartPar
+d\_embed * d\_value * n\_heads * n\_layers
+\\
+\sphinxhline
+\sphinxAtStartPar
+Unembedding Matrix
+&
+\sphinxAtStartPar
+n\_vocab * d\_embed
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\subsubsection{Cross Attention}
+\label{\detokenize{pretraining:cross-attention}}
+\sphinxAtStartPar
+\sphinxstylestrong{Cross\sphinxhyphen{}attention} is a mechanism in transformers where the queries
+(\(Q\)) come from one sequence (e.g., the decoder), while the keys
+(\(K\)) and values (\(V\)) come from another sequence (e.g., the
+encoder). It allows the model to align and focus on relevant parts of a
+second sequence when processing the current sequence.
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Feature
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Self\sphinxhyphen{}Attention
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Cross\sphinxhyphen{}Attention
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Source
+of
+Queries
+&
+\sphinxAtStartPar
+Queries (\(Q\)) come
+from the same sequence.
+&
+\sphinxAtStartPar
+Queries (\(Q\)) come
+from one sequence (e.g.,
+decoder).
+\\
+\sphinxhline
+\sphinxAtStartPar
+Source
+of
+Keys
+/Values
+&
+\sphinxAtStartPar
+Keys (\(K\)) and Values
+(\(V\)) come from the
+same sequence.
+&
+\sphinxAtStartPar
+Keys (\(K\)) and Values
+(\(V\)) come from a
+different sequence (e.g.,
+encoder).
+\\
+\sphinxhline
+\sphinxAtStartPar
+Purpose
+&
+\sphinxAtStartPar
+Captures relationships
+within the same sequence.
+&
+\sphinxAtStartPar
+Aligns and integrates
+information between two
+sequences.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Example
+Usage
+&
+\sphinxAtStartPar
+Used in both encoder and
+decoder to process input or
+output tokens.
+&
+\sphinxAtStartPar
+Used in encoder\sphinxhyphen{}decoder
+models (e.g., translation)
+to let the decoder focus on
+encoder outputs.
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\subsection{Layer Normalization}
+\label{\detokenize{pretraining:layer-normalization}}
+\sphinxAtStartPar
+Layer Normalization is crucial in transformers because it helps
+stabilize and accelerate the training of deep neural networks by
+normalizing the activations across the layers. The transformer
+architecture, which consists of many layers and complex operations,
+benefits significantly from this technique for several reasons:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Internal Covariate Shift}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Deep models like transformers often suffer from \sphinxstylestrong{internal
+covariate shift}, where the distribution of activations changes
+during training due to the update of model parameters. This can
+make training slower and less stable.
+
+\item {} 
+\sphinxAtStartPar
+Layer normalization helps mitigate this by ensuring that the output
+of each layer has a consistent distribution, which leads to faster
+convergence and more stable training.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Gradient Flow}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+In deep models, the gradients can become either very small
+(vanishing gradient problem) or very large (exploding gradient
+problem) as they propagate through the layers. Layer normalization
+helps keep the gradients within a reasonable range, ensuring
+\sphinxstylestrong{efficient gradient flow} and preventing these issues.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Improved Convergence}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+By normalizing the activations, layer normalization allows the
+model to use \sphinxstylestrong{larger learning rates}, which speeds up training
+and leads to better convergence.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Works Across Batch Sizes}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Unlike \sphinxstylestrong{Batch Normalization}, which normalizes activations across
+the batch dimension, \sphinxstylestrong{Layer Normalization} normalizes across the
+feature dimension for each individual example, making it more
+suitable for tasks like \sphinxstylestrong{sequence modeling}, where the batch size
+may vary and the model deals with sequences of different lengths.
+
+\end{itemize}
+
+\end{enumerate}
+
+\sphinxAtStartPar
+The process can be broken down into the following steps:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+Compute the Mean and Variance: for a given input
+\(x = [x_1, ..., x_d]\):
+\begin{equation*}
+\begin{split}\mu = {1\over d} \sum^d_{i=1}x_i\\
+\sigma^2 = {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where \(\mu\) is the mean and \(\sigma^2\) is the variance of
+the input.
+
+\item {} 
+\sphinxAtStartPar
+Normalize the input: subtracting the mean and dividing by the
+standard deviation:
+\begin{equation*}
+\begin{split}\hat{x_i} = { x_i - \mu \over \sqrt{\sigma^2 + \epsilon}}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where \(\epsilon\) is a small constant added to the variance to
+avoid division by zero.
+
+\item {} 
+\sphinxAtStartPar
+Scale and shift: after normalization, the output is scaled and
+shifted by \sphinxstylestrong{learnable parameters} \(\gamma\) (scale) and
+\(\beta\) (shift), which allow the model to restore the original
+distribution if needed:
+\begin{equation*}
+\begin{split}y_i = \gamma \cdot \hat{x_i} + \beta\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where \(\gamma\) and \(\beta\) are trainable parameters
+learned during the training process.
+
+\end{enumerate}
+
+
+\subsection{Residual Connections}
+\label{\detokenize{pretraining:residual-connections}}
+\sphinxAtStartPar
+In the transformer architecture, \sphinxstylestrong{residual connections} are used after
+each key operation, such as:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{After Self\sphinxhyphen{}Attention}: The input to the attention layer is added
+back to the output of the self\sphinxhyphen{}attention mechanism.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{After Feed\sphinxhyphen{}Forward Networks}: Similarly, after the output of the
+feed\sphinxhyphen{}forward network is computed, the input to the feed\sphinxhyphen{}forward block
+is added back to the result.
+
+\end{itemize}
+
+\sphinxAtStartPar
+In both cases, the sum is typically passed through a \sphinxstylestrong{Layer
+Normalization} operation, which stabilizes the training process
+further.
+
+\sphinxAtStartPar
+Residual connection has the following advantages:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Skip Connection}: The original input to the layer is \sphinxstylestrong{skipped
+over} and added directly to the output of the layer. This allows the
+model to preserve the information from earlier layers, helping it
+learn faster and more efficiently.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Enabling Easier Gradient Flow}: In deep neural networks, as layers
+become deeper, gradients can either vanish or explode, making
+training difficult. Residual connections mitigate the vanishing
+gradient problem by allowing gradients to flow more easily through
+the network during backpropagation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Helping with Identity Mapping}: Residual connections allow the
+network to learn \sphinxstylestrong{identity mappings}. If a certain layer doesn’t
+need to make any modifications to the input, the network can simply
+learn to output the input directly, ensuring that deeper layers don’t
+hurt the performance of the network. This helps the network avoid
+situations where deeper layers perform worse than shallow layers.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Stabilizing Training}: The direct path from the input to the
+output, via the residual connection, helps stabilize the training by
+providing an additional gradient flow, making the learning process
+more robust to initialization and hyperparameters.
+
+\end{enumerate}
+
+
+\subsection{Feed\sphinxhyphen{}Forward Networks}
+\label{\detokenize{pretraining:feed-forward-networks}}
+\sphinxAtStartPar
+In the Transformer architecture, \sphinxstylestrong{Feed\sphinxhyphen{}Forward Networks (FFNs)} are a
+key component within each layer of the encoder and decoder. FFNs are
+applied independently to each token in the sequence, after the attention
+mechanism (self\sphinxhyphen{}attention or cross\sphinxhyphen{}attention). They process the
+information passed through the attention mechanism to refine the
+representations of each token.
+
+\sphinxAtStartPar
+The characteristics and roles of FFN:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Position\sphinxhyphen{}Independent}: FFNs operate \sphinxstylestrong{independently} on each
+token’s embedding, without considering the sequence structure. Each
+token is treated individually.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Non\sphinxhyphen{}Linearity}: The \sphinxstylestrong{activation function} (like ReLU or GELU)
+introduces \sphinxstylestrong{non\sphinxhyphen{}linearity} into the model, which is crucial for
+allowing the network to learn complex patterns in the data
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Parameter Sharing}: The same FFN is applied to each token in the
+sequence independently. The parameters are shared across all tokens,
+which is computationally efficient and reduces the number of
+parameters in the model.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Dimensionality Expansion}: The hidden layer size \(d_{ff}\) is
+typically \sphinxstylestrong{larger} than the model dimension
+\(d_{\text{model}}\) (often by a factor of 4), allowing the
+network to learn richer representations in the intermediate space.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Local Information Processing}: FFNs only process \sphinxstylestrong{local}
+information about each token’s embedding, as opposed to the
+self\sphinxhyphen{}attention mechanism, which captures \sphinxstylestrong{global dependencies}
+across all tokens in the sequence.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Residual Connection}: FFNs in transformers use \sphinxstylestrong{residual
+connections}, where the input to the FFN is added to the output.
+This helps \sphinxstylestrong{prevent vanishing gradient issues} and makes training
+deep models more efficient.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Parallelization}: Since FFNs are applied independently to each
+token, they can be \sphinxstylestrong{parallelized} effectively, leading to faster
+training and inference.
+
+\end{enumerate}
+
+\sphinxAtStartPar
+The network can only process a fixed number of vectors at a time, known
+as its \sphinxstylestrong{context size}. The context size can be 4096 (GPT\sphinxhyphen{}3) up to 2M
+tokens (LongRoPE).
+
+
+\subsection{Label Smoothing}
+\label{\detokenize{pretraining:label-smoothing}}
+\sphinxAtStartPar
+In transformer models, \sphinxstylestrong{label smoothing} is commonly applied during
+the training phase to improve the model’s generalization by modifying
+the target labels used for training. This technique is typically used in
+tasks like \sphinxstylestrong{machine translation}, \sphinxstylestrong{language modeling}, and other
+sequence\sphinxhyphen{}to\sphinxhyphen{}sequence tasks.
+
+\sphinxAtStartPar
+Label smoothing is applied after the decoder generates a probability
+distribution over the vocabulary in the final layer. The output of the
+decoder is a vector of logits (raw predictions), which are transformed
+into a probability distribution using \sphinxstylestrong{softmax}. After applying
+softmax, the predicted probabilities are compared to the smoothed target
+distribution to calculate the loss.
+
+\sphinxAtStartPar
+The target distribution is originally an one\sphinxhyphen{}hot vector. After \sphinxstylestrong{label
+smoothing}, the one\sphinxhyphen{}hot encoding is adjusted so that the correct token
+has a reduced probability, and the incorrect tokens share a small amount
+of probability mass. For example, if the origianl one\sphinxhyphen{}hot vector is
+\([0, 1, 0, 0]\), then label smoothing would convert this vector
+into something like \([0.05, 0.9, 0.05, 0.05]\).
+
+\sphinxAtStartPar
+During training, the model computes the \sphinxstylestrong{cross\sphinxhyphen{}entropy loss} between
+the predicted probabilities and the smoothed target distribution. The
+loss function is modified as follows:
+\begin{equation*}
+\begin{split}L = -\sum_i{\hat{y_i} \log(p_i)}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where \(\hat{y_i}\) is the smoothed target probability for class
+\(i\), and \(p_i\) is the predicted probability for class
+\(i\).
+
+\sphinxAtStartPar
+The model’s output probabilities are then adjusted during training by
+backpropagating the modified loss. This encourages the model to
+distribute some probability to alternative tokens, making it less likely
+to become overly confident in its predictions.
+
+\sphinxAtStartPar
+Label smoothing is important in transformers because
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Prevents Overfitting}: Label smoothing forces the model to spread
+some probability mass over other tokens, making it \sphinxstylestrong{less
+overconfident} and more likely to generalize well to unseen data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Encourages Robustness}: By smoothing the target labels, the
+transformer is encouraged to explore alternative possibilities for
+each token rather than memorizing the exact sequence of tokens in the
+training data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Improved Calibration}: The model learns to \sphinxstylestrong{distribute probability
+more evenly} across all tokens, which often results in
+\sphinxstylestrong{better\sphinxhyphen{}calibrated probabilities} that improve performance in tasks
+such as \sphinxstylestrong{classification} and \sphinxstylestrong{sequence generation}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Training Stability}: Label smoothing reduces the effect of outliers
+and noisy labels in the training data, improving the overall stability
+of training and leading to faster convergence.
+
+\end{itemize}
+
+
+\subsection{Softmax and Temperature}
+\label{\detokenize{pretraining:softmax-and-temperature}}
+\sphinxAtStartPar
+The \sphinxstylestrong{softmax function} is a mathematical operation used to transform a
+vector of raw scores (\sphinxstylestrong{logits}) into a vector of \sphinxstylestrong{probabilities}. It
+takes a vector of real numbers, \(z = [z_1, z_2, \dots, z_n]\), and
+maps it to a probability distribution, where each element is in the
+range {[}0, 1{]}, and the sum of all elements equals 1. Mathematically,
+\begin{equation*}
+\begin{split}p_i=\text{softmax}(z_i) = {e^{z_i}\over \sum^n_{j=1}e^{z_j}}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+The softmax function has been used in GPT in two ways:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Probability Distribution}: It converts raw scores into
+probabilities that sum to 1. Next token as prediction will be the
+token with the highest probability.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Attention Weights}: In attention mechanism, softmax is applied to
+the score of all tokens in the sequence to normalize them into
+attention weights.
+
+\end{itemize}
+
+\sphinxAtStartPar
+Properties of Softmax:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Exponentiation}: Amplifies the difference between higher and lower
+scores, making the largest score dominate.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Normalization}: Ensures that the output probabilities sum to 1.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Differentiable}: Enables backpropagation for training the model.
+
+\end{itemize}
+
+\sphinxAtStartPar
+The \sphinxstylestrong{temperature} parameter is used in the softmax function to control
+the sharpness or smoothness of the probability distribution over the
+logits, affecting how confident or diverse the model’s predictions are.
+When using a temperature \(T > 0\), the logits are scaled by
+\(\frac{1}{T}\) before applying softmax:
+\begin{equation*}
+\begin{split}p_i = \text{softmax}(z_i) = {\exp(z_i/T)\over \sum^n_{j=1}\exp(z_j/T)}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+When \(T\) is larger, more weight is given to the lower values, then
+the distribution is more uniform. If \(T\) is smaller, the biggest
+logit score will dominate more aggresively. Setting \(T=0\) gives
+all the weights to the maximum value resulting a \textasciitilde{}100\% probability.
+
+
+\subsection{Unembedding Matrix}
+\label{\detokenize{pretraining:unembedding-matrix}}
+\sphinxAtStartPar
+The \sphinxstylestrong{unembedding matrix} in the final layer of GPT is the counterpart
+to the \sphinxstylestrong{embedding matrix} used at the input layer. GPT’s final hidden
+layer outputs continuous vectors for each token position in the input
+sequence. The unembedding matrix projects these vectors into a space
+where each dimension corresponds to a token in the vocabulary, producing
+logits for all vocabulary tokens.
+
+\sphinxAtStartPar
+The unembedding matrix is not randomly initialized, instead, it’s
+initialized as the transpose of the embedding matrix
+\(W_U = W_E^T\). If the vocabulary size is \(V\) and the hidden
+layer size is \(d\), the unembedding matrix \(W_U\) has
+dimensions \(V \times d\). In the final layer, GPT produces a hidden
+state \(h\) with size \(d\) for each token position. The
+unembedding matrix is applied as follows.
+\begin{equation*}
+\begin{split}\text{Logits} = h \cdot W_U^T\end{split}
+\end{equation*}
+\sphinxAtStartPar
+The logits are passed through the \sphinxstylestrong{softmax function} to generate
+probabilities over the vocabulary. The token with the highest
+probability (or sampled stochastically) is chosen as the next token.
+
+\sphinxAtStartPar
+Using a learned unembedding matrix to compute logits in the final layer
+of GPT offers critical advantages over directly computing logits from
+the final hidden vector without this additional projection step:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The embedding and unembedding matrices establish a connection between
+the input and output token spaces. Without an unembedding matrix,
+there would be no learned mechanism to align the model’s internal
+representation to the specific vocabulary used for prediction.
+
+\item {} 
+\sphinxAtStartPar
+The model’s hidden states are designed to represent rich features of
+the input sequence rather than being explicitly tied to the vocabulary
+size. The unembedding matrix translates the compressed hidden state
+(e.g. 768 or 1024 size) into a vocabulary distribution (e.g. \textasciitilde{}50k
+tokens), ensuring the model can scale to larger vocabularies or output
+spaces.
+
+\item {} 
+\sphinxAtStartPar
+The unembedding matrix learns how to transform these rich
+representations into logits that accurately reflect token
+probabilities in the specific vocabulary. It provides a structured way
+for gradients from the loss function (e.g., cross\sphinxhyphen{}entropy loss) to
+update both the model’s hidden representations and the vocabulary
+mappings.
+
+\end{itemize}
+
+
+\subsection{Decoding}
+\label{\detokenize{pretraining:decoding}}
+\sphinxAtStartPar
+In transformer models, \sphinxstylestrong{decoding} refers to the process of generating
+output sequences from a model’s learned representations. Decoder takes
+the hidden state generated by encoder from input representations as well
+as previously generated tokens (or a start token) and progressively
+generates the output sequence one by one based on the probability
+distribution over all possible words in the vocabulary for the next
+token.
+
+\sphinxAtStartPar
+Depending on the specific task and goals (e.g., translation, generation,
+or summarization), different decoding strategies like \sphinxstylestrong{beam search},
+\sphinxstylestrong{top\sphinxhyphen{}k sampling}, \sphinxstylestrong{top\sphinxhyphen{}p sampling}, and \sphinxstylestrong{temperature sampling} can
+be used to strike the right balance between creativity and accuracy.
+
+
+\subsubsection{Greedy Decoding}
+\label{\detokenize{pretraining:greedy-decoding}}
+\sphinxAtStartPar
+Greedy decoding is the simplest and most straightforward method. At each
+time step, the model chooses the token with the highest probability from
+the predicted distribution and adds it to the output sequence.
+
+
+\subsubsection{Beam Search}
+\label{\detokenize{pretraining:beam-search}}
+\sphinxAtStartPar
+Beam search is a more advanced method than greedy decoding. It keeps
+track of multiple hypotheses at each decoding step (instead of just the
+most probable one) and selects the top\sphinxhyphen{}k most likely sequences (called
+the “beam width”).
+
+\sphinxAtStartPar
+At each decoding step, beam search explores the top\sphinxhyphen{}k candidate
+sequences (instead of just one) and chooses the one with the highest
+cumulative probability. A hyperparameter, \sphinxstylestrong{beam width}, controls how
+many candidate sequences are considered at each step.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{beam_search}.png}
+\caption{Beam Search}\label{\detokenize{pretraining:id11}}\end{figure}
+
+
+\subsubsection{Summary}
+\label{\detokenize{pretraining:summary-1}}\label{\detokenize{pretraining:id1}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Method
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Advantages
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Disadvantages
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Use Cases
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Greedy
+Decoding
+&
+\sphinxAtStartPar
+Simple, fast,
+deterministic
+&
+\sphinxAtStartPar
+May produce
+repetitive or
+suboptimal
+sequences
+&
+\sphinxAtStartPar
+When speed is
+important, low
+diversity tasks
+\\
+\sphinxhline
+\sphinxAtStartPar
+Beam
+Search
+&
+\sphinxAtStartPar
+Produces
+higher\sphinxhyphen{}quality
+sequences, less
+repetitive
+&
+\sphinxAtStartPar
+Computationally
+expensive,
+limited by beam
+width
+&
+\sphinxAtStartPar
+Machine
+translation,
+summarization
+\\
+\sphinxhline
+\sphinxAtStartPar
+Top\sphinxhyphen{}k
+Sampling
+&
+\sphinxAtStartPar
+Adds diversity,
+avoids repetitive
+output
+&
+\sphinxAtStartPar
+May reduce
+coherence in
+some cases
+&
+\sphinxAtStartPar
+Creative text
+generation,
+storytelling
+\\
+\sphinxhline
+\sphinxAtStartPar
+Top\sphinxhyphen{}p
+Sampling
+&
+\sphinxAtStartPar
+Dynamically adjusts
+for diversity, more
+natural
+&
+\sphinxAtStartPar
+May still
+produce
+incoherent
+outputs
+&
+\sphinxAtStartPar
+Creative text
+generation,
+dialogue systems
+\\
+\sphinxhline
+\sphinxAtStartPar
+Temperature
+Sampling
+&
+\sphinxAtStartPar
+Fine control over
+and diversity
+randomness, balance
+between coherence
+&
+\sphinxAtStartPar
+Requires tuning
+for optimal
+results
+&
+\sphinxAtStartPar
+Creative text
+randomness
+generation,
+fine\sphinxhyphen{}tuning output
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\section{Modern Transformer Techniques}
+\label{\detokenize{pretraining:modern-transformer-techniques}}
+
+\subsection{KV Cache}
+\label{\detokenize{pretraining:kv-cache}}
+\sphinxAtStartPar
+The primary purpose of the KV cache is to \sphinxstylestrong{speed up the inference
+process} and make it more efficient. Specifically, during
+autoregressive generation (such as generating text one token at a time),
+the transformer model processes the input tokens sequentially, which
+means that for each new token, it needs to compute the attention scores
+between the current token and all previous tokens.
+
+\sphinxAtStartPar
+Instead of recalculating the \sphinxstylestrong{key (K)} and \sphinxstylestrong{value (V)} vectors for
+the entire sequence at each step (which would be computationally
+expensive), the KV cache allows the model to \sphinxstylestrong{reuse the keys and
+values} from previous tokens, thus reducing redundant computations.
+
+\sphinxAtStartPar
+As demonstrated in the diagram below, during the training process,
+attention scores are calculated by this formula without KV Cache:
+\begin{equation*}
+\begin{split}\text{Attention Weights} = \text{softmax}\Big({QK^T\over{\sqrt{d_k}}}\Big)\end{split}
+\end{equation*}
+\sphinxAtStartPar
+\sphinxincludegraphics{{qkv_attention_pattern}.png}
+
+\sphinxAtStartPar
+When generating the next token during inference, the model doesn’t need
+to recompute the keys and values for the tokens it has already
+processed. Instead, it simply retrieves the stored keys and values from
+the cache for all previously generated tokens. Only the new token’s key
+and value are computed for the current timestep and added to the cache.
+
+\sphinxAtStartPar
+During the attention computation for each new token, the model uses both
+the new key and value (for the current token) and the cached keys and
+values (for all previous tokens). This way, the attention mechanism can
+still compute the correct attention scores and weighted sums without
+recalculating everything from scratch.
+
+\sphinxAtStartPar
+\sphinxstylestrong{The attention formula with Cache:} for a new token \(t\),
+\begin{equation*}
+\begin{split}\text{Attention Output} = \text{softmax} \Big({Q_t \cdot [K_{\text{cache}}, K_t]^T\over \sqrt{d_k}}\Big) \cdot [V_{\text{cache}}, V_t]\end{split}
+\end{equation*}
+\sphinxAtStartPar
+\sphinxincludegraphics{{kv_cache}.png}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Why Not Cache Queries:} \sphinxstylestrong{Queries} are specific to the token being
+processed at the current step of generation. For every new token in
+autoregressive decoding, the query vector needs to be freshly computed
+because it is derived from the embedding of the current token. Keys and
+values, on the other hand, represent the context of the previous tokens,
+which remains the same across multiple steps until the sequence is
+extended.
+
+\sphinxAtStartPar
+\sphinxstylestrong{Space complexity of KV Cache is huge without optimization}: The space
+complexity is calculated by number of layers * number of batch size * number
+of attention heads * attention head size * sequence length.
+
+\sphinxAtStartPar
+Space complexity can be optimized by reducing “number of attention
+heads” without too much penalty on performance.
+
+
+\subsection{Multi\sphinxhyphen{}Query Attention}
+\label{\detokenize{pretraining:multi-query-attention}}
+\sphinxAtStartPar
+\sphinxstylestrong{Multi\sphinxhyphen{}Query Attention (MQA)} is a variant of the attention mechanism
+introduced to improve the efficiency of transformer models, particularly
+in scenarios where decoding speed and memory usage are critical. It
+modifies the standard multi\sphinxhyphen{}head attention by using multiple query heads
+but sharing the key and value matrices across all the heads. There are
+still multiple independent query heads (\(Q\)), but the \sphinxstylestrong{key
+(:math:\textasciigrave{}K\textasciigrave{}) and value (:math:\textasciigrave{}V\textasciigrave{}) matrices are shared} across all the
+heads.
+
+\sphinxAtStartPar
+Each query head \(i\) computes its attention scores with the shared
+key matrix:
+\begin{equation*}
+\begin{split}\text{Attention}_i = \text{softmax} \Big({Q_i K^T \over \sqrt{d_k}}\Big)V\end{split}
+\end{equation*}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{multiquery_attention}.png}
+\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id12}}\end{figure}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Advantages of MQA:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Efficiency in Memory Usage}: By sharing the \(K\) and \(V\)
+matrices across heads, the memory footprint is reduced, particularly
+for the KV cache used during autoregressive generation in large
+models. This is especially valuable for serving large\sphinxhyphen{}scale language
+models with limited GPU/TPU memory.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Faster Decoding}: During autoregressive decoding (e.g., in GPT\sphinxhyphen{}like
+models), each query needs to attend to the cached keys and values. In
+standard multi\sphinxhyphen{}head attention, this involves accessing multiple
+\(K\) and \(V\) matrices, which can slow down decoding. In
+MQA, since only one shared \(K\) and \(V\) matrix is used, the
+decoding process is faster and more streamlined
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Minimal Performance Tradeoff}: Despite simplifying the model, MQA
+often achieves comparable performance to standard multi\sphinxhyphen{}head attention
+in many tasks, particularly in large\sphinxhyphen{}scale language models.
+
+\end{itemize}
+
+
+\subsection{Grouped\sphinxhyphen{}Query Attention}
+\label{\detokenize{pretraining:grouped-query-attention}}
+\sphinxAtStartPar
+\sphinxstylestrong{Grouped\sphinxhyphen{}Query Attention (GQA)} is a hybrid approach between
+\sphinxstylestrong{Multi\sphinxhyphen{}Head Attention (MHA)} and \sphinxstylestrong{Multi\sphinxhyphen{}Query Attention (MQA)} that
+balances computational efficiency and expressivity. In GQA, multiple
+query heads are grouped together, and each group shares a set of
+\sphinxstylestrong{keys} and \sphinxstylestrong{values}. This design seeks to retain some of the
+flexibility of MHA while reducing the memory and computational overhead,
+similar to MQA.
+
+\sphinxAtStartPar
+Mathematically, if there are \(G\) groups, each with \(H / G\)
+heads, the queries are processed independently for each group but share
+keys and values within the group:
+\begin{equation*}
+\begin{split}\text{Attention}_i = \text{softmax} \Big({Q_i K^T_{\text{group,i}}\over \sqrt{d_k}}\Big) V_{group,i}\end{split}
+\end{equation*}
+\sphinxAtStartPar
+where \(i\) is the query head within a group.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{grouped_query_attention}.png}
+\caption{Grouped Query Attention}\label{\detokenize{pretraining:id13}}\end{figure}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Advantages of GQA:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Efficiency}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Reduced KV Cache Size: GQA requires fewer key and value matrices
+compared to MHA. This reduces memory usage, especially during
+autoregressive decoding when keys and values for all previous tokens
+are stored in a cache.
+
+\item {} 
+\sphinxAtStartPar
+Faster Inference: By reducing the number of keys and values to
+process, GQA speeds up attention computations during decoding,
+particularly in long\sphinxhyphen{}sequence tasks.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Balance Between Flexibility and Efficiency}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+More Expressivity Than MQA: Unlike MQA, where all heads share the
+same keys and values, GQA allows multiple groups of keys and values,
+enabling more flexibility for the attention mechanism to learn
+diverse patterns.
+
+\item {} 
+\sphinxAtStartPar
+Simpler Than MHA: GQA is less computationally expensive and
+memory\sphinxhyphen{}intensive than MHA, as fewer sets of keys and values are
+used.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Scalability}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GQA is well\sphinxhyphen{}suited for very large models and long\sphinxhyphen{}sequence tasks
+where standard MHA becomes computationally and memory prohibitive.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{Flash Attention}
+\label{\detokenize{pretraining:flash-attention}}
 \sphinxstepscope
 
 

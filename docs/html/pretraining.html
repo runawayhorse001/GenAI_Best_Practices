@@ -18,6 +18,7 @@
       <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,7 +52,46 @@
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Pre-training</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Pre-training</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#transformer-architecture">7.1. Transformer Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attention-is-all-you-need">7.1.1. Attention Is All You Need</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoder-decoder">7.1.2. Encoder-Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#positional-encoding">7.1.3. Positional Encoding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sinusoidal-positional-encodings">7.1.3.1. Sinusoidal Positional Encodings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rotary-positional-embeddings-rope">7.1.3.2. Rotary Positional Embeddings (RoPE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#learnable-positional-encodings">7.1.3.3. <strong>Learnable Positional Encodings</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">7.1.3.4. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#embedding-matrix">7.1.4. Embedding Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attention-mechanism">7.1.5. Attention Mechanism</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#self-attention">7.1.5.1. Self-Attention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cross-attention">7.1.5.2. Cross Attention</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#layer-normalization">7.1.6. Layer Normalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#residual-connections">7.1.7. Residual Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feed-forward-networks">7.1.8. Feed-Forward Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#label-smoothing">7.1.9. Label Smoothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softmax-and-temperature">7.1.10. Softmax and Temperature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unembedding-matrix">7.1.11. Unembedding Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decoding">7.1.12. Decoding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#greedy-decoding">7.1.12.1. Greedy Decoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beam-search">7.1.12.2. Beam Search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary-1">7.1.12.3. Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modern-transformer-techniques">7.2. Modern Transformer Techniques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kv-cache">7.2.1. KV Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-query-attention">7.2.2. Multi-Query Attention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grouped-query-attention">7.2.3. Grouped-Query Attention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-attention">7.2.4. Flash Attention</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference.html">9. Main Reference</a></li>
 </ul>
@@ -84,10 +124,10 @@
 <div class="admonition-proverb admonition">
 <p class="admonition-title">Proverb</p>
 <p>Pre-training as we know it will end. – Ilya Sutskever at neurips 2024</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <span id="fig-ilya"></span><img alt="_images/ilya_sutskever.png" src="_images/ilya_sutskever.png" />
 <figcaption>
-<p><span class="caption-text">Ilya Sutskever at neurips 2024</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text">Ilya Sutskever at neurips 2024</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div>
@@ -101,6 +141,1148 @@ learn patterns in language, enabling them to generate human-like text, answer qu
 summarize information, and perform other natural language processing tasks.</p>
 <p>This chapter delves into transformer models, drawing on insights from
 <a class="reference external" href="https://nlp.seas.harvard.edu/annotated-transformer/">The Annotated Transformer</a> and <a class="reference external" href="https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c">Tracing the Transformer in Diagrams</a>, to explore their underlying architecture and practical applications.</p>
+<section id="transformer-architecture">
+<h2><span class="section-number">7.1. </span>Transformer Architecture<a class="headerlink" href="#transformer-architecture" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id3">
+<img alt="transformer_architecture" src="_images/transformer_architecture.png" />
+<figcaption>
+<p><span class="caption-text">Transformer Architecture</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="attention-is-all-you-need">
+<h3><span class="section-number">7.1.1. </span>Attention Is All You Need<a class="headerlink" href="#attention-is-all-you-need" title="Link to this heading"></a></h3>
+<p>The Transformer is a deep learning model designed to handle sequential
+data, such as text, by relying entirely on attention mechanisms rather
+than recurrence or convolution. It consists of an <strong>encoder-decoder
+structure</strong>, where the <strong>encoder</strong> transforms an input sequence into a
+set of rich contextual representations, and the <strong>decoder</strong> generates
+the output sequence by attending to these representations and previously
+generated tokens. Both encoder and decoder are composed of stacked
+layers, each featuring <strong>multi-head self-attention</strong> (to capture
+relationships between tokens), <strong>feedforward neural networks</strong> (for
+non-linear transformations), and <strong>residual connections with layer
+normalization</strong> (to improve training stability). Positional encodings
+are added to token embeddings to retain sequence order information, and
+the architecture’s parallelism and scalability make it highly efficient
+for tasks like machine translation, summarization, and language
+modeling.</p>
+<p>When the Transformer architecture was introduced in the paper
+<em>“Attention Is All You Need”</em> (Vaswani et al., 2017), the primary task
+it aimed to address was <strong>machine translation</strong>. The researchers wanted
+to develop a model that could translate text from one language to
+another more efficiently and effectively than the existing
+sequence-to-sequence (Seq2Seq) models, which relied heavily on recurrent
+neural networks (RNNs) or long short-term memory (LSTM) networks. RNNs /
+LSTMs suffer from slow training and inference, short-term memory, and
+vanishing / exploding gradients challenges, due to their sequentual
+nature and long-range dependencies. The Transformer with self-attention
+mechanism achieved to eliminate the sequential bottleneck of RNNs while
+retaining the ability to capture dependencies across the entire input
+sequence.</p>
+</section>
+<section id="encoder-decoder">
+<h3><span class="section-number">7.1.2. </span>Encoder-Decoder<a class="headerlink" href="#encoder-decoder" title="Link to this heading"></a></h3>
+<p>Transformer has an encoding component, a decoding component, and
+connections between them. The encoding component is a stack of encoders
+- usually 6-12 layers, though it can go higher (e.g. T5-large has 24
+encoder layers). The decoder component is a stack of decoders, usually
+in the same number of layers for balance.</p>
+<ul class="simple">
+<li><p>Each <strong>encoder</strong> layer includes multi-head self-attention, feedforward
+neural network (FNN), add &amp; norm, and positional encoding. It reads
+the input sequence (e.g., a sentence in Chinese) and produces a
+context-aware representation.</p></li>
+<li><p>Each <strong>decoder</strong> layer includes masked multi-head self-attention,
+encoder-decoder attention, feedforward neural network (FFN), add &amp;
+norm, and positional encoding. It generates the output sequence (e.g.,
+a translation in English) using the encoder’s output and previously
+generated tokens.</p></li>
+</ul>
+<p>The encoder-decoder structure was inspired by earlier Seq2Seq models
+(Sutskever et al., 2014), which used separate RNNs or LSTMs for encoding
+the input sequence and decoding the output sequence. The innovation of
+the Transformer was replacing the recurrent nature of those models with
+an attention-based approach. The Transformer revolutionized not just
+machine translation but also the entire field of natural language
+processing (NLP). Its encoder-decoder structure provided a blueprint for
+subsequent models:</p>
+<ul class="simple">
+<li><p><strong>Encoder-only models</strong> (e.g., BERT, RoBERTa, DistilBERT) for
+understanding tasks such as classification, sentiment analysis, named
+entity recognition, and question answering.</p>
+<ul>
+<li><p>Unlike encoder-decoder or decoder-only models, encoder-only models
+don’t generate new sequences. Its architecture and training
+objectives are optimized for extracting contextual representations
+from input sequences. They focus solely on understanding and
+representing the input.</p></li>
+<li><p>Encoder-only models typically use <strong>bidirectional self-attention</strong>,
+meaning each token can attend to all other tokens in the sequence
+(both before and after it). This contrasts with decoder-only models,
+which use causal masking and can only attend to past tokens.
+Bidirectionality provides a more holistic understanding of the
+input.</p></li>
+<li><p>Encoder-only models are often pretrained with tasks like <strong>masked
+language modeling (MLM)</strong>, where random tokens in the input are
+masked and the model learns to predict them based on context.</p></li>
+</ul>
+</li>
+<li><p><strong>Decoder-only models</strong> (e.g., GPT series, Transformer-XL) for text
+generation tasks.</p>
+<ul>
+<li><p>Decoder-only models are trained with an <strong>autoregressive
+objective</strong>, meaning they predict the next token in a sequence based
+on the tokens seen so far. This makes them inherently suited for
+producing coherent, contextually relevant continuations.</p></li>
+<li><p>The self-attention mechanism in decoder-only models is <strong>causal</strong>,
+meaning each token attends only to previous tokens (including
+itself). They are pretrained with <strong>causal language modeling
+(CLM)</strong>, where they learn to predict the next token given the
+previous ones.</p></li>
+<li><p>Decoder-only models are not constrained to fixed-length outputs and
+can generate sequences of arbitrary lengths, making them ideal for
+open-ended tasks such as story writing, dialogue generation, and
+summarization.</p></li>
+</ul>
+</li>
+<li><p><strong>Encoder-decoder models</strong> (e.g., Original Transformer, BART, T5) for
+sequence-to-sequence tasks such as machine translation, summarization,
+and text generation.</p>
+<ul>
+<li><p>Encoder and decoder are designed to handle different parts of the
+task - creating a contextual representation and generating output
+sequence. This decoupling of encoding and decoding allows the model
+to flexibly handle inputs and outputs of different lengths.</p></li>
+<li><p>The <strong>encoder-decoder attention mechanism</strong> in the decoder allows
+the model to focus on specific parts of the encoded input sequence
+while generating the output sequence. This <strong>cross-attention</strong>
+mechanism helps maintain the relationship between the input and
+output sequences.</p></li>
+<li><p>In many encoder-decoder models (such as those based on
+Transformers), the encoder processes the input sequence
+<strong>bidirectionally</strong>, meaning it can attend to both preceding and
+succeeding tokens when creating the representations. This ensures a
+comprehensive understanding of the input sequence before it is
+passed to the decoder.</p></li>
+<li><p>During training, the encoder-decoder model is typically provided
+with a sequence of <strong>input-output pairs</strong> (e.g., a Chinese sentence
+and its English translation). This paired structure makes the model
+highly suited for tasks like translation, where the goal is to map
+input sequences in one language to corresponding output sequences in
+another language.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="positional-encoding">
+<h3><span class="section-number">7.1.3. </span>Positional Encoding<a class="headerlink" href="#positional-encoding" title="Link to this heading"></a></h3>
+<p><strong>Positional encoding</strong> is a mechanism used in transformers to provide
+information about the order of tokens in a sequence. Unlike recurrent
+neural networks (RNNs), transformers process all tokens in parallel, and
+therefore lack a built-in way to capture sequential information.
+Positional encoding solves this by injecting position-dependent
+information into the input embeddings.</p>
+<section id="sinusoidal-positional-encodings">
+<h4><span class="section-number">7.1.3.1. </span>Sinusoidal Positional Encodings<a class="headerlink" href="#sinusoidal-positional-encodings" title="Link to this heading"></a></h4>
+<p>Sinusoidal positional encoding adds a vector to the embedding of each
+token, with the vector values derived using <strong>sinusoidal functions</strong>.
+For a token at position <span class="math notranslate nohighlight">\(pos\)</span> in the sequence and a specific
+dimension <span class="math notranslate nohighlight">\(i\)</span> of the embedding:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}PE(pos,2i) = \sin\Big({pos\over 10000^{2i/d}}\Big)\\
+PE(pos,2i+1) = \cos\Big({pos\over 10000^{2i/d}}\Big)\end{split}\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(pos\)</span>: Position of the token in the sequence.</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span>: Index of the embedding dimension.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span>: Total dimension of the embedding vector.</p></li>
+</ul>
+<p>The positional encodings are added directly to the token embeddings:</p>
+<div class="math notranslate nohighlight">
+\[\text{Input to Transformer} = \text{Token Embedding} + \text{Positional Encoding}\]</div>
+<figure class="align-center" id="id4">
+<img alt="position_embedding" src="_images/position_embedding.png" />
+<figcaption>
+<p><span class="caption-text">Positional Embedding</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rotary-positional-embeddings-rope">
+<h4><span class="section-number">7.1.3.2. </span>Rotary Positional Embeddings (RoPE)<a class="headerlink" href="#rotary-positional-embeddings-rope" title="Link to this heading"></a></h4>
+<p>Rotary positional embedding is a modern variant that introduces
+positional information through rotation in a complex vector space. It
+encodes positional information by rotating the query and key vectors in
+the attention mechanism using a transformation in a complex vector
+space. RoPE mitigates the limitations of absolute positional encodings
+by focusing on relative relationships, enabling smooth transitions and
+better handling of long sequences. This makes it particularly
+advantageous in large-scale language models like GPT-4, LLaMA, where
+long-range dependencies and adaptability are crucial.</p>
+<p>Given a token vector <span class="math notranslate nohighlight">\(x\)</span> with positional encoding, RoPE applies a
+rotation:</p>
+<div class="math notranslate nohighlight">
+\[\text{RoPE} = R(pos)\cdot x\]</div>
+<p>where <span class="math notranslate nohighlight">\(R(pos)\)</span> is the rotation matrix determined by the token’s
+position.</p>
+<p>Specifically, for a rotation by an angle <span class="math notranslate nohighlight">\(\theta\)</span>, the 2D rotation
+matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}R(\theta) = \begin{bmatrix} \cos(\theta) &amp; -\sin(\theta) \\ \sin(\theta) &amp; \cos(\theta)\end{bmatrix}\end{split}\]</div>
+<p>For each pair of dimensions <span class="math notranslate nohighlight">\((x_{even}, x_{odd})\)</span>, the rotation is
+performed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}x'_{even} \\x'_{odd} \end{bmatrix} = \begin{bmatrix} \cos(\theta) &amp; -\sin(\theta) \\ \sin(\theta) &amp; \cos(\theta)\end{bmatrix} \cdot \begin{bmatrix}x_{even} \\x_{odd} \end{bmatrix}\end{split}\]</div>
+</section>
+<section id="learnable-positional-encodings">
+<h4><span class="section-number">7.1.3.3. </span><strong>Learnable Positional Encodings</strong><a class="headerlink" href="#learnable-positional-encodings" title="Link to this heading"></a></h4>
+<p>Learnable Positional Encodings are a type of positional encoding used in
+transformer-based models where the positional information is not fixed
+(like in <strong>sinusoidal</strong> encoding) but is <strong>learned during training</strong>.
+These encodings are treated as trainable parameters and are updated
+through backpropagation, just like other parameters in the model.</p>
+</section>
+<section id="summary">
+<h4><span class="section-number">7.1.3.4. </span>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Sinusoidal
+Positional Encoding</p></th>
+<th class="head"><p>Rotary Positional
+Embeddings (RoPE)</p></th>
+<th class="head"><p>Learnable
+Positional
+Encodings</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>Absolute</p></td>
+<td><p>Relative</p></td>
+<td><p>Absolute</p></td>
+</tr>
+<tr class="row-odd"><td><p>Learnable</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Advantages</p></td>
+<td><p>Fixed, no trainable
+parameters;
+Generalizes to
+unseen sequence
+lengths;
+Computationally
+simple.</p></td>
+<td><p>Encodes relative
+positional
+relationships;
+Scales efficiently
+to long sequences;
+Smooth handling of
+long-range
+dependencies.</p></td>
+<td><p>Flexible for
+task-specific
+adaptation;
+Optimized during
+training.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Disadvantages</p></td>
+<td><p>Fixed, cannot adapt
+to data; Encodes
+only absolute
+positions; Less
+flexible for
+relative tasks.</p></td>
+<td><p>More complex to
+implement;
+Relatively new,
+less widespread for
+general tasks.</p></td>
+<td><p>Limited to a fixed
+maximum sequence
+length; No inherent
+relative
+positioning;
+Requires more
+parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p>Usage</p></td>
+<td><p>Early models (e.g.,
+original
+Transformer);
+S
+equence-to-sequence
+tasks like
+translation.</p></td>
+<td><p>Modern LLMs (e.g.,
+GPT-4, LLaMA) with
+long context
+lengths; Tasks
+requiring
+long-range
+dependencies.</p></td>
+<td><p>Popular in earlier
+models like GPT-2,
+BERT; Tasks with
+shorter sequences.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Best For</p></td>
+<td><p>Simplicity,
+generalization to
+unseen data.</p></td>
+<td><p>Long-context tasks,
+relative
+dependencies,
+efficient scaling.</p></td>
+<td><p>Task-specific
+optimization,
+shorter context
+tasks.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="embedding-matrix">
+<h3><span class="section-number">7.1.4. </span>Embedding Matrix<a class="headerlink" href="#embedding-matrix" title="Link to this heading"></a></h3>
+<p><strong>Embedding</strong> refers to the process of converting <strong>discrete tokens
+(words, subwords, or characters)</strong> into <strong>continuous vector
+representations</strong> in a high-dimensional space. These vectors capture the
+semantic and syntactic properties of tokens, allowing the model to
+process and understand language more effectively. Embedding layer is a
+necessary component because:</p>
+<ul class="simple">
+<li><p>Discrete symbols are not directly understandable by the model.
+Embeddings transform these discrete tokens into continuous vectors.
+Neural networks process continuous numbers more effectively than
+discrete symbols.</p></li>
+<li><p>Embeddings help the model learn relationships between words. By
+learning the <strong>semantic properties</strong> of tokens during training, words
+with similar meanings (e.g. “king” and “queen”) should have similar
+vector representations.</p></li>
+<li><p>In Transformer based models, embeddings are not just static
+representations but can be adjusted as the model learns from the
+context of a sentence to capture subtle semantic nuances and
+dependencies between words.</p></li>
+</ul>
+<figure class="align-center" id="id5">
+<img alt="word_embedding-modified" src="_images/word_embedding_matrix.png" />
+<figcaption>
+<p><span class="caption-text">Word Embedding</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Take an example of embedding matrix <span class="math notranslate nohighlight">\(W_E\)</span> with ~50k vocabulary
+size, each token in the vocabulary has a corresponding vector, typically
+initialized <strong>randomly</strong> at the beginning of training. Embedding matrix
+does not only represent individual words. They also encode the
+information about the position of the word. And through training process
+(passing through self-attention and multiple layers), these embeddings
+are transformed into <strong>contextual embeddings</strong>, encoding not only the
+individual word but also its relationship to other words in the
+sequence.</p>
+<p>The reason why a model predicting the next word requires efficient
+context incorporation, is that the meaning of a word is clearly informed
+by its surroundings, sometimes this includes context from a long
+distance away. For example, with contextual embeddings, the dot products
+of pieces of this sentence “<em>Harry Potter attends Hogwarts School of
+Witchcraft and Wizardry, retrieves the Philosopher’s Stone, battles a
+basilisk, and ultimately leads a final battle at Hogwarts, defeating
+Voldemort and bringing peace to the wizarding world</em>” results in the
+following projections in embedding space:</p>
+<figure class="align-center" id="id6">
+<img alt="contextual_embedding" src="_images/contextual_embedding.png" />
+<figcaption>
+<p><span class="caption-text">Contextual Embedding</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Embedding matrix contains vectors of all words in the vocabulary. It’s
+the first pile of weights in our model. If the vocabulary size is
+<span class="math notranslate nohighlight">\(V\)</span> and the embedding dimension is <span class="math notranslate nohighlight">\(d\)</span>, the embedding matrix
+<span class="math notranslate nohighlight">\(W_E\)</span> has dimensions <span class="math notranslate nohighlight">\(d \times V\)</span>. The total number of
+parameters in this embedding matrix is calculated by <span class="math notranslate nohighlight">\(d \times V\)</span>.</p>
+</section>
+<section id="attention-mechanism">
+<h3><span class="section-number">7.1.5. </span>Attention Mechanism<a class="headerlink" href="#attention-mechanism" title="Link to this heading"></a></h3>
+<section id="self-attention">
+<h4><span class="section-number">7.1.5.1. </span>Self-Attention<a class="headerlink" href="#self-attention" title="Link to this heading"></a></h4>
+<p>A <strong>self-attention</strong> is called single-head attention, which enables the
+model to effectively capture relationships and dependencies between
+different tokens within the same input sequence. Multi-headed attention
+has multiple self-attentions running in parallel. The goal of
+self-attention is to produce a refined embedding where each word has
+ingested contextual meanings from other words by a series of
+computations. For example, in the input of “The brave wizard cast a
+powerful spell”, the refined embedding E3’ of ‘wizard’ should contain
+the meaning of ‘brave’, and the refined embedding E7’ of ‘spell’ should
+contain the meaning of ‘powerful’.</p>
+<figure class="align-center">
+<img alt="selfattention_goal" src="_images/selfattention_goal.png" />
+</figure>
+<p>The computation involved in self-attention in transformers consists of
+several key steps: generating query, key, and value representations,
+calculating attention scores, applying softmax, and computing a weighted
+sum of the values.</p>
+<ol class="arabic">
+<li><p><strong>Linear Projection to Query space</strong></p>
+<p>Given an input represention with dimension of <span class="math notranslate nohighlight">\((d \times N)\)</span>
+where <span class="math notranslate nohighlight">\(d\)</span> is the embedding dimension and <span class="math notranslate nohighlight">\(N\)</span> is the token
+number. Query matrix <span class="math notranslate nohighlight">\(W_Q\)</span> with dimension of
+<span class="math notranslate nohighlight">\((N \times d_q)\)</span> (<span class="math notranslate nohighlight">\(d_q\)</span> is usually small e.g. 128)
+contains learnable parameters. It is used to project input
+representation <span class="math notranslate nohighlight">\(W_E\)</span> to the smaller query space <span class="math notranslate nohighlight">\(Q\)</span> by
+matrix multiplication.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Q = W_E W_Q\\ \space(N\times d)(d\times d_q) \rightarrow (N \times d_q)\end{split}\]</div>
+<p>Conceptually, the query matrix aims to ask each word a question
+regarding what kinds of relationship it has with each of the other
+words.</p>
+<figure class="align-center" id="id7">
+<img alt="query_projection" src="_images/query_projection.png" />
+<figcaption>
+<p><span class="caption-text">Query Projection</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p><strong>Linear Projection to Key space</strong></p>
+<p>Key matrix <span class="math notranslate nohighlight">\(W_k\)</span> with dimension of <span class="math notranslate nohighlight">\((N \times d_k)\)</span>
+contains learnable parameters. It is used to project input
+representation <span class="math notranslate nohighlight">\(W_E\)</span> to the smaller key space <span class="math notranslate nohighlight">\(K\)</span> by
+matrix multiplication.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}K = W_E W_K \\ \space (N \times d) (d \times d_k) \rightarrow (N \times d_k)\end{split}\]</div>
+<p>Conceptually, the keys are answering the queries by matching the
+queries whenever they closely align with each other. In our example
+of “The brave wizard cast a powerful spell”, the key metrix maps the
+word ‘brave’ to vectors that are closely aligned with the query
+produced by the word ‘wizard’.</p>
+<figure class="align-center" id="id8">
+<img alt="key_projection" src="_images/key_projection.png" />
+<figcaption>
+<p><span class="caption-text">Key Projection</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p><strong>Compute Attention Scores</strong></p>
+<p>Attention scores are calculated by taking the <strong>dot product</strong> of the
+query vectors with the key vectors. These scores as a measurement of
+relationship represent how well each key matches each query. They can
+be values from negative infinity to positive infinity.</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention Score} = QK^T\]</div>
+<p>In our example, the attention score produced by <span class="math notranslate nohighlight">\(K_2 \cdot Q_3\)</span>
+is expected to be a large positive value because ‘brave’ is an
+adjective to ‘wizard’. In other words, the embedding of ‘brave’
+<strong>attends to</strong> the embedding of ‘wizard’.</p>
+<figure class="align-center" id="id9">
+<img alt="attention_score" src="_images/attention_score.png" />
+<figcaption>
+<p><span class="caption-text">Attention Score</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p><strong>Scaling and softmax normalization</strong></p>
+<p>To prevent large values in the attention scores (which could lead to
+very small gradients), the scores are often scaled by the square root
+of the dimension of the key vectors <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span>. This scaling
+helps stabilize the softmax function used in the next step.</p>
+<div class="math notranslate nohighlight">
+\[\text{Scaled Attention Score} = {QK^T \over \sqrt{d_k}}\]</div>
+<p>The attention scores are passed through a <strong>softmax</strong> function, which
+normalizes them into a probability distribution. This ensures that
+each column of the attention matrix sums to 1, so each token has a
+clear distribution of “attention” over all tokens.</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention Weights} = \text{softmax}\Big({QK^T\over{\sqrt{d_k}}}\Big)\]</div>
+<p>Note that for a <strong>masked</strong> self attention, the bottom left triangle
+of attention scores are set to negative infinity before softmax
+normalization. The purpose is to mask those information as latter
+words are not allowed to influence earlier words. After softmax
+normalization, those masked attention information becomes zero and
+the columns stay normalized. This process is called <strong>masking</strong>.</p>
+</li>
+<li><p><strong>Computing weighted sum of values</strong></p>
+<p>In the attention score matrix with dimension of <span class="math notranslate nohighlight">\(N \times N\)</span>,
+each column is giving weights according to how relevant the word in
+key space (on the left in the figure) is to the correpsonding word in
+query space (on the top in the figure). This matrix is also called
+<strong>attention pattern</strong>.</p>
+<p>The size of attention pattern is the square of the context size,
+therefore, context size is a huge bottleneck for LLMs. Recent years,
+some variations of attention mechanism are developed such as Sparse
+Attention Mechanism, Blockwise Attention, Linformer, Reformer,
+Longformer, etc, aiming to make context more scalable.</p>
+</li>
+<li><p><strong>Linear Projection to Value space</strong></p>
+<p>Value matrix <span class="math notranslate nohighlight">\(W_v\)</span> with dimension of <span class="math notranslate nohighlight">\((N \times d_v)\)</span>
+contains learnable parameters. It is used to project input
+representation <span class="math notranslate nohighlight">\(W_E\)</span> to the smaller value space <span class="math notranslate nohighlight">\(V\)</span> by
+matrix multiplication.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}V = W_E W_V \\ \space (N \times d) (d \times d_v) \rightarrow (N \times d_v)\end{split}\]</div>
+<p>Conceptually, by maping the embedding of a word to the value space,
+it’s trying to figure out what should be added to the embedding of
+other words, if this word is relevant to adjusting the meaning of
+other words.</p>
+</li>
+<li><p><strong>Compute Weighted Sum of Values</strong></p>
+<p>Each token’s output is computed by taking a <strong>weighted sum</strong> of the
+value vectors, where the weights come from the attention distribution
+obtained in the previous step.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Output} = \text{Attention Weights} \times V\\
+(N \times N) (N \times d_v) \rightarrow (N \times d_v)\end{split}\]</div>
+<p>This results in a matrix of size <span class="math notranslate nohighlight">\(N \times d_v\)</span> where for each
+word there is a weighted sum of the value vectors <span class="math notranslate nohighlight">\(\Delta E\)</span>
+based on the attention distribution. Conceptually, this is the change
+going to be added to the original embedding, resulting in a more
+refined vector, encoding contextually rich meaning.</p>
+<figure class="align-center" id="id10">
+<img alt="value_projection_weighted_sum" src="_images/value_projection_weighted_sum.png" />
+<figcaption>
+<p><span class="caption-text">Value Projection and Weighted Sum</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+<p>To sum up, given <span class="math notranslate nohighlight">\(W_E\)</span> input matrix (<span class="math notranslate nohighlight">\(N \times d\)</span>),
+<span class="math notranslate nohighlight">\(W_Q, W_K, W_V\)</span> as weight matrices
+(<span class="math notranslate nohighlight">\(d\times d_q, d\times d_k, d\times d_v\)</span>), the matrix form of the
+full self-attention process can be written as:</p>
+<div class="math notranslate nohighlight">
+\[\text{Output} = \text{softmax}\Big({(W_EW_Q)(W_EW_K)^T \over \sqrt{d_k}}\Big) \times (W_EW_V)\]</div>
+<p>where the final output matrix is <span class="math notranslate nohighlight">\(N \times d_v\)</span>.</p>
+<p>A full attention block inside a transformer consists of <strong>multi-head
+attention</strong>, where self-attention operations run in parallel, each with
+its own distinct Key, Query, Value matrices.</p>
+<p>To update embedding matrix, the weighted sum of values is passed through
+a linear transformation (via <span class="math notranslate nohighlight">\(W_O\)</span>), and then added to the
+original input embeddings via a residual connection.</p>
+<div class="math notranslate nohighlight">
+\[\text{Final output} = \text{Output} \times W_o\]</div>
+<p>The number of parameters involved in Attention Mechanism:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p># Parameters</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Embedding Matrix</p></td>
+<td><p>d_embed * n_vocab</p></td>
+</tr>
+<tr class="row-odd"><td><p>Key Matrix</p></td>
+<td><p>d_key * d_embed * n_heads * n_layers</p></td>
+</tr>
+<tr class="row-even"><td><p>Query Matrix</p></td>
+<td><p>d_query * d_embed * n_heads * n_layers</p></td>
+</tr>
+<tr class="row-odd"><td><p>Value Matrix</p></td>
+<td><p>d_value * d_embed * n_heads * n_layers</p></td>
+</tr>
+<tr class="row-even"><td><p>Output Matrix</p></td>
+<td><p>d_embed * d_value * n_heads * n_layers</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unembedding Matrix</p></td>
+<td><p>n_vocab * d_embed</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cross-attention">
+<h4><span class="section-number">7.1.5.2. </span>Cross Attention<a class="headerlink" href="#cross-attention" title="Link to this heading"></a></h4>
+<p><strong>Cross-attention</strong> is a mechanism in transformers where the queries
+(<span class="math notranslate nohighlight">\(Q\)</span>) come from one sequence (e.g., the decoder), while the keys
+(<span class="math notranslate nohighlight">\(K\)</span>) and values (<span class="math notranslate nohighlight">\(V\)</span>) come from another sequence (e.g., the
+encoder). It allows the model to align and focus on relevant parts of a
+second sequence when processing the current sequence.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Self-Attention</p></th>
+<th class="head"><p>Cross-Attention</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Source
+of
+Queries</p></td>
+<td><p>Queries (<span class="math notranslate nohighlight">\(Q\)</span>) come
+from the same sequence.</p></td>
+<td><p>Queries (<span class="math notranslate nohighlight">\(Q\)</span>) come
+from one sequence (e.g.,
+decoder).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Source
+of
+Keys
+/Values</p></td>
+<td><p>Keys (<span class="math notranslate nohighlight">\(K\)</span>) and Values
+(<span class="math notranslate nohighlight">\(V\)</span>) come from the
+same sequence.</p></td>
+<td><p>Keys (<span class="math notranslate nohighlight">\(K\)</span>) and Values
+(<span class="math notranslate nohighlight">\(V\)</span>) come from a
+different sequence (e.g.,
+encoder).</p></td>
+</tr>
+<tr class="row-even"><td><p>Purpose</p></td>
+<td><p>Captures relationships
+within the same sequence.</p></td>
+<td><p>Aligns and integrates
+information between two
+sequences.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Example
+Usage</p></td>
+<td><p>Used in both encoder and
+decoder to process input or
+output tokens.</p></td>
+<td><p>Used in encoder-decoder
+models (e.g., translation)
+to let the decoder focus on
+encoder outputs.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="layer-normalization">
+<h3><span class="section-number">7.1.6. </span>Layer Normalization<a class="headerlink" href="#layer-normalization" title="Link to this heading"></a></h3>
+<p>Layer Normalization is crucial in transformers because it helps
+stabilize and accelerate the training of deep neural networks by
+normalizing the activations across the layers. The transformer
+architecture, which consists of many layers and complex operations,
+benefits significantly from this technique for several reasons:</p>
+<ol class="arabic simple">
+<li><p><strong>Internal Covariate Shift</strong>:</p>
+<ul class="simple">
+<li><p>Deep models like transformers often suffer from <strong>internal
+covariate shift</strong>, where the distribution of activations changes
+during training due to the update of model parameters. This can
+make training slower and less stable.</p></li>
+<li><p>Layer normalization helps mitigate this by ensuring that the output
+of each layer has a consistent distribution, which leads to faster
+convergence and more stable training.</p></li>
+</ul>
+</li>
+<li><p><strong>Gradient Flow</strong>:</p>
+<ul class="simple">
+<li><p>In deep models, the gradients can become either very small
+(vanishing gradient problem) or very large (exploding gradient
+problem) as they propagate through the layers. Layer normalization
+helps keep the gradients within a reasonable range, ensuring
+<strong>efficient gradient flow</strong> and preventing these issues.</p></li>
+</ul>
+</li>
+<li><p><strong>Improved Convergence</strong>:</p>
+<ul class="simple">
+<li><p>By normalizing the activations, layer normalization allows the
+model to use <strong>larger learning rates</strong>, which speeds up training
+and leads to better convergence.</p></li>
+</ul>
+</li>
+<li><p><strong>Works Across Batch Sizes</strong>:</p>
+<ul class="simple">
+<li><p>Unlike <strong>Batch Normalization</strong>, which normalizes activations across
+the batch dimension, <strong>Layer Normalization</strong> normalizes across the
+feature dimension for each individual example, making it more
+suitable for tasks like <strong>sequence modeling</strong>, where the batch size
+may vary and the model deals with sequences of different lengths.</p></li>
+</ul>
+</li>
+</ol>
+<p>The process can be broken down into the following steps:</p>
+<ol class="arabic">
+<li><p>Compute the Mean and Variance: for a given input
+<span class="math notranslate nohighlight">\(x = [x_1, ..., x_d]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mu = {1\over d} \sum^d_{i=1}x_i\\
+\sigma^2 = {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the mean and <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of
+the input.</p>
+</li>
+<li><p>Normalize the input: subtracting the mean and dividing by the
+standard deviation:</p>
+<div class="math notranslate nohighlight">
+\[\hat{x_i} = { x_i - \mu \over \sqrt{\sigma^2 + \epsilon}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a small constant added to the variance to
+avoid division by zero.</p>
+</li>
+<li><p>Scale and shift: after normalization, the output is scaled and
+shifted by <strong>learnable parameters</strong> <span class="math notranslate nohighlight">\(\gamma\)</span> (scale) and
+<span class="math notranslate nohighlight">\(\beta\)</span> (shift), which allow the model to restore the original
+distribution if needed:</p>
+<div class="math notranslate nohighlight">
+\[y_i = \gamma \cdot \hat{x_i} + \beta\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are trainable parameters
+learned during the training process.</p>
+</li>
+</ol>
+</section>
+<section id="residual-connections">
+<h3><span class="section-number">7.1.7. </span>Residual Connections<a class="headerlink" href="#residual-connections" title="Link to this heading"></a></h3>
+<p>In the transformer architecture, <strong>residual connections</strong> are used after
+each key operation, such as:</p>
+<ul class="simple">
+<li><p><strong>After Self-Attention</strong>: The input to the attention layer is added
+back to the output of the self-attention mechanism.</p></li>
+<li><p><strong>After Feed-Forward Networks</strong>: Similarly, after the output of the
+feed-forward network is computed, the input to the feed-forward block
+is added back to the result.</p></li>
+</ul>
+<p>In both cases, the sum is typically passed through a <strong>Layer
+Normalization</strong> operation, which stabilizes the training process
+further.</p>
+<p>Residual connection has the following advantages:</p>
+<ol class="arabic simple">
+<li><p><strong>Skip Connection</strong>: The original input to the layer is <strong>skipped
+over</strong> and added directly to the output of the layer. This allows the
+model to preserve the information from earlier layers, helping it
+learn faster and more efficiently.</p></li>
+<li><p><strong>Enabling Easier Gradient Flow</strong>: In deep neural networks, as layers
+become deeper, gradients can either vanish or explode, making
+training difficult. Residual connections mitigate the vanishing
+gradient problem by allowing gradients to flow more easily through
+the network during backpropagation.</p></li>
+<li><p><strong>Helping with Identity Mapping</strong>: Residual connections allow the
+network to learn <strong>identity mappings</strong>. If a certain layer doesn’t
+need to make any modifications to the input, the network can simply
+learn to output the input directly, ensuring that deeper layers don’t
+hurt the performance of the network. This helps the network avoid
+situations where deeper layers perform worse than shallow layers.</p></li>
+<li><p><strong>Stabilizing Training</strong>: The direct path from the input to the
+output, via the residual connection, helps stabilize the training by
+providing an additional gradient flow, making the learning process
+more robust to initialization and hyperparameters.</p></li>
+</ol>
+</section>
+<section id="feed-forward-networks">
+<h3><span class="section-number">7.1.8. </span>Feed-Forward Networks<a class="headerlink" href="#feed-forward-networks" title="Link to this heading"></a></h3>
+<p>In the Transformer architecture, <strong>Feed-Forward Networks (FFNs)</strong> are a
+key component within each layer of the encoder and decoder. FFNs are
+applied independently to each token in the sequence, after the attention
+mechanism (self-attention or cross-attention). They process the
+information passed through the attention mechanism to refine the
+representations of each token.</p>
+<p>The characteristics and roles of FFN:</p>
+<ol class="arabic simple">
+<li><p><strong>Position-Independent</strong>: FFNs operate <strong>independently</strong> on each
+token’s embedding, without considering the sequence structure. Each
+token is treated individually.</p></li>
+<li><p><strong>Non-Linearity</strong>: The <strong>activation function</strong> (like ReLU or GELU)
+introduces <strong>non-linearity</strong> into the model, which is crucial for
+allowing the network to learn complex patterns in the data</p></li>
+<li><p><strong>Parameter Sharing</strong>: The same FFN is applied to each token in the
+sequence independently. The parameters are shared across all tokens,
+which is computationally efficient and reduces the number of
+parameters in the model.</p></li>
+<li><p><strong>Dimensionality Expansion</strong>: The hidden layer size <span class="math notranslate nohighlight">\(d_{ff}\)</span> is
+typically <strong>larger</strong> than the model dimension
+<span class="math notranslate nohighlight">\(d_{\text{model}}\)</span> (often by a factor of 4), allowing the
+network to learn richer representations in the intermediate space.</p></li>
+<li><p><strong>Local Information Processing</strong>: FFNs only process <strong>local</strong>
+information about each token’s embedding, as opposed to the
+self-attention mechanism, which captures <strong>global dependencies</strong>
+across all tokens in the sequence.</p></li>
+<li><p><strong>Residual Connection</strong>: FFNs in transformers use <strong>residual
+connections</strong>, where the input to the FFN is added to the output.
+This helps <strong>prevent vanishing gradient issues</strong> and makes training
+deep models more efficient.</p></li>
+<li><p><strong>Parallelization</strong>: Since FFNs are applied independently to each
+token, they can be <strong>parallelized</strong> effectively, leading to faster
+training and inference.</p></li>
+</ol>
+<p>The network can only process a fixed number of vectors at a time, known
+as its <strong>context size</strong>. The context size can be 4096 (GPT-3) up to 2M
+tokens (LongRoPE).</p>
+</section>
+<section id="label-smoothing">
+<h3><span class="section-number">7.1.9. </span>Label Smoothing<a class="headerlink" href="#label-smoothing" title="Link to this heading"></a></h3>
+<p>In transformer models, <strong>label smoothing</strong> is commonly applied during
+the training phase to improve the model’s generalization by modifying
+the target labels used for training. This technique is typically used in
+tasks like <strong>machine translation</strong>, <strong>language modeling</strong>, and other
+sequence-to-sequence tasks.</p>
+<p>Label smoothing is applied after the decoder generates a probability
+distribution over the vocabulary in the final layer. The output of the
+decoder is a vector of logits (raw predictions), which are transformed
+into a probability distribution using <strong>softmax</strong>. After applying
+softmax, the predicted probabilities are compared to the smoothed target
+distribution to calculate the loss.</p>
+<p>The target distribution is originally an one-hot vector. After <strong>label
+smoothing</strong>, the one-hot encoding is adjusted so that the correct token
+has a reduced probability, and the incorrect tokens share a small amount
+of probability mass. For example, if the origianl one-hot vector is
+<span class="math notranslate nohighlight">\([0, 1, 0, 0]\)</span>, then label smoothing would convert this vector
+into something like <span class="math notranslate nohighlight">\([0.05, 0.9, 0.05, 0.05]\)</span>.</p>
+<p>During training, the model computes the <strong>cross-entropy loss</strong> between
+the predicted probabilities and the smoothed target distribution. The
+loss function is modified as follows:</p>
+<div class="math notranslate nohighlight">
+\[L = -\sum_i{\hat{y_i} \log(p_i)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> is the smoothed target probability for class
+<span class="math notranslate nohighlight">\(i\)</span>, and <span class="math notranslate nohighlight">\(p_i\)</span> is the predicted probability for class
+<span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The model’s output probabilities are then adjusted during training by
+backpropagating the modified loss. This encourages the model to
+distribute some probability to alternative tokens, making it less likely
+to become overly confident in its predictions.</p>
+<p>Label smoothing is important in transformers because</p>
+<ul class="simple">
+<li><p><strong>Prevents Overfitting</strong>: Label smoothing forces the model to spread
+some probability mass over other tokens, making it <strong>less
+overconfident</strong> and more likely to generalize well to unseen data.</p></li>
+<li><p><strong>Encourages Robustness</strong>: By smoothing the target labels, the
+transformer is encouraged to explore alternative possibilities for
+each token rather than memorizing the exact sequence of tokens in the
+training data.</p></li>
+<li><p><strong>Improved Calibration</strong>: The model learns to <strong>distribute probability
+more evenly</strong> across all tokens, which often results in
+<strong>better-calibrated probabilities</strong> that improve performance in tasks
+such as <strong>classification</strong> and <strong>sequence generation</strong>.</p></li>
+<li><p><strong>Training Stability</strong>: Label smoothing reduces the effect of outliers
+and noisy labels in the training data, improving the overall stability
+of training and leading to faster convergence.</p></li>
+</ul>
+</section>
+<section id="softmax-and-temperature">
+<h3><span class="section-number">7.1.10. </span>Softmax and Temperature<a class="headerlink" href="#softmax-and-temperature" title="Link to this heading"></a></h3>
+<p>The <strong>softmax function</strong> is a mathematical operation used to transform a
+vector of raw scores (<strong>logits</strong>) into a vector of <strong>probabilities</strong>. It
+takes a vector of real numbers, <span class="math notranslate nohighlight">\(z = [z_1, z_2, \dots, z_n]\)</span>, and
+maps it to a probability distribution, where each element is in the
+range [0, 1], and the sum of all elements equals 1. Mathematically,</p>
+<div class="math notranslate nohighlight">
+\[p_i=\text{softmax}(z_i) = {e^{z_i}\over \sum^n_{j=1}e^{z_j}}\]</div>
+<p>The softmax function has been used in GPT in two ways:</p>
+<ul class="simple">
+<li><p><strong>Probability Distribution</strong>: It converts raw scores into
+probabilities that sum to 1. Next token as prediction will be the
+token with the highest probability.</p></li>
+<li><p><strong>Attention Weights</strong>: In attention mechanism, softmax is applied to
+the score of all tokens in the sequence to normalize them into
+attention weights.</p></li>
+</ul>
+<p>Properties of Softmax:</p>
+<ul class="simple">
+<li><p><strong>Exponentiation</strong>: Amplifies the difference between higher and lower
+scores, making the largest score dominate.</p></li>
+<li><p><strong>Normalization</strong>: Ensures that the output probabilities sum to 1.</p></li>
+<li><p><strong>Differentiable</strong>: Enables backpropagation for training the model.</p></li>
+</ul>
+<p>The <strong>temperature</strong> parameter is used in the softmax function to control
+the sharpness or smoothness of the probability distribution over the
+logits, affecting how confident or diverse the model’s predictions are.
+When using a temperature <span class="math notranslate nohighlight">\(T &gt; 0\)</span>, the logits are scaled by
+<span class="math notranslate nohighlight">\(\frac{1}{T}\)</span> before applying softmax:</p>
+<div class="math notranslate nohighlight">
+\[p_i = \text{softmax}(z_i) = {\exp(z_i/T)\over \sum^n_{j=1}\exp(z_j/T)}\]</div>
+<p>When <span class="math notranslate nohighlight">\(T\)</span> is larger, more weight is given to the lower values, then
+the distribution is more uniform. If <span class="math notranslate nohighlight">\(T\)</span> is smaller, the biggest
+logit score will dominate more aggresively. Setting <span class="math notranslate nohighlight">\(T=0\)</span> gives
+all the weights to the maximum value resulting a ~100% probability.</p>
+</section>
+<section id="unembedding-matrix">
+<h3><span class="section-number">7.1.11. </span>Unembedding Matrix<a class="headerlink" href="#unembedding-matrix" title="Link to this heading"></a></h3>
+<p>The <strong>unembedding matrix</strong> in the final layer of GPT is the counterpart
+to the <strong>embedding matrix</strong> used at the input layer. GPT’s final hidden
+layer outputs continuous vectors for each token position in the input
+sequence. The unembedding matrix projects these vectors into a space
+where each dimension corresponds to a token in the vocabulary, producing
+logits for all vocabulary tokens.</p>
+<p>The unembedding matrix is not randomly initialized, instead, it’s
+initialized as the transpose of the embedding matrix
+<span class="math notranslate nohighlight">\(W_U = W_E^T\)</span>. If the vocabulary size is <span class="math notranslate nohighlight">\(V\)</span> and the hidden
+layer size is <span class="math notranslate nohighlight">\(d\)</span>, the unembedding matrix <span class="math notranslate nohighlight">\(W_U\)</span> has
+dimensions <span class="math notranslate nohighlight">\(V \times d\)</span>. In the final layer, GPT produces a hidden
+state <span class="math notranslate nohighlight">\(h\)</span> with size <span class="math notranslate nohighlight">\(d\)</span> for each token position. The
+unembedding matrix is applied as follows.</p>
+<div class="math notranslate nohighlight">
+\[\text{Logits} = h \cdot W_U^T\]</div>
+<p>The logits are passed through the <strong>softmax function</strong> to generate
+probabilities over the vocabulary. The token with the highest
+probability (or sampled stochastically) is chosen as the next token.</p>
+<p>Using a learned unembedding matrix to compute logits in the final layer
+of GPT offers critical advantages over directly computing logits from
+the final hidden vector without this additional projection step:</p>
+<ul class="simple">
+<li><p>The embedding and unembedding matrices establish a connection between
+the input and output token spaces. Without an unembedding matrix,
+there would be no learned mechanism to align the model’s internal
+representation to the specific vocabulary used for prediction.</p></li>
+<li><p>The model’s hidden states are designed to represent rich features of
+the input sequence rather than being explicitly tied to the vocabulary
+size. The unembedding matrix translates the compressed hidden state
+(e.g. 768 or 1024 size) into a vocabulary distribution (e.g. ~50k
+tokens), ensuring the model can scale to larger vocabularies or output
+spaces.</p></li>
+<li><p>The unembedding matrix learns how to transform these rich
+representations into logits that accurately reflect token
+probabilities in the specific vocabulary. It provides a structured way
+for gradients from the loss function (e.g., cross-entropy loss) to
+update both the model’s hidden representations and the vocabulary
+mappings.</p></li>
+</ul>
+</section>
+<section id="decoding">
+<h3><span class="section-number">7.1.12. </span>Decoding<a class="headerlink" href="#decoding" title="Link to this heading"></a></h3>
+<p>In transformer models, <strong>decoding</strong> refers to the process of generating
+output sequences from a model’s learned representations. Decoder takes
+the hidden state generated by encoder from input representations as well
+as previously generated tokens (or a start token) and progressively
+generates the output sequence one by one based on the probability
+distribution over all possible words in the vocabulary for the next
+token.</p>
+<p>Depending on the specific task and goals (e.g., translation, generation,
+or summarization), different decoding strategies like <strong>beam search</strong>,
+<strong>top-k sampling</strong>, <strong>top-p sampling</strong>, and <strong>temperature sampling</strong> can
+be used to strike the right balance between creativity and accuracy.</p>
+<section id="greedy-decoding">
+<h4><span class="section-number">7.1.12.1. </span>Greedy Decoding<a class="headerlink" href="#greedy-decoding" title="Link to this heading"></a></h4>
+<p>Greedy decoding is the simplest and most straightforward method. At each
+time step, the model chooses the token with the highest probability from
+the predicted distribution and adds it to the output sequence.</p>
+</section>
+<section id="beam-search">
+<h4><span class="section-number">7.1.12.2. </span>Beam Search<a class="headerlink" href="#beam-search" title="Link to this heading"></a></h4>
+<p>Beam search is a more advanced method than greedy decoding. It keeps
+track of multiple hypotheses at each decoding step (instead of just the
+most probable one) and selects the top-k most likely sequences (called
+the “beam width”).</p>
+<p>At each decoding step, beam search explores the top-k candidate
+sequences (instead of just one) and chooses the one with the highest
+cumulative probability. A hyperparameter, <strong>beam width</strong>, controls how
+many candidate sequences are considered at each step.</p>
+<figure class="align-center" id="id11">
+<img alt="beam_search" src="_images/beam_search.png" />
+<figcaption>
+<p><span class="caption-text">Beam Search</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="summary-1">
+<span id="id1"></span><h4><span class="section-number">7.1.12.3. </span>Summary<a class="headerlink" href="#summary-1" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Advantages</p></th>
+<th class="head"><p>Disadvantages</p></th>
+<th class="head"><p>Use Cases</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Greedy
+Decoding</p></td>
+<td><p>Simple, fast,
+deterministic</p></td>
+<td><p>May produce
+repetitive or
+suboptimal
+sequences</p></td>
+<td><p>When speed is
+important, low
+diversity tasks</p></td>
+</tr>
+<tr class="row-odd"><td><p>Beam
+Search</p></td>
+<td><p>Produces
+higher-quality
+sequences, less
+repetitive</p></td>
+<td><p>Computationally
+expensive,
+limited by beam
+width</p></td>
+<td><p>Machine
+translation,
+summarization</p></td>
+</tr>
+<tr class="row-even"><td><p>Top-k
+Sampling</p></td>
+<td><p>Adds diversity,
+avoids repetitive
+output</p></td>
+<td><p>May reduce
+coherence in
+some cases</p></td>
+<td><p>Creative text
+generation,
+storytelling</p></td>
+</tr>
+<tr class="row-odd"><td><p>Top-p
+Sampling</p></td>
+<td><p>Dynamically adjusts
+for diversity, more
+natural</p></td>
+<td><p>May still
+produce
+incoherent
+outputs</p></td>
+<td><p>Creative text
+generation,
+dialogue systems</p></td>
+</tr>
+<tr class="row-even"><td><p>Temperature
+Sampling</p></td>
+<td><p>Fine control over
+and diversity
+randomness, balance
+between coherence</p></td>
+<td><p>Requires tuning
+for optimal
+results</p></td>
+<td><p>Creative text
+randomness
+generation,
+fine-tuning output</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="modern-transformer-techniques">
+<h2><span class="section-number">7.2. </span>Modern Transformer Techniques<a class="headerlink" href="#modern-transformer-techniques" title="Link to this heading"></a></h2>
+<section id="kv-cache">
+<h3><span class="section-number">7.2.1. </span>KV Cache<a class="headerlink" href="#kv-cache" title="Link to this heading"></a></h3>
+<p>The primary purpose of the KV cache is to <strong>speed up the inference
+process</strong> and make it more efficient. Specifically, during
+autoregressive generation (such as generating text one token at a time),
+the transformer model processes the input tokens sequentially, which
+means that for each new token, it needs to compute the attention scores
+between the current token and all previous tokens.</p>
+<p>Instead of recalculating the <strong>key (K)</strong> and <strong>value (V)</strong> vectors for
+the entire sequence at each step (which would be computationally
+expensive), the KV cache allows the model to <strong>reuse the keys and
+values</strong> from previous tokens, thus reducing redundant computations.</p>
+<p>As demonstrated in the diagram below, during the training process,
+attention scores are calculated by this formula without KV Cache:</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention Weights} = \text{softmax}\Big({QK^T\over{\sqrt{d_k}}}\Big)\]</div>
+<p><img alt="qkv_attention_pattern" src="_images/qkv_attention_pattern.png" /></p>
+<p>When generating the next token during inference, the model doesn’t need
+to recompute the keys and values for the tokens it has already
+processed. Instead, it simply retrieves the stored keys and values from
+the cache for all previously generated tokens. Only the new token’s key
+and value are computed for the current timestep and added to the cache.</p>
+<p>During the attention computation for each new token, the model uses both
+the new key and value (for the current token) and the cached keys and
+values (for all previous tokens). This way, the attention mechanism can
+still compute the correct attention scores and weighted sums without
+recalculating everything from scratch.</p>
+<p><strong>The attention formula with Cache:</strong> for a new token <span class="math notranslate nohighlight">\(t\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention Output} = \text{softmax} \Big({Q_t \cdot [K_{\text{cache}}, K_t]^T\over \sqrt{d_k}}\Big) \cdot [V_{\text{cache}}, V_t]\]</div>
+<p><img alt="kv_cache" src="_images/kv_cache.png" /></p>
+<p><strong>Why Not Cache Queries:</strong> <strong>Queries</strong> are specific to the token being
+processed at the current step of generation. For every new token in
+autoregressive decoding, the query vector needs to be freshly computed
+because it is derived from the embedding of the current token. Keys and
+values, on the other hand, represent the context of the previous tokens,
+which remains the same across multiple steps until the sequence is
+extended.</p>
+<p><strong>Space complexity of KV Cache is huge without optimization</strong>: The space
+complexity is calculated by number of layers * number of batch size * number
+of attention heads * attention head size * sequence length.</p>
+<p>Space complexity can be optimized by reducing “number of attention
+heads” without too much penalty on performance.</p>
+</section>
+<section id="multi-query-attention">
+<h3><span class="section-number">7.2.2. </span>Multi-Query Attention<a class="headerlink" href="#multi-query-attention" title="Link to this heading"></a></h3>
+<p><strong>Multi-Query Attention (MQA)</strong> is a variant of the attention mechanism
+introduced to improve the efficiency of transformer models, particularly
+in scenarios where decoding speed and memory usage are critical. It
+modifies the standard multi-head attention by using multiple query heads
+but sharing the key and value matrices across all the heads. There are
+still multiple independent query heads (<span class="math notranslate nohighlight">\(Q\)</span>), but the <strong>key
+(:math:`K`) and value (:math:`V`) matrices are shared</strong> across all the
+heads.</p>
+<p>Each query head <span class="math notranslate nohighlight">\(i\)</span> computes its attention scores with the shared
+key matrix:</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention}_i = \text{softmax} \Big({Q_i K^T \over \sqrt{d_k}}\Big)V\]</div>
+<figure class="align-center" id="id12">
+<img alt="multiquery_attention" src="_images/multiquery_attention.png" />
+<figcaption>
+<p><span class="caption-text">Multi-Query Attention</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Advantages of MQA:</strong></p>
+<ul class="simple">
+<li><p><strong>Efficiency in Memory Usage</strong>: By sharing the <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(V\)</span>
+matrices across heads, the memory footprint is reduced, particularly
+for the KV cache used during autoregressive generation in large
+models. This is especially valuable for serving large-scale language
+models with limited GPU/TPU memory.</p></li>
+<li><p><strong>Faster Decoding</strong>: During autoregressive decoding (e.g., in GPT-like
+models), each query needs to attend to the cached keys and values. In
+standard multi-head attention, this involves accessing multiple
+<span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(V\)</span> matrices, which can slow down decoding. In
+MQA, since only one shared <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(V\)</span> matrix is used, the
+decoding process is faster and more streamlined</p></li>
+<li><p><strong>Minimal Performance Tradeoff</strong>: Despite simplifying the model, MQA
+often achieves comparable performance to standard multi-head attention
+in many tasks, particularly in large-scale language models.</p></li>
+</ul>
+</section>
+<section id="grouped-query-attention">
+<h3><span class="section-number">7.2.3. </span>Grouped-Query Attention<a class="headerlink" href="#grouped-query-attention" title="Link to this heading"></a></h3>
+<p><strong>Grouped-Query Attention (GQA)</strong> is a hybrid approach between
+<strong>Multi-Head Attention (MHA)</strong> and <strong>Multi-Query Attention (MQA)</strong> that
+balances computational efficiency and expressivity. In GQA, multiple
+query heads are grouped together, and each group shares a set of
+<strong>keys</strong> and <strong>values</strong>. This design seeks to retain some of the
+flexibility of MHA while reducing the memory and computational overhead,
+similar to MQA.</p>
+<p>Mathematically, if there are <span class="math notranslate nohighlight">\(G\)</span> groups, each with <span class="math notranslate nohighlight">\(H / G\)</span>
+heads, the queries are processed independently for each group but share
+keys and values within the group:</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention}_i = \text{softmax} \Big({Q_i K^T_{\text{group,i}}\over \sqrt{d_k}}\Big) V_{group,i}\]</div>
+<p>where <span class="math notranslate nohighlight">\(i\)</span> is the query head within a group.</p>
+<figure class="align-center" id="id13">
+<img alt="grouped_query_attention" src="_images/grouped_query_attention.png" />
+<figcaption>
+<p><span class="caption-text">Grouped Query Attention</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Advantages of GQA:</strong></p>
+<ul class="simple">
+<li><p><strong>Efficiency</strong>:</p>
+<ul>
+<li><p>Reduced KV Cache Size: GQA requires fewer key and value matrices
+compared to MHA. This reduces memory usage, especially during
+autoregressive decoding when keys and values for all previous tokens
+are stored in a cache.</p></li>
+<li><p>Faster Inference: By reducing the number of keys and values to
+process, GQA speeds up attention computations during decoding,
+particularly in long-sequence tasks.</p></li>
+</ul>
+</li>
+<li><p><strong>Balance Between Flexibility and Efficiency</strong>:</p>
+<ul>
+<li><p>More Expressivity Than MQA: Unlike MQA, where all heads share the
+same keys and values, GQA allows multiple groups of keys and values,
+enabling more flexibility for the attention mechanism to learn
+diverse patterns.</p></li>
+<li><p>Simpler Than MHA: GQA is less computationally expensive and
+memory-intensive than MHA, as fewer sets of keys and values are
+used.</p></li>
+</ul>
+</li>
+<li><p><strong>Scalability</strong>:</p>
+<ul>
+<li><p>GQA is well-suited for very large models and long-sequence tasks
+where standard MHA becomes computationally and memory prohibitive.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="flash-attention">
+<h3><span class="section-number">7.2.4. </span>Flash Attention<a class="headerlink" href="#flash-attention" title="Link to this heading"></a></h3>
+</section>
+</section>
 </section>
 
 

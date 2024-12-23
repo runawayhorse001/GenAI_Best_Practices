@@ -92,12 +92,39 @@
 \contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{158}{subsection.6.4.2}%
 \contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{159}{subsection.6.4.3}%
 \contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{161}{chapter.7}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{163}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{164}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{164}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{165}{section.8.3}%
-\contentsline {section}{\numberline {8.4}GEval with DeepEval}{165}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{165}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{165}{subsection.8.4.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{177}{chapter.9}%
-\contentsline {chapter}{Bibliography}{179}{chapter*.4}%
+\contentsline {section}{\numberline {7.1}Transformer Architecture}{162}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Attention Is All You Need}{162}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Encoder\sphinxhyphen {}Decoder}{163}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Positional Encoding}{164}{subsection.7.1.3}%
+\contentsline {subsubsection}{Sinusoidal Positional Encodings}{164}{subsubsection*.4}%
+\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{165}{subsubsection*.5}%
+\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{166}{subsubsection*.6}%
+\contentsline {subsubsection}{Summary}{166}{subsubsection*.7}%
+\contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{166}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{168}{subsection.7.1.5}%
+\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{168}{subsubsection*.8}%
+\contentsline {subsubsection}{Cross Attention}{172}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{173}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{174}{subsection.7.1.7}%
+\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{174}{subsection.7.1.8}%
+\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{175}{subsection.7.1.9}%
+\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{176}{subsection.7.1.10}%
+\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{176}{subsection.7.1.11}%
+\contentsline {subsection}{\numberline {7.1.12}Decoding}{177}{subsection.7.1.12}%
+\contentsline {subsubsection}{Greedy Decoding}{177}{subsubsection*.10}%
+\contentsline {subsubsection}{Beam Search}{177}{subsubsection*.11}%
+\contentsline {subsubsection}{Summary}{178}{subsubsection*.12}%
+\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{178}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}KV Cache}{178}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{180}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{181}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{182}{subsection.7.2.4}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{183}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{184}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{184}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{185}{section.8.3}%
+\contentsline {section}{\numberline {8.4}GEval with DeepEval}{185}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{185}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{185}{subsection.8.4.2}%
+\contentsline {chapter}{\numberline {9}Main Reference}{197}{chapter.9}%
+\contentsline {chapter}{Bibliography}{199}{chapter*.13}%
