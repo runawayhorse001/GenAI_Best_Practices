@@ -9329,7 +9329,7 @@ Pre\sphinxhyphen{}training as we know it will end. \textendash{} Ilya Sutskever 
 \capstart
 
 \noindent\sphinxincludegraphics{{ilya_sutskever}.png}
-\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id3}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
+\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id8}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -9356,7 +9356,7 @@ This chapter delves into transformer models, drawing on insights from
 \capstart
 
 \noindent\sphinxincludegraphics{{transformer_architecture}.png}
-\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id4}}\end{figure}
+\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id9}}\end{figure}
 
 
 \subsection{Attention Is All You Need}
@@ -9583,7 +9583,7 @@ The positional encodings are added directly to the token embeddings:
 \capstart
 
 \noindent\sphinxincludegraphics{{position_embedding}.png}
-\caption{Positional Embedding}\label{\detokenize{pretraining:id5}}\end{figure}
+\caption{Positional Embedding}\label{\detokenize{pretraining:id10}}\end{figure}
 
 
 \subsubsection{Rotary Positional Embeddings (RoPE)}
@@ -9835,7 +9835,7 @@ dependencies between words.
 \capstart
 
 \noindent\sphinxincludegraphics{{word_embedding_matrix}.png}
-\caption{Word Embedding}\label{\detokenize{pretraining:id6}}\end{figure}
+\caption{Word Embedding}\label{\detokenize{pretraining:id11}}\end{figure}
 
 \sphinxAtStartPar
 Take an example of embedding matrix \(W_E\) with \textasciitilde{}50k vocabulary
@@ -9864,7 +9864,7 @@ following projections in embedding space:
 \capstart
 
 \noindent\sphinxincludegraphics{{contextual_embedding}.png}
-\caption{Contextual Embedding}\label{\detokenize{pretraining:id7}}\end{figure}
+\caption{Contextual Embedding}\label{\detokenize{pretraining:id12}}\end{figure}
 
 \sphinxAtStartPar
 Embedding matrix contains vectors of all words in the vocabulary. It’s
@@ -9876,6 +9876,13 @@ parameters in this embedding matrix is calculated by \(d \times V\).
 
 \subsection{Attention Mechanism}
 \label{\detokenize{pretraining:attention-mechanism}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{self_attention_hendrik}.png}
+\caption{Self Attention (source: \sphinxhref{https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download}{The Transformer Architecture A Visual Guide})}\label{\detokenize{pretraining:id13}}\end{figure}
+
 
 \subsubsection{Self\sphinxhyphen{}Attention}
 \label{\detokenize{pretraining:self-attention}}
@@ -9917,7 +9924,8 @@ contains learnable parameters. It is used to project input
 representation \(W_E\) to the smaller query space \(Q\) by
 matrix multiplication.
 \begin{equation*}
-\begin{split}Q = W_E W_Q\\ \space(N\times d)(d\times d_q) \rightarrow (N \times d_q)\end{split}
+\begin{split}Q &= W_E W_Q\\
+(N\times d)(d\times d_q) &\rightarrow (N \times d_q)\end{split}
 \end{equation*}
 \sphinxAtStartPar
 Conceptually, the query matrix aims to ask each word a question
@@ -9929,7 +9937,7 @@ words.
 \capstart
 
 \noindent\sphinxincludegraphics{{query_projection}.png}
-\caption{Query Projection}\label{\detokenize{pretraining:id8}}\end{figure}
+\caption{Query Projection}\label{\detokenize{pretraining:id14}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -9941,7 +9949,8 @@ contains learnable parameters. It is used to project input
 representation \(W_E\) to the smaller key space \(K\) by
 matrix multiplication.
 \begin{equation*}
-\begin{split}K = W_E W_K \\ \space (N \times d) (d \times d_k) \rightarrow (N \times d_k)\end{split}
+\begin{split}K &= W_E W_K \\
+(N \times d) (d \times d_k) &\rightarrow (N \times d_k)\end{split}
 \end{equation*}
 \sphinxAtStartPar
 Conceptually, the keys are answering the queries by matching the
@@ -9955,7 +9964,7 @@ produced by the word ‘wizard’.
 \capstart
 
 \noindent\sphinxincludegraphics{{key_projection}.png}
-\caption{Key Projection}\label{\detokenize{pretraining:id9}}\end{figure}
+\caption{Key Projection}\label{\detokenize{pretraining:id15}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -9980,7 +9989,7 @@ adjective to ‘wizard’. In other words, the embedding of ‘brave’
 \capstart
 
 \noindent\sphinxincludegraphics{{attention_score}.png}
-\caption{Attention Score}\label{\detokenize{pretraining:id10}}\end{figure}
+\caption{Attention Score}\label{\detokenize{pretraining:id16}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10038,7 +10047,8 @@ contains learnable parameters. It is used to project input
 representation \(W_E\) to the smaller value space \(V\) by
 matrix multiplication.
 \begin{equation*}
-\begin{split}V = W_E W_V \\ \space (N \times d) (d \times d_v) \rightarrow (N \times d_v)\end{split}
+\begin{split}V &= W_E W_V \\
+(N \times d) (d \times d_v) &\rightarrow (N \times d_v)\end{split}
 \end{equation*}
 \sphinxAtStartPar
 Conceptually, by maping the embedding of a word to the value space,
@@ -10055,8 +10065,8 @@ Each token’s output is computed by taking a \sphinxstylestrong{weighted sum} o
 value vectors, where the weights come from the attention distribution
 obtained in the previous step.
 \begin{equation*}
-\begin{split}\text{Output} = \text{Attention Weights} \times V\\
-(N \times N) (N \times d_v) \rightarrow (N \times d_v)\end{split}
+\begin{split}\text{Output} &= \text{Attention Weights} \times V\\
+(N \times N) (N \times d_v) &\rightarrow (N \times d_v)\end{split}
 \end{equation*}
 \sphinxAtStartPar
 This results in a matrix of size \(N \times d_v\) where for each
@@ -10070,7 +10080,7 @@ refined vector, encoding contextually rich meaning.
 \capstart
 
 \noindent\sphinxincludegraphics{{value_projection_weighted_sum}.png}
-\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id11}}\end{figure}
+\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id17}}\end{figure}
 
 \end{enumerate}
 
@@ -10336,8 +10346,8 @@ The process can be broken down into the following steps:
 Compute the Mean and Variance: for a given input
 \(x = [x_1, ..., x_d]\):
 \begin{equation*}
-\begin{split}\mu = {1\over d} \sum^d_{i=1}x_i\\
-\sigma^2 = {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2\end{split}
+\begin{split}\mu &= {1\over d} \sum^d_{i=1}x_i\\
+\sigma^2 &= {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2\end{split}
 \end{equation*}
 \sphinxAtStartPar
 where \(\mu\) is the mean and \(\sigma^2\) is the variance of
@@ -10634,7 +10644,9 @@ When using a temperature \(T > 0\), the logits are scaled by
 When \(T\) is larger, more weight is given to the lower values, then
 the distribution is more uniform. If \(T\) is smaller, the biggest
 logit score will dominate more aggresively. Setting \(T=0\) gives
-all the weights to the maximum value resulting a \textasciitilde{}100\% probability.
+all the weights to the maximum value resulting a \textasciitilde{}100\% probability. This
+means higher temperature leads to creative but potentially incoherent
+outputs, and lower temperature leads to safe and predictable outputs.
 
 
 \subsection{Unembedding Matrix}
@@ -10741,7 +10753,134 @@ many candidate sequences are considered at each step.
 \capstart
 
 \noindent\sphinxincludegraphics{{beam_search}.png}
-\caption{Beam Search}\label{\detokenize{pretraining:id12}}\end{figure}
+\caption{Beam Search}\label{\detokenize{pretraining:id18}}\end{figure}
+
+
+\subsubsection{Top\sphinxhyphen{}k Sampling}
+\label{\detokenize{pretraining:top-k-sampling}}
+\sphinxAtStartPar
+After the model outputs a probability distribution over the entire
+vocabulary (e.g., 50,000 tokens for GPT\sphinxhyphen{}style models). Only the top
+\(k\) tokens with the highest probabilities are retained. All other
+tokens are discarded. The probabilities of the remaining \(k\)
+tokens are renormalized to sum to 1. A token is randomly selected from
+the \(k\)\sphinxhyphen{}token subset based on the renormalized probabilities.
+
+\sphinxAtStartPar
+When \(k=1\), top\sphinxhyphen{}k sampling is the same as greedy decoding, where
+the token with the highest probability is chosen. Higher \(k\)
+allows more variety by considering more tokens.
+
+\sphinxAtStartPar
+Top\sphinxhyphen{}k sampling is considered \sphinxstylestrong{static} and \sphinxstylestrong{predefined} because once
+a contant \(k\) is specified, at each decoding step, only the top
+\(k\) tokens are considered for sampling. Regardless the shape of
+distribution, the size of the candidate pool \(k\) does not change.
+If the probability distribution is “flat”(many tokens with similar
+probabilities), top\sphinxhyphen{}k might still discard important tokens outside the
+top \(k\). If the distribution is “peaked” (one or a few tokens
+dominate), top\sphinxhyphen{}k might include unlikely tokens unnecessarily.
+
+
+\subsubsection{Top\sphinxhyphen{}p (Nucleus) Sampling}
+\label{\detokenize{pretraining:top-p-nucleus-sampling}}
+\sphinxAtStartPar
+After the model outputs a probability distribution over the vocabulary.
+Tokens are sorted in descending order of probability. A cumulative sum
+of probabilities is calculated for the sorted tokens. The smallest set
+of tokens whose cumulative probability exceeds or equals \(p\) are
+retained. The probabilities of the selected tokens are renormalized to
+sum to 1. A token is randomly selected from this dynamic subset.
+
+\sphinxAtStartPar
+When \(p=1\), all tokens are included, then top\sphinxhyphen{}p sampling is
+equivalent to pure sampling. Lower \(p\) focuses on fewer tokens,
+ensuring higher\sphinxhyphen{}quality predictions while retaining some randomness.
+
+\sphinxAtStartPar
+Top\sphinxhyphen{}p sampling is considered \sphinxstylestrong{dynamic} and \sphinxstylestrong{adaptive} because the
+number of tokens in the pool varies depending on the shape of the
+probability distribution. If the distribution is “peaked,” top\sphinxhyphen{}p will
+include fewer tokens because the most probable tokens quickly satisfy
+the cumulative threshold \(p\). If the distribution is “flat,” top\sphinxhyphen{}p
+will include more tokens to ensure the cumulative probability reaches
+\(p\).
+
+
+\subsubsection{Temperature Scaling}
+\label{\detokenize{pretraining:temperature-scaling}}
+\sphinxAtStartPar
+As mentioned in the section “Softmax and Temperature”, temperature
+scaling is applied to the logits right before sampling or selection
+(e.g., during top\sphinxhyphen{}k or top\sphinxhyphen{}p sampling). It modifies the softmax function
+with a parameter \(T\) added to adjust the shape of the resulting
+probability distribution from logits. Temperature scaling is used in
+tasks requiring stochastic decoding methods like top\sphinxhyphen{}k sampling or
+nucleus sampling.
+
+\sphinxAtStartPar
+\sphinxstylestrong{Temperature (:math:\textasciigrave{}T\textasciigrave{}) + Top\sphinxhyphen{}k}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+“High \(T\) + high \(k\)” results in extremely diverse and
+creative outputs. It may produce incoherent or irrelevant text because
+too many unlikely tokens are considered. It’s used when generating
+highly imaginative or exploratory text, such as in creative writing.
+
+\item {} 
+\sphinxAtStartPar
+“High \(T\) + low \(k\)” balances diversity with some level of
+coherence. Even with low \(k\), high \(T\) may introduce
+unexpected word choices. It’s used when creative tasks where some
+randomness is desired, but the context must still be respected.
+
+\item {} 
+\sphinxAtStartPar
+“Low \(T\) + high \(k\)” produces coherent and focused outputs
+because \(T\) emphasizes the most probable tokens. The effect of
+high \(k\) is mitigated because the scaled probabilities naturally
+limit diversity.
+
+\item {} 
+\sphinxAtStartPar
+“Low \(T\) + low \(k\)” produces highly deterministic outputs.
+Text may seem repetitive. It’s used when tasks requiring consistency,
+such as factual responses or concise answers.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Temperature (:math:\textasciigrave{}T\textasciigrave{}) + Top\sphinxhyphen{}p}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+“High \(T\) + high \(p\)” produces diverse outputs, but the
+context may still be loosely followed. It may produce incoherent or
+irrelevant text because too many unlikely tokens are considered. It’s
+used when generating exploratory or brainstorming text.
+
+\item {} 
+\sphinxAtStartPar
+“High \(T\) + low \(p\)” produces constrained output despite
+high \(T\), as only the most probable tokens within the
+\(p\)\sphinxhyphen{}threshold are considered. Even with low \(k\), high
+\(T\) may introduce unexpected word choices. It’s used for
+slightly creative tasks with some emphasis on coherence.
+
+\item {} 
+\sphinxAtStartPar
+“Low \(T\) + high \(p\)” produces coherent and slightly
+diverse text. It’s used in balanced tasks, such as assistant chatbots
+or domain\sphinxhyphen{}specific content generation.
+
+\item {} 
+\sphinxAtStartPar
+“Low \(T\) + low \(p\)” produces very deterministic and rigid
+outputs. it’s used when generating formal or technical content
+requiring precision, such as legal or scientific writing.
+
+\end{itemize}
 
 
 \subsubsection{Summary}
@@ -10969,7 +11108,7 @@ key matrix:
 \capstart
 
 \noindent\sphinxincludegraphics{{multiquery_attention}.png}
-\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id13}}\end{figure}
+\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id19}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of MQA:}
@@ -11026,7 +11165,7 @@ where \(i\) is the query head within a group.
 \capstart
 
 \noindent\sphinxincludegraphics{{grouped_query_attention}.png}
-\caption{Grouped Query Attention}\label{\detokenize{pretraining:id14}}\end{figure}
+\caption{Grouped Query Attention}\label{\detokenize{pretraining:id20}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of GQA:}
@@ -11085,6 +11224,288 @@ where standard MHA becomes computationally and memory prohibitive.
 
 \subsection{Flash Attention}
 \label{\detokenize{pretraining:flash-attention}}
+\sphinxAtStartPar
+FlashAttention \sphinxcite{reference:tri-dao-1} is a novel and
+efficient algorithm designed to address the computational and memory
+challenges of self\sphinxhyphen{}attention in Transformers, particularly for long
+sequences. It’s designed to solve two challenges of traditional
+Transformer implementation:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Self\sphinxhyphen{}attention mechanisms in transformers are computationally
+expensive with quadratic time (\(n^2\)) and memory complexity
+concerning sequence length (\(n\)), making them inefficient for
+long sequences.
+
+\item {} 
+\sphinxAtStartPar
+It’s been revealed in “Data Movement is All You Need” \sphinxcite{reference:andrei} that the
+key bottleneck during training a Transformer is data movement (reading
+and writing data) rather than computation. The paper highlights that
+many transformer operations are \sphinxstylestrong{memory\sphinxhyphen{}bandwidth\sphinxhyphen{}bound}, meaning
+that the speed of data transfer to and from HBM often becomes a
+bottleneck rather than the GPU’s raw computational power. This finding
+shows that existing implementations of Transformers do not efficiently
+utilize GPUs.
+
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{flashattention_paper}.png}
+\caption{Flash Attention (source: \sphinxhref{https://arxiv.org/abs/2205.14135}{Flash Attention})}\label{\detokenize{pretraining:id21}}\end{figure}
+
+\sphinxAtStartPar
+The idea of Flash Attention is \sphinxstylestrong{computing by blocks} to reduce HBM
+reads and writes. Their implementation is a \sphinxstylestrong{fused CUDA kernel} for
+fine\sphinxhyphen{}grained control of memory accesses with two techniques:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Tiling}: Tiling works by decomposing large softmax into smaller
+ones by scaling. It firstly loads inputs by blocks from HBM to SRAM
+for fast computation, computes attention output with respect to that
+block in SRAM, then updates output in HBM by scaling.
+
+\sphinxAtStartPar
+The method decomposes softmax as follows as an example.
+\([x_1, x_2]\) represents the concatenation of two partitions
+(blocks) of input scores. Softmax is independently computed one block
+at a time. This block\sphinxhyphen{}wise operations reduce memory and computational
+overhead compared to processing the entire sequence at once.
+\(m(x)\) represents the maximum value within a block of the
+attention matrix. It’s used as a max\sphinxhyphen{}shifting step during the softmax
+calculation, which improves numerical stability. \(\ell(x)\) is a
+normalization factor used to convert the exponentials into probability
+distributions. The combination of scaling factors ensures that the
+results match the global Softmax computation if it were performed over
+the full sequence.
+\begin{equation*}
+\begin{split}&m(x) = m(\begin{bmatrix}x_1 & x_2\end{bmatrix}) = \max(m(x_1), m(x_2))\\
+&f(x) = \begin{bmatrix} e^{m(x_1)-m(x)}f(x_1) & e^{m(x_2)-m(x)}f(x_2)\end{bmatrix}\\
+&\ell(x) = \ell(\begin{bmatrix}x_1 & x_2\end{bmatrix}) = e^{m(x_1)-m(x)}f(x_1)+e^{m(x_2)-m(x)}f(x_2)\\
+&\text{softmax}(x) = {f(x)\over \ell(x)}\end{split}
+\end{equation*}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Recomputation}: the idea is to store the output
+\(\text{softmax}(PQ^T)V\) and softmax normalization factors
+\(m(x), \ell(x)\) rather than storing the attention matrix from
+forward in HBM, then recompute the attention matrix in the backward in
+SRAM.
+
+\sphinxAtStartPar
+Recomputation allows the model to discard intermediate activations
+during the forward pass, only keeping the most essential data for
+backpropagation. This frees up memory, enabling the model to process
+much longer sequences or use larger batch sizes. It essentially trades
+\sphinxstylestrong{additional computation} for \sphinxstylestrong{reduced memory usage}, making the
+process scalable. This is a tradeoff that is often acceptable,
+especially with hardware accelerators (GPUs/TPUs) where computation
+power is abundant but memory capacity is limited.
+
+\end{itemize}
+
+\sphinxAtStartPar
+Both \sphinxstylestrong{tiling} and \sphinxstylestrong{recomputation} aim to address memory and
+computational challenges when working with large models or long
+sequences, each improving efficiency in different ways:
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Benefit}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Tiling}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Recomputation}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Memory
+Efficiency
+&
+\sphinxAtStartPar
+Reduces memory usage by
+processing smaller tiles
+instead of the whole
+sequence at once.
+&
+\sphinxAtStartPar
+Saves memory by not
+storing intermediate
+results; recomputes when
+needed.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Computational
+Speed
+&
+\sphinxAtStartPar
+Enables parallel
+processing of smaller
+tiles, improving
+computation time.
+&
+\sphinxAtStartPar
+Reduces memory footprint,
+potentially increasing
+throughput by minimizing
+the need to store large
+intermediate values.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Handling
+Long
+Sequences
+&
+\sphinxAtStartPar
+Makes it feasible to
+process long sequences
+that otherwise wouldn’t
+fit in memory.
+&
+\sphinxAtStartPar
+Allows for computation of
+large models with limited
+memory by recomputing
+expensive intermediate
+steps.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Hardware
+Utilization
+&
+\sphinxAtStartPar
+Optimizes the use of
+limited memory resources
+(e.g., GPU/TPU) by
+limiting the amount of
+data in memory.
+&
+\sphinxAtStartPar
+Helps avoid running out
+of memory by not
+requiring large storage
+for intermediate states.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Scalability
+&
+\sphinxAtStartPar
+Enables handling of
+larger datasets and
+longer sequences without
+overwhelming memory.
+&
+\sphinxAtStartPar
+Makes it possible to work
+with large models and
+datasets by not storing
+every intermediate
+result.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Reduced
+Memory
+Bandwidth
+&
+\sphinxAtStartPar
+Lowers memory bandwidth
+requirements by only
+loading small parts of
+data at a time.
+&
+\sphinxAtStartPar
+Minimizes the need for
+frequent memory
+writes/reads, improving
+memory access efficiency.
+\\
+\sphinxhline
+\sphinxAtStartPar
+Reduces
+Redundant
+Computation
+&
+\sphinxAtStartPar
+Focuses on smaller
+sub\sphinxhyphen{}problems, reducing
+redundant operations.
+&
+\sphinxAtStartPar
+Recomputes intermediate
+steps only when
+necessary, avoiding
+unnecessary storage and
+computation.
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Flash Attention 2}:
+
+\sphinxAtStartPar
+FlashAttention\sphinxhyphen{}2 \sphinxcite{reference:tri-dao-2} builds upon
+FlashAttention by addressing suboptimal work partitioning between
+different thread blocks and warps on the GPU. It reduces the number of
+non\sphinxhyphen{}matrix multiplication (matmul) FLOPs, which are slower to perform on
+GPUs. It also parallelizes the attention computation across the sequence
+length dimension, in addition to the batch and number of heads
+dimensions. This increases occupancy (utilization of GPU resources),
+especially when the sequence is long and the batch size is small. Within
+each thread block, FlashAttention\sphinxhyphen{}2 distributes the work between warps
+to reduce communication through shared memory. FlashAttention\sphinxhyphen{}2 also
+uses a minor tweak to the backward pass, using the row\sphinxhyphen{}wise logsumexp
+instead of both the row\sphinxhyphen{}wise max and row\sphinxhyphen{}wise sum of exponentials in the
+softmax. It incorporates techniques like swapping the order of loops and
+parallelization over the sequence length, which were first suggested in
+the Triton implementation. Furthermore, it can also efficiently handle
+multi\sphinxhyphen{}query attention (MQA) and grouped\sphinxhyphen{}query attention (GQA) by
+manipulating indices instead of duplicating key and value heads.
+
+\sphinxAtStartPar
+\sphinxstylestrong{FlashAttention\sphinxhyphen{}3}:
+
+\sphinxAtStartPar
+FlashAttention\sphinxhyphen{}3 \sphinxcite{reference:jay-shah} further improves
+performance, especially on newer GPUs like the H100. It achieves this by
+exploiting asynchrony and low\sphinxhyphen{}precision computations. It uses a
+\sphinxstylestrong{warp\sphinxhyphen{}specialized software pipelining} scheme that splits the
+producers and consumers of data into separate warps, overlapping overall
+computation and data movement. This hides memory and instruction issue
+latencies. FlashAttention\sphinxhyphen{}3 overlaps non\sphinxhyphen{}GEMM operations involved in
+softmax with the asynchronous WGMMA instructions for GEMM. This is done
+by interleaving block\sphinxhyphen{}wise matmul and softmax operations, and by
+reworking the FlashAttention\sphinxhyphen{}2 algorithm to circumvent sequential
+dependencies between softmax and GEMMs. It implements \sphinxstylestrong{block
+quantization and incoherent processing} that leverages hardware support
+for FP8 low\sphinxhyphen{}precision to achieve further speedup. FP8 FlashAttention\sphinxhyphen{}3
+is also more accurate than a baseline FP8 attention by 2.6x, due to its
+block quantization and incoherent processing, especially in cases with
+outlier features. It uses primitives from CUTLASS, such as WGMMA and TMA
+abstractions. Like FlashAttention and FlashAttention\sphinxhyphen{}2, it is also able
+to handle multi\sphinxhyphen{}query attention (MQA) and grouped\sphinxhyphen{}query attention (GQA).
+
 \sphinxstepscope
 
 
@@ -11950,6 +12371,22 @@ Maxime Labonne.
 \sphinxAtStartPar
 Yang Liu.
 \sphinxhref{https://arxiv.org/pdf/2303.16634}{G\sphinxhyphen{}EVAL: NLG Evaluation using GPT\sphinxhyphen{}4 with Better Human Alignment}, 2023.
+\bibitem[Tri\_Dao\_1]{reference:tri-dao-1}
+\sphinxAtStartPar
+Tri Dao etc.
+\sphinxhref{https://arxiv.org/abs/2205.14135}{FlashAttention: Fast and Memory\sphinxhyphen{}Efficient Exact Attention with IO\sphinxhyphen{}Awareness}, 2022.
+\bibitem[Tri\_Dao\_2]{reference:tri-dao-2}
+\sphinxAtStartPar
+Tri Dao.
+\sphinxhref{https://arxiv.org/abs/2307.08691}{FlashAttention\sphinxhyphen{}2: Faster Attention with Better Parallelism and Work Partitioning}, 2023.
+\bibitem[Jay\_Shah]{reference:jay-shah}
+\sphinxAtStartPar
+Jay Shah etc.
+\sphinxhref{https://arxiv.org/abs/2407.08608}{FlashAttention\sphinxhyphen{}3: Fast and Accurate Attention with Asynchrony and Low\sphinxhyphen{}precision}, 2024.
+\bibitem[Andrei]{reference:andrei}
+\sphinxAtStartPar
+Andrei Ivanov etc.
+\sphinxhref{https://arxiv.org/abs/2007.00072}{Data Movement Is All You Need: A Case Study on Optimizing Transformers}, 2024.
 \end{sphinxthebibliography}
 
 

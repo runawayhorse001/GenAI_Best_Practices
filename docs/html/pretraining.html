@@ -78,7 +78,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#decoding">7.1.12. Decoding</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#greedy-decoding">7.1.12.1. Greedy Decoding</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#beam-search">7.1.12.2. Beam Search</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#summary-1">7.1.12.3. Summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#top-k-sampling">7.1.12.3. Top-k Sampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#top-p-nucleus-sampling">7.1.12.4. Top-p (Nucleus) Sampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#temperature-scaling">7.1.12.5. Temperature Scaling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary-1">7.1.12.6. Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -124,10 +127,10 @@
 <div class="admonition-proverb admonition">
 <p class="admonition-title">Proverb</p>
 <p>Pre-training as we know it will end. – Ilya Sutskever at neurips 2024</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id8">
 <span id="fig-ilya"></span><img alt="_images/ilya_sutskever.png" src="_images/ilya_sutskever.png" />
 <figcaption>
-<p><span class="caption-text">Ilya Sutskever at neurips 2024</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">Ilya Sutskever at neurips 2024</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div>
@@ -143,10 +146,10 @@ summarize information, and perform other natural language processing tasks.</p>
 <a class="reference external" href="https://nlp.seas.harvard.edu/annotated-transformer/">The Annotated Transformer</a> and <a class="reference external" href="https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c">Tracing the Transformer in Diagrams</a>, to explore their underlying architecture and practical applications.</p>
 <section id="transformer-architecture">
 <h2><span class="section-number">7.1. </span>Transformer Architecture<a class="headerlink" href="#transformer-architecture" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id9">
 <img alt="transformer_architecture" src="_images/transformer_architecture.png" />
 <figcaption>
-<p><span class="caption-text">Transformer Architecture (source: <a class="reference internal" href="reference.html#attentionallyouneed" id="id1"><span>[attentionAllYouNeed]</span></a>)</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-text">Transformer Architecture (source: <a class="reference internal" href="reference.html#attentionallyouneed" id="id1"><span>[attentionAllYouNeed]</span></a>)</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="attention-is-all-you-need">
@@ -300,10 +303,10 @@ PE(pos,2i+1) = \cos\Big({pos\over 10000^{2i/d}}\Big)\end{split}\]</div>
 <p>The positional encodings are added directly to the token embeddings:</p>
 <div class="math notranslate nohighlight">
 \[\text{Input to Transformer} = \text{Token Embedding} + \text{Positional Encoding}\]</div>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id10">
 <img alt="position_embedding" src="_images/position_embedding.png" />
 <figcaption>
-<p><span class="caption-text">Positional Embedding</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">Positional Embedding</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -467,10 +470,10 @@ representations but can be adjusted as the model learns from the
 context of a sentence to capture subtle semantic nuances and
 dependencies between words.</p></li>
 </ul>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id11">
 <img alt="word_embedding-modified" src="_images/word_embedding_matrix.png" />
 <figcaption>
-<p><span class="caption-text">Word Embedding</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">Word Embedding</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Take an example of embedding matrix <span class="math notranslate nohighlight">\(W_E\)</span> with ~50k vocabulary
@@ -491,10 +494,10 @@ Witchcraft and Wizardry, retrieves the Philosopher’s Stone, battles a
 basilisk, and ultimately leads a final battle at Hogwarts, defeating
 Voldemort and bringing peace to the wizarding world</em>” results in the
 following projections in embedding space:</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id12">
 <img alt="contextual_embedding" src="_images/contextual_embedding.png" />
 <figcaption>
-<p><span class="caption-text">Contextual Embedding</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">Contextual Embedding</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Embedding matrix contains vectors of all words in the vocabulary. It’s
@@ -505,6 +508,12 @@ parameters in this embedding matrix is calculated by <span class="math notransla
 </section>
 <section id="attention-mechanism">
 <h3><span class="section-number">7.1.5. </span>Attention Mechanism<a class="headerlink" href="#attention-mechanism" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id13">
+<img alt="self_attention_hendrik" src="_images/self_attention_hendrik.png" />
+<figcaption>
+<p><span class="caption-text">Self Attention (source: <a class="reference external" href="https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download">The Transformer Architecture A Visual Guide</a>)</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <section id="self-attention">
 <h4><span class="section-number">7.1.5.1. </span>Self-Attention<a class="headerlink" href="#self-attention" title="Link to this heading"></a></h4>
 <p>A <strong>self-attention</strong> is called single-head attention, which enables the
@@ -534,14 +543,15 @@ contains learnable parameters. It is used to project input
 representation <span class="math notranslate nohighlight">\(W_E\)</span> to the smaller query space <span class="math notranslate nohighlight">\(Q\)</span> by
 matrix multiplication.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}Q = W_E W_Q\\ \space(N\times d)(d\times d_q) \rightarrow (N \times d_q)\end{split}\]</div>
+\[\begin{split}Q &amp;= W_E W_Q\\
+(N\times d)(d\times d_q) &amp;\rightarrow (N \times d_q)\end{split}\]</div>
 <p>Conceptually, the query matrix aims to ask each word a question
 regarding what kinds of relationship it has with each of the other
 words.</p>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id14">
 <img alt="query_projection" src="_images/query_projection.png" />
 <figcaption>
-<p><span class="caption-text">Query Projection</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text">Query Projection</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -551,16 +561,17 @@ contains learnable parameters. It is used to project input
 representation <span class="math notranslate nohighlight">\(W_E\)</span> to the smaller key space <span class="math notranslate nohighlight">\(K\)</span> by
 matrix multiplication.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}K = W_E W_K \\ \space (N \times d) (d \times d_k) \rightarrow (N \times d_k)\end{split}\]</div>
+\[\begin{split}K &amp;= W_E W_K \\
+(N \times d) (d \times d_k) &amp;\rightarrow (N \times d_k)\end{split}\]</div>
 <p>Conceptually, the keys are answering the queries by matching the
 queries whenever they closely align with each other. In our example
 of “The brave wizard cast a powerful spell”, the key metrix maps the
 word ‘brave’ to vectors that are closely aligned with the query
 produced by the word ‘wizard’.</p>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id15">
 <img alt="key_projection" src="_images/key_projection.png" />
 <figcaption>
-<p><span class="caption-text">Key Projection</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">Key Projection</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -575,10 +586,10 @@ be values from negative infinity to positive infinity.</p>
 is expected to be a large positive value because ‘brave’ is an
 adjective to ‘wizard’. In other words, the embedding of ‘brave’
 <strong>attends to</strong> the embedding of ‘wizard’.</p>
-<figure class="align-center" id="id10">
+<figure class="align-center" id="id16">
 <img alt="attention_score" src="_images/attention_score.png" />
 <figcaption>
-<p><span class="caption-text">Attention Score</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+<p><span class="caption-text">Attention Score</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -620,7 +631,8 @@ contains learnable parameters. It is used to project input
 representation <span class="math notranslate nohighlight">\(W_E\)</span> to the smaller value space <span class="math notranslate nohighlight">\(V\)</span> by
 matrix multiplication.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}V = W_E W_V \\ \space (N \times d) (d \times d_v) \rightarrow (N \times d_v)\end{split}\]</div>
+\[\begin{split}V &amp;= W_E W_V \\
+(N \times d) (d \times d_v) &amp;\rightarrow (N \times d_v)\end{split}\]</div>
 <p>Conceptually, by maping the embedding of a word to the value space,
 it’s trying to figure out what should be added to the embedding of
 other words, if this word is relevant to adjusting the meaning of
@@ -631,17 +643,17 @@ other words.</p>
 value vectors, where the weights come from the attention distribution
 obtained in the previous step.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\text{Output} = \text{Attention Weights} \times V\\
-(N \times N) (N \times d_v) \rightarrow (N \times d_v)\end{split}\]</div>
+\[\begin{split}\text{Output} &amp;= \text{Attention Weights} \times V\\
+(N \times N) (N \times d_v) &amp;\rightarrow (N \times d_v)\end{split}\]</div>
 <p>This results in a matrix of size <span class="math notranslate nohighlight">\(N \times d_v\)</span> where for each
 word there is a weighted sum of the value vectors <span class="math notranslate nohighlight">\(\Delta E\)</span>
 based on the attention distribution. Conceptually, this is the change
 going to be added to the original embedding, resulting in a more
 refined vector, encoding contextually rich meaning.</p>
-<figure class="align-center" id="id11">
+<figure class="align-center" id="id17">
 <img alt="value_projection_weighted_sum" src="_images/value_projection_weighted_sum.png" />
 <figcaption>
-<p><span class="caption-text">Value Projection and Weighted Sum</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+<p><span class="caption-text">Value Projection and Weighted Sum</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -797,8 +809,8 @@ may vary and the model deals with sequences of different lengths.</p></li>
 <li><p>Compute the Mean and Variance: for a given input
 <span class="math notranslate nohighlight">\(x = [x_1, ..., x_d]\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mu = {1\over d} \sum^d_{i=1}x_i\\
-\sigma^2 = {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2\end{split}\]</div>
+\[\begin{split}\mu &amp;= {1\over d} \sum^d_{i=1}x_i\\
+\sigma^2 &amp;= {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the mean and <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of
 the input.</p>
 </li>
@@ -981,7 +993,9 @@ When using a temperature <span class="math notranslate nohighlight">\(T &gt; 0\)
 <p>When <span class="math notranslate nohighlight">\(T\)</span> is larger, more weight is given to the lower values, then
 the distribution is more uniform. If <span class="math notranslate nohighlight">\(T\)</span> is smaller, the biggest
 logit score will dominate more aggresively. Setting <span class="math notranslate nohighlight">\(T=0\)</span> gives
-all the weights to the maximum value resulting a ~100% probability.</p>
+all the weights to the maximum value resulting a ~100% probability. This
+means higher temperature leads to creative but potentially incoherent
+outputs, and lower temperature leads to safe and predictable outputs.</p>
 </section>
 <section id="unembedding-matrix">
 <h3><span class="section-number">7.1.11. </span>Unembedding Matrix<a class="headerlink" href="#unembedding-matrix" title="Link to this heading"></a></h3>
@@ -1054,15 +1068,100 @@ the “beam width”).</p>
 sequences (instead of just one) and chooses the one with the highest
 cumulative probability. A hyperparameter, <strong>beam width</strong>, controls how
 many candidate sequences are considered at each step.</p>
-<figure class="align-center" id="id12">
+<figure class="align-center" id="id18">
 <img alt="beam_search" src="_images/beam_search.png" />
 <figcaption>
-<p><span class="caption-text">Beam Search</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+<p><span class="caption-text">Beam Search</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
+<section id="top-k-sampling">
+<h4><span class="section-number">7.1.12.3. </span>Top-k Sampling<a class="headerlink" href="#top-k-sampling" title="Link to this heading"></a></h4>
+<p>After the model outputs a probability distribution over the entire
+vocabulary (e.g., 50,000 tokens for GPT-style models). Only the top
+<span class="math notranslate nohighlight">\(k\)</span> tokens with the highest probabilities are retained. All other
+tokens are discarded. The probabilities of the remaining <span class="math notranslate nohighlight">\(k\)</span>
+tokens are renormalized to sum to 1. A token is randomly selected from
+the <span class="math notranslate nohighlight">\(k\)</span>-token subset based on the renormalized probabilities.</p>
+<p>When <span class="math notranslate nohighlight">\(k=1\)</span>, top-k sampling is the same as greedy decoding, where
+the token with the highest probability is chosen. Higher <span class="math notranslate nohighlight">\(k\)</span>
+allows more variety by considering more tokens.</p>
+<p>Top-k sampling is considered <strong>static</strong> and <strong>predefined</strong> because once
+a contant <span class="math notranslate nohighlight">\(k\)</span> is specified, at each decoding step, only the top
+<span class="math notranslate nohighlight">\(k\)</span> tokens are considered for sampling. Regardless the shape of
+distribution, the size of the candidate pool <span class="math notranslate nohighlight">\(k\)</span> does not change.
+If the probability distribution is “flat”(many tokens with similar
+probabilities), top-k might still discard important tokens outside the
+top <span class="math notranslate nohighlight">\(k\)</span>. If the distribution is “peaked” (one or a few tokens
+dominate), top-k might include unlikely tokens unnecessarily.</p>
+</section>
+<section id="top-p-nucleus-sampling">
+<h4><span class="section-number">7.1.12.4. </span>Top-p (Nucleus) Sampling<a class="headerlink" href="#top-p-nucleus-sampling" title="Link to this heading"></a></h4>
+<p>After the model outputs a probability distribution over the vocabulary.
+Tokens are sorted in descending order of probability. A cumulative sum
+of probabilities is calculated for the sorted tokens. The smallest set
+of tokens whose cumulative probability exceeds or equals <span class="math notranslate nohighlight">\(p\)</span> are
+retained. The probabilities of the selected tokens are renormalized to
+sum to 1. A token is randomly selected from this dynamic subset.</p>
+<p>When <span class="math notranslate nohighlight">\(p=1\)</span>, all tokens are included, then top-p sampling is
+equivalent to pure sampling. Lower <span class="math notranslate nohighlight">\(p\)</span> focuses on fewer tokens,
+ensuring higher-quality predictions while retaining some randomness.</p>
+<p>Top-p sampling is considered <strong>dynamic</strong> and <strong>adaptive</strong> because the
+number of tokens in the pool varies depending on the shape of the
+probability distribution. If the distribution is “peaked,” top-p will
+include fewer tokens because the most probable tokens quickly satisfy
+the cumulative threshold <span class="math notranslate nohighlight">\(p\)</span>. If the distribution is “flat,” top-p
+will include more tokens to ensure the cumulative probability reaches
+<span class="math notranslate nohighlight">\(p\)</span>.</p>
+</section>
+<section id="temperature-scaling">
+<h4><span class="section-number">7.1.12.5. </span>Temperature Scaling<a class="headerlink" href="#temperature-scaling" title="Link to this heading"></a></h4>
+<p>As mentioned in the section “Softmax and Temperature”, temperature
+scaling is applied to the logits right before sampling or selection
+(e.g., during top-k or top-p sampling). It modifies the softmax function
+with a parameter <span class="math notranslate nohighlight">\(T\)</span> added to adjust the shape of the resulting
+probability distribution from logits. Temperature scaling is used in
+tasks requiring stochastic decoding methods like top-k sampling or
+nucleus sampling.</p>
+<p><strong>Temperature (:math:`T`) + Top-k</strong>:</p>
+<ul class="simple">
+<li><p>“High <span class="math notranslate nohighlight">\(T\)</span> + high <span class="math notranslate nohighlight">\(k\)</span>” results in extremely diverse and
+creative outputs. It may produce incoherent or irrelevant text because
+too many unlikely tokens are considered. It’s used when generating
+highly imaginative or exploratory text, such as in creative writing.</p></li>
+<li><p>“High <span class="math notranslate nohighlight">\(T\)</span> + low <span class="math notranslate nohighlight">\(k\)</span>” balances diversity with some level of
+coherence. Even with low <span class="math notranslate nohighlight">\(k\)</span>, high <span class="math notranslate nohighlight">\(T\)</span> may introduce
+unexpected word choices. It’s used when creative tasks where some
+randomness is desired, but the context must still be respected.</p></li>
+<li><p>“Low <span class="math notranslate nohighlight">\(T\)</span> + high <span class="math notranslate nohighlight">\(k\)</span>” produces coherent and focused outputs
+because <span class="math notranslate nohighlight">\(T\)</span> emphasizes the most probable tokens. The effect of
+high <span class="math notranslate nohighlight">\(k\)</span> is mitigated because the scaled probabilities naturally
+limit diversity.</p></li>
+<li><p>“Low <span class="math notranslate nohighlight">\(T\)</span> + low <span class="math notranslate nohighlight">\(k\)</span>” produces highly deterministic outputs.
+Text may seem repetitive. It’s used when tasks requiring consistency,
+such as factual responses or concise answers.</p></li>
+</ul>
+<p><strong>Temperature (:math:`T`) + Top-p</strong>:</p>
+<ul class="simple">
+<li><p>“High <span class="math notranslate nohighlight">\(T\)</span> + high <span class="math notranslate nohighlight">\(p\)</span>” produces diverse outputs, but the
+context may still be loosely followed. It may produce incoherent or
+irrelevant text because too many unlikely tokens are considered. It’s
+used when generating exploratory or brainstorming text.</p></li>
+<li><p>“High <span class="math notranslate nohighlight">\(T\)</span> + low <span class="math notranslate nohighlight">\(p\)</span>” produces constrained output despite
+high <span class="math notranslate nohighlight">\(T\)</span>, as only the most probable tokens within the
+<span class="math notranslate nohighlight">\(p\)</span>-threshold are considered. Even with low <span class="math notranslate nohighlight">\(k\)</span>, high
+<span class="math notranslate nohighlight">\(T\)</span> may introduce unexpected word choices. It’s used for
+slightly creative tasks with some emphasis on coherence.</p></li>
+<li><p>“Low <span class="math notranslate nohighlight">\(T\)</span> + high <span class="math notranslate nohighlight">\(p\)</span>” produces coherent and slightly
+diverse text. It’s used in balanced tasks, such as assistant chatbots
+or domain-specific content generation.</p></li>
+<li><p>“Low <span class="math notranslate nohighlight">\(T\)</span> + low <span class="math notranslate nohighlight">\(p\)</span>” produces very deterministic and rigid
+outputs. it’s used when generating formal or technical content
+requiring precision, such as legal or scientific writing.</p></li>
+</ul>
+</section>
 <section id="summary-1">
-<span id="id2"></span><h4><span class="section-number">7.1.12.3. </span>Summary<a class="headerlink" href="#summary-1" title="Link to this heading"></a></h4>
+<span id="id2"></span><h4><span class="section-number">7.1.12.6. </span>Summary<a class="headerlink" href="#summary-1" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1202,10 +1301,10 @@ heads.</p>
 key matrix:</p>
 <div class="math notranslate nohighlight">
 \[\text{Attention}_i = \text{softmax} \Big({Q_i K^T \over \sqrt{d_k}}\Big)V\]</div>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id19">
 <img alt="multiquery_attention" src="_images/multiquery_attention.png" />
 <figcaption>
-<p><span class="caption-text">Multi-Query Attention</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-text">Multi-Query Attention</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>Advantages of MQA:</strong></p>
@@ -1241,10 +1340,10 @@ keys and values within the group:</p>
 <div class="math notranslate nohighlight">
 \[\text{Attention}_i = \text{softmax} \Big({Q_i K^T_{\text{group,i}}\over \sqrt{d_k}}\Big) V_{group,i}\]</div>
 <p>where <span class="math notranslate nohighlight">\(i\)</span> is the query head within a group.</p>
-<figure class="align-center" id="id14">
+<figure class="align-center" id="id20">
 <img alt="grouped_query_attention" src="_images/grouped_query_attention.png" />
 <figcaption>
-<p><span class="caption-text">Grouped Query Attention</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-text">Grouped Query Attention</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>Advantages of GQA:</strong></p>
@@ -1281,6 +1380,205 @@ where standard MHA becomes computationally and memory prohibitive.</p></li>
 </section>
 <section id="flash-attention">
 <h3><span class="section-number">7.2.4. </span>Flash Attention<a class="headerlink" href="#flash-attention" title="Link to this heading"></a></h3>
+<p>FlashAttention <a class="reference internal" href="reference.html#tri-dao-1" id="id3"><span>[Tri_Dao_1]</span></a> is a novel and
+efficient algorithm designed to address the computational and memory
+challenges of self-attention in Transformers, particularly for long
+sequences. It’s designed to solve two challenges of traditional
+Transformer implementation:</p>
+<ul class="simple">
+<li><p>Self-attention mechanisms in transformers are computationally
+expensive with quadratic time (<span class="math notranslate nohighlight">\(n^2\)</span>) and memory complexity
+concerning sequence length (<span class="math notranslate nohighlight">\(n\)</span>), making them inefficient for
+long sequences.</p></li>
+<li><p>It’s been revealed in “Data Movement is All You Need” <a class="reference internal" href="reference.html#andrei" id="id4"><span>[Andrei]</span></a> that the
+key bottleneck during training a Transformer is data movement (reading
+and writing data) rather than computation. The paper highlights that
+many transformer operations are <strong>memory-bandwidth-bound</strong>, meaning
+that the speed of data transfer to and from HBM often becomes a
+bottleneck rather than the GPU’s raw computational power. This finding
+shows that existing implementations of Transformers do not efficiently
+utilize GPUs.</p></li>
+</ul>
+<figure class="align-center" id="id21">
+<img alt="flashattention" src="_images/flashattention_paper.png" />
+<figcaption>
+<p><span class="caption-text">Flash Attention (source: <a class="reference external" href="https://arxiv.org/abs/2205.14135">Flash Attention</a>)</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The idea of Flash Attention is <strong>computing by blocks</strong> to reduce HBM
+reads and writes. Their implementation is a <strong>fused CUDA kernel</strong> for
+fine-grained control of memory accesses with two techniques:</p>
+<ul>
+<li><p><strong>Tiling</strong>: Tiling works by decomposing large softmax into smaller
+ones by scaling. It firstly loads inputs by blocks from HBM to SRAM
+for fast computation, computes attention output with respect to that
+block in SRAM, then updates output in HBM by scaling.</p>
+<p>The method decomposes softmax as follows as an example.
+<span class="math notranslate nohighlight">\([x_1, x_2]\)</span> represents the concatenation of two partitions
+(blocks) of input scores. Softmax is independently computed one block
+at a time. This block-wise operations reduce memory and computational
+overhead compared to processing the entire sequence at once.
+<span class="math notranslate nohighlight">\(m(x)\)</span> represents the maximum value within a block of the
+attention matrix. It’s used as a max-shifting step during the softmax
+calculation, which improves numerical stability. <span class="math notranslate nohighlight">\(\ell(x)\)</span> is a
+normalization factor used to convert the exponentials into probability
+distributions. The combination of scaling factors ensures that the
+results match the global Softmax computation if it were performed over
+the full sequence.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;m(x) = m(\begin{bmatrix}x_1 &amp; x_2\end{bmatrix}) = \max(m(x_1), m(x_2))\\
+&amp;f(x) = \begin{bmatrix} e^{m(x_1)-m(x)}f(x_1) &amp; e^{m(x_2)-m(x)}f(x_2)\end{bmatrix}\\
+&amp;\ell(x) = \ell(\begin{bmatrix}x_1 &amp; x_2\end{bmatrix}) = e^{m(x_1)-m(x)}f(x_1)+e^{m(x_2)-m(x)}f(x_2)\\
+&amp;\text{softmax}(x) = {f(x)\over \ell(x)}\end{split}\]</div>
+</li>
+<li><p><strong>Recomputation</strong>: the idea is to store the output
+<span class="math notranslate nohighlight">\(\text{softmax}(PQ^T)V\)</span> and softmax normalization factors
+<span class="math notranslate nohighlight">\(m(x), \ell(x)\)</span> rather than storing the attention matrix from
+forward in HBM, then recompute the attention matrix in the backward in
+SRAM.</p>
+<p>Recomputation allows the model to discard intermediate activations
+during the forward pass, only keeping the most essential data for
+backpropagation. This frees up memory, enabling the model to process
+much longer sequences or use larger batch sizes. It essentially trades
+<strong>additional computation</strong> for <strong>reduced memory usage</strong>, making the
+process scalable. This is a tradeoff that is often acceptable,
+especially with hardware accelerators (GPUs/TPUs) where computation
+power is abundant but memory capacity is limited.</p>
+</li>
+</ul>
+<p>Both <strong>tiling</strong> and <strong>recomputation</strong> aim to address memory and
+computational challenges when working with large models or long
+sequences, each improving efficiency in different ways:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Benefit</strong></p></th>
+<th class="head"><p><strong>Tiling</strong></p></th>
+<th class="head"><p><strong>Recomputation</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Memory
+Efficiency</p></td>
+<td><p>Reduces memory usage by
+processing smaller tiles
+instead of the whole
+sequence at once.</p></td>
+<td><p>Saves memory by not
+storing intermediate
+results; recomputes when
+needed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Computational
+Speed</p></td>
+<td><p>Enables parallel
+processing of smaller
+tiles, improving
+computation time.</p></td>
+<td><p>Reduces memory footprint,
+potentially increasing
+throughput by minimizing
+the need to store large
+intermediate values.</p></td>
+</tr>
+<tr class="row-even"><td><p>Handling
+Long
+Sequences</p></td>
+<td><p>Makes it feasible to
+process long sequences
+that otherwise wouldn’t
+fit in memory.</p></td>
+<td><p>Allows for computation of
+large models with limited
+memory by recomputing
+expensive intermediate
+steps.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hardware
+Utilization</p></td>
+<td><p>Optimizes the use of
+limited memory resources
+(e.g., GPU/TPU) by
+limiting the amount of
+data in memory.</p></td>
+<td><p>Helps avoid running out
+of memory by not
+requiring large storage
+for intermediate states.</p></td>
+</tr>
+<tr class="row-even"><td><p>Scalability</p></td>
+<td><p>Enables handling of
+larger datasets and
+longer sequences without
+overwhelming memory.</p></td>
+<td><p>Makes it possible to work
+with large models and
+datasets by not storing
+every intermediate
+result.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reduced
+Memory
+Bandwidth</p></td>
+<td><p>Lowers memory bandwidth
+requirements by only
+loading small parts of
+data at a time.</p></td>
+<td><p>Minimizes the need for
+frequent memory
+writes/reads, improving
+memory access efficiency.</p></td>
+</tr>
+<tr class="row-even"><td><p>Reduces
+Redundant
+Computation</p></td>
+<td><p>Focuses on smaller
+sub-problems, reducing
+redundant operations.</p></td>
+<td><p>Recomputes intermediate
+steps only when
+necessary, avoiding
+unnecessary storage and
+computation.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flash Attention 2</strong>:</p>
+<p>FlashAttention-2 <a class="reference internal" href="reference.html#tri-dao-2" id="id6"><span>[Tri_Dao_2]</span></a> builds upon
+FlashAttention by addressing suboptimal work partitioning between
+different thread blocks and warps on the GPU. It reduces the number of
+non-matrix multiplication (matmul) FLOPs, which are slower to perform on
+GPUs. It also parallelizes the attention computation across the sequence
+length dimension, in addition to the batch and number of heads
+dimensions. This increases occupancy (utilization of GPU resources),
+especially when the sequence is long and the batch size is small. Within
+each thread block, FlashAttention-2 distributes the work between warps
+to reduce communication through shared memory. FlashAttention-2 also
+uses a minor tweak to the backward pass, using the row-wise logsumexp
+instead of both the row-wise max and row-wise sum of exponentials in the
+softmax. It incorporates techniques like swapping the order of loops and
+parallelization over the sequence length, which were first suggested in
+the Triton implementation. Furthermore, it can also efficiently handle
+multi-query attention (MQA) and grouped-query attention (GQA) by
+manipulating indices instead of duplicating key and value heads.</p>
+<p><strong>FlashAttention-3</strong>:</p>
+<p>FlashAttention-3 <a class="reference internal" href="reference.html#jay-shah" id="id7"><span>[Jay_Shah]</span></a> further improves
+performance, especially on newer GPUs like the H100. It achieves this by
+exploiting asynchrony and low-precision computations. It uses a
+<strong>warp-specialized software pipelining</strong> scheme that splits the
+producers and consumers of data into separate warps, overlapping overall
+computation and data movement. This hides memory and instruction issue
+latencies. FlashAttention-3 overlaps non-GEMM operations involved in
+softmax with the asynchronous WGMMA instructions for GEMM. This is done
+by interleaving block-wise matmul and softmax operations, and by
+reworking the FlashAttention-2 algorithm to circumvent sequential
+dependencies between softmax and GEMMs. It implements <strong>block
+quantization and incoherent processing</strong> that leverages hardware support
+for FP8 low-precision to achieve further speedup. FP8 FlashAttention-3
+is also more accurate than a baseline FP8 attention by 2.6x, due to its
+block quantization and incoherent processing, especially in cases with
+outlier features. It uses primitives from CUTLASS, such as WGMMA and TMA
+abstractions. Like FlashAttention and FlashAttention-2, it is also able
+to handle multi-query attention (MQA) and grouped-query attention (GQA).</p>
 </section>
 </section>
 </section>
@@ -1297,7 +1595,7 @@ where standard MHA becomes computationally and memory prohibitive.</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Dec 23, 2024.
+      <span class="lastupdated">Last updated on Dec 24, 2024.
       </span></p>
   </div>
 
