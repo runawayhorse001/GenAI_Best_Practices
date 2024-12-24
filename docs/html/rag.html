@@ -73,15 +73,21 @@
 <li class="toctree-l3"><a class="reference internal" href="#create-index">5.3.2. Create Index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#retrieval-grader">5.3.3. Retrieval Grader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generate">5.3.4. Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hallucination-grader">5.3.5. Hallucination Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#answer-grader">5.3.6. Answer Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#question-re-writer">5.3.7. Question Re-writer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-the-graph">5.3.8. Create the Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compile-graph">5.3.9. Compile Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#graph-visualization">5.3.10. Graph visualization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test">5.3.11. Test</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#relevant-retrieval">5.3.11.1. Relevant retrieval</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#irrelevant-retrieval">5.3.11.2. Irrelevant retrieval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">5.3.5. Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hallucination-grader">5.3.5.1. Hallucination Grader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#answer-grader">5.3.5.2. Answer Grader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#question-re-writer">5.3.5.3. Question Re-writer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#graph">5.3.6. Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-the-graph">5.3.6.1. Create the Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compile-graph">5.3.6.2. Compile Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#graph-visualization">5.3.6.3. Graph visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#test">5.3.7. Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#relevant-retrieval">5.3.7.1. Relevant retrieval</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#irrelevant-retrieval">5.3.7.2. Irrelevant retrieval</a></li>
 </ul>
 </li>
 </ul>
@@ -91,51 +97,70 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">5.4.2. Create Index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">5.4.3. Retrieval Grader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">5.4.4. Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#router">5.4.5. Router</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">5.4.6. Hallucination Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">5.4.7. Answer Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">5.4.8. Question Re-writer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#web-search-tool-google">5.4.9. Web Search Tool (Google)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">5.4.10. Create the Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">5.4.11. Compile Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5.4.12. Graph visualization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.4.13. Test</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id15">5.4.13.1. Relevant retrieval</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">5.4.13.2. Irrelevant retrieval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5.4.5. Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#router">5.4.5.1. Router</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">5.4.5.2. Hallucination Grader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">5.4.5.3. Answer Grader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">5.4.5.4. Question Re-writer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#web-search-tool-google">5.4.5.5. Web Search Tool (Google)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.4.6. Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">5.4.6.1. Create the Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">5.4.6.2. Compile Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">5.4.6.3. Graph visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">5.4.7. Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id17">5.4.7.1. Relevant retrieval</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">5.4.7.2. Irrelevant retrieval</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#adaptive-rag">5.5. Adaptive RAG</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id17">5.5.1. Load Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">5.5.2. Create Index</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">5.5.3. Router</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id20">5.5.4. Retrieval Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">5.5.5. Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">5.5.6. Hallucination Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">5.5.7. Answer Grader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">5.5.8. Question Re-writer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#google-web-search">5.5.9. Google Web Search</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id25">5.5.10. Create the Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id26">5.5.11. Compile Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id27">5.5.12. Graph visualization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id28">5.5.13. Test</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id29">5.5.13.1. Relevant retrieval</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id30">5.5.13.2. Irrelevant retrieval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">5.5.1. Load Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">5.5.2. Create Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">5.5.3. Retrieval Grader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">5.5.4. Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">5.5.5. Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id24">5.5.5.1. Router</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">5.5.5.2. Hallucination Grader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">5.5.5.3. Answer Grader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">5.5.5.4. Question Re-writer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#google-web-search">5.5.5.5. Google Web Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">5.5.6. Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id29">5.5.6.1. Create the Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">5.5.6.2. Compile Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">5.5.6.3. Graph visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">5.5.7. Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id33">5.5.7.1. Relevant retrieval</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">5.5.7.2. Irrelevant retrieval</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#agentic-rag">5.6. Agentic RAG</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id31">5.6.1. Load Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id32">5.6.2. Create Index</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#define-tool">5.6.3. Define Tool</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id33">5.6.4. Retrieval Grader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">5.6.1. Load Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">5.6.2. Create Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retrieval-tool">5.6.3. Retrieval Tool</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#define-tool">5.6.3.1. Define Tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id37">5.6.3.2. Retrieval Grader</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id38">5.6.4. Generate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#agent-state">5.6.5. Agent State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id34">5.6.6. Create the Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id35">5.6.7. Compile Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id36">5.6.8. Graph visualization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id37">5.6.9. Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">5.6.6. Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id40">5.6.6.1. Create the Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id41">5.6.6.2. Compile Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id42">5.6.6.3. Graph visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id43">5.6.7. Test</a></li>
 </ul>
 </li>
 </ul>
@@ -190,10 +215,10 @@
 <li><p>Agentic RAG: <a class="reference external" href="https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq_vL-6OKLW8Hdr4?usp=drive_link"><img alt="Agentic-RAG" src="_images/colab-badge.png" /></a></p></li>
 </ul>
 </div>
-<figure class="align-center" id="id38">
+<figure class="align-center" id="id44">
 <span id="fig-rag"></span><img alt="_images/RAG_diagram.png" src="_images/RAG_diagram.png" />
 <figcaption>
-<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
+<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id44" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition note">
@@ -430,10 +455,10 @@ or results.</p></td>
 </section>
 <section id="late-chunking">
 <h4><span class="section-number">5.2.1.2. </span>Late Chunking<a class="headerlink" href="#late-chunking" title="Link to this heading"></a></h4>
-<figure class="align-center" id="id39">
+<figure class="align-center" id="id45">
 <span id="fig-late-chunk"></span><img alt="_images/late_chunking.png" src="_images/late_chunking.png" />
 <figcaption>
-<p><span class="caption-text">An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce <a class="reference external" href="https://jina.ai/news/late-chunking-in-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id39" title="Link to this image"></a></p>
+<p><span class="caption-text">An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce <a class="reference external" href="https://jina.ai/news/late-chunking-in-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id45" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>Late Chunking</strong> refers to a strategy in Retrieval-Augmented Generation (RAG) where chunking of
@@ -818,11 +843,11 @@ of popular vector databases for RAG workflows:</p>
 <section id="retrieval">
 <h3><span class="section-number">5.2.2. </span>Retrieval<a class="headerlink" href="#retrieval" title="Link to this heading"></a></h3>
 <p>The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.</p>
-<figure class="align-center" id="id40">
+<figure class="align-center" id="id46">
 <span id="fig-retriever"></span><a class="reference internal image-reference" href="_images/retriever.png"><img alt="_images/retriever.png" src="_images/retriever.png" style="width: 369.0px; height: 515.5px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Reciprocal Rank Fusion</span><a class="headerlink" href="#id40" title="Link to this image"></a></p>
+<p><span class="caption-text">Reciprocal Rank Fusion</span><a class="headerlink" href="#id46" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="common-retrieval-methods">
@@ -1102,10 +1127,10 @@ different rankings, and you want to combine them into a single, unified ranking.
 </section>
 <section id="self-rag">
 <span id="ch-self-rag"></span><h2><span class="section-number">5.3. </span>Self-RAG<a class="headerlink" href="#self-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id41">
+<figure class="align-center" id="id47">
 <span id="fig-self-rag-paper"></span><img alt="_images/self_rag_paper.png" src="_images/self_rag_paper.png" />
 <figcaption>
-<p><span class="caption-text">Overview of SELF-RAG. (Source <a class="reference internal" href="reference.html#selfrag" id="id2"><span>[selfRAG]</span></a>)</span><a class="headerlink" href="#id41" title="Link to this image"></a></p>
+<p><span class="caption-text">Overview of SELF-RAG. (Source <a class="reference internal" href="reference.html#selfrag" id="id2"><span>[selfRAG]</span></a>)</span><a class="headerlink" href="#id47" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>In the paper <a class="reference internal" href="reference.html#selfrag" id="id3"><span>[selfRAG]</span></a>, Four types decisions are made:</p>
@@ -1169,10 +1194,10 @@ Assesses if <cite>y</cite> (generation) is a useful response to <cite>x</cite> (
 </ul>
 </div></blockquote>
 </div></blockquote>
-<figure class="align-center" id="id42">
+<figure class="align-center" id="id48">
 <span id="fig-self-rag"></span><img alt="_images/self_rag.png" src="_images/self_rag.png" />
 <figcaption>
-<p><span class="caption-text">Self-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_self_rag_local/">Langgraph self-rag</a>)</span><a class="headerlink" href="#id42" title="Link to this image"></a></p>
+<p><span class="caption-text">Self-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_self_rag_local/">Langgraph self-rag</a>)</span><a class="headerlink" href="#id48" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="load-models">
@@ -1348,8 +1373,10 @@ you will get error:</p>
 </pre></div>
 </div>
 </section>
+<section id="utilities">
+<h3><span class="section-number">5.3.5. </span>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h3>
 <section id="hallucination-grader">
-<h3><span class="section-number">5.3.5. </span>Hallucination Grader<a class="headerlink" href="#hallucination-grader" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.3.5.1. </span>Hallucination Grader<a class="headerlink" href="#hallucination-grader" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Hallucination Grader</span>
 
 <span class="c1"># Data model</span>
@@ -1388,7 +1415,7 @@ you will get error:</p>
 </div>
 </section>
 <section id="answer-grader">
-<h3><span class="section-number">5.3.6. </span>Answer Grader<a class="headerlink" href="#answer-grader" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.3.5.2. </span>Answer Grader<a class="headerlink" href="#answer-grader" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Answer Grader</span>
 
 <span class="c1"># Data model</span>
@@ -1427,7 +1454,7 @@ you will get error:</p>
 </div>
 </section>
 <section id="question-re-writer">
-<h3><span class="section-number">5.3.7. </span>Question Re-writer<a class="headerlink" href="#question-re-writer" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.3.5.3. </span>Question Re-writer<a class="headerlink" href="#question-re-writer" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Question Re-writer</span>
 
 <span class="c1"># Prompt</span>
@@ -1450,8 +1477,11 @@ you will get error:</p>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="graph">
+<h3><span class="section-number">5.3.6. </span>Graph<a class="headerlink" href="#graph" title="Link to this heading"></a></h3>
 <section id="create-the-graph">
-<h3><span class="section-number">5.3.8. </span>Create the Graph<a class="headerlink" href="#create-the-graph" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.3.6.1. </span>Create the Graph<a class="headerlink" href="#create-the-graph" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
@@ -1634,7 +1664,7 @@ you will get error:</p>
 </div>
 </section>
 <section id="compile-graph">
-<h3><span class="section-number">5.3.9. </span>Compile Graph<a class="headerlink" href="#compile-graph" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.3.6.2. </span>Compile Graph<a class="headerlink" href="#compile-graph" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
 
 <span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">GraphState</span><span class="p">)</span>
@@ -1674,7 +1704,7 @@ you will get error:</p>
 </div>
 </section>
 <section id="graph-visualization">
-<h3><span class="section-number">5.3.10. </span>Graph visualization<a class="headerlink" href="#graph-visualization" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.3.6.3. </span>Graph visualization<a class="headerlink" href="#graph-visualization" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -1684,17 +1714,18 @@ you will get error:</p>
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id43">
+<figure class="align-center" id="id49">
 <span id="fig-self-rag-graph"></span><img alt="_images/self_rag_graph.png" src="_images/self_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Self-RAG Graph</span><a class="headerlink" href="#id43" title="Link to this image"></a></p>
+<p><span class="caption-text">Self-RAG Graph</span><a class="headerlink" href="#id49" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
+</section>
 <section id="test">
-<h3><span class="section-number">5.3.11. </span>Test<a class="headerlink" href="#test" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.3.7. </span>Test<a class="headerlink" href="#test" title="Link to this heading"></a></h3>
 <section id="relevant-retrieval">
-<h4><span class="section-number">5.3.11.1. </span>Relevant retrieval<a class="headerlink" href="#relevant-retrieval" title="Link to this heading"></a></h4>
+<h4><span class="section-number">5.3.7.1. </span>Relevant retrieval<a class="headerlink" href="#relevant-retrieval" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
@@ -1743,7 +1774,7 @@ you will get error:</p>
 </div></blockquote>
 </section>
 <section id="irrelevant-retrieval">
-<h4><span class="section-number">5.3.11.2. </span>Irrelevant retrieval<a class="headerlink" href="#irrelevant-retrieval" title="Link to this heading"></a></h4>
+<h4><span class="section-number">5.3.7.2. </span>Irrelevant retrieval<a class="headerlink" href="#irrelevant-retrieval" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
@@ -1857,10 +1888,10 @@ you will get error:</p>
 </section>
 <section id="corrective-rag">
 <span id="ch-c-rag"></span><h2><span class="section-number">5.4. </span>Corrective RAG<a class="headerlink" href="#corrective-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id44">
+<figure class="align-center" id="id50">
 <span id="fig-c-rag"></span><img alt="_images/corrective_rag.png" src="_images/corrective_rag.png" />
 <figcaption>
-<p><span class="caption-text">Corrective-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_crag_local/">Langgraph c-rag</a>)</span><a class="headerlink" href="#id44" title="Link to this image"></a></p>
+<p><span class="caption-text">Corrective-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_crag_local/">Langgraph c-rag</a>)</span><a class="headerlink" href="#id50" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="id4">
@@ -2013,8 +2044,10 @@ use web search.</p>
 </pre></div>
 </div>
 </section>
+<section id="id8">
+<h3><span class="section-number">5.4.5. </span>Utilities<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <section id="router">
-<h3><span class="section-number">5.4.5. </span>Router<a class="headerlink" href="#router" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.4.5.1. </span>Router<a class="headerlink" href="#router" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Router</span>
 
 <span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
@@ -2070,8 +2103,8 @@ use web search.</p>
 </pre></div>
 </div>
 </section>
-<section id="id8">
-<h3><span class="section-number">5.4.6. </span>Hallucination Grader<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id9">
+<h4><span class="section-number">5.4.5.2. </span>Hallucination Grader<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Hallucination Grader</span>
 
 <span class="c1"># Data model</span>
@@ -2109,8 +2142,8 @@ use web search.</p>
 </pre></div>
 </div>
 </section>
-<section id="id9">
-<h3><span class="section-number">5.4.7. </span>Answer Grader<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id10">
+<h4><span class="section-number">5.4.5.3. </span>Answer Grader<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Answer Grader</span>
 
 <span class="c1"># Data model</span>
@@ -2148,8 +2181,8 @@ use web search.</p>
 </pre></div>
 </div>
 </section>
-<section id="id10">
-<h3><span class="section-number">5.4.8. </span>Question Re-writer<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id11">
+<h4><span class="section-number">5.4.5.4. </span>Question Re-writer<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Question Re-writer</span>
 
 <span class="c1"># Prompt</span>
@@ -2173,7 +2206,7 @@ use web search.</p>
 </div>
 </section>
 <section id="web-search-tool-google">
-<h3><span class="section-number">5.4.9. </span>Web Search Tool (Google)<a class="headerlink" href="#web-search-tool-google" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.4.5.5. </span>Web Search Tool (Google)<a class="headerlink" href="#web-search-tool-google" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_google_community</span> <span class="kn">import</span> <span class="n">GoogleSearchAPIWrapper</span><span class="p">,</span> <span class="n">GoogleSearchResults</span>
 
 <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">userdata</span>
@@ -2199,8 +2232,11 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </div>
 </div>
 </section>
-<section id="id11">
-<h3><span class="section-number">5.4.10. </span>Create the Graph<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+</section>
+<section id="id12">
+<h3><span class="section-number">5.4.6. </span>Graph<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id13">
+<h4><span class="section-number">5.4.6.1. </span>Create the Graph<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -2348,8 +2384,8 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 </section>
-<section id="id12">
-<h3><span class="section-number">5.4.11. </span>Compile Graph<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id14">
+<h4><span class="section-number">5.4.6.2. </span>Compile Graph<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span>
 
 
@@ -2380,8 +2416,8 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 </section>
-<section id="id13">
-<h3><span class="section-number">5.4.12. </span>Graph visualization<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id15">
+<h4><span class="section-number">5.4.6.3. </span>Graph visualization<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -2391,17 +2427,18 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id45">
+<figure class="align-center" id="id51">
 <span id="fig-c-rag-graph"></span><img alt="_images/c_rag_graph.png" src="_images/c_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Corrective-RAG Graph</span><a class="headerlink" href="#id45" title="Link to this image"></a></p>
+<p><span class="caption-text">Corrective-RAG Graph</span><a class="headerlink" href="#id51" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
-<section id="id14">
-<h3><span class="section-number">5.4.13. </span>Test<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
-<section id="id15">
-<h4><span class="section-number">5.4.13.1. </span>Relevant retrieval<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+</section>
+<section id="id16">
+<h3><span class="section-number">5.4.7. </span>Test<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<section id="id17">
+<h4><span class="section-number">5.4.7.1. </span>Relevant retrieval<a class="headerlink" href="#id17" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
 
@@ -2432,8 +2469,8 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </div>
 </div></blockquote>
 </section>
-<section id="id16">
-<h4><span class="section-number">5.4.13.2. </span>Irrelevant retrieval<a class="headerlink" href="#id16" title="Link to this heading"></a></h4>
+<section id="id18">
+<h4><span class="section-number">5.4.7.2. </span>Irrelevant retrieval<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of China?&quot;</span><span class="p">}</span>
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())}}</span>
@@ -2465,14 +2502,14 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </section>
 <section id="adaptive-rag">
 <span id="ch-a-rag"></span><h2><span class="section-number">5.5. </span>Adaptive RAG<a class="headerlink" href="#adaptive-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id46">
+<figure class="align-center" id="id52">
 <span id="fig-a-rag"></span><img alt="_images/adaptive_rag.png" src="_images/adaptive_rag.png" />
 <figcaption>
-<p><span class="caption-text">Adaptive-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/">Langgraph A-rag</a>)</span><a class="headerlink" href="#id46" title="Link to this image"></a></p>
+<p><span class="caption-text">Adaptive-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/">Langgraph A-rag</a>)</span><a class="headerlink" href="#id52" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<section id="id17">
-<h3><span class="section-number">5.5.1. </span>Load Models<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<section id="id19">
+<h3><span class="section-number">5.5.1. </span>Load Models<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">OllamaEmbeddings</span>
 <span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
 
@@ -2494,8 +2531,8 @@ you will get error:</p>
 </div></blockquote>
 </div>
 </section>
-<section id="id18">
-<h3><span class="section-number">5.5.2. </span>Create Index<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="id20">
+<h3><span class="section-number">5.5.2. </span>Create Index<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
 <span class="kn">from</span> <span class="nn">langchain_community.document_loaders</span> <span class="kn">import</span> <span class="n">WebBaseLoader</span>
 <span class="kn">from</span> <span class="nn">langchain_community.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span>
@@ -2526,8 +2563,100 @@ you will get error:</p>
 </pre></div>
 </div>
 </section>
-<section id="id19">
-<h3><span class="section-number">5.5.3. </span>Router<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<section id="id21">
+<h3><span class="section-number">5.5.3. </span>Retrieval Grader<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Retrieval Grader</span>
+
+<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+
+<span class="c1"># Import BaseModel and Field from langchain_core.pydantic_v1</span>
+<span class="c1"># from langchain_core.pydantic_v1 import BaseModel, Field</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
+
+<span class="c1"># Data model</span>
+<span class="k">class</span> <span class="nc">GradeDocuments</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary score for relevance check on retrieved documents.&quot;&quot;&quot;</span>
+
+    <span class="n">score</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>  <span class="c1"># Changed field name to &#39;score&#39;</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Documents are relevant to the question, &#39;yes&#39; or &#39;no&#39;&quot;</span><span class="p">)</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">GradeDocuments</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are a grader assessing relevance of a retrieved</span>
+<span class="s2">    document to a user question. </span><span class="se">\n</span>
+<span class="s2">    Here is the retrieved document: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{document}</span><span class="s2"> </span><span class="se">\n\n</span>
+<span class="s2">    Here is the user question: </span><span class="si">{question}</span><span class="s2"> </span><span class="se">\n</span>
+<span class="s2">    If the document contains keywords related to the user question,</span>
+<span class="s2">    grade it as relevant. </span><span class="se">\n</span>
+<span class="s2">    It does not need to be a stringent test. The goal is to filter out</span>
+<span class="s2">    erroneous retrievals. </span><span class="se">\n</span>
+<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; score to indicate whether the document</span>
+<span class="s2">    is relevant to the question. </span><span class="se">\n</span>
+<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no</span>
+<span class="s2">    preamble or explanation.&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
+    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()}</span>
+<span class="p">)</span>
+
+<span class="n">retrieval_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">parser</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">doc_txt</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
+<span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">doc_txt</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="id22">
+<h3><span class="section-number">5.5.4. </span>Generate<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Generate</span>
+
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are an assistant for question-answering tasks.</span>
+
+<span class="s2">    Use the following documents to answer the question.</span>
+
+<span class="s2">    If you don&#39;t know the answer, just say that you don&#39;t know.</span>
+
+<span class="s2">    Use three sentences maximum and keep the answer concise:</span>
+<span class="s2">    Question: </span><span class="si">{question}</span>
+<span class="s2">    Documents: </span><span class="si">{documents}</span>
+<span class="s2">    Answer:</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;documents&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Chain</span>
+<span class="n">rag_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+
+<span class="c1"># Run</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short-term Memory, and Long-term Memory. </span><span class="se">\n\n</span><span class="s2">Sensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It&#39;s the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). </span><span class="se">\n\n</span><span class="s2">Short-term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. </span><span class="se">\n\n</span><span class="s2">Long-term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah).&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h3><span class="section-number">5.5.5. </span>Utilities<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id24">
+<h4><span class="section-number">5.5.5.1. </span>Router<a class="headerlink" href="#id24" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Router</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
@@ -2644,98 +2773,8 @@ output parser. But, you can still use the similar one we implemented in <a class
 </div>
 </div>
 </section>
-<section id="id20">
-<h3><span class="section-number">5.5.4. </span>Retrieval Grader<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Retrieval Grader</span>
-
-<span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
-<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
-<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
-<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
-
-<span class="c1"># Import BaseModel and Field from langchain_core.pydantic_v1</span>
-<span class="c1"># from langchain_core.pydantic_v1 import BaseModel, Field</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
-<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
-
-<span class="c1"># Data model</span>
-<span class="k">class</span> <span class="nc">GradeDocuments</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Binary score for relevance check on retrieved documents.&quot;&quot;&quot;</span>
-
-    <span class="n">score</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>  <span class="c1"># Changed field name to &#39;score&#39;</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Documents are relevant to the question, &#39;yes&#39; or &#39;no&#39;&quot;</span><span class="p">)</span>
-
-<span class="n">parser</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">GradeDocuments</span><span class="p">)</span>
-
-<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are a grader assessing relevance of a retrieved</span>
-<span class="s2">    document to a user question. </span><span class="se">\n</span>
-<span class="s2">    Here is the retrieved document: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{document}</span><span class="s2"> </span><span class="se">\n\n</span>
-<span class="s2">    Here is the user question: </span><span class="si">{question}</span><span class="s2"> </span><span class="se">\n</span>
-<span class="s2">    If the document contains keywords related to the user question,</span>
-<span class="s2">    grade it as relevant. </span><span class="se">\n</span>
-<span class="s2">    It does not need to be a stringent test. The goal is to filter out</span>
-<span class="s2">    erroneous retrievals. </span><span class="se">\n</span>
-<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; score to indicate whether the document</span>
-<span class="s2">    is relevant to the question. </span><span class="se">\n</span>
-<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no</span>
-<span class="s2">    preamble or explanation.&quot;&quot;&quot;</span><span class="p">,</span>
-    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
-    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()}</span>
-<span class="p">)</span>
-
-<span class="n">retrieval_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">parser</span>
-<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
-<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
-<span class="n">doc_txt</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
-<span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">doc_txt</span><span class="p">})</span>
-</pre></div>
-</div>
-</section>
-<section id="id21">
-<h3><span class="section-number">5.5.5. </span>Generate<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Generate</span>
-
-<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
-
-<span class="c1"># Prompt</span>
-<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are an assistant for question-answering tasks.</span>
-
-<span class="s2">    Use the following documents to answer the question.</span>
-
-<span class="s2">    If you don&#39;t know the answer, just say that you don&#39;t know.</span>
-
-<span class="s2">    Use three sentences maximum and keep the answer concise:</span>
-<span class="s2">    Question: </span><span class="si">{question}</span>
-<span class="s2">    Documents: </span><span class="si">{documents}</span>
-<span class="s2">    Answer:</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
-    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;documents&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-
-<span class="c1"># Chain</span>
-<span class="n">rag_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
-
-<span class="c1"># Run</span>
-<span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Ouput:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short-term Memory, and Long-term Memory. </span><span class="se">\n\n</span><span class="s2">Sensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It&#39;s the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). </span><span class="se">\n\n</span><span class="s2">Short-term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. </span><span class="se">\n\n</span><span class="s2">Long-term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah).&quot;</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="id22">
-<h3><span class="section-number">5.5.6. </span>Hallucination Grader<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id25">
+<h4><span class="section-number">5.5.5.2. </span>Hallucination Grader<a class="headerlink" href="#id25" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Hallucination Grader</span>
 
 <span class="c1"># Data model</span>
@@ -2769,8 +2808,8 @@ output parser. But, you can still use the similar one we implemented in <a class
 </pre></div>
 </div>
 </section>
-<section id="id23">
-<h3><span class="section-number">5.5.7. </span>Answer Grader<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id26">
+<h4><span class="section-number">5.5.5.3. </span>Answer Grader<a class="headerlink" href="#id26" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Answer Grader</span>
 
 <span class="c1"># Data model</span>
@@ -2805,8 +2844,8 @@ output parser. But, you can still use the similar one we implemented in <a class
 </pre></div>
 </div>
 </section>
-<section id="id24">
-<h3><span class="section-number">5.5.8. </span>Question Re-writer<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<section id="id27">
+<h4><span class="section-number">5.5.5.4. </span>Question Re-writer<a class="headerlink" href="#id27" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Question Re-writer</span>
 
 <span class="c1"># Prompt</span>
@@ -2826,7 +2865,7 @@ output parser. But, you can still use the similar one we implemented in <a class
 </div>
 </section>
 <section id="google-web-search">
-<h3><span class="section-number">5.5.9. </span>Google Web Search<a class="headerlink" href="#google-web-search" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.5.5.5. </span>Google Web Search<a class="headerlink" href="#google-web-search" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Google Web Search</span>
 <span class="kn">from</span> <span class="nn">langchain_google_community</span> <span class="kn">import</span> <span class="n">GoogleSearchAPIWrapper</span><span class="p">,</span> <span class="n">GoogleSearchResults</span>
 
@@ -2853,8 +2892,11 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </div>
 </div>
 </section>
-<section id="id25">
-<h3><span class="section-number">5.5.10. </span>Create the Graph<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+</section>
+<section id="id28">
+<h3><span class="section-number">5.5.6. </span>Graph<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<section id="id29">
+<h4><span class="section-number">5.5.6.1. </span>Create the Graph<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -3086,8 +3128,8 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 </section>
-<section id="id26">
-<h3><span class="section-number">5.5.11. </span>Compile Graph<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<section id="id30">
+<h4><span class="section-number">5.5.6.2. </span>Compile Graph<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
 
 <span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">GraphState</span><span class="p">)</span>
@@ -3134,8 +3176,8 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 </section>
-<section id="id27">
-<h3><span class="section-number">5.5.12. </span>Graph visualization<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<section id="id31">
+<h4><span class="section-number">5.5.6.3. </span>Graph visualization<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -3145,17 +3187,18 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id47">
+<figure class="align-center" id="id53">
 <span id="fig-a-rag-graph"></span><img alt="_images/a_rag_graph.png" src="_images/a_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Adaptive-RAG Graph</span><a class="headerlink" href="#id47" title="Link to this image"></a></p>
+<p><span class="caption-text">Adaptive-RAG Graph</span><a class="headerlink" href="#id53" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
-<section id="id28">
-<h3><span class="section-number">5.5.13. </span>Test<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
-<section id="id29">
-<h4><span class="section-number">5.5.13.1. </span>Relevant retrieval<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
+</section>
+<section id="id32">
+<h3><span class="section-number">5.5.7. </span>Test<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<section id="id33">
+<h4><span class="section-number">5.5.7.1. </span>Relevant retrieval<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
 
@@ -3183,8 +3226,8 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </div>
 </div></blockquote>
 </section>
-<section id="id30">
-<h4><span class="section-number">5.5.13.2. </span>Irrelevant retrieval<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
+<section id="id34">
+<h4><span class="section-number">5.5.7.2. </span>Irrelevant retrieval<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;What are the types of agent memory?&quot;</span>
 
@@ -3223,14 +3266,14 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </section>
 <section id="agentic-rag">
 <span id="ch-agentic-rag"></span><h2><span class="section-number">5.6. </span>Agentic RAG<a class="headerlink" href="#agentic-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id48">
+<figure class="align-center" id="id54">
 <span id="fig-agentic-rag"></span><img alt="_images/agentic_rag.png" src="_images/agentic_rag.png" />
 <figcaption>
-<p><span class="caption-text">Agentic-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/">Langgraph Agentic-rag</a>)</span><a class="headerlink" href="#id48" title="Link to this image"></a></p>
+<p><span class="caption-text">Agentic-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/">Langgraph Agentic-rag</a>)</span><a class="headerlink" href="#id54" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<section id="id31">
-<h3><span class="section-number">5.6.1. </span>Load Models<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<section id="id35">
+<h3><span class="section-number">5.6.1. </span>Load Models<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">OllamaEmbeddings</span>
 <span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
 
@@ -3252,8 +3295,8 @@ you will get error:</p>
 </div></blockquote>
 </div>
 </section>
-<section id="id32">
-<h3><span class="section-number">5.6.2. </span>Create Index<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<section id="id36">
+<h3><span class="section-number">5.6.2. </span>Create Index<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
 <span class="kn">from</span> <span class="nn">langchain_community.document_loaders</span> <span class="kn">import</span> <span class="n">WebBaseLoader</span>
 <span class="kn">from</span> <span class="nn">langchain_community.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span>
@@ -3284,8 +3327,10 @@ you will get error:</p>
 </pre></div>
 </div>
 </section>
+<section id="retrieval-tool">
+<h3><span class="section-number">5.6.3. </span>Retrieval Tool<a class="headerlink" href="#retrieval-tool" title="Link to this heading"></a></h3>
 <section id="define-tool">
-<h3><span class="section-number">5.6.3. </span>Define Tool<a class="headerlink" href="#define-tool" title="Link to this heading"></a></h3>
+<h4><span class="section-number">5.6.3.1. </span>Define Tool<a class="headerlink" href="#define-tool" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools.retriever</span> <span class="kn">import</span> <span class="n">create_retriever_tool</span>
 
 <span class="n">retriever_tool</span> <span class="o">=</span> <span class="n">create_retriever_tool</span><span class="p">(</span>
@@ -3343,8 +3388,8 @@ and <a class="reference internal" href="#ch-a-rag"><span class="std std-ref">Ada
 </div>
 </div>
 </section>
-<section id="id33">
-<h3><span class="section-number">5.6.4. </span>Retrieval Grader<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<section id="id37">
+<h4><span class="section-number">5.6.3.2. </span>Retrieval Grader<a class="headerlink" href="#id37" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Retrieval Grader</span>
 
 <span class="kn">from</span> <span class="nn">langchain_ollama.llms</span> <span class="kn">import</span> <span class="n">OllamaLLM</span>
@@ -3392,6 +3437,43 @@ and <a class="reference internal" href="#ch-a-rag"><span class="std std-ref">Ada
 </pre></div>
 </div>
 </section>
+</section>
+<section id="id38">
+<h3><span class="section-number">5.6.4. </span>Generate<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate answer</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (messages): The current state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: The updated state with re-phrased question</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GENERATE---&quot;</span><span class="p">)</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">last_message</span> <span class="o">=</span> <span class="n">messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">docs</span> <span class="o">=</span> <span class="n">last_message</span><span class="o">.</span><span class="n">content</span>
+
+    <span class="c1"># Prompt</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="s2">&quot;rlm/rag-prompt&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># Post-processing</span>
+    <span class="k">def</span> <span class="nf">format_docs</span><span class="p">(</span><span class="n">docs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">)</span>
+
+    <span class="c1"># Chain</span>
+    <span class="n">rag_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+
+    <span class="c1"># Run</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">response</span><span class="p">]}</span>
+</pre></div>
+</div>
+</section>
 <section id="agent-state">
 <h3><span class="section-number">5.6.5. </span>Agent State<a class="headerlink" href="#agent-state" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Sequence</span>
@@ -3409,8 +3491,10 @@ and <a class="reference internal" href="#ch-a-rag"><span class="std std-ref">Ada
 </pre></div>
 </div>
 </section>
-<section id="id34">
-<h3><span class="section-number">5.6.6. </span>Create the Graph<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
+<section id="id39">
+<h3><span class="section-number">5.6.6. </span>Graph<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<section id="id40">
+<h4><span class="section-number">5.6.6.1. </span>Create the Graph<a class="headerlink" href="#id40" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
 
@@ -3561,8 +3645,8 @@ and <a class="reference internal" href="#ch-a-rag"><span class="std std-ref">Ada
 </pre></div>
 </div>
 </section>
-<section id="id35">
-<h3><span class="section-number">5.6.7. </span>Compile Graph<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<section id="id41">
+<h4><span class="section-number">5.6.6.2. </span>Compile Graph<a class="headerlink" href="#id41" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
 <span class="kn">from</span> <span class="nn">langgraph.prebuilt</span> <span class="kn">import</span> <span class="n">ToolNode</span>
 
@@ -3622,8 +3706,8 @@ OllamaFunctions is initialized with the desired model name:</p>
 </div>
 </div>
 </section>
-<section id="id36">
-<h3><span class="section-number">5.6.8. </span>Graph visualization<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<section id="id42">
+<h4><span class="section-number">5.6.6.3. </span>Graph visualization<a class="headerlink" href="#id42" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -3633,15 +3717,16 @@ OllamaFunctions is initialized with the desired model name:</p>
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id49">
+<figure class="align-center" id="id55">
 <span id="fig-agentic-rag-graph"></span><img alt="_images/agentic_rag_graph.png" src="_images/agentic_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Agentic-RAG Graph</span><a class="headerlink" href="#id49" title="Link to this image"></a></p>
+<p><span class="caption-text">Agentic-RAG Graph</span><a class="headerlink" href="#id55" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
-<section id="id37">
-<h3><span class="section-number">5.6.9. </span>Test<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+</section>
+<section id="id43">
+<h3><span class="section-number">5.6.7. </span>Test<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
 
 <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span>

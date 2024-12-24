@@ -1105,8 +1105,11 @@ Output:
     ]
   }
 
+Utilities
+---------
+
 Hallucination Grader
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1148,7 +1151,7 @@ Output:
   GradeHallucinations(score='yes')
 
 Answer Grader
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1190,7 +1193,7 @@ Output:
   GradeAnswer(score='yes')
 
 Question Re-writer
-------------------
+~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1216,8 +1219,11 @@ Output:
 
   { "question": "What is the function or purpose of an agent's memory in a given context?" }
 
+Graph
+-----
+
 Create the Graph
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1401,7 +1407,7 @@ Create the Graph
           return "not supported"
 
 Compile Graph
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1442,7 +1448,7 @@ Compile Graph
   app = workflow.compile()        
 
 Graph visualization
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1798,8 +1804,11 @@ Output:
     "long_term_memory": ["The design of generative agents combines LLM with memory, planning and reflection mechanisms to enable agents to behave conditioned on past experience", "The memory stream: is a long-term memory module (external database) that records a comprehensive list of agents’ experience in natural language"]
   }
 
+Utilities
+---------  
+
 Router
-------
+~~~~~~
 
 .. code:: python
 
@@ -1859,7 +1868,7 @@ Output:
   {'datasource': 'vectorstore'}
 
 Hallucination Grader
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1901,7 +1910,7 @@ Output:
   GradeHallucinations(score='yes')
 
 Answer Grader
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1943,7 +1952,7 @@ Output:
   GradeAnswer(score='yes')
 
 Question Re-writer
-------------------
+~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1971,7 +1980,7 @@ Output:
 
 
 Web Search Tool (Google)
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2000,8 +2009,11 @@ Web Search Tool (Google)
     [Document(page_content=d["snippet"], metadata={"url": d["link"]})
      for d in eval(web_results)] 
 
+Graph 
+-----
+
 Create the Graph
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2151,7 +2163,7 @@ Create the Graph
           return "generate"    
 
 Compile Graph
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2184,7 +2196,7 @@ Compile Graph
   app = workflow.compile()  
 
 Graph visualization
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2338,8 +2350,106 @@ Create Index
   )
   retriever = vectorstore.as_retriever(k=4)
 
+
+Retrieval Grader
+----------------
+
+.. code:: python
+
+  ### Retrieval Grader
+
+  from langchain_ollama.llms import OllamaLLM
+  from langchain.prompts import PromptTemplate
+  from langchain_community.chat_models import ChatOllama
+  from langchain_core.output_parsers import JsonOutputParser
+
+  # Import BaseModel and Field from langchain_core.pydantic_v1
+  # from langchain_core.pydantic_v1 import BaseModel, Field 
+  from pydantic import BaseModel, Field 
+  from langchain.output_parsers import PydanticOutputParser
+
+  # Data model
+  class GradeDocuments(BaseModel): 
+      """Binary score for relevance check on retrieved documents."""
+
+      score: str = Field(  # Changed field name to 'score'
+          description="Documents are relevant to the question, 'yes' or 'no'")
+
+  parser = PydanticOutputParser(pydantic_object=GradeDocuments)
+
+  prompt = PromptTemplate(
+      template="""You are a grader assessing relevance of a retrieved
+      document to a user question. \n
+      Here is the retrieved document: \n\n {document} \n\n
+      Here is the user question: {question} \n
+      If the document contains keywords related to the user question,
+      grade it as relevant. \n
+      It does not need to be a stringent test. The goal is to filter out
+      erroneous retrievals. \n
+      Give a binary score 'yes' or 'no' score to indicate whether the document
+      is relevant to the question. \n
+      Provide the binary score as a JSON with a single key 'score' and no
+      preamble or explanation.""",
+      input_variables=["question", "document"],
+      partial_variables={"format_instructions": parser.get_format_instructions()}
+  )
+
+  retrieval_grader = prompt | llm | parser
+  question = "agent memory"
+  docs = retriever.invoke(question)
+  doc_txt = docs[1].page_content
+  retrieval_grader.invoke({"question": question, "document": doc_txt})
+
+Generate
+--------
+
+.. code:: python
+
+  ### Generate
+
+  from langchain_core.output_parsers import StrOutputParser
+
+  # Prompt
+  prompt = PromptTemplate(
+      template="""You are an assistant for question-answering tasks.
+
+      Use the following documents to answer the question.
+
+      If you don't know the answer, just say that you don't know.
+
+      Use three sentences maximum and keep the answer concise:
+      Question: {question}
+      Documents: {documents}
+      Answer:
+      """,
+      input_variables=["question", "documents"],
+  )
+
+  # Chain
+  rag_chain = prompt | llm | StrOutputParser()
+
+  # Run
+  generation = rag_chain.invoke({"documents": docs, "question": question})
+  print(generation)
+
+Ouput:
+
+.. code:: python
+
+  {
+      "answer": [
+          {
+              "role": "assistant",
+              "content": "In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short-term Memory, and Long-term Memory. \n\nSensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It's the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). \n\nShort-term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. \n\nLong-term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah)."
+          }
+      ]
+  }
+
+Utilities
+---------
+
 Router
-------
+~~~~~~
 
 .. code:: python
 
@@ -2461,102 +2571,9 @@ Ouput:
                                               prompt engineering?"})) ### Index
 
 
-Retrieval Grader
-----------------
-
-.. code:: python
-
-  ### Retrieval Grader
-
-  from langchain_ollama.llms import OllamaLLM
-  from langchain.prompts import PromptTemplate
-  from langchain_community.chat_models import ChatOllama
-  from langchain_core.output_parsers import JsonOutputParser
-
-  # Import BaseModel and Field from langchain_core.pydantic_v1
-  # from langchain_core.pydantic_v1 import BaseModel, Field 
-  from pydantic import BaseModel, Field 
-  from langchain.output_parsers import PydanticOutputParser
-
-  # Data model
-  class GradeDocuments(BaseModel): 
-      """Binary score for relevance check on retrieved documents."""
-
-      score: str = Field(  # Changed field name to 'score'
-          description="Documents are relevant to the question, 'yes' or 'no'")
-
-  parser = PydanticOutputParser(pydantic_object=GradeDocuments)
-
-  prompt = PromptTemplate(
-      template="""You are a grader assessing relevance of a retrieved
-      document to a user question. \n
-      Here is the retrieved document: \n\n {document} \n\n
-      Here is the user question: {question} \n
-      If the document contains keywords related to the user question,
-      grade it as relevant. \n
-      It does not need to be a stringent test. The goal is to filter out
-      erroneous retrievals. \n
-      Give a binary score 'yes' or 'no' score to indicate whether the document
-      is relevant to the question. \n
-      Provide the binary score as a JSON with a single key 'score' and no
-      preamble or explanation.""",
-      input_variables=["question", "document"],
-      partial_variables={"format_instructions": parser.get_format_instructions()}
-  )
-
-  retrieval_grader = prompt | llm | parser
-  question = "agent memory"
-  docs = retriever.invoke(question)
-  doc_txt = docs[1].page_content
-  retrieval_grader.invoke({"question": question, "document": doc_txt})
-
-Generate
---------
-
-.. code:: python
-
-  ### Generate
-
-  from langchain_core.output_parsers import StrOutputParser
-
-  # Prompt
-  prompt = PromptTemplate(
-      template="""You are an assistant for question-answering tasks.
-
-      Use the following documents to answer the question.
-
-      If you don't know the answer, just say that you don't know.
-
-      Use three sentences maximum and keep the answer concise:
-      Question: {question}
-      Documents: {documents}
-      Answer:
-      """,
-      input_variables=["question", "documents"],
-  )
-
-  # Chain
-  rag_chain = prompt | llm | StrOutputParser()
-
-  # Run
-  generation = rag_chain.invoke({"documents": docs, "question": question})
-  print(generation)
-
-Ouput:
-
-.. code:: python
-
-  {
-      "answer": [
-          {
-              "role": "assistant",
-              "content": "In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short-term Memory, and Long-term Memory. \n\nSensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It's the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). \n\nShort-term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. \n\nLong-term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah)."
-          }
-      ]
-  }
 
 Hallucination Grader
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2593,7 +2610,7 @@ Hallucination Grader
 
 
 Answer Grader
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2631,7 +2648,7 @@ Answer Grader
 
 
 Question Re-writer
-------------------
+~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2653,7 +2670,7 @@ Question Re-writer
 
 
 Google Web Search
------------------
+~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2683,8 +2700,12 @@ Google Web Search
     [Document(page_content=d["snippet"], metadata={"url": d["link"]})
      for d in eval(web_results)] 
 
+
+Graph
+-----     
+
 Create the Graph
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2918,7 +2939,7 @@ Create the Graph
           return "not supported"
 
 Compile Graph
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2967,7 +2988,7 @@ Compile Graph
   app = workflow.compile()
 
 Graph visualization
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -3127,8 +3148,11 @@ Create Index
   )
   retriever = vectorstore.as_retriever(k=4)
 
-Define Tool 
------------
+Retrieval Tool 
+--------------
+
+Define Tool
+~~~~~~~~~~~
 
 .. code:: python
 
@@ -3192,7 +3216,7 @@ Define Tool
     agent_executor.invoke({"input": "whats the weather in sf?"})
 
 Retrieval Grader
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
     
@@ -3244,6 +3268,44 @@ Ouput:
 
   GradeDocuments(score='yes')
 
+
+Generate
+--------
+
+.. code:: python
+
+  def generate(state):
+      """
+      Generate answer
+
+      Args:
+          state (messages): The current state
+
+      Returns:
+          dict: The updated state with re-phrased question
+      """
+      print("---GENERATE---")
+      messages = state["messages"]
+      question = messages[0].content
+      last_message = messages[-1]
+
+      docs = last_message.content
+
+      # Prompt
+      prompt = hub.pull("rlm/rag-prompt")
+
+
+      # Post-processing
+      def format_docs(docs):
+          return "\n\n".join(doc.page_content for doc in docs)
+
+      # Chain
+      rag_chain = prompt | llm | StrOutputParser()
+
+      # Run
+      response = rag_chain.invoke({"context": docs, "question": question})
+      return {"messages": [response]}
+
 Agent State
 -----------
 
@@ -3262,8 +3324,11 @@ Agent State
       # Default is to replace. add_messages says "append"
       messages: Annotated[Sequence[BaseMessage], add_messages]  
 
+Graph
+-----
+
 Create the Graph
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python    
 
@@ -3416,7 +3481,7 @@ Create the Graph
   # prompt = hub.pull("rlm/rag-prompt").pretty_print()
 
 Compile Graph
--------------
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -3482,7 +3547,7 @@ Compile Graph
     response = model.invoke(messages)
 
 Graph visualization
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
