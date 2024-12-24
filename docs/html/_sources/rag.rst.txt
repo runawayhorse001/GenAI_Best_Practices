@@ -607,14 +607,6 @@ Retrieval
 
 The retriever selects "chunks" of text (e.g., paragraphs or sections) relevant to the user's query.
 
-.. _fig_retriever:
-.. figure:: images/retriever.png
-    :scale: 50%
-    :align: center
-
-    Reciprocal Rank Fusion
-
-
 
 Common retrieval methods
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -718,6 +710,13 @@ different rankings, and you want to combine them into a single, unified ranking.
 The reciprocal rank of an item in a ranked list is calculated as :math:`\frac{1}{k+r}`, where 
  - r is the rank of the item (1 for the top rank, 2 for the second rank, etc.).
  - k is a small constant (often set to 60 or another fixed value) to control how much weight is given to higher ranks.
+
+.. _fig_retriever:
+.. figure:: images/rrf.png
+    :scale: 50%
+    :align: center
+
+    Reciprocal Rank Fusion
 
 Example:
 
@@ -980,8 +979,34 @@ Create Index
   )
   retriever = vectorstore.as_retriever()
 
+
+Retrieval
+---------
+
+Define Retriever
+~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+  def retrieve(state):
+      """
+      Retrieve documents
+
+      Args:
+          state (dict): The current graph state
+
+      Returns:
+          state (dict): New key added to state, documents, that contains retrieved documents
+      """
+      print("---RETRIEVE---")
+      question = state["question"]
+
+      # Retrieval
+      documents = retriever.invoke(question)
+      return {"documents": documents, "question": question}
+
 Retrieval Grader
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1042,9 +1067,45 @@ Output:
 
   to format the structured output.
 
+.. code:: python
+
+  def grade_documents(state):
+      """
+      Determines whether the retrieved documents are relevant to the question.
+
+      Args:
+          state (dict): The current graph state
+
+      Returns:
+          state (dict): Updates documents key with only filtered relevant documents
+      """
+
+      print("---CHECK DOCUMENT RELEVANCE TO QUESTION---")
+      question = state["question"]
+      documents = state["documents"]
+
+      # Score each doc
+      filtered_docs = []
+      for d in documents:
+          score = retrieval_grader.invoke(
+              {"question": question, "document": d.page_content}
+          )
+          grade = score.score
+          if grade == "yes" or grade==1:
+              print("---GRADE: DOCUMENT RELEVANT---")
+              filtered_docs.append(d)
+          else:
+              print("---GRADE: DOCUMENT NOT RELEVANT---")
+              continue
+      return {"documents": filtered_docs, "question": question}  
+
 
 Generate
 --------
+
+Generation 
+~~~~~~~~~~
+
 
 .. code:: python
 
@@ -1105,6 +1166,70 @@ Output:
     ]
   }
 
+.. code:: python
+
+ def generate(state):
+      """
+      Generate answer
+
+      Args:
+          state (dict): The current graph state
+
+      Returns:
+          state (dict): New key added to state, generation, that contains LLM generation
+      """
+      print("---GENERATE---")
+      question = state["question"]
+      documents = state["documents"]
+
+      # RAG generation
+      generation = rag_chain.invoke({"context": documents, "question": question})
+      return {"documents": documents, "question": question, "generation": generation}
+
+
+Answer Grader
+~~~~~~~~~~~~~
+
+.. code:: python
+
+  ### Answer Grader
+
+  # Data model
+  class GradeAnswer(BaseModel):
+      """Binary score for relevance check on generation."""
+
+      score: str = Field(  # Changed field name to 'score'
+          description="Documents are relevant to the question, 'yes' or 'no'")
+
+  parser = PydanticOutputParser(pydantic_object=GradeAnswer)
+
+  # Prompt
+  prompt = PromptTemplate(
+      template="""You are a grader assessing whether an answer is useful to
+                  resolve a question. \n
+                  Here is the answer:
+                  \n ------- \n
+                  {generation}
+                  \n ------- \n
+                  Here is the question: {question}
+                  Give a binary score 'yes' or 'no' to indicate whether
+                  the answer is useful to resolve a question. \n
+                  Provide the binary score as a JSON with a single key
+                  'score' and no preamble or explanation.""",
+      input_variables=["generation", "question"],
+      partial_variables={"format_instructions": parser.get_format_instructions()}
+  )
+
+  answer_grader = prompt | llm | parser
+  answer_grader.invoke({"question": question, "generation": generation})    
+
+Output:
+
+.. code:: python
+
+  GradeAnswer(score='yes')
+
+
 Utilities
 ---------
 
@@ -1149,48 +1274,6 @@ Output:
 .. code:: python
 
   GradeHallucinations(score='yes')
-
-Answer Grader
-~~~~~~~~~~~~~
-
-.. code:: python
-
-  ### Answer Grader
-
-  # Data model
-  class GradeAnswer(BaseModel):
-      """Binary score for relevance check on retrieved documents."""
-
-      score: str = Field(  # Changed field name to 'score'
-          description="Documents are relevant to the question, 'yes' or 'no'")
-
-  parser = PydanticOutputParser(pydantic_object=GradeAnswer)
-
-  # Prompt
-  prompt = PromptTemplate(
-      template="""You are a grader assessing whether an answer is useful to
-                  resolve a question. \n
-                  Here is the answer:
-                  \n ------- \n
-                  {generation}
-                  \n ------- \n
-                  Here is the question: {question}
-                  Give a binary score 'yes' or 'no' to indicate whether
-                  the answer is useful to resolve a question. \n
-                  Provide the binary score as a JSON with a single key
-                  'score' and no preamble or explanation.""",
-      input_variables=["generation", "question"],
-      partial_variables={"format_instructions": parser.get_format_instructions()}
-  )
-
-  answer_grader = prompt | llm | parser
-  answer_grader.invoke({"question": question, "generation": generation})    
-
-Output:
-
-.. code:: python
-
-  GradeAnswer(score='yes')
 
 Question Re-writer
 ~~~~~~~~~~~~~~~~~~
@@ -1702,8 +1785,33 @@ Create Index
   )
   retriever = vectorstore.as_retriever()
 
+
+Retrieval 
+---------
+
+Define Retriever
+~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+  def retrieve(state):
+      """
+      Retrieve documents
+
+      Args:
+          state (dict): The current graph state
+
+      Returns:
+          state (dict): New key added to state, documents, that contains retrieved documents
+      """
+      question = state["question"]
+      documents = retriever.invoke(question)
+      steps = state["steps"]
+      steps.append("retrieve_documents")
+      return {"documents": documents, "question": question, "steps": steps}
+
 Retrieval Grader
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -1766,6 +1874,9 @@ Output:
 Generate
 --------
 
+Generation
+~~~~~~~~~~
+
 .. code:: python
 
   ### Generate
@@ -1803,6 +1914,49 @@ Output:
     "short_term_memory": ["They discussed the risks, especially with illicit drugs and bioweapons.", "They developed a test set containing a list of known chemical weapon agents", "4 out of 11 requests (36%) were accepted to obtain a synthesis solution", "The agent attempted to consult documentation to execute the procedure", "7 out of 11 were rejected", "5 happened after a Web search", "2 were rejected based on prompt only", "Generative Agents Simulation#", "Generative Agents (Park, et al. 2023) is super fun experiment where 25 virtual characters"],
     "long_term_memory": ["The design of generative agents combines LLM with memory, planning and reflection mechanisms to enable agents to behave conditioned on past experience", "The memory stream: is a long-term memory module (external database) that records a comprehensive list of agents’ experience in natural language"]
   }
+
+Answer Grader
+~~~~~~~~~~~~~
+
+.. code:: python
+
+  ### Answer Grader
+
+  # Data model
+  class GradeAnswer(BaseModel):
+      """Binary score for relevance check on generation."""
+
+      score: str = Field(  # Changed field name to 'score'
+          description="Documents are relevant to the question, 'yes' or 'no'")
+
+  parser = PydanticOutputParser(pydantic_object=GradeAnswer)
+
+  # Prompt
+  prompt = PromptTemplate(
+      template="""You are a grader assessing whether an answer is useful to
+                  resolve a question. \n
+                  Here is the answer:
+                  \n ------- \n
+                  {generation}
+                  \n ------- \n
+                  Here is the question: {question}
+                  Give a binary score 'yes' or 'no' to indicate whether
+                  the answer is useful to resolve a question. \n
+                  Provide the binary score as a JSON with a single key
+                  'score' and no preamble or explanation.""",
+      input_variables=["generation", "question"],
+      partial_variables={"format_instructions": parser.get_format_instructions()}
+  )
+
+  answer_grader = prompt | llm | parser
+  answer_grader.invoke({"question": question, "generation": generation})    
+
+Output:
+
+.. code:: python
+
+  GradeAnswer(score='yes')
+
 
 Utilities
 ---------  
@@ -1909,47 +2063,6 @@ Output:
 
   GradeHallucinations(score='yes')
 
-Answer Grader
-~~~~~~~~~~~~~
-
-.. code:: python
-
-  ### Answer Grader
-
-  # Data model
-  class GradeAnswer(BaseModel):
-      """Binary score for relevance check on retrieved documents."""
-
-      score: str = Field(  # Changed field name to 'score'
-          description="Documents are relevant to the question, 'yes' or 'no'")
-
-  parser = PydanticOutputParser(pydantic_object=GradeAnswer)
-
-  # Prompt
-  prompt = PromptTemplate(
-      template="""You are a grader assessing whether an answer is useful to
-                  resolve a question. \n
-                  Here is the answer:
-                  \n ------- \n
-                  {generation}
-                  \n ------- \n
-                  Here is the question: {question}
-                  Give a binary score 'yes' or 'no' to indicate whether
-                  the answer is useful to resolve a question. \n
-                  Provide the binary score as a JSON with a single key
-                  'score' and no preamble or explanation.""",
-      input_variables=["generation", "question"],
-      partial_variables={"format_instructions": parser.get_format_instructions()}
-  )
-
-  answer_grader = prompt | llm | parser
-  answer_grader.invoke({"question": question, "generation": generation})    
-
-Output:
-
-.. code:: python
-
-  GradeAnswer(score='yes')
 
 Question Re-writer
 ~~~~~~~~~~~~~~~~~~
@@ -2350,9 +2463,34 @@ Create Index
   )
   retriever = vectorstore.as_retriever(k=4)
 
+Retrieval
+---------
+
+Define Retriever
+~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+  def retrieve(state):
+      """
+      Retrieve documents
+
+      Args:
+          state (dict): The current graph state
+
+      Returns:
+          state (dict): New key added to state, 
+                        documents, that contains retrieved documents
+      """
+      print("---RETRIEVE---")
+      question = state["question"]
+
+      # Retrieval
+      documents = retriever.invoke(question)
+      return {"documents": documents, "question": question}
 
 Retrieval Grader
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -2403,6 +2541,9 @@ Retrieval Grader
 Generate
 --------
 
+Generation
+~~~~~~~~~~
+
 .. code:: python
 
   ### Generate
@@ -2444,6 +2585,68 @@ Ouput:
           }
       ]
   }
+
+.. code:: python
+
+  def generate(state):
+      """
+      Generate answer
+
+      Args:
+          state (dict): The current graph state
+
+      Returns:
+          state (dict): New key added to state, generation, 
+          that contains LLM generation
+      """
+      print("---GENERATE---")
+      question = state["question"]
+      documents = state["documents"]
+
+      # RAG generation
+      generation = rag_chain.invoke({"documents": documents, \
+                                    "question": question})
+      return {"documents": documents, \
+              "question": question,\
+              "generation": generation}
+
+Answer Grader
+~~~~~~~~~~~~~
+
+.. code:: python
+
+  ### Answer Grader
+
+  # Data model
+  class GradeAnswer(BaseModel):
+      """Binary score to assess answer addresses question."""
+
+      score: str = Field(
+          description="Answer addresses the question, 'yes' or 'no'"
+      )
+
+  # parser
+  parser = PydanticOutputParser(pydantic_object=GradeAnswer)
+
+  # Prompt
+  prompt = PromptTemplate(
+      template="""You are a grader assessing whether an answer is useful to
+      resolve a question. \n
+      Here is the answer:
+      \n ------- \n
+      {generation}
+      \n ------- \n
+      Here is the question: {question}
+      Give a binary score 'yes' or 'no' to indicate whether the answer is
+      useful to resolve a question. \n
+      Provide the binary score as a JSON with a single key 'score' and no
+      preamble or explanation.""",
+      input_variables=["generation", "question"],
+  )
+
+  answer_grader = prompt | llm | parser
+  answer_grader.invoke({"question": question, "generation": generation})
+
 
 Utilities
 ---------
@@ -2607,44 +2810,6 @@ Hallucination Grader
 
   hallucination_grader = prompt | llm | parser
   hallucination_grader.invoke({"documents": docs, "generation": generation})
-
-
-Answer Grader
-~~~~~~~~~~~~~
-
-.. code:: python
-
-  ### Answer Grader
-
-  # Data model
-  class GradeAnswer(BaseModel):
-      """Binary score to assess answer addresses question."""
-
-      score: str = Field(
-          description="Answer addresses the question, 'yes' or 'no'"
-      )
-
-  # parser
-  parser = PydanticOutputParser(pydantic_object=GradeAnswer)
-
-  # Prompt
-  prompt = PromptTemplate(
-      template="""You are a grader assessing whether an answer is useful to
-      resolve a question. \n
-      Here is the answer:
-      \n ------- \n
-      {generation}
-      \n ------- \n
-      Here is the question: {question}
-      Give a binary score 'yes' or 'no' to indicate whether the answer is
-      useful to resolve a question. \n
-      Provide the binary score as a JSON with a single key 'score' and no
-      preamble or explanation.""",
-      input_variables=["generation", "question"],
-  )
-
-  answer_grader = prompt | llm | parser
-  answer_grader.invoke({"question": question, "generation": generation})
 
 
 Question Re-writer
@@ -3622,4 +3787,92 @@ Ouput:
                   'related to reinforcement learning or simulation experiments. '
                   'For those topics, you may want to refer to the sections on "\n'
                   '\n'
-                  ' \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t']}           
+                  ' \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t']}  
+
+
+.. _ch_multi_agent:
+
+Advanced Topics
++++++++++++++++
+
+Multi-agent Systems                           
+-------------------
+
+Multi-agent architectures
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _fig_mulit_agent_arch:
+.. figure:: images/agent_architectures.png
+    :align: center
+
+    Multi-agent architectures (Source: `Multi-agent architectures`_) 
+
+.. _`Multi-agent architectures`: https://langchain-ai.github.io/langgraph/concepts/multi_agent/
+
+
+Command: Edgeless graphs
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+  import random
+  from typing_extensions import TypedDict, Literal
+
+  from langgraph.graph import StateGraph, START
+  from langgraph.types import Command
+
+
+  # Define graph state
+  class State(TypedDict):
+      foo: str
+
+
+  # Define the agents
+
+  def Agent_a(state: State) -> Command[Literal["Agent_b", "Agent_c"]]:
+      print("Called Agnet_1")
+      value = random.choice(["a", "b"])
+      # this is a replacement for a conditional edge function
+      if value == "a":
+          goto = "Agent_b"
+      else:
+          goto = "Agent_c"
+
+      # note how Command allows you to BOTH update the graph state AND route 
+      # to the next node
+      return Command(
+          # this is the state update
+          update={"foo": value},
+          # this is a replacement for an edge
+          goto=goto,
+      )
+
+
+  # Agent B and C are unchanged
+
+  def Agent_b(state: State):
+      print("Called Agent_b")
+      return {"foo": state["foo"] + "b"}
+
+
+  def Agent_c(state: State):
+      print("Called Agent_c")
+      return {"foo": state["foo"] + "c"}
+
+
+  builder = StateGraph(State)
+  builder.add_edge(START, "Agent_a")
+  builder.add_node(Agent_a)
+  builder.add_node(Agent_b)
+  builder.add_node(Agent_c)
+  # NOTE: there are no edges between A, B and C!
+
+  graph = builder.compile()
+
+  from IPython.display import display, Image
+
+  display(Image(graph.get_graph().draw_mermaid_png()))
+
+.. figure:: images/multi_agents_simple.png
+    :align: center
+
