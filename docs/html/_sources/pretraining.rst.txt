@@ -40,7 +40,7 @@ Transformer Architecture
    :alt: transformer_architecture
    :align: center
 
-   Transformer Architecture
+   Transformer Architecture (source: [attentionAllYouNeed]_)
 
 Attention Is All You Need
 -------------------------
