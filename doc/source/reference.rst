@@ -40,5 +40,19 @@ Main Reference
                  `G-EVAL: NLG Evaluation using GPT-4 with Better Human Alignment
                  <https://arxiv.org/pdf/2303.16634>`_, 2023.
 
-                 
-       
+
+.. [Tri_Dao_1] Tri Dao etc.
+                 `FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness
+                 <https://arxiv.org/abs/2205.14135>`_, 2022.          
+
+.. [Tri_Dao_2] Tri Dao.
+                 `FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning
+                 <https://arxiv.org/abs/2307.08691>`_, 2023.
+
+.. [Jay_Shah] Jay Shah etc.
+                    `FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision
+                    <https://arxiv.org/abs/2407.08608>`_, 2024.
+
+.. [Andrei] Andrei Ivanov etc.
+                 `Data Movement Is All You Need: A Case Study on Optimizing Transformers
+                 <https://arxiv.org/abs/2007.00072>`_, 2024.

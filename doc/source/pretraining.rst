@@ -366,6 +366,14 @@ parameters in this embedding matrix is calculated by :math:`d \times V`.
 Attention Mechanism
 -------------------
 
+.. figure:: images/self_attention_hendrik.png
+   :alt: self_attention_hendrik
+   :align: center
+
+   Self Attention (source: `The Transformer Architecture A Visual Guide`_)
+
+.. _`The Transformer Architecture A Visual Guide`: https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download
+
 Self-Attention
 ~~~~~~~~~~~~~~
 
@@ -403,7 +411,8 @@ sum of the values.
    .. math::
 
 
-      Q = W_E W_Q\\ \space(N\times d)(d\times d_q) \rightarrow (N \times d_q)
+      Q &= W_E W_Q\\ 
+      (N\times d)(d\times d_q) &\rightarrow (N \times d_q)
 
    Conceptually, the query matrix aims to ask each word a question
    regarding what kinds of relationship it has with each of the other
@@ -425,7 +434,8 @@ sum of the values.
    .. math::
 
 
-      K = W_E W_K \\ \space (N \times d) (d \times d_k) \rightarrow (N \times d_k)
+      K &= W_E W_K \\ 
+      (N \times d) (d \times d_k) &\rightarrow (N \times d_k)
 
    Conceptually, the keys are answering the queries by matching the
    queries whenever they closely align with each other. In our example
@@ -515,7 +525,8 @@ sum of the values.
    .. math::
 
 
-      V = W_E W_V \\ \space (N \times d) (d \times d_v) \rightarrow (N \times d_v)
+      V &= W_E W_V \\ 
+      (N \times d) (d \times d_v) &\rightarrow (N \times d_v)
 
    Conceptually, by maping the embedding of a word to the value space,
    it’s trying to figure out what should be added to the embedding of
@@ -531,8 +542,8 @@ sum of the values.
    .. math::
 
 
-      \text{Output} = \text{Attention Weights} \times V\\
-      (N \times N) (N \times d_v) \rightarrow (N \times d_v)
+      \text{Output} &= \text{Attention Weights} \times V\\
+      (N \times N) (N \times d_v) &\rightarrow (N \times d_v)
 
    This results in a matrix of size :math:`N \times d_v` where for each
    word there is a weighted sum of the value vectors :math:`\Delta E`
@@ -665,8 +676,8 @@ The process can be broken down into the following steps:
    .. math::
 
 
-      \mu = {1\over d} \sum^d_{i=1}x_i\\
-      \sigma^2 = {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2
+      \mu &= {1\over d} \sum^d_{i=1}x_i\\
+      \sigma^2 &= {1\over d} \sum^d_{i=1} \sum^d_{i=1} (x_i-\mu)^2
 
    where :math:`\mu` is the mean and :math:`\sigma^2` is the variance of
    the input.
@@ -877,7 +888,9 @@ When using a temperature :math:`T > 0`, the logits are scaled by
 When :math:`T` is larger, more weight is given to the lower values, then
 the distribution is more uniform. If :math:`T` is smaller, the biggest
 logit score will dominate more aggresively. Setting :math:`T=0` gives
-all the weights to the maximum value resulting a ~100% probability.
+all the weights to the maximum value resulting a ~100% probability. This
+means higher temperature leads to creative but potentially incoherent
+outputs, and lower temperature leads to safe and predictable outputs.
 
 Unembedding Matrix
 ------------------
@@ -968,6 +981,99 @@ many candidate sequences are considered at each step.
    :align: center
 
    Beam Search
+
+Top-k Sampling
+~~~~~~~~~~~~~~
+
+After the model outputs a probability distribution over the entire
+vocabulary (e.g., 50,000 tokens for GPT-style models). Only the top
+:math:`k` tokens with the highest probabilities are retained. All other
+tokens are discarded. The probabilities of the remaining :math:`k`
+tokens are renormalized to sum to 1. A token is randomly selected from
+the :math:`k`-token subset based on the renormalized probabilities.
+
+When :math:`k=1`, top-k sampling is the same as greedy decoding, where
+the token with the highest probability is chosen. Higher :math:`k`
+allows more variety by considering more tokens.
+
+Top-k sampling is considered **static** and **predefined** because once
+a contant :math:`k` is specified, at each decoding step, only the top
+:math:`k` tokens are considered for sampling. Regardless the shape of
+distribution, the size of the candidate pool :math:`k` does not change.
+If the probability distribution is “flat”(many tokens with similar
+probabilities), top-k might still discard important tokens outside the
+top :math:`k`. If the distribution is “peaked” (one or a few tokens
+dominate), top-k might include unlikely tokens unnecessarily.
+
+Top-p (Nucleus) Sampling
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+After the model outputs a probability distribution over the vocabulary.
+Tokens are sorted in descending order of probability. A cumulative sum
+of probabilities is calculated for the sorted tokens. The smallest set
+of tokens whose cumulative probability exceeds or equals :math:`p` are
+retained. The probabilities of the selected tokens are renormalized to
+sum to 1. A token is randomly selected from this dynamic subset.
+
+When :math:`p=1`, all tokens are included, then top-p sampling is
+equivalent to pure sampling. Lower :math:`p` focuses on fewer tokens,
+ensuring higher-quality predictions while retaining some randomness.
+
+Top-p sampling is considered **dynamic** and **adaptive** because the
+number of tokens in the pool varies depending on the shape of the
+probability distribution. If the distribution is “peaked,” top-p will
+include fewer tokens because the most probable tokens quickly satisfy
+the cumulative threshold :math:`p`. If the distribution is “flat,” top-p
+will include more tokens to ensure the cumulative probability reaches
+:math:`p`.
+
+Temperature Scaling
+~~~~~~~~~~~~~~~~~~~
+
+As mentioned in the section “Softmax and Temperature”, temperature
+scaling is applied to the logits right before sampling or selection
+(e.g., during top-k or top-p sampling). It modifies the softmax function
+with a parameter :math:`T` added to adjust the shape of the resulting
+probability distribution from logits. Temperature scaling is used in
+tasks requiring stochastic decoding methods like top-k sampling or
+nucleus sampling.
+
+**Temperature (:math:`T`) + Top-k**:
+
+- “High :math:`T` + high :math:`k`” results in extremely diverse and
+  creative outputs. It may produce incoherent or irrelevant text because
+  too many unlikely tokens are considered. It’s used when generating
+  highly imaginative or exploratory text, such as in creative writing.
+- “High :math:`T` + low :math:`k`” balances diversity with some level of
+  coherence. Even with low :math:`k`, high :math:`T` may introduce
+  unexpected word choices. It’s used when creative tasks where some
+  randomness is desired, but the context must still be respected.
+- “Low :math:`T` + high :math:`k`” produces coherent and focused outputs
+  because :math:`T` emphasizes the most probable tokens. The effect of
+  high :math:`k` is mitigated because the scaled probabilities naturally
+  limit diversity.
+- “Low :math:`T` + low :math:`k`” produces highly deterministic outputs.
+  Text may seem repetitive. It’s used when tasks requiring consistency,
+  such as factual responses or concise answers.
+
+**Temperature (:math:`T`) + Top-p**:
+
+- “High :math:`T` + high :math:`p`” produces diverse outputs, but the
+  context may still be loosely followed. It may produce incoherent or
+  irrelevant text because too many unlikely tokens are considered. It’s
+  used when generating exploratory or brainstorming text.
+- “High :math:`T` + low :math:`p`” produces constrained output despite
+  high :math:`T`, as only the most probable tokens within the
+  :math:`p`-threshold are considered. Even with low :math:`k`, high
+  :math:`T` may introduce unexpected word choices. It’s used for
+  slightly creative tasks with some emphasis on coherence.
+- “Low :math:`T` + high :math:`p`” produces coherent and slightly
+  diverse text. It’s used in balanced tasks, such as assistant chatbots
+  or domain-specific content generation.
+- “Low :math:`T` + low :math:`p`” produces very deterministic and rigid
+  outputs. it’s used when generating formal or technical content
+  requiring precision, such as legal or scientific writing.
+
 
 .. _summary-1:
 
@@ -1165,8 +1271,171 @@ where :math:`i` is the query head within a group.
   - GQA is well-suited for very large models and long-sequence tasks
     where standard MHA becomes computationally and memory prohibitive.
 
-Flash Attention
----------------
 
 .. |qkv_attention_pattern| image:: images/qkv_attention_pattern.png
 .. |kv_cache| image:: images/kv_cache.png
+
+Flash Attention
+---------------
+
+FlashAttention [Tri_Dao_1]_ is a novel and
+efficient algorithm designed to address the computational and memory
+challenges of self-attention in Transformers, particularly for long
+sequences. It’s designed to solve two challenges of traditional
+Transformer implementation:
+
+- Self-attention mechanisms in transformers are computationally
+  expensive with quadratic time (:math:`n^2`) and memory complexity
+  concerning sequence length (:math:`n`), making them inefficient for
+  long sequences.
+- It's been revealed in “Data Movement is All You Need” [Andrei]_ that the
+  key bottleneck during training a Transformer is data movement (reading
+  and writing data) rather than computation. The paper highlights that
+  many transformer operations are **memory-bandwidth-bound**, meaning
+  that the speed of data transfer to and from HBM often becomes a
+  bottleneck rather than the GPU’s raw computational power. This finding
+  shows that existing implementations of Transformers do not efficiently
+  utilize GPUs.
+
+.. figure:: images/flashattention_paper.png
+   :alt: flashattention
+   :align: center
+
+   Flash Attention (source: `Flash Attention`_)
+
+.. _Flash Attention: https://arxiv.org/abs/2205.14135
+
+The idea of Flash Attention is **computing by blocks** to reduce HBM
+reads and writes. Their implementation is a **fused CUDA kernel** for
+fine-grained control of memory accesses with two techniques:
+
+- **Tiling**: Tiling works by decomposing large softmax into smaller
+  ones by scaling. It firstly loads inputs by blocks from HBM to SRAM
+  for fast computation, computes attention output with respect to that
+  block in SRAM, then updates output in HBM by scaling.
+
+  The method decomposes softmax as follows as an example.
+  :math:`[x_1, x_2]` represents the concatenation of two partitions
+  (blocks) of input scores. Softmax is independently computed one block
+  at a time. This block-wise operations reduce memory and computational
+  overhead compared to processing the entire sequence at once.
+  :math:`m(x)` represents the maximum value within a block of the
+  attention matrix. It’s used as a max-shifting step during the softmax
+  calculation, which improves numerical stability. :math:`\ell(x)` is a
+  normalization factor used to convert the exponentials into probability
+  distributions. The combination of scaling factors ensures that the
+  results match the global Softmax computation if it were performed over
+  the full sequence.
+
+  .. math::
+
+
+     &m(x) = m(\begin{bmatrix}x_1 & x_2\end{bmatrix}) = \max(m(x_1), m(x_2))\\
+     &f(x) = \begin{bmatrix} e^{m(x_1)-m(x)}f(x_1) & e^{m(x_2)-m(x)}f(x_2)\end{bmatrix}\\
+     &\ell(x) = \ell(\begin{bmatrix}x_1 & x_2\end{bmatrix}) = e^{m(x_1)-m(x)}f(x_1)+e^{m(x_2)-m(x)}f(x_2)\\
+     &\text{softmax}(x) = {f(x)\over \ell(x)}
+
+- **Recomputation**: the idea is to store the output
+  :math:`\text{softmax}(PQ^T)V` and softmax normalization factors
+  :math:`m(x), \ell(x)` rather than storing the attention matrix from
+  forward in HBM, then recompute the attention matrix in the backward in
+  SRAM.
+
+  Recomputation allows the model to discard intermediate activations
+  during the forward pass, only keeping the most essential data for
+  backpropagation. This frees up memory, enabling the model to process
+  much longer sequences or use larger batch sizes. It essentially trades
+  **additional computation** for **reduced memory usage**, making the
+  process scalable. This is a tradeoff that is often acceptable,
+  especially with hardware accelerators (GPUs/TPUs) where computation
+  power is abundant but memory capacity is limited.
+
+Both **tiling** and **recomputation** aim to address memory and
+computational challenges when working with large models or long
+sequences, each improving efficiency in different ways:
+
++--------------+---------------------------+---------------------------+
+| **Benefit**  | **Tiling**                | **Recomputation**         |
++==============+===========================+===========================+
+| Memory       | Reduces memory usage by   | Saves memory by not       |
+| Efficiency   | processing smaller tiles  | storing intermediate      |
+|              | instead of the whole      | results; recomputes when  |
+|              | sequence at once.         | needed.                   |
++--------------+---------------------------+---------------------------+
+| Computational| Enables parallel          | Reduces memory footprint, |
+| Speed        | processing of smaller     | potentially increasing    |
+|              | tiles, improving          | throughput by minimizing  |
+|              | computation time.         | the need to store large   |
+|              |                           | intermediate values.      |
++--------------+---------------------------+---------------------------+
+| Handling     | Makes it feasible to      | Allows for computation of |
+| Long         | process long sequences    | large models with limited |
+| Sequences    | that otherwise wouldn’t   | memory by recomputing     |
+|              | fit in memory.            | expensive intermediate    |
+|              |                           | steps.                    |
++--------------+---------------------------+---------------------------+
+| Hardware     | Optimizes the use of      | Helps avoid running out   |
+| Utilization  | limited memory resources  | of memory by not          |
+|              | (e.g., GPU/TPU) by        | requiring large storage   |
+|              | limiting the amount of    | for intermediate states.  |
+|              | data in memory.           |                           |
++--------------+---------------------------+---------------------------+
+| Scalability  | Enables handling of       | Makes it possible to work |
+|              | larger datasets and       | with large models and     |
+|              | longer sequences without  | datasets by not storing   |
+|              | overwhelming memory.      | every intermediate        |
+|              |                           | result.                   |
++--------------+---------------------------+---------------------------+
+| Reduced      | Lowers memory bandwidth   | Minimizes the need for    |
+| Memory       | requirements by only      | frequent memory           |
+| Bandwidth    | loading small parts of    | writes/reads, improving   |
+|              | data at a time.           | memory access efficiency. |
++--------------+---------------------------+---------------------------+
+| Reduces      | Focuses on smaller        | Recomputes intermediate   |
+| Redundant    | sub-problems, reducing    | steps only when           |
+| Computation  | redundant operations.     | necessary, avoiding       |
+|              |                           | unnecessary storage and   |
+|              |                           | computation.              |
++--------------+---------------------------+---------------------------+
+
+**Flash Attention 2**:
+
+FlashAttention-2 [Tri_Dao_2]_ builds upon
+FlashAttention by addressing suboptimal work partitioning between
+different thread blocks and warps on the GPU. It reduces the number of
+non-matrix multiplication (matmul) FLOPs, which are slower to perform on
+GPUs. It also parallelizes the attention computation across the sequence
+length dimension, in addition to the batch and number of heads
+dimensions. This increases occupancy (utilization of GPU resources),
+especially when the sequence is long and the batch size is small. Within
+each thread block, FlashAttention-2 distributes the work between warps
+to reduce communication through shared memory. FlashAttention-2 also
+uses a minor tweak to the backward pass, using the row-wise logsumexp
+instead of both the row-wise max and row-wise sum of exponentials in the
+softmax. It incorporates techniques like swapping the order of loops and
+parallelization over the sequence length, which were first suggested in
+the Triton implementation. Furthermore, it can also efficiently handle
+multi-query attention (MQA) and grouped-query attention (GQA) by
+manipulating indices instead of duplicating key and value heads.
+
+**FlashAttention-3**:
+
+FlashAttention-3 [Jay_Shah]_ further improves
+performance, especially on newer GPUs like the H100. It achieves this by
+exploiting asynchrony and low-precision computations. It uses a
+**warp-specialized software pipelining** scheme that splits the
+producers and consumers of data into separate warps, overlapping overall
+computation and data movement. This hides memory and instruction issue
+latencies. FlashAttention-3 overlaps non-GEMM operations involved in
+softmax with the asynchronous WGMMA instructions for GEMM. This is done
+by interleaving block-wise matmul and softmax operations, and by
+reworking the FlashAttention-2 algorithm to circumvent sequential
+dependencies between softmax and GEMMs. It implements **block
+quantization and incoherent processing** that leverages hardware support
+for FP8 low-precision to achieve further speedup. FP8 FlashAttention-3
+is also more accurate than a baseline FP8 attention by 2.6x, due to its
+block quantization and incoherent processing, especially in cases with
+outlier features. It uses primitives from CUTLASS, such as WGMMA and TMA
+abstractions. Like FlashAttention and FlashAttention-2, it is also able
+to handle multi-query attention (MQA) and grouped-query attention (GQA).
+
