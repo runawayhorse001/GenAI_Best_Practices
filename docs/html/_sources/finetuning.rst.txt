@@ -127,6 +127,77 @@ SFT (Supervised Fine-Tuning)
 - Achieves high performance on specific tasks.  
 - Essential for aligning models with labeled datasets.
 
+RLHF (Reinforcement Learning from Human Feedback)
+-------------------------------------------------
+
+**RLHF** is a technique used to fine-tune language models, aligning their 
+behavior with human preferences or specific tasks. RLHF incorporates feedback 
+from humans to guide the model's learning process, ensuring that its outputs 
+are not only coherent but also align with desired ethical, practical, or 
+stylistic goals.
+
+**How It Works**:  
+
+- The model is initialized with pre-trained weights.  
+- The pretrained model is fine-tuned further using reinforcement learning, 
+  guided by the reward model.
+- A reinforcement learning algorithm, such as Proximal Policy Optimization 
+  (PPO), optimizes the model to maximize the reward assigned by the reward model.
+
+.. note::
+
+    - **Direct Preference Optimization** 
+        DPO is a technique for aligning large 
+        language models (LLMs) with human preferences, offering an alternative 
+        to the traditional Reinforcement Learning from Human Feedback (RLHF) 
+        approach that uses Proximal Policy Optimization (PPO). Instead of 
+        training a separate reward model and using reinforcement learning, 
+        DPO simplifies the process by directly leveraging human preference 
+        data to fine-tune the model through supervised learning.
+
+    - **Proximal Policy Optimization** 
+        PPO is a reinforcement learning algorithm 
+        commonly used in RLHF to fine-tune LLMs. PPO optimizes the model's policy 
+        by maximizing the reward signal provided by a reward model, which 
+        represents human preferences.
+
+    - **Comparison: DPO vs PPO**
+
+
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Feature**               | **DPO**                                 | **PPO**                                |
+        +===========================+=========================================+========================================+
+        | **Training Paradigm**     | Supervised fine-tuning with preferences | Reinforcement learning with a reward   |
+        |                           |                                         | model                                  |
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Workflow Complexity**   | Simpler                                 | More complex (requires reward model    |
+        |                           |                                         | and iterative RL)                      |
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Stability**             | More stable (uses supervised learning)  | Less stable (inherent to RL methods)   |
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Efficiency**            | Computationally efficient               | Computationally intensive              |
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Scalability**           | Scales well with large preference       | Requires significant compute for RL    |
+        |                           | datasets                                | steps                                  |
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Use Case**              | Directly aligns LLM with preferences    | Optimizes policy for long-term reward  |
+        |                           |                                         | maximization                           |
+        +---------------------------+-----------------------------------------+----------------------------------------+
+        | **Human Preference        | Directly encoded in loss function       | Encoded via a reward model             |
+        | Modeling**                |                                         |                                        |
+        +---------------------------+-----------------------------------------+----------------------------------------+        
+
+
+
+**Benefits**:  
+
+- RLHF ensures the model's outputs are ethical, safe, and aligned with human 
+  expectations, reducing harmful or biased content. 
+- Responses become more relevant, helpful, and contextually appropriate, 
+  enhancing user experience.
+- Fine-tuning with RLHF allows models to be customized for specific use cases, 
+  such as customer service, creative writing, or technical support.
+
 
 Summary Table
 -------------

@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 22, 2024}
+\date{December 24, 2024}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -3290,7 +3290,7 @@ Agentic RAG: \sphinxhref{https://colab.research.google.com/drive/1-eZ61ux0QSCNx2
 \capstart
 
 \noindent\sphinxincludegraphics{{RAG_diagram}.png}
-\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id4}}\label{\detokenize{rag:fig-rag}}\end{figure}
+\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id38}}\label{\detokenize{rag:fig-rag}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
@@ -3329,7 +3329,10 @@ The model is “augmented” with the retrieved information, which reduces hallu
 \end{itemize}
 
 
-\section{Indexing}
+\section{Naive RAG}
+\label{\detokenize{rag:naive-rag}}
+
+\subsection{Indexing}
 \label{\detokenize{rag:indexing}}
 \sphinxAtStartPar
 The indexing processes raw text or other forms of unstructured data and creates an efficient structure
@@ -3342,7 +3345,7 @@ The indexing processes raw text or other forms of unstructured data and creates 
 \end{figure}
 
 
-\subsection{Naive Chunking}
+\subsubsection{Naive Chunking}
 \label{\detokenize{rag:naive-chunking}}
 \sphinxAtStartPar
 Chunking in Retrieval\sphinxhyphen{}Augmented Generation (RAG) involves splitting documents or knowledge bases
@@ -3705,14 +3708,14 @@ Maintains precision due to dense information.
 The valuating Chunking Strategies for Retrieval can be found at: \sphinxurl{https://research.trychroma.com/evaluating-chunking}
 
 
-\subsection{Late Chunking}
+\subsubsection{Late Chunking}
 \label{\detokenize{rag:late-chunking}}
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{late_chunking}.png}
-\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id5}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
+\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id39}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Late Chunking} refers to a strategy in Retrieval\sphinxhyphen{}Augmented Generation (RAG) where chunking of
@@ -3923,7 +3926,7 @@ country in terms of area.”
 \sphinxattableend\end{savenotes}
 
 
-\subsection{Types of Indexing}
+\subsubsection{Types of Indexing}
 \label{\detokenize{rag:types-of-indexing}}
 \sphinxAtStartPar
 The embedding methods we introduced in Chapter {\hyperref[\detokenize{embedding:embedding}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Word and Sentence Embedding}}}}} can be applied here to convert each chunk
@@ -3976,7 +3979,7 @@ can integrate BM25 with vector search.
 \end{itemize}
 
 
-\subsection{Vector Database}
+\subsubsection{Vector Database}
 \label{\detokenize{rag:vector-database}}
 \sphinxAtStartPar
 Vector databases are essential for Retrieval\sphinxhyphen{}Augmented Generation (RAG) systems, enabling
@@ -4442,7 +4445,7 @@ Choosing a Vector Database
 Each database has unique strengths and is suited for specific RAG use cases. The choice depends on scalability, integration needs, and budget.
 
 
-\section{Retrieval}
+\subsection{Retrieval}
 \label{\detokenize{rag:retrieval}}
 \sphinxAtStartPar
 The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.
@@ -4452,10 +4455,10 @@ The retriever selects “chunks” of text (e.g., paragraphs or sections) releva
 \capstart
 
 \noindent\sphinxincludegraphics[scale=0.5]{{retriever}.png}
-\caption{Reciprocal Rank Fusion}\label{\detokenize{rag:id6}}\label{\detokenize{rag:fig-retriever}}\end{figure}
+\caption{Reciprocal Rank Fusion}\label{\detokenize{rag:id40}}\label{\detokenize{rag:fig-retriever}}\end{figure}
 
 
-\subsection{Common retrieval methods}
+\subsubsection{Common retrieval methods}
 \label{\detokenize{rag:common-retrieval-methods}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -4708,7 +4711,7 @@ Often combined with product quantization.
 \sphinxattableend\end{savenotes}
 
 
-\subsection{Reciprocal Rank Fusion}
+\subsubsection{Reciprocal Rank Fusion}
 \label{\detokenize{rag:reciprocal-rank-fusion}}
 \sphinxAtStartPar
 Reciprocal Rank Fusion (RRF) is a ranking technique commonly used in information retrieval
@@ -4810,7 +4813,7 @@ Document D: \(\frac{1}{60+4} +\frac{1}{60+3}=0.03149801587301587\)
 \end{sphinxVerbatim}
 
 
-\section{Generation}
+\subsection{Generation}
 \label{\detokenize{rag:generation}}
 \sphinxAtStartPar
 Finally, the retrieved relevant information will be feed back into the LLMs to generate responses.
@@ -4907,17 +4910,14 @@ Web search engine: \sphinxcode{\sphinxupquote{Google}}
 \end{sphinxVerbatim}
 
 
-\section{Advanced Topic}
-\label{\detokenize{rag:advanced-topic}}
-
-\subsection{Self\sphinxhyphen{}RAG}
+\section{Self\sphinxhyphen{}RAG}
 \label{\detokenize{rag:self-rag}}\label{\detokenize{rag:ch-self-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag_paper}.png}
-\caption{Overview of SELF\sphinxhyphen{}RAG. (Source \sphinxcite{reference:selfrag})}\label{\detokenize{rag:id7}}\label{\detokenize{rag:fig-self-rag-paper}}\end{figure}
+\caption{Overview of SELF\sphinxhyphen{}RAG. (Source \sphinxcite{reference:selfrag})}\label{\detokenize{rag:id41}}\label{\detokenize{rag:fig-self-rag-paper}}\end{figure}
 
 \sphinxAtStartPar
 In the paper \sphinxcite{reference:selfrag}, Four types decisions are made:
@@ -5034,12 +5034,11 @@ Assesses if \sphinxtitleref{y} (generation) is a useful response to \sphinxtitle
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag}.png}
-\caption{Self\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_self\_rag\_local/}{Langgraph self\sphinxhyphen{}rag})}\label{\detokenize{rag:id8}}\label{\detokenize{rag:fig-self-rag}}\end{figure}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Load Models
+\caption{Self\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_self\_rag\_local/}{Langgraph self\sphinxhyphen{}rag})}\label{\detokenize{rag:id42}}\label{\detokenize{rag:fig-self-rag}}\end{figure}
 
+
+\subsection{Load Models}
+\label{\detokenize{rag:load-models}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -5065,13 +5064,9 @@ you will get error:
 \end{quote}
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Create Index
 
-\end{itemize}
-\begin{quote}
-
+\subsection{Create Index}
+\label{\detokenize{rag:create-index}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -5101,12 +5096,10 @@ Create Index
 \PYG{p}{)}
 \PYG{n}{retriever} \PYG{o}{=} \PYG{n}{vectorstore}\PYG{o}{.}\PYG{n}{as\PYGZus{}retriever}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
-\end{quote}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Retrieval Grader
 
+
+\subsection{Retrieval Grader}
+\label{\detokenize{rag:retrieval-grader}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -5176,10 +5169,9 @@ Output:
 to format the structured output.
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Generate
 
+\subsection{Generate}
+\label{\detokenize{rag:generate}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
 
@@ -5240,10 +5232,9 @@ Output:
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Hallucination Grader
 
+\subsection{Hallucination Grader}
+\label{\detokenize{rag:hallucination-grader}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Hallucination Grader}
 
@@ -5284,10 +5275,9 @@ Output:
 \PYG{n}{GradeHallucinations}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Answer Grader
 
+\subsection{Answer Grader}
+\label{\detokenize{rag:answer-grader}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
 
@@ -5328,10 +5318,9 @@ Output:
 \PYG{n}{GradeAnswer}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Question Re\sphinxhyphen{}writer
 
+\subsection{Question Re\sphinxhyphen{}writer}
+\label{\detokenize{rag:question-re-writer}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Question Re\PYGZhy{}writer}
 
@@ -5357,10 +5346,9 @@ Output:
 \PYG{p}{\PYGZob{}} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is the function or purpose of an agent}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s memory in a given context?}\PYG{l+s+s2}{\PYGZdq{}} \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Create the Graph
 
+\subsection{Create the Graph}
+\label{\detokenize{rag:create-the-graph}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{List}
 
@@ -5542,10 +5530,9 @@ Create the Graph
         \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not supported}\PYG{l+s+s2}{\PYGZdq{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Compile Graph
 
+\subsection{Compile Graph}
+\label{\detokenize{rag:compile-graph}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 
@@ -5584,10 +5571,9 @@ Compile Graph
 \PYG{n}{app} \PYG{o}{=} \PYG{n}{workflow}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Graph visualization
 
+\subsection{Graph visualization}
+\label{\detokenize{rag:graph-visualization}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -5605,15 +5591,14 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag_graph}.png}
-\caption{Self\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id9}}\label{\detokenize{rag:fig-self-rag-graph}}\end{figure}
+\caption{Self\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id43}}\label{\detokenize{rag:fig-self-rag-graph}}\end{figure}
 
-\item {} 
-\sphinxAtStartPar
-Test
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Relevant retrieval
+
+\subsection{Test}
+\label{\detokenize{rag:test}}
+
+\subsubsection{Relevant retrieval}
+\label{\detokenize{rag:relevant-retrieval}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{pprint} \PYG{k+kn}{import} \PYG{n}{pprint}
@@ -5662,10 +5647,11 @@ Output:
 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{heavy experimentation and heuristics.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
+\end{quote}
 
-\item {} 
-\sphinxAtStartPar
-Irrelevant retrieval
+
+\subsubsection{Irrelevant retrieval}
+\label{\detokenize{rag:irrelevant-retrieval}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{pprint} \PYG{k+kn}{import} \PYG{n}{pprint}
@@ -5776,25 +5762,21 @@ Output:
 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{series analysis.}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{   \PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
-
-\end{itemize}
-
-\end{itemize}
+\end{quote}
 
 
-\subsection{Corrective RAG}
+\section{Corrective RAG}
 \label{\detokenize{rag:corrective-rag}}\label{\detokenize{rag:ch-c-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{corrective_rag}.png}
-\caption{Corrective\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_crag\_local/}{Langgraph c\sphinxhyphen{}rag})}\label{\detokenize{rag:id10}}\label{\detokenize{rag:fig-c-rag}}\end{figure}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Load Models
+\caption{Corrective\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_crag\_local/}{Langgraph c\sphinxhyphen{}rag})}\label{\detokenize{rag:id44}}\label{\detokenize{rag:fig-c-rag}}\end{figure}
 
+
+\subsection{Load Models}
+\label{\detokenize{rag:id4}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -5820,13 +5802,9 @@ you will get error:
 \end{quote}
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Create Index
 
-\end{itemize}
-\begin{quote}
-
+\subsection{Create Index}
+\label{\detokenize{rag:id5}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -5856,12 +5834,10 @@ Create Index
 \PYG{p}{)}
 \PYG{n}{retriever} \PYG{o}{=} \PYG{n}{vectorstore}\PYG{o}{.}\PYG{n}{as\PYGZus{}retriever}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
-\end{quote}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Retrieval Grader
 
+
+\subsection{Retrieval Grader}
+\label{\detokenize{rag:id6}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -5921,10 +5897,9 @@ the \sphinxcode{\sphinxupquote{or grade == 1}} in \sphinxcode{\sphinxupquote{gra
 use web search.
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Generate
 
+\subsection{Generate}
+\label{\detokenize{rag:id7}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
 
@@ -5964,10 +5939,9 @@ Output:
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Router
 
+\subsection{Router}
+\label{\detokenize{rag:router}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
 
@@ -6026,10 +6000,9 @@ Output:
 \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{datasource}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vectorstore}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Hallucination Grader
 
+\subsection{Hallucination Grader}
+\label{\detokenize{rag:id8}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Hallucination Grader}
 
@@ -6070,10 +6043,9 @@ Output:
 \PYG{n}{GradeHallucinations}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Answer Grader
 
+\subsection{Answer Grader}
+\label{\detokenize{rag:id9}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
 
@@ -6114,10 +6086,9 @@ Output:
 \PYG{n}{GradeAnswer}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Question Re\sphinxhyphen{}writer
 
+\subsection{Question Re\sphinxhyphen{}writer}
+\label{\detokenize{rag:id10}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Question Re\PYGZhy{}writer}
 
@@ -6143,10 +6114,9 @@ Output:
 \PYG{p}{\PYGZob{}} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is the function or purpose of an agent}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s memory in a given context?}\PYG{l+s+s2}{\PYGZdq{}} \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Web Search Tool (Google)
 
+\subsection{Web Search Tool (Google)}
+\label{\detokenize{rag:web-search-tool-google}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}google\PYGZus{}community} \PYG{k+kn}{import} \PYG{n}{GoogleSearchAPIWrapper}\PYG{p}{,} \PYG{n}{GoogleSearchResults}
 
@@ -6163,10 +6133,20 @@ Web Search Tool (Google)
 \PYG{c+c1}{\PYGZsh{} web\PYGZus{}results = web\PYGZus{}search\PYGZus{}tool.invoke(\PYGZob{}\PYGZdq{}query\PYGZdq{}: question\PYGZcb{})}
 \end{sphinxVerbatim}
 
-\item {} 
+\begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-Create the Graph
+The reults from \sphinxcode{\sphinxupquote{GoogleSearchResults}} are not in \sphinxcode{\sphinxupquote{json}} format.  You will
+need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\sphinxupquote{web\_search}} function. e.g
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{n}{Document}\PYG{p}{(}\PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{n}{d}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{snippet}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{url}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{d}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{link}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+ \PYG{k}{for} \PYG{n}{d} \PYG{o+ow}{in} \PYG{n+nb}{eval}\PYG{p}{(}\PYG{n}{web\PYGZus{}results}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+\end{sphinxadmonition}
+
+
+\subsection{Create the Graph}
+\label{\detokenize{rag:id11}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{List}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -6314,10 +6294,9 @@ Create the Graph
         \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generate}\PYG{l+s+s2}{\PYGZdq{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Compile Graph
 
+\subsection{Compile Graph}
+\label{\detokenize{rag:id12}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{START}\PYG{p}{,} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}
 
@@ -6348,10 +6327,9 @@ Compile Graph
 \PYG{n}{app} \PYG{o}{=} \PYG{n}{workflow}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Graph visualization
 
+\subsection{Graph visualization}
+\label{\detokenize{rag:id13}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -6369,15 +6347,14 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{c_rag_graph}.png}
-\caption{Corrective\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id11}}\label{\detokenize{rag:fig-c-rag-graph}}\end{figure}
+\caption{Corrective\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id45}}\label{\detokenize{rag:fig-c-rag-graph}}\end{figure}
 
-\item {} 
-\sphinxAtStartPar
-Test
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Relevant retrieval
+
+\subsection{Test}
+\label{\detokenize{rag:id14}}
+
+\subsubsection{Relevant retrieval}
+\label{\detokenize{rag:id15}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{uuid}
@@ -6409,10 +6386,11 @@ Ouput:
   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade\PYGZus{}document\PYGZus{}retrieval}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{generate\PYGZus{}answer}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
+\end{quote}
 
-\item {} 
-\sphinxAtStartPar
-Irrelevant retrieval
+
+\subsubsection{Irrelevant retrieval}
+\label{\detokenize{rag:id16}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{example} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is the capital of China?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
@@ -6441,25 +6419,21 @@ Ouput:
   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{web\PYGZus{}search}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{generate\PYGZus{}answer}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
-
-\end{itemize}
-
-\end{itemize}
+\end{quote}
 
 
-\subsection{Adaptive RAG}
+\section{Adaptive RAG}
 \label{\detokenize{rag:adaptive-rag}}\label{\detokenize{rag:ch-a-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{adaptive_rag}.png}
-\caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id12}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Load Models
+\caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id46}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
 
+
+\subsection{Load Models}
+\label{\detokenize{rag:id17}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -6485,13 +6459,9 @@ you will get error:
 \end{quote}
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Create Index
 
-\end{itemize}
-\begin{quote}
-
+\subsection{Create Index}
+\label{\detokenize{rag:id18}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -6521,15 +6491,10 @@ Create Index
 \PYG{p}{)}
 \PYG{n}{retriever} \PYG{o}{=} \PYG{n}{vectorstore}\PYG{o}{.}\PYG{n}{as\PYGZus{}retriever}\PYG{p}{(}\PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
 \end{sphinxVerbatim}
-\end{quote}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Router
 
-\end{itemize}
-\begin{quote}
 
+\subsection{Router}
+\label{\detokenize{rag:id19}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
 
@@ -6650,12 +6615,10 @@ output parser. But, you can still use the similar one we implemented in {\hyperr
 \PYG{l+s+s2}{                                          prompt engineering?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Index}
 \end{sphinxVerbatim}
 \end{sphinxadmonition}
-\end{quote}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Retrieval Grader
 
+
+\subsection{Retrieval Grader}
+\label{\detokenize{rag:id20}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -6702,10 +6665,9 @@ Retrieval Grader
 \PYG{n}{retrieval\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{document}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{doc\PYGZus{}txt}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Generate
 
+\subsection{Generate}
+\label{\detokenize{rag:id21}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
 
@@ -6740,19 +6702,18 @@ Ouput:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{p}{\PYGZob{}}
-   \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{answer}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
-       \PYG{p}{\PYGZob{}}
-           \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{role}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{assistant}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-           \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{content}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short\PYGZhy{}term Memory, and Long\PYGZhy{}term Memory. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Sensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Short\PYGZhy{}term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Long\PYGZhy{}term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah).}\PYG{l+s+s2}{\PYGZdq{}}
-       \PYG{p}{\PYGZcb{}}
-   \PYG{p}{]}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{answer}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
+        \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{role}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{assistant}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{content}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{In the context of an LLM (Large Language Model) powered autonomous agent, memory can be divided into three types: Sensory Memory, Short\PYGZhy{}term Memory, and Long\PYGZhy{}term Memory. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Sensory Memory is learning embedding representations for raw inputs, including text, image or other modalities. It}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s the earliest stage of memory, providing the ability to retain impressions of sensory information after the original stimuli have ended. Sensory memory typically only lasts for up to a few seconds. Subcategories include iconic memory (visual), echoic memory (auditory), and haptic memory (touch). }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Short\PYGZhy{}term memory, also known as working memory, is short and finite, as it is restricted by the finite context window length of Transformer. It stores and manipulates the information that the agent currently needs to solve a task. }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{Long\PYGZhy{}term memory is the external vector store that the agent can attend to at query time, accessible via fast retrieval. This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval methods such as Maximum Inner Product Search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN) algorithm to return approximately top k nearest neighbors, trading off a little accuracy lost for a huge speedup. A couple common choices of ANN algorithms for fast MIPS are HNSW (Hierarchical Navigable Small World) and Annoy (Approximate Nearest Neighbors Oh Yeah).}\PYG{l+s+s2}{\PYGZdq{}}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{]}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Hallucination Grader
 
+\subsection{Hallucination Grader}
+\label{\detokenize{rag:id22}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Hallucination Grader}
 
@@ -6786,13 +6747,9 @@ Hallucination Grader
 \PYG{n}{hallucination\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{docs}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Answer Grader
 
-\end{itemize}
-\begin{quote}
-
+\subsection{Answer Grader}
+\label{\detokenize{rag:id23}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
 
@@ -6826,12 +6783,10 @@ Answer Grader
 \PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
 \PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
 \end{sphinxVerbatim}
-\end{quote}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Question Re\sphinxhyphen{}writer
 
+
+\subsection{Question Re\sphinxhyphen{}writer}
+\label{\detokenize{rag:id24}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Question Re\PYGZhy{}writer}
 
@@ -6850,10 +6805,9 @@ Question Re\sphinxhyphen{}writer
 \PYG{n}{question\PYGZus{}rewriter}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Google Web Search
 
+\subsection{Google Web Search}
+\label{\detokenize{rag:google-web-search}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{} Google Web Search}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}google\PYGZus{}community} \PYG{k+kn}{import} \PYG{n}{GoogleSearchAPIWrapper}\PYG{p}{,} \PYG{n}{GoogleSearchResults}
@@ -6871,10 +6825,20 @@ Google Web Search
 \PYG{n}{web\PYGZus{}search\PYGZus{}tool} \PYG{o}{=} \PYG{n}{GoogleSearchResults}\PYG{p}{(}\PYG{n}{api\PYGZus{}wrapper}\PYG{o}{=}\PYG{n}{google\PYGZus{}search\PYGZus{}wrapper}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
+\begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-Create the Graph
+The reults from \sphinxcode{\sphinxupquote{GoogleSearchResults}} are not in \sphinxcode{\sphinxupquote{json}} format.  You will
+need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\sphinxupquote{web\_search}} function. e.g
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{n}{Document}\PYG{p}{(}\PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{n}{d}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{snippet}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{url}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{d}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{link}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+ \PYG{k}{for} \PYG{n}{d} \PYG{o+ow}{in} \PYG{n+nb}{eval}\PYG{p}{(}\PYG{n}{web\PYGZus{}results}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+\end{sphinxadmonition}
+
+
+\subsection{Create the Graph}
+\label{\detokenize{rag:id25}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{List}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -7106,10 +7070,9 @@ Create the Graph
         \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{not supported}\PYG{l+s+s2}{\PYGZdq{}}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Compile Graph
 
+\subsection{Compile Graph}
+\label{\detokenize{rag:id26}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 
@@ -7156,10 +7119,9 @@ Compile Graph
 \PYG{n}{app} \PYG{o}{=} \PYG{n}{workflow}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Graph visualization
 
+\subsection{Graph visualization}
+\label{\detokenize{rag:id27}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -7177,15 +7139,14 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{a_rag_graph}.png}
-\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id13}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
+\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id47}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
 
-\item {} 
-\sphinxAtStartPar
-Test
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Relevant retrieval
+
+\subsection{Test}
+\label{\detokenize{rag:id28}}
+
+\subsubsection{Relevant retrieval}
+\label{\detokenize{rag:id29}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{uuid}
@@ -7214,10 +7175,11 @@ Ouput:
   \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{url}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://pubmed.ncbi.nlm.nih.gov/38294063/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Supercritical and homogenous transmission of monkeypox in the capital of China. J Med Virol. 2024 Feb;96(2):e29442. doi: 10.1002/jmv.29442. Authors. Yunjun}\PYG{l+s+se}{\PYGZbs{}xa0}\PYG{l+s+s1}{...}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
   \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{url}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://www.sciencedirect.com/science/article/pii/S0304387820301358}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{This paper investigates the impacts of fires on cognitive performance. We find that a one\PYGZhy{}standard\PYGZhy{}deviation increase in the difference between upwind and}\PYG{l+s+se}{\PYGZbs{}xa0}\PYG{l+s+s1}{...}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
+\end{quote}
 
-\item {} 
-\sphinxAtStartPar
-Irrelevant retrieval
+
+\subsubsection{Irrelevant retrieval}
+\label{\detokenize{rag:id30}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n+nb}{input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent memory?}\PYG{l+s+s2}{\PYGZdq{}}
@@ -7253,25 +7215,21 @@ Ouput:
   \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{description}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Building agents with LLM (large language model) as its core controller is a cool concept. Several proof\PYGZhy{}of\PYGZhy{}concepts demos, such as AutoGPT, GPT\PYGZhy{}Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well\PYGZhy{}written copies, stories, essays and programs; it can be framed as a powerful general problem solver.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Agent System Overview}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In a LLM\PYGZhy{}powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Reflection and refinement: The agent can do self\PYGZhy{}criticism and self\PYGZhy{}reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Memory}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Fig. 1. Overview of a LLM\PYGZhy{}powered autonomous agent system.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Component One: Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{language}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{en}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{source}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://lilianweng.github.io/posts/2023\PYGZhy{}06\PYGZhy{}23\PYGZhy{}agent/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{title}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LLM Powered Autonomous Agents | Lil}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{Log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
   \PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{description}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Building agents with LLM (large language model) as its core controller is a cool concept. Several proof\PYGZhy{}of\PYGZhy{}concepts demos, such as AutoGPT, GPT\PYGZhy{}Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well\PYGZhy{}written copies, stories, essays and programs; it can be framed as a powerful general problem solver.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Agent System Overview}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In a LLM\PYGZhy{}powered autonomous agent system, LLM functions as the agent’s brain, complemented by several key components:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Subgoal and decomposition: The agent breaks down large tasks into smaller, manageable subgoals, enabling efficient handling of complex tasks.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Reflection and refinement: The agent can do self\PYGZhy{}criticism and self\PYGZhy{}reflection over past actions, learn from mistakes and refine them for future steps, thereby improving the quality of final results.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Memory}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory: I would consider all the in\PYGZhy{}context learning (See Prompt Engineering) as utilizing short\PYGZhy{}term memory of the model to learn.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory: This provides the agent with the capability to retain and recall (infinite) information over extended periods, often by leveraging an external vector store and fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Tool use}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The agent learns to call external APIs for extra information that is missing from the model weights (often hard to change after pre\PYGZhy{}training), including current information, code execution capability, access to proprietary information sources and more.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Fig. 1. Overview of a LLM\PYGZhy{}powered autonomous agent system.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Component One: Planning}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A complicated task usually involves many steps. An agent needs to know what they are and plan ahead.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{language}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{en}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{source}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://lilianweng.github.io/posts/2023\PYGZhy{}06\PYGZhy{}23\PYGZhy{}agent/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{title}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LLM Powered Autonomous Agents | Lil}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{Log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sensory memory as learning embedding representations for raw inputs, including text, image or other modalities;}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Short\PYGZhy{}term memory as in\PYGZhy{}context learning. It is short and finite, as it is restricted by the finite context window length of Transformer.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Long\PYGZhy{}term memory as the external vector store that the agent can attend to at query time, accessible via fast retrieval.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Maximum Inner Product Search (MIPS)\PYGZsh{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{The external memory can alleviate the restriction of finite attention span.  A standard practice is to save the embedding representation of information into a vector store database that can support fast maximum inner\PYGZhy{}product search (MIPS). To optimize the retrieval speed, the common choice is the approximate nearest neighbors (ANN)}\PYG{l+s+se}{\PYGZbs{}u200b}\PYG{l+s+s1}{ algorithm to return approximately top k nearest neighbors to trade off a little accuracy lost for a huge speedup.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{A couple common choices of ANN algorithms for fast MIPS:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
-
-\end{itemize}
-
-\end{itemize}
+\end{quote}
 
 
-\subsection{Agentic RAG}
+\section{Agentic RAG}
 \label{\detokenize{rag:agentic-rag}}\label{\detokenize{rag:ch-agentic-rag}}
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag}.png}
-\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id14}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Load Models
+\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id48}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
 
+
+\subsection{Load Models}
+\label{\detokenize{rag:id31}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -7297,13 +7255,9 @@ you will get error:
 \end{quote}
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Create Index
 
-\end{itemize}
-\begin{quote}
-
+\subsection{Create Index}
+\label{\detokenize{rag:id32}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -7333,12 +7287,10 @@ Create Index
 \PYG{p}{)}
 \PYG{n}{retriever} \PYG{o}{=} \PYG{n}{vectorstore}\PYG{o}{.}\PYG{n}{as\PYGZus{}retriever}\PYG{p}{(}\PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
 \end{sphinxVerbatim}
-\end{quote}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Define Tool
 
+
+\subsection{Define Tool}
+\label{\detokenize{rag:define-tool}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{tools}\PYG{n+nn}{.}\PYG{n+nn}{retriever} \PYG{k+kn}{import} \PYG{n}{create\PYGZus{}retriever\PYGZus{}tool}
 
@@ -7398,10 +7350,9 @@ and {\hyperref[\detokenize{rag:ch-a-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{s
 \end{sphinxVerbatim}
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Retrieval Grader
 
+\subsection{Retrieval Grader}
+\label{\detokenize{rag:id33}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -7452,10 +7403,9 @@ Ouput:
 \PYG{n}{GradeDocuments}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Agent State
 
+\subsection{Agent State}
+\label{\detokenize{rag:agent-state}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{Annotated}\PYG{p}{,} \PYG{n}{Sequence}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -7471,10 +7421,9 @@ Agent State
     \PYG{n}{messages}\PYG{p}{:} \PYG{n}{Annotated}\PYG{p}{[}\PYG{n}{Sequence}\PYG{p}{[}\PYG{n}{BaseMessage}\PYG{p}{]}\PYG{p}{,} \PYG{n}{add\PYGZus{}messages}\PYG{p}{]}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Create the Graph
 
+\subsection{Create the Graph}
+\label{\detokenize{rag:id34}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{Annotated}\PYG{p}{,} \PYG{n}{Literal}\PYG{p}{,} \PYG{n}{Sequence}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -7625,10 +7574,9 @@ Create the Graph
 \PYG{c+c1}{\PYGZsh{} prompt = hub.pull(\PYGZdq{}rlm/rag\PYGZhy{}prompt\PYGZdq{}).pretty\PYGZus{}print()}
 \end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-Compile Graph
 
+\subsection{Compile Graph}
+\label{\detokenize{rag:id35}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{prebuilt} \PYG{k+kn}{import} \PYG{n}{ToolNode}
@@ -7693,10 +7641,9 @@ If you use OpenAI model, the code should be like:
 \end{sphinxVerbatim}
 \end{sphinxadmonition}
 
-\item {} 
-\sphinxAtStartPar
-Graph visualization
 
+\subsection{Graph visualization}
+\label{\detokenize{rag:id36}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -7714,12 +7661,11 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag_graph}.png}
-\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id15}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
+\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id49}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
 
-\item {} 
-\sphinxAtStartPar
-Test
 
+\subsection{Test}
+\label{\detokenize{rag:id37}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pprint}
 
@@ -7773,8 +7719,6 @@ Ouput:
                 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}
                 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ }\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
-
-\end{itemize}
 
 \sphinxstepscope
 
@@ -7986,6 +7930,186 @@ Achieves high performance on specific tasks.
 \item {} 
 \sphinxAtStartPar
 Essential for aligning models with labeled datasets.
+
+\end{itemize}
+
+
+\subsection{RLHF (Reinforcement Learning from Human Feedback)}
+\label{\detokenize{finetuning:rlhf-reinforcement-learning-from-human-feedback}}
+\sphinxAtStartPar
+\sphinxstylestrong{RLHF} is a technique used to fine\sphinxhyphen{}tune language models, aligning their
+behavior with human preferences or specific tasks. RLHF incorporates feedback
+from humans to guide the model’s learning process, ensuring that its outputs
+are not only coherent but also align with desired ethical, practical, or
+stylistic goals.
+
+\sphinxAtStartPar
+\sphinxstylestrong{How It Works}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The model is initialized with pre\sphinxhyphen{}trained weights.
+
+\item {} 
+\sphinxAtStartPar
+The pretrained model is fine\sphinxhyphen{}tuned further using reinforcement learning,
+guided by the reward model.
+
+\item {} 
+\sphinxAtStartPar
+A reinforcement learning algorithm, such as Proximal Policy Optimization
+(PPO), optimizes the model to maximize the reward assigned by the reward model.
+
+\end{itemize}
+
+\begin{sphinxadmonition}{note}{Note:}\begin{itemize}
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Direct Preference Optimization}}
+\sphinxAtStartPar
+DPO is a technique for aligning large
+language models (LLMs) with human preferences, offering an alternative
+to the traditional Reinforcement Learning from Human Feedback (RLHF)
+approach that uses Proximal Policy Optimization (PPO). Instead of
+training a separate reward model and using reinforcement learning,
+DPO simplifies the process by directly leveraging human preference
+data to fine\sphinxhyphen{}tune the model through supervised learning.
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Proximal Policy Optimization}}
+\sphinxAtStartPar
+PPO is a reinforcement learning algorithm
+commonly used in RLHF to fine\sphinxhyphen{}tune LLMs. PPO optimizes the model’s policy
+by maximizing the reward signal provided by a reward model, which
+represents human preferences.
+
+\end{description}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Comparison: DPO vs PPO}
+\begin{quote}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{Feature}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{DPO}
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxstylestrong{PPO}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstylestrong{Training Paradigm}
+&
+\sphinxAtStartPar
+Supervised fine\sphinxhyphen{}tuning with preferences
+&
+\sphinxAtStartPar
+Reinforcement learning with a reward
+model
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Workflow Complexity}
+&
+\sphinxAtStartPar
+Simpler
+&
+\sphinxAtStartPar
+More complex (requires reward model
+and iterative RL)
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Stability}
+&
+\sphinxAtStartPar
+More stable (uses supervised learning)
+&
+\sphinxAtStartPar
+Less stable (inherent to RL methods)
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Efficiency}
+&
+\sphinxAtStartPar
+Computationally efficient
+&
+\sphinxAtStartPar
+Computationally intensive
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Scalability}
+&
+\sphinxAtStartPar
+Scales well with large preference
+datasets
+&
+\sphinxAtStartPar
+Requires significant compute for RL
+steps
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Use Case}
+&
+\sphinxAtStartPar
+Directly aligns LLM with preferences
+&
+\sphinxAtStartPar
+Optimizes policy for long\sphinxhyphen{}term reward
+maximization
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Human Preference
+Modeling}
+&
+\sphinxAtStartPar
+Directly encoded in loss function
+&
+\sphinxAtStartPar
+Encoded via a reward model
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+\end{quote}
+
+\end{itemize}
+\end{sphinxadmonition}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Benefits}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+RLHF ensures the model’s outputs are ethical, safe, and aligned with human
+expectations, reducing harmful or biased content.
+
+\item {} 
+\sphinxAtStartPar
+Responses become more relevant, helpful, and contextually appropriate,
+enhancing user experience.
+
+\item {} 
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuning with RLHF allows models to be customized for specific use cases,
+such as customer service, creative writing, or technical support.
 
 \end{itemize}
 
@@ -8899,7 +9023,7 @@ Pre\sphinxhyphen{}training as we know it will end. \textendash{} Ilya Sutskever 
 \capstart
 
 \noindent\sphinxincludegraphics{{ilya_sutskever}.png}
-\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id2}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
+\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id3}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -8926,7 +9050,7 @@ This chapter delves into transformer models, drawing on insights from
 \capstart
 
 \noindent\sphinxincludegraphics{{transformer_architecture}.png}
-\caption{Transformer Architecture}\label{\detokenize{pretraining:id3}}\end{figure}
+\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id4}}\end{figure}
 
 
 \subsection{Attention Is All You Need}
@@ -9153,7 +9277,7 @@ The positional encodings are added directly to the token embeddings:
 \capstart
 
 \noindent\sphinxincludegraphics{{position_embedding}.png}
-\caption{Positional Embedding}\label{\detokenize{pretraining:id4}}\end{figure}
+\caption{Positional Embedding}\label{\detokenize{pretraining:id5}}\end{figure}
 
 
 \subsubsection{Rotary Positional Embeddings (RoPE)}
@@ -9405,7 +9529,7 @@ dependencies between words.
 \capstart
 
 \noindent\sphinxincludegraphics{{word_embedding_matrix}.png}
-\caption{Word Embedding}\label{\detokenize{pretraining:id5}}\end{figure}
+\caption{Word Embedding}\label{\detokenize{pretraining:id6}}\end{figure}
 
 \sphinxAtStartPar
 Take an example of embedding matrix \(W_E\) with \textasciitilde{}50k vocabulary
@@ -9434,7 +9558,7 @@ following projections in embedding space:
 \capstart
 
 \noindent\sphinxincludegraphics{{contextual_embedding}.png}
-\caption{Contextual Embedding}\label{\detokenize{pretraining:id6}}\end{figure}
+\caption{Contextual Embedding}\label{\detokenize{pretraining:id7}}\end{figure}
 
 \sphinxAtStartPar
 Embedding matrix contains vectors of all words in the vocabulary. It’s
@@ -9499,7 +9623,7 @@ words.
 \capstart
 
 \noindent\sphinxincludegraphics{{query_projection}.png}
-\caption{Query Projection}\label{\detokenize{pretraining:id7}}\end{figure}
+\caption{Query Projection}\label{\detokenize{pretraining:id8}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -9525,7 +9649,7 @@ produced by the word ‘wizard’.
 \capstart
 
 \noindent\sphinxincludegraphics{{key_projection}.png}
-\caption{Key Projection}\label{\detokenize{pretraining:id8}}\end{figure}
+\caption{Key Projection}\label{\detokenize{pretraining:id9}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -9550,7 +9674,7 @@ adjective to ‘wizard’. In other words, the embedding of ‘brave’
 \capstart
 
 \noindent\sphinxincludegraphics{{attention_score}.png}
-\caption{Attention Score}\label{\detokenize{pretraining:id9}}\end{figure}
+\caption{Attention Score}\label{\detokenize{pretraining:id10}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -9640,7 +9764,7 @@ refined vector, encoding contextually rich meaning.
 \capstart
 
 \noindent\sphinxincludegraphics{{value_projection_weighted_sum}.png}
-\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id10}}\end{figure}
+\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id11}}\end{figure}
 
 \end{enumerate}
 
@@ -10311,11 +10435,11 @@ many candidate sequences are considered at each step.
 \capstart
 
 \noindent\sphinxincludegraphics{{beam_search}.png}
-\caption{Beam Search}\label{\detokenize{pretraining:id11}}\end{figure}
+\caption{Beam Search}\label{\detokenize{pretraining:id12}}\end{figure}
 
 
 \subsubsection{Summary}
-\label{\detokenize{pretraining:summary-1}}\label{\detokenize{pretraining:id1}}
+\label{\detokenize{pretraining:summary-1}}\label{\detokenize{pretraining:id2}}
 
 \begin{savenotes}\sphinxattablestart
 \sphinxthistablewithglobalstyle
@@ -10539,7 +10663,7 @@ key matrix:
 \capstart
 
 \noindent\sphinxincludegraphics{{multiquery_attention}.png}
-\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id12}}\end{figure}
+\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id13}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of MQA:}
@@ -10596,7 +10720,7 @@ where \(i\) is the query head within a group.
 \capstart
 
 \noindent\sphinxincludegraphics{{grouped_query_attention}.png}
-\caption{Grouped Query Attention}\label{\detokenize{pretraining:id13}}\end{figure}
+\caption{Grouped Query Attention}\label{\detokenize{pretraining:id14}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of GQA:}
@@ -11483,7 +11607,7 @@ Correctness (GEval): 0.00\% pass rate
 
 \chapter{Main Reference}
 \label{\detokenize{reference:main-reference}}\label{\detokenize{reference:reference}}\label{\detokenize{reference::doc}}
-\begin{sphinxthebibliography}{fineTune}
+\begin{sphinxthebibliography}{attentio}
 \bibitem[GenAI]{reference:genai}
 \sphinxAtStartPar
 Wenqiang Feng, Di Zhen.
@@ -11508,6 +11632,10 @@ Yunho Mo etc.
 \sphinxAtStartPar
 Philipp Schmid.
 \sphinxhref{https://www.philschmid.de/fine-tune-embedding-model-for-rag}{Fine\sphinxhyphen{}tune Embedding models for Retrieval Augmented Generation (RAG)}, 2024.
+\bibitem[attentionAllYouNeed]{reference:attentionallyouneed}
+\sphinxAtStartPar
+Ashish Vaswani etc.
+\sphinxhref{https://arxiv.org/pdf/1706.03762}{Attention Is All You Need}, 2017.
 \bibitem[fineTuneLLM]{reference:finetunellm}
 \sphinxAtStartPar
 Maxime Labonne.

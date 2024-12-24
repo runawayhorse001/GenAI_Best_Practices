@@ -26,6 +26,12 @@ Main Reference
                  `Fine-tune Embedding models for Retrieval Augmented Generation (RAG)
                  <https://www.philschmid.de/fine-tune-embedding-model-for-rag>`_, 2024.
 
+
+.. [attentionAllYouNeed] Ashish Vaswani etc.
+                 `Attention Is All You Need
+                 <https://arxiv.org/pdf/1706.03762>`_, 2017.
+
+
 .. [fineTuneLLM] Maxime Labonne.
                  `Fine-Tune Your Own Llama 2 Model in a Colab Notebook
                  <https://mlabonne.github.io/blog/posts/Fine_Tune_Your_Own_Llama_2_Model_in_a_Colab_Notebook.html>`_, 2024.
