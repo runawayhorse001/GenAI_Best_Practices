@@ -3290,7 +3290,7 @@ Agentic RAG: \sphinxhref{https://colab.research.google.com/drive/1-eZ61ux0QSCNx2
 \capstart
 
 \noindent\sphinxincludegraphics{{RAG_diagram}.png}
-\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id44}}\label{\detokenize{rag:fig-rag}}\end{figure}
+\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id53}}\label{\detokenize{rag:fig-rag}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
@@ -3715,7 +3715,7 @@ The valuating Chunking Strategies for Retrieval can be found at: \sphinxurl{http
 \capstart
 
 \noindent\sphinxincludegraphics{{late_chunking}.png}
-\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id45}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
+\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id54}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Late Chunking} refers to a strategy in Retrieval\sphinxhyphen{}Augmented Generation (RAG) where chunking of
@@ -4450,13 +4450,6 @@ Each database has unique strengths and is suited for specific RAG use cases. The
 \sphinxAtStartPar
 The retriever selects “chunks” of text (e.g., paragraphs or sections) relevant to the user’s query.
 
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[scale=0.5]{{retriever}.png}
-\caption{Reciprocal Rank Fusion}\label{\detokenize{rag:id46}}\label{\detokenize{rag:fig-retriever}}\end{figure}
-
 
 \subsubsection{Common retrieval methods}
 \label{\detokenize{rag:common-retrieval-methods}}\begin{itemize}
@@ -4732,6 +4725,13 @@ k is a small constant (often set to 60 or another fixed value) to control how mu
 
 \end{description}
 
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[scale=0.5]{{rrf}.png}
+\caption{Reciprocal Rank Fusion}\label{\detokenize{rag:id55}}\label{\detokenize{rag:fig-retriever}}\end{figure}
+
 \sphinxAtStartPar
 Example:
 
@@ -4917,7 +4917,7 @@ Web search engine: \sphinxcode{\sphinxupquote{Google}}
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag_paper}.png}
-\caption{Overview of SELF\sphinxhyphen{}RAG. (Source \sphinxcite{reference:selfrag})}\label{\detokenize{rag:id47}}\label{\detokenize{rag:fig-self-rag-paper}}\end{figure}
+\caption{Overview of SELF\sphinxhyphen{}RAG. (Source \sphinxcite{reference:selfrag})}\label{\detokenize{rag:id56}}\label{\detokenize{rag:fig-self-rag-paper}}\end{figure}
 
 \sphinxAtStartPar
 In the paper \sphinxcite{reference:selfrag}, Four types decisions are made:
@@ -5034,7 +5034,7 @@ Assesses if \sphinxtitleref{y} (generation) is a useful response to \sphinxtitle
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag}.png}
-\caption{Self\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_self\_rag\_local/}{Langgraph self\sphinxhyphen{}rag})}\label{\detokenize{rag:id48}}\label{\detokenize{rag:fig-self-rag}}\end{figure}
+\caption{Self\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_self\_rag\_local/}{Langgraph self\sphinxhyphen{}rag})}\label{\detokenize{rag:id57}}\label{\detokenize{rag:fig-self-rag}}\end{figure}
 
 
 \subsection{Load Models}
@@ -5098,7 +5098,32 @@ you will get error:
 \end{sphinxVerbatim}
 
 
-\subsection{Retrieval Grader}
+\subsection{Retrieval}
+\label{\detokenize{rag:id4}}
+
+\subsubsection{Define Retriever}
+\label{\detokenize{rag:define-retriever}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{retrieve}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Retrieve documents}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): New key added to state, documents, that contains retrieved documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}RETRIEVE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Retrieval}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{retriever}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Retrieval Grader}
 \label{\detokenize{rag:retrieval-grader}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
@@ -5169,9 +5194,44 @@ Output:
 to format the structured output.
 \end{sphinxadmonition}
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{grade\PYGZus{}documents}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Determines whether the retrieved documents are relevant to the question.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): Updates documents key with only filtered relevant documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}CHECK DOCUMENT RELEVANCE TO QUESTION\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Score each doc}
+    \PYG{n}{filtered\PYGZus{}docs} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{d} \PYG{o+ow}{in} \PYG{n}{documents}\PYG{p}{:}
+        \PYG{n}{score} \PYG{o}{=} \PYG{n}{retrieval\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}
+            \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{document}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{d}\PYG{o}{.}\PYG{n}{page\PYGZus{}content}\PYG{p}{\PYGZcb{}}
+        \PYG{p}{)}
+        \PYG{n}{grade} \PYG{o}{=} \PYG{n}{score}\PYG{o}{.}\PYG{n}{score}
+        \PYG{k}{if} \PYG{n}{grade} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o+ow}{or} \PYG{n}{grade}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GRADE: DOCUMENT RELEVANT\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+            \PYG{n}{filtered\PYGZus{}docs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GRADE: DOCUMENT NOT RELEVANT\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{continue}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{filtered\PYGZus{}docs}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
 
 \subsection{Generate}
 \label{\detokenize{rag:generate}}
+
+\subsubsection{Generation}
+\label{\detokenize{rag:id5}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
 
@@ -5232,6 +5292,69 @@ Output:
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{generate}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{     }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{     Generate answer}
+
+\PYG{l+s+sd}{     Args:}
+\PYG{l+s+sd}{         state (dict): The current graph state}
+
+\PYG{l+s+sd}{     Returns:}
+\PYG{l+s+sd}{         state (dict): New key added to state, generation, that contains LLM generation}
+\PYG{l+s+sd}{     \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+     \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GENERATE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+     \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+     \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+     \PYG{c+c1}{\PYGZsh{} RAG generation}
+     \PYG{n}{generation} \PYG{o}{=} \PYG{n}{rag\PYGZus{}chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{context}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+     \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Answer Grader}
+\label{\detokenize{rag:answer-grader}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score for relevance check on generation.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}  \PYG{c+c1}{\PYGZsh{} Changed field name to \PYGZsq{}score\PYGZsq{}}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Documents are relevant to the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
+\PYG{l+s+s2}{                resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Here is the answer:}
+\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
+\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{                Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether}
+\PYG{l+s+s2}{                the answer is useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Provide the binary score as a JSON with a single key}
+\PYG{l+s+s2}{                }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\PYG{p}{)}
+
+\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Output:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{GradeAnswer}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
 
 \subsection{Utilities}
 \label{\detokenize{rag:utilities}}
@@ -5276,49 +5399,6 @@ Output:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{GradeHallucinations}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsubsection{Answer Grader}
-\label{\detokenize{rag:answer-grader}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
-
-\PYG{c+c1}{\PYGZsh{} Data model}
-\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
-\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score for relevance check on retrieved documents.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}  \PYG{c+c1}{\PYGZsh{} Changed field name to \PYGZsq{}score\PYGZsq{}}
-        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Documents are relevant to the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-
-\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} Prompt}
-\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
-    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
-\PYG{l+s+s2}{                resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                Here is the answer:}
-\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
-\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
-\PYG{l+s+s2}{                Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether}
-\PYG{l+s+s2}{                the answer is useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                Provide the binary score as a JSON with a single key}
-\PYG{l+s+s2}{                }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
-\PYG{p}{)}
-
-\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
-\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Output:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{GradeAnswer}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -5597,7 +5677,7 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag_graph}.png}
-\caption{Self\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id49}}\label{\detokenize{rag:fig-self-rag-graph}}\end{figure}
+\caption{Self\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id58}}\label{\detokenize{rag:fig-self-rag-graph}}\end{figure}
 
 
 \subsection{Test}
@@ -5778,11 +5858,11 @@ Output:
 \capstart
 
 \noindent\sphinxincludegraphics{{corrective_rag}.png}
-\caption{Corrective\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_crag\_local/}{Langgraph c\sphinxhyphen{}rag})}\label{\detokenize{rag:id50}}\label{\detokenize{rag:fig-c-rag}}\end{figure}
+\caption{Corrective\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_crag\_local/}{Langgraph c\sphinxhyphen{}rag})}\label{\detokenize{rag:id59}}\label{\detokenize{rag:fig-c-rag}}\end{figure}
 
 
 \subsection{Load Models}
-\label{\detokenize{rag:id4}}
+\label{\detokenize{rag:id6}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -5810,7 +5890,7 @@ you will get error:
 
 
 \subsection{Create Index}
-\label{\detokenize{rag:id5}}
+\label{\detokenize{rag:id7}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -5842,8 +5922,32 @@ you will get error:
 \end{sphinxVerbatim}
 
 
-\subsection{Retrieval Grader}
-\label{\detokenize{rag:id6}}
+\subsection{Retrieval}
+\label{\detokenize{rag:id8}}
+
+\subsubsection{Define Retriever}
+\label{\detokenize{rag:id9}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{retrieve}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Retrieve documents}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): New key added to state, documents, that contains retrieved documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{retriever}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}
+    \PYG{n}{steps} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{steps}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{steps}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{retrieve\PYGZus{}documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{steps}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{steps}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Retrieval Grader}
+\label{\detokenize{rag:id10}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -5905,7 +6009,10 @@ use web search.
 
 
 \subsection{Generate}
-\label{\detokenize{rag:id7}}
+\label{\detokenize{rag:id11}}
+
+\subsubsection{Generation}
+\label{\detokenize{rag:id12}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
 
@@ -5946,8 +6053,51 @@ Output:
 \end{sphinxVerbatim}
 
 
+\subsubsection{Answer Grader}
+\label{\detokenize{rag:id13}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score for relevance check on generation.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}  \PYG{c+c1}{\PYGZsh{} Changed field name to \PYGZsq{}score\PYGZsq{}}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Documents are relevant to the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
+\PYG{l+s+s2}{                resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Here is the answer:}
+\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
+\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{                Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether}
+\PYG{l+s+s2}{                the answer is useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Provide the binary score as a JSON with a single key}
+\PYG{l+s+s2}{                }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\PYG{p}{)}
+
+\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Output:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{GradeAnswer}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
 \subsection{Utilities}
-\label{\detokenize{rag:id8}}
+\label{\detokenize{rag:id14}}
 
 \subsubsection{Router}
 \label{\detokenize{rag:router}}
@@ -6011,7 +6161,7 @@ Output:
 
 
 \subsubsection{Hallucination Grader}
-\label{\detokenize{rag:id9}}
+\label{\detokenize{rag:id15}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Hallucination Grader}
 
@@ -6053,51 +6203,8 @@ Output:
 \end{sphinxVerbatim}
 
 
-\subsubsection{Answer Grader}
-\label{\detokenize{rag:id10}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
-
-\PYG{c+c1}{\PYGZsh{} Data model}
-\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
-\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score for relevance check on retrieved documents.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}  \PYG{c+c1}{\PYGZsh{} Changed field name to \PYGZsq{}score\PYGZsq{}}
-        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Documents are relevant to the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-
-\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} Prompt}
-\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
-    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
-\PYG{l+s+s2}{                resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                Here is the answer:}
-\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
-\PYG{l+s+s2}{                }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
-\PYG{l+s+s2}{                Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether}
-\PYG{l+s+s2}{                the answer is useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{                Provide the binary score as a JSON with a single key}
-\PYG{l+s+s2}{                }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
-\PYG{p}{)}
-
-\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
-\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Output:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{GradeAnswer}\PYG{p}{(}\PYG{n}{score}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
 \subsubsection{Question Re\sphinxhyphen{}writer}
-\label{\detokenize{rag:id11}}
+\label{\detokenize{rag:id16}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Question Re\PYGZhy{}writer}
 
@@ -6155,10 +6262,10 @@ need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\s
 
 
 \subsection{Graph}
-\label{\detokenize{rag:id12}}
+\label{\detokenize{rag:id17}}
 
 \subsubsection{Create the Graph}
-\label{\detokenize{rag:id13}}
+\label{\detokenize{rag:id18}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{List}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -6308,7 +6415,7 @@ need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\s
 
 
 \subsubsection{Compile Graph}
-\label{\detokenize{rag:id14}}
+\label{\detokenize{rag:id19}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{START}\PYG{p}{,} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}
 
@@ -6341,7 +6448,7 @@ need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\s
 
 
 \subsubsection{Graph visualization}
-\label{\detokenize{rag:id15}}
+\label{\detokenize{rag:id20}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -6359,14 +6466,14 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{c_rag_graph}.png}
-\caption{Corrective\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id51}}\label{\detokenize{rag:fig-c-rag-graph}}\end{figure}
+\caption{Corrective\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id60}}\label{\detokenize{rag:fig-c-rag-graph}}\end{figure}
 
 
 \subsection{Test}
-\label{\detokenize{rag:id16}}
+\label{\detokenize{rag:id21}}
 
 \subsubsection{Relevant retrieval}
-\label{\detokenize{rag:id17}}\begin{quote}
+\label{\detokenize{rag:id22}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{uuid}
@@ -6402,7 +6509,7 @@ Ouput:
 
 
 \subsubsection{Irrelevant retrieval}
-\label{\detokenize{rag:id18}}\begin{quote}
+\label{\detokenize{rag:id23}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{example} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{input}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What is the capital of China?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
@@ -6441,11 +6548,11 @@ Ouput:
 \capstart
 
 \noindent\sphinxincludegraphics{{adaptive_rag}.png}
-\caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id52}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
+\caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id61}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
 
 
 \subsection{Load Models}
-\label{\detokenize{rag:id19}}
+\label{\detokenize{rag:id24}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -6473,7 +6580,7 @@ you will get error:
 
 
 \subsection{Create Index}
-\label{\detokenize{rag:id20}}
+\label{\detokenize{rag:id25}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -6505,8 +6612,34 @@ you will get error:
 \end{sphinxVerbatim}
 
 
-\subsection{Retrieval Grader}
-\label{\detokenize{rag:id21}}
+\subsection{Retrieval}
+\label{\detokenize{rag:id26}}
+
+\subsubsection{Define Retriever}
+\label{\detokenize{rag:id27}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{retrieve}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Retrieve documents}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): New key added to state,}
+\PYG{l+s+sd}{                      documents, that contains retrieved documents}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}RETRIEVE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Retrieval}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{retriever}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Retrieval Grader}
+\label{\detokenize{rag:id28}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -6555,7 +6688,10 @@ you will get error:
 
 
 \subsection{Generate}
-\label{\detokenize{rag:id22}}
+\label{\detokenize{rag:id29}}
+
+\subsubsection{Generation}
+\label{\detokenize{rag:id30}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Generate}
 
@@ -6599,12 +6735,73 @@ Ouput:
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{generate}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Generate answer}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        state (dict): The current graph state}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        state (dict): New key added to state, generation,}
+\PYG{l+s+sd}{        that contains LLM generation}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}\PYGZhy{}GENERATE\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{question} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{n}{documents} \PYG{o}{=} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} RAG generation}
+    \PYG{n}{generation} \PYG{o}{=} \PYG{n}{rag\PYGZus{}chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYGZbs{}
+                                  \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{documents}\PYG{p}{,} \PYGZbs{}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,}\PYGZbs{}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Answer Grader}
+\label{\detokenize{rag:id31}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score to assess answer addresses question.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}
+        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Answer addresses the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} parser}
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Prompt}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
+\PYG{l+s+s2}{    resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the answer:}
+\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
+\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{    Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether the answer is}
+\PYG{l+s+s2}{    useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{    Provide the binary score as a JSON with a single key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no}
+\PYG{l+s+s2}{    preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
 
 \subsection{Utilities}
-\label{\detokenize{rag:id23}}
+\label{\detokenize{rag:id32}}
 
 \subsubsection{Router}
-\label{\detokenize{rag:id24}}
+\label{\detokenize{rag:id33}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Router}
 
@@ -6728,7 +6925,7 @@ output parser. But, you can still use the similar one we implemented in {\hyperr
 
 
 \subsubsection{Hallucination Grader}
-\label{\detokenize{rag:id25}}
+\label{\detokenize{rag:id34}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Hallucination Grader}
 
@@ -6763,45 +6960,8 @@ output parser. But, you can still use the similar one we implemented in {\hyperr
 \end{sphinxVerbatim}
 
 
-\subsubsection{Answer Grader}
-\label{\detokenize{rag:id26}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Answer Grader}
-
-\PYG{c+c1}{\PYGZsh{} Data model}
-\PYG{k}{class} \PYG{n+nc}{GradeAnswer}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
-\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Binary score to assess answer addresses question.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-    \PYG{n}{score}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}
-        \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Answer addresses the question, }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{\PYGZdq{}}
-    \PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} parser}
-\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{GradeAnswer}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} Prompt}
-\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
-    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are a grader assessing whether an answer is useful to}
-\PYG{l+s+s2}{    resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{    Here is the answer:}
-\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{    }\PYG{l+s+si}{\PYGZob{}generation\PYGZcb{}}
-\PYG{l+s+s2}{    }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{    Here is the question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
-\PYG{l+s+s2}{    Give a binary score }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{yes}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ or }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{no}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ to indicate whether the answer is}
-\PYG{l+s+s2}{    useful to resolve a question. }\PYG{l+s+se}{\PYGZbs{}n}
-\PYG{l+s+s2}{    Provide the binary score as a JSON with a single key }\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{score}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{ and no}
-\PYG{l+s+s2}{    preamble or explanation.}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{)}
-
-\PYG{n}{answer\PYGZus{}grader} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
-\PYG{n}{answer\PYGZus{}grader}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{generation}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generation}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
 \subsubsection{Question Re\sphinxhyphen{}writer}
-\label{\detokenize{rag:id27}}
+\label{\detokenize{rag:id35}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Question Re\PYGZhy{}writer}
 
@@ -6853,10 +7013,10 @@ need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\s
 
 
 \subsection{Graph}
-\label{\detokenize{rag:id28}}
+\label{\detokenize{rag:id36}}
 
 \subsubsection{Create the Graph}
-\label{\detokenize{rag:id29}}
+\label{\detokenize{rag:id37}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{List}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -7090,7 +7250,7 @@ need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\s
 
 
 \subsubsection{Compile Graph}
-\label{\detokenize{rag:id30}}
+\label{\detokenize{rag:id38}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 
@@ -7139,7 +7299,7 @@ need to use \sphinxcode{\sphinxupquote{eval(results)}} within the \sphinxcode{\s
 
 
 \subsubsection{Graph visualization}
-\label{\detokenize{rag:id31}}
+\label{\detokenize{rag:id39}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -7157,14 +7317,14 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{a_rag_graph}.png}
-\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id53}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
+\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id62}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
 
 
 \subsection{Test}
-\label{\detokenize{rag:id32}}
+\label{\detokenize{rag:id40}}
 
 \subsubsection{Relevant retrieval}
-\label{\detokenize{rag:id33}}\begin{quote}
+\label{\detokenize{rag:id41}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{uuid}
@@ -7197,7 +7357,7 @@ Ouput:
 
 
 \subsubsection{Irrelevant retrieval}
-\label{\detokenize{rag:id34}}\begin{quote}
+\label{\detokenize{rag:id42}}\begin{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n+nb}{input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{What are the types of agent memory?}\PYG{l+s+s2}{\PYGZdq{}}
@@ -7243,11 +7403,11 @@ Ouput:
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag}.png}
-\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id54}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
+\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id63}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
 
 
 \subsection{Load Models}
-\label{\detokenize{rag:id35}}
+\label{\detokenize{rag:id43}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
@@ -7275,7 +7435,7 @@ you will get error:
 
 
 \subsection{Create Index}
-\label{\detokenize{rag:id36}}
+\label{\detokenize{rag:id44}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{text\PYGZus{}splitter} \PYG{k+kn}{import} \PYG{n}{RecursiveCharacterTextSplitter}
 \PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}community}\PYG{n+nn}{.}\PYG{n+nn}{document\PYGZus{}loaders} \PYG{k+kn}{import} \PYG{n}{WebBaseLoader}
@@ -7373,7 +7533,7 @@ and {\hyperref[\detokenize{rag:ch-a-rag}]{\sphinxcrossref{\DUrole{std}{\DUrole{s
 
 
 \subsubsection{Retrieval Grader}
-\label{\detokenize{rag:id37}}
+\label{\detokenize{rag:id45}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} Retrieval Grader}
 
@@ -7426,7 +7586,7 @@ Ouput:
 
 
 \subsection{Generate}
-\label{\detokenize{rag:id38}}
+\label{\detokenize{rag:id46}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{def} \PYG{n+nf}{generate}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{p}{:}
 \PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
@@ -7481,10 +7641,10 @@ Ouput:
 
 
 \subsection{Graph}
-\label{\detokenize{rag:id39}}
+\label{\detokenize{rag:id47}}
 
 \subsubsection{Create the Graph}
-\label{\detokenize{rag:id40}}
+\label{\detokenize{rag:id48}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{Annotated}\PYG{p}{,} \PYG{n}{Literal}\PYG{p}{,} \PYG{n}{Sequence}
 \PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}
@@ -7637,7 +7797,7 @@ Ouput:
 
 
 \subsubsection{Compile Graph}
-\label{\detokenize{rag:id41}}
+\label{\detokenize{rag:id49}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{END}\PYG{p}{,} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
 \PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{prebuilt} \PYG{k+kn}{import} \PYG{n}{ToolNode}
@@ -7704,7 +7864,7 @@ If you use OpenAI model, the code should be like:
 
 
 \subsubsection{Graph visualization}
-\label{\detokenize{rag:id42}}
+\label{\detokenize{rag:id50}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}\PYG{p}{,} \PYG{n}{display}
 
@@ -7722,11 +7882,11 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag_graph}.png}
-\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id55}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
+\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id64}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
 
 
 \subsection{Test}
-\label{\detokenize{rag:id43}}
+\label{\detokenize{rag:id51}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pprint}
 
@@ -7780,6 +7940,91 @@ Ouput:
                 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}
                 \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ }\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
+
+
+\section{Advanced Topics}
+\label{\detokenize{rag:advanced-topics}}\label{\detokenize{rag:ch-multi-agent}}
+
+\subsection{Multi\sphinxhyphen{}agent Systems}
+\label{\detokenize{rag:multi-agent-systems}}
+
+\subsubsection{Multi\sphinxhyphen{}agent architectures}
+\label{\detokenize{rag:multi-agent-architectures}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{agent_architectures}.png}
+\caption{Multi\sphinxhyphen{}agent architectures (Source: \sphinxhref{https://langchain-ai.github.io/langgraph/concepts/multi\_agent/}{Multi\sphinxhyphen{}agent architectures})}\label{\detokenize{rag:id65}}\label{\detokenize{rag:fig-mulit-agent-arch}}\end{figure}
+
+
+\subsubsection{Command: Edgeless graphs}
+\label{\detokenize{rag:command-edgeless-graphs}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{random}
+\PYG{k+kn}{from} \PYG{n+nn}{typing\PYGZus{}extensions} \PYG{k+kn}{import} \PYG{n}{TypedDict}\PYG{p}{,} \PYG{n}{Literal}
+
+\PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{graph} \PYG{k+kn}{import} \PYG{n}{StateGraph}\PYG{p}{,} \PYG{n}{START}
+\PYG{k+kn}{from} \PYG{n+nn}{langgraph}\PYG{n+nn}{.}\PYG{n+nn}{types} \PYG{k+kn}{import} \PYG{n}{Command}
+
+
+\PYG{c+c1}{\PYGZsh{} Define graph state}
+\PYG{k}{class} \PYG{n+nc}{State}\PYG{p}{(}\PYG{n}{TypedDict}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{foo}\PYG{p}{:} \PYG{n+nb}{str}
+
+
+\PYG{c+c1}{\PYGZsh{} Define the agents}
+
+\PYG{k}{def} \PYG{n+nf}{Agent\PYGZus{}a}\PYG{p}{(}\PYG{n}{state}\PYG{p}{:} \PYG{n}{State}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Command}\PYG{p}{[}\PYG{n}{Literal}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Agent\PYGZus{}b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Agent\PYGZus{}c}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Called Agnet\PYGZus{}1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{value} \PYG{o}{=} \PYG{n}{random}\PYG{o}{.}\PYG{n}{choice}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{a}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} this is a replacement for a conditional edge function}
+    \PYG{k}{if} \PYG{n}{value} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{a}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+        \PYG{n}{goto} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Agent\PYGZus{}b}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{goto} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Agent\PYGZus{}c}\PYG{l+s+s2}{\PYGZdq{}}
+
+    \PYG{c+c1}{\PYGZsh{} note how Command allows you to BOTH update the graph state AND route}
+    \PYG{c+c1}{\PYGZsh{} to the next node}
+    \PYG{k}{return} \PYG{n}{Command}\PYG{p}{(}
+        \PYG{c+c1}{\PYGZsh{} this is the state update}
+        \PYG{n}{update}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{foo}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{value}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+        \PYG{c+c1}{\PYGZsh{} this is a replacement for an edge}
+        \PYG{n}{goto}\PYG{o}{=}\PYG{n}{goto}\PYG{p}{,}
+    \PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Agent B and C are unchanged}
+
+\PYG{k}{def} \PYG{n+nf}{Agent\PYGZus{}b}\PYG{p}{(}\PYG{n}{state}\PYG{p}{:} \PYG{n}{State}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Called Agent\PYGZus{}b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{foo}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{foo}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k}{def} \PYG{n+nf}{Agent\PYGZus{}c}\PYG{p}{(}\PYG{n}{state}\PYG{p}{:} \PYG{n}{State}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Called Agent\PYGZus{}c}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{foo}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{state}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{foo}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{c}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{n}{builder} \PYG{o}{=} \PYG{n}{StateGraph}\PYG{p}{(}\PYG{n}{State}\PYG{p}{)}
+\PYG{n}{builder}\PYG{o}{.}\PYG{n}{add\PYGZus{}edge}\PYG{p}{(}\PYG{n}{START}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Agent\PYGZus{}a}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{builder}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{n}{Agent\PYGZus{}a}\PYG{p}{)}
+\PYG{n}{builder}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{n}{Agent\PYGZus{}b}\PYG{p}{)}
+\PYG{n}{builder}\PYG{o}{.}\PYG{n}{add\PYGZus{}node}\PYG{p}{(}\PYG{n}{Agent\PYGZus{}c}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} NOTE: there are no edges between A, B and C!}
+
+\PYG{n}{graph} \PYG{o}{=} \PYG{n}{builder}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{display}\PYG{p}{,} \PYG{n}{Image}
+
+\PYG{n}{display}\PYG{p}{(}\PYG{n}{Image}\PYG{p}{(}\PYG{n}{graph}\PYG{o}{.}\PYG{n}{get\PYGZus{}graph}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{draw\PYGZus{}mermaid\PYGZus{}png}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{multi_agents_simple}.png}
+\end{figure}
 
 \sphinxstepscope
 
