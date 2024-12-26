@@ -12,12 +12,12 @@ Retrieval-Augmented Generation
     - Reciprocal Rank Fusion: |RRF|
     - RAG in colab: |n-rag|
 
-    -------------
+    --
     
     - Langchain Google Web Search |goog_search|
     - Langchain SQL Query |sql_query|
 
-    -------------
+    --
 
     - Self-RAG: |S-RAG|
     - Corrective RAG: |C-RAG|

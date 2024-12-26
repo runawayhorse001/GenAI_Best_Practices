@@ -53,7 +53,7 @@
 \contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{54}{subsection.4.3.11}%
 \contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{55}{subsection.4.3.12}%
 \contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{57}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{57}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Overview}{58}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Naive RAG}{58}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Indexing}{58}{subsection.5.2.1}%
 \contentsline {subsubsection}{Naive Chunking}{59}{subsubsection*.4}%
@@ -176,30 +176,38 @@
 \contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{176}{subsubsection*.56}%
 \contentsline {subsubsection}{Summary}{176}{subsubsection*.57}%
 \contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{176}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{178}{subsection.7.1.5}%
-\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{178}{subsubsection*.58}%
-\contentsline {subsubsection}{Cross Attention}{182}{subsubsection*.59}%
-\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{183}{subsection.7.1.6}%
-\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{184}{subsection.7.1.7}%
-\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{184}{subsection.7.1.8}%
-\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{185}{subsection.7.1.9}%
-\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{186}{subsection.7.1.10}%
-\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{186}{subsection.7.1.11}%
-\contentsline {subsection}{\numberline {7.1.12}Decoding}{187}{subsection.7.1.12}%
-\contentsline {subsubsection}{Greedy Decoding}{187}{subsubsection*.60}%
-\contentsline {subsubsection}{Beam Search}{187}{subsubsection*.61}%
-\contentsline {subsubsection}{Summary}{188}{subsubsection*.62}%
-\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{188}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}KV Cache}{188}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{190}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{191}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{192}{subsection.7.2.4}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{193}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{194}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{194}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{195}{section.8.3}%
-\contentsline {section}{\numberline {8.4}GEval with DeepEval}{195}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{195}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{195}{subsection.8.4.2}%
-\contentsline {chapter}{\numberline {9}Main Reference}{207}{chapter.9}%
-\contentsline {chapter}{Bibliography}{209}{chapter*.63}%
+\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{177}{subsection.7.1.5}%
+\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{177}{subsubsection*.58}%
+\contentsline {subsubsection}{Cross Attention}{183}{subsubsection*.59}%
+\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{184}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{185}{subsection.7.1.7}%
+\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{185}{subsection.7.1.8}%
+\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{186}{subsection.7.1.9}%
+\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{187}{subsection.7.1.10}%
+\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{187}{subsection.7.1.11}%
+\contentsline {subsection}{\numberline {7.1.12}Decoding}{188}{subsection.7.1.12}%
+\contentsline {subsubsection}{Greedy Decoding}{188}{subsubsection*.60}%
+\contentsline {subsubsection}{Beam Search}{188}{subsubsection*.61}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{189}{subsubsection*.62}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{189}{subsubsection*.63}%
+\contentsline {subsubsection}{Temperature Scaling}{190}{subsubsection*.64}%
+\contentsline {subsubsection}{Summary}{191}{subsubsection*.65}%
+\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{191}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}KV Cache}{191}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{193}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{194}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{195}{subsection.7.2.4}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{199}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{200}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{200}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{201}{section.8.3}%
+\contentsline {section}{\numberline {8.4}GEval with DeepEval}{201}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{201}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{201}{subsection.8.4.2}%
+\contentsline {chapter}{\numberline {9}LLM Guardrails}{213}{chapter.9}%
+\contentsline {section}{\numberline {9.1}LLM Risks}{213}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{214}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{217}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{222}{section.9.4}%
+\contentsline {chapter}{\numberline {10}Main Reference}{227}{chapter.10}%
+\contentsline {chapter}{Bibliography}{229}{chapter*.66}%
