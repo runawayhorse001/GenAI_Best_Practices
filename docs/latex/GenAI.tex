@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 24, 2024}
+\date{December 26, 2024}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -12332,6 +12332,820 @@ Correctness (GEval): 0.00\% pass rate
 \sphinxstepscope
 
 
+\chapter{LLM Guardrails}
+\label{\detokenize{guardrails:llm-guardrails}}\label{\detokenize{guardrails:guardrails}}\label{\detokenize{guardrails::doc}}
+\sphinxAtStartPar
+Large Language Models (LLMs), such as OpenAI’s GPT\sphinxhyphen{}4 and Google’s PaLM,
+have revolutionized the field of artificial intelligence. By leveraging
+vast amounts of text data, these models demonstrate remarkable
+capabilities, ranging from generating creative content to automating
+complex workflows. Their versatility makes them integral to industries
+such as healthcare, finance, education, and customer service. However,
+as their applications expand, so do the risks associated with their
+misuse or malfunction.
+
+\sphinxAtStartPar
+The power of LLMs comes with inherent challenges. Uncontrolled or poorly
+guided deployments can lead to harmful outcomes such as spreading
+misinformation, generating biased content, or exposing sensitive data.
+The dynamic nature of LLMs’ outputs also makes them unpredictable,
+especially when faced with ambiguous or adversarial inputs. Without
+appropriate safeguards, these challenges can undermine trust in AI
+systems and hinder their adoption in sensitive domains.
+
+\sphinxAtStartPar
+Guardrails serve as a critical mechanism for ensuring that LLMs operate
+within acceptable boundaries. These measures can take the form of
+technical interventions, governance policies, or ethical frameworks
+designed to mitigate risks. By incorporating robust guardrails,
+organizations can harness the full potential of LLMs while ensuring
+their safe, reliable, and equitable use.
+
+
+\section{LLM Risks}
+\label{\detokenize{guardrails:llm-risks}}
+\sphinxAtStartPar
+LLMs offer immense potential across diverse applications but also
+present significant risks that must be carefully managed to ensure
+responsible and effective use. These risks span various dimensions,
+including ethical considerations, technical reliability, and societal
+impacts. Addressing these challenges requires the implementation of
+robust guardrails to mitigate harm and enhance trustworthiness. Below
+are some key areas where risks emerge and the measures needed to address
+them:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Safety and Ethical Use:}
+
+\sphinxAtStartPar
+LLMs can generate harmful, offensive, or unethical outputs due to
+unintended biases in training data or adversarial inputs. These issues
+can result in reputational damage and harm to users. Safety is
+paramount in any AI system. Ethical use further emphasizes
+transparency, accountability, and the avoidance of practices that
+could exploit or deceive users. Guardrails should include content
+moderation systems, bias detection mechanisms, and strict adherence to
+ethical guidelines to prevent harmful, offensive, or manipulative
+outputs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Accuracy and Reliability:}
+
+\sphinxAtStartPar
+LLMs are prone to “hallucinations”—instances where they generate
+factually incorrect or nonsensical information. This undermines their
+reliability, particularly in high\sphinxhyphen{}stakes applications like healthcare
+or finance. Guardrails should incorporate fact\sphinxhyphen{}checking mechanisms,
+retrieval\sphinxhyphen{}augmented generation, and continuous fine\sphinxhyphen{}tuning against
+validated datasets to minimize errors and hallucinations. Ensuring
+accuracy is particularly crucial in applications like medical
+diagnosis or legal advisory.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Robustness to Adversarial Inputs:}
+
+\sphinxAtStartPar
+LLMs are vulnerable to adversarial attacks, where maliciously crafted
+inputs manipulate the model into producing undesired or harmful
+outputs. Guardrails should implement input validation, adversarial
+training, and monitoring mechanisms to detect and mitigate malicious
+prompt manipulations and maintain its intended behavior even under
+stress.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Mitigating Bias and Promoting Fairness:}
+
+\sphinxAtStartPar
+Training data often contain historical or societal biases, leading to
+outputs that reinforce stereotypes or marginalize certain groups.
+Addressing bias is complex and requires careful intervention.
+Guardrails aim to identify and mitigate biases during model
+development and deployment, fostering fair and inclusive outputs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Privacy and Security Risks:}
+
+\sphinxAtStartPar
+LLMs might inadvertently leak sensitive data present in their training
+datasets or fail to adhere to privacy regulations. This poses risks
+for user trust and legal compliance. Guardrails should implement
+robust data anonymization, encryption, differential privacy
+techniques, access controls, and post\sphinxhyphen{}processing filters to safeguard
+sensitive information and ensure compliance with regulations.
+
+\end{itemize}
+
+
+\section{Overview of Jailbreak Techniques}
+\label{\detokenize{guardrails:overview-of-jailbreak-techniques}}
+\sphinxAtStartPar
+There are various methods to bypass the guardrails implemented in LLMs.
+These methods, referred to as “jailbreaks,” exploit vulnerabilities in
+LLMs to generate undesirable or harmful content. The jailbreaks are
+categorized based on the attacker’s access to the model (white\sphinxhyphen{}box,
+black\sphinxhyphen{}box, and gray\sphinxhyphen{}box) and the techniques they use \sphinxcite{reference:yidong}. The categorization of
+these techniques based on access and methodology provides a structured
+way to understand the vulnerabilities and potential risks associated
+with these powerful AI models.
+
+\sphinxAtStartPar
+\sphinxstylestrong{1. White\sphinxhyphen{}box Jailbreaks} assume the attacker has full access to the
+internal details of the model.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Learning\sphinxhyphen{}based Methods} use optimization methods to generate
+adversarial inputs.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Greedy Coordinate Gradient (GCG)} searches for a specific sequence
+of characters (an adversarial suffix) that, when added to a query,
+causes the LLM to generate harmful content. For example, adding a
+specific string of characters to a prompt might lead the model to
+output toxic language.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Projected Gradient Descent (PGD)} improves upon GCG, using
+continuous relaxation to control the error introduced by
+manipulating the input prompt, allowing it to fool LLMs with similar
+attack performance but faster.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{AutoDAN\sphinxhyphen{}Zhu} aims to generate more stealthy jailbreak prompts by
+using a double\sphinxhyphen{}loop optimization method built upon GCG. It also shows
+the ability to solve other tasks like prompt leaking.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{COLD\sphinxhyphen{}Attack} automates the search for adversarial attacks under a
+variety of restrictions, such as fluency and stealthiness. It performs
+efficient gradient\sphinxhyphen{}based sampling in the logit space and uses a guided
+decoding process to translate the logit sequences back into text.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{PRP (Prefix\sphinxhyphen{}based attack)} uses a two\sphinxhyphen{}step prefix\sphinxhyphen{}based approach,
+including universal adversarial prefix construction and prefix
+propagation, to elicit harmful content from LLMs with guardrails. For
+example, inserting a universal prefix into the response can trick the
+guardrail into outputting harmful content.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{AutoDAN\sphinxhyphen{}Liu} uses a hierarchical genetic algorithm to generate
+stealthy jailbreak prompts that can circumvent the ethical guidelines
+of LLMs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{LLM Generation Manipulation} directly manipulates the generation
+process of open\sphinxhyphen{}source LLMs to generate specific tokens, thereby
+causing the model to produce undesired responses. For example, it can
+force the model to generate private data.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{2. Black\sphinxhyphen{}box Jailbreaks} operate under the assumption that the
+attacker lacks knowledge of the LLM’s internal architecture.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Delicately Designed Jailbreaks} involve crafting specific prompts
+to exploit LLM vulnerabilities.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{JailBroken} identifies two main reasons for successful attacks:
+competing training objectives and instruction tuning objectives, and
+uses these failure modes as guiding principles to design new
+attacks. For example, using carefully engineered prompts to elicit
+harmful content .
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{DeepInception} injects an inception mechanism into the LLM to
+“hypnotize” it into acting as a jailbreaker, using nested scenes to
+bypass safety constraints. For example, personifying the LLM and
+creating nested scenes to generate harmful content.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{DAN (Do Anything Now)} exploits the ability of LLMs to perform
+boundless functions by bypassing the customary rules that govern AI
+systems.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ICA (In\sphinxhyphen{}Context Attack)} constructs malicious contexts to direct
+models to produce harmful outputs, leveraging the in\sphinxhyphen{}context
+learning abilities of LLMs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{SAP (Semi\sphinxhyphen{}Automatic Attack Prompt)} combines manual and automatic
+methods to generate prompts that mislead LLMs into outputting
+harmful content. It uses in\sphinxhyphen{}context learning with LLMs to update the
+prompts.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{DRA (Disguise and Reconstruction Attack)} conceals harmful
+instructions via disguise, prompting the model to uncover and
+reconstruct the original instruction.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Exploiting Long\sphinxhyphen{}tail Distribution} involves converting queries into
+rare or unique data formats.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CipherChat} encodes malicious text using ciphers to bypass safety
+features, and introduces SelfCipher, a hidden cipher embedded within
+LLMs to achieve this goal. For example, using encoded prompts to
+generate unsafe content .
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{MultiLingual} uses non\sphinxhyphen{}English languages to expose the
+vulnerabilities of LLMs by using translated prompts to generate
+unsafe content.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{LRL (Low Resource Languages)} uses less commonly used languages
+to bypass protective measures and elicit harmful responses.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CodeChameleon} encrypts queries into a format that is challenging
+for LLMs to detect, then incorporates decryption functions in
+instructions so that LLMs can understand the encrypted content. For
+example, encrypting a prompt and using code to decrypt and execute
+it.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Optimization\sphinxhyphen{}based Approaches} automate the generation of jailbreak
+prompts.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ReNeLLM} automates jailbreak prompt generation by using prompt
+rewriting and scenario nesting.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{PAIR (Prompt Automatic Iterative Refinement)} uses a language
+model to craft prompt\sphinxhyphen{}level attacks by learning from prior prompts
+and responses.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{GPTFUZZER} uses a fuzzing framework to autonomously generate
+jailbreak prompts, inspired by AFL fuzzing.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{TAP (Tree of Attacks with Pruning)} uses an LLM to refine
+candidate prompts iteratively using tree\sphinxhyphen{}of\sphinxhyphen{}thought reasoning.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{GA (genetic algorithm)} generates a universal adversarial suffix
+by using random subset sampling to minimize the cosine similarity
+between benign input embedding and adversarial input embedding.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{GUARD (Guideline Upholding through Adaptive Role\sphinxhyphen{}play
+Diagnostics)} assigns different roles to user LLMs to generate new
+jailbreaks.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Unified Framework for Jailbreaking:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{EasyJailbreak} evaluates jailbreak attacks on LLMs with
+components like Selector, Mutator, Constraint, and Evaluator.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Prompt Injection for Desired Responses:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{PROMPTINJECT}: Generates iterative adversarial prompts through
+masks, focusing on goal hijacking and prompt leaking. For example,
+using a “rogue string” to divert the model.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{IPI (Indirect Prompt Injection):} Uses retrieved prompts as
+“arbitrary code” to compromise LLM\sphinxhyphen{}integrated applications.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{HOUYI}: Uses a preconstructed prompt, an injection prompt, and a
+malicious question to achieve the adversary’s goals, focusing on
+prompt abuse and prompt leak.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Mosaic Prompts}: Exploits the ability to query an LLM multiple
+times to generate a mosaic of permissible content to circumvent
+semantic censorship.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CIA (Compositional Instruction Attack):} Capitalizes on LLMs’
+failure to detect harmful intents when instructions are composed of
+multiple elements.
+
+\end{itemize}
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{3. Gray\sphinxhyphen{}box Jailbreaks} have partial access to the model, such as
+some training data.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Fine\sphinxhyphen{}tuning Attacks} fine\sphinxhyphen{}tune the model to remove safeguards.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuning can compromise the safety of LLMs by removing RLHF
+protections. For example, fine\sphinxhyphen{}tuning with a few examples can lead
+to harmful responses.
+
+\item {} 
+\sphinxAtStartPar
+Fine\sphinxhyphen{}tuning can amplify the privacy risks by increasing the
+likelihood that models will divulge PII upon prompting.
+
+\item {} 
+\sphinxAtStartPar
+Additional training can compromise the effectiveness of established
+guardrails and make the model susceptible to harmful instructions.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Retrieval\sphinxhyphen{}Augmented Generation (RAG) Attacks} exploit
+vulnerabilities in the RAG framework
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Poisoning external datasets by injecting malicious instructions can
+invalidate safety protection. For example, injecting biased system
+messages can bias the responses.
+
+\item {} 
+\sphinxAtStartPar
+Injecting toxic text into the knowledge database can compromise
+LLMs.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Backdoor Attacks} manipulate the model to produce specific outputs
+when triggered.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Auto Poison}: Incorporates training examples that reference the
+desired target content into the system, triggering similar behaviors
+in downstream models.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{LoFT (Local Proxy Fine\sphinxhyphen{}tuning)}: Fine\sphinxhyphen{}tunes local proxy models to
+develop attacks that are more likely to transfer successfully to
+larger LLMs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{BadGPT:} Injects a backdoor trigger into the reward model during
+fine\sphinxhyphen{}tuning.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ICLAttack:} Fine\sphinxhyphen{}tunes models by targeting in\sphinxhyphen{}context learning
+for backdoor attacks.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ActivationAttack:} Uses activation steering to target
+truthfulness, toxicity, bias, and harmfulness.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\section{Introduction to Guardrails}
+\label{\detokenize{guardrails:introduction-to-guardrails}}
+\sphinxAtStartPar
+To mitigate unreliable LLM behaviors, there are four major methods:
+better retrieval by RAG, better prompting by prompt engineering, better
+models by model finetuning, and better guardrails by AI validation.
+Among these methods, \sphinxstylestrong{better guardrails by AI validation} play a
+critical role. A guardrail is an additional layer of check or validation
+around the input and output of an LLM model. The validity could be
+defined as no hallucination, no sensitive information, robustness to
+jailbreaking, keeping response on topic, etc.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{llm_guardrails_overview}.png}
+\caption{LLM Guardrails Overview.}\label{\detokenize{guardrails:id4}}\end{figure}
+
+\sphinxAtStartPar
+The implementation of guardrails can be classified into the following
+categories or a combination of those based on \sphinxstylestrong{methodology}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Rule\sphinxhyphen{}based filtering and moderation}: Relies on predefined rules
+and patterns to screen both input and output content in AI systems,
+blocking or altering restricted material such as offensive language or
+sensitive data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Classifier\sphinxhyphen{}based evaluation and filtering}: Utilizes trained
+classifiers to identify and exclude unwanted content from the
+responses generated by LLMs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Neural\sphinxhyphen{}symbolic systems}: Combines neural networks with symbolic
+reasoning to enforce controlled outputs through explicit rules, often
+applied in content moderation and policy adherence.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Constraint\sphinxhyphen{}based programming paradigms}: Employs specialized
+languages or frameworks to define rules and structures that regulate
+model outputs, typically used for maintaining consistent formats and
+ensuring policy compliance.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Feedback and evaluation toolkits}: Provides a quality assurance
+framework for LLMs using auxiliary models and metrics to assess output
+quality and safety, along with feedback mechanisms for ongoing
+improvement.
+
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{guardrails_categories}.png}
+\caption{Guardrails Categories (Source: \sphinxhref{https://gradientflow.com/llm-guardrails/}{Gradient Flow}).}\label{\detokenize{guardrails:id5}}\end{figure}
+
+\sphinxAtStartPar
+Guardrails for LLMs come in various types, each addressing specific
+needs to ensure safe, compliant, and relevant AI interactions:
+\begin{itemize}
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Compliance Guardrails}: These mechanisms ensure that an LLM}
+\sphinxAtStartPar
+adheres to applicable laws and regulations, particularly in sensitive
+fields like finance or healthcare. By preventing outputs such as
+unauthorized recommendations or the disclosure of protected
+information, they protect organizations from legal liabilities and
+promote adherence to industry standards.
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Ethical Guardrails}: Designed to uphold fairness and social}
+\sphinxAtStartPar
+responsibility, ethical guardrails prevent the generation of biased,
+harmful, or inappropriate language. For instance, in hiring
+applications, they help avoid outputs that reinforce stereotypes,
+fostering inclusivity and respect in AI\sphinxhyphen{}driven environments.
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Contextual Guardrails}: These are tailored to align the model’s}
+\sphinxAtStartPar
+outputs with specific domains or scenarios. For example, a technical
+support chatbot benefits from guardrails that ensure responses are
+accurate and relevant to the company’s products, avoiding general or
+unrelated information.
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Security Guardrails}: Focused on safeguarding sensitive data and}
+\sphinxAtStartPar
+preventing vulnerabilities, these measures protect against risks such
+as unauthorized access, data breaches, or phishing attempts. They are
+vital in maintaining trust and security in environments handling
+confidential interactions.
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxstylestrong{Adaptive Guardrails}: Built to evolve with shifting regulations}
+\sphinxAtStartPar
+and standards, adaptive guardrails ensure long\sphinxhyphen{}term compliance and
+effectiveness. They are particularly useful in dynamic industries
+where requirements, such as privacy laws or safety protocols,
+frequently change.
+
+\end{description}
+
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{type_of_guardrails}.png}
+\caption{Type of Guardrails.}\label{\detokenize{guardrails:id6}}\end{figure}
+
+\sphinxAtStartPar
+In practice, guardrails need to be thoughtfully customized to align with
+an organization’s specific objectives, comply with industry\sphinxhyphen{}specific
+regulations, and address the distinct challenges posed by each LLM
+application. Below are critical approaches of implementing guardrails
+for LLM applications.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{summary_implement_techniques_for_guardrails}.jpg}
+\caption{A Summary of Techniques for Implementing Guardrails (Source: \sphinxhref{https://attri.ai/blog/a-comprehensive-guide-everything-you-need-to-know-about-llms-guardrails}{attri.ai}).}\label{\detokenize{guardrails:id7}}\end{figure}
+
+
+\section{Overview of Guardrails Tools}
+\label{\detokenize{guardrails:overview-of-guardrails-tools}}
+\sphinxAtStartPar
+Guardrails are essential mechanisms designed to ensure that LLMs operate
+within desired parameters, enhancing their reliability, safety, and
+alignment with user expectations. Below are the guardrail frameworks
+supporting software packages designed to enhance the safety and
+reliability of LLMs (source: \sphinxstyleemphasis{Safeguarding Large Language Models: A
+Survey}). These tools generally function as intermediaries between users
+and LLMs, aiming to ensure that the LLMs adhere to ethical and
+operational guidelines.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Nvidia NeMo}: NVIDIA NeMo is a comprehensive, cloud\sphinxhyphen{}native
+framework designed to simplify the development, customization, and
+deployment of generative AI models. Built for researchers and
+enterprises, it supports a wide range of applications, including LLMs,
+multimodal systems, automatic speech recognition (ASR), and
+text\sphinxhyphen{}to\sphinxhyphen{}speech (TTS). At its core, NeMo offers modular components
+called “Neural Modules,” which serve as building blocks for creating
+scalable and domain\sphinxhyphen{}specific AI solutions. The platform integrates
+state\sphinxhyphen{}of\sphinxhyphen{}the\sphinxhyphen{}art tools for data curation, model training, fine\sphinxhyphen{}tuning,
+and inference. It leverages NVIDIA’s advanced GPU technologies, such
+as Megatron\sphinxhyphen{}LM and TensorRT\sphinxhyphen{}LLM, to deliver high performance and
+efficiency in both training and deployment. NeMo also supports
+cutting\sphinxhyphen{}edge techniques like retrieval\sphinxhyphen{}augmented generation (RAG) for
+grounded responses and provides safety features through its Guardrails
+toolkit. With pre\sphinxhyphen{}trained models, customizable pipelines, and seamless
+scalability across cloud, data center, and edge environments, NeMo
+empowers developers to create enterprise\sphinxhyphen{}grade AI systems tailored to
+specific use cases.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{rag_nemo_and_thirdparty}.png}
+\caption{Architectural workflow of a RAG chatbot safeguarded by NeMo
+Guardrails and integrated with third\sphinxhyphen{}party applications (source: \sphinxhref{https://developer.nvidia.com/blog/content-moderation-and-safety-checks-with-nvidia-nemo-guardrails/}{NVIDIA Blog})}\label{\detokenize{guardrails:id8}}\end{figure}
+
+\end{itemize}
+\begin{quote}
+
+\sphinxAtStartPar
+The official repository for NeMo Guardrails is available on GitHub:
+\sphinxurl{NVIDIA/NeMo-Guardrails}.
+\begin{description}
+\sphinxlineitem{Other resources:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://www.pinecone.io/learn/nemo-guardrails-intro/}{NeMo Guardrails: The Missing
+Manual}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://developer.nvidia.com/blog/content-moderation-and-safety-checks-with-nvidia-nemo-guardrails/}{Content Moderation and Safety Checks with NVIDIA NeMo
+Guardrails}
+
+\end{itemize}
+
+\end{description}
+\end{quote}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Llama Guard}: Llama Guard \sphinxcite{reference:hakaninan}, developed by Meta, is a state\sphinxhyphen{}of\sphinxhyphen{}the\sphinxhyphen{}art
+content moderation model designed to safeguard human\sphinxhyphen{}AI interactions
+by classifying inputs and outputs as “safe” or “unsafe.” Built on the
+Llama family of LLMs, it incorporates a safety risk taxonomy to
+identify and mitigate harmful content, such as violence, hate speech,
+sexual material, and criminal planning. Llama Guard excels in both
+prompt and response classification, ensuring responsible use of
+generative AI systems. The model is highly adaptable, allowing users
+to customize safety guidelines and taxonomies for specific regulatory
+or organizational needs. It supports multilingual moderation across up
+to eight languages and features advanced capabilities like few\sphinxhyphen{}shot
+and zero\sphinxhyphen{}shot learning for new policies. With fine\sphinxhyphen{}tuned versions such
+as Llama Guard 3, optimized for real\sphinxhyphen{}time applications, it provides
+robust safeguards against malicious prompts and misuse, including
+cybersecurity threats like code interpreter abuse. This makes Llama
+Guard a powerful tool for ensuring trust and safety in AI\sphinxhyphen{}driven
+environments.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{llama_guard}.png}
+\caption{Llama Guard (source: \sphinxhref{https://arxiv.org/abs/2312.06674}{Llama Guard})}\label{\detokenize{guardrails:id9}}\end{figure}
+
+\sphinxAtStartPar
+Paper: \sphinxhref{https://arxiv.org/abs/2312.06674}{Llama Guard: LLM\sphinxhyphen{}based Input\sphinxhyphen{}Output Safeguard for
+Human\sphinxhyphen{}AI Conversations}
+
+\sphinxAtStartPar
+The implementation of Llama Guard is available on GitHub (\sphinxhref{https://github.com/balavenkatesh3322/guardrails-demo}{LLM Security
+Project with Llama Guard}).
+\begin{description}
+\sphinxlineitem{Other resources:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://www.pondhouse-data.com/blog/llm-safety-with-llamaguard-2}{LLM Safety with Llama Guard
+2}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://www.llama.com/trust-and-safety/}{Making safety tools accessible to
+everyone}
+
+\end{itemize}
+
+\end{description}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Guardrails AI}: Guardrails AI is a robust framework designed to
+enhance the reliability and safety of LLM applications. Built on the
+RAIL (Reliable AI Markup Language) specification, it provides a
+structured, language\sphinxhyphen{}agnostic approach to enforce rules and corrective
+actions for LLM outputs. This framework allows developers to define
+the expected structure, data types, and quality benchmarks for
+AI\sphinxhyphen{}generated content, ensuring outputs are consistent with predefined
+criteria. Guardrails AI operates by wrapping around LLM API calls,
+validating inputs and outputs against established specifications. It
+can detect and mitigate risks such as bias, hallucinations, and
+security vulnerabilities in real\sphinxhyphen{}time, making it an essential tool for
+maintaining ethical and compliant AI operations. The system supports a
+wide range of applications across industries like finance and
+e\sphinxhyphen{}commerce by ensuring that AI outputs adhere to specific guidelines
+and regulations. With features like semantic validation, error
+correction, and sensitive data leak prevention, Guardrails AI empowers
+organizations to deploy AI solutions that are both effective and
+secure.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{LMQL (Language Model Query Language)}: LMQL \sphinxcite{reference:lucabeurerkellner} is
+an innovative programming language designed to enhance interactions with
+LLMs by combining declarative SQL\sphinxhyphen{}like constructs with Python scripting.
+As a superset of Python, LMQL allows developers to embed constraints
+directly into queries, enabling precise control over the structure,
+format, and content of model outputs. Its syntax is intuitive yet
+powerful, supporting variables, conditions, and logical operators for
+complex AI workflows. Key features of LMQL include constraint\sphinxhyphen{}guided
+decoding, which uses token masking and eager validation to ensure
+outputs meet predefined criteria, such as length limits or specific
+content requirements. By optimizing interactions with LLMs, LMQL
+reduces inference costs and minimizes the number of API calls, making
+it particularly valuable for enterprises using pay\sphinxhyphen{}to\sphinxhyphen{}use APIs. It
+supports advanced decoding techniques like beam search and integrates
+seamlessly into workflows such as multi\sphinxhyphen{}turn dialogue systems and
+retrieval\sphinxhyphen{}augmented generation (RAG) pipelines. With its focus on
+efficiency, flexibility, and safety, LMQL provides a robust framework
+for building reliable and cost\sphinxhyphen{}effective AI applications.
+
+\sphinxAtStartPar
+Paper: \sphinxhref{https://arxiv.org/abs/2212.06094}{Prompting Is Programming: A Query Language for Large Language
+Models}
+\begin{description}
+\sphinxlineitem{Other resources:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://wandb.ai/mostafaibrahim17/ml-articles/reports/Unveiling-LMQL-The-Future-of-Interacting-with-Language-Models--Vmlldzo2NzgzMjcy}{Unveiling LMQL: The Future of Interacting with Language
+Models}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://towardsdatascience.com/lmql-sql-for-language-models-d7486d88c541}{LMQL — SQL for Language
+Models}
+
+\end{itemize}
+
+\end{description}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{TruLens}: TruLens is an open\sphinxhyphen{}source toolkit for developing,
+evaluating, and monitoring LLMs. It features TruLens\sphinxhyphen{}Eval, which
+assesses model outputs against predefined standards, logs inputs and
+outputs, and utilizes auxiliary models for comprehensive evaluations.
+By integrating retrieval\sphinxhyphen{}augmented generation (RAG), TruLens enhances
+the accuracy and relevance of outputs. The toolkit visualizes
+performance metrics to facilitate iterative refinement of LLM
+applications, focusing on continuous improvement rather than merely
+constraining inputs and outputs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Guidance AI}: Guidance AI is a programming framework that
+integrates text generation, prompts, and logic control within a Python
+environment. It employs a Handlebars\sphinxhyphen{}like templating syntax, allowing
+users to constrain outputs with regex and context\sphinxhyphen{}free grammars
+(CFGs). This approach provides more effective control over LLMs
+compared to traditional prompting methods. Guidance AI supports
+various LLMs and utilizes role labels to map tokens or API calls
+accurately. Additionally, it features hidden blocks for intermediate
+calculations, enabling more complex workflows.
+
+\item {} 
+\sphinxAtStartPar
+Python Packages: Several Python packages can be used to implement
+guardrails around LLMs. These include:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{LangChain}: Helps streamline the development of LLM applications
+and can be used to implement guardrails.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{AI Fairness 360 (AIF360)}: A toolkit from IBM for detecting and
+mitigating bias in AI models.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Adversarial Robustness Toolbox (ART)}: Enhances model security
+and robustness against adversarial attacks.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Fairlearn}: Reduces unwanted biases in machine learning models.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Detoxify}: Identifies and mitigates toxic content in text data.
+
+\end{itemize}
+
+\end{itemize}
+
+\sphinxstepscope
+
+
 \chapter{Main Reference}
 \label{\detokenize{reference:main-reference}}\label{\detokenize{reference:reference}}\label{\detokenize{reference::doc}}
 \begin{sphinxthebibliography}{attentio}
@@ -12387,6 +13201,18 @@ Jay Shah etc.
 \sphinxAtStartPar
 Andrei Ivanov etc.
 \sphinxhref{https://arxiv.org/abs/2007.00072}{Data Movement Is All You Need: A Case Study on Optimizing Transformers}, 2024.
+\bibitem[YiDong]{reference:yidong}
+\sphinxAtStartPar
+Yi Dong etc.
+\sphinxhref{https://arxiv.org/abs/2406.02622}{Safeguarding Large Language Models: A Survey}, 2024.
+\bibitem[HakanInan]{reference:hakaninan}
+\sphinxAtStartPar
+Hakan Inan etc.
+\sphinxhref{https://arxiv.org/abs/2312.06674}{Llama Guard: LLM\sphinxhyphen{}based Input\sphinxhyphen{}Output Safeguard for Human\sphinxhyphen{}AI Conversations}, 2023.
+\bibitem[LucaBeurerKellner]{reference:lucabeurerkellner}
+\sphinxAtStartPar
+Luca Beurer\sphinxhyphen{}Kellner etc.
+\sphinxhref{https://arxiv.org/abs/2212.06094}{Prompting Is Programming: A Query Language for Large Language Models}, 2022.
 \end{sphinxthebibliography}
 
 
