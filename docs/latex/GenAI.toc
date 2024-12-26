@@ -26,195 +26,195 @@
 \contentsline {subsection}{\numberline {3.1.1}One Hot Encoder}{28}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}CountVectorizer}{29}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}TF\sphinxhyphen {}IDF}{30}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Static word embeddings}{34}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Static word embeddings}{35}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Word2Vec}{35}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}GloVE}{37}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Fast Text}{38}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Contextual word embeddings}{39}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}BERT}{39}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}gte\sphinxhyphen {}large\sphinxhyphen {}en\sphinxhyphen {}v1.5}{40}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}bge\sphinxhyphen {}base\sphinxhyphen {}en\sphinxhyphen {}v1.5}{41}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Prompt Engineering}{45}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Prompt}{45}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Prompt Engineering}{45}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}What’s Prompt Engineering}{45}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Key Elements of a Prompt}{45}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{46}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Role Assignment}{46}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Contextual Setup}{47}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Explicit Instructions}{48}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Chain of Thought (CoT) Prompting}{49}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Few\sphinxhyphen {}Shot Prompting}{50}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Iterative Prompting}{51}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}Instructional Chaining}{53}{subsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.3.8}Use Constraints}{54}{subsection.4.3.8}%
-\contentsline {subsection}{\numberline {4.3.9}Creative Prompting}{54}{subsection.4.3.9}%
-\contentsline {subsection}{\numberline {4.3.10}Feedback Incorporation}{54}{subsection.4.3.10}%
-\contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{54}{subsection.4.3.11}%
-\contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{55}{subsection.4.3.12}%
-\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{57}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{58}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Naive RAG}{58}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Indexing}{58}{subsection.5.2.1}%
-\contentsline {subsubsection}{Naive Chunking}{59}{subsubsection*.4}%
-\contentsline {subsubsection}{Late Chunking}{62}{subsubsection*.5}%
-\contentsline {subsubsection}{Types of Indexing}{66}{subsubsection*.6}%
-\contentsline {subsubsection}{Vector Database}{66}{subsubsection*.7}%
-\contentsline {subsection}{\numberline {5.2.2}Retrieval}{69}{subsection.5.2.2}%
-\contentsline {subsubsection}{Common retrieval methods}{69}{subsubsection*.8}%
-\contentsline {subsubsection}{Reciprocal Rank Fusion}{71}{subsubsection*.9}%
-\contentsline {subsection}{\numberline {5.2.3}Generation}{73}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Self\sphinxhyphen {}RAG}{75}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Load Models}{76}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Create Index}{78}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Retrieval}{78}{subsection.5.3.3}%
-\contentsline {subsubsection}{Define Retriever}{78}{subsubsection*.10}%
-\contentsline {subsubsection}{Retrieval Grader}{79}{subsubsection*.11}%
-\contentsline {subsection}{\numberline {5.3.4}Generate}{81}{subsection.5.3.4}%
-\contentsline {subsubsection}{Generation}{81}{subsubsection*.12}%
-\contentsline {subsubsection}{Answer Grader}{83}{subsubsection*.13}%
-\contentsline {subsection}{\numberline {5.3.5}Utilities}{84}{subsection.5.3.5}%
-\contentsline {subsubsection}{Hallucination Grader}{84}{subsubsection*.14}%
-\contentsline {subsubsection}{Question Re\sphinxhyphen {}writer}{84}{subsubsection*.15}%
-\contentsline {subsection}{\numberline {5.3.6}Graph}{85}{subsection.5.3.6}%
-\contentsline {subsubsection}{Create the Graph}{85}{subsubsection*.16}%
-\contentsline {subsubsection}{Compile Graph}{89}{subsubsection*.17}%
-\contentsline {subsubsection}{Graph visualization}{90}{subsubsection*.18}%
-\contentsline {subsection}{\numberline {5.3.7}Test}{90}{subsection.5.3.7}%
-\contentsline {subsubsection}{Relevant retrieval}{90}{subsubsection*.19}%
-\contentsline {subsubsection}{Irrelevant retrieval}{92}{subsubsection*.20}%
-\contentsline {section}{\numberline {5.4}Corrective RAG}{95}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Load Models}{95}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Create Index}{96}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Retrieval}{97}{subsection.5.4.3}%
-\contentsline {subsubsection}{Define Retriever}{97}{subsubsection*.21}%
-\contentsline {subsubsection}{Retrieval Grader}{97}{subsubsection*.22}%
-\contentsline {subsection}{\numberline {5.4.4}Generate}{98}{subsection.5.4.4}%
-\contentsline {subsubsection}{Generation}{98}{subsubsection*.23}%
-\contentsline {subsubsection}{Answer Grader}{100}{subsubsection*.24}%
-\contentsline {subsection}{\numberline {5.4.5}Utilities}{100}{subsection.5.4.5}%
-\contentsline {subsubsection}{Router}{100}{subsubsection*.25}%
-\contentsline {subsubsection}{Hallucination Grader}{102}{subsubsection*.26}%
-\contentsline {subsubsection}{Question Re\sphinxhyphen {}writer}{102}{subsubsection*.27}%
-\contentsline {subsubsection}{Web Search Tool (Google)}{103}{subsubsection*.28}%
-\contentsline {subsection}{\numberline {5.4.6}Graph}{103}{subsection.5.4.6}%
-\contentsline {subsubsection}{Create the Graph}{103}{subsubsection*.29}%
-\contentsline {subsubsection}{Compile Graph}{107}{subsubsection*.30}%
-\contentsline {subsubsection}{Graph visualization}{107}{subsubsection*.31}%
-\contentsline {subsection}{\numberline {5.4.7}Test}{108}{subsection.5.4.7}%
-\contentsline {subsubsection}{Relevant retrieval}{108}{subsubsection*.32}%
-\contentsline {subsubsection}{Irrelevant retrieval}{111}{subsubsection*.33}%
-\contentsline {section}{\numberline {5.5}Adaptive RAG}{112}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Load Models}{112}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Create Index}{114}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}Retrieval}{114}{subsection.5.5.3}%
-\contentsline {subsubsection}{Define Retriever}{114}{subsubsection*.34}%
-\contentsline {subsubsection}{Retrieval Grader}{115}{subsubsection*.35}%
-\contentsline {subsection}{\numberline {5.5.4}Generate}{116}{subsection.5.5.4}%
-\contentsline {subsubsection}{Generation}{116}{subsubsection*.36}%
-\contentsline {subsubsection}{Answer Grader}{118}{subsubsection*.37}%
-\contentsline {subsection}{\numberline {5.5.5}Utilities}{118}{subsection.5.5.5}%
-\contentsline {subsubsection}{Router}{118}{subsubsection*.38}%
-\contentsline {subsubsection}{Hallucination Grader}{121}{subsubsection*.39}%
-\contentsline {subsubsection}{Question Re\sphinxhyphen {}writer}{122}{subsubsection*.40}%
-\contentsline {subsubsection}{Google Web Search}{122}{subsubsection*.41}%
-\contentsline {subsection}{\numberline {5.5.6}Graph}{123}{subsection.5.5.6}%
-\contentsline {subsubsection}{Create the Graph}{123}{subsubsection*.42}%
-\contentsline {subsubsection}{Compile Graph}{128}{subsubsection*.43}%
-\contentsline {subsubsection}{Graph visualization}{129}{subsubsection*.44}%
-\contentsline {subsection}{\numberline {5.5.7}Test}{129}{subsection.5.5.7}%
-\contentsline {subsubsection}{Relevant retrieval}{129}{subsubsection*.45}%
-\contentsline {subsubsection}{Irrelevant retrieval}{131}{subsubsection*.46}%
-\contentsline {section}{\numberline {5.6}Agentic RAG}{134}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Load Models}{134}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Create Index}{136}{subsection.5.6.2}%
-\contentsline {subsection}{\numberline {5.6.3}Retrieval Tool}{137}{subsection.5.6.3}%
-\contentsline {subsubsection}{Define Tool}{137}{subsubsection*.47}%
-\contentsline {subsubsection}{Retrieval Grader}{138}{subsubsection*.48}%
-\contentsline {subsection}{\numberline {5.6.4}Generate}{139}{subsection.5.6.4}%
-\contentsline {subsection}{\numberline {5.6.5}Agent State}{140}{subsection.5.6.5}%
-\contentsline {subsection}{\numberline {5.6.6}Graph}{140}{subsection.5.6.6}%
-\contentsline {subsubsection}{Create the Graph}{140}{subsubsection*.49}%
-\contentsline {subsubsection}{Compile Graph}{144}{subsubsection*.50}%
-\contentsline {subsubsection}{Graph visualization}{145}{subsubsection*.51}%
-\contentsline {subsection}{\numberline {5.6.7}Test}{145}{subsection.5.6.7}%
-\contentsline {section}{\numberline {5.7}Advanced Topics}{148}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Multi\sphinxhyphen {}agent Systems}{148}{subsection.5.7.1}%
-\contentsline {subsubsection}{Multi\sphinxhyphen {}agent architectures}{148}{subsubsection*.52}%
-\contentsline {subsubsection}{Command: Edgeless graphs}{148}{subsubsection*.53}%
-\contentsline {chapter}{\numberline {6}Fine Tuning}{153}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{154}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}LoRA (Low\sphinxhyphen {}Rank Adaptation)}{154}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}QLoRA (Quantized Low\sphinxhyphen {}Rank Adaptation)}{154}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{155}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{155}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}RLHF (Reinforcement Learning from Human Feedback)}{156}{subsection.6.1.5}%
-\contentsline {subsection}{\numberline {6.1.6}Summary Table}{157}{subsection.6.1.6}%
-\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{157}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{157}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{158}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{158}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{158}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{158}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{159}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{160}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{162}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{164}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{165}{subsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{165}{subsection.6.3.6}%
-\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{166}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{166}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{167}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{168}{subsection.6.4.3}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{171}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Transformer Architecture}{172}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Attention Is All You Need}{172}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Encoder\sphinxhyphen {}Decoder}{173}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Positional Encoding}{174}{subsection.7.1.3}%
-\contentsline {subsubsection}{Sinusoidal Positional Encodings}{174}{subsubsection*.54}%
-\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{175}{subsubsection*.55}%
-\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{176}{subsubsection*.56}%
-\contentsline {subsubsection}{Summary}{176}{subsubsection*.57}%
-\contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{176}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{177}{subsection.7.1.5}%
-\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{177}{subsubsection*.58}%
-\contentsline {subsubsection}{Cross Attention}{183}{subsubsection*.59}%
-\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{184}{subsection.7.1.6}%
-\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{185}{subsection.7.1.7}%
-\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{185}{subsection.7.1.8}%
-\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{186}{subsection.7.1.9}%
-\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{187}{subsection.7.1.10}%
-\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{187}{subsection.7.1.11}%
-\contentsline {subsection}{\numberline {7.1.12}Decoding}{188}{subsection.7.1.12}%
-\contentsline {subsubsection}{Greedy Decoding}{188}{subsubsection*.60}%
-\contentsline {subsubsection}{Beam Search}{188}{subsubsection*.61}%
-\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{189}{subsubsection*.62}%
-\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{189}{subsubsection*.63}%
-\contentsline {subsubsection}{Temperature Scaling}{190}{subsubsection*.64}%
-\contentsline {subsubsection}{Summary}{191}{subsubsection*.65}%
-\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{191}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}KV Cache}{191}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{193}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{194}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{195}{subsection.7.2.4}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{199}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{200}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{200}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{201}{section.8.3}%
-\contentsline {section}{\numberline {8.4}GEval with DeepEval}{201}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{201}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{201}{subsection.8.4.2}%
-\contentsline {chapter}{\numberline {9}LLM Guardrails}{213}{chapter.9}%
-\contentsline {section}{\numberline {9.1}LLM Risks}{213}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{214}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{217}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{220}{section.9.4}%
-\contentsline {section}{\numberline {9.5}NeMo Guardrails}{225}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{225}{subsection.9.5.1}%
-\contentsline {subsection}{\numberline {9.5.2}Rails}{232}{subsection.9.5.2}%
-\contentsline {subsection}{\numberline {9.5.3}Test}{232}{subsection.9.5.3}%
-\contentsline {subsubsection}{Safe Usecase}{232}{subsubsection*.66}%
-\contentsline {subsubsection}{Unsafe Usecases}{234}{subsubsection*.67}%
-\contentsline {section}{\numberline {9.6}Llama Guard3}{237}{section.9.6}%
-\contentsline {chapter}{\numberline {10}Main Reference}{239}{chapter.10}%
-\contentsline {chapter}{Bibliography}{241}{chapter*.68}%
+\contentsline {subsection}{\numberline {3.2.2}GloVE}{38}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Fast Text}{39}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Contextual word embeddings}{40}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}BERT}{40}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}gte\sphinxhyphen {}large\sphinxhyphen {}en\sphinxhyphen {}v1.5}{42}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}bge\sphinxhyphen {}base\sphinxhyphen {}en\sphinxhyphen {}v1.5}{43}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Prompt Engineering}{47}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Prompt}{47}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Prompt Engineering}{47}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}What’s Prompt Engineering}{47}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Key Elements of a Prompt}{47}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Advanced Prompt Engineering}{48}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Role Assignment}{48}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Contextual Setup}{49}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Explicit Instructions}{50}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Chain of Thought (CoT) Prompting}{51}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Few\sphinxhyphen {}Shot Prompting}{52}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Iterative Prompting}{53}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}Instructional Chaining}{55}{subsection.4.3.7}%
+\contentsline {subsection}{\numberline {4.3.8}Use Constraints}{56}{subsection.4.3.8}%
+\contentsline {subsection}{\numberline {4.3.9}Creative Prompting}{56}{subsection.4.3.9}%
+\contentsline {subsection}{\numberline {4.3.10}Feedback Incorporation}{56}{subsection.4.3.10}%
+\contentsline {subsection}{\numberline {4.3.11}Scenario\sphinxhyphen {}Based Prompts}{56}{subsection.4.3.11}%
+\contentsline {subsection}{\numberline {4.3.12}Multimodal Prompting}{57}{subsection.4.3.12}%
+\contentsline {chapter}{\numberline {5}Retrieval\sphinxhyphen {}Augmented Generation}{59}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Overview}{60}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Naive RAG}{60}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Indexing}{60}{subsection.5.2.1}%
+\contentsline {subsubsection}{Naive Chunking}{61}{subsubsection*.4}%
+\contentsline {subsubsection}{Late Chunking}{64}{subsubsection*.5}%
+\contentsline {subsubsection}{Types of Indexing}{68}{subsubsection*.6}%
+\contentsline {subsubsection}{Vector Database}{68}{subsubsection*.7}%
+\contentsline {subsection}{\numberline {5.2.2}Retrieval}{71}{subsection.5.2.2}%
+\contentsline {subsubsection}{Common retrieval methods}{71}{subsubsection*.8}%
+\contentsline {subsubsection}{Reciprocal Rank Fusion}{73}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {5.2.3}Generation}{75}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Self\sphinxhyphen {}RAG}{77}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Load Models}{78}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Create Index}{80}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Retrieval}{80}{subsection.5.3.3}%
+\contentsline {subsubsection}{Define Retriever}{80}{subsubsection*.10}%
+\contentsline {subsubsection}{Retrieval Grader}{81}{subsubsection*.11}%
+\contentsline {subsection}{\numberline {5.3.4}Generate}{83}{subsection.5.3.4}%
+\contentsline {subsubsection}{Generation}{83}{subsubsection*.12}%
+\contentsline {subsubsection}{Answer Grader}{85}{subsubsection*.13}%
+\contentsline {subsection}{\numberline {5.3.5}Utilities}{86}{subsection.5.3.5}%
+\contentsline {subsubsection}{Hallucination Grader}{86}{subsubsection*.14}%
+\contentsline {subsubsection}{Question Re\sphinxhyphen {}writer}{86}{subsubsection*.15}%
+\contentsline {subsection}{\numberline {5.3.6}Graph}{87}{subsection.5.3.6}%
+\contentsline {subsubsection}{Create the Graph}{87}{subsubsection*.16}%
+\contentsline {subsubsection}{Compile Graph}{91}{subsubsection*.17}%
+\contentsline {subsubsection}{Graph visualization}{92}{subsubsection*.18}%
+\contentsline {subsection}{\numberline {5.3.7}Test}{92}{subsection.5.3.7}%
+\contentsline {subsubsection}{Relevant retrieval}{92}{subsubsection*.19}%
+\contentsline {subsubsection}{Irrelevant retrieval}{94}{subsubsection*.20}%
+\contentsline {section}{\numberline {5.4}Corrective RAG}{97}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Load Models}{97}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Create Index}{98}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Retrieval}{99}{subsection.5.4.3}%
+\contentsline {subsubsection}{Define Retriever}{99}{subsubsection*.21}%
+\contentsline {subsubsection}{Retrieval Grader}{99}{subsubsection*.22}%
+\contentsline {subsection}{\numberline {5.4.4}Generate}{100}{subsection.5.4.4}%
+\contentsline {subsubsection}{Generation}{100}{subsubsection*.23}%
+\contentsline {subsubsection}{Answer Grader}{102}{subsubsection*.24}%
+\contentsline {subsection}{\numberline {5.4.5}Utilities}{102}{subsection.5.4.5}%
+\contentsline {subsubsection}{Router}{102}{subsubsection*.25}%
+\contentsline {subsubsection}{Hallucination Grader}{104}{subsubsection*.26}%
+\contentsline {subsubsection}{Question Re\sphinxhyphen {}writer}{104}{subsubsection*.27}%
+\contentsline {subsubsection}{Web Search Tool (Google)}{105}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {5.4.6}Graph}{105}{subsection.5.4.6}%
+\contentsline {subsubsection}{Create the Graph}{105}{subsubsection*.29}%
+\contentsline {subsubsection}{Compile Graph}{109}{subsubsection*.30}%
+\contentsline {subsubsection}{Graph visualization}{109}{subsubsection*.31}%
+\contentsline {subsection}{\numberline {5.4.7}Test}{110}{subsection.5.4.7}%
+\contentsline {subsubsection}{Relevant retrieval}{110}{subsubsection*.32}%
+\contentsline {subsubsection}{Irrelevant retrieval}{113}{subsubsection*.33}%
+\contentsline {section}{\numberline {5.5}Adaptive RAG}{114}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Load Models}{114}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Create Index}{116}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Retrieval}{116}{subsection.5.5.3}%
+\contentsline {subsubsection}{Define Retriever}{116}{subsubsection*.34}%
+\contentsline {subsubsection}{Retrieval Grader}{117}{subsubsection*.35}%
+\contentsline {subsection}{\numberline {5.5.4}Generate}{118}{subsection.5.5.4}%
+\contentsline {subsubsection}{Generation}{118}{subsubsection*.36}%
+\contentsline {subsubsection}{Answer Grader}{120}{subsubsection*.37}%
+\contentsline {subsection}{\numberline {5.5.5}Utilities}{120}{subsection.5.5.5}%
+\contentsline {subsubsection}{Router}{120}{subsubsection*.38}%
+\contentsline {subsubsection}{Hallucination Grader}{123}{subsubsection*.39}%
+\contentsline {subsubsection}{Question Re\sphinxhyphen {}writer}{124}{subsubsection*.40}%
+\contentsline {subsubsection}{Google Web Search}{124}{subsubsection*.41}%
+\contentsline {subsection}{\numberline {5.5.6}Graph}{125}{subsection.5.5.6}%
+\contentsline {subsubsection}{Create the Graph}{125}{subsubsection*.42}%
+\contentsline {subsubsection}{Compile Graph}{130}{subsubsection*.43}%
+\contentsline {subsubsection}{Graph visualization}{131}{subsubsection*.44}%
+\contentsline {subsection}{\numberline {5.5.7}Test}{131}{subsection.5.5.7}%
+\contentsline {subsubsection}{Relevant retrieval}{131}{subsubsection*.45}%
+\contentsline {subsubsection}{Irrelevant retrieval}{133}{subsubsection*.46}%
+\contentsline {section}{\numberline {5.6}Agentic RAG}{136}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Load Models}{136}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Create Index}{138}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}Retrieval Tool}{139}{subsection.5.6.3}%
+\contentsline {subsubsection}{Define Tool}{139}{subsubsection*.47}%
+\contentsline {subsubsection}{Retrieval Grader}{140}{subsubsection*.48}%
+\contentsline {subsection}{\numberline {5.6.4}Generate}{141}{subsection.5.6.4}%
+\contentsline {subsection}{\numberline {5.6.5}Agent State}{142}{subsection.5.6.5}%
+\contentsline {subsection}{\numberline {5.6.6}Graph}{142}{subsection.5.6.6}%
+\contentsline {subsubsection}{Create the Graph}{142}{subsubsection*.49}%
+\contentsline {subsubsection}{Compile Graph}{146}{subsubsection*.50}%
+\contentsline {subsubsection}{Graph visualization}{147}{subsubsection*.51}%
+\contentsline {subsection}{\numberline {5.6.7}Test}{147}{subsection.5.6.7}%
+\contentsline {section}{\numberline {5.7}Advanced Topics}{150}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Multi\sphinxhyphen {}agent Systems}{150}{subsection.5.7.1}%
+\contentsline {subsubsection}{Multi\sphinxhyphen {}agent architectures}{150}{subsubsection*.52}%
+\contentsline {subsubsection}{Command: Edgeless graphs}{150}{subsubsection*.53}%
+\contentsline {chapter}{\numberline {6}Fine Tuning}{155}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{156}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}LoRA (Low\sphinxhyphen {}Rank Adaptation)}{156}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}QLoRA (Quantized Low\sphinxhyphen {}Rank Adaptation)}{156}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{157}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{157}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}RLHF (Reinforcement Learning from Human Feedback)}{158}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}Summary Table}{159}{subsection.6.1.6}%
+\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{159}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{159}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{160}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{160}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{160}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{160}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{161}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{162}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{164}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{166}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{167}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{167}{subsection.6.3.6}%
+\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{168}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{168}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{169}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{170}{subsection.6.4.3}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{173}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Transformer Architecture}{174}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Attention Is All You Need}{174}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Encoder\sphinxhyphen {}Decoder}{175}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Positional Encoding}{176}{subsection.7.1.3}%
+\contentsline {subsubsection}{Sinusoidal Positional Encodings}{176}{subsubsection*.54}%
+\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{177}{subsubsection*.55}%
+\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{178}{subsubsection*.56}%
+\contentsline {subsubsection}{Summary}{178}{subsubsection*.57}%
+\contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{178}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{179}{subsection.7.1.5}%
+\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{179}{subsubsection*.58}%
+\contentsline {subsubsection}{Cross Attention}{185}{subsubsection*.59}%
+\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{186}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{187}{subsection.7.1.7}%
+\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{187}{subsection.7.1.8}%
+\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{188}{subsection.7.1.9}%
+\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{189}{subsection.7.1.10}%
+\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{189}{subsection.7.1.11}%
+\contentsline {subsection}{\numberline {7.1.12}Decoding}{190}{subsection.7.1.12}%
+\contentsline {subsubsection}{Greedy Decoding}{190}{subsubsection*.60}%
+\contentsline {subsubsection}{Beam Search}{190}{subsubsection*.61}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{191}{subsubsection*.62}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{191}{subsubsection*.63}%
+\contentsline {subsubsection}{Temperature Scaling}{192}{subsubsection*.64}%
+\contentsline {subsubsection}{Summary}{193}{subsubsection*.65}%
+\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{193}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}KV Cache}{193}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{195}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{196}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{197}{subsection.7.2.4}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{201}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{202}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{202}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{203}{section.8.3}%
+\contentsline {section}{\numberline {8.4}GEval with DeepEval}{203}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{203}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{203}{subsection.8.4.2}%
+\contentsline {chapter}{\numberline {9}LLM Guardrails}{215}{chapter.9}%
+\contentsline {section}{\numberline {9.1}LLM Risks}{215}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{216}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{219}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{222}{section.9.4}%
+\contentsline {section}{\numberline {9.5}NeMo Guardrails}{227}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{227}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Rails}{234}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Test}{234}{subsection.9.5.3}%
+\contentsline {subsubsection}{Safe Usecase}{234}{subsubsection*.66}%
+\contentsline {subsubsection}{Unsafe Usecases}{236}{subsubsection*.67}%
+\contentsline {section}{\numberline {9.6}Llama Guard3}{239}{section.9.6}%
+\contentsline {chapter}{\numberline {10}Main Reference}{241}{chapter.10}%
+\contentsline {chapter}{Bibliography}{243}{chapter*.68}%

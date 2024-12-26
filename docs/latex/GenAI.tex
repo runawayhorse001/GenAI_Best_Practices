@@ -1784,7 +1784,7 @@ Word Embedding: \sphinxhref{https://colab.research.google.com/drive/1IZR9vRHAl-j
 \capstart
 
 \noindent\sphinxincludegraphics{{embedding_diagram}.png}
-\caption{Embedding Diagram}\label{\detokenize{embedding:id2}}\label{\detokenize{embedding:fig-embedding}}\end{figure}
+\caption{Embedding Diagram}\label{\detokenize{embedding:id3}}\label{\detokenize{embedding:fig-embedding}}\end{figure}
 
 
 \section{Traditional word embeddings}
@@ -1903,6 +1903,11 @@ Limitations:
 \PYG{p}{[}\PYG{l+m+mf}{0.} \PYG{l+m+mf}{1.} \PYG{l+m+mf}{0.}\PYG{p}{]}\PYG{p}{]}
 \end{sphinxVerbatim}
 
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The detailed PySpark implementation can be found at \sphinxhref{https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html\#onehotencoder}{OneHotEncoder\_PySpark}.
+\end{sphinxadmonition}
+
 
 \subsection{CountVectorizer}
 \label{\detokenize{embedding:countvectorizer}}
@@ -1940,6 +1945,11 @@ Limitations:
 \PYG{p}{[}\PYG{l+m+mi}{1} \PYG{l+m+mi}{0} \PYG{l+m+mi}{0} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}
 \end{sphinxVerbatim}
 
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The detailed PySpark implementation can be found at \sphinxhref{https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html\#countvectorizer}{Countvectorizer\_PySpark}.
+\end{sphinxadmonition}
+
 \sphinxAtStartPar
 To overcome these limitations, advanced techniques like \sphinxstylestrong{TF\sphinxhyphen{}IDF}, \sphinxstylestrong{word embeddings}
 (e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.
@@ -1954,6 +1964,11 @@ collection (or corpus) of documents. It builds upon the \sphinxstylestrong{Bag o
 by not only considering the frequency of a word in a document but also taking
 into account how common or rare the word is across the corpus. The pyspark implementation
 can be found at \sphinxcite{reference:pyspark}.
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The detailed PySpark implementation can be found at \sphinxhref{https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html\#tf-idf}{TFIDF\_PySpark}.
+\end{sphinxadmonition}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -2260,16 +2275,42 @@ usually pre\sphinxhyphen{}trained on large text corpora using algorithms like Wo
 
 
 \subsection{Word2Vec}
-\label{\detokenize{embedding:word2vec}}\begin{itemize}
+\label{\detokenize{embedding:word2vec}}
+\sphinxAtStartPar
+more details can be found at \sphinxstylestrong{Chapter 8 Data Manipulation: Features} in  \sphinxcite{reference:pyspark}.
+\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 The Context Window
+\begin{quote}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{cont_win}.png}
+\caption{Context Window}\label{\detokenize{embedding:id4}}\label{\detokenize{embedding:fig-cont-win}}\end{figure}
+\end{quote}
 
 \item {} 
 \sphinxAtStartPar
 CBOW and Skip\sphinxhyphen{}Gram Model
+\begin{quote}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{w2v_3}.png}
+\caption{CBOW and Skip\sphinxhyphen{}Gram Model}\label{\detokenize{embedding:id5}}\label{\detokenize{embedding:fig-cbow-sgm}}\end{figure}
+\end{quote}
 
 \end{itemize}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The detailed PySpark implementation can be found at \sphinxhref{https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html\#word2vec}{Word2Vec\_PySpark}.
+\end{sphinxadmonition}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{gensim}
@@ -2488,6 +2529,13 @@ changes depending on its context in a sentence or document. These embeddings cap
 the meaning of a word as influenced by its surrounding words, addressing the limitations
 of static embeddings by incorporating contextual nuances.
 
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{models_databricks}.jpg}
+\caption{LLMs and Embedding Models in Databricks}\label{\detokenize{embedding:id6}}\label{\detokenize{embedding:fig-embedding-databricks}}\end{figure}
+
 
 \subsection{BERT}
 \label{\detokenize{embedding:bert}}
@@ -2646,7 +2694,7 @@ at: \sphinxurl{https://huggingface.co/BAAI/bge-base-en-v1.5} .
 \capstart
 
 \noindent\sphinxincludegraphics{{embedding2d}.png}
-\caption{t\sphinxhyphen{}SNE embeddings 2D}\label{\detokenize{embedding:id3}}\label{\detokenize{embedding:fig-embedding2d}}\end{figure}
+\caption{t\sphinxhyphen{}SNE embeddings 2D}\label{\detokenize{embedding:id7}}\label{\detokenize{embedding:fig-embedding2d}}\end{figure}
 
 \sphinxstepscope
 

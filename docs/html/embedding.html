@@ -117,10 +117,10 @@ continuous vector space where similar words are located closer together.</p>
 <li><p>Word Embedding: <a class="reference external" href="https://colab.research.google.com/drive/1IZR9vRHAl-jHsHOkt2evsgJJ1_hCICa?usp=drive_link"><img alt="Word Embedding" src="_images/colab-badge.png" /></a></p></li>
 </ul>
 </div>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id3">
 <span id="fig-embedding"></span><img alt="_images/embedding_diagram.png" src="_images/embedding_diagram.png" />
 <figcaption>
-<p><span class="caption-text">Embedding Diagram</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text">Embedding Diagram</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="traditional-word-embeddings">
@@ -199,6 +199,10 @@ of words, ignoring grammar, order, and context but keeping their frequency.</p>
 <span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]]</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The detailed PySpark implementation can be found at <a class="reference external" href="https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#onehotencoder">OneHotEncoder_PySpark</a>.</p>
+</div>
 </section>
 <section id="countvectorizer">
 <h3><span class="section-number">3.1.2. </span>CountVectorizer<a class="headerlink" href="#countvectorizer" title="Link to this heading"></a></h3>
@@ -234,6 +238,10 @@ of words, ignoring grammar, order, and context but keeping their frequency.</p>
 <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]]</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The detailed PySpark implementation can be found at <a class="reference external" href="https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#countvectorizer">Countvectorizer_PySpark</a>.</p>
+</div>
 <p>To overcome these limitations, advanced techniques like <strong>TF-IDF</strong>, <strong>word embeddings</strong>
 (e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.</p>
 </section>
@@ -245,6 +253,10 @@ collection (or corpus) of documents. It builds upon the <strong>Bag of Words (Bo
 by not only considering the frequency of a word in a document but also taking
 into account how common or rare the word is across the corpus. The pyspark implementation
 can be found at <a class="reference internal" href="reference.html#pyspark" id="id1"><span>[PySpark]</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The detailed PySpark implementation can be found at <a class="reference external" href="https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#tf-idf">TFIDF_PySpark</a>.</p>
+</div>
 <ul>
 <li><p>Components of TF-ID</p></li>
 <li><p><strong>t</strong>: the term in corpus.</p></li>
@@ -467,10 +479,33 @@ large corpora and remain unchanged during usage, making them “static.” These
 usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe, or FastText.</p>
 <section id="word2vec">
 <h3><span class="section-number">3.2.1. </span>Word2Vec<a class="headerlink" href="#word2vec" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>The Context Window</p></li>
-<li><p>CBOW and Skip-Gram Model</p></li>
+<p>more details can be found at <strong>Chapter 8 Data Manipulation: Features</strong> in  <a class="reference internal" href="reference.html#pyspark" id="id2"><span>[PySpark]</span></a>.</p>
+<ul>
+<li><p>The Context Window</p>
+<blockquote>
+<div><figure class="align-center" id="id4">
+<span id="fig-cont-win"></span><img alt="_images/cont_win.png" src="_images/cont_win.png" />
+<figcaption>
+<p><span class="caption-text">Context Window</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>CBOW and Skip-Gram Model</p>
+<blockquote>
+<div><figure class="align-center" id="id5">
+<span id="fig-cbow-sgm"></span><img alt="_images/w2v_3.png" src="_images/w2v_3.png" />
+<figcaption>
+<p><span class="caption-text">CBOW and Skip-Gram Model</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The detailed PySpark implementation can be found at <a class="reference external" href="https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#word2vec">Word2Vec_PySpark</a>.</p>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim</span>
 <span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
 <span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
@@ -679,6 +714,12 @@ usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe,
 changes depending on its context in a sentence or document. These embeddings capture
 the meaning of a word as influenced by its surrounding words, addressing the limitations
 of static embeddings by incorporating contextual nuances.</p>
+<figure class="align-center" id="id6">
+<span id="fig-embedding-databricks"></span><img alt="_images/models_databricks.jpg" src="_images/models_databricks.jpg" />
+<figcaption>
+<p><span class="caption-text">LLMs and Embedding Models in Databricks</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <section id="bert">
 <h3><span class="section-number">3.3.1. </span>BERT<a class="headerlink" href="#bert" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertModel</span>
@@ -819,10 +860,10 @@ at: <a class="reference external" href="https://huggingface.co/BAAI/bge-base-en-
       <span class="p">[</span> <span class="mf">0.0740</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0185</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0369</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">0.0083</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0026</span><span class="p">,</span>  <span class="mf">0.0016</span><span class="p">]])</span>
 </pre></div>
 </div>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id7">
 <span id="fig-embedding2d"></span><img alt="_images/embedding2d.png" src="_images/embedding2d.png" />
 <figcaption>
-<p><span class="caption-text">t-SNE embeddings 2D</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">t-SNE embeddings 2D</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -841,7 +882,7 @@ at: <a class="reference external" href="https://huggingface.co/BAAI/bge-base-en-
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Dec 25, 2024.
+      <span class="lastupdated">Last updated on Dec 26, 2024.
       </span></p>
   </div>
 

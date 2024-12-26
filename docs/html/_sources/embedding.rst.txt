@@ -115,6 +115,13 @@ One Hot Encoder
    [0. 0. 1.]
    [0. 1. 0.]]   
 
+.. note:: 
+
+   The detailed PySpark implementation can be found at `OneHotEncoder_PySpark`_. 
+
+.. _OneHotEncoder_PySpark: https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#onehotencoder      
+
+
 CountVectorizer
 ---------------
 
@@ -152,8 +159,16 @@ CountVectorizer
    [1 0 1 1 0 1]
    [1 0 0 1 1 1]]  
 
+.. note:: 
+
+   The detailed PySpark implementation can be found at `Countvectorizer_PySpark`_. 
+
+.. _Countvectorizer_PySpark: https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#countvectorizer      
+
+
 To overcome these limitations, advanced techniques like **TF-IDF**, **word embeddings** 
 (e.g., Word2Vec, GloVe), and contextual embeddings (e.g., BERT) are often used.
+
 
 TF-IDF
 ------
@@ -164,6 +179,14 @@ collection (or corpus) of documents. It builds upon the **Bag of Words (BoW)** m
 by not only considering the frequency of a word in a document but also taking 
 into account how common or rare the word is across the corpus. The pyspark implementation
 can be found at [PySpark]_.
+
+.. note:: 
+
+   The detailed PySpark implementation can be found at `TFIDF_PySpark`_. 
+
+.. _TFIDF_PySpark: https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#tf-idf      
+
+
 
 - Components of TF-ID
 
@@ -390,11 +413,32 @@ usually pre-trained on large text corpora using algorithms like Word2Vec, GloVe,
 Word2Vec
 --------
 
+more details can be found at **Chapter 8 Data Manipulation: Features** in  [PySpark]_. 
 
 - The Context Window
 
+   .. _fig_cont_win:
+   .. figure:: images/cont_win.png
+      :align: center
+
+      Context Window  
+   
 
 - CBOW and Skip-Gram Model 
+
+
+   .. _fig_cbow_sgm:
+   .. figure:: images/w2v_3.png
+      :align: center
+
+      CBOW and Skip-Gram Model  
+
+ 
+.. note:: 
+
+   The detailed PySpark implementation can be found at `Word2Vec_PySpark`_. 
+
+.. _Word2Vec_PySpark: https://runawayhorse001.github.io/LearningApacheSpark/manipulation.html#word2vec      
 
 .. code-block:: python      
 
@@ -614,6 +658,12 @@ changes depending on its context in a sentence or document. These embeddings cap
 the meaning of a word as influenced by its surrounding words, addressing the limitations 
 of static embeddings by incorporating contextual nuances.
 
+.. _fig_embedding_databricks:
+.. figure:: images/models_databricks.jpg
+    :align: center
+
+    LLMs and Embedding Models in Databricks 
+
 BERT
 ----
 
@@ -648,6 +698,8 @@ BERT
             [-0.0187, -0.7320, -0.3420,  ...,  0.4028,  0.1425, -0.2014],
             [ 0.5493, -0.1029, -0.1571,  ...,  0.3503, -0.7601, -0.1398]]],
        grad_fn=<NativeLayerNormBackward0>)
+
+
 
 gte-large-en-v1.5
 -----------------
