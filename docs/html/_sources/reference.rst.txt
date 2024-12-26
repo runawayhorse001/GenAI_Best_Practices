@@ -56,3 +56,15 @@ Main Reference
 .. [Andrei] Andrei Ivanov etc.
                  `Data Movement Is All You Need: A Case Study on Optimizing Transformers
                  <https://arxiv.org/abs/2007.00072>`_, 2024.
+
+.. [YiDong] Yi Dong etc.
+                 `Safeguarding Large Language Models: A Survey
+                 <https://arxiv.org/abs/2406.02622>`_, 2024.
+
+.. [HakanInan] Hakan Inan etc.
+                 `Llama Guard: LLM-based Input-Output Safeguard for Human-AI Conversations
+                 <https://arxiv.org/abs/2312.06674>`_, 2023.
+
+.. [LucaBeurerKellner] Luca Beurer-Kellner etc.
+                 `Prompting Is Programming: A Query Language for Large Language Models
+                 <https://arxiv.org/abs/2212.06094>`_, 2022.

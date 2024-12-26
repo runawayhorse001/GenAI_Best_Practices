@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. LLM Guardrails &mdash; GenAI: Best Practices 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+    <link rel="shortcut icon" href="_static/icon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Main Reference" href="reference.html" />
+    <link rel="prev" title="8. LLM Evaluation Metrics" href="evaluation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GenAI: Best Practices
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prelim.html">2. Preliminary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedding.html">3. Word and Sentence Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. LLM Guardrails</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#llm-risks">9.1. LLM Risks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-jailbreak-techniques">9.2. Overview of Jailbreak Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-guardrails">9.3. Introduction to Guardrails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-guardrails-tools">9.4. Overview of Guardrails Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">10. Main Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GenAI: Best Practices</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>LLM Guardrails</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="llm-guardrails">
+<span id="guardrails"></span><h1><span class="section-number">9. </span>LLM Guardrails<a class="headerlink" href="#llm-guardrails" title="Link to this heading"></a></h1>
+<p>Large Language Models (LLMs), such as OpenAI’s GPT-4 and Google’s PaLM,
+have revolutionized the field of artificial intelligence. By leveraging
+vast amounts of text data, these models demonstrate remarkable
+capabilities, ranging from generating creative content to automating
+complex workflows. Their versatility makes them integral to industries
+such as healthcare, finance, education, and customer service. However,
+as their applications expand, so do the risks associated with their
+misuse or malfunction.</p>
+<p>The power of LLMs comes with inherent challenges. Uncontrolled or poorly
+guided deployments can lead to harmful outcomes such as spreading
+misinformation, generating biased content, or exposing sensitive data.
+The dynamic nature of LLMs’ outputs also makes them unpredictable,
+especially when faced with ambiguous or adversarial inputs. Without
+appropriate safeguards, these challenges can undermine trust in AI
+systems and hinder their adoption in sensitive domains.</p>
+<p>Guardrails serve as a critical mechanism for ensuring that LLMs operate
+within acceptable boundaries. These measures can take the form of
+technical interventions, governance policies, or ethical frameworks
+designed to mitigate risks. By incorporating robust guardrails,
+organizations can harness the full potential of LLMs while ensuring
+their safe, reliable, and equitable use.</p>
+<section id="llm-risks">
+<h2><span class="section-number">9.1. </span>LLM Risks<a class="headerlink" href="#llm-risks" title="Link to this heading"></a></h2>
+<p>LLMs offer immense potential across diverse applications but also
+present significant risks that must be carefully managed to ensure
+responsible and effective use. These risks span various dimensions,
+including ethical considerations, technical reliability, and societal
+impacts. Addressing these challenges requires the implementation of
+robust guardrails to mitigate harm and enhance trustworthiness. Below
+are some key areas where risks emerge and the measures needed to address
+them:</p>
+<ul>
+<li><p><strong>Safety and Ethical Use:</strong></p>
+<p>LLMs can generate harmful, offensive, or unethical outputs due to
+unintended biases in training data or adversarial inputs. These issues
+can result in reputational damage and harm to users. Safety is
+paramount in any AI system. Ethical use further emphasizes
+transparency, accountability, and the avoidance of practices that
+could exploit or deceive users. Guardrails should include content
+moderation systems, bias detection mechanisms, and strict adherence to
+ethical guidelines to prevent harmful, offensive, or manipulative
+outputs.</p>
+</li>
+<li><p><strong>Accuracy and Reliability:</strong></p>
+<p>LLMs are prone to “hallucinations”—instances where they generate
+factually incorrect or nonsensical information. This undermines their
+reliability, particularly in high-stakes applications like healthcare
+or finance. Guardrails should incorporate fact-checking mechanisms,
+retrieval-augmented generation, and continuous fine-tuning against
+validated datasets to minimize errors and hallucinations. Ensuring
+accuracy is particularly crucial in applications like medical
+diagnosis or legal advisory.</p>
+</li>
+<li><p><strong>Robustness to Adversarial Inputs:</strong></p>
+<p>LLMs are vulnerable to adversarial attacks, where maliciously crafted
+inputs manipulate the model into producing undesired or harmful
+outputs. Guardrails should implement input validation, adversarial
+training, and monitoring mechanisms to detect and mitigate malicious
+prompt manipulations and maintain its intended behavior even under
+stress.</p>
+</li>
+<li><p><strong>Mitigating Bias and Promoting Fairness:</strong></p>
+<p>Training data often contain historical or societal biases, leading to
+outputs that reinforce stereotypes or marginalize certain groups.
+Addressing bias is complex and requires careful intervention.
+Guardrails aim to identify and mitigate biases during model
+development and deployment, fostering fair and inclusive outputs.</p>
+</li>
+<li><p><strong>Privacy and Security Risks:</strong></p>
+<p>LLMs might inadvertently leak sensitive data present in their training
+datasets or fail to adhere to privacy regulations. This poses risks
+for user trust and legal compliance. Guardrails should implement
+robust data anonymization, encryption, differential privacy
+techniques, access controls, and post-processing filters to safeguard
+sensitive information and ensure compliance with regulations.</p>
+</li>
+</ul>
+</section>
+<section id="overview-of-jailbreak-techniques">
+<h2><span class="section-number">9.2. </span>Overview of Jailbreak Techniques<a class="headerlink" href="#overview-of-jailbreak-techniques" title="Link to this heading"></a></h2>
+<p>There are various methods to bypass the guardrails implemented in LLMs.
+These methods, referred to as “jailbreaks,” exploit vulnerabilities in
+LLMs to generate undesirable or harmful content. The jailbreaks are
+categorized based on the attacker’s access to the model (white-box,
+black-box, and gray-box) and the techniques they use <a class="reference internal" href="reference.html#yidong" id="id1"><span>[YiDong]</span></a>. The categorization of
+these techniques based on access and methodology provides a structured
+way to understand the vulnerabilities and potential risks associated
+with these powerful AI models.</p>
+<p><strong>1. White-box Jailbreaks</strong> assume the attacker has full access to the
+internal details of the model.</p>
+<ul class="simple">
+<li><p><strong>Learning-based Methods</strong> use optimization methods to generate
+adversarial inputs.</p>
+<ul>
+<li><p><strong>Greedy Coordinate Gradient (GCG)</strong> searches for a specific sequence
+of characters (an adversarial suffix) that, when added to a query,
+causes the LLM to generate harmful content. For example, adding a
+specific string of characters to a prompt might lead the model to
+output toxic language.</p></li>
+<li><p><strong>Projected Gradient Descent (PGD)</strong> improves upon GCG, using
+continuous relaxation to control the error introduced by
+manipulating the input prompt, allowing it to fool LLMs with similar
+attack performance but faster.</p></li>
+</ul>
+</li>
+<li><p><strong>AutoDAN-Zhu</strong> aims to generate more stealthy jailbreak prompts by
+using a double-loop optimization method built upon GCG. It also shows
+the ability to solve other tasks like prompt leaking.</p></li>
+<li><p><strong>COLD-Attack</strong> automates the search for adversarial attacks under a
+variety of restrictions, such as fluency and stealthiness. It performs
+efficient gradient-based sampling in the logit space and uses a guided
+decoding process to translate the logit sequences back into text.</p></li>
+<li><p><strong>PRP (Prefix-based attack)</strong> uses a two-step prefix-based approach,
+including universal adversarial prefix construction and prefix
+propagation, to elicit harmful content from LLMs with guardrails. For
+example, inserting a universal prefix into the response can trick the
+guardrail into outputting harmful content.</p></li>
+<li><p><strong>AutoDAN-Liu</strong> uses a hierarchical genetic algorithm to generate
+stealthy jailbreak prompts that can circumvent the ethical guidelines
+of LLMs.</p></li>
+<li><p><strong>LLM Generation Manipulation</strong> directly manipulates the generation
+process of open-source LLMs to generate specific tokens, thereby
+causing the model to produce undesired responses. For example, it can
+force the model to generate private data.</p></li>
+</ul>
+<p><strong>2. Black-box Jailbreaks</strong> operate under the assumption that the
+attacker lacks knowledge of the LLM’s internal architecture.</p>
+<ul class="simple">
+<li><p><strong>Delicately Designed Jailbreaks</strong> involve crafting specific prompts
+to exploit LLM vulnerabilities.</p>
+<ul>
+<li><p><strong>JailBroken</strong> identifies two main reasons for successful attacks:
+competing training objectives and instruction tuning objectives, and
+uses these failure modes as guiding principles to design new
+attacks. For example, using carefully engineered prompts to elicit
+harmful content .</p></li>
+<li><p><strong>DeepInception</strong> injects an inception mechanism into the LLM to
+“hypnotize” it into acting as a jailbreaker, using nested scenes to
+bypass safety constraints. For example, personifying the LLM and
+creating nested scenes to generate harmful content.</p></li>
+<li><p><strong>DAN (Do Anything Now)</strong> exploits the ability of LLMs to perform
+boundless functions by bypassing the customary rules that govern AI
+systems.</p></li>
+<li><p><strong>ICA (In-Context Attack)</strong> constructs malicious contexts to direct
+models to produce harmful outputs, leveraging the in-context
+learning abilities of LLMs.</p></li>
+<li><p><strong>SAP (Semi-Automatic Attack Prompt)</strong> combines manual and automatic
+methods to generate prompts that mislead LLMs into outputting
+harmful content. It uses in-context learning with LLMs to update the
+prompts.</p></li>
+<li><p><strong>DRA (Disguise and Reconstruction Attack)</strong> conceals harmful
+instructions via disguise, prompting the model to uncover and
+reconstruct the original instruction.</p></li>
+</ul>
+</li>
+<li><p><strong>Exploiting Long-tail Distribution</strong> involves converting queries into
+rare or unique data formats.</p>
+<ul>
+<li><p><strong>CipherChat</strong> encodes malicious text using ciphers to bypass safety
+features, and introduces SelfCipher, a hidden cipher embedded within
+LLMs to achieve this goal. For example, using encoded prompts to
+generate unsafe content .</p></li>
+<li><p><strong>MultiLingual</strong> uses non-English languages to expose the
+vulnerabilities of LLMs by using translated prompts to generate
+unsafe content.</p></li>
+<li><p><strong>LRL (Low Resource Languages)</strong> uses less commonly used languages
+to bypass protective measures and elicit harmful responses.</p></li>
+<li><p><strong>CodeChameleon</strong> encrypts queries into a format that is challenging
+for LLMs to detect, then incorporates decryption functions in
+instructions so that LLMs can understand the encrypted content. For
+example, encrypting a prompt and using code to decrypt and execute
+it.</p></li>
+</ul>
+</li>
+<li><p><strong>Optimization-based Approaches</strong> automate the generation of jailbreak
+prompts.</p>
+<ul>
+<li><p><strong>ReNeLLM</strong> automates jailbreak prompt generation by using prompt
+rewriting and scenario nesting.</p></li>
+<li><p><strong>PAIR (Prompt Automatic Iterative Refinement)</strong> uses a language
+model to craft prompt-level attacks by learning from prior prompts
+and responses.</p></li>
+<li><p><strong>GPTFUZZER</strong> uses a fuzzing framework to autonomously generate
+jailbreak prompts, inspired by AFL fuzzing.</p></li>
+<li><p><strong>TAP (Tree of Attacks with Pruning)</strong> uses an LLM to refine
+candidate prompts iteratively using tree-of-thought reasoning.</p></li>
+<li><p><strong>GA (genetic algorithm)</strong> generates a universal adversarial suffix
+by using random subset sampling to minimize the cosine similarity
+between benign input embedding and adversarial input embedding.</p></li>
+<li><p><strong>GUARD (Guideline Upholding through Adaptive Role-play
+Diagnostics)</strong> assigns different roles to user LLMs to generate new
+jailbreaks.</p></li>
+</ul>
+</li>
+<li><p><strong>Unified Framework for Jailbreaking:</strong></p>
+<ul>
+<li><p><strong>EasyJailbreak</strong> evaluates jailbreak attacks on LLMs with
+components like Selector, Mutator, Constraint, and Evaluator.</p></li>
+</ul>
+</li>
+<li><p><strong>Prompt Injection for Desired Responses:</strong></p>
+<ul>
+<li><p><strong>PROMPTINJECT</strong>: Generates iterative adversarial prompts through
+masks, focusing on goal hijacking and prompt leaking. For example,
+using a “rogue string” to divert the model.</p></li>
+<li><p><strong>IPI (Indirect Prompt Injection):</strong> Uses retrieved prompts as
+“arbitrary code” to compromise LLM-integrated applications.</p></li>
+<li><p><strong>HOUYI</strong>: Uses a preconstructed prompt, an injection prompt, and a
+malicious question to achieve the adversary’s goals, focusing on
+prompt abuse and prompt leak.</p></li>
+<li><p><strong>Mosaic Prompts</strong>: Exploits the ability to query an LLM multiple
+times to generate a mosaic of permissible content to circumvent
+semantic censorship.</p></li>
+<li><p><strong>CIA (Compositional Instruction Attack):</strong> Capitalizes on LLMs’
+failure to detect harmful intents when instructions are composed of
+multiple elements.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Gray-box Jailbreaks</strong> have partial access to the model, such as
+some training data.</p>
+<ul class="simple">
+<li><p><strong>Fine-tuning Attacks</strong> fine-tune the model to remove safeguards.</p>
+<ul>
+<li><p>Fine-tuning can compromise the safety of LLMs by removing RLHF
+protections. For example, fine-tuning with a few examples can lead
+to harmful responses.</p></li>
+<li><p>Fine-tuning can amplify the privacy risks by increasing the
+likelihood that models will divulge PII upon prompting.</p></li>
+<li><p>Additional training can compromise the effectiveness of established
+guardrails and make the model susceptible to harmful instructions.</p></li>
+</ul>
+</li>
+<li><p><strong>Retrieval-Augmented Generation (RAG) Attacks</strong> exploit
+vulnerabilities in the RAG framework</p>
+<ul>
+<li><p>Poisoning external datasets by injecting malicious instructions can
+invalidate safety protection. For example, injecting biased system
+messages can bias the responses.</p></li>
+<li><p>Injecting toxic text into the knowledge database can compromise
+LLMs.</p></li>
+</ul>
+</li>
+<li><p><strong>Backdoor Attacks</strong> manipulate the model to produce specific outputs
+when triggered.</p>
+<ul>
+<li><p><strong>Auto Poison</strong>: Incorporates training examples that reference the
+desired target content into the system, triggering similar behaviors
+in downstream models.</p></li>
+<li><p><strong>LoFT (Local Proxy Fine-tuning)</strong>: Fine-tunes local proxy models to
+develop attacks that are more likely to transfer successfully to
+larger LLMs.</p></li>
+<li><p><strong>BadGPT:</strong> Injects a backdoor trigger into the reward model during
+fine-tuning.</p></li>
+<li><p><strong>ICLAttack:</strong> Fine-tunes models by targeting in-context learning
+for backdoor attacks.</p></li>
+<li><p><strong>ActivationAttack:</strong> Uses activation steering to target
+truthfulness, toxicity, bias, and harmfulness.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="introduction-to-guardrails">
+<h2><span class="section-number">9.3. </span>Introduction to Guardrails<a class="headerlink" href="#introduction-to-guardrails" title="Link to this heading"></a></h2>
+<p>To mitigate unreliable LLM behaviors, there are four major methods:
+better retrieval by RAG, better prompting by prompt engineering, better
+models by model finetuning, and better guardrails by AI validation.
+Among these methods, <strong>better guardrails by AI validation</strong> play a
+critical role. A guardrail is an additional layer of check or validation
+around the input and output of an LLM model. The validity could be
+defined as no hallucination, no sensitive information, robustness to
+jailbreaking, keeping response on topic, etc.</p>
+<figure class="align-center" id="id4">
+<img alt="llm_guardrails_overview" src="_images/llm_guardrails_overview.png" />
+<figcaption>
+<p><span class="caption-text">LLM Guardrails Overview.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The implementation of guardrails can be classified into the following
+categories or a combination of those based on <strong>methodology</strong>:</p>
+<ul class="simple">
+<li><p><strong>Rule-based filtering and moderation</strong>: Relies on predefined rules
+and patterns to screen both input and output content in AI systems,
+blocking or altering restricted material such as offensive language or
+sensitive data.</p></li>
+<li><p><strong>Classifier-based evaluation and filtering</strong>: Utilizes trained
+classifiers to identify and exclude unwanted content from the
+responses generated by LLMs.</p></li>
+<li><p><strong>Neural-symbolic systems</strong>: Combines neural networks with symbolic
+reasoning to enforce controlled outputs through explicit rules, often
+applied in content moderation and policy adherence.</p></li>
+<li><p><strong>Constraint-based programming paradigms</strong>: Employs specialized
+languages or frameworks to define rules and structures that regulate
+model outputs, typically used for maintaining consistent formats and
+ensuring policy compliance.</p></li>
+<li><p><strong>Feedback and evaluation toolkits</strong>: Provides a quality assurance
+framework for LLMs using auxiliary models and metrics to assess output
+quality and safety, along with feedback mechanisms for ongoing
+improvement.</p></li>
+</ul>
+<figure class="align-center" id="id5">
+<img alt="guardrails_categories.png" src="_images/guardrails_categories.png" />
+<figcaption>
+<p><span class="caption-text">Guardrails Categories (Source: <a class="reference external" href="https://gradientflow.com/llm-guardrails/">Gradient Flow</a>).</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Guardrails for LLMs come in various types, each addressing specific
+needs to ensure safe, compliant, and relevant AI interactions:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Compliance Guardrails</strong>: These mechanisms ensure that an LLM</dt><dd><p>adheres to applicable laws and regulations, particularly in sensitive
+fields like finance or healthcare. By preventing outputs such as
+unauthorized recommendations or the disclosure of protected
+information, they protect organizations from legal liabilities and
+promote adherence to industry standards.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Ethical Guardrails</strong>: Designed to uphold fairness and social</dt><dd><p>responsibility, ethical guardrails prevent the generation of biased,
+harmful, or inappropriate language. For instance, in hiring
+applications, they help avoid outputs that reinforce stereotypes,
+fostering inclusivity and respect in AI-driven environments.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Contextual Guardrails</strong>: These are tailored to align the model’s</dt><dd><p>outputs with specific domains or scenarios. For example, a technical
+support chatbot benefits from guardrails that ensure responses are
+accurate and relevant to the company’s products, avoiding general or
+unrelated information.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Security Guardrails</strong>: Focused on safeguarding sensitive data and</dt><dd><p>preventing vulnerabilities, these measures protect against risks such
+as unauthorized access, data breaches, or phishing attempts. They are
+vital in maintaining trust and security in environments handling
+confidential interactions.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Adaptive Guardrails</strong>: Built to evolve with shifting regulations</dt><dd><p>and standards, adaptive guardrails ensure long-term compliance and
+effectiveness. They are particularly useful in dynamic industries
+where requirements, such as privacy laws or safety protocols,
+frequently change.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<figure class="align-center" id="id6">
+<img alt="type_of_guardrails" src="_images/type_of_guardrails.png" />
+<figcaption>
+<p><span class="caption-text">Type of Guardrails.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In practice, guardrails need to be thoughtfully customized to align with
+an organization’s specific objectives, comply with industry-specific
+regulations, and address the distinct challenges posed by each LLM
+application. Below are critical approaches of implementing guardrails
+for LLM applications.</p>
+<figure class="align-center" id="id7">
+<img alt="summary_implement_techniques_for_guardrails.jpg" src="_images/summary_implement_techniques_for_guardrails.jpg" />
+<figcaption>
+<p><span class="caption-text">A Summary of Techniques for Implementing Guardrails (Source: <a class="reference external" href="https://attri.ai/blog/a-comprehensive-guide-everything-you-need-to-know-about-llms-guardrails">attri.ai</a>).</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="overview-of-guardrails-tools">
+<h2><span class="section-number">9.4. </span>Overview of Guardrails Tools<a class="headerlink" href="#overview-of-guardrails-tools" title="Link to this heading"></a></h2>
+<p>Guardrails are essential mechanisms designed to ensure that LLMs operate
+within desired parameters, enhancing their reliability, safety, and
+alignment with user expectations. Below are the guardrail frameworks
+supporting software packages designed to enhance the safety and
+reliability of LLMs (source: <em>Safeguarding Large Language Models: A
+Survey</em>). These tools generally function as intermediaries between users
+and LLMs, aiming to ensure that the LLMs adhere to ethical and
+operational guidelines.</p>
+<ul>
+<li><p><strong>Nvidia NeMo</strong>: NVIDIA NeMo is a comprehensive, cloud-native
+framework designed to simplify the development, customization, and
+deployment of generative AI models. Built for researchers and
+enterprises, it supports a wide range of applications, including LLMs,
+multimodal systems, automatic speech recognition (ASR), and
+text-to-speech (TTS). At its core, NeMo offers modular components
+called “Neural Modules,” which serve as building blocks for creating
+scalable and domain-specific AI solutions. The platform integrates
+state-of-the-art tools for data curation, model training, fine-tuning,
+and inference. It leverages NVIDIA’s advanced GPU technologies, such
+as Megatron-LM and TensorRT-LLM, to deliver high performance and
+efficiency in both training and deployment. NeMo also supports
+cutting-edge techniques like retrieval-augmented generation (RAG) for
+grounded responses and provides safety features through its Guardrails
+toolkit. With pre-trained models, customizable pipelines, and seamless
+scalability across cloud, data center, and edge environments, NeMo
+empowers developers to create enterprise-grade AI systems tailored to
+specific use cases.</p>
+<figure class="align-center" id="id8">
+<img alt="rag_nemo_and_thirdparty" src="_images/rag_nemo_and_thirdparty.png" />
+<figcaption>
+<p><span class="caption-text">Architectural workflow of a RAG chatbot safeguarded by NeMo
+Guardrails and integrated with third-party applications (source: <a class="reference external" href="https://developer.nvidia.com/blog/content-moderation-and-safety-checks-with-nvidia-nemo-guardrails/">NVIDIA Blog</a>)</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+<blockquote>
+<div><p>The official repository for NeMo Guardrails is available on GitHub:
+<a class="reference external" href="NVIDIA/NeMo-Guardrails">NVIDIA/NeMo-Guardrails</a>.</p>
+<dl class="simple">
+<dt>Other resources:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.pinecone.io/learn/nemo-guardrails-intro/">NeMo Guardrails: The Missing
+Manual</a></p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/blog/content-moderation-and-safety-checks-with-nvidia-nemo-guardrails/">Content Moderation and Safety Checks with NVIDIA NeMo
+Guardrails</a></p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<ul>
+<li><p><strong>Llama Guard</strong>: Llama Guard <a class="reference internal" href="reference.html#hakaninan" id="id2"><span>[HakanInan]</span></a>, developed by Meta, is a state-of-the-art
+content moderation model designed to safeguard human-AI interactions
+by classifying inputs and outputs as “safe” or “unsafe.” Built on the
+Llama family of LLMs, it incorporates a safety risk taxonomy to
+identify and mitigate harmful content, such as violence, hate speech,
+sexual material, and criminal planning. Llama Guard excels in both
+prompt and response classification, ensuring responsible use of
+generative AI systems. The model is highly adaptable, allowing users
+to customize safety guidelines and taxonomies for specific regulatory
+or organizational needs. It supports multilingual moderation across up
+to eight languages and features advanced capabilities like few-shot
+and zero-shot learning for new policies. With fine-tuned versions such
+as Llama Guard 3, optimized for real-time applications, it provides
+robust safeguards against malicious prompts and misuse, including
+cybersecurity threats like code interpreter abuse. This makes Llama
+Guard a powerful tool for ensuring trust and safety in AI-driven
+environments.</p>
+<figure class="align-center" id="id9">
+<img alt="llama_guard" src="_images/llama_guard.png" />
+<figcaption>
+<p><span class="caption-text">Llama Guard (source: <a class="reference external" href="https://arxiv.org/abs/2312.06674">Llama Guard</a>)</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Paper: <a class="reference external" href="https://arxiv.org/abs/2312.06674">Llama Guard: LLM-based Input-Output Safeguard for
+Human-AI Conversations</a></p>
+<p>The implementation of Llama Guard is available on GitHub (<a class="reference external" href="https://github.com/balavenkatesh3322/guardrails-demo">LLM Security
+Project with Llama Guard</a>).</p>
+<dl class="simple">
+<dt>Other resources:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.pondhouse-data.com/blog/llm-safety-with-llamaguard-2">LLM Safety with Llama Guard
+2</a></p></li>
+<li><p><a class="reference external" href="https://www.llama.com/trust-and-safety/">Making safety tools accessible to
+everyone</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Guardrails AI</strong>: Guardrails AI is a robust framework designed to
+enhance the reliability and safety of LLM applications. Built on the
+RAIL (Reliable AI Markup Language) specification, it provides a
+structured, language-agnostic approach to enforce rules and corrective
+actions for LLM outputs. This framework allows developers to define
+the expected structure, data types, and quality benchmarks for
+AI-generated content, ensuring outputs are consistent with predefined
+criteria. Guardrails AI operates by wrapping around LLM API calls,
+validating inputs and outputs against established specifications. It
+can detect and mitigate risks such as bias, hallucinations, and
+security vulnerabilities in real-time, making it an essential tool for
+maintaining ethical and compliant AI operations. The system supports a
+wide range of applications across industries like finance and
+e-commerce by ensuring that AI outputs adhere to specific guidelines
+and regulations. With features like semantic validation, error
+correction, and sensitive data leak prevention, Guardrails AI empowers
+organizations to deploy AI solutions that are both effective and
+secure.</p></li>
+<li><p><strong>LMQL (Language Model Query Language)</strong>: LMQL <a class="reference internal" href="reference.html#lucabeurerkellner" id="id3"><span>[LucaBeurerKellner]</span></a> is
+an innovative programming language designed to enhance interactions with
+LLMs by combining declarative SQL-like constructs with Python scripting.
+As a superset of Python, LMQL allows developers to embed constraints
+directly into queries, enabling precise control over the structure,
+format, and content of model outputs. Its syntax is intuitive yet
+powerful, supporting variables, conditions, and logical operators for
+complex AI workflows. Key features of LMQL include constraint-guided
+decoding, which uses token masking and eager validation to ensure
+outputs meet predefined criteria, such as length limits or specific
+content requirements. By optimizing interactions with LLMs, LMQL
+reduces inference costs and minimizes the number of API calls, making
+it particularly valuable for enterprises using pay-to-use APIs. It
+supports advanced decoding techniques like beam search and integrates
+seamlessly into workflows such as multi-turn dialogue systems and
+retrieval-augmented generation (RAG) pipelines. With its focus on
+efficiency, flexibility, and safety, LMQL provides a robust framework
+for building reliable and cost-effective AI applications.</p>
+<p>Paper: <a class="reference external" href="https://arxiv.org/abs/2212.06094">Prompting Is Programming: A Query Language for Large Language
+Models</a></p>
+<dl class="simple">
+<dt>Other resources:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://wandb.ai/mostafaibrahim17/ml-articles/reports/Unveiling-LMQL-The-Future-of-Interacting-with-Language-Models--Vmlldzo2NzgzMjcy">Unveiling LMQL: The Future of Interacting with Language
+Models</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/lmql-sql-for-language-models-d7486d88c541">LMQL — SQL for Language
+Models</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>TruLens</strong>: TruLens is an open-source toolkit for developing,
+evaluating, and monitoring LLMs. It features TruLens-Eval, which
+assesses model outputs against predefined standards, logs inputs and
+outputs, and utilizes auxiliary models for comprehensive evaluations.
+By integrating retrieval-augmented generation (RAG), TruLens enhances
+the accuracy and relevance of outputs. The toolkit visualizes
+performance metrics to facilitate iterative refinement of LLM
+applications, focusing on continuous improvement rather than merely
+constraining inputs and outputs.</p></li>
+<li><p><strong>Guidance AI</strong>: Guidance AI is a programming framework that
+integrates text generation, prompts, and logic control within a Python
+environment. It employs a Handlebars-like templating syntax, allowing
+users to constrain outputs with regex and context-free grammars
+(CFGs). This approach provides more effective control over LLMs
+compared to traditional prompting methods. Guidance AI supports
+various LLMs and utilizes role labels to map tokens or API calls
+accurately. Additionally, it features hidden blocks for intermediate
+calculations, enabling more complex workflows.</p></li>
+<li><p>Python Packages: Several Python packages can be used to implement
+guardrails around LLMs. These include:</p>
+<ul class="simple">
+<li><p><strong>LangChain</strong>: Helps streamline the development of LLM applications
+and can be used to implement guardrails.</p></li>
+<li><p><strong>AI Fairness 360 (AIF360)</strong>: A toolkit from IBM for detecting and
+mitigating bias in AI models.</p></li>
+<li><p><strong>Adversarial Robustness Toolbox (ART)</strong>: Enhances model security
+and robustness against adversarial attacks.</p></li>
+<li><p><strong>Fairlearn</strong>: Reduces unwanted biases in machine learning models.</p></li>
+<li><p><strong>Detoxify</strong>: Identifies and mitigates toxic content in text data.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="evaluation.html" class="btn btn-neutral float-left" title="8. LLM Evaluation Metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reference.html" class="btn btn-neutral float-right" title="10. Main Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
+      <span class="lastupdated">Last updated on Dec 25, 2024.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
