@@ -27,35 +27,35 @@ Retrieval-Augmented Generation
 
     
     
-    .. |n-rag| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1jTkoER5eYQqBZs8RgOiCmTl8_WDt67go?usp=drive_link  
+.. |n-rag| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1jTkoER5eYQqBZs8RgOiCmTl8_WDt67go?usp=drive_link  
 
-    .. |Naive Chunking| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1r89QGmEDAS-ZJcfgYv6GKRrNDs4s_lir?usp=drive_link 
+.. |Naive Chunking| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1r89QGmEDAS-ZJcfgYv6GKRrNDs4s_lir?usp=drive_link 
 
-    .. |Late Chunking| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1ZqxmK1YuvPcpJap1psscMTih2jnQVINT?usp=drive_link 
+.. |Late Chunking| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1ZqxmK1YuvPcpJap1psscMTih2jnQVINT?usp=drive_link 
 
-    .. |RRF| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1Vg7C5Z3Y7OlilnfQlQqkKyNrcnUR6Xry?usp=drive_link 
+.. |RRF| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1Vg7C5Z3Y7OlilnfQlQqkKyNrcnUR6Xry?usp=drive_link 
 
-    .. |goog_search| image:: images/colab-badge.png 
-          :target: https://colab.research.google.com/drive/17vLeVzcESb-jkY9NdOP1fRaO6I16Yfuz?usp=drive_link 
+.. |goog_search| image:: images/colab-badge.png 
+      :target: https://colab.research.google.com/drive/17vLeVzcESb-jkY9NdOP1fRaO6I16Yfuz?usp=drive_link 
 
-    .. |sql_query| image:: images/colab-badge.png 
-          :target: https://colab.research.google.com/drive/1H_EeFxWxXxX1KD8JupSsSMf1N-zfU8qR?usp=drive_link 
+.. |sql_query| image:: images/colab-badge.png 
+      :target: https://colab.research.google.com/drive/1H_EeFxWxXxX1KD8JupSsSMf1N-zfU8qR?usp=drive_link 
 
-    .. |S-RAG| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1KbC4Wu-JUj6zbVuFkSNvtz3oVzWhEAZG?usp=drive_link 
+.. |S-RAG| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1KbC4Wu-JUj6zbVuFkSNvtz3oVzWhEAZG?usp=drive_link 
 
-    .. |C-RAG| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1Sb7w1cTRZGkFs2LeF3F6gL8WNhjCdWyR?usp=drive_link 
+.. |C-RAG| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1Sb7w1cTRZGkFs2LeF3F6gL8WNhjCdWyR?usp=drive_link 
 
-    .. |A-RAG| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1tzihPk9Ln96RYcwn6WaHHQjlMdFvCviS?usp=drive_link 
+.. |A-RAG| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1tzihPk9Ln96RYcwn6WaHHQjlMdFvCviS?usp=drive_link 
 
-    .. |Agentic-RAG| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq_vL-6OKLW8Hdr4?usp=drive_link 
+.. |Agentic-RAG| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq_vL-6OKLW8Hdr4?usp=drive_link 
 
 
 .. _fig_rag:

@@ -208,6 +208,13 @@
 \contentsline {section}{\numberline {9.1}LLM Risks}{213}{section.9.1}%
 \contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{214}{section.9.2}%
 \contentsline {section}{\numberline {9.3}Introduction to Guardrails}{217}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{222}{section.9.4}%
-\contentsline {chapter}{\numberline {10}Main Reference}{227}{chapter.10}%
-\contentsline {chapter}{Bibliography}{229}{chapter*.66}%
+\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{220}{section.9.4}%
+\contentsline {section}{\numberline {9.5}NeMo Guardrails}{225}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{225}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Rails}{232}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Test}{232}{subsection.9.5.3}%
+\contentsline {subsubsection}{Safe Usecase}{232}{subsubsection*.66}%
+\contentsline {subsubsection}{Unsafe Usecases}{234}{subsubsection*.67}%
+\contentsline {section}{\numberline {9.6}Llama Guard3}{237}{section.9.6}%
+\contentsline {chapter}{\numberline {10}Main Reference}{239}{chapter.10}%
+\contentsline {chapter}{Bibliography}{241}{chapter*.68}%
