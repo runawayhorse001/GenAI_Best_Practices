@@ -216,5 +216,10 @@
 \contentsline {subsubsection}{Safe Usecase}{234}{subsubsection*.66}%
 \contentsline {subsubsection}{Unsafe Usecases}{236}{subsubsection*.67}%
 \contentsline {section}{\numberline {9.6}Llama Guard3}{239}{section.9.6}%
-\contentsline {chapter}{\numberline {10}Main Reference}{241}{chapter.10}%
-\contentsline {chapter}{Bibliography}{243}{chapter*.68}%
+\contentsline {subsection}{\numberline {9.6.1}Load Models}{239}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{239}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Tests}{240}{subsection.9.6.3}%
+\contentsline {subsubsection}{Safe Usecase}{240}{subsubsection*.68}%
+\contentsline {subsubsection}{Unsafe Usecase}{241}{subsubsection*.69}%
+\contentsline {chapter}{\numberline {10}Main Reference}{243}{chapter.10}%
+\contentsline {chapter}{Bibliography}{245}{chapter*.70}%

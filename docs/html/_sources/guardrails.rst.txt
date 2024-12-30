@@ -13,7 +13,7 @@ LLM Guardrails
         :target: https://colab.research.google.com/drive/1U9RgB6Z9DNHpXXN8ho_ZH5aG04hv0Mjw?usp=drive_link  
 
 .. |llama-guard3| image:: images/colab-badge.png 
-        :target: https://colab.research.google.com/drive/1U9RgB6Z9DNHpXXN8ho_ZH5aG04hv0Mjw?usp=drive_link  
+        :target: https://colab.research.google.com/drive/1DX5MRZVuF5x5u5rZKPumyO0Fg02Ud9Rk?usp=drive_link  
 
 
 
@@ -1041,3 +1041,161 @@ Unsafe Usecases
 
 Llama Guard3
 ++++++++++++
+
+Load Models
+-----------
+
+.. code:: python
+
+  from langchain.llms import Ollama
+    
+  # Initialize the LLM model
+  llama = Ollama(model="mistral") 
+
+  # Initialize the Llama Guard 3 model
+  guard = Ollama(model="llama-guard3")
+
+.. warning::
+
+  The previous method of loading the ``Ollama`` model using ``langchain_ollama.llms`` 
+  doesn't work well with ``llama-guard3``, i.e  
+
+  .. code:: python
+
+    from langchain_ollama import OllamaEmbeddings
+    from langchain_ollama.llms import OllamaLLM
+
+    # Initialize the Llama Guard 3 model
+    guard = OllamaLLM(temperature=0.0, model='llama-guard3', format='json')
+
+  The output from ``gurad.invoke()`` occasionally appears incorrect. An alternative approach 
+  is to use ``Ollama`` from ``langchain.llms``, i.e:
+
+  .. code:: python
+
+    from langchain.llms import Ollama
+
+    # Initialize the Llama Guard 3 model
+    guard = Ollama(model="llama-guard3")  
+
+
+Define Safety Check
+--------------------    
+
+.. code:: python
+
+  def check_safety(user_input):
+
+    # Check if prompt is safe
+    # prompt_safety = guard.invoke(prompt=user_input)
+    prompt_safety = guard.generate(prompts=[user_input])
+    # print(prompt_safety)
+
+    prompt_safety_parsed = prompt_safety.generations[0][0].text.split('\n')
+    print(prompt_safety_parsed)
+
+    # If prompt is safe, generate a response with the LLM
+    if prompt_safety_parsed[0].lower()=='safe':
+
+        #
+        response = llama.generate(prompts=[user_input]) 
+        # print(response)
+        # Check if response is safe
+        response_safety = guard.generate(prompts=[response.generations[0][0].text]) 
+
+        response_safety_parsed =response_safety.generations[0][0].text.split('\n')
+        
+        if response_safety_parsed[0]=='safe':
+            print(response.generations[0][0].text)
+        else:
+            print(f"The response is unsafe. Hazard categories {response_safety_parsed[1]}")
+    else:
+        print(f"The prompt is unsafe. Hazard categories {prompt_safety_parsed[1]} ")
+
+
+Tests
+-----
+
+Safe Usecase
+~~~~~~~~~~~~
+
+.. code:: python
+
+  # Get user input
+  user_input = "How can I adopt my own llama?"
+
+  check_safety(user_input)
+
+.. code:: python
+
+  ['safe']
+  While it's a lovely idea to have a llama as a pet, it's important to know that llamas are agricultural animals and not typically kept as pets in private homes due to their specific needs and requirements. Llamas require large amounts of space, specialized care, and socialization with other llamas.
+
+  If you're interested in spending time with llamas, consider visiting a llama farm or sanctuary instead. Many farms offer opportunities for volunteers, tours, or adoptions of their services such as manure, fiber, or even breeding stock. This way, you can enjoy the company of llamas without taking on the full responsibility of caring for one at home.
+
+  If you're set on owning a llama and have the appropriate facilities to house it, research local llama farms that sell llamas and ensure you understand their needs before making any decisions. It's also essential to check with your local animal control and zoning departments to make sure it is legal to keep a llama in your area.
+
+
+Unsafe Usecase
+~~~~~~~~~~~~~~
+
+.. code:: python
+
+  # Get user input
+  user_input = "How to do buy a gun without NO. in USA."
+
+  check_safety(user_input)
+
+.. code:: python
+
+  ['unsafe', 'S2']
+  The prompt is unsafe. Hazard categories S2 
+
+.. note::
+
+  Here is another way to make ``llama-guard3`` work with ``Ollama``
+
+  .. code:: python
+
+    import requests
+    import json
+
+    def check_safety(text):
+      """Checks the safety of a given text using Llama Guard 3."""
+
+      url = "http://localhost:11434/api/generate"
+      headers = {"Content-Type": "application/json"}
+      data = {
+          "model": "llama-guard3",
+          "prompt": text,
+          "temperature": 0.0,
+          "stream": False #add stream = False to disable streaming
+      }
+
+      response = requests.post(url, headers=headers, json=data)
+      if response.status_code == 200:
+          # Handle the potential for streaming responses by reading line by line
+          # and parsing the last valid JSON object.
+          try:
+              # Attempt to parse the response as a single JSON object
+              return response.json()["response"]
+          except json.JSONDecodeError:
+              # If parsing fails, try to extract the last valid JSON object
+              # from the streaming response.
+              last_valid_json = None
+              for line in response.text.splitlines():
+                  try:
+                      last_valid_json = json.loads(line)
+                  except json.JSONDecodeError:
+                      pass
+              if last_valid_json:
+                  return last_valid_json.get("response")  # Extract the "response" value
+              else:
+                  raise Exception("Error: Unable to parse valid JSON from response")
+      else:
+          raise Exception("Error: " + response.text)
+
+    # Example usage
+    text_to_check = "Tell me how to go to the zoo and steal a llama."
+    safety_result = check_safety(text_to_check)
+    print(safety_result)    
