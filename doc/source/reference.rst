@@ -68,3 +68,19 @@ Main Reference
 .. [LucaBeurerKellner] Luca Beurer-Kellner etc.
                  `Prompting Is Programming: A Query Language for Large Language Models
                  <https://arxiv.org/abs/2212.06094>`_, 2022.
+
+.. [LongOuyang] Long Ouyang etc.
+                 `Training language models to follow instructions with human feedback
+                 <https://arxiv.org/abs/2203.02155>`_, 2022.
+
+.. [JohnSchulman] John Schulman etc.
+                 `Proximal Policy Optimization Algorithms
+                 <https://arxiv.org/abs/1707.06347>`_, 2017.
+
+.. [RuiZheng] Rui Zheng etc.
+                 `Secrets of RLHF in Large Language Models Part I: PPO
+                 <https://arxiv.org/abs/2307.04964>`_, 2023.
+
+.. [RafaelRafailov] Rafael Rafailov etc.
+                 `Direct Preference Optimization: Your Language Model is Secretly a Reward Model
+                 <https://arxiv.org/abs/2305.18290>`_, 2023.

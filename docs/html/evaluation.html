@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8. LLM Evaluation Metrics &mdash; GenAI: Best Practices 1.0 documentation</title>
+  <title>9. LLM Evaluation Metrics &mdash; GenAI: Best Practices 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. LLM Guardrails" href="guardrails.html" />
-    <link rel="prev" title="7. Pre-training" href="pretraining.html" /> 
+    <link rel="next" title="10. LLM Guardrails" href="guardrails.html" />
+    <link rel="prev" title="8. Reinforcement Learning from Human Feedback (RLHF)" href="rlhf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,19 +52,20 @@
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">8. LLM Evaluation Metrics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#statistical-scorers-traditional-metrics">8.1. Statistical Scorers (Traditional Metrics)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#model-based-scorers-learned-metrics">8.2. Model-Based Scorers (Learned Metrics)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#human-centric-evaluations-augmenting-metrics">8.3. Human-Centric Evaluations (Augmenting Metrics)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#geval-with-deepeval">8.4. GEval with DeepEval</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#g-eval-algorithm">8.4.1. G-Eval Algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#g-eval-with-deepeval">8.4.2. G-Eval with DeepEval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rlhf.html">8. Reinforcement Learning from Human Feedback (RLHF)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. LLM Evaluation Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statistical-scorers-traditional-metrics">9.1. Statistical Scorers (Traditional Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-based-scorers-learned-metrics">9.2. Model-Based Scorers (Learned Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#human-centric-evaluations-augmenting-metrics">9.3. Human-Centric Evaluations (Augmenting Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geval-with-deepeval">9.4. GEval with DeepEval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#g-eval-algorithm">9.4.1. G-Eval Algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#g-eval-with-deepeval">9.4.2. G-Eval with DeepEval</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guardrails.html">9. LLM Guardrails</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">10. Main Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guardrails.html">10. LLM Guardrails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">11. Main Reference</a></li>
 </ul>
 
         </div>
@@ -81,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">8. </span>LLM Evaluation Metrics</li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>LLM Evaluation Metrics</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -91,7 +92,7 @@
            <div itemprop="articleBody">
              
   <section id="llm-evaluation-metrics">
-<span id="evaluation"></span><h1><span class="section-number">8. </span>LLM Evaluation Metrics<a class="headerlink" href="#llm-evaluation-metrics" title="Link to this heading"></a></h1>
+<span id="evaluation"></span><h1><span class="section-number">9. </span>LLM Evaluation Metrics<a class="headerlink" href="#llm-evaluation-metrics" title="Link to this heading"></a></h1>
 <div class="admonition-colab-notebook-for-this-chapter admonition">
 <p class="admonition-title">Colab Notebook for This Chapter</p>
 <p>GEval with DeepEval: <a class="reference external" href="https://colab.research.google.com/drive/17aARKonCOzBzsfk1ceLESTboEPkKNJi1?usp=drive_link"><img alt="GEval with DeepEval" src="_images/colab-badge.png" /></a></p>
@@ -103,7 +104,7 @@
 </figcaption>
 </figure>
 <section id="statistical-scorers-traditional-metrics">
-<h2><span class="section-number">8.1. </span>Statistical Scorers (Traditional Metrics)<a class="headerlink" href="#statistical-scorers-traditional-metrics" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.1. </span>Statistical Scorers (Traditional Metrics)<a class="headerlink" href="#statistical-scorers-traditional-metrics" title="Link to this heading"></a></h2>
 <p>These metrics evaluate text outputs based on statistical comparisons to references
 or expected outputs.</p>
 <div class="admonition note">
@@ -137,7 +138,7 @@ A variation of BLEU designed for grammatical error correction tasks.</p></li>
 </ul>
 </section>
 <section id="model-based-scorers-learned-metrics">
-<h2><span class="section-number">8.2. </span>Model-Based Scorers (Learned Metrics)<a class="headerlink" href="#model-based-scorers-learned-metrics" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.2. </span>Model-Based Scorers (Learned Metrics)<a class="headerlink" href="#model-based-scorers-learned-metrics" title="Link to this heading"></a></h2>
 <p>These metrics employ models trained to assess the quality of generated text,
 often based on human annotations.</p>
 <ul class="simple">
@@ -160,7 +161,7 @@ Focuses on domain-specific evaluation, checking how well outputs align with doma
 </ul>
 </section>
 <section id="human-centric-evaluations-augmenting-metrics">
-<h2><span class="section-number">8.3. </span>Human-Centric Evaluations (Augmenting Metrics)<a class="headerlink" href="#human-centric-evaluations-augmenting-metrics" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.3. </span>Human-Centric Evaluations (Augmenting Metrics)<a class="headerlink" href="#human-centric-evaluations-augmenting-metrics" title="Link to this heading"></a></h2>
 <p>While not automated, human evaluations are crucial for assessing subjective qualities such as:</p>
 <ul class="simple">
 <li><p><strong>Fluency</strong></p></li>
@@ -172,13 +173,13 @@ Focuses on domain-specific evaluation, checking how well outputs align with doma
 <p>Both statistical and model-based scorers are often used in tandem with human evaluation to ensure a holistic assessment of LLM outputs.</p>
 </section>
 <section id="geval-with-deepeval">
-<span id="sec-geval"></span><h2><span class="section-number">8.4. </span>GEval with DeepEval<a class="headerlink" href="#geval-with-deepeval" title="Link to this heading"></a></h2>
+<span id="sec-geval"></span><h2><span class="section-number">9.4. </span>GEval with DeepEval<a class="headerlink" href="#geval-with-deepeval" title="Link to this heading"></a></h2>
 <p>G-Eval is a recently developed evaluation framework developed from paper <a class="reference internal" href="reference.html#geval" id="id1"><span>[GEval]</span></a> to assess large language models (LLMs) using GPT-based evaluators.
 It leverages the capabilities of advanced LLMs (like GPT-4 or beyond) to rate and critique the outputs of other models, including themselves,
 across various tasks. This approach shifts the evaluation paradigm by relying on the intrinsic understanding and reasoning power of the models,
 rather than traditional metrics.</p>
 <section id="g-eval-algorithm">
-<h3><span class="section-number">8.4.1. </span>G-Eval Algorithm<a class="headerlink" href="#g-eval-algorithm" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.4.1. </span>G-Eval Algorithm<a class="headerlink" href="#g-eval-algorithm" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id4">
 <span id="fig-geval"></span><img alt="_images/geval.png" src="_images/geval.png" />
 <figcaption>
@@ -187,7 +188,7 @@ rather than traditional metrics.</p>
 </figure>
 </section>
 <section id="g-eval-with-deepeval">
-<h3><span class="section-number">8.4.2. </span>G-Eval with DeepEval<a class="headerlink" href="#g-eval-with-deepeval" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.4.2. </span>G-Eval with DeepEval<a class="headerlink" href="#g-eval-with-deepeval" title="Link to this heading"></a></h3>
 <p>In <a class="reference external" href="https://docs.confident-ai.com/docs/metrics-introduction">DeepEval</a>,, a metric serves as a standard for measuring the performance
 of an LLM’s output based on specific criteria of interest. Essentially,
 while the metric functions as the “ruler”, a test case represents the
@@ -639,15 +640,15 @@ and contradicts the expected output., error: None)</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pretraining.html" class="btn btn-neutral float-left" title="7. Pre-training" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="guardrails.html" class="btn btn-neutral float-right" title="9. LLM Guardrails" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rlhf.html" class="btn btn-neutral float-left" title="8. Reinforcement Learning from Human Feedback (RLHF)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="guardrails.html" class="btn btn-neutral float-right" title="10. LLM Guardrails" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Dec 25, 2024.
+      <span class="lastupdated">Last updated on Dec 30, 2024.
       </span></p>
   </div>
 
