@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{December 26, 2024}
+\date{December 30, 2024}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -12396,7 +12396,7 @@ NeMo Guardrails: \sphinxhref{https://colab.research.google.com/drive/1U9RgB6Z9DN
 
 \item {} 
 \sphinxAtStartPar
-Llama Guard3: \sphinxhref{https://colab.research.google.com/drive/1U9RgB6Z9DNHpXXN8ho\_ZH5aG04hv0Mjw?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+Llama Guard3: \sphinxhref{https://colab.research.google.com/drive/1DX5MRZVuF5x5u5rZKPumyO0Fg02Ud9Rk?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
 
 \end{itemize}
 \end{sphinxadmonition}
@@ -12852,7 +12852,7 @@ jailbreaking, keeping response on topic, etc.
 \capstart
 
 \noindent\sphinxincludegraphics{{llm_guardrails_overview}.png}
-\caption{LLM Guardrails Overview.}\label{\detokenize{guardrails:id4}}\end{figure}
+\caption{LLM Guardrails Overview.}\label{\detokenize{guardrails:id5}}\end{figure}
 
 \sphinxAtStartPar
 The implementation of guardrails can be classified into the following
@@ -12898,7 +12898,7 @@ improvement.
 \capstart
 
 \noindent\sphinxincludegraphics{{guardrails_categories}.png}
-\caption{Guardrails Categories (Source: \sphinxhref{https://gradientflow.com/llm-guardrails/}{Gradient Flow}).}\label{\detokenize{guardrails:id5}}\end{figure}
+\caption{Guardrails Categories (Source: \sphinxhref{https://gradientflow.com/llm-guardrails/}{Gradient Flow}).}\label{\detokenize{guardrails:id6}}\end{figure}
 
 \sphinxAtStartPar
 Guardrails for LLMs come in various types, each addressing specific
@@ -12962,7 +12962,7 @@ frequently change.
 \capstart
 
 \noindent\sphinxincludegraphics{{type_of_guardrails}.png}
-\caption{Type of Guardrails.}\label{\detokenize{guardrails:id6}}\end{figure}
+\caption{Type of Guardrails.}\label{\detokenize{guardrails:id7}}\end{figure}
 
 \sphinxAtStartPar
 In practice, guardrails need to be thoughtfully customized to align with
@@ -12976,7 +12976,7 @@ for LLM applications.
 \capstart
 
 \noindent\sphinxincludegraphics{{summary_implement_techniques_for_guardrails}.jpg}
-\caption{A Summary of Techniques for Implementing Guardrails (Source: \sphinxhref{https://attri.ai/blog/a-comprehensive-guide-everything-you-need-to-know-about-llms-guardrails}{attri.ai}).}\label{\detokenize{guardrails:id7}}\end{figure}
+\caption{A Summary of Techniques for Implementing Guardrails (Source: \sphinxhref{https://attri.ai/blog/a-comprehensive-guide-everything-you-need-to-know-about-llms-guardrails}{attri.ai}).}\label{\detokenize{guardrails:id8}}\end{figure}
 
 
 \section{Overview of Guardrails Tools}
@@ -13018,7 +13018,7 @@ specific use cases.
 
 \noindent\sphinxincludegraphics{{rag_nemo_and_thirdparty}.png}
 \caption{Architectural workflow of a RAG chatbot safeguarded by NeMo
-Guardrails and integrated with third\sphinxhyphen{}party applications (source: \sphinxhref{https://developer.nvidia.com/blog/content-moderation-and-safety-checks-with-nvidia-nemo-guardrails/}{NVIDIA Blog})}\label{\detokenize{guardrails:id8}}\end{figure}
+Guardrails and integrated with third\sphinxhyphen{}party applications (source: \sphinxhref{https://developer.nvidia.com/blog/content-moderation-and-safety-checks-with-nvidia-nemo-guardrails/}{NVIDIA Blog})}\label{\detokenize{guardrails:id9}}\end{figure}
 
 \end{itemize}
 \begin{quote}
@@ -13068,7 +13068,7 @@ environments.
 \capstart
 
 \noindent\sphinxincludegraphics{{llama_guard}.png}
-\caption{Llama Guard (source: \sphinxhref{https://arxiv.org/abs/2312.06674}{Llama Guard})}\label{\detokenize{guardrails:id9}}\end{figure}
+\caption{Llama Guard (source: \sphinxhref{https://arxiv.org/abs/2312.06674}{Llama Guard})}\label{\detokenize{guardrails:id10}}\end{figure}
 
 \sphinxAtStartPar
 Paper: \sphinxhref{https://arxiv.org/abs/2312.06674}{Llama Guard: LLM\sphinxhyphen{}based Input\sphinxhyphen{}Output Safeguard for
@@ -13735,6 +13735,164 @@ S4
 
 \section{Llama Guard3}
 \label{\detokenize{guardrails:llama-guard3}}
+
+\subsection{Load Models}
+\label{\detokenize{guardrails:load-models}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{Ollama}
+
+\PYG{c+c1}{\PYGZsh{} Initialize the LLM model}
+\PYG{n}{llama} \PYG{o}{=} \PYG{n}{Ollama}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{mistral}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Initialize the Llama Guard 3 model}
+\PYG{n}{guard} \PYG{o}{=} \PYG{n}{Ollama}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{llama\PYGZhy{}guard3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{warning}{Warning:}
+\sphinxAtStartPar
+The previous method of loading the \sphinxcode{\sphinxupquote{Ollama}} model using \sphinxcode{\sphinxupquote{langchain\_ollama.llms}}
+doesn’t work well with \sphinxcode{\sphinxupquote{llama\sphinxhyphen{}guard3}}, i.e
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{OllamaLLM}
+
+\PYG{c+c1}{\PYGZsh{} Initialize the Llama Guard 3 model}
+\PYG{n}{guard} \PYG{o}{=} \PYG{n}{OllamaLLM}\PYG{p}{(}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{model}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{llama\PYGZhy{}guard3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The output from \sphinxcode{\sphinxupquote{gurad.invoke()}} occasionally appears incorrect. An alternative approach
+is to use \sphinxcode{\sphinxupquote{Ollama}} from \sphinxcode{\sphinxupquote{langchain.llms}}, i.e:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{llms} \PYG{k+kn}{import} \PYG{n}{Ollama}
+
+\PYG{c+c1}{\PYGZsh{} Initialize the Llama Guard 3 model}
+\PYG{n}{guard} \PYG{o}{=} \PYG{n}{Ollama}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{llama\PYGZhy{}guard3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{sphinxadmonition}
+
+
+\subsection{Define Safety Check}
+\label{\detokenize{guardrails:define-safety-check}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{check\PYGZus{}safety}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{)}\PYG{p}{:}
+
+  \PYG{c+c1}{\PYGZsh{} Check if prompt is safe}
+  \PYG{c+c1}{\PYGZsh{} prompt\PYGZus{}safety = guard.invoke(prompt=user\PYGZus{}input)}
+  \PYG{n}{prompt\PYGZus{}safety} \PYG{o}{=} \PYG{n}{guard}\PYG{o}{.}\PYG{n}{generate}\PYG{p}{(}\PYG{n}{prompts}\PYG{o}{=}\PYG{p}{[}\PYG{n}{user\PYGZus{}input}\PYG{p}{]}\PYG{p}{)}
+  \PYG{c+c1}{\PYGZsh{} print(prompt\PYGZus{}safety)}
+
+  \PYG{n}{prompt\PYGZus{}safety\PYGZus{}parsed} \PYG{o}{=} \PYG{n}{prompt\PYGZus{}safety}\PYG{o}{.}\PYG{n}{generations}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+  \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{prompt\PYGZus{}safety\PYGZus{}parsed}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} If prompt is safe, generate a response with the LLM}
+  \PYG{k}{if} \PYG{n}{prompt\PYGZus{}safety\PYGZus{}parsed}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{(}\PYG{p}{)}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{safe}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}
+
+      \PYG{c+c1}{\PYGZsh{}}
+      \PYG{n}{response} \PYG{o}{=} \PYG{n}{llama}\PYG{o}{.}\PYG{n}{generate}\PYG{p}{(}\PYG{n}{prompts}\PYG{o}{=}\PYG{p}{[}\PYG{n}{user\PYGZus{}input}\PYG{p}{]}\PYG{p}{)}
+      \PYG{c+c1}{\PYGZsh{} print(response)}
+      \PYG{c+c1}{\PYGZsh{} Check if response is safe}
+      \PYG{n}{response\PYGZus{}safety} \PYG{o}{=} \PYG{n}{guard}\PYG{o}{.}\PYG{n}{generate}\PYG{p}{(}\PYG{n}{prompts}\PYG{o}{=}\PYG{p}{[}\PYG{n}{response}\PYG{o}{.}\PYG{n}{generations}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{text}\PYG{p}{]}\PYG{p}{)}
+
+      \PYG{n}{response\PYGZus{}safety\PYGZus{}parsed} \PYG{o}{=}\PYG{n}{response\PYGZus{}safety}\PYG{o}{.}\PYG{n}{generations}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+      \PYG{k}{if} \PYG{n}{response\PYGZus{}safety\PYGZus{}parsed}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{safe}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}
+          \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{response}\PYG{o}{.}\PYG{n}{generations}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{text}\PYG{p}{)}
+      \PYG{k}{else}\PYG{p}{:}
+          \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The response is unsafe. Hazard categories }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{response\PYGZus{}safety\PYGZus{}parsed}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+  \PYG{k}{else}\PYG{p}{:}
+      \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The prompt is unsafe. Hazard categories }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{prompt\PYGZus{}safety\PYGZus{}parsed}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsection{Tests}
+\label{\detokenize{guardrails:tests}}
+
+\subsubsection{Safe Usecase}
+\label{\detokenize{guardrails:id4}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Get user input}
+\PYG{n}{user\PYGZus{}input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{How can I adopt my own llama?}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{n}{check\PYGZus{}safety}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{safe}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{n}{While} \PYG{n}{it}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{s a lovely idea to have a llama as a pet, it}\PYG{l+s+s1}{\PYGZsq{}}\PYG{n}{s} \PYG{n}{important} \PYG{n}{to} \PYG{n}{know} \PYG{n}{that} \PYG{n}{llamas} \PYG{n}{are} \PYG{n}{agricultural} \PYG{n}{animals} \PYG{o+ow}{and} \PYG{o+ow}{not} \PYG{n}{typically} \PYG{n}{kept} \PYG{k}{as} \PYG{n}{pets} \PYG{o+ow}{in} \PYG{n}{private} \PYG{n}{homes} \PYG{n}{due} \PYG{n}{to} \PYG{n}{their} \PYG{n}{specific} \PYG{n}{needs} \PYG{o+ow}{and} \PYG{n}{requirements}\PYG{o}{.} \PYG{n}{Llamas} \PYG{n}{require} \PYG{n}{large} \PYG{n}{amounts} \PYG{n}{of} \PYG{n}{space}\PYG{p}{,} \PYG{n}{specialized} \PYG{n}{care}\PYG{p}{,} \PYG{o+ow}{and} \PYG{n}{socialization} \PYG{k}{with} \PYG{n}{other} \PYG{n}{llamas}\PYG{o}{.}
+
+\PYG{n}{If} \PYG{n}{you}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{re interested in spending time with llamas, consider visiting a llama farm or sanctuary instead. Many farms offer opportunities for volunteers, tours, or adoptions of their services such as manure, fiber, or even breeding stock. This way, you can enjoy the company of llamas without taking on the full responsibility of caring for one at home.}
+
+\PYG{n}{If} \PYG{n}{you}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{re set on owning a llama and have the appropriate facilities to house it, research local llama farms that sell llamas and ensure you understand their needs before making any decisions. It}\PYG{l+s+s1}{\PYGZsq{}}\PYG{n}{s} \PYG{n}{also} \PYG{n}{essential} \PYG{n}{to} \PYG{n}{check} \PYG{k}{with} \PYG{n}{your} \PYG{n}{local} \PYG{n}{animal} \PYG{n}{control} \PYG{o+ow}{and} \PYG{n}{zoning} \PYG{n}{departments} \PYG{n}{to} \PYG{n}{make} \PYG{n}{sure} \PYG{n}{it} \PYG{o+ow}{is} \PYG{n}{legal} \PYG{n}{to} \PYG{n}{keep} \PYG{n}{a} \PYG{n}{llama} \PYG{o+ow}{in} \PYG{n}{your} \PYG{n}{area}\PYG{o}{.}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Unsafe Usecase}
+\label{\detokenize{guardrails:unsafe-usecase}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Get user input}
+\PYG{n}{user\PYGZus{}input} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{How to do buy a gun without NO. in USA.}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{n}{check\PYGZus{}safety}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{unsafe}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{S2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{n}{The} \PYG{n}{prompt} \PYG{o+ow}{is} \PYG{n}{unsafe}\PYG{o}{.} \PYG{n}{Hazard} \PYG{n}{categories} \PYG{n}{S2}
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+Here is another way to make \sphinxcode{\sphinxupquote{llama\sphinxhyphen{}guard3}} work with \sphinxcode{\sphinxupquote{Ollama}}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{requests}
+\PYG{k+kn}{import} \PYG{n+nn}{json}
+
+\PYG{k}{def} \PYG{n+nf}{check\PYGZus{}safety}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{  }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Checks the safety of a given text using Llama Guard 3.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+  \PYG{n}{url} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{http://localhost:11434/api/generate}\PYG{l+s+s2}{\PYGZdq{}}
+  \PYG{n}{headers} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Content\PYGZhy{}Type}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{application/json}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+  \PYG{n}{data} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{model}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{llama\PYGZhy{}guard3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{prompt}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{text}\PYG{p}{,}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{temperature}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mf}{0.0}\PYG{p}{,}
+      \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{stream}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{k+kc}{False} \PYG{c+c1}{\PYGZsh{}add stream = False to disable streaming}
+  \PYG{p}{\PYGZcb{}}
+
+  \PYG{n}{response} \PYG{o}{=} \PYG{n}{requests}\PYG{o}{.}\PYG{n}{post}\PYG{p}{(}\PYG{n}{url}\PYG{p}{,} \PYG{n}{headers}\PYG{o}{=}\PYG{n}{headers}\PYG{p}{,} \PYG{n}{json}\PYG{o}{=}\PYG{n}{data}\PYG{p}{)}
+  \PYG{k}{if} \PYG{n}{response}\PYG{o}{.}\PYG{n}{status\PYGZus{}code} \PYG{o}{==} \PYG{l+m+mi}{200}\PYG{p}{:}
+      \PYG{c+c1}{\PYGZsh{} Handle the potential for streaming responses by reading line by line}
+      \PYG{c+c1}{\PYGZsh{} and parsing the last valid JSON object.}
+      \PYG{k}{try}\PYG{p}{:}
+          \PYG{c+c1}{\PYGZsh{} Attempt to parse the response as a single JSON object}
+          \PYG{k}{return} \PYG{n}{response}\PYG{o}{.}\PYG{n}{json}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{response}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+      \PYG{k}{except} \PYG{n}{json}\PYG{o}{.}\PYG{n}{JSONDecodeError}\PYG{p}{:}
+          \PYG{c+c1}{\PYGZsh{} If parsing fails, try to extract the last valid JSON object}
+          \PYG{c+c1}{\PYGZsh{} from the streaming response.}
+          \PYG{n}{last\PYGZus{}valid\PYGZus{}json} \PYG{o}{=} \PYG{k+kc}{None}
+          \PYG{k}{for} \PYG{n}{line} \PYG{o+ow}{in} \PYG{n}{response}\PYG{o}{.}\PYG{n}{text}\PYG{o}{.}\PYG{n}{splitlines}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+              \PYG{k}{try}\PYG{p}{:}
+                  \PYG{n}{last\PYGZus{}valid\PYGZus{}json} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{loads}\PYG{p}{(}\PYG{n}{line}\PYG{p}{)}
+              \PYG{k}{except} \PYG{n}{json}\PYG{o}{.}\PYG{n}{JSONDecodeError}\PYG{p}{:}
+                  \PYG{k}{pass}
+          \PYG{k}{if} \PYG{n}{last\PYGZus{}valid\PYGZus{}json}\PYG{p}{:}
+              \PYG{k}{return} \PYG{n}{last\PYGZus{}valid\PYGZus{}json}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{response}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Extract the \PYGZdq{}response\PYGZdq{} value}
+          \PYG{k}{else}\PYG{p}{:}
+              \PYG{k}{raise} \PYG{n+ne}{Exception}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Error: Unable to parse valid JSON from response}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+  \PYG{k}{else}\PYG{p}{:}
+      \PYG{k}{raise} \PYG{n+ne}{Exception}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Error: }\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+} \PYG{n}{response}\PYG{o}{.}\PYG{n}{text}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Example usage}
+\PYG{n}{text\PYGZus{}to\PYGZus{}check} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tell me how to go to the zoo and steal a llama.}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{safety\PYGZus{}result} \PYG{o}{=} \PYG{n}{check\PYGZus{}safety}\PYG{p}{(}\PYG{n}{text\PYGZus{}to\PYGZus{}check}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{safety\PYGZus{}result}\PYG{p}{)}
+\end{sphinxVerbatim}
+\end{sphinxadmonition}
+
 \sphinxstepscope
 
 

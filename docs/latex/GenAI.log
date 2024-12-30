@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  26 DEC 2024 15:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  30 DEC 2024 09:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,7 +825,7 @@ Package hyperref Info: Link coloring ON on input line 72.
 \openout5 = `GenAI.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 80.
-<logo.png, id=885, 496.85625pt x 308.15125pt>
+<logo.png, id=905, 496.85625pt x 308.15125pt>
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 8
 0.
 
@@ -881,7 +881,7 @@ File: logo.png Graphic file (type png)
 <use logo.png>
 Package pdftex.def Info: logo.png  used on input line 89.
 (pdftex.def)             Requested size: 469.75908pt x 291.36432pt.
-<colab-badge.png, id=1077, 88.07906pt x 15.05624pt>
+<colab-badge.png, id=1100, 88.07906pt x 15.05624pt>
 File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 95.
@@ -979,7 +979,7 @@ File: ts1txtt.fd 2000/12/15 v3.1
 )
 
 [7]
-<vector.png, id=1129, 720.44156pt x 458.46281pt>
+<vector.png, id=1152, 720.44156pt x 458.46281pt>
 File: vector.png Graphic file (type png)
 <use vector.png>
 Package pdftex.def Info: vector.png  used on input line 353.
@@ -995,7 +995,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8 <./vector.png>]
-<1Bauo.png, id=1137, 697.8572pt x 186.6975pt>
+<1Bauo.png, id=1160, 697.8572pt x 186.6975pt>
 File: 1Bauo.png Graphic file (type png)
 <use 1Bauo.png>
 Package pdftex.def Info: 1Bauo.png  used on input line 369.
@@ -1152,18 +1152,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [18]
-<modernbert_pareto_curve.png, id=1225, 734.745pt x 509.65407pt>
+<modernbert_pareto_curve.png, id=1248, 734.745pt x 509.65407pt>
 File: modernbert_pareto_curve.png Graphic file (type png)
 <use modernbert_pareto_curve.png>
 Package pdftex.def Info: modernbert_pareto_curve.png  used on input line 1389.
 (pdftex.def)             Requested size: 469.76431pt x 325.85864pt.
-<modernbert_alternating_attention.png, id=1227, 1204.5pt x 677.53125pt>
+<modernbert_alternating_attention.png, id=1250, 1204.5pt x 677.53125pt>
 File: modernbert_alternating_attention.png Graphic file (type png)
 <use modernbert_alternating_attention.png>
 Package pdftex.def Info: modernbert_alternating_attention.png  used on input li
 ne 1403.
 (pdftex.def)             Requested size: 469.75311pt x 264.24646pt.
-<modernbert_unpadding.png, id=1229, 1204.5pt x 677.53125pt>
+<modernbert_unpadding.png, id=1252, 1204.5pt x 677.53125pt>
 File: modernbert_unpadding.png Graphic file (type png)
 <use modernbert_unpadding.png>
 Package pdftex.def Info: modernbert_unpadding.png  used on input line 1417.
@@ -1203,12 +1203,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [21]
-<runtime.png, id=1258, 1395.71437pt x 788.9475pt>
+<runtime.png, id=1281, 1395.71437pt x 788.9475pt>
 File: runtime.png Graphic file (type png)
 <use runtime.png>
 Package pdftex.def Info: runtime.png  used on input line 1517.
 (pdftex.def)             Requested size: 469.75502pt x 265.52997pt.
-<T4.png, id=1259, 1395.71437pt x 788.9475pt>
+<T4.png, id=1282, 1395.71437pt x 788.9475pt>
 File: T4.png Graphic file (type png)
 <use T4.png>
 Package pdftex.def Info: T4.png  used on input line 1517.
@@ -1221,7 +1221,7 @@ File: T4.png Graphic file (type png)
 <use T4.png>
 Package pdftex.def Info: T4.png  used on input line 1517.
 (pdftex.def)             Requested size: 222.87845pt x 125.98137pt.
-<gemini.png, id=1260, 968.86969pt x 590.95781pt>
+<gemini.png, id=1283, 968.86969pt x 590.95781pt>
 File: gemini.png Graphic file (type png)
 <use gemini.png>
 Package pdftex.def Info: gemini.png  used on input line 1531.
@@ -1237,12 +1237,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [22 <./runtime.png> <./T4.png> <./gemini.png>]
-<ollama_download.png, id=1268, 959.83594pt x 301.125pt>
+<ollama_download.png, id=1291, 959.83594pt x 301.125pt>
 File: ollama_download.png Graphic file (type png)
 <use ollama_download.png>
 Package pdftex.def Info: ollama_download.png  used on input line 1620.
 (pdftex.def)             Requested size: 469.75253pt x 147.37793pt.
-<ollama_serve.png, id=1269, 808.52063pt x 186.6975pt>
+<ollama_serve.png, id=1292, 808.52063pt x 186.6975pt>
 File: ollama_serve.png Graphic file (type png)
 <use ollama_serve.png>
 Package pdftex.def Info: ollama_serve.png  used on input line 1640.
@@ -1258,7 +1258,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [23 <./ollama_download.png>]
-<pull_models.png, id=1279, 808.52063pt x 295.85532pt>
+<pull_models.png, id=1302, 808.52063pt x 295.85532pt>
 File: pull_models.png Graphic file (type png)
 <use pull_models.png>
 Package pdftex.def Info: pull_models.png  used on input line 1660.
@@ -1301,7 +1301,7 @@ File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 2.
 (pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<embedding_diagram.png, id=1301, 601.4972pt x 356.83313pt>
+<embedding_diagram.png, id=1324, 601.4972pt x 356.83313pt>
 File: embedding_diagram.png Graphic file (type png)
 <use embedding_diagram.png>
 Package pdftex.def Info: embedding_diagram.png  used on input line 1786.
@@ -1391,12 +1391,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [34]
-<cont_win.png, id=1354, 1204.5pt x 400.49625pt>
+<cont_win.png, id=1377, 1204.5pt x 400.49625pt>
 File: cont_win.png Graphic file (type png)
 <use cont_win.png>
 Package pdftex.def Info: cont_win.png  used on input line 2291.
 (pdftex.def)             Requested size: 469.75311pt x 156.1929pt.
-<w2v_3.png, id=1355, 816.04875pt x 481.8pt>
+<w2v_3.png, id=1378, 816.04875pt x 481.8pt>
 File: w2v_3.png Graphic file (type png)
 <use w2v_3.png>
 Package pdftex.def Info: w2v_3.png  used on input line 2304.
@@ -1464,7 +1464,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [39]
-<models_databricks.jpg, id=1380, 971.12813pt x 528.47438pt>
+<models_databricks.jpg, id=1403, 971.12813pt x 528.47438pt>
 File: models_databricks.jpg Graphic file (type jpg)
 <use models_databricks.jpg>
 Package pdftex.def Info: models_databricks.jpg  used on input line 2536.
@@ -1518,7 +1518,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [43]
-<embedding2d.png, id=1401, 602.25pt x 451.6875pt>
+<embedding2d.png, id=1424, 602.25pt x 451.6875pt>
 File: embedding2d.png Graphic file (type png)
 <use embedding2d.png>
 Package pdftex.def Info: embedding2d.png  used on input line 2696.
@@ -1725,7 +1725,7 @@ File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 2.
 (pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<RAG_diagram.png, id=1480, 1810.51407pt x 813.0375pt>
+<RAG_diagram.png, id=1503, 1810.51407pt x 813.0375pt>
 File: RAG_diagram.png Graphic file (type png)
 <use RAG_diagram.png>
 Package pdftex.def Info: RAG_diagram.png  used on input line 3346.
@@ -1733,7 +1733,7 @@ Package pdftex.def Info: RAG_diagram.png  used on input line 3346.
 
 
 [59]
-<indexer.png, id=1488, 1252.68pt x 238.64156pt>
+<indexer.png, id=1511, 1252.68pt x 238.64156pt>
 File: indexer.png Graphic file (type png)
 <use indexer.png>
 Package pdftex.def Info: indexer.png  used on input line 3398.
@@ -1788,7 +1788,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3757--3757
 []\T1/qtm/m/n/10.95 Le-gal or Tech-ni-cal
  []
 
-<late_chunking.png, id=1514, 792.9625pt x 686.565pt>
+<late_chunking.png, id=1537, 792.9625pt x 686.565pt>
 File: late_chunking.png Graphic file (type png)
 <use late_chunking.png>
 Package pdftex.def Info: late_chunking.png  used on input line 3771.
@@ -2016,7 +2016,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
 []\T1/qtm/b/n/10.95 HNSW
  []
 
-<rrf.png, id=1587, 896.59969pt x 837.88031pt>
+<rrf.png, id=1610, 896.59969pt x 837.88031pt>
 File: rrf.png Graphic file (type png)
 <use rrf.png>
 Package pdftex.def Info: rrf.png  used on input line 4786.
@@ -2042,7 +2042,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [74 <./rrf.png>]
-<generator.png, id=1598, 1492.8272pt x 204.765pt>
+<generator.png, id=1621, 1492.8272pt x 204.765pt>
 File: generator.png Graphic file (type png)
 <use generator.png>
 Package pdftex.def Info: generator.png  used on input line 4878.
@@ -2072,7 +2072,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [76 <./generator.png>]
-<self_rag_paper.png, id=1608, 707.64375pt x 380.17032pt>
+<self_rag_paper.png, id=1631, 707.64375pt x 380.17032pt>
 File: self_rag_paper.png Graphic file (type png)
 <use self_rag_paper.png>
 Package pdftex.def Info: self_rag_paper.png  used on input line 4973.
@@ -2088,7 +2088,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [77]
-<self_rag.png, id=1618, 1263.97218pt x 539.76656pt>
+<self_rag.png, id=1641, 1263.97218pt x 539.76656pt>
 File: self_rag.png Graphic file (type png)
 <use self_rag.png>
 Package pdftex.def Info: self_rag.png  used on input line 5090.
@@ -2272,7 +2272,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [91]
-<self_rag_graph.png, id=1686, 304.13625pt x 372.64218pt>
+<self_rag_graph.png, id=1709, 304.13625pt x 372.64218pt>
 File: self_rag_graph.png Graphic file (type png)
 <use self_rag_graph.png>
 Package pdftex.def Info: self_rag_graph.png  used on input line 5733.
@@ -2344,7 +2344,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [96]
-<corrective_rag.png, id=1708, 1278.27562pt x 547.2947pt>
+<corrective_rag.png, id=1731, 1278.27562pt x 547.2947pt>
 File: corrective_rag.png Graphic file (type png)
 <use corrective_rag.png>
 Package pdftex.def Info: corrective_rag.png  used on input line 5914.
@@ -2506,7 +2506,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [108]
-<c_rag_graph.png, id=1763, 149.05687pt x 417.81094pt>
+<c_rag_graph.png, id=1787, 149.05687pt x 417.81094pt>
 File: c_rag_graph.png Graphic file (type png)
 <use c_rag_graph.png>
 Package pdftex.def Info: c_rag_graph.png  used on input line 6522.
@@ -2577,7 +2577,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX Font Info:    Font shape `TS1/txtt/b/n' in size <10.95> not available
 (Font)              Font shape `TS1/txtt/bx/n' tried instead on input line 6586
 .
-<adaptive_rag.png, id=1787, 1071.25218pt x 561.59813pt>
+<adaptive_rag.png, id=1810, 1071.25218pt x 561.59813pt>
 File: adaptive_rag.png Graphic file (type png)
 <use adaptive_rag.png>
 Package pdftex.def Info: adaptive_rag.png  used on input line 6604.
@@ -2806,7 +2806,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [130]
-<a_rag_graph.png, id=1864, 416.30531pt x 447.17062pt>
+<a_rag_graph.png, id=1888, 416.30531pt x 447.17062pt>
 File: a_rag_graph.png Graphic file (type png)
 <use a_rag_graph.png>
 Package pdftex.def Info: a_rag_graph.png  used on input line 7373.
@@ -2882,7 +2882,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [135]
-<agentic_rag.png, id=1888, 1215.79219pt x 443.40656pt>
+<agentic_rag.png, id=1911, 1215.79219pt x 443.40656pt>
 File: agentic_rag.png Graphic file (type png)
 <use agentic_rag.png>
 Package pdftex.def Info: agentic_rag.png  used on input line 7459.
@@ -3027,7 +3027,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [146]
-<agentic_rag_graph.png, id=1942, 240.9pt x 343.2825pt>
+<agentic_rag_graph.png, id=1965, 240.9pt x 343.2825pt>
 File: agentic_rag_graph.png Graphic file (type png)
 <use agentic_rag_graph.png>
 Package pdftex.def Info: agentic_rag_graph.png  used on input line 7938.
@@ -3071,7 +3071,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [149]
-<agent_architectures.png, id=1956, 1123.19624pt x 922.94812pt>
+<agent_architectures.png, id=1979, 1123.19624pt x 922.94812pt>
 File: agent_architectures.png Graphic file (type png)
 <use agent_architectures.png>
 Package pdftex.def Info: agent_architectures.png  used on input line 8011.
@@ -3119,7 +3119,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [152]
-<multi_agents_simple.png, id=1973, 182.18062pt x 187.45032pt>
+<multi_agents_simple.png, id=1997, 182.18062pt x 187.45032pt>
 File: multi_agents_simple.png Graphic file (type png)
 <use multi_agents_simple.png>
 Package pdftex.def Info: multi_agents_simple.png  used on input line 8080.
@@ -3156,7 +3156,7 @@ File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 2.
 (pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<fine_tuning.png, id=1984, 2402.9775pt x 837.1275pt>
+<fine_tuning.png, id=2008, 2402.9775pt x 837.1275pt>
 File: fine_tuning.png Graphic file (type png)
 <use fine_tuning.png>
 Package pdftex.def Info: fine_tuning.png  used on input line 8118.
@@ -3164,7 +3164,7 @@ Package pdftex.def Info: fine_tuning.png  used on input line 8118.
 
 
 [155 <./fine_tuning.png (PNG copy)>]
-<lora.png, id=1992, 1204.5pt x 505.89pt>
+<lora.png, id=2015, 1204.5pt x 505.89pt>
 File: lora.png Graphic file (type png)
 <use lora.png>
 Package pdftex.def Info: lora.png  used on input line 8139.
@@ -3180,12 +3180,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [156 <./lora.png>]
-<peft_1.png, id=1999, 840.13875pt x 576.65437pt>
+<peft_1.png, id=2022, 840.13875pt x 576.65437pt>
 File: peft_1.png Graphic file (type png)
 <use peft_1.png>
 Package pdftex.def Info: peft_1.png  used on input line 8223.
 (pdftex.def)             Requested size: 469.75502pt x 322.43149pt.
-<peft_2.png, id=2000, 837.88031pt x 516.42938pt>
+<peft_2.png, id=2023, 837.88031pt x 516.42938pt>
 File: peft_2.png Graphic file (type png)
 <use peft_2.png>
 Package pdftex.def Info: peft_2.png  used on input line 8223.
@@ -3525,7 +3525,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [166]
-<fine_tuning_wandb.png, id=2060, 1209.76968pt x 767.86874pt>
+<fine_tuning_wandb.png, id=2083, 1209.76968pt x 767.86874pt>
 File: fine_tuning_wandb.png Graphic file (type png)
 <use fine_tuning_wandb.png>
 Package pdftex.def Info: fine_tuning_wandb.png  used on input line 9250.
@@ -3561,7 +3561,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [169]
-<fine_tuning_llm.png, id=2078, 1445.4pt x 813.0375pt>
+<fine_tuning_llm.png, id=2101, 1445.4pt x 813.0375pt>
 File: fine_tuning_llm.png Graphic file (type png)
 <use fine_tuning_llm.png>
 Package pdftex.def Info: fine_tuning_llm.png  used on input line 9368.
@@ -3600,7 +3600,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 ]
 Chapter 7.
-<ilya_sutskever.png, id=2093, 750.55406pt x 475.7775pt>
+<ilya_sutskever.png, id=2117, 750.55406pt x 475.7775pt>
 File: ilya_sutskever.png Graphic file (type png)
 <use ilya_sutskever.png>
 Package pdftex.def Info: ilya_sutskever.png  used on input line 9385.
@@ -3608,7 +3608,7 @@ Package pdftex.def Info: ilya_sutskever.png  used on input line 9385.
 
 
 [173 <./ilya_sutskever.png>]
-<transformer_architecture.png, id=2102, 570.63188pt x 453.94594pt>
+<transformer_architecture.png, id=2126, 570.63188pt x 453.94594pt>
 File: transformer_architecture.png Graphic file (type png)
 <use transformer_architecture.png>
 Package pdftex.def Info: transformer_architecture.png  used on input line 9412.
@@ -3651,7 +3651,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [176]
-<position_embedding.png, id=2122, 933.4875pt x 569.12625pt>
+<position_embedding.png, id=2145, 933.4875pt x 569.12625pt>
 File: position_embedding.png Graphic file (type png)
 <use position_embedding.png>
 Package pdftex.def Info: position_embedding.png  used on input line 9639.
@@ -3787,22 +3787,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [178]
-<word_embedding_matrix.png, id=2133, 942.52126pt x 336.50719pt>
+<word_embedding_matrix.png, id=2156, 942.52126pt x 336.50719pt>
 File: word_embedding_matrix.png Graphic file (type png)
 <use word_embedding_matrix.png>
 Package pdftex.def Info: word_embedding_matrix.png  used on input line 9891.
 (pdftex.def)             Requested size: 469.76378pt x 167.71916pt.
-<contextual_embedding.png, id=2134, 771.88374pt x 396.48125pt>
+<contextual_embedding.png, id=2157, 771.88374pt x 396.48125pt>
 File: contextual_embedding.png Graphic file (type png)
 <use contextual_embedding.png>
 Package pdftex.def Info: contextual_embedding.png  used on input line 9920.
 (pdftex.def)             Requested size: 469.75304pt x 241.29662pt.
-<self_attention_hendrik.png, id=2135, 634.62094pt x 631.60968pt>
+<self_attention_hendrik.png, id=2158, 634.62094pt x 631.60968pt>
 File: self_attention_hendrik.png Graphic file (type png)
 <use self_attention_hendrik.png>
 Package pdftex.def Info: self_attention_hendrik.png  used on input line 9937.
 (pdftex.def)             Requested size: 469.76707pt x 467.52841pt.
-<selfattention_goal.png, id=2137, 897.3525pt x 207.77625pt>
+<selfattention_goal.png, id=2160, 897.3525pt x 207.77625pt>
 File: selfattention_goal.png Graphic file (type png)
 <use selfattention_goal.png>
 Package pdftex.def Info: selfattention_goal.png  used on input line 9958.
@@ -3818,12 +3818,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [179 <./word_embedding_matrix.png>]
-<query_projection.png, id=2144, 851.18pt x 212.795pt>
+<query_projection.png, id=2167, 851.18pt x 212.795pt>
 File: query_projection.png Graphic file (type png)
 <use query_projection.png>
 Package pdftex.def Info: query_projection.png  used on input line 9993.
 (pdftex.def)             Requested size: 469.76094pt x 117.44022pt.
-<key_projection.png, id=2145, 796.9775pt x 305.14pt>
+<key_projection.png, id=2168, 796.9775pt x 305.14pt>
 File: key_projection.png Graphic file (type png)
 <use key_projection.png>
 Package pdftex.def Info: key_projection.png  used on input line 10020.
@@ -3859,7 +3859,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [182 <./query_projection.png> <./key_projection.png>]
-<attention_score.png, id=2171, 1030.85126pt x 515.9275pt>
+<attention_score.png, id=2194, 1030.85126pt x 515.9275pt>
 File: attention_score.png Graphic file (type png)
 <use attention_score.png>
 Package pdftex.def Info: attention_score.png  used on input line 10045.
@@ -3875,7 +3875,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [183 <./attention_score.png>]
-<value_projection_weighted_sum.png, id=2180, 1001.7425pt x 448.67625pt>
+<value_projection_weighted_sum.png, id=2203, 1001.7425pt x 448.67625pt>
 File: value_projection_weighted_sum.png Graphic file (type png)
 <use value_projection_weighted_sum.png>
 Package pdftex.def Info: value_projection_weighted_sum.png  used on input line 
@@ -3962,7 +3962,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [189]
-<beam_search.png, id=2229, 828.09375pt x 411.5375pt>
+<beam_search.png, id=2252, 828.09375pt x 411.5375pt>
 File: beam_search.png Graphic file (type png)
 <use beam_search.png>
 Package pdftex.def Info: beam_search.png  used on input line 10809.
@@ -4038,7 +4038,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [192]
-<qkv_attention_pattern.png, id=2245, 1304.875pt x 629.35126pt>
+<qkv_attention_pattern.png, id=2268, 1304.875pt x 629.35126pt>
 File: qkv_attention_pattern.png Graphic file (type png)
 <use qkv_attention_pattern.png>
 Package pdftex.def Info: qkv_attention_pattern.png  used on input line 11099.
@@ -4054,7 +4054,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [193]
-<kv_cache.png, id=2251, 937.5025pt x 636.3775pt>
+<kv_cache.png, id=2274, 937.5025pt x 636.3775pt>
 File: kv_cache.png Graphic file (type png)
 <use kv_cache.png>
 Package pdftex.def Info: kv_cache.png  used on input line 11121.
@@ -4070,7 +4070,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [194 <./qkv_attention_pattern.png>]
-<multiquery_attention.png, id=2257, 1114.1625pt x 463.7325pt>
+<multiquery_attention.png, id=2280, 1114.1625pt x 463.7325pt>
 File: multiquery_attention.png Graphic file (type png)
 <use multiquery_attention.png>
 Package pdftex.def Info: multiquery_attention.png  used on input line 11164.
@@ -4086,7 +4086,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [195 <./kv_cache.png>]
-<grouped_query_attention.png, id=2263, 1055.945pt x 466.74374pt>
+<grouped_query_attention.png, id=2286, 1055.945pt x 466.74374pt>
 File: grouped_query_attention.png Graphic file (type png)
 <use grouped_query_attention.png>
 Package pdftex.def Info: grouped_query_attention.png  used on input line 11221.
@@ -4113,7 +4113,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [197 <./grouped_query_attention.png>]
-<flashattention_paper.png, id=2280, 688.07062pt x 372.64218pt>
+<flashattention_paper.png, id=2303, 688.07062pt x 372.64218pt>
 File: flashattention_paper.png Graphic file (type png)
 <use flashattention_paper.png>
 Package pdftex.def Info: flashattention_paper.png  used on input line 11312.
@@ -4199,7 +4199,7 @@ File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 2.
 (pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<metrics_llm.png, id=2303, 3152.02594pt x 2317.90968pt>
+<metrics_llm.png, id=2326, 3152.02594pt x 2317.90968pt>
 File: metrics_llm.png Graphic file (type png)
 <use metrics_llm.png>
 Package pdftex.def Info: metrics_llm.png  used on input line 11578.
@@ -4219,7 +4219,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [202]
-<geval.png, id=2318, 746.79pt x 543.02875pt>
+<geval.png, id=2341, 746.79pt x 543.02875pt>
 File: geval.png Graphic file (type png)
 <use geval.png>
 Package pdftex.def Info: geval.png  used on input line 11735.
@@ -4393,13 +4393,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [218]
-<llm_guardrails_overview.png, id=2397, 780.9175pt x 585.18625pt>
+<llm_guardrails_overview.png, id=2420, 780.9175pt x 585.18625pt>
 File: llm_guardrails_overview.png Graphic file (type png)
 <use llm_guardrails_overview.png>
 Package pdftex.def Info: llm_guardrails_overview.png  used on input line 12854.
 
 (pdftex.def)             Requested size: 469.75761pt x 352.02524pt.
-<guardrails_categories.png, id=2398, 1131.47719pt x 993.7125pt>
+<guardrails_categories.png, id=2421, 1131.47719pt x 993.7125pt>
 File: guardrails_categories.png Graphic file (type png)
 <use guardrails_categories.png>
 Package pdftex.def Info: guardrails_categories.png  used on input line 12900.
@@ -4435,12 +4435,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [221 <./guardrails_categories.png>]
-<type_of_guardrails.png, id=2416, 895.345pt x 538.01pt>
+<type_of_guardrails.png, id=2439, 895.345pt x 538.01pt>
 File: type_of_guardrails.png Graphic file (type png)
 <use type_of_guardrails.png>
 Package pdftex.def Info: type_of_guardrails.png  used on input line 12964.
 (pdftex.def)             Requested size: 469.7626pt x 282.27066pt.
-<summary_implement_techniques_for_guardrails.jpg, id=2417, 2119.92pt x 2068.728
+<summary_implement_techniques_for_guardrails.jpg, id=2440, 2119.92pt x 2068.728
 74pt>
 File: summary_implement_techniques_for_guardrails.jpg Graphic file (type jpg)
 <use summary_implement_techniques_for_guardrails.jpg>
@@ -4458,13 +4458,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [222]
-<rag_nemo_and_thirdparty.png, id=2423, 770.88pt x 503.63156pt>
+<rag_nemo_and_thirdparty.png, id=2446, 770.88pt x 503.63156pt>
 File: rag_nemo_and_thirdparty.png Graphic file (type png)
 <use rag_nemo_and_thirdparty.png>
 Package pdftex.def Info: rag_nemo_and_thirdparty.png  used on input line 13019.
 
 (pdftex.def)             Requested size: 469.75385pt x 306.89972pt.
-<llama_guard.png, id=2430, 848.4197pt x 529.22719pt>
+<llama_guard.png, id=2453, 848.4197pt x 529.22719pt>
 File: llama_guard.png Graphic file (type png)
 <use llama_guard.png>
 Package pdftex.def Info: llama_guard.png  used on input line 13070.
@@ -4701,11 +4701,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[240
+[240]
+Underfull \vbox (badness 1509) detected at line 13894
+ []
 
-]
-Chapter 10.
 
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [241]
 
@@ -4717,11 +4725,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[242
+[242]
+Chapter 10.
+
+
+[243
+
+]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[244
 
 ] (./GenAI.ind)
 
-[243
+[245
 
 ] (./GenAI.aux)
  ***********
@@ -4733,13 +4757,13 @@ L3 programming layer <2024-05-27>
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `GenAI.out' has not changed.
-(rerunfilecheck)             Checksum: 6DD3B075FE5E117EE41FF13B112C8084;32729.
+(rerunfilecheck)             Checksum: D74A17E99BAE05052D37C1C257292782;33376.
  ) 
 Here is how much of TeX's memory you used:
- 18698 strings out of 475544
- 319229 string characters out of 5777741
+ 18714 strings out of 475544
+ 319522 string characters out of 5777741
  2255905 words of memory out of 5000000
- 40288 multiletter control sequences out of 15000+600000
+ 40297 multiletter control sequences out of 15000+600000
  626297 words of font info for 103 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  72i,22n,83p,6361b,834s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -4762,10 +4786,10 @@ tt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxbtt.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on GenAI.pdf (249 pages, 8884829 bytes).
+Output written on GenAI.pdf (251 pages, 8893300 bytes).
 PDF statistics:
- 2788 PDF objects out of 2984 (max. 8388607)
- 2359 compressed objects within 24 object streams
- 642 named destinations out of 1000 (max. 500000)
- 2098 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2823 PDF objects out of 2984 (max. 8388607)
+ 2392 compressed objects within 24 object streams
+ 649 named destinations out of 1000 (max. 500000)
+ 2138 words of extra memory for PDF output out of 10000 (max. 10000000)
 
