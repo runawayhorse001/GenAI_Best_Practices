@@ -6,15 +6,12 @@ Pre-training
 ============
 
 
-.. admonition:: Proverb
+.. admonition:: Ilya Sutskever at Neurips 2024
 
-	Pre-training as we know it will end. – Ilya Sutskever at neurips 2024
+   .. _fig_ilya:
+   .. figure:: images/ilya_sutskever.png
+      :align: center
 
-        .. _fig_ilya:
-        .. figure:: images/ilya_sutskever.png
-            :align: center
-
-            Ilya Sutskever at neurips 2024
 
 In industry, most companies focus primarily on prompt engineering, RAG, and fine-tuning, 
 while advanced techniques like pre-training from scratch or deep model customization 
@@ -27,7 +24,8 @@ learn patterns in language, enabling them to generate human-like text, answer qu
 summarize information, and perform other natural language processing tasks.
 
 This chapter delves into transformer models, drawing on insights from 
-`The Annotated Transformer`_ and `Tracing the Transformer in Diagrams`_, to explore their underlying architecture and practical applications.    
+`The Annotated Transformer`_ and `Tracing the Transformer in Diagrams`_, to explore their 
+underlying architecture and practical applications.    
 
 
 .. _`The Annotated Transformer`: https://nlp.seas.harvard.edu/annotated-transformer/

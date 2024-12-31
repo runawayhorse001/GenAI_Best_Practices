@@ -9373,17 +9373,13 @@ The folloing code is from notebook \sphinxcite{reference:finetunellm}, and the c
 
 \chapter{Pre\sphinxhyphen{}training}
 \label{\detokenize{pretraining:pre-training}}\label{\detokenize{pretraining:pretraining}}\label{\detokenize{pretraining::doc}}
-\begin{sphinxadmonition}{note}{Proverb}
-
-\sphinxAtStartPar
-Pre\sphinxhyphen{}training as we know it will end. \textendash{} Ilya Sutskever at neurips 2024
+\begin{sphinxadmonition}{note}{Ilya Sutskever at Neurips 2024}
 
 \begin{figure}[H]
 \centering
-\capstart
 
 \noindent\sphinxincludegraphics{{ilya_sutskever}.png}
-\caption{Ilya Sutskever at neurips 2024}\label{\detokenize{pretraining:id8}}\label{\detokenize{pretraining:fig-ilya}}\end{figure}
+\end{figure}
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -9400,7 +9396,8 @@ summarize information, and perform other natural language processing tasks.
 
 \sphinxAtStartPar
 This chapter delves into transformer models, drawing on insights from
-\sphinxhref{https://nlp.seas.harvard.edu/annotated-transformer/}{The Annotated Transformer} and \sphinxhref{https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c}{Tracing the Transformer in Diagrams}, to explore their underlying architecture and practical applications.
+\sphinxhref{https://nlp.seas.harvard.edu/annotated-transformer/}{The Annotated Transformer} and \sphinxhref{https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c}{Tracing the Transformer in Diagrams}, to explore their
+underlying architecture and practical applications.
 
 
 \section{Transformer Architecture}
@@ -9410,7 +9407,7 @@ This chapter delves into transformer models, drawing on insights from
 \capstart
 
 \noindent\sphinxincludegraphics{{transformer_architecture}.png}
-\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id9}}\end{figure}
+\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id8}}\end{figure}
 
 
 \subsection{Attention Is All You Need}
@@ -9637,7 +9634,7 @@ The positional encodings are added directly to the token embeddings:
 \capstart
 
 \noindent\sphinxincludegraphics{{position_embedding}.png}
-\caption{Positional Embedding}\label{\detokenize{pretraining:id10}}\end{figure}
+\caption{Positional Embedding}\label{\detokenize{pretraining:id9}}\end{figure}
 
 
 \subsubsection{Rotary Positional Embeddings (RoPE)}
@@ -9889,7 +9886,7 @@ dependencies between words.
 \capstart
 
 \noindent\sphinxincludegraphics{{word_embedding_matrix}.png}
-\caption{Word Embedding}\label{\detokenize{pretraining:id11}}\end{figure}
+\caption{Word Embedding}\label{\detokenize{pretraining:id10}}\end{figure}
 
 \sphinxAtStartPar
 Take an example of embedding matrix \(W_E\) with \textasciitilde{}50k vocabulary
@@ -9918,7 +9915,7 @@ following projections in embedding space:
 \capstart
 
 \noindent\sphinxincludegraphics{{contextual_embedding}.png}
-\caption{Contextual Embedding}\label{\detokenize{pretraining:id12}}\end{figure}
+\caption{Contextual Embedding}\label{\detokenize{pretraining:id11}}\end{figure}
 
 \sphinxAtStartPar
 Embedding matrix contains vectors of all words in the vocabulary. It’s
@@ -9935,7 +9932,7 @@ parameters in this embedding matrix is calculated by \(d \times V\).
 \capstart
 
 \noindent\sphinxincludegraphics{{self_attention_hendrik}.png}
-\caption{Self Attention (source: \sphinxhref{https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download}{The Transformer Architecture A Visual Guide})}\label{\detokenize{pretraining:id13}}\end{figure}
+\caption{Self Attention (source: \sphinxhref{https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download}{The Transformer Architecture A Visual Guide})}\label{\detokenize{pretraining:id12}}\end{figure}
 
 
 \subsubsection{Self\sphinxhyphen{}Attention}
@@ -9991,7 +9988,7 @@ words.
 \capstart
 
 \noindent\sphinxincludegraphics{{query_projection}.png}
-\caption{Query Projection}\label{\detokenize{pretraining:id14}}\end{figure}
+\caption{Query Projection}\label{\detokenize{pretraining:id13}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10018,7 +10015,7 @@ produced by the word ‘wizard’.
 \capstart
 
 \noindent\sphinxincludegraphics{{key_projection}.png}
-\caption{Key Projection}\label{\detokenize{pretraining:id15}}\end{figure}
+\caption{Key Projection}\label{\detokenize{pretraining:id14}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10043,7 +10040,7 @@ adjective to ‘wizard’. In other words, the embedding of ‘brave’
 \capstart
 
 \noindent\sphinxincludegraphics{{attention_score}.png}
-\caption{Attention Score}\label{\detokenize{pretraining:id16}}\end{figure}
+\caption{Attention Score}\label{\detokenize{pretraining:id15}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10134,7 +10131,7 @@ refined vector, encoding contextually rich meaning.
 \capstart
 
 \noindent\sphinxincludegraphics{{value_projection_weighted_sum}.png}
-\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id17}}\end{figure}
+\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id16}}\end{figure}
 
 \end{enumerate}
 
@@ -10807,7 +10804,7 @@ many candidate sequences are considered at each step.
 \capstart
 
 \noindent\sphinxincludegraphics{{beam_search}.png}
-\caption{Beam Search}\label{\detokenize{pretraining:id18}}\end{figure}
+\caption{Beam Search}\label{\detokenize{pretraining:id17}}\end{figure}
 
 
 \subsubsection{Top\sphinxhyphen{}k Sampling}
@@ -11162,7 +11159,7 @@ key matrix:
 \capstart
 
 \noindent\sphinxincludegraphics{{multiquery_attention}.png}
-\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id19}}\end{figure}
+\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id18}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of MQA:}
@@ -11219,7 +11216,7 @@ where \(i\) is the query head within a group.
 \capstart
 
 \noindent\sphinxincludegraphics{{grouped_query_attention}.png}
-\caption{Grouped Query Attention}\label{\detokenize{pretraining:id20}}\end{figure}
+\caption{Grouped Query Attention}\label{\detokenize{pretraining:id19}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of GQA:}
@@ -11310,7 +11307,7 @@ utilize GPUs.
 \capstart
 
 \noindent\sphinxincludegraphics{{flashattention_paper}.png}
-\caption{Flash Attention (source: \sphinxhref{https://arxiv.org/abs/2205.14135}{Flash Attention})}\label{\detokenize{pretraining:id21}}\end{figure}
+\caption{Flash Attention (source: \sphinxhref{https://arxiv.org/abs/2205.14135}{Flash Attention})}\label{\detokenize{pretraining:id20}}\end{figure}
 
 \sphinxAtStartPar
 The idea of Flash Attention is \sphinxstylestrong{computing by blocks} to reduce HBM
