@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10. LLM Guardrails &mdash; GenAI: Best Practices 1.0 documentation</title>
+  <title>9. LLM Guardrails &mdash; GenAI: Best Practices 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="11. Main Reference" href="reference.html" />
-    <link rel="prev" title="9. LLM Evaluation Metrics" href="evaluation.html" /> 
+    <link rel="next" title="10. Main Reference" href="reference.html" />
+    <link rel="prev" title="8. LLM Evaluation Metrics" href="evaluation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,36 +52,35 @@
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rlhf.html">8. Reinforcement Learning from Human Feedback (RLHF)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="evaluation.html">9. LLM Evaluation Metrics</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">10. LLM Guardrails</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#llm-risks">10.1. LLM Risks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-jailbreak-techniques">10.2. Overview of Jailbreak Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#introduction-to-guardrails">10.3. Introduction to Guardrails</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-guardrails-tools">10.4. Overview of Guardrails Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nemo-guardrails">10.5. NeMo Guardrails</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#yaml-config">10.5.1. Yaml Config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rails">10.5.2. Rails</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test">10.5.3. Test</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#safe-usecase">10.5.3.1. Safe Usecase</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#unsafe-usecases">10.5.3.2. Unsafe Usecases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. LLM Guardrails</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#llm-risks">9.1. LLM Risks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-jailbreak-techniques">9.2. Overview of Jailbreak Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-guardrails">9.3. Introduction to Guardrails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-guardrails-tools">9.4. Overview of Guardrails Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nemo-guardrails">9.5. NeMo Guardrails</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yaml-config">9.5.1. Yaml Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rails">9.5.2. Rails</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test">9.5.3. Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#safe-usecase">9.5.3.1. Safe Usecase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unsafe-usecases">9.5.3.2. Unsafe Usecases</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#llama-guard3">10.6. Llama Guard3</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#load-models">10.6.1. Load Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#define-safety-check">10.6.2. Define Safety Check</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tests">10.6.3. Tests</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">10.6.3.1. Safe Usecase</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#unsafe-usecase">10.6.3.2. Unsafe Usecase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llama-guard3">9.6. Llama Guard3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-models">9.6.1. Load Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-safety-check">9.6.2. Define Safety Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tests">9.6.3. Tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">9.6.3.1. Safe Usecase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unsafe-usecase">9.6.3.2. Unsafe Usecase</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">11. Main Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">10. Main Reference</a></li>
 </ul>
 
         </div>
@@ -98,7 +97,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">10. </span>LLM Guardrails</li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>LLM Guardrails</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -108,7 +107,7 @@
            <div itemprop="articleBody">
              
   <section id="llm-guardrails">
-<span id="guardrails"></span><h1><span class="section-number">10. </span>LLM Guardrails<a class="headerlink" href="#llm-guardrails" title="Link to this heading"></a></h1>
+<span id="guardrails"></span><h1><span class="section-number">9. </span>LLM Guardrails<a class="headerlink" href="#llm-guardrails" title="Link to this heading"></a></h1>
 <div class="admonition-colab-notebook-for-this-chapter admonition">
 <p class="admonition-title">Colab Notebook for This Chapter</p>
 <ul class="simple">
@@ -138,7 +137,7 @@ designed to mitigate risks. By incorporating robust guardrails,
 organizations can harness the full potential of LLMs while ensuring
 their safe, reliable, and equitable use.</p>
 <section id="llm-risks">
-<h2><span class="section-number">10.1. </span>LLM Risks<a class="headerlink" href="#llm-risks" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.1. </span>LLM Risks<a class="headerlink" href="#llm-risks" title="Link to this heading"></a></h2>
 <p>LLMs offer immense potential across diverse applications but also
 present significant risks that must be carefully managed to ensure
 responsible and effective use. These risks span various dimensions,
@@ -195,7 +194,7 @@ sensitive information and ensure compliance with regulations.</p>
 </ul>
 </section>
 <section id="overview-of-jailbreak-techniques">
-<h2><span class="section-number">10.2. </span>Overview of Jailbreak Techniques<a class="headerlink" href="#overview-of-jailbreak-techniques" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.2. </span>Overview of Jailbreak Techniques<a class="headerlink" href="#overview-of-jailbreak-techniques" title="Link to this heading"></a></h2>
 <p>There are various methods to bypass the guardrails implemented in LLMs.
 These methods, referred to as “jailbreaks,” exploit vulnerabilities in
 LLMs to generate undesirable or harmful content. The jailbreaks are
@@ -379,7 +378,7 @@ truthfulness, toxicity, bias, and harmfulness.</p></li>
 </ul>
 </section>
 <section id="introduction-to-guardrails">
-<h2><span class="section-number">10.3. </span>Introduction to Guardrails<a class="headerlink" href="#introduction-to-guardrails" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.3. </span>Introduction to Guardrails<a class="headerlink" href="#introduction-to-guardrails" title="Link to this heading"></a></h2>
 <p>To mitigate unreliable LLM behaviors, there are four major methods:
 better retrieval by RAG, better prompting by prompt engineering, better
 models by model finetuning, and better guardrails by AI validation.
@@ -486,7 +485,7 @@ for LLM applications.</p>
 </figure>
 </section>
 <section id="overview-of-guardrails-tools">
-<h2><span class="section-number">10.4. </span>Overview of Guardrails Tools<a class="headerlink" href="#overview-of-guardrails-tools" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.4. </span>Overview of Guardrails Tools<a class="headerlink" href="#overview-of-guardrails-tools" title="Link to this heading"></a></h2>
 <p>Guardrails are essential mechanisms designed to ensure that LLMs operate
 within desired parameters, enhancing their reliability, safety, and
 alignment with user expectations. Below are the guardrail frameworks
@@ -656,9 +655,9 @@ and robustness against adversarial attacks.</p></li>
 </ul>
 </section>
 <section id="nemo-guardrails">
-<h2><span class="section-number">10.5. </span>NeMo Guardrails<a class="headerlink" href="#nemo-guardrails" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.5. </span>NeMo Guardrails<a class="headerlink" href="#nemo-guardrails" title="Link to this heading"></a></h2>
 <section id="yaml-config">
-<h3><span class="section-number">10.5.1. </span>Yaml Config<a class="headerlink" href="#yaml-config" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.5.1. </span>Yaml Config<a class="headerlink" href="#yaml-config" title="Link to this heading"></a></h3>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">YAML_CONFIG</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">models:</span>
@@ -944,7 +943,7 @@ and robustness against adversarial attacks.</p></li>
 </div></blockquote>
 </section>
 <section id="rails">
-<h3><span class="section-number">10.5.2. </span>Rails<a class="headerlink" href="#rails" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.5.2. </span>Rails<a class="headerlink" href="#rails" title="Link to this heading"></a></h3>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">RailsConfig</span><span class="o">.</span><span class="n">from_content</span><span class="p">(</span><span class="n">yaml_content</span><span class="o">=</span><span class="n">YAML_CONFIG</span><span class="p">)</span>
 <span class="n">rails</span> <span class="o">=</span> <span class="n">LLMRails</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
@@ -953,9 +952,9 @@ and robustness against adversarial attacks.</p></li>
 </div></blockquote>
 </section>
 <section id="test">
-<h3><span class="section-number">10.5.3. </span>Test<a class="headerlink" href="#test" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.5.3. </span>Test<a class="headerlink" href="#test" title="Link to this heading"></a></h3>
 <section id="safe-usecase">
-<h4><span class="section-number">10.5.3.1. </span>Safe Usecase<a class="headerlink" href="#safe-usecase" title="Link to this heading"></a></h4>
+<h4><span class="section-number">9.5.3.1. </span>Safe Usecase<a class="headerlink" href="#safe-usecase" title="Link to this heading"></a></h4>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">rails</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> \
                                     <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi, I am George! My email is </span><span class="se">\</span>
@@ -1022,7 +1021,7 @@ safe
 </div></blockquote>
 </section>
 <section id="unsafe-usecases">
-<h4><span class="section-number">10.5.3.2. </span>Unsafe Usecases<a class="headerlink" href="#unsafe-usecases" title="Link to this heading"></a></h4>
+<h4><span class="section-number">9.5.3.2. </span>Unsafe Usecases<a class="headerlink" href="#unsafe-usecases" title="Link to this heading"></a></h4>
 <ol class="arabic">
 <li><p><code class="docutils literal notranslate"><span class="pre">S3</span></code> Unsafe</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">rails</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> \
@@ -1157,9 +1156,9 @@ S4
 </section>
 </section>
 <section id="llama-guard3">
-<h2><span class="section-number">10.6. </span>Llama Guard3<a class="headerlink" href="#llama-guard3" title="Link to this heading"></a></h2>
+<h2><span class="section-number">9.6. </span>Llama Guard3<a class="headerlink" href="#llama-guard3" title="Link to this heading"></a></h2>
 <section id="load-models">
-<h3><span class="section-number">10.6.1. </span>Load Models<a class="headerlink" href="#load-models" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.6.1. </span>Load Models<a class="headerlink" href="#load-models" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">Ollama</span>
 
 <span class="c1"># Initialize the LLM model</span>
@@ -1191,7 +1190,7 @@ is to use <code class="docutils literal notranslate"><span class="pre">Ollama</s
 </div>
 </section>
 <section id="define-safety-check">
-<h3><span class="section-number">10.6.2. </span>Define Safety Check<a class="headerlink" href="#define-safety-check" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.6.2. </span>Define Safety Check<a class="headerlink" href="#define-safety-check" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_safety</span><span class="p">(</span><span class="n">user_input</span><span class="p">):</span>
 
   <span class="c1"># Check if prompt is safe</span>
@@ -1223,9 +1222,9 @@ is to use <code class="docutils literal notranslate"><span class="pre">Ollama</s
 </div>
 </section>
 <section id="tests">
-<h3><span class="section-number">10.6.3. </span>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h3>
+<h3><span class="section-number">9.6.3. </span>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h3>
 <section id="id4">
-<h4><span class="section-number">10.6.3.1. </span>Safe Usecase<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<h4><span class="section-number">9.6.3.1. </span>Safe Usecase<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get user input</span>
 <span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;How can I adopt my own llama?&quot;</span>
 
@@ -1242,7 +1241,7 @@ is to use <code class="docutils literal notranslate"><span class="pre">Ollama</s
 </div>
 </section>
 <section id="unsafe-usecase">
-<h4><span class="section-number">10.6.3.2. </span>Unsafe Usecase<a class="headerlink" href="#unsafe-usecase" title="Link to this heading"></a></h4>
+<h4><span class="section-number">9.6.3.2. </span>Unsafe Usecase<a class="headerlink" href="#unsafe-usecase" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get user input</span>
 <span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;How to do buy a gun without NO. in USA.&quot;</span>
 
@@ -1310,15 +1309,15 @@ is to use <code class="docutils literal notranslate"><span class="pre">Ollama</s
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="evaluation.html" class="btn btn-neutral float-left" title="9. LLM Evaluation Metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="reference.html" class="btn btn-neutral float-right" title="11. Main Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="evaluation.html" class="btn btn-neutral float-left" title="8. LLM Evaluation Metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reference.html" class="btn btn-neutral float-right" title="10. Main Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Dec 30, 2024.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
       </span></p>
   </div>
 

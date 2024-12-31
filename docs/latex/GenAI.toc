@@ -149,77 +149,80 @@
 \contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{157}{subsection.6.1.3}%
 \contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{157}{subsection.6.1.4}%
 \contentsline {subsection}{\numberline {6.1.5}RLHF (Reinforcement Learning from Human Feedback)}{158}{subsection.6.1.5}%
-\contentsline {subsection}{\numberline {6.1.6}Summary Table}{159}{subsection.6.1.6}%
-\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{159}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{159}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{160}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{160}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{160}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{160}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{161}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{162}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{164}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{166}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{167}{subsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{167}{subsection.6.3.6}%
-\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{168}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{168}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{169}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{170}{subsection.6.4.3}%
-\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{173}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Transformer Architecture}{174}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Attention Is All You Need}{174}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Encoder\sphinxhyphen {}Decoder}{175}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Positional Encoding}{176}{subsection.7.1.3}%
-\contentsline {subsubsection}{Sinusoidal Positional Encodings}{176}{subsubsection*.54}%
-\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{177}{subsubsection*.55}%
-\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{178}{subsubsection*.56}%
-\contentsline {subsubsection}{Summary}{178}{subsubsection*.57}%
-\contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{178}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{179}{subsection.7.1.5}%
-\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{179}{subsubsection*.58}%
-\contentsline {subsubsection}{Cross Attention}{185}{subsubsection*.59}%
-\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{186}{subsection.7.1.6}%
-\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{187}{subsection.7.1.7}%
-\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{187}{subsection.7.1.8}%
-\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{188}{subsection.7.1.9}%
-\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{189}{subsection.7.1.10}%
-\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{189}{subsection.7.1.11}%
-\contentsline {subsection}{\numberline {7.1.12}Decoding}{190}{subsection.7.1.12}%
-\contentsline {subsubsection}{Greedy Decoding}{190}{subsubsection*.60}%
-\contentsline {subsubsection}{Beam Search}{190}{subsubsection*.61}%
-\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{191}{subsubsection*.62}%
-\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{191}{subsubsection*.63}%
-\contentsline {subsubsection}{Temperature Scaling}{192}{subsubsection*.64}%
-\contentsline {subsubsection}{Summary}{193}{subsubsection*.65}%
-\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{193}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}KV Cache}{193}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{195}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{196}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{197}{subsection.7.2.4}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{201}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{202}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{202}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{203}{section.8.3}%
-\contentsline {section}{\numberline {8.4}GEval with DeepEval}{203}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{203}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{203}{subsection.8.4.2}%
-\contentsline {chapter}{\numberline {9}LLM Guardrails}{215}{chapter.9}%
-\contentsline {section}{\numberline {9.1}LLM Risks}{215}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{216}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{219}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{222}{section.9.4}%
-\contentsline {section}{\numberline {9.5}NeMo Guardrails}{227}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{227}{subsection.9.5.1}%
-\contentsline {subsection}{\numberline {9.5.2}Rails}{234}{subsection.9.5.2}%
-\contentsline {subsection}{\numberline {9.5.3}Test}{234}{subsection.9.5.3}%
-\contentsline {subsubsection}{Safe Usecase}{234}{subsubsection*.66}%
-\contentsline {subsubsection}{Unsafe Usecases}{236}{subsubsection*.67}%
-\contentsline {section}{\numberline {9.6}Llama Guard3}{239}{section.9.6}%
-\contentsline {subsection}{\numberline {9.6.1}Load Models}{239}{subsection.9.6.1}%
-\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{239}{subsection.9.6.2}%
-\contentsline {subsection}{\numberline {9.6.3}Tests}{240}{subsection.9.6.3}%
-\contentsline {subsubsection}{Safe Usecase}{240}{subsubsection*.68}%
-\contentsline {subsubsection}{Unsafe Usecase}{241}{subsubsection*.69}%
-\contentsline {chapter}{\numberline {10}Main Reference}{243}{chapter.10}%
-\contentsline {chapter}{Bibliography}{245}{chapter*.70}%
+\contentsline {subsubsection}{PPO}{159}{subsubsection*.54}%
+\contentsline {subsubsection}{DPO}{164}{subsubsection*.55}%
+\contentsline {subsubsection}{Main Difficulties in RLHF}{167}{subsubsection*.56}%
+\contentsline {subsection}{\numberline {6.1.6}Summary Table}{169}{subsection.6.1.6}%
+\contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{169}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{169}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Feature\sphinxhyphen {}Based Approach}{170}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Layer\sphinxhyphen {}Specific Fine\sphinxhyphen {}Tuning}{170}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Task\sphinxhyphen {}Adaptive Pre\sphinxhyphen {}training}{170}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Embedding Model Fine\sphinxhyphen {}Tuning}{170}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Prepare Dataset}{171}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Import and Evaluate Pretrained Baseline Model}{172}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Loss Function with Matryoshka Representation}{174}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Fine\sphinxhyphen {}tune Embedding Model}{176}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Evaluate Fine\sphinxhyphen {}tuned Model}{177}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Results Comparison}{177}{subsection.6.3.6}%
+\contentsline {section}{\numberline {6.4}LLM Fine\sphinxhyphen {}Tuning}{178}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Load Dataset and Pretrained Model}{178}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fine\sphinxhyphen {}tuning Configuration}{179}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Fine\sphinxhyphen {}tune model}{180}{subsection.6.4.3}%
+\contentsline {chapter}{\numberline {7}Pre\sphinxhyphen {}training}{183}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Transformer Architecture}{184}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Attention Is All You Need}{184}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Encoder\sphinxhyphen {}Decoder}{185}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Positional Encoding}{186}{subsection.7.1.3}%
+\contentsline {subsubsection}{Sinusoidal Positional Encodings}{186}{subsubsection*.57}%
+\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{187}{subsubsection*.58}%
+\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{188}{subsubsection*.59}%
+\contentsline {subsubsection}{Summary}{188}{subsubsection*.60}%
+\contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{188}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{189}{subsection.7.1.5}%
+\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{189}{subsubsection*.61}%
+\contentsline {subsubsection}{Cross Attention}{195}{subsubsection*.62}%
+\contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{196}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}Residual Connections}{197}{subsection.7.1.7}%
+\contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{197}{subsection.7.1.8}%
+\contentsline {subsection}{\numberline {7.1.9}Label Smoothing}{198}{subsection.7.1.9}%
+\contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{199}{subsection.7.1.10}%
+\contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{199}{subsection.7.1.11}%
+\contentsline {subsection}{\numberline {7.1.12}Decoding}{200}{subsection.7.1.12}%
+\contentsline {subsubsection}{Greedy Decoding}{200}{subsubsection*.63}%
+\contentsline {subsubsection}{Beam Search}{200}{subsubsection*.64}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{201}{subsubsection*.65}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{201}{subsubsection*.66}%
+\contentsline {subsubsection}{Temperature Scaling}{202}{subsubsection*.67}%
+\contentsline {subsubsection}{Summary}{203}{subsubsection*.68}%
+\contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{203}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}KV Cache}{203}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{205}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{206}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Flash Attention}{207}{subsection.7.2.4}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{211}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{212}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{212}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{213}{section.8.3}%
+\contentsline {section}{\numberline {8.4}GEval with DeepEval}{213}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{213}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{213}{subsection.8.4.2}%
+\contentsline {chapter}{\numberline {9}LLM Guardrails}{225}{chapter.9}%
+\contentsline {section}{\numberline {9.1}LLM Risks}{225}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{226}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{229}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{232}{section.9.4}%
+\contentsline {section}{\numberline {9.5}NeMo Guardrails}{237}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{237}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Rails}{244}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Test}{244}{subsection.9.5.3}%
+\contentsline {subsubsection}{Safe Usecase}{244}{subsubsection*.69}%
+\contentsline {subsubsection}{Unsafe Usecases}{246}{subsubsection*.70}%
+\contentsline {section}{\numberline {9.6}Llama Guard3}{249}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Load Models}{249}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{249}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Tests}{250}{subsection.9.6.3}%
+\contentsline {subsubsection}{Safe Usecase}{250}{subsubsection*.71}%
+\contentsline {subsubsection}{Unsafe Usecase}{251}{subsubsection*.72}%
+\contentsline {chapter}{\numberline {10}Main Reference}{253}{chapter.10}%
+\contentsline {chapter}{Bibliography}{255}{chapter*.73}%

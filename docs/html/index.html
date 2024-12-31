@@ -52,10 +52,9 @@
 <li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rlhf.html">8. Reinforcement Learning from Human Feedback (RLHF)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="evaluation.html">9. LLM Evaluation Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guardrails.html">10. LLM Guardrails</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">11. Main Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guardrails.html">9. LLM Guardrails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">10. Main Reference</a></li>
 </ul>
 
         </div>
@@ -285,58 +284,37 @@ The PDF version can be downloaded from <a class="reference external" href="../la
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rlhf.html">8. Reinforcement Learning from Human Feedback (RLHF)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rlhf.html#ppo">8.1. PPO</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#state-action-and-reward-in-the-context-of-llms">8.1.1. <strong>State, Action, and Reward in the Context of LLMs</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#ppo-objective-function">8.1.2. <strong>PPO Objective Function</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#steps-of-rlhf-using-ppo">8.1.3. <strong>Steps of RLHF Using PPO</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#rlhf-training-tricks">8.1.4. RLHF Training Tricks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rlhf.html#dpo">8.2. DPO</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#dpo-objective">8.2.1. DPO Objective</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#steps-of-rlhf-using-dpo">8.2.2. Steps of RLHF Using DPO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#dpo-variants">8.2.3. DPO Variants</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rlhf.html#main-difficulties-in-rlhf">8.3. Main Difficulties in RLHF</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#data-collection">8.3.1. <strong>Data Collection</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rlhf.html#reward-hacking">8.3.2. <strong>Reward Hacking</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#statistical-scorers-traditional-metrics">8.1. Statistical Scorers (Traditional Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#model-based-scorers-learned-metrics">8.2. Model-Based Scorers (Learned Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#human-centric-evaluations-augmenting-metrics">8.3. Human-Centric Evaluations (Augmenting Metrics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#geval-with-deepeval">8.4. GEval with DeepEval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#g-eval-algorithm">8.4.1. G-Eval Algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#g-eval-with-deepeval">8.4.2. G-Eval with DeepEval</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="evaluation.html">9. LLM Evaluation Metrics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="evaluation.html#statistical-scorers-traditional-metrics">9.1. Statistical Scorers (Traditional Metrics)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="evaluation.html#model-based-scorers-learned-metrics">9.2. Model-Based Scorers (Learned Metrics)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="evaluation.html#human-centric-evaluations-augmenting-metrics">9.3. Human-Centric Evaluations (Augmenting Metrics)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="evaluation.html#geval-with-deepeval">9.4. GEval with DeepEval</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="evaluation.html#g-eval-algorithm">9.4.1. G-Eval Algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="evaluation.html#g-eval-with-deepeval">9.4.2. G-Eval with DeepEval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guardrails.html">9. LLM Guardrails</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guardrails.html#llm-risks">9.1. LLM Risks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guardrails.html#overview-of-jailbreak-techniques">9.2. Overview of Jailbreak Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guardrails.html#introduction-to-guardrails">9.3. Introduction to Guardrails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guardrails.html#overview-of-guardrails-tools">9.4. Overview of Guardrails Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guardrails.html#nemo-guardrails">9.5. NeMo Guardrails</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guardrails.html#yaml-config">9.5.1. Yaml Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardrails.html#rails">9.5.2. Rails</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardrails.html#test">9.5.3. Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="guardrails.html#llama-guard3">9.6. Llama Guard3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guardrails.html#load-models">9.6.1. Load Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardrails.html#define-safety-check">9.6.2. Define Safety Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardrails.html#tests">9.6.3. Tests</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guardrails.html">10. LLM Guardrails</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guardrails.html#llm-risks">10.1. LLM Risks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guardrails.html#overview-of-jailbreak-techniques">10.2. Overview of Jailbreak Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guardrails.html#introduction-to-guardrails">10.3. Introduction to Guardrails</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guardrails.html#overview-of-guardrails-tools">10.4. Overview of Guardrails Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guardrails.html#nemo-guardrails">10.5. NeMo Guardrails</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="guardrails.html#yaml-config">10.5.1. Yaml Config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guardrails.html#rails">10.5.2. Rails</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guardrails.html#test">10.5.3. Test</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="guardrails.html#llama-guard3">10.6. Llama Guard3</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="guardrails.html#load-models">10.6.1. Load Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guardrails.html#define-safety-check">10.6.2. Define Safety Check</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guardrails.html#tests">10.6.3. Tests</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">11. Main Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">10. Main Reference</a></li>
 </ul>
 </div>
 </section>
@@ -352,7 +330,7 @@ The PDF version can be downloaded from <a class="reference external" href="../la
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Dec 30, 2024.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
       </span></p>
   </div>
 
