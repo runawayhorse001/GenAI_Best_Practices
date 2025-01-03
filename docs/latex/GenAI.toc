@@ -200,29 +200,35 @@
 \contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{205}{subsection.7.2.2}%
 \contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{206}{subsection.7.2.3}%
 \contentsline {subsection}{\numberline {7.2.4}Flash Attention}{207}{subsection.7.2.4}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{211}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{212}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{212}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{213}{section.8.3}%
-\contentsline {section}{\numberline {8.4}GEval with DeepEval}{213}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{213}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{213}{subsection.8.4.2}%
-\contentsline {chapter}{\numberline {9}LLM Guardrails}{225}{chapter.9}%
-\contentsline {section}{\numberline {9.1}LLM Risks}{225}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{226}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{229}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{232}{section.9.4}%
-\contentsline {section}{\numberline {9.5}NeMo Guardrails}{237}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{237}{subsection.9.5.1}%
-\contentsline {subsection}{\numberline {9.5.2}Rails}{244}{subsection.9.5.2}%
-\contentsline {subsection}{\numberline {9.5.3}Test}{244}{subsection.9.5.3}%
-\contentsline {subsubsection}{Safe Usecase}{244}{subsubsection*.69}%
-\contentsline {subsubsection}{Unsafe Usecases}{246}{subsubsection*.70}%
-\contentsline {section}{\numberline {9.6}Llama Guard3}{249}{section.9.6}%
-\contentsline {subsection}{\numberline {9.6.1}Load Models}{249}{subsection.9.6.1}%
-\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{249}{subsection.9.6.2}%
-\contentsline {subsection}{\numberline {9.6.3}Tests}{250}{subsection.9.6.3}%
-\contentsline {subsubsection}{Safe Usecase}{250}{subsubsection*.71}%
-\contentsline {subsubsection}{Unsafe Usecase}{251}{subsubsection*.72}%
-\contentsline {chapter}{\numberline {10}Main Reference}{253}{chapter.10}%
-\contentsline {chapter}{Bibliography}{255}{chapter*.73}%
+\contentsline {subsection}{\numberline {7.2.5}Mixture of Experts (MoE)}{210}{subsection.7.2.5}%
+\contentsline {subsubsection}{Introduction}{210}{subsubsection*.69}%
+\contentsline {subsubsection}{Methodology}{210}{subsubsection*.70}%
+\contentsline {subsubsection}{Mixtral 8x7B}{215}{subsubsection*.71}%
+\contentsline {subsection}{\numberline {7.2.6}Case Studies}{216}{subsection.7.2.6}%
+\contentsline {subsubsection}{DeepSeek\sphinxhyphen {}V3}{216}{subsubsection*.72}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{221}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{222}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{222}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{223}{section.8.3}%
+\contentsline {section}{\numberline {8.4}GEval with DeepEval}{223}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{223}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{223}{subsection.8.4.2}%
+\contentsline {chapter}{\numberline {9}LLM Guardrails}{235}{chapter.9}%
+\contentsline {section}{\numberline {9.1}LLM Risks}{235}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{236}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{239}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{242}{section.9.4}%
+\contentsline {section}{\numberline {9.5}NeMo Guardrails}{247}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{247}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Rails}{254}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Test}{254}{subsection.9.5.3}%
+\contentsline {subsubsection}{Safe Usecase}{254}{subsubsection*.73}%
+\contentsline {subsubsection}{Unsafe Usecases}{256}{subsubsection*.74}%
+\contentsline {section}{\numberline {9.6}Llama Guard3}{259}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Load Models}{259}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{259}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Tests}{260}{subsection.9.6.3}%
+\contentsline {subsubsection}{Safe Usecase}{260}{subsubsection*.75}%
+\contentsline {subsubsection}{Unsafe Usecase}{261}{subsubsection*.76}%
+\contentsline {chapter}{\numberline {10}Main Reference}{263}{chapter.10}%
+\contentsline {chapter}{Bibliography}{265}{chapter*.77}%
