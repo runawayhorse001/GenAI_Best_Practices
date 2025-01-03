@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{January 02, 2025}
+\date{January 03, 2025}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -10039,7 +10039,7 @@ This chapter delves into transformer models, drawing on insights from
 \capstart
 
 \noindent\sphinxincludegraphics{{transformer_architecture}.png}
-\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id8}}\end{figure}
+\caption{Transformer Architecture (source: \sphinxcite{reference:attentionallyouneed})}\label{\detokenize{pretraining:id10}}\end{figure}
 
 
 \subsection{Attention Is All You Need}
@@ -10266,7 +10266,7 @@ The positional encodings are added directly to the token embeddings:
 \capstart
 
 \noindent\sphinxincludegraphics{{position_embedding}.png}
-\caption{Positional Embedding}\label{\detokenize{pretraining:id9}}\end{figure}
+\caption{Positional Embedding}\label{\detokenize{pretraining:id11}}\end{figure}
 
 
 \subsubsection{Rotary Positional Embeddings (RoPE)}
@@ -10518,7 +10518,7 @@ dependencies between words.
 \capstart
 
 \noindent\sphinxincludegraphics{{word_embedding_matrix}.png}
-\caption{Word Embedding}\label{\detokenize{pretraining:id10}}\end{figure}
+\caption{Word Embedding}\label{\detokenize{pretraining:id12}}\end{figure}
 
 \sphinxAtStartPar
 Take an example of embedding matrix \(W_E\) with \textasciitilde{}50k vocabulary
@@ -10547,7 +10547,7 @@ following projections in embedding space:
 \capstart
 
 \noindent\sphinxincludegraphics{{contextual_embedding}.png}
-\caption{Contextual Embedding}\label{\detokenize{pretraining:id11}}\end{figure}
+\caption{Contextual Embedding}\label{\detokenize{pretraining:id13}}\end{figure}
 
 \sphinxAtStartPar
 Embedding matrix contains vectors of all words in the vocabulary. It’s
@@ -10564,7 +10564,7 @@ parameters in this embedding matrix is calculated by \(d \times V\).
 \capstart
 
 \noindent\sphinxincludegraphics{{self_attention_hendrik}.png}
-\caption{Self Attention (source: \sphinxhref{https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download}{The Transformer Architecture A Visual Guide})}\label{\detokenize{pretraining:id12}}\end{figure}
+\caption{Self Attention (source: \sphinxhref{https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download}{The Transformer Architecture A Visual Guide})}\label{\detokenize{pretraining:id14}}\end{figure}
 
 
 \subsubsection{Self\sphinxhyphen{}Attention}
@@ -10620,7 +10620,7 @@ words.
 \capstart
 
 \noindent\sphinxincludegraphics{{query_projection}.png}
-\caption{Query Projection}\label{\detokenize{pretraining:id13}}\end{figure}
+\caption{Query Projection}\label{\detokenize{pretraining:id15}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10647,7 +10647,7 @@ produced by the word ‘wizard’.
 \capstart
 
 \noindent\sphinxincludegraphics{{key_projection}.png}
-\caption{Key Projection}\label{\detokenize{pretraining:id14}}\end{figure}
+\caption{Key Projection}\label{\detokenize{pretraining:id16}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10672,7 +10672,7 @@ adjective to ‘wizard’. In other words, the embedding of ‘brave’
 \capstart
 
 \noindent\sphinxincludegraphics{{attention_score}.png}
-\caption{Attention Score}\label{\detokenize{pretraining:id15}}\end{figure}
+\caption{Attention Score}\label{\detokenize{pretraining:id17}}\end{figure}
 
 \item {} 
 \sphinxAtStartPar
@@ -10763,7 +10763,7 @@ refined vector, encoding contextually rich meaning.
 \capstart
 
 \noindent\sphinxincludegraphics{{value_projection_weighted_sum}.png}
-\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id16}}\end{figure}
+\caption{Value Projection and Weighted Sum}\label{\detokenize{pretraining:id18}}\end{figure}
 
 \end{enumerate}
 
@@ -11436,7 +11436,7 @@ many candidate sequences are considered at each step.
 \capstart
 
 \noindent\sphinxincludegraphics{{beam_search}.png}
-\caption{Beam Search}\label{\detokenize{pretraining:id17}}\end{figure}
+\caption{Beam Search}\label{\detokenize{pretraining:id19}}\end{figure}
 
 
 \subsubsection{Top\sphinxhyphen{}k Sampling}
@@ -11791,7 +11791,7 @@ key matrix:
 \capstart
 
 \noindent\sphinxincludegraphics{{multiquery_attention}.png}
-\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id18}}\end{figure}
+\caption{Multi\sphinxhyphen{}Query Attention}\label{\detokenize{pretraining:id20}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of MQA:}
@@ -11848,7 +11848,7 @@ where \(i\) is the query head within a group.
 \capstart
 
 \noindent\sphinxincludegraphics{{grouped_query_attention}.png}
-\caption{Grouped Query Attention}\label{\detokenize{pretraining:id19}}\end{figure}
+\caption{Grouped Query Attention}\label{\detokenize{pretraining:id21}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Advantages of GQA:}
@@ -11939,7 +11939,7 @@ utilize GPUs.
 \capstart
 
 \noindent\sphinxincludegraphics{{flashattention_paper}.png}
-\caption{Flash Attention (source: \sphinxhref{https://arxiv.org/abs/2205.14135}{Flash Attention})}\label{\detokenize{pretraining:id20}}\end{figure}
+\caption{Flash Attention (source: \sphinxhref{https://arxiv.org/abs/2205.14135}{Flash Attention})}\label{\detokenize{pretraining:id22}}\end{figure}
 
 \sphinxAtStartPar
 The idea of Flash Attention is \sphinxstylestrong{computing by blocks} to reduce HBM
@@ -12248,7 +12248,7 @@ given input.
 \capstart
 
 \noindent\sphinxincludegraphics{{MoE_layer}.png}
-\caption{MoE Layer.}\label{\detokenize{pretraining:id21}}\end{figure}
+\caption{MoE Layer.}\label{\detokenize{pretraining:id23}}\end{figure}
 
 \sphinxAtStartPar
 In a standard decoder\sphinxhyphen{}only transformer architecture, FFNNs are applied
@@ -12266,7 +12266,7 @@ itself an FFNN.
 \capstart
 
 \noindent\sphinxincludegraphics{{dense_sparse_decoder}.png}
-\caption{Dense Decoder and Sparse Decoder.}\label{\detokenize{pretraining:id22}}\end{figure}
+\caption{Dense Decoder and Sparse Decoder.}\label{\detokenize{pretraining:id24}}\end{figure}
 
 \sphinxAtStartPar
 During inference, only specific experts are activated. A given text
@@ -12281,7 +12281,7 @@ utilized for the input.
 \capstart
 
 \noindent\sphinxincludegraphics{{different_expert_path}.png}
-\caption{Different tokens have different expert paths.}\label{\detokenize{pretraining:id23}}\end{figure}
+\caption{Different tokens have different expert paths.}\label{\detokenize{pretraining:id25}}\end{figure}
 
 \sphinxAtStartPar
 After passing through the router, a \sphinxstylestrong{softmax function} generates a
@@ -12313,7 +12313,7 @@ experts’ outputs weighted by their respective probabilities:
 \capstart
 
 \noindent\sphinxincludegraphics{{MoE_layer_details}.png}
-\caption{Computations within an MoE layer.}\label{\detokenize{pretraining:id24}}\end{figure}
+\caption{Computations within an MoE layer.}\label{\detokenize{pretraining:id26}}\end{figure}
 
 \sphinxAtStartPar
 During training, some experts may learn faster than others, leading to
@@ -12354,7 +12354,252 @@ that layer entirely—a phenomenon referred to as \sphinxstylestrong{token overf
 \capstart
 
 \noindent\sphinxincludegraphics{{expert_capacity}.png}
-\caption{Expert Capacity}\label{\detokenize{pretraining:id25}}\end{figure}
+\caption{Expert Capacity}\label{\detokenize{pretraining:id27}}\end{figure}
+
+
+\subsubsection{Mixtral 8x7B}
+\label{\detokenize{pretraining:mixtral-8x7b}}
+\sphinxAtStartPar
+The \sphinxhref{https://arxiv.org/abs/2401.04088}{Mixtral 8x7B model} is a
+sparse mixture of experts (MoE) model that is currently one of the best
+performing open\sphinxhyphen{}source large language models. The sparse MoE layers
+allow only a subset of the experts used for each input. Specifically,
+only 2 experts are used at a time for each input (TopK=2). Mixtral 8x7B
+replaces each feed\sphinxhyphen{}forward module in a transformer architecture with 8
+expert layers. It also uses a routing module, or gating network, that
+directs each token embedding to the 8 expert feed\sphinxhyphen{}forward modules. The
+outputs of these expert layers are then summed.
+
+\sphinxAtStartPar
+The “8x” in the name refers to the 8 expert sub\sphinxhyphen{}networks and the “7B”
+indicates that it combines Mistral 7B modules. However, the model’s size
+is not 56B parameters (8 x 7B). In total, Mixtral 8x7B has 47B
+parameters. The 7B parameters of the Mistral model are distributed as
+1.29B parameters in the attention layers and 5.71B in the feed\sphinxhyphen{}forward
+layers. Mixtral 8x7B has \sphinxstylestrong{45.68B} parameters in its expert (feed
+forward) layers. While Mixtral 8x7B has 47B parameters, it only uses
+\sphinxstylestrong{13B} parameters for each input token because only two experts are
+active at a time. This makes it more efficient than a regular, non\sphinxhyphen{}MoE
+47B parameter model.
+
+\sphinxAtStartPar
+Mixtral 8x7B outperforms Llama 2 70B and GPT\sphinxhyphen{}3.5 across most benchmarks,
+including mathematics, code generation, and multilingual tasks, while
+using significantly fewer active parameters (13B vs. 70B). Its
+fine\sphinxhyphen{}tuned version, Mixtral 8x7B \textendash{} Instruct, surpasses Claude\sphinxhyphen{}2.1,
+Gemini Pro, and GPT\sphinxhyphen{}3.5 Turbo in human evaluation benchmarks,
+demonstrating superior efficiency, reduced biases, and high performance
+in long\sphinxhyphen{}context and multilingual scenarios.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{mixtral_of_experts}.png}
+\caption{Mixtral of Experts (Source: \sphinxhref{https://magazine.sebastianraschka.com/p/ai-research-papers-2024-part-1}{Sebastian Raschka})}\label{\detokenize{pretraining:id28}}\end{figure}
+
+
+\subsection{Case Studies}
+\label{\detokenize{pretraining:case-studies}}
+
+\subsubsection{DeepSeek\sphinxhyphen{}V3}
+\label{\detokenize{pretraining:deepseek-v3}}
+\sphinxAtStartPar
+DeepSeek\sphinxhyphen{}V3 marks a significant leap
+forward in AI model performance, offering exceptional inference
+capabilities that redefine industry benchmarks. The model processes
+approximately \sphinxstylestrong{89 tokens per second}, making it nearly \sphinxstylestrong{4 times
+faster} than its predecessor, DeepSeek\sphinxhyphen{}V2.5, which achieved a rate of
+18 tokens per second. This remarkable speed and efficiency position
+DeepSeek\sphinxhyphen{}V3 as a leader in the field.
+
+\sphinxAtStartPar
+With an impressive \sphinxstylestrong{671 billion Mixture\sphinxhyphen{}of\sphinxhyphen{}Experts (MoE) parameters},
+of which \sphinxstylestrong{37 billion are activated per token}, DeepSeek\sphinxhyphen{}V3 operates on
+a scale unmatched by its predecessor. Its parameter size is
+approximately \sphinxstylestrong{2.8 times larger} than DeepSeek\sphinxhyphen{}V2.5, and it was
+trained on a massive dataset of \sphinxstylestrong{14.8 trillion high\sphinxhyphen{}quality tokens} at
+a total cost of just \sphinxstylestrong{\$5.576 million}.
+
+\sphinxAtStartPar
+DeepSeek\sphinxhyphen{}V3’s exceptional performance stems from a suite of cutting\sphinxhyphen{}edge
+innovations that push the boundaries of AI efficiency and scalability.
+Key advancements include \sphinxstylestrong{Multi\sphinxhyphen{}Head Latent Attention (MLA)}, an
+advanced \sphinxstylestrong{Mixture\sphinxhyphen{}of\sphinxhyphen{}Experts (MoE)} architecture, and \sphinxstylestrong{Multi\sphinxhyphen{}Token
+Prediction (MTP)}, which significantly accelerate text generation by
+predicting multiple tokens simultaneously. Complementing these are
+sophisticated training strategies such as the \sphinxstylestrong{Auxiliary\sphinxhyphen{}Loss\sphinxhyphen{}Free Load
+Balancing} method, which ensures optimal resource utilization without
+compromising accuracy, and the \sphinxstylestrong{FP8 Mixed Precision Framework},
+designed to reduce memory usage and computational costs while
+maintaining numerical stability. These technologies collectively enable
+DeepSeek\sphinxhyphen{}V3 to process up to \sphinxstylestrong{128,000 tokens} in a single context
+window, a feat that sets new benchmarks for large language models. This
+unparalleled combination of innovation and efficiency positions
+DeepSeek\sphinxhyphen{}V3 as a formidable competitor in the AI landscape, narrowing
+the gap between open\sphinxhyphen{}source and proprietary systems while redefining
+standards for scalability and performance. \sphinxcite{reference:deepseek-v3}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Architecture:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Multi\sphinxhyphen{}Head Latent Attention (MLA)}
+
+\sphinxAtStartPar
+Multi\sphinxhyphen{}Head Latent Attention (MLA), introduced in DeepSeek\sphinxhyphen{}V2, is an
+innovative attention mechanism designed to address the bottleneck of
+large Key\sphinxhyphen{}Value (KV) caches in traditional Multi\sphinxhyphen{}Head Attention (MHA).
+The core concept of MLA is \sphinxstylestrong{low\sphinxhyphen{}rank joint compression} for keys and
+values, which significantly reduces the KV cache size. During
+inference, only a compressed latent representation of keys and values
+is stored, enabling more efficient memory usage and allowing for
+larger batch sizes and sequence lengths. Additionally, during
+training, low\sphinxhyphen{}rank compression is also applied to queries to minimize
+activation memory requirements. \sphinxcite{reference:deepseek-v2}
+
+\sphinxAtStartPar
+MLA further incorporates a \sphinxstylestrong{decoupled Rotary Position Embedding
+(RoPE)}, applied to additional multi\sphinxhyphen{}head queries and a shared key.
+This decoupling ensures compatibility with MLA’s compression process
+by separating positional encoding information from the compressed
+latent vectors. During inference, the decoupled key is cached
+alongside the compressed latent vectors, maintaining efficiency while
+preserving positional context. These innovations make MLA a highly
+efficient and scalable solution for modern attention mechanisms.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{MLA_DeepSeekV2}.png}
+\caption{DeepSeek\sphinxhyphen{}V2 Multi\sphinxhyphen{}Head Latent Attention (MLA) (Source: \sphinxhref{https://arxiv.org/abs/2405.04434}{DeepSeek\sphinxhyphen{}V2})}\label{\detokenize{pretraining:id29}}\end{figure}
+
+\item {} 
+\sphinxAtStartPar
+DeepSeekMoE
+
+\sphinxAtStartPar
+For Feed\sphinxhyphen{}Forward Networks (FFNs), the DeepSeekMoE architecture is
+utilized, introducing two key innovations to enhance expert
+specialization and knowledge efficiency. First, \sphinxstylestrong{Fine\sphinxhyphen{}Grained Expert
+Segmentation} divides experts into smaller, more specialized units by
+splitting the FFN intermediate hidden dimensions. This segmentation
+enables a more precise decomposition of knowledge while maintaining
+constant computational costs, allowing for a flexible and adaptive
+combination of activated experts. Second, \sphinxstylestrong{Shared Expert Isolation}
+designates specific experts to capture and consolidate common
+knowledge across contexts. This strategy reduces redundancy among
+routed experts, ensuring that each expert acquires distinct and
+focused knowledge for more accurate and efficient processing.
+DeepSeek\sphinxhyphen{}V3 uses the sigmoid function to calculate the affinity
+scores. It normalizes the selected affinity scores to generate the
+gating values, ensuring a more balanced and precise distribution.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{deepseek_architecture}.png}
+\caption{DeepSeekMoE Architecture (Source: \sphinxhref{https://arxiv.org/abs/2412.19437}{DeepSeek\sphinxhyphen{}V3})}\label{\detokenize{pretraining:id30}}\end{figure}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Multi\sphinxhyphen{}Token Prediction (MTP)}
+
+\sphinxAtStartPar
+Multi\sphinxhyphen{}Token Prediction (MTP) is an advanced training objective
+employed in DeepSeek\sphinxhyphen{}V3 that extends the model’s ability to predict
+multiple future tokens simultaneously at each position, rather than
+focusing on a single token. This approach densifies training signals,
+improving data efficiency by enabling the model to learn more
+effectively from the same dataset. Additionally, MTP allows the model
+to pre\sphinxhyphen{}plan its token representations, enhancing its ability to
+predict long\sphinxhyphen{}term patterns and improving performance on complex tasks.
+Unlike prior implementations, where multiple tokens are predicted in
+parallel using independent output heads, DeepSeek\sphinxhyphen{}V3 sequentially
+predicts additional tokens while maintaining the full causal chain at
+each prediction depth. This design preserves contextual dependencies
+and ensures robust generative capabilities. MTP also accelerates
+inference by enabling faster token generation and supports speculative
+decoding for further efficiency gains. These features make MTP a
+transformative innovation for scaling language models and enhancing
+their predictive accuracy and speed.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{multi_token_prediction}.png}
+\caption{Multi\sphinxhyphen{}Token Prediction (MTP) (Source: \sphinxhref{https://arxiv.org/abs/2412.19437}{DeepSeek\sphinxhyphen{}V3})}\label{\detokenize{pretraining:id31}}\end{figure}
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Training Strategy:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Auxiliary\sphinxhyphen{}Loss\sphinxhyphen{}Free Load Balancing}
+
+\sphinxAtStartPar
+Rather than applying the traditional auxiliary loss for load
+balancing, they use an auxiliary\sphinxhyphen{}lose\sphinxhyphen{}free load balancing strategy to
+achieve a better trade\sphinxhyphen{}off between load balance and model performance.
+
+\sphinxAtStartPar
+Each expert is assigned a bias term that is added to its affinity
+score during the routing process. This adjusted score determines the
+top\sphinxhyphen{}K routing decisions. After each training step, the bias for
+overloaded experts is decreased, while it is increased for underloaded
+experts. The adjustment rate is controlled by a hyperparameter called
+the bias update speed \(\gamma\). The bias term is only used for
+routing decisions, while the gating value (used to scale the FFN
+output) is derived from the original affinity score, ensuring no
+interference with model computations.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{FP8 Mixed Precision Framework}
+
+\sphinxAtStartPar
+The mixed precision framework in DeepSeek\sphinxhyphen{}V3 leverages FP8 training to
+significantly enhance computational efficiency and reduce memory usage
+while maintaining numerical stability. Key features include:
+
+\sphinxAtStartPar
+Most compute\sphinxhyphen{}intensive operations, such as GEMM (General Matrix
+Multiplication) operations for forward pass (Fprop), activation
+backward pass (Dgrad), and weight backward pass (Wgrad), are conducted
+in FP8 precision. This design doubles computational speed compared to
+traditional BF16 methods and allows activations to be stored in FP8,
+reducing memory consumption.
+
+\sphinxAtStartPar
+Critical components sensitive to low\sphinxhyphen{}precision computations, such as
+embedding modules, output heads, MoE gating modules, normalization
+operators, and attention operators, are maintained in higher precision
+(e.g., BF16 or FP32). This ensures stable training dynamics without
+compromising efficiency. To further guarantee numerical stability,
+master weights, weight gradients, and optimizer states are stored in
+higher precision formats.
+
+\sphinxAtStartPar
+To further improve precision in low\sphinxhyphen{}precision FP8 training,
+DeepSeek\sphinxhyphen{}V3 incorporates innovative strategies in both
+\sphinxstylestrong{quantization} and the \sphinxstylestrong{multiplication} process, addressing
+challenges of accuracy and stability inherent to low\sphinxhyphen{}precision
+formats.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{fp8_precision}.png}
+\caption{FP Mixed Precision Framework (Source: \sphinxhref{https://arxiv.org/abs/2412.19437}{DeepSeek\sphinxhyphen{}V3})}\label{\detokenize{pretraining:id32}}\end{figure}
+
+\end{itemize}
 
 \sphinxstepscope
 
@@ -14775,6 +15020,14 @@ Rui Zheng etc.
 \sphinxAtStartPar
 Rafael Rafailov etc.
 \sphinxhref{https://arxiv.org/abs/2305.18290}{Direct Preference Optimization: Your Language Model is Secretly a Reward Model}, 2023.
+\bibitem[DeepSeek\sphinxhyphen{}V3]{reference:deepseek-v3}
+\sphinxAtStartPar
+DeepSeek AI.
+\sphinxhref{https://arxiv.org/abs/2412.19437}{DeepSeek\sphinxhyphen{}V3 Technical Report}, 2024.
+\bibitem[DeepSeek\sphinxhyphen{}V2]{reference:deepseek-v2}
+\sphinxAtStartPar
+DeepSeek AI.
+\sphinxhref{https://arxiv.org/abs/2405.04434}{DeepSeek\sphinxhyphen{}V2: A Strong, Economical, and Efficient Mixture\sphinxhyphen{}of\sphinxhyphen{}Experts Language Model}, 2024.
 \end{sphinxthebibliography}
 
 

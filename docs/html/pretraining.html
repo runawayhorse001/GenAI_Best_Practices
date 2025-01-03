@@ -94,6 +94,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#mixture-of-experts-moe">7.2.5. Mixture of Experts (MoE)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction">7.2.5.1. Introduction</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#methodology">7.2.5.2. Methodology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixtral-8x7b">7.2.5.3. Mixtral 8x7B</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#case-studies">7.2.6. Case Studies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deepseek-v3">7.2.6.1. DeepSeek-V3</a></li>
 </ul>
 </li>
 </ul>
@@ -149,10 +154,10 @@ summarize information, and perform other natural language processing tasks.</p>
 <a class="reference external" href="https://nlp.seas.harvard.edu/annotated-transformer/">The Annotated Transformer</a> and <a class="reference external" href="https://towardsdatascience.com/tracing-the-transformer-in-diagrams-95dbeb68160c">Tracing the Transformer in Diagrams</a>, to explore their underlying architecture and practical applications.</p>
 <section id="transformer-architecture">
 <h2><span class="section-number">7.1. </span>Transformer Architecture<a class="headerlink" href="#transformer-architecture" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id10">
 <img alt="transformer_architecture" src="_images/transformer_architecture.png" />
 <figcaption>
-<p><span class="caption-text">Transformer Architecture (source: <a class="reference internal" href="reference.html#attentionallyouneed" id="id1"><span>[attentionAllYouNeed]</span></a>)</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text">Transformer Architecture (source: <a class="reference internal" href="reference.html#attentionallyouneed" id="id1"><span>[attentionAllYouNeed]</span></a>)</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="attention-is-all-you-need">
@@ -306,10 +311,10 @@ PE(pos,2i+1) = \cos\Big({pos\over 10000^{2i/d}}\Big)\end{split}\]</div>
 <p>The positional encodings are added directly to the token embeddings:</p>
 <div class="math notranslate nohighlight">
 \[\text{Input to Transformer} = \text{Token Embedding} + \text{Positional Encoding}\]</div>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id11">
 <img alt="position_embedding" src="_images/position_embedding.png" />
 <figcaption>
-<p><span class="caption-text">Positional Embedding</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">Positional Embedding</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -473,10 +478,10 @@ representations but can be adjusted as the model learns from the
 context of a sentence to capture subtle semantic nuances and
 dependencies between words.</p></li>
 </ul>
-<figure class="align-center" id="id10">
+<figure class="align-center" id="id12">
 <img alt="word_embedding-modified" src="_images/word_embedding_matrix.png" />
 <figcaption>
-<p><span class="caption-text">Word Embedding</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+<p><span class="caption-text">Word Embedding</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Take an example of embedding matrix <span class="math notranslate nohighlight">\(W_E\)</span> with ~50k vocabulary
@@ -497,10 +502,10 @@ Witchcraft and Wizardry, retrieves the Philosopher’s Stone, battles a
 basilisk, and ultimately leads a final battle at Hogwarts, defeating
 Voldemort and bringing peace to the wizarding world</em>” results in the
 following projections in embedding space:</p>
-<figure class="align-center" id="id11">
+<figure class="align-center" id="id13">
 <img alt="contextual_embedding" src="_images/contextual_embedding.png" />
 <figcaption>
-<p><span class="caption-text">Contextual Embedding</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+<p><span class="caption-text">Contextual Embedding</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Embedding matrix contains vectors of all words in the vocabulary. It’s
@@ -511,10 +516,10 @@ parameters in this embedding matrix is calculated by <span class="math notransla
 </section>
 <section id="attention-mechanism">
 <h3><span class="section-number">7.1.5. </span>Attention Mechanism<a class="headerlink" href="#attention-mechanism" title="Link to this heading"></a></h3>
-<figure class="align-center" id="id12">
+<figure class="align-center" id="id14">
 <img alt="self_attention_hendrik" src="_images/self_attention_hendrik.png" />
 <figcaption>
-<p><span class="caption-text">Self Attention (source: <a class="reference external" href="https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download">The Transformer Architecture A Visual Guide</a>)</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+<p><span class="caption-text">Self Attention (source: <a class="reference external" href="https://www.hendrik-erz.de/post/the-transformer-architecture-a-visual-guide-pdf-download">The Transformer Architecture A Visual Guide</a>)</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="self-attention">
@@ -551,10 +556,10 @@ matrix multiplication.</p>
 <p>Conceptually, the query matrix aims to ask each word a question
 regarding what kinds of relationship it has with each of the other
 words.</p>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id15">
 <img alt="query_projection" src="_images/query_projection.png" />
 <figcaption>
-<p><span class="caption-text">Query Projection</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-text">Query Projection</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -571,10 +576,10 @@ queries whenever they closely align with each other. In our example
 of “The brave wizard cast a powerful spell”, the key metrix maps the
 word ‘brave’ to vectors that are closely aligned with the query
 produced by the word ‘wizard’.</p>
-<figure class="align-center" id="id14">
+<figure class="align-center" id="id16">
 <img alt="key_projection" src="_images/key_projection.png" />
 <figcaption>
-<p><span class="caption-text">Key Projection</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-text">Key Projection</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -589,10 +594,10 @@ be values from negative infinity to positive infinity.</p>
 is expected to be a large positive value because ‘brave’ is an
 adjective to ‘wizard’. In other words, the embedding of ‘brave’
 <strong>attends to</strong> the embedding of ‘wizard’.</p>
-<figure class="align-center" id="id15">
+<figure class="align-center" id="id17">
 <img alt="attention_score" src="_images/attention_score.png" />
 <figcaption>
-<p><span class="caption-text">Attention Score</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+<p><span class="caption-text">Attention Score</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -653,10 +658,10 @@ word there is a weighted sum of the value vectors <span class="math notranslate 
 based on the attention distribution. Conceptually, this is the change
 going to be added to the original embedding, resulting in a more
 refined vector, encoding contextually rich meaning.</p>
-<figure class="align-center" id="id16">
+<figure class="align-center" id="id18">
 <img alt="value_projection_weighted_sum" src="_images/value_projection_weighted_sum.png" />
 <figcaption>
-<p><span class="caption-text">Value Projection and Weighted Sum</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+<p><span class="caption-text">Value Projection and Weighted Sum</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -1071,10 +1076,10 @@ the “beam width”).</p>
 sequences (instead of just one) and chooses the one with the highest
 cumulative probability. A hyperparameter, <strong>beam width</strong>, controls how
 many candidate sequences are considered at each step.</p>
-<figure class="align-center" id="id17">
+<figure class="align-center" id="id19">
 <img alt="beam_search" src="_images/beam_search.png" />
 <figcaption>
-<p><span class="caption-text">Beam Search</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+<p><span class="caption-text">Beam Search</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1304,10 +1309,10 @@ heads.</p>
 key matrix:</p>
 <div class="math notranslate nohighlight">
 \[\text{Attention}_i = \text{softmax} \Big({Q_i K^T \over \sqrt{d_k}}\Big)V\]</div>
-<figure class="align-center" id="id18">
+<figure class="align-center" id="id20">
 <img alt="multiquery_attention" src="_images/multiquery_attention.png" />
 <figcaption>
-<p><span class="caption-text">Multi-Query Attention</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+<p><span class="caption-text">Multi-Query Attention</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>Advantages of MQA:</strong></p>
@@ -1343,10 +1348,10 @@ keys and values within the group:</p>
 <div class="math notranslate nohighlight">
 \[\text{Attention}_i = \text{softmax} \Big({Q_i K^T_{\text{group,i}}\over \sqrt{d_k}}\Big) V_{group,i}\]</div>
 <p>where <span class="math notranslate nohighlight">\(i\)</span> is the query head within a group.</p>
-<figure class="align-center" id="id19">
+<figure class="align-center" id="id21">
 <img alt="grouped_query_attention" src="_images/grouped_query_attention.png" />
 <figcaption>
-<p><span class="caption-text">Grouped Query Attention</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+<p><span class="caption-text">Grouped Query Attention</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>Advantages of GQA:</strong></p>
@@ -1402,10 +1407,10 @@ bottleneck rather than the GPU’s raw computational power. This finding
 shows that existing implementations of Transformers do not efficiently
 utilize GPUs.</p></li>
 </ul>
-<figure class="align-center" id="id20">
+<figure class="align-center" id="id22">
 <img alt="flashattention" src="_images/flashattention_paper.png" />
 <figcaption>
-<p><span class="caption-text">Flash Attention (source: <a class="reference external" href="https://arxiv.org/abs/2205.14135">Flash Attention</a>)</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+<p><span class="caption-text">Flash Attention (source: <a class="reference external" href="https://arxiv.org/abs/2205.14135">Flash Attention</a>)</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The idea of Flash Attention is <strong>computing by blocks</strong> to reduce HBM
@@ -1621,10 +1626,10 @@ learn syntactic information on a token level.</p></li>
 which experts. It helps to decide which expert is best suited for a
 given input.</p></li>
 </ul>
-<figure class="align-center" id="id21">
+<figure class="align-center" id="id23">
 <img alt="MoE_layer" src="_images/MoE_layer.png" />
 <figcaption>
-<p><span class="caption-text">MoE Layer.</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+<p><span class="caption-text">MoE Layer.</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>In a standard decoder-only transformer architecture, FFNNs are applied
@@ -1636,10 +1641,10 @@ dense layers by segmenting them into multiple smaller components, each
 acting as an expert, and activates only a subset of experts at any given
 time. This approach forms a <strong>sparse model</strong>, where each expert is
 itself an FFNN.</p>
-<figure class="align-center" id="id22">
+<figure class="align-center" id="id24">
 <img alt="dense_sparse_decoder" src="_images/dense_sparse_decoder.png" />
 <figcaption>
-<p><span class="caption-text">Dense Decoder and Sparse Decoder.</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+<p><span class="caption-text">Dense Decoder and Sparse Decoder.</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>During inference, only specific experts are activated. A given text
@@ -1648,10 +1653,10 @@ selected experts may vary for each token, resulting in different paths
 being taken through the network. Consequently, each token may activate a
 unique set of experts, ensuring that the most relevant subset is
 utilized for the input.</p>
-<figure class="align-center" id="id23">
+<figure class="align-center" id="id25">
 <img alt="different_expert_path" src="_images/different_expert_path.png" />
 <figcaption>
-<p><span class="caption-text">Different tokens have different expert paths.</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+<p><span class="caption-text">Different tokens have different expert paths.</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>After passing through the router, a <strong>softmax function</strong> generates a
@@ -1671,10 +1676,10 @@ weights <span class="math notranslate nohighlight">\(W\)</span>, we compute <spa
 experts’ outputs weighted by their respective probabilities:</p>
 <div class="math notranslate nohighlight">
 \[y=\sum_{i\in \tau} G_i(x)E_i(x)\]</div>
-<figure class="align-center" id="id24">
+<figure class="align-center" id="id26">
 <img alt="expert_capacity" src="_images/MoE_layer_details.png" />
 <figcaption>
-<p><span class="caption-text">Computations within an MoE layer.</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+<p><span class="caption-text">Computations within an MoE layer.</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>During training, some experts may learn faster than others, leading to
@@ -1705,12 +1710,206 @@ If an expert reaches its capacity (denoted as <span class="math notranslate nohi
 tokens are routed to other available experts in the layer. If all
 experts within a layer reach their capacity, subsequent tokens bypass
 that layer entirely—a phenomenon referred to as <strong>token overflow</strong>.</p>
-<figure class="align-center" id="id25">
+<figure class="align-center" id="id27">
 <img alt="expert_capacity" src="_images/expert_capacity.png" />
 <figcaption>
-<p><span class="caption-text">Expert Capacity</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+<p><span class="caption-text">Expert Capacity</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+</section>
+<section id="mixtral-8x7b">
+<h4><span class="section-number">7.2.5.3. </span>Mixtral 8x7B<a class="headerlink" href="#mixtral-8x7b" title="Link to this heading"></a></h4>
+<p>The <a class="reference external" href="https://arxiv.org/abs/2401.04088">Mixtral 8x7B model</a> is a
+sparse mixture of experts (MoE) model that is currently one of the best
+performing open-source large language models. The sparse MoE layers
+allow only a subset of the experts used for each input. Specifically,
+only 2 experts are used at a time for each input (TopK=2). Mixtral 8x7B
+replaces each feed-forward module in a transformer architecture with 8
+expert layers. It also uses a routing module, or gating network, that
+directs each token embedding to the 8 expert feed-forward modules. The
+outputs of these expert layers are then summed.</p>
+<p>The “8x” in the name refers to the 8 expert sub-networks and the “7B”
+indicates that it combines Mistral 7B modules. However, the model’s size
+is not 56B parameters (8 x 7B). In total, Mixtral 8x7B has 47B
+parameters. The 7B parameters of the Mistral model are distributed as
+1.29B parameters in the attention layers and 5.71B in the feed-forward
+layers. Mixtral 8x7B has <strong>45.68B</strong> parameters in its expert (feed
+forward) layers. While Mixtral 8x7B has 47B parameters, it only uses
+<strong>13B</strong> parameters for each input token because only two experts are
+active at a time. This makes it more efficient than a regular, non-MoE
+47B parameter model.</p>
+<p>Mixtral 8x7B outperforms Llama 2 70B and GPT-3.5 across most benchmarks,
+including mathematics, code generation, and multilingual tasks, while
+using significantly fewer active parameters (13B vs. 70B). Its
+fine-tuned version, Mixtral 8x7B – Instruct, surpasses Claude-2.1,
+Gemini Pro, and GPT-3.5 Turbo in human evaluation benchmarks,
+demonstrating superior efficiency, reduced biases, and high performance
+in long-context and multilingual scenarios.</p>
+<figure class="align-center" id="id28">
+<img alt="mixtral_of_experts" src="_images/mixtral_of_experts.png" />
+<figcaption>
+<p><span class="caption-text">Mixtral of Experts (Source: <a class="reference external" href="https://magazine.sebastianraschka.com/p/ai-research-papers-2024-part-1">Sebastian Raschka</a>)</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="case-studies">
+<h3><span class="section-number">7.2.6. </span>Case Studies<a class="headerlink" href="#case-studies" title="Link to this heading"></a></h3>
+<section id="deepseek-v3">
+<h4><span class="section-number">7.2.6.1. </span>DeepSeek-V3<a class="headerlink" href="#deepseek-v3" title="Link to this heading"></a></h4>
+<p>DeepSeek-V3 marks a significant leap
+forward in AI model performance, offering exceptional inference
+capabilities that redefine industry benchmarks. The model processes
+approximately <strong>89 tokens per second</strong>, making it nearly <strong>4 times
+faster</strong> than its predecessor, DeepSeek-V2.5, which achieved a rate of
+18 tokens per second. This remarkable speed and efficiency position
+DeepSeek-V3 as a leader in the field.</p>
+<p>With an impressive <strong>671 billion Mixture-of-Experts (MoE) parameters</strong>,
+of which <strong>37 billion are activated per token</strong>, DeepSeek-V3 operates on
+a scale unmatched by its predecessor. Its parameter size is
+approximately <strong>2.8 times larger</strong> than DeepSeek-V2.5, and it was
+trained on a massive dataset of <strong>14.8 trillion high-quality tokens</strong> at
+a total cost of just <strong>$5.576 million</strong>.</p>
+<p>DeepSeek-V3’s exceptional performance stems from a suite of cutting-edge
+innovations that push the boundaries of AI efficiency and scalability.
+Key advancements include <strong>Multi-Head Latent Attention (MLA)</strong>, an
+advanced <strong>Mixture-of-Experts (MoE)</strong> architecture, and <strong>Multi-Token
+Prediction (MTP)</strong>, which significantly accelerate text generation by
+predicting multiple tokens simultaneously. Complementing these are
+sophisticated training strategies such as the <strong>Auxiliary-Loss-Free Load
+Balancing</strong> method, which ensures optimal resource utilization without
+compromising accuracy, and the <strong>FP8 Mixed Precision Framework</strong>,
+designed to reduce memory usage and computational costs while
+maintaining numerical stability. These technologies collectively enable
+DeepSeek-V3 to process up to <strong>128,000 tokens</strong> in a single context
+window, a feat that sets new benchmarks for large language models. This
+unparalleled combination of innovation and efficiency positions
+DeepSeek-V3 as a formidable competitor in the AI landscape, narrowing
+the gap between open-source and proprietary systems while redefining
+standards for scalability and performance. <a class="reference internal" href="reference.html#deepseek-v3" id="id8"><span>[DeepSeek-V3]</span></a></p>
+<p><strong>Architecture:</strong></p>
+<ul>
+<li><p><strong>Multi-Head Latent Attention (MLA)</strong></p>
+<p>Multi-Head Latent Attention (MLA), introduced in DeepSeek-V2, is an
+innovative attention mechanism designed to address the bottleneck of
+large Key-Value (KV) caches in traditional Multi-Head Attention (MHA).
+The core concept of MLA is <strong>low-rank joint compression</strong> for keys and
+values, which significantly reduces the KV cache size. During
+inference, only a compressed latent representation of keys and values
+is stored, enabling more efficient memory usage and allowing for
+larger batch sizes and sequence lengths. Additionally, during
+training, low-rank compression is also applied to queries to minimize
+activation memory requirements. <a class="reference internal" href="reference.html#deepseek-v2" id="id9"><span>[DeepSeek-V2]</span></a></p>
+<p>MLA further incorporates a <strong>decoupled Rotary Position Embedding
+(RoPE)</strong>, applied to additional multi-head queries and a shared key.
+This decoupling ensures compatibility with MLA’s compression process
+by separating positional encoding information from the compressed
+latent vectors. During inference, the decoupled key is cached
+alongside the compressed latent vectors, maintaining efficiency while
+preserving positional context. These innovations make MLA a highly
+efficient and scalable solution for modern attention mechanisms.</p>
+<figure class="align-center" id="id29">
+<img alt="MLA_DeepSeekV2" src="_images/MLA_DeepSeekV2.png" />
+<figcaption>
+<p><span class="caption-text">DeepSeek-V2 Multi-Head Latent Attention (MLA) (Source: <a class="reference external" href="https://arxiv.org/abs/2405.04434">DeepSeek-V2</a>)</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>DeepSeekMoE</p>
+<p>For Feed-Forward Networks (FFNs), the DeepSeekMoE architecture is
+utilized, introducing two key innovations to enhance expert
+specialization and knowledge efficiency. First, <strong>Fine-Grained Expert
+Segmentation</strong> divides experts into smaller, more specialized units by
+splitting the FFN intermediate hidden dimensions. This segmentation
+enables a more precise decomposition of knowledge while maintaining
+constant computational costs, allowing for a flexible and adaptive
+combination of activated experts. Second, <strong>Shared Expert Isolation</strong>
+designates specific experts to capture and consolidate common
+knowledge across contexts. This strategy reduces redundancy among
+routed experts, ensuring that each expert acquires distinct and
+focused knowledge for more accurate and efficient processing.
+DeepSeek-V3 uses the sigmoid function to calculate the affinity
+scores. It normalizes the selected affinity scores to generate the
+gating values, ensuring a more balanced and precise distribution.</p>
+<figure class="align-center" id="id30">
+<img alt="deepseek_architecture" src="_images/deepseek_architecture.png" />
+<figcaption>
+<p><span class="caption-text">DeepSeekMoE Architecture (Source: <a class="reference external" href="https://arxiv.org/abs/2412.19437">DeepSeek-V3</a>)</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p><strong>Multi-Token Prediction (MTP)</strong></p>
+<p>Multi-Token Prediction (MTP) is an advanced training objective
+employed in DeepSeek-V3 that extends the model’s ability to predict
+multiple future tokens simultaneously at each position, rather than
+focusing on a single token. This approach densifies training signals,
+improving data efficiency by enabling the model to learn more
+effectively from the same dataset. Additionally, MTP allows the model
+to pre-plan its token representations, enhancing its ability to
+predict long-term patterns and improving performance on complex tasks.
+Unlike prior implementations, where multiple tokens are predicted in
+parallel using independent output heads, DeepSeek-V3 sequentially
+predicts additional tokens while maintaining the full causal chain at
+each prediction depth. This design preserves contextual dependencies
+and ensures robust generative capabilities. MTP also accelerates
+inference by enabling faster token generation and supports speculative
+decoding for further efficiency gains. These features make MTP a
+transformative innovation for scaling language models and enhancing
+their predictive accuracy and speed.</p>
+<figure class="align-center" id="id31">
+<img alt="multi_token_prediction" src="_images/multi_token_prediction.png" />
+<figcaption>
+<p><span class="caption-text">Multi-Token Prediction (MTP) (Source: <a class="reference external" href="https://arxiv.org/abs/2412.19437">DeepSeek-V3</a>)</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+<p><strong>Training Strategy:</strong></p>
+<ul>
+<li><p><strong>Auxiliary-Loss-Free Load Balancing</strong></p>
+<p>Rather than applying the traditional auxiliary loss for load
+balancing, they use an auxiliary-lose-free load balancing strategy to
+achieve a better trade-off between load balance and model performance.</p>
+<p>Each expert is assigned a bias term that is added to its affinity
+score during the routing process. This adjusted score determines the
+top-K routing decisions. After each training step, the bias for
+overloaded experts is decreased, while it is increased for underloaded
+experts. The adjustment rate is controlled by a hyperparameter called
+the bias update speed <span class="math notranslate nohighlight">\(\gamma\)</span>. The bias term is only used for
+routing decisions, while the gating value (used to scale the FFN
+output) is derived from the original affinity score, ensuring no
+interference with model computations.</p>
+</li>
+<li><p><strong>FP8 Mixed Precision Framework</strong></p>
+<p>The mixed precision framework in DeepSeek-V3 leverages FP8 training to
+significantly enhance computational efficiency and reduce memory usage
+while maintaining numerical stability. Key features include:</p>
+<p>Most compute-intensive operations, such as GEMM (General Matrix
+Multiplication) operations for forward pass (Fprop), activation
+backward pass (Dgrad), and weight backward pass (Wgrad), are conducted
+in FP8 precision. This design doubles computational speed compared to
+traditional BF16 methods and allows activations to be stored in FP8,
+reducing memory consumption.</p>
+<p>Critical components sensitive to low-precision computations, such as
+embedding modules, output heads, MoE gating modules, normalization
+operators, and attention operators, are maintained in higher precision
+(e.g., BF16 or FP32). This ensures stable training dynamics without
+compromising efficiency. To further guarantee numerical stability,
+master weights, weight gradients, and optimizer states are stored in
+higher precision formats.</p>
+<p>To further improve precision in low-precision FP8 training,
+DeepSeek-V3 incorporates innovative strategies in both
+<strong>quantization</strong> and the <strong>multiplication</strong> process, addressing
+challenges of accuracy and stability inherent to low-precision
+formats.</p>
+<figure class="align-center" id="id32">
+<img alt="fp8_precision" src="_images/fp8_precision.png" />
+<figcaption>
+<p><span class="caption-text">FP Mixed Precision Framework (Source: <a class="reference external" href="https://arxiv.org/abs/2412.19437">DeepSeek-V3</a>)</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
 </section>
 </section>
 </section>
@@ -1728,7 +1927,7 @@ that layer entirely—a phenomenon referred to as <strong>token overflow</strong
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Jan 01, 2025.
+      <span class="lastupdated">Last updated on Jan 03, 2025.
       </span></p>
   </div>
 
