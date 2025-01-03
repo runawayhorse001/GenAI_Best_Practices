@@ -1591,3 +1591,213 @@ that layer entirely—a phenomenon referred to as **token overflow**.
 
    Expert Capacity
 
+Mixtral 8x7B
+~~~~~~~~~~~~
+
+The `Mixtral 8x7B model <https://arxiv.org/abs/2401.04088>`__ is a
+sparse mixture of experts (MoE) model that is currently one of the best
+performing open-source large language models. The sparse MoE layers
+allow only a subset of the experts used for each input. Specifically,
+only 2 experts are used at a time for each input (TopK=2). Mixtral 8x7B
+replaces each feed-forward module in a transformer architecture with 8
+expert layers. It also uses a routing module, or gating network, that
+directs each token embedding to the 8 expert feed-forward modules. The
+outputs of these expert layers are then summed.
+
+The “8x” in the name refers to the 8 expert sub-networks and the “7B”
+indicates that it combines Mistral 7B modules. However, the model’s size
+is not 56B parameters (8 x 7B). In total, Mixtral 8x7B has 47B
+parameters. The 7B parameters of the Mistral model are distributed as
+1.29B parameters in the attention layers and 5.71B in the feed-forward
+layers. Mixtral 8x7B has **45.68B** parameters in its expert (feed
+forward) layers. While Mixtral 8x7B has 47B parameters, it only uses
+**13B** parameters for each input token because only two experts are
+active at a time. This makes it more efficient than a regular, non-MoE
+47B parameter model.
+
+Mixtral 8x7B outperforms Llama 2 70B and GPT-3.5 across most benchmarks,
+including mathematics, code generation, and multilingual tasks, while
+using significantly fewer active parameters (13B vs. 70B). Its
+fine-tuned version, Mixtral 8x7B – Instruct, surpasses Claude-2.1,
+Gemini Pro, and GPT-3.5 Turbo in human evaluation benchmarks,
+demonstrating superior efficiency, reduced biases, and high performance
+in long-context and multilingual scenarios.
+
+.. figure:: images/mixtral_of_experts.png
+   :alt: mixtral_of_experts
+   :align: center
+
+   Mixtral of Experts (Source: `Sebastian Raschka <https://magazine.sebastianraschka.com/p/ai-research-papers-2024-part-1>`__)
+
+
+Case Studies
+------------
+
+DeepSeek-V3
+~~~~~~~~~~~~
+
+DeepSeek-V3 marks a significant leap
+forward in AI model performance, offering exceptional inference
+capabilities that redefine industry benchmarks. The model processes
+approximately **89 tokens per second**, making it nearly **4 times
+faster** than its predecessor, DeepSeek-V2.5, which achieved a rate of
+18 tokens per second. This remarkable speed and efficiency position
+DeepSeek-V3 as a leader in the field.
+
+With an impressive **671 billion Mixture-of-Experts (MoE) parameters**,
+of which **37 billion are activated per token**, DeepSeek-V3 operates on
+a scale unmatched by its predecessor. Its parameter size is
+approximately **2.8 times larger** than DeepSeek-V2.5, and it was
+trained on a massive dataset of **14.8 trillion high-quality tokens** at
+a total cost of just **$5.576 million**.
+
+DeepSeek-V3’s exceptional performance stems from a suite of cutting-edge
+innovations that push the boundaries of AI efficiency and scalability.
+Key advancements include **Multi-Head Latent Attention (MLA)**, an
+advanced **Mixture-of-Experts (MoE)** architecture, and **Multi-Token
+Prediction (MTP)**, which significantly accelerate text generation by
+predicting multiple tokens simultaneously. Complementing these are
+sophisticated training strategies such as the **Auxiliary-Loss-Free Load
+Balancing** method, which ensures optimal resource utilization without
+compromising accuracy, and the **FP8 Mixed Precision Framework**,
+designed to reduce memory usage and computational costs while
+maintaining numerical stability. These technologies collectively enable
+DeepSeek-V3 to process up to **128,000 tokens** in a single context
+window, a feat that sets new benchmarks for large language models. This
+unparalleled combination of innovation and efficiency positions
+DeepSeek-V3 as a formidable competitor in the AI landscape, narrowing
+the gap between open-source and proprietary systems while redefining
+standards for scalability and performance. [DeepSeek-V3]_
+
+**Architecture:**
+
+- **Multi-Head Latent Attention (MLA)**
+
+  Multi-Head Latent Attention (MLA), introduced in DeepSeek-V2, is an
+  innovative attention mechanism designed to address the bottleneck of
+  large Key-Value (KV) caches in traditional Multi-Head Attention (MHA). 
+  The core concept of MLA is **low-rank joint compression** for keys and
+  values, which significantly reduces the KV cache size. During
+  inference, only a compressed latent representation of keys and values
+  is stored, enabling more efficient memory usage and allowing for
+  larger batch sizes and sequence lengths. Additionally, during
+  training, low-rank compression is also applied to queries to minimize
+  activation memory requirements. [DeepSeek-V2]_
+
+  MLA further incorporates a **decoupled Rotary Position Embedding
+  (RoPE)**, applied to additional multi-head queries and a shared key.
+  This decoupling ensures compatibility with MLA’s compression process
+  by separating positional encoding information from the compressed
+  latent vectors. During inference, the decoupled key is cached
+  alongside the compressed latent vectors, maintaining efficiency while
+  preserving positional context. These innovations make MLA a highly
+  efficient and scalable solution for modern attention mechanisms.
+
+  .. figure:: images/MLA_DeepSeekV2.png
+     :alt: MLA_DeepSeekV2
+     :align: center
+
+     DeepSeek-V2 Multi-Head Latent Attention (MLA) (Source: `DeepSeek-V2 <https://arxiv.org/abs/2405.04434>`__)
+
+- DeepSeekMoE
+
+  For Feed-Forward Networks (FFNs), the DeepSeekMoE architecture is
+  utilized, introducing two key innovations to enhance expert
+  specialization and knowledge efficiency. First, **Fine-Grained Expert
+  Segmentation** divides experts into smaller, more specialized units by
+  splitting the FFN intermediate hidden dimensions. This segmentation
+  enables a more precise decomposition of knowledge while maintaining
+  constant computational costs, allowing for a flexible and adaptive
+  combination of activated experts. Second, **Shared Expert Isolation**
+  designates specific experts to capture and consolidate common
+  knowledge across contexts. This strategy reduces redundancy among
+  routed experts, ensuring that each expert acquires distinct and
+  focused knowledge for more accurate and efficient processing.
+  DeepSeek-V3 uses the sigmoid function to calculate the affinity
+  scores. It normalizes the selected affinity scores to generate the
+  gating values, ensuring a more balanced and precise distribution.
+
+  .. figure:: images/deepseek_architecture.png
+     :alt: deepseek_architecture
+     :align: center
+
+     DeepSeekMoE Architecture (Source: `DeepSeek-V3 <https://arxiv.org/abs/2412.19437>`__)
+
+- **Multi-Token Prediction (MTP)**
+
+  Multi-Token Prediction (MTP) is an advanced training objective
+  employed in DeepSeek-V3 that extends the model’s ability to predict
+  multiple future tokens simultaneously at each position, rather than
+  focusing on a single token. This approach densifies training signals,
+  improving data efficiency by enabling the model to learn more
+  effectively from the same dataset. Additionally, MTP allows the model
+  to pre-plan its token representations, enhancing its ability to
+  predict long-term patterns and improving performance on complex tasks.
+  Unlike prior implementations, where multiple tokens are predicted in
+  parallel using independent output heads, DeepSeek-V3 sequentially
+  predicts additional tokens while maintaining the full causal chain at
+  each prediction depth. This design preserves contextual dependencies
+  and ensures robust generative capabilities. MTP also accelerates
+  inference by enabling faster token generation and supports speculative
+  decoding for further efficiency gains. These features make MTP a
+  transformative innovation for scaling language models and enhancing
+  their predictive accuracy and speed.
+
+  .. figure:: images/multi_token_prediction.png
+     :alt: multi_token_prediction
+     :align: center
+
+     Multi-Token Prediction (MTP) (Source: `DeepSeek-V3 <https://arxiv.org/abs/2412.19437>`__)
+
+
+**Training Strategy:**
+
+- **Auxiliary-Loss-Free Load Balancing**
+
+  Rather than applying the traditional auxiliary loss for load
+  balancing, they use an auxiliary-lose-free load balancing strategy to
+  achieve a better trade-off between load balance and model performance.
+
+  Each expert is assigned a bias term that is added to its affinity
+  score during the routing process. This adjusted score determines the
+  top-K routing decisions. After each training step, the bias for
+  overloaded experts is decreased, while it is increased for underloaded
+  experts. The adjustment rate is controlled by a hyperparameter called
+  the bias update speed :math:`\gamma`. The bias term is only used for
+  routing decisions, while the gating value (used to scale the FFN
+  output) is derived from the original affinity score, ensuring no
+  interference with model computations.
+
+- **FP8 Mixed Precision Framework**
+
+  The mixed precision framework in DeepSeek-V3 leverages FP8 training to
+  significantly enhance computational efficiency and reduce memory usage
+  while maintaining numerical stability. Key features include:
+
+  Most compute-intensive operations, such as GEMM (General Matrix
+  Multiplication) operations for forward pass (Fprop), activation
+  backward pass (Dgrad), and weight backward pass (Wgrad), are conducted
+  in FP8 precision. This design doubles computational speed compared to
+  traditional BF16 methods and allows activations to be stored in FP8,
+  reducing memory consumption.
+
+  Critical components sensitive to low-precision computations, such as
+  embedding modules, output heads, MoE gating modules, normalization
+  operators, and attention operators, are maintained in higher precision
+  (e.g., BF16 or FP32). This ensures stable training dynamics without
+  compromising efficiency. To further guarantee numerical stability,
+  master weights, weight gradients, and optimizer states are stored in
+  higher precision formats.
+
+  To further improve precision in low-precision FP8 training,
+  DeepSeek-V3 incorporates innovative strategies in both
+  **quantization** and the **multiplication** process, addressing
+  challenges of accuracy and stability inherent to low-precision
+  formats.
+
+  .. figure:: images/fp8_precision.png
+     :alt: fp8_precision
+     :align: center
+
+     FP Mixed Precision Framework (Source: `DeepSeek-V3 <https://arxiv.org/abs/2412.19437>`__)
+

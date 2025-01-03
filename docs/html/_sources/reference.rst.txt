@@ -84,3 +84,11 @@ Main Reference
 .. [RafaelRafailov] Rafael Rafailov etc.
                  `Direct Preference Optimization: Your Language Model is Secretly a Reward Model
                  <https://arxiv.org/abs/2305.18290>`_, 2023.
+
+.. [DeepSeek-V3] DeepSeek AI.
+                 `DeepSeek-V3 Technical Report
+                 <https://arxiv.org/abs/2412.19437>`_, 2024.
+
+.. [DeepSeek-V2] DeepSeek AI.
+                 `DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model
+                 <https://arxiv.org/abs/2405.04434>`_, 2024.
