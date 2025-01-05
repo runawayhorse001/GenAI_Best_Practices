@@ -142,6 +142,10 @@
 \contentsline {subsection}{\numberline {5.7.1}Multi\sphinxhyphen {}agent Systems}{150}{subsection.5.7.1}%
 \contentsline {subsubsection}{Multi\sphinxhyphen {}agent architectures}{150}{subsubsection*.52}%
 \contentsline {subsubsection}{Command: Edgeless graphs}{150}{subsubsection*.53}%
+\contentsline {subsection}{\numberline {5.7.2}Graph RAG}{153}{subsection.5.7.2}%
+\contentsline {subsubsection}{Knowledge Graph}{153}{subsubsection*.54}%
+\contentsline {subsubsection}{Neo4j for Graph Data}{153}{subsubsection*.55}%
+\contentsline {subsubsection}{Graph RAG}{153}{subsubsection*.56}%
 \contentsline {chapter}{\numberline {6}Fine Tuning}{155}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Cutting\sphinxhyphen {}Edge Strategies for LLM Fine\sphinxhyphen {}Tuning}{156}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}LoRA (Low\sphinxhyphen {}Rank Adaptation)}{156}{subsection.6.1.1}%
@@ -149,9 +153,9 @@
 \contentsline {subsection}{\numberline {6.1.3}PEFT (Parameter\sphinxhyphen {}Efficient Fine\sphinxhyphen {}Tuning)}{157}{subsection.6.1.3}%
 \contentsline {subsection}{\numberline {6.1.4}SFT (Supervised Fine\sphinxhyphen {}Tuning)}{157}{subsection.6.1.4}%
 \contentsline {subsection}{\numberline {6.1.5}RLHF (Reinforcement Learning from Human Feedback)}{158}{subsection.6.1.5}%
-\contentsline {subsubsection}{PPO}{159}{subsubsection*.54}%
-\contentsline {subsubsection}{DPO}{164}{subsubsection*.55}%
-\contentsline {subsubsection}{Main Difficulties in RLHF}{167}{subsubsection*.56}%
+\contentsline {subsubsection}{PPO}{159}{subsubsection*.57}%
+\contentsline {subsubsection}{DPO}{164}{subsubsection*.58}%
+\contentsline {subsubsection}{Main Difficulties in RLHF}{167}{subsubsection*.59}%
 \contentsline {subsection}{\numberline {6.1.6}Summary Table}{169}{subsection.6.1.6}%
 \contentsline {section}{\numberline {6.2}Key Early Fine\sphinxhyphen {}Tuning Methods}{169}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Full Fine\sphinxhyphen {}Tuning}{169}{subsection.6.2.1}%
@@ -174,14 +178,14 @@
 \contentsline {subsection}{\numberline {7.1.1}Attention Is All You Need}{184}{subsection.7.1.1}%
 \contentsline {subsection}{\numberline {7.1.2}Encoder\sphinxhyphen {}Decoder}{185}{subsection.7.1.2}%
 \contentsline {subsection}{\numberline {7.1.3}Positional Encoding}{186}{subsection.7.1.3}%
-\contentsline {subsubsection}{Sinusoidal Positional Encodings}{186}{subsubsection*.57}%
-\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{187}{subsubsection*.58}%
-\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{188}{subsubsection*.59}%
-\contentsline {subsubsection}{Summary}{188}{subsubsection*.60}%
+\contentsline {subsubsection}{Sinusoidal Positional Encodings}{186}{subsubsection*.60}%
+\contentsline {subsubsection}{Rotary Positional Embeddings (RoPE)}{187}{subsubsection*.61}%
+\contentsline {subsubsection}{\sphinxstylestrong {Learnable Positional Encodings}}{188}{subsubsection*.62}%
+\contentsline {subsubsection}{Summary}{188}{subsubsection*.63}%
 \contentsline {subsection}{\numberline {7.1.4}Embedding Matrix}{188}{subsection.7.1.4}%
 \contentsline {subsection}{\numberline {7.1.5}Attention Mechanism}{189}{subsection.7.1.5}%
-\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{189}{subsubsection*.61}%
-\contentsline {subsubsection}{Cross Attention}{195}{subsubsection*.62}%
+\contentsline {subsubsection}{Self\sphinxhyphen {}Attention}{189}{subsubsection*.64}%
+\contentsline {subsubsection}{Cross Attention}{195}{subsubsection*.65}%
 \contentsline {subsection}{\numberline {7.1.6}Layer Normalization}{196}{subsection.7.1.6}%
 \contentsline {subsection}{\numberline {7.1.7}Residual Connections}{197}{subsection.7.1.7}%
 \contentsline {subsection}{\numberline {7.1.8}Feed\sphinxhyphen {}Forward Networks}{197}{subsection.7.1.8}%
@@ -189,23 +193,23 @@
 \contentsline {subsection}{\numberline {7.1.10}Softmax and Temperature}{199}{subsection.7.1.10}%
 \contentsline {subsection}{\numberline {7.1.11}Unembedding Matrix}{199}{subsection.7.1.11}%
 \contentsline {subsection}{\numberline {7.1.12}Decoding}{200}{subsection.7.1.12}%
-\contentsline {subsubsection}{Greedy Decoding}{200}{subsubsection*.63}%
-\contentsline {subsubsection}{Beam Search}{200}{subsubsection*.64}%
-\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{201}{subsubsection*.65}%
-\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{201}{subsubsection*.66}%
-\contentsline {subsubsection}{Temperature Scaling}{202}{subsubsection*.67}%
-\contentsline {subsubsection}{Summary}{203}{subsubsection*.68}%
+\contentsline {subsubsection}{Greedy Decoding}{200}{subsubsection*.66}%
+\contentsline {subsubsection}{Beam Search}{200}{subsubsection*.67}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}k Sampling}{201}{subsubsection*.68}%
+\contentsline {subsubsection}{Top\sphinxhyphen {}p (Nucleus) Sampling}{201}{subsubsection*.69}%
+\contentsline {subsubsection}{Temperature Scaling}{202}{subsubsection*.70}%
+\contentsline {subsubsection}{Summary}{203}{subsubsection*.71}%
 \contentsline {section}{\numberline {7.2}Modern Transformer Techniques}{203}{section.7.2}%
 \contentsline {subsection}{\numberline {7.2.1}KV Cache}{203}{subsection.7.2.1}%
 \contentsline {subsection}{\numberline {7.2.2}Multi\sphinxhyphen {}Query Attention}{205}{subsection.7.2.2}%
 \contentsline {subsection}{\numberline {7.2.3}Grouped\sphinxhyphen {}Query Attention}{206}{subsection.7.2.3}%
 \contentsline {subsection}{\numberline {7.2.4}Flash Attention}{207}{subsection.7.2.4}%
 \contentsline {subsection}{\numberline {7.2.5}Mixture of Experts (MoE)}{210}{subsection.7.2.5}%
-\contentsline {subsubsection}{Introduction}{210}{subsubsection*.69}%
-\contentsline {subsubsection}{Methodology}{210}{subsubsection*.70}%
-\contentsline {subsubsection}{Mixtral 8x7B}{215}{subsubsection*.71}%
+\contentsline {subsubsection}{Introduction}{210}{subsubsection*.72}%
+\contentsline {subsubsection}{Methodology}{210}{subsubsection*.73}%
+\contentsline {subsubsection}{Mixtral 8x7B}{215}{subsubsection*.74}%
 \contentsline {subsection}{\numberline {7.2.6}Case Studies}{216}{subsection.7.2.6}%
-\contentsline {subsubsection}{DeepSeek\sphinxhyphen {}V3}{216}{subsubsection*.72}%
+\contentsline {subsubsection}{DeepSeek\sphinxhyphen {}V3}{216}{subsubsection*.75}%
 \contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{221}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{222}{section.8.1}%
 \contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{222}{section.8.2}%
@@ -222,13 +226,21 @@
 \contentsline {subsection}{\numberline {9.5.1}Yaml Config}{247}{subsection.9.5.1}%
 \contentsline {subsection}{\numberline {9.5.2}Rails}{254}{subsection.9.5.2}%
 \contentsline {subsection}{\numberline {9.5.3}Test}{254}{subsection.9.5.3}%
-\contentsline {subsubsection}{Safe Usecase}{254}{subsubsection*.73}%
-\contentsline {subsubsection}{Unsafe Usecases}{256}{subsubsection*.74}%
+\contentsline {subsubsection}{Safe Usecase}{254}{subsubsection*.76}%
+\contentsline {subsubsection}{Unsafe Usecases}{256}{subsubsection*.77}%
 \contentsline {section}{\numberline {9.6}Llama Guard3}{259}{section.9.6}%
 \contentsline {subsection}{\numberline {9.6.1}Load Models}{259}{subsection.9.6.1}%
 \contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{259}{subsection.9.6.2}%
 \contentsline {subsection}{\numberline {9.6.3}Tests}{260}{subsection.9.6.3}%
-\contentsline {subsubsection}{Safe Usecase}{260}{subsubsection*.75}%
-\contentsline {subsubsection}{Unsafe Usecase}{261}{subsubsection*.76}%
-\contentsline {chapter}{\numberline {10}Main Reference}{263}{chapter.10}%
-\contentsline {chapter}{Bibliography}{265}{chapter*.77}%
+\contentsline {subsubsection}{Safe Usecase}{260}{subsubsection*.78}%
+\contentsline {subsubsection}{Unsafe Usecase}{261}{subsubsection*.79}%
+\contentsline {chapter}{\numberline {10}LLM Deployments}{263}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Prototype Deployment}{263}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Gradio vs. Streamlit}{263}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Deployment with Gradio}{263}{subsection.10.1.2}%
+\contentsline {subsubsection}{Ollama Local Model}{263}{subsubsection*.80}%
+\contentsline {subsubsection}{Gradio Chat Interface}{264}{subsubsection*.81}%
+\contentsline {subsubsection}{Demo}{265}{subsubsection*.82}%
+\contentsline {section}{\numberline {10.2}Production Deployment}{265}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Main Reference}{267}{chapter.11}%
+\contentsline {chapter}{Bibliography}{269}{chapter*.83}%

@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. LLM Deployments &mdash; GenAI: Best Practices 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+    <link rel="shortcut icon" href="_static/icon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="11. Main Reference" href="reference.html" />
+    <link rel="prev" title="9. LLM Guardrails" href="guardrails.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GenAI: Best Practices
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prelim.html">2. Preliminary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedding.html">3. Word and Sentence Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.html">4. Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rag.html">5. Retrieval-Augmented Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finetuning.html">6. Fine Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guardrails.html">9. LLM Guardrails</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. LLM Deployments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prototype-deployment">10.1. Prototype Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gradio-vs-streamlit">10.1.1. Gradio vs. Streamlit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment-with-gradio">10.1.2. Deployment with Gradio</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ollama-local-model">10.1.2.1. Ollama Local Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gradio-chat-interface">10.1.2.2. Gradio Chat Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#demo">10.1.2.3. Demo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#production-deployment">10.2. Production Deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">11. Main Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GenAI: Best Practices</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10. </span>LLM Deployments</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="llm-deployments">
+<span id="deploy"></span><h1><span class="section-number">10. </span>LLM Deployments<a class="headerlink" href="#llm-deployments" title="Link to this heading"></a></h1>
+<section id="prototype-deployment">
+<h2><span class="section-number">10.1. </span>Prototype Deployment<a class="headerlink" href="#prototype-deployment" title="Link to this heading"></a></h2>
+<section id="gradio-vs-streamlit">
+<h3><span class="section-number">10.1.1. </span>Gradio vs. Streamlit<a class="headerlink" href="#gradio-vs-streamlit" title="Link to this heading"></a></h3>
+<p>Gradio and Streamlit are popular Python frameworks for building interactive web applications,
+particularly for data science and machine learning.</p>
+<ul class="simple">
+<li><p><strong>Gradio</strong>
+- Designed primarily for AI/ML applications.
+- Ideal for creating quick demos or prototypes for machine learning models.
+- Focuses on simplicity in serving models with minimal setup.
+- Works well for sharing ML models and allowing users to test them interactively.</p></li>
+<li><p><strong>Streamlit</strong>
+- General-purpose framework for building data science dashboards and applications.
+- Suitable for broader use cases, including data visualization, analytics, and ML demos.
+- Offers more flexibility for building data-centric apps.</p></li>
+</ul>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Feature Comparison</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Gradio</p></th>
+<th class="head"><p>Streamlit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pre-built components</p></td>
+<td><p>Yes (optimized for ML models)</p></td>
+<td><p>Yes (general-purpose widgets)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layout flexibility</p></td>
+<td><p>Limited</p></td>
+<td><p>Extensive</p></td>
+</tr>
+<tr class="row-even"><td><p>Multi-page support</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Real-time updates</p></td>
+<td><p>Limited</p></td>
+<td><p>Supported with <code class="docutils literal notranslate"><span class="pre">st.session_state</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Python only?</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="deployment-with-gradio">
+<h3><span class="section-number">10.1.2. </span>Deployment with Gradio<a class="headerlink" href="#deployment-with-gradio" title="Link to this heading"></a></h3>
+<section id="ollama-local-model">
+<h4><span class="section-number">10.1.2.1. </span>Ollama Local Model<a class="headerlink" href="#ollama-local-model" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;mistral&quot;</span><span class="p">,</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">langchain_core.messages</span> <span class="kn">import</span> <span class="n">AIMessage</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;You are a helpful assistant that translates English to French. Translate the user sentence.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;human&quot;</span><span class="p">,</span> <span class="s2">&quot;I love programming.&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">ai_msg</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+<span class="n">ai_msg</span>
+</pre></div>
+</div>
+</section>
+<section id="gradio-chat-interface">
+<h4><span class="section-number">10.1.2.2. </span>Gradio Chat Interface<a class="headerlink" href="#gradio-chat-interface" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">system_message</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful chat assistant who acts like a pirate.&quot;</span>
+
+<span class="k">def</span> <span class="nf">stream_response</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">. History: </span><span class="si">{</span><span class="n">history</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">history_langchain_format</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">history_langchain_format</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">system_message</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">human</span><span class="p">,</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
+        <span class="n">history_langchain_format</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">human</span><span class="p">))</span>
+        <span class="n">history_langchain_format</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">ai</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;History: </span><span class="si">{</span><span class="n">history_langchain_format</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">history_langchain_format</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">message</span><span class="p">))</span>
+        <span class="n">partial_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">llm</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">history_langchain_format</span><span class="p">):</span>
+            <span class="n">partial_message</span> <span class="o">+=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+            <span class="k">yield</span> <span class="n">partial_message</span>
+
+
+<span class="n">demo_interface</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">ChatInterface</span><span class="p">(</span>
+
+    <span class="n">stream_response</span><span class="p">,</span>
+    <span class="n">textbox</span><span class="o">=</span><span class="n">gr</span><span class="o">.</span><span class="n">Textbox</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Send to the LLM...&quot;</span><span class="p">,</span>
+                    <span class="n">container</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">autoscroll</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">scale</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">demo_interface</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">share</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="demo">
+<h4><span class="section-number">10.1.2.3. </span>Demo<a class="headerlink" href="#demo" title="Link to this heading"></a></h4>
+<table class="borderless docutils align-default" style="width: 100%">
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/ollama_gradio.png"><img alt="_images/ollama_gradio.png" src="_images/ollama_gradio.png" style="width: 100%;" />
+</a>
+</td>
+<td><a class="reference internal image-reference" href="_images/gradio.png"><img alt="_images/gradio.png" src="_images/gradio.png" style="width: 100%;" />
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="production-deployment">
+<h2><span class="section-number">10.2. </span>Production Deployment<a class="headerlink" href="#production-deployment" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id2">
+<span id="fig-endpoint-db"></span><img alt="_images/endpoint_db.jpg" src="_images/endpoint_db.jpg" />
+<figcaption>
+<p><span class="caption-text">Serving Endpoint in Databricks</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="guardrails.html" class="btn btn-neutral float-left" title="9. LLM Guardrails" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reference.html" class="btn btn-neutral float-right" title="11. Main Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
+      <span class="lastupdated">Last updated on Jan 05, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

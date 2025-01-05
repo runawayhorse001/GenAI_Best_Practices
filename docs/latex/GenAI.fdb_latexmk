@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex GenAI.idx"] 1735942267.47248 "GenAI.idx" "GenAI.ind" "GenAI" 1735942284.2735 0
-  "GenAI.idx" 1735942268.02101 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex GenAI.idx"] 1736098800.18415 "GenAI.idx" "GenAI.ind" "GenAI" 1736098857.98234 0
+  "GenAI.idx" 1736098801.20473 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "GenAI.ilg"
   "GenAI.ind"
   (rewritten before read)
-["pdflatex"] 1735942267.52376 "GenAI.tex" "GenAI.pdf" "GenAI" 1735942284.27365 2
+["pdflatex"] 1736098800.25689 "GenAI.tex" "GenAI.pdf" "GenAI" 1736098857.98254 2
   "/etc/texmf/web2c/texmf.cnf" 1733500287.93404 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -182,11 +182,11 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1733500426 6829263 f2202ecc5b89caf9e5a5a9209267cb3e ""
   "1Bauo.png" 1733883657.04928 75520 6488cbedf23e3ac3dd586979a7ad78ef ""
   "DPO_idea.png" 1735653700.88916 326112 9a0e9cb1b639d963237dd08dadf08d05 ""
-  "GenAI.aux" 1735942283.88994 80373 0fb5743725f671b89fd052d1114e556b "pdflatex"
-  "GenAI.ind" 1735942267.48497 0 d41d8cd98f00b204e9800998ecf8427e "makeindex GenAI.idx"
-  "GenAI.out" 1735942283.89694 34580 0ea613c726267b905864cb31fbcab8b1 "pdflatex"
-  "GenAI.tex" 1735942247.73517 854596 cca6adf59014ecc32ac38586c05743b1 ""
-  "GenAI.toc" 1735942283.89694 19701 ced8645f5339eb3acb5e7b6aeae9dd67 "pdflatex"
+  "GenAI.aux" 1736098857.25423 83557 1eb0a94e5342f940008a10d6739b9c0e "pdflatex"
+  "GenAI.ind" 1736098800.20474 0 d41d8cd98f00b204e9800998ecf8427e "makeindex GenAI.idx"
+  "GenAI.out" 1736098857.26523 36373 5538e2da23af13315f376fc7c08b3cc0 "pdflatex"
+  "GenAI.tex" 1736098768.68501 863045 c4d2a2cd09fb5ad640700aeb1a639dd7 ""
+  "GenAI.toc" 1736098857.26523 20645 b5acc6b8309bedb957430b67e73baac7 "pdflatex"
   "MLA_DeepSeekV2.png" 1735942179.73961 103494 df07e6cb694b9256ae9c7b797f867325 ""
   "MoE_layer.png" 1735942179.74061 137694 4720cc1a3caf3095ccbec953d8fc8a2d ""
   "MoE_layer_details.png" 1735942179.74161 181550 0e5d09481ac459faf8a2027b69e62367 ""
@@ -212,6 +212,7 @@
   "different_expert_path.png" 1735942179.7486 136975 5a146e8e7e338be1d9ad0e5dfb4d383b ""
   "embedding2d.png" 1734581075.55911 51780 b54ff0959efa89a5a31d4e115fa9d1d5 ""
   "embedding_diagram.png" 1733885474.74645 63996 835279b23b4f0efc14581bd98f52bc97 ""
+  "endpoint_db.jpg" 1736096307.91157 366485 90ddae79cca844a08e5ee7172c00164a ""
   "expert_capacity.png" 1735942179.7486 101324 073364f9a60b418ffb4c957376f5e0fd ""
   "fine_tuning.png" 1734461192.72287 131924 795e52335de96896f02cf473815a8d0f ""
   "fine_tuning_llm.png" 1734497440.38321 149302 416adfa501ff4d45bf6cf6fd83bde902 ""
@@ -221,6 +222,7 @@
   "gemini.png" 1734534292.10462 290009 639a7167f79e7c3ec1ebeb8bb4206ada ""
   "generator.png" 1734416487.62773 113266 5153bddb9ecc040ac64b956c532b054a ""
   "geval.png" 1734586155.96541 360164 12466f39fe29d4b45f74c6ba2d853e27 ""
+  "gradio.png" 1736096019.54301 117744 093d9129c056edcb67314c42db8241e9 ""
   "grouped_query_attention.png" 1734924406.93335 144235 20c87856d61aeb3a30928c8c724c3cad ""
   "guardrails_categories.png" 1735653700.90116 392727 b6324681c563277f3cd1fd633cb16964 ""
   "ilya_sutskever.png" 1734500423.75548 405205 d67cde556140a00d319e3e6f647c78ac ""
@@ -243,6 +245,7 @@
   "multi_token_prediction.png" 1735942179.7546 687969 13d397583815b510b94e89981de56500 ""
   "multiquery_attention.png" 1734924406.93535 140465 df8bb3281cb6ec79d411260394e7a43f ""
   "ollama_download.png" 1734149917.69959 57371 6459b1d2d329602833ffdbf6e2aa4473 ""
+  "ollama_gradio.png" 1736096071.96957 187866 0f632dc17d4717c00c694ab8c117057a ""
   "ollama_serve.png" 1734148418.7356 43257 b3c588fcdb8278102d37e9666cb9dede ""
   "peft_1.png" 1734462879.41314 191428 00a129f40e4658135a9bfefaa1342c67 ""
   "peft_2.png" 1734462924.07313 222278 8b23059c5aedab3bf8b48e846f8f6be7 ""
@@ -260,7 +263,7 @@
   "self_rag_paper.png" 1734718431.12614 219396 58b53a4707cab3cd63010b55712bbe58 ""
   "selfattention_goal.png" 1734924406.93835 139269 049ee7cea3fbd9142d8bd0ea02cf2dee ""
   "sphinx.sty" 1733500209.89951 54119 967a674353157928503df7cae9b6165e ""
-  "sphinxhighlight.sty" 1735942266.5019 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1736098798.51775 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxlatexadmonitions.sty" 1733500209.89951 19110 2855832b1a32f04033523b9919260ac9 ""
   "sphinxlatexcontainers.sty" 1733500209.90051 900 d61f923db071a7b54d3cee8a1e6935d3 ""
   "sphinxlatexgraphics.sty" 1733500209.90051 4918 c9266041d02bc615d54b890e96e3acd3 ""
@@ -275,7 +278,7 @@
   "sphinxlatexstyletext.sty" 1733500209.90151 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1733500209.90151 57643 7f1013c2fa11942370d867527bdda568 ""
   "sphinxmanual.cls" 1733500209.90151 4241 7b0d7a37df7b5715fb0dbd585c52ecdb ""
-  "sphinxmessages.sty" 1735942267.35496 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1736098799.99574 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1733500209.90151 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1733500209.90251 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1733500209.90251 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""

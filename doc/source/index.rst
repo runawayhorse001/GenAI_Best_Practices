@@ -29,4 +29,5 @@ Contents
    pretraining
    evaluation
    guardrails
+   deploy
    reference 
