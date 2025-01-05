@@ -190,6 +190,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#command-edgeless-graphs">5.7.1.2. Command: Edgeless graphs</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#graph-rag">5.7.2. Graph RAG</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#knowledge-graph">5.7.2.1. Knowledge Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neo4j-for-graph-data">5.7.2.2. Neo4j for Graph Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id53">5.7.2.3. Graph RAG</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -198,7 +204,8 @@
 <li class="toctree-l1"><a class="reference internal" href="pretraining.html">7. Pre-training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">8. LLM Evaluation Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guardrails.html">9. LLM Guardrails</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">10. Main Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">10. LLM Deployments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">11. Main Reference</a></li>
 </ul>
 
         </div>
@@ -247,10 +254,10 @@
 <li><p>Agentic RAG: <a class="reference external" href="https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq_vL-6OKLW8Hdr4?usp=drive_link"><img alt="Agentic-RAG" src="_images/colab-badge.png" /></a></p></li>
 </ul>
 </div>
-<figure class="align-center" id="id53">
+<figure class="align-center" id="id54">
 <span id="fig-rag"></span><img alt="_images/RAG_diagram.png" src="_images/RAG_diagram.png" />
 <figcaption>
-<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id53" title="Link to this image"></a></p>
+<p><span class="caption-text">Retrieval-Augmented Generation Diagram</span><a class="headerlink" href="#id54" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition note">
@@ -487,10 +494,10 @@ or results.</p></td>
 </section>
 <section id="late-chunking">
 <h4><span class="section-number">5.2.1.2. </span>Late Chunking<a class="headerlink" href="#late-chunking" title="Link to this heading"></a></h4>
-<figure class="align-center" id="id54">
+<figure class="align-center" id="id55">
 <span id="fig-late-chunk"></span><img alt="_images/late_chunking.png" src="_images/late_chunking.png" />
 <figcaption>
-<p><span class="caption-text">An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce <a class="reference external" href="https://jina.ai/news/late-chunking-in-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id54" title="Link to this image"></a></p>
+<p><span class="caption-text">An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce <a class="reference external" href="https://jina.ai/news/late-chunking-in-long-context-embedding-models/">Jina AI</a>)</span><a class="headerlink" href="#id55" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>Late Chunking</strong> refers to a strategy in Retrieval-Augmented Generation (RAG) where chunking of
@@ -1016,11 +1023,11 @@ different rankings, and you want to combine them into a single, unified ranking.
 </ul>
 </dd>
 </dl>
-<figure class="align-center" id="id55">
+<figure class="align-center" id="id56">
 <span id="fig-retriever"></span><a class="reference internal image-reference" href="_images/rrf.png"><img alt="_images/rrf.png" src="_images/rrf.png" style="width: 595.5px; height: 556.5px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Reciprocal Rank Fusion</span><a class="headerlink" href="#id55" title="Link to this image"></a></p>
+<p><span class="caption-text">Reciprocal Rank Fusion</span><a class="headerlink" href="#id56" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Example:</p>
@@ -1159,10 +1166,10 @@ different rankings, and you want to combine them into a single, unified ranking.
 </section>
 <section id="self-rag">
 <span id="ch-self-rag"></span><h2><span class="section-number">5.3. </span>Self-RAG<a class="headerlink" href="#self-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id56">
+<figure class="align-center" id="id57">
 <span id="fig-self-rag-paper"></span><img alt="_images/self_rag_paper.png" src="_images/self_rag_paper.png" />
 <figcaption>
-<p><span class="caption-text">Overview of SELF-RAG. (Source <a class="reference internal" href="reference.html#selfrag" id="id2"><span>[selfRAG]</span></a>)</span><a class="headerlink" href="#id56" title="Link to this image"></a></p>
+<p><span class="caption-text">Overview of SELF-RAG. (Source <a class="reference internal" href="reference.html#selfrag" id="id2"><span>[selfRAG]</span></a>)</span><a class="headerlink" href="#id57" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>In the paper <a class="reference internal" href="reference.html#selfrag" id="id3"><span>[selfRAG]</span></a>, Four types decisions are made:</p>
@@ -1226,10 +1233,10 @@ Assesses if <cite>y</cite> (generation) is a useful response to <cite>x</cite> (
 </ul>
 </div></blockquote>
 </div></blockquote>
-<figure class="align-center" id="id57">
+<figure class="align-center" id="id58">
 <span id="fig-self-rag"></span><img alt="_images/self_rag.png" src="_images/self_rag.png" />
 <figcaption>
-<p><span class="caption-text">Self-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_self_rag_local/">Langgraph self-rag</a>)</span><a class="headerlink" href="#id57" title="Link to this image"></a></p>
+<p><span class="caption-text">Self-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_self_rag_local/">Langgraph self-rag</a>)</span><a class="headerlink" href="#id58" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="load-models">
@@ -1823,10 +1830,10 @@ you will get error:</p>
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id58">
+<figure class="align-center" id="id59">
 <span id="fig-self-rag-graph"></span><img alt="_images/self_rag_graph.png" src="_images/self_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Self-RAG Graph</span><a class="headerlink" href="#id58" title="Link to this image"></a></p>
+<p><span class="caption-text">Self-RAG Graph</span><a class="headerlink" href="#id59" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1997,10 +2004,10 @@ you will get error:</p>
 </section>
 <section id="corrective-rag">
 <span id="ch-c-rag"></span><h2><span class="section-number">5.4. </span>Corrective RAG<a class="headerlink" href="#corrective-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id59">
+<figure class="align-center" id="id60">
 <span id="fig-c-rag"></span><img alt="_images/corrective_rag.png" src="_images/corrective_rag.png" />
 <figcaption>
-<p><span class="caption-text">Corrective-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_crag_local/">Langgraph c-rag</a>)</span><a class="headerlink" href="#id59" title="Link to this image"></a></p>
+<p><span class="caption-text">Corrective-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_crag_local/">Langgraph c-rag</a>)</span><a class="headerlink" href="#id60" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="id6">
@@ -2562,10 +2569,10 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id60">
+<figure class="align-center" id="id61">
 <span id="fig-c-rag-graph"></span><img alt="_images/c_rag_graph.png" src="_images/c_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Corrective-RAG Graph</span><a class="headerlink" href="#id60" title="Link to this image"></a></p>
+<p><span class="caption-text">Corrective-RAG Graph</span><a class="headerlink" href="#id61" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -2637,10 +2644,10 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </section>
 <section id="adaptive-rag">
 <span id="ch-a-rag"></span><h2><span class="section-number">5.5. </span>Adaptive RAG<a class="headerlink" href="#adaptive-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id61">
+<figure class="align-center" id="id62">
 <span id="fig-a-rag"></span><img alt="_images/adaptive_rag.png" src="_images/adaptive_rag.png" />
 <figcaption>
-<p><span class="caption-text">Adaptive-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/">Langgraph A-rag</a>)</span><a class="headerlink" href="#id61" title="Link to this image"></a></p>
+<p><span class="caption-text">Adaptive-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/">Langgraph A-rag</a>)</span><a class="headerlink" href="#id62" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="id24">
@@ -3373,10 +3380,10 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id62">
+<figure class="align-center" id="id63">
 <span id="fig-a-rag-graph"></span><img alt="_images/a_rag_graph.png" src="_images/a_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Adaptive-RAG Graph</span><a class="headerlink" href="#id62" title="Link to this image"></a></p>
+<p><span class="caption-text">Adaptive-RAG Graph</span><a class="headerlink" href="#id63" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -3452,10 +3459,10 @@ need to use <code class="docutils literal notranslate"><span class="pre">eval(re
 </section>
 <section id="agentic-rag">
 <span id="ch-agentic-rag"></span><h2><span class="section-number">5.6. </span>Agentic RAG<a class="headerlink" href="#agentic-rag" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id63">
+<figure class="align-center" id="id64">
 <span id="fig-agentic-rag"></span><img alt="_images/agentic_rag.png" src="_images/agentic_rag.png" />
 <figcaption>
-<p><span class="caption-text">Agentic-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/">Langgraph Agentic-rag</a>)</span><a class="headerlink" href="#id63" title="Link to this image"></a></p>
+<p><span class="caption-text">Agentic-RAG langgraph diagram (source <a class="reference external" href="https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_agentic_rag/">Langgraph Agentic-rag</a>)</span><a class="headerlink" href="#id64" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="id43">
@@ -3903,10 +3910,10 @@ OllamaFunctions is initialized with the desired model name:</p>
 </pre></div>
 </div>
 <p>Ouput</p>
-<figure class="align-center" id="id64">
+<figure class="align-center" id="id65">
 <span id="fig-agentic-rag-graph"></span><img alt="_images/agentic_rag_graph.png" src="_images/agentic_rag_graph.png" />
 <figcaption>
-<p><span class="caption-text">Agentic-RAG Graph</span><a class="headerlink" href="#id64" title="Link to this image"></a></p>
+<p><span class="caption-text">Agentic-RAG Graph</span><a class="headerlink" href="#id65" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -3971,10 +3978,10 @@ OllamaFunctions is initialized with the desired model name:</p>
 <h3><span class="section-number">5.7.1. </span>Multi-agent Systems<a class="headerlink" href="#multi-agent-systems" title="Link to this heading"></a></h3>
 <section id="multi-agent-architectures">
 <h4><span class="section-number">5.7.1.1. </span>Multi-agent architectures<a class="headerlink" href="#multi-agent-architectures" title="Link to this heading"></a></h4>
-<figure class="align-center" id="id65">
+<figure class="align-center" id="id66">
 <span id="fig-mulit-agent-arch"></span><img alt="_images/agent_architectures.png" src="_images/agent_architectures.png" />
 <figcaption>
-<p><span class="caption-text">Multi-agent architectures (Source: <a class="reference external" href="https://langchain-ai.github.io/langgraph/concepts/multi_agent/">Multi-agent architectures</a>)</span><a class="headerlink" href="#id65" title="Link to this image"></a></p>
+<p><span class="caption-text">Multi-agent architectures (Source: <a class="reference external" href="https://langchain-ai.github.io/langgraph/concepts/multi_agent/">Multi-agent architectures</a>)</span><a class="headerlink" href="#id66" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -4044,6 +4051,22 @@ OllamaFunctions is initialized with the desired model name:</p>
 </figure>
 </section>
 </section>
+<section id="graph-rag">
+<h3><span class="section-number">5.7.2. </span>Graph RAG<a class="headerlink" href="#graph-rag" title="Link to this heading"></a></h3>
+<section id="knowledge-graph">
+<h4><span class="section-number">5.7.2.1. </span>Knowledge Graph<a class="headerlink" href="#knowledge-graph" title="Link to this heading"></a></h4>
+</section>
+<section id="neo4j-for-graph-data">
+<h4><span class="section-number">5.7.2.2. </span>Neo4j for Graph Data<a class="headerlink" href="#neo4j-for-graph-data" title="Link to this heading"></a></h4>
+<p>Neo4j is a popular graph database management system designed to store, query, and analyze data
+in the form of nodes, relationships, and properties. Unlike traditional relational databases,
+which use tables, rows, and columns, Neo4j uses a graph-based model that is highly efficient
+for handling interconnected data.</p>
+</section>
+<section id="id53">
+<h4><span class="section-number">5.7.2.3. </span>Graph RAG<a class="headerlink" href="#id53" title="Link to this heading"></a></h4>
+</section>
+</section>
 </section>
 </section>
 
@@ -4059,7 +4082,7 @@ OllamaFunctions is initialized with the desired model name:</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Jan 03, 2025.
+      <span class="lastupdated">Last updated on Jan 05, 2025.
       </span></p>
   </div>
 

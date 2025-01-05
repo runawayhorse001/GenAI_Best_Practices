@@ -3876,3 +3876,23 @@ Command: Edgeless graphs
 .. figure:: images/multi_agents_simple.png
     :align: center
 
+
+Graph RAG                          
+---------
+
+Knowledge Graph 
+~~~~~~~~~~~~~~~
+
+Neo4j for Graph Data
+~~~~~~~~~~~~~~~~~~~~
+
+Neo4j is a popular graph database management system designed to store, query, and analyze data 
+in the form of nodes, relationships, and properties. Unlike traditional relational databases, 
+which use tables, rows, and columns, Neo4j uses a graph-based model that is highly efficient 
+for handling interconnected data.
+
+
+Graph RAG
+~~~~~~~~~
+
+
