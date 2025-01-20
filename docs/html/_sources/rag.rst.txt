@@ -3891,8 +3891,23 @@ in the form of nodes, relationships, and properties. Unlike traditional relation
 which use tables, rows, and columns, Neo4j uses a graph-based model that is highly efficient 
 for handling interconnected data.
 
+.. _fig_neo4j:
+.. figure:: images/neo4j_aura.png
+    :align: center
+
+    Neo4j Aura
+
 
 Graph RAG
 ~~~~~~~~~
+
+Graph retriever
+
+.. _fig_neo4j:
+.. figure:: images/graph_neighbor.png
+    :align: center
+
+    Graph retriever
+
 
 
