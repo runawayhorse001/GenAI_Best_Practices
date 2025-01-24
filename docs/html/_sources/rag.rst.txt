@@ -3883,6 +3883,53 @@ Graph RAG
 Knowledge Graph 
 ~~~~~~~~~~~~~~~
 
+A Knowledge Graph is a structured representation of information that captures entities --objects, events,
+or concepts, their attributes, and the relationships between them. It is designed to enable machines 
+to understand, reason, and derive insights from the interconnected nature of data.
+
+There are four major components of any knowledge graph: Nodes, Edges, Properties and Schema.
+
+1. **Nodes (Entities)**
+   Entities are the fundamental units of a knowledge graph that represent real-world objects, concepts, or things.
+
+   Examples:
+
+   - People: ``Albert Einstein``
+   - Places: ``Paris``
+   - Concepts: ``Relativity``
+
+2. **Edges (Relationships)**
+   Relationships define how entities are connected to each other. These are often labeled to specify the type of connection.
+
+   Examples:
+
+   - ``Albert Einstein`` **wrote** ``Theory of Relativity``
+   - ``Paris`` **is the capital of** ``France``
+
+3. **Properties (Attributes)**
+   Attributes provide additional details or metadata about entities or relationships.
+
+   Examples:
+   - For an entity ``Albert Einstein``:
+
+     - **Date of Birth**: ``1879-03-14``
+     - **Profession**: ``Physicist``
+
+4. **Schema (Ontology)**
+   An ontology defines the structure of the knowledge graph, including:
+
+   - **Classes**: Categories or types of entities (e.g., Person, City, Book).
+   - **Properties**: Rules for relationships and attributes (e.g., "Person has Date of Birth").
+   - **Constraints**: Cardinality, domains, and ranges for valid relationships.
+
+
+.. _fig_graph_components:
+.. figure:: images/graph_components.png
+    :align: center
+
+    graph_components
+
+
 Neo4j for Graph Data
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -3903,7 +3950,7 @@ Graph RAG
 
 Graph retriever
 
-.. _fig_neo4j:
+.. _fig_neo4j_neighbor:
 .. figure:: images/graph_neighbor.png
     :align: center
 
