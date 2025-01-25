@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{January 20, 2025}
+\date{January 25, 2025}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -3337,6 +3337,19 @@ Adaptive RAG: \sphinxhref{https://colab.research.google.com/drive/1tzihPk9Ln96RY
 Agentic RAG: \sphinxhref{https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq\_vL-6OKLW8Hdr4?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
 
 \end{itemize}
+
+\sphinxAtStartPar
+\textendash{}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Neo4j Cypher: \sphinxhref{https://colab.research.google.com/drive/1lO08AeXD\_SwijC-KlTOzsh1lks55NsG3?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\item {} 
+\sphinxAtStartPar
+Graph\sphinxhyphen{}RAG: \sphinxhref{https://colab.research.google.com/drive/1-KkhK-bdTLWdUreV-jNkjgoaFo573ZCO?usp=drive\_link}{\sphinxincludegraphics{{colab-badge}.png}}
+
+\end{itemize}
 \end{sphinxadmonition}
 
 \begin{figure}[htbp]
@@ -3344,7 +3357,7 @@ Agentic RAG: \sphinxhref{https://colab.research.google.com/drive/1-eZ61ux0QSCNx2
 \capstart
 
 \noindent\sphinxincludegraphics{{RAG_diagram}.png}
-\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id55}}\label{\detokenize{rag:fig-rag}}\end{figure}
+\caption{Retrieval\sphinxhyphen{}Augmented Generation Diagram}\label{\detokenize{rag:id54}}\label{\detokenize{rag:fig-rag}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
@@ -3769,7 +3782,7 @@ The valuating Chunking Strategies for Retrieval can be found at: \sphinxurl{http
 \capstart
 
 \noindent\sphinxincludegraphics{{late_chunking}.png}
-\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id56}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
+\caption{An illustration of the naive chunking strategy (left) and the late chunking strategy (right). (Souce \sphinxhref{https://jina.ai/news/late-chunking-in-long-context-embedding-models/}{Jina AI})}\label{\detokenize{rag:id55}}\label{\detokenize{rag:fig-late-chunk}}\end{figure}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Late Chunking} refers to a strategy in Retrieval\sphinxhyphen{}Augmented Generation (RAG) where chunking of
@@ -4784,7 +4797,7 @@ k is a small constant (often set to 60 or another fixed value) to control how mu
 \capstart
 
 \noindent\sphinxincludegraphics[scale=0.5]{{rrf}.png}
-\caption{Reciprocal Rank Fusion}\label{\detokenize{rag:id57}}\label{\detokenize{rag:fig-retriever}}\end{figure}
+\caption{Reciprocal Rank Fusion}\label{\detokenize{rag:id56}}\label{\detokenize{rag:fig-retriever}}\end{figure}
 
 \sphinxAtStartPar
 Example:
@@ -4971,7 +4984,7 @@ Web search engine: \sphinxcode{\sphinxupquote{Google}}
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag_paper}.png}
-\caption{Overview of SELF\sphinxhyphen{}RAG. (Source \sphinxcite{reference:selfrag})}\label{\detokenize{rag:id58}}\label{\detokenize{rag:fig-self-rag-paper}}\end{figure}
+\caption{Overview of SELF\sphinxhyphen{}RAG. (Source \sphinxcite{reference:selfrag})}\label{\detokenize{rag:id57}}\label{\detokenize{rag:fig-self-rag-paper}}\end{figure}
 
 \sphinxAtStartPar
 In the paper \sphinxcite{reference:selfrag}, Four types decisions are made:
@@ -5088,7 +5101,7 @@ Assesses if \sphinxtitleref{y} (generation) is a useful response to \sphinxtitle
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag}.png}
-\caption{Self\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_self\_rag\_local/}{Langgraph self\sphinxhyphen{}rag})}\label{\detokenize{rag:id59}}\label{\detokenize{rag:fig-self-rag}}\end{figure}
+\caption{Self\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_self\_rag\_local/}{Langgraph self\sphinxhyphen{}rag})}\label{\detokenize{rag:id58}}\label{\detokenize{rag:fig-self-rag}}\end{figure}
 
 
 \subsection{Load Models}
@@ -5731,7 +5744,7 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{self_rag_graph}.png}
-\caption{Self\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id60}}\label{\detokenize{rag:fig-self-rag-graph}}\end{figure}
+\caption{Self\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id59}}\label{\detokenize{rag:fig-self-rag-graph}}\end{figure}
 
 
 \subsection{Test}
@@ -5912,7 +5925,7 @@ Output:
 \capstart
 
 \noindent\sphinxincludegraphics{{corrective_rag}.png}
-\caption{Corrective\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_crag\_local/}{Langgraph c\sphinxhyphen{}rag})}\label{\detokenize{rag:id61}}\label{\detokenize{rag:fig-c-rag}}\end{figure}
+\caption{Corrective\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_crag\_local/}{Langgraph c\sphinxhyphen{}rag})}\label{\detokenize{rag:id60}}\label{\detokenize{rag:fig-c-rag}}\end{figure}
 
 
 \subsection{Load Models}
@@ -6520,7 +6533,7 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{c_rag_graph}.png}
-\caption{Corrective\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id62}}\label{\detokenize{rag:fig-c-rag-graph}}\end{figure}
+\caption{Corrective\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id61}}\label{\detokenize{rag:fig-c-rag-graph}}\end{figure}
 
 
 \subsection{Test}
@@ -6602,7 +6615,7 @@ Ouput:
 \capstart
 
 \noindent\sphinxincludegraphics{{adaptive_rag}.png}
-\caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id63}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
+\caption{Adaptive\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_adaptive\_rag/}{Langgraph A\sphinxhyphen{}rag})}\label{\detokenize{rag:id62}}\label{\detokenize{rag:fig-a-rag}}\end{figure}
 
 
 \subsection{Load Models}
@@ -7371,7 +7384,7 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{a_rag_graph}.png}
-\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id64}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
+\caption{Adaptive\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id63}}\label{\detokenize{rag:fig-a-rag-graph}}\end{figure}
 
 
 \subsection{Test}
@@ -7457,7 +7470,7 @@ Ouput:
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag}.png}
-\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id65}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
+\caption{Agentic\sphinxhyphen{}RAG langgraph diagram (source \sphinxhref{https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph\_agentic\_rag/}{Langgraph Agentic\sphinxhyphen{}rag})}\label{\detokenize{rag:id64}}\label{\detokenize{rag:fig-agentic-rag}}\end{figure}
 
 
 \subsection{Load Models}
@@ -7936,7 +7949,7 @@ Ouput
 \capstart
 
 \noindent\sphinxincludegraphics{{agentic_rag_graph}.png}
-\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id66}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
+\caption{Agentic\sphinxhyphen{}RAG Graph}\label{\detokenize{rag:id65}}\label{\detokenize{rag:fig-agentic-rag-graph}}\end{figure}
 
 
 \subsection{Test}
@@ -8009,7 +8022,7 @@ Ouput:
 \capstart
 
 \noindent\sphinxincludegraphics{{agent_architectures}.png}
-\caption{Multi\sphinxhyphen{}agent architectures (Source: \sphinxhref{https://langchain-ai.github.io/langgraph/concepts/multi\_agent/}{Multi\sphinxhyphen{}agent architectures})}\label{\detokenize{rag:id67}}\label{\detokenize{rag:fig-mulit-agent-arch}}\end{figure}
+\caption{Multi\sphinxhyphen{}agent architectures (Source: \sphinxhref{https://langchain-ai.github.io/langgraph/concepts/multi\_agent/}{Multi\sphinxhyphen{}agent architectures})}\label{\detokenize{rag:id66}}\label{\detokenize{rag:fig-mulit-agent-arch}}\end{figure}
 
 
 \subsubsection{Command: Edgeless graphs}
@@ -8086,6 +8099,102 @@ Ouput:
 
 \subsubsection{Knowledge Graph}
 \label{\detokenize{rag:knowledge-graph}}
+\sphinxAtStartPar
+A Knowledge Graph is a structured representation of information that captures entities \textendash{}objects, events,
+or concepts, their attributes, and the relationships between them. It is designed to enable machines
+to understand, reason, and derive insights from the interconnected nature of data.
+
+\sphinxAtStartPar
+There are four major components of any knowledge graph: Nodes, Edges, Properties and Schema.
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Nodes (Entities)}
+Entities are the fundamental units of a knowledge graph that represent real\sphinxhyphen{}world objects, concepts, or things.
+
+\sphinxAtStartPar
+Examples:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+People: \sphinxcode{\sphinxupquote{Albert Einstein}}
+
+\item {} 
+\sphinxAtStartPar
+Places: \sphinxcode{\sphinxupquote{Paris}}
+
+\item {} 
+\sphinxAtStartPar
+Concepts: \sphinxcode{\sphinxupquote{Relativity}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Edges (Relationships)}
+Relationships define how entities are connected to each other. These are often labeled to specify the type of connection.
+
+\sphinxAtStartPar
+Examples:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{Albert Einstein}} \sphinxstylestrong{wrote} \sphinxcode{\sphinxupquote{Theory of Relativity}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{Paris}} \sphinxstylestrong{is the capital of} \sphinxcode{\sphinxupquote{France}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Properties (Attributes)}
+Attributes provide additional details or metadata about entities or relationships.
+
+\sphinxAtStartPar
+Examples:
+\sphinxhyphen{} For an entity \sphinxcode{\sphinxupquote{Albert Einstein}}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Date of Birth}: \sphinxcode{\sphinxupquote{1879\sphinxhyphen{}03\sphinxhyphen{}14}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Profession}: \sphinxcode{\sphinxupquote{Physicist}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Schema (Ontology)}
+An ontology defines the structure of the knowledge graph, including:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Classes}: Categories or types of entities (e.g., Person, City, Book).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Properties}: Rules for relationships and attributes (e.g., “Person has Date of Birth”).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Constraints}: Cardinality, domains, and ranges for valid relationships.
+
+\end{itemize}
+
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{graph_components}.png}
+\caption{graph\_components}\label{\detokenize{rag:id67}}\label{\detokenize{rag:fig-graph-components}}\end{figure}
+
 
 \subsubsection{Neo4j for Graph Data}
 \label{\detokenize{rag:neo4j-for-graph-data}}
@@ -8101,19 +8210,538 @@ for handling interconnected data.
 
 \noindent\sphinxincludegraphics{{neo4j_aura}.png}
 \caption{Neo4j Aura}\label{\detokenize{rag:id68}}\label{\detokenize{rag:fig-neo4j}}\end{figure}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+connection
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+Neo4j sandbox (only available for 3 days)
+
+\end{enumerate}
+\begin{quote}
+
+\sphinxAtStartPar
+We will use {[}the small Movie project{]}(\sphinxurl{https://sandbox.neo4j.com/?usecase=movies}) to demonstrate
+how to connect to Neo4j database and use \sphinxcode{\sphinxupquote{Cypher Query}} to fetch the data.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{neo4j_sandbox}.png}
+\caption{Neo4j Sandbox}\label{\detokenize{rag:id69}}\label{\detokenize{rag:fig-neo4j-sb}}\end{figure}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{url} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bolt://3.86.166.85:7687}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{username}\PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{neo4j}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{password} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{shields\PYGZhy{}puffs\PYGZhy{}tours}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{graph} \PYG{o}{=} \PYG{n}{Neo4jGraph}\PYG{p}{(}\PYG{n}{url}\PYG{o}{=}\PYG{n}{url}\PYG{p}{,} \PYG{n}{username}\PYG{o}{=}\PYG{n}{username}\PYG{p}{,} \PYG{n}{password}\PYG{o}{=}\PYG{n}{password}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{graph}\PYG{o}{.}\PYG{n}{schema}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Node\PYG{+w}{ }properties:
+Person\PYG{+w}{ }\PYG{o}{\PYGZob{}}name:\PYG{+w}{ }STRING,\PYG{+w}{ }born:\PYG{+w}{ }INTEGER\PYG{o}{\PYGZcb{}}
+Movie\PYG{+w}{ }\PYG{o}{\PYGZob{}}tagline:\PYG{+w}{ }STRING,\PYG{+w}{ }title:\PYG{+w}{ }STRING,\PYG{+w}{ }released:\PYG{+w}{ }INTEGER\PYG{o}{\PYGZcb{}}
+Relationship\PYG{+w}{ }properties:
+ACTED\PYGZus{}IN\PYG{+w}{ }\PYG{o}{\PYGZob{}}roles:\PYG{+w}{ }LIST\PYG{o}{\PYGZcb{}}
+REVIEWED\PYG{+w}{ }\PYG{o}{\PYGZob{}}summary:\PYG{+w}{ }STRING,\PYG{+w}{ }rating:\PYG{+w}{ }INTEGER\PYG{o}{\PYGZcb{}}
+The\PYG{+w}{ }relationships:
+\PYG{o}{(}:Person\PYG{o}{)}\PYGZhy{}\PYG{o}{[}:ACTED\PYGZus{}IN\PYG{o}{]}\PYGZhy{}\PYGZgt{}\PYG{o}{(}:Movie\PYG{o}{)}
+\PYG{o}{(}:Person\PYG{o}{)}\PYGZhy{}\PYG{o}{[}:DIRECTED\PYG{o}{]}\PYGZhy{}\PYGZgt{}\PYG{o}{(}:Movie\PYG{o}{)}
+\PYG{o}{(}:Person\PYG{o}{)}\PYGZhy{}\PYG{o}{[}:PRODUCED\PYG{o}{]}\PYGZhy{}\PYGZgt{}\PYG{o}{(}:Movie\PYG{o}{)}
+\PYG{o}{(}:Person\PYG{o}{)}\PYGZhy{}\PYG{o}{[}:WROTE\PYG{o}{]}\PYGZhy{}\PYGZgt{}\PYG{o}{(}:Movie\PYG{o}{)}
+\PYG{o}{(}:Person\PYG{o}{)}\PYGZhy{}\PYG{o}{[}:FOLLOWS\PYG{o}{]}\PYGZhy{}\PYGZgt{}\PYG{o}{(}:Person\PYG{o}{)}
+\PYG{o}{(}:Person\PYG{o}{)}\PYGZhy{}\PYG{o}{[}:REVIEWED\PYG{o}{]}\PYGZhy{}\PYGZgt{}\PYG{o}{(}:Movie\PYG{o}{)}
+\end{sphinxVerbatim}
+\end{quote}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+\sphinxAtStartPar
+Neo4j Aura
+
+\end{enumerate}
+\begin{quote}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{neo4j_aura_free}.png}
+\caption{Neo4j Aura}\label{\detokenize{rag:id70}}\label{\detokenize{rag:fig-neo4j-aura-free}}\end{figure}
+\end{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NEO4J\PYGZus{}URI}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NEO4J\PYGZus{}URI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NEO4J\PYGZus{}USERNAME}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NEO4J\PYGZus{}USERNAME}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NEO4J\PYGZus{}PASSWORD}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NEO4J\PYGZus{}PASSWORD}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} graph = Neo4jGraph(url = \PYGZsq{}neo4j+s://\PYGZti{}\PYGZti{}\PYGZsq{},database=\PYGZsq{}neo4j\PYGZsq{},}
+\PYG{c+c1}{\PYGZsh{}                    username=\PYGZsq{}neo4j\PYGZsq{},password=\PYGZsq{}\PYGZsq{})}
+
+\PYG{n}{graph} \PYG{o}{=} \PYG{n}{Neo4jGraph}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Ingest new data
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{graph}\PYG{o}{.}\PYG{n}{query}\PYG{p}{(}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{MERGE (m:Movie \PYGZob{}name:\PYGZdq{}Top Gun\PYGZdq{}, runtime: 120\PYGZcb{})}
+\PYG{l+s+sd}{WITH m}
+\PYG{l+s+sd}{UNWIND [\PYGZdq{}Tom Cruise\PYGZdq{}, \PYGZdq{}Val Kilmer\PYGZdq{}, \PYGZdq{}Anthony Edwards\PYGZdq{}, \PYGZdq{}Meg Ryan\PYGZdq{}] AS actor}
+\PYG{l+s+sd}{MERGE (a:Actor \PYGZob{}name:actor\PYGZcb{})}
+\PYG{l+s+sd}{MERGE (a)\PYGZhy{}[:ACTED\PYGZus{}IN]\PYGZhy{}\PYGZgt{}(m)}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Cypher query fech data
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{graph}\PYG{o}{.}\PYG{n}{query}\PYG{p}{(}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{MATCH (m:Movie)}
+\PYG{l+s+sd}{MATCH (m)\PYGZhy{}[r:ACTED\PYGZus{}IN|DIRECTED]\PYGZhy{}(t)}
+\PYG{l+s+sd}{RETURN m, r, t LIMIT 2}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{[}\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}m\PYGZsq{}}:\PYG{+w}{ }\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}tagline\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Welcome to the Real World\PYGZsq{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}title\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}The Matrix\PYGZsq{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}released\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1999}\PYG{o}{\PYGZcb{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}:\PYG{+w}{ }\PYG{o}{(}\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}born\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1978},\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}name\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Emil Eifrem\PYGZsq{}}\PYG{o}{\PYGZcb{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}ACTED\PYGZus{}IN\PYGZsq{}},
+\PYG{+w}{  }\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}tagline\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Welcome to the Real World\PYGZsq{}},
+\PYG{+w}{    }\PYG{l+s+s1}{\PYGZsq{}title\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}The Matrix\PYGZsq{}},
+\PYG{+w}{    }\PYG{l+s+s1}{\PYGZsq{}released\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1999}\PYG{o}{\PYGZcb{}}\PYG{o}{)},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}t\PYGZsq{}}:\PYG{+w}{ }\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}born\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1978},\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}name\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Emil Eifrem\PYGZsq{}}\PYG{o}{\PYGZcb{}}\PYG{o}{\PYGZcb{}},
+\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}m\PYGZsq{}}:\PYG{+w}{ }\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}tagline\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Welcome to the Real World\PYGZsq{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}title\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}The Matrix\PYGZsq{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}released\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1999}\PYG{o}{\PYGZcb{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}:\PYG{+w}{ }\PYG{o}{(}\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}born\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1965},\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}name\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Lana Wachowski\PYGZsq{}}\PYG{o}{\PYGZcb{}},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}DIRECTED\PYGZsq{}},
+\PYG{+w}{  }\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}tagline\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Welcome to the Real World\PYGZsq{}},
+\PYG{+w}{    }\PYG{l+s+s1}{\PYGZsq{}title\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}The Matrix\PYGZsq{}},
+\PYG{+w}{    }\PYG{l+s+s1}{\PYGZsq{}released\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1999}\PYG{o}{\PYGZcb{}}\PYG{o}{)},
+\PYG{+w}{  }\PYG{l+s+s1}{\PYGZsq{}t\PYGZsq{}}:\PYG{+w}{ }\PYG{o}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}born\PYGZsq{}}:\PYG{+w}{ }\PYG{l+m}{1965},\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}name\PYGZsq{}}:\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Lana Wachowski\PYGZsq{}}\PYG{o}{\PYGZcb{}}\PYG{o}{\PYGZcb{}}\PYG{o}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{graph}\PYG{o}{.}\PYG{n}{query}\PYG{p}{(}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{MATCH (p:Person)\PYGZhy{}[:ACTED\PYGZus{}IN]\PYGZhy{}\PYGZgt{}(m:Movie)}
+\PYG{l+s+sd}{    WHERE m.title = \PYGZsq{}Top Gun\PYGZsq{}}
+\PYG{l+s+sd}{    RETURN p.name}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Val Kilmer}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Meg Ryan}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Tom Skerritt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Kelly McGillis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Tom Cruise}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Anthony Edwards}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Graph Cypher QAChain
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chain} \PYG{o}{=} \PYG{n}{GraphCypherQAChain}\PYG{o}{.}\PYG{n}{from\PYGZus{}llm}\PYG{p}{(}
+    \PYG{n}{llm}\PYG{p}{,} \PYG{n}{graph}\PYG{o}{=}\PYG{n}{graph}\PYG{p}{,} \PYG{n}{verbose}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{allow\PYGZus{}dangerous\PYGZus{}requests}\PYG{o}{=}\PYG{k+kc}{True}
+\PYG{p}{)}
+
+\PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Who played in The Matrix?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}} \PYG{n}{Entering} \PYG{n}{new} \PYG{n}{GraphCypherQAChain} \PYG{n}{chain}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{n}{Generated} \PYG{n}{Cypher}\PYG{p}{:}
+\PYG{n}{MATCH} \PYG{p}{(}\PYG{n}{p}\PYG{p}{:}\PYG{n}{Person}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{p}{[}\PYG{p}{:}\PYG{n}{ACTED\PYGZus{}IN}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{m}\PYG{p}{:}\PYG{n}{Movie}\PYG{p}{)} \PYG{n}{WHERE} \PYG{n}{m}\PYG{o}{.}\PYG{n}{title} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The Matrix}\PYG{l+s+s1}{\PYGZsq{}} \PYG{n}{RETURN} \PYG{n}{p}\PYG{o}{.}\PYG{n}{name}
+\PYG{n}{Full} \PYG{n}{Context}\PYG{p}{:}
+\PYG{p}{[}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Emil Eifrem}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Hugo Weaving}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Laurence Fishburne}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Carrie\PYGZhy{}Anne Moss}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p.name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Keanu Reeves}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{]}
+
+\PYG{o}{\PYGZgt{}} \PYG{n}{Finished} \PYG{n}{chain}\PYG{o}{.}
+\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{query}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Who played in The Matrix?}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{result}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ Emil Eifrem, Hugo Weaving, Laurene Fishburne, Carrie\PYGZhy{}Anne Moss, and Keanu Reeves played in The Matrix.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\end{itemize}
 
 
 \subsubsection{Graph RAG}
-\label{\detokenize{rag:id53}}
+\label{\detokenize{rag:id53}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Neo4j Environment Setup
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{google}\PYG{n+nn}{.}\PYG{n+nn}{colab} \PYG{k+kn}{import} \PYG{n}{userdata}
+\PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NEO4J\PYGZus{}URI}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NEO4J\PYGZus{}URI}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NEO4J\PYGZus{}USERNAME}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NEO4J\PYGZus{}USERNAME}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NEO4J\PYGZus{}PASSWORD}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{userdata}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NEO4J\PYGZus{}PASSWORD}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{}graph = Neo4jGraph(url=\PYGZdq{}neo4j+s://\PYGZdq{}, username=\PYGZdq{}neo4j\PYGZdq{}, password=\PYGZdq{}password\PYGZdq{})}
+\PYG{n}{graph} \PYG{o}{=} \PYG{n}{Neo4jGraph}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Data ingestion
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Read the wikipedia article}
+\PYG{n}{raw\PYGZus{}documents} \PYG{o}{=} \PYG{n}{WikipediaLoader}\PYG{p}{(}\PYG{n}{query}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Elizabeth I}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} Define chunking strategy}
+\PYG{n}{text\PYGZus{}splitter} \PYG{o}{=} \PYG{n}{TokenTextSplitter}\PYG{p}{(}\PYG{n}{chunk\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{512}\PYG{p}{,} \PYG{n}{chunk\PYGZus{}overlap}\PYG{o}{=}\PYG{l+m+mi}{24}\PYG{p}{)}
+
+\PYG{n}{documents} \PYG{o}{=} \PYG{n}{text\PYGZus{}splitter}\PYG{o}{.}\PYG{n}{split\PYGZus{}documents}\PYG{p}{(}\PYG{n}{raw\PYGZus{}documents}\PYG{p}{)}
+\PYG{n}{documents}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}\PYG{n}{Document}\PYG{p}{(}\PYG{n}{metadata}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{title}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Elizabeth I}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{summary}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Elizabeth I (7 September 1533 \textendash{} 24 March 1603) was Queen of England and Ireland from 17 November 1558 until her death in 1603. She was the last monarch of the House of Tudor.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Elizabeth was the only surviving child of Henry VIII and his second wife, Anne Boleyn. When Elizabeth was two years old, her parents}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ marriage was annulled, her mother was executed, and Elizabeth was declared illegitimate. Henry restored her to the line of succession when she was 10, via the Third Succession Act 1543. After Henry}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s death in 1547, Elizabeth}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s younger half\PYGZhy{}brother Edward VI ruled until his own death in 1553, bequeathing the crown to a Protestant cousin, Lady Jane Grey, and ignoring the claims of his two half\PYGZhy{}sisters, the Catholic Mary and the younger Elizabeth, in spite of statutes to the contrary. Edward}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s will was set aside within weeks of his death and Mary became queen, deposing and executing Jane. During Mary}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s reign, Elizabeth was imprisoned for nearly a year on suspicion of supporting Protestant rebels.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Upon her half\PYGZhy{}sister}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s death in 1558, Elizabeth succeeded to the throne and set out to rule by good counsel. She depended heavily on a group of trusted advisers led by William Cecil, whom she created Baron Burghley. One of her first actions as queen was the establishment of an English Protestant church, of which she became the supreme governor. This era, later named the Elizabethan Religious Settlement, would evolve into the Church of England. It was expected that Elizabeth would marry and produce an heir; however, despite numerous courtships, she never did. Because of this she is sometimes referred to as the }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Virgin Queen}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{. She was eventually succeeded by her first cousin twice removed, James VI of Scotland, the son of Mary, Queen of Scots.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In government, Elizabeth was more moderate than her father and siblings had been. One of her mottoes was video et taceo (}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{I see and keep silent}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{). In religion, she was relatively tolerant and avoided systematic persecution. After the pope declared her illegitimate in 1570, which in theory released English Catholics from allegiance to her, several conspiracies threatened her life, all of which were defeated with the help of her ministers}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ secret service, run by Sir Francis Walsingham. Elizabeth was cautious in foreign affairs, manoeuvring between the major powers of France and Spain. She half\PYGZhy{}heartedly supported a number of ineffective, poorly resourced military campaigns in the Netherlands, France, and Ireland. By the mid\PYGZhy{}1580s, England could no longer avoid war with Spain.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{As she grew older, Elizabeth became celebrated for her virginity. A cult of personality grew around her which was celebrated in the portraits, pageants, and literature of the day. Elizabeth}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s reign became known as the Elizabethan era. The period is famous for the flourishing of English drama, led by playwrights such as William Shakespeare and Christopher Marlowe, the prowess of English maritime adventurers, such as Francis Drake and Walter Raleigh, and for the defeat of the Spanish Armada. Some historians depict Elizabeth as a short\PYGZhy{}tempered, sometimes indecisive ruler, who enjoyed more than her fair share of luck. Towards the end of her reign, a series of economic and military problems weakened her popularity. Elizabeth is acknowledged as a charismatic performer (}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Gloriana}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{) and a dogged survivor (}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Good Queen Bess}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{) in an era when government was ramshackle and limited, and when monarchs in neighbouring countries faced internal problems that jeopardised their thrones. After the short, disastrous reigns of her half\PYGZhy{}siblings, her 44 years on the throne provided welcome stability for the kingdom and helped to forge a sense of national identity.}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{source}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://en.wikipedia.org/wiki/Elizabeth\PYGZus{}I}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,} \PYG{n}{page\PYGZus{}content}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Elizabeth I (7 September 1533 \textendash{} 24 March 1603) was Queen of England and Ireland from 17 November 1558 until her death in 1603. She was the last monarch of the House of Tudor.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Elizabeth was the only surviving child of Henry VIII and his second wife, Anne Boleyn. When Elizabeth was two years old, her parents}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ marriage was annulled, her mother was executed, and Elizabeth was declared illegitimate. Henry restored her to the line of succession when she was 10, via the Third Succession Act 1543. After Henry}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s death in 1547, Elizabeth}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s younger half\PYGZhy{}brother Edward VI ruled until his own death in 1553, bequeathing the crown to a Protestant cousin, Lady Jane Grey, and ignoring the claims of his two half\PYGZhy{}sisters, the Catholic Mary and the younger Elizabeth, in spite of statutes to the contrary. Edward}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s will was set aside within weeks of his death and Mary became queen, deposing and executing Jane. During Mary}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s reign, Elizabeth was imprisoned for nearly a year on suspicion of supporting Protestant rebels.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{Upon her half\PYGZhy{}sister}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{s death in 1558, Elizabeth succeeded to the throne and set out to rule by good counsel. She depended heavily on a group of trusted advisers led by William Cecil, whom she created Baron Burghley. One of her first actions as queen was the establishment of an English Protestant church, of which she became the supreme governor. This era, later named the Elizabethan Religious Settlement, would evolve into the Church of England. It was expected that Elizabeth would marry and produce an heir; however, despite numerous courtships, she never did. Because of this she is sometimes referred to as the }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{Virgin Queen}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{. She was eventually succeeded by her first cousin twice removed, James VI of Scotland, the son of Mary, Queen of Scots.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{In government, Elizabeth was more moderate than her father and siblings had been. One of her mottoes was video et taceo (}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{I see and keep silent}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{). In religion, she was relatively tolerant and avoided systematic persecution. After the pope declared her illegitimate in 1570, which in theory released English Catholics from allegiance to her, several conspiracies threatened her life, all of which were defeated with the help of her ministers}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ secret service, run by Sir Francis Walsingham. Elizabeth was cautious in foreign affairs, manoeuvring between the major powers of France and Spain. She half\PYGZhy{}heartedly supported a number of ineffective, poorly resourced military campaigns in the Netherlands, France,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{OllamaEmbeddings}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain\PYGZus{}ollama} \PYG{k+kn}{import} \PYG{n}{ChatOllama}
+
+\PYG{c+c1}{\PYGZsh{} embedding model}
+\PYG{n}{embedding} \PYG{o}{=} \PYG{n}{OllamaEmbeddings}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{bge\PYGZhy{}m3}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} LLM}
+\PYG{n}{llm} \PYG{o}{=} \PYG{n}{ChatOllama}\PYG{p}{(}\PYG{n}{model}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{mistral}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{temperature}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{n}{llm\PYGZus{}transformer} \PYG{o}{=} \PYG{n}{LLMGraphTransformer}\PYG{p}{(}\PYG{n}{llm}\PYG{o}{=}\PYG{n}{llm}\PYG{p}{)}
+
+\PYG{n}{graph\PYGZus{}documents} \PYG{o}{=} \PYG{n}{llm\PYGZus{}transformer}\PYG{o}{.}\PYG{n}{convert\PYGZus{}to\PYGZus{}graph\PYGZus{}documents}\PYG{p}{(}\PYG{n}{documents}\PYG{p}{)}
+\PYG{n}{graph}\PYG{o}{.}\PYG{n}{add\PYGZus{}graph\PYGZus{}documents}\PYG{p}{(}
+    \PYG{n}{graph\PYGZus{}documents}\PYG{p}{,}
+    \PYG{n}{baseEntityLabel}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
+    \PYG{n}{include\PYGZus{}source}\PYG{o}{=}\PYG{k+kc}{True}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Unstructured data retriever
+
+\sphinxAtStartPar
+You can use the Neo4jVector.from\_existing\_graph method to add both keyword and vector retrieval to documents.
+This method configures keyword and vector search indexes for a hybrid search approach, targeting nodes
+labeled Document. Additionally, it calculates text embedding values if they are missing.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{vector\PYGZus{}index} \PYG{o}{=} \PYG{n}{Neo4jVector}\PYG{o}{.}\PYG{n}{from\PYGZus{}existing\PYGZus{}graph}\PYG{p}{(}
+    \PYG{n}{embedding}\PYG{p}{,}
+    \PYG{n}{search\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{hybrid}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{node\PYGZus{}label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Document}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{text\PYGZus{}node\PYGZus{}properties}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{text}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{embedding\PYGZus{}node\PYGZus{}property}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{embedding}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
 \sphinxAtStartPar
 Graph retriever
+
+\sphinxAtStartPar
+The graph retriever starts by identifying relevant entities in the input. For simplicity,
+we instruct the LLM to identify people, organizations, and locations. To achieve this,
+we will use LCEL with the newly added with\_structured\_output method to achieve this.
 
 \begin{figure}[htbp]
 \centering
 \capstart
 
 \noindent\sphinxincludegraphics{{graph_neighbor}.png}
-\caption{Graph retriever}\label{\detokenize{rag:id69}}\label{\detokenize{rag:id54}}\end{figure}
+\caption{Graph retriever}\label{\detokenize{rag:id71}}\label{\detokenize{rag:fig-neo4j-neighbor}}\end{figure}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Retriever}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{chains} \PYG{k+kn}{import} \PYG{n}{LLMChain}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{PydanticOutputParser}
+
+\PYG{k+kn}{from} \PYG{n+nn}{pydantic} \PYG{k+kn}{import} \PYG{n}{BaseModel}\PYG{p}{,} \PYG{n}{Field}
+\PYG{k+kn}{from} \PYG{n+nn}{langchain}\PYG{n+nn}{.}\PYG{n+nn}{output\PYGZus{}parsers} \PYG{k+kn}{import} \PYG{n}{PydanticOutputParser}
+
+\PYG{c+c1}{\PYGZsh{} Data model}
+\PYG{k}{class} \PYG{n+nc}{Entity}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}An entity with a name and type.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{Name}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The name of the entity.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{Type}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,} \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The type of the entity.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{class} \PYG{n+nc}{Entities}\PYG{p}{(}\PYG{n}{BaseModel}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}A list of entities.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{Entities}\PYG{p}{:} \PYG{n}{List}\PYG{p}{[}\PYG{n}{Entity}\PYG{p}{]} \PYG{o}{=} \PYG{n}{Field}\PYG{p}{(}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{,}
+                    \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{All the person, organization, }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{                              or business entitiesentities found in the text.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{PydanticOutputParser}\PYG{p}{(}\PYG{n}{pydantic\PYGZus{}object}\PYG{o}{=}\PYG{n}{Entities}\PYG{p}{)}
+
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{p}{(}
+    \PYG{n}{template}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{You are extracting organization and person entities }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                from the text }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Use the given format to extract information from the}
+\PYG{l+s+s2}{                following }\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                input: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                Return your answer in JSON format with the keys }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{, }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Entities}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ and }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Answer}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.}\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                The value of }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Entities}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ should be a list of entities where each entity is a dictionary with keys }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Name}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ and }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Type}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.}\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                The value of }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Answer}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ should be a dictionary with keys }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Text}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ and }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Entities}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.}\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{                The value of }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Text}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ should be a string containing the answer to the question and the value of }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Entities}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ should be a list of entities where each entity is a dictionary with keys }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Name}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ and }\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Type}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.}\PYG{l+s+se}{\PYGZbs{}n}
+\PYG{l+s+s2}{            }\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{input\PYGZus{}variables}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{partial\PYGZus{}variables}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{format\PYGZus{}instructions}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{get\PYGZus{}format\PYGZus{}instructions}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\PYG{p}{)}
+
+\PYG{n}{entity\PYGZus{}chain} \PYG{o}{=} \PYG{n}{prompt} \PYG{o}{|} \PYG{n}{llm} \PYG{o}{|} \PYG{n}{parser}
+
+\PYG{k}{def} \PYG{n+nf}{generate\PYGZus{}full\PYGZus{}text\PYGZus{}query}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Generate a full\PYGZhy{}text search query for a given input string.}
+
+\PYG{l+s+sd}{    This function constructs a query string suitable for a full\PYGZhy{}text search.}
+\PYG{l+s+sd}{    It processes the input string by splitting it into words and appending a}
+\PYG{l+s+sd}{    similarity threshold (\PYGZti{}2 changed characters) to each word, then combines}
+\PYG{l+s+sd}{    them using the AND operator. Useful for mapping entities from user questions}
+\PYG{l+s+sd}{    to database values, and allows for some misspelings.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{full\PYGZus{}text\PYGZus{}query} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{n}{words} \PYG{o}{=} \PYG{p}{[}\PYG{n}{el} \PYG{k}{for} \PYG{n}{el} \PYG{o+ow}{in} \PYG{n}{remove\PYGZus{}lucene\PYGZus{}chars}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{)}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)} \PYG{k}{if} \PYG{n}{el}\PYG{p}{]}
+    \PYG{c+c1}{\PYGZsh{} Check if words is empty before trying to access element.}
+    \PYG{k}{if} \PYG{n}{words}\PYG{p}{:}
+        \PYG{k}{for} \PYG{n}{word} \PYG{o+ow}{in} \PYG{n}{words}\PYG{p}{[}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{:}
+            \PYG{n}{full\PYGZus{}text\PYGZus{}query} \PYG{o}{+}\PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{word}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZti{}2 AND}\PYG{l+s+s2}{\PYGZdq{}}
+        \PYG{n}{full\PYGZus{}text\PYGZus{}query} \PYG{o}{+}\PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{words}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZti{}2}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{c+c1}{\PYGZsh{} Return empty query if no words}
+    \PYG{k}{return} \PYG{n}{full\PYGZus{}text\PYGZus{}query}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{structured\PYGZus{}retriever}\PYG{p}{(}\PYG{n}{question}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Collects the neighborhood of entities mentioned}
+\PYG{l+s+sd}{    in the question}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{result} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{n}{entities} \PYG{o}{=} \PYG{n}{entity\PYGZus{}chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{question}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{Entities}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{c+c1}{\PYGZsh{} Pass the entity name as a single string, not a split list}
+    \PYG{c+c1}{\PYGZsh{} print(entities.Name, generate\PYGZus{}full\PYGZus{}text\PYGZus{}query(entities.Name))}
+    \PYG{k}{for} \PYG{n}{entity} \PYG{o+ow}{in} \PYG{n}{entities}\PYG{o}{.}\PYG{n}{Name}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ }\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} Check if the entity is valid before generating a query}
+        \PYG{k}{if} \PYG{n}{entity}\PYG{p}{:}  \PYG{c+c1}{\PYGZsh{} Check if entity is not empty or whitespace}
+            \PYG{n}{response} \PYG{o}{=} \PYG{n}{graph}\PYG{o}{.}\PYG{n}{query}\PYG{p}{(}
+\PYG{+w}{                }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}CALL db.index.fulltext.queryNodes(\PYGZsq{}entity\PYGZsq{}, \PYGZdl{}query, \PYGZob{}limit:5\PYGZcb{})}
+\PYG{l+s+sd}{                YIELD node,score}
+\PYG{l+s+sd}{                CALL \PYGZob{}}
+\PYG{l+s+sd}{                  WITH node}
+\PYG{l+s+sd}{                  MATCH (node)\PYGZhy{}[r:!MENTIONS]\PYGZhy{}\PYGZgt{}(neighbor)}
+\PYG{l+s+sd}{                  RETURN node.id + \PYGZsq{} \PYGZhy{} \PYGZsq{} + type(r) + \PYGZsq{} \PYGZhy{}\PYGZgt{} \PYGZsq{} + neighbor.id AS output}
+\PYG{l+s+sd}{                  UNION ALL}
+\PYG{l+s+sd}{                  WITH node}
+\PYG{l+s+sd}{                  MATCH (node)\PYGZlt{}\PYGZhy{}[r:!MENTIONS]\PYGZhy{}(neighbor)}
+\PYG{l+s+sd}{                  RETURN neighbor.id + \PYGZsq{} \PYGZhy{} \PYGZsq{} + type(r) + \PYGZsq{} \PYGZhy{}\PYGZgt{} \PYGZsq{} +  node.id AS output}
+\PYG{l+s+sd}{                \PYGZcb{}}
+\PYG{l+s+sd}{                RETURN output LIMIT 50}
+\PYG{l+s+sd}{                \PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{p}{,}
+                \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{query}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{generate\PYGZus{}full\PYGZus{}text\PYGZus{}query}\PYG{p}{(}\PYG{n}{entity}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+            \PYG{p}{)}
+            \PYG{c+c1}{\PYGZsh{} Check if the response contains any results before processing}
+            \PYG{k}{if} \PYG{n}{response}\PYG{p}{:}
+                \PYG{n}{result} \PYG{o}{+}\PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{p}{[}\PYG{n}{el}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{output}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{k}{for} \PYG{n}{el} \PYG{o+ow}{in} \PYG{n}{response}\PYG{p}{]}\PYG{p}{)}
+            \PYG{c+c1}{\PYGZsh{} If no results, you might want to handle it with a message or skip it}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Warning: No results found for entity: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{entity}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{} If the entity is invalid, you can handle it with a message or skip it}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Warning: Skipping invalid entity: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{entity}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{result}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{structured\PYGZus{}retriever}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Who is Elizabeth I?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{RULED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Russia}
+\PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{BORN\PYGZus{}IN} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Greenwich} \PYG{n}{Palace}
+\PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{BORN\PYGZus{}IN} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Kolomenskoye}
+\PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{RULES} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{England}
+\PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{IS\PYGZus{}A} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1998} \PYG{n}{British} \PYG{n}{biographical} \PYG{n}{historical} \PYG{n}{drama} \PYG{n}{film}
+\PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{WAS\PYGZus{}MARRIED\PYGZus{}TO} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{William} \PYG{n}{Carey}
+\PYG{o+ow}{in}\PYG{o}{\PYGZhy{}}\PYG{n}{waiting} \PYG{o}{\PYGZhy{}} \PYG{n}{IS\PYGZus{}WAITING\PYGZus{}FOR} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Elizabeth}
+\PYG{n}{Elizabeth} \PYG{n}{Stuart} \PYG{o}{\PYGZhy{}} \PYG{n}{BORN\PYGZus{}IN} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Dunfermline} \PYG{n}{Palace}
+\PYG{n}{Elizabeth} \PYG{n}{Stuart} \PYG{o}{\PYGZhy{}} \PYG{n}{TRAVELLED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Scotland}
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{RULED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{England} \PYG{o+ow}{and} \PYG{n}{Ireland}
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{CORONATED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Westminster} \PYG{n}{Abbey}
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{IS\PYGZus{}A} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{two}\PYG{o}{\PYGZhy{}}\PYG{n}{part} \PYG{l+m+mi}{2005} \PYG{n}{British}\PYG{o}{\PYGZhy{}}\PYG{n}{American} \PYG{n}{historical} \PYG{n}{drama} \PYG{n}{television} \PYG{n}{serial}
+\PYG{n}{Becoming} \PYG{n}{Elizabeth} \PYG{o}{\PYGZhy{}} \PYG{n}{REPEATED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{15} \PYG{n}{July} \PYG{l+m+mi}{2023}\PYG{n}{Isabella} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{BORN\PYGZus{}IN} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Madrigal} \PYG{n}{de} \PYG{n}{las} \PYG{n}{Altas} \PYG{n}{Torres}
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{RULED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{England} \PYG{o+ow}{and} \PYG{n}{Ireland}
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{CORONATED} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Westminster} \PYG{n}{Abbey}
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{IS\PYGZus{}A} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{two}\PYG{o}{\PYGZhy{}}\PYG{n}{part} \PYG{l+m+mi}{2005} \PYG{n}{British}\PYG{o}{\PYGZhy{}}\PYG{n}{American} \PYG{n}{historical} \PYG{n}{drama} \PYG{n}{television} \PYG{n}{serial}
+\PYG{n}{Rip} \PYG{n}{Hunter} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.} \PYG{n}{Time} \PYG{n}{Master} \PYG{o}{\PYGZhy{}} \PYG{n}{PUBLISHES} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Elizabeth} \PYG{n}{I} \PYG{n}{of} \PYG{n}{England}
+\PYG{n}{James} \PYG{n}{VI} \PYG{o+ow}{and} \PYG{n}{I} \PYG{o}{\PYGZhy{}} \PYG{n}{RULES} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Scotland}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Final retriever
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{retriever}\PYG{p}{(}\PYG{n}{question}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Search query: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{question}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{structured\PYGZus{}data} \PYG{o}{=} \PYG{n}{structured\PYGZus{}retriever}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}
+    \PYG{n}{unstructured\PYGZus{}data} \PYG{o}{=} \PYG{p}{[}\PYG{n}{el}\PYG{o}{.}\PYG{n}{page\PYGZus{}content} \PYG{k}{for} \PYG{n}{el} \PYG{o+ow}{in} \PYG{n}{vector\PYGZus{}index}\PYG{o}{.}\PYG{n}{similarity\PYGZus{}search}\PYG{p}{(}\PYG{n}{question}\PYG{p}{)}\PYG{p}{]}
+    \PYG{n}{final\PYGZus{}data} \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{Structured data:}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{structured\PYGZus{}data}\PYG{l+s+si}{\PYGZcb{}}
+\PYG{l+s+s2}{                    Unstructured data:}
+\PYG{l+s+s2}{                    }\PYG{l+s+si}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZsh{}Document }\PYG{l+s+s2}{\PYGZdq{}}\PYG{o}{.}\PYG{+w}{ }\PYG{n}{join}\PYG{p}{(}\PYG{n}{unstructured\PYGZus{}data}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}
+\PYG{l+s+s2}{                  }\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{return} \PYG{n}{final\PYGZus{}data}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Defining the RAG chain
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Condense a chat history and follow\PYGZhy{}up question into a standalone question}
+\PYG{n}{\PYGZus{}template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question,}
+\PYG{l+s+s2}{in its original language.}
+\PYG{l+s+s2}{Chat History:}
+\PYG{l+s+si}{\PYGZob{}chat\PYGZus{}history\PYGZcb{}}
+\PYG{l+s+s2}{Follow Up Input: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{Standalone question:}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}  \PYG{c+c1}{\PYGZsh{} noqa: E501}
+\PYG{n}{CONDENSE\PYGZus{}QUESTION\PYGZus{}PROMPT} \PYG{o}{=} \PYG{n}{PromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{\PYGZus{}template}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{\PYGZus{}format\PYGZus{}chat\PYGZus{}history}\PYG{p}{(}\PYG{n}{chat\PYGZus{}history}\PYG{p}{:} \PYG{n}{List}\PYG{p}{[}\PYG{n}{Tuple}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n+nb}{str}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{List}\PYG{p}{:}
+    \PYG{n}{buffer} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{human}\PYG{p}{,} \PYG{n}{ai} \PYG{o+ow}{in} \PYG{n}{chat\PYGZus{}history}\PYG{p}{:}
+        \PYG{n}{buffer}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{HumanMessage}\PYG{p}{(}\PYG{n}{content}\PYG{o}{=}\PYG{n}{human}\PYG{p}{)}\PYG{p}{)}
+        \PYG{n}{buffer}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{AIMessage}\PYG{p}{(}\PYG{n}{content}\PYG{o}{=}\PYG{n}{ai}\PYG{p}{)}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{buffer}
+
+\PYG{n}{\PYGZus{}search\PYGZus{}query} \PYG{o}{=} \PYG{n}{RunnableBranch}\PYG{p}{(}
+    \PYG{c+c1}{\PYGZsh{} If input includes chat\PYGZus{}history, we condense it with the follow\PYGZhy{}up question}
+    \PYG{p}{(}
+        \PYG{n}{RunnableLambda}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n+nb}{bool}\PYG{p}{(}\PYG{n}{x}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{chat\PYGZus{}history}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{with\PYGZus{}config}\PYG{p}{(}
+            \PYG{n}{run\PYGZus{}name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{HasChatHistoryCheck}\PYG{l+s+s2}{\PYGZdq{}}
+        \PYG{p}{)}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} Condense follow\PYGZhy{}up question and chat into a standalone\PYGZus{}question}
+        \PYG{n}{RunnablePassthrough}\PYG{o}{.}\PYG{n}{assign}\PYG{p}{(}
+            \PYG{n}{chat\PYGZus{}history}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{\PYGZus{}format\PYGZus{}chat\PYGZus{}history}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{chat\PYGZus{}history}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
+        \PYG{p}{)}
+        \PYG{o}{|} \PYG{n}{CONDENSE\PYGZus{}QUESTION\PYGZus{}PROMPT}
+        \PYG{o}{|} \PYG{n}{llm}
+        \PYG{o}{|} \PYG{n}{StrOutputParser}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{)}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{} Else, we have no chat history, so just pass through the question}
+    \PYG{n}{RunnableLambda}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x} \PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{)}
+
+\PYG{n}{template} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{l+s+s2}{Answer the question based only on the following context:}
+\PYG{l+s+si}{\PYGZob{}context\PYGZcb{}}
+
+\PYG{l+s+s2}{Question: }\PYG{l+s+si}{\PYGZob{}question\PYGZcb{}}
+\PYG{l+s+s2}{Use natural language and be concise.}
+\PYG{l+s+s2}{Answer:}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{n}{prompt} \PYG{o}{=} \PYG{n}{ChatPromptTemplate}\PYG{o}{.}\PYG{n}{from\PYGZus{}template}\PYG{p}{(}\PYG{n}{template}\PYG{p}{)}
+
+\PYG{n}{chain} \PYG{o}{=} \PYG{p}{(}
+    \PYG{n}{RunnableParallel}\PYG{p}{(}
+        \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{context}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{\PYGZus{}search\PYGZus{}query} \PYG{o}{|} \PYG{n}{retriever}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{RunnablePassthrough}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{)}
+    \PYG{o}{|} \PYG{n}{prompt}
+    \PYG{o}{|} \PYG{n}{llm}
+    \PYG{o}{|} \PYG{n}{StrOutputParser}\PYG{p}{(}\PYG{p}{)}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Test
+
+\end{itemize}
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Which house did Elizabeth I belong to?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Search\PYG{+w}{ }query:\PYG{+w}{ }Which\PYG{+w}{ }house\PYG{+w}{ }did\PYG{+w}{ }Elizabeth\PYG{+w}{ }I\PYG{+w}{ }belong\PYG{+w}{ }to?
+Elizabeth\PYG{+w}{ }I\PYG{+w}{ }belonged\PYG{+w}{ }to\PYG{+w}{ }the\PYG{+w}{ }Tudor\PYG{+w}{ }dynasty.
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}\PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{When was Elizabeth I born?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{n}{was} \PYG{n}{born} \PYG{n}{on} \PYG{n}{September} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+m+mf}{1533.}
+\end{sphinxVerbatim}
+\end{quote}
+
+\sphinxAtStartPar
+Test a follow up question:
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chain}\PYG{o}{.}\PYG{n}{invoke}\PYG{p}{(}
+    \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{question}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{When was she born?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{chat\PYGZus{}history}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Which house did Elizabeth I belong to?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{House Of Tudor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ouput:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Elizabeth} \PYG{n}{I} \PYG{n}{of} \PYG{n}{England} \PYG{n}{was} \PYG{n}{born} \PYG{n}{on} \PYG{n}{September} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+m+mf}{1533.}
+\end{sphinxVerbatim}
+\end{quote}
 
 \sphinxstepscope
 

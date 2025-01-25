@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  20 JAN 2025 17:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.12.6)  25 JAN 2025 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1725,18 +1725,26 @@ File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 2.
 (pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<RAG_diagram.png, id=1596, 1810.51407pt x 813.0375pt>
+File: colab-badge.png Graphic file (type png)
+<use colab-badge.png>
+Package pdftex.def Info: colab-badge.png  used on input line 2.
+(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
+File: colab-badge.png Graphic file (type png)
+<use colab-badge.png>
+Package pdftex.def Info: colab-badge.png  used on input line 2.
+(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
+<RAG_diagram.png, id=1598, 1810.51407pt x 813.0375pt>
 File: RAG_diagram.png Graphic file (type png)
 <use RAG_diagram.png>
-Package pdftex.def Info: RAG_diagram.png  used on input line 3346.
+Package pdftex.def Info: RAG_diagram.png  used on input line 3359.
 (pdftex.def)             Requested size: 469.75565pt x 210.95056pt.
 
 
 [59]
-<indexer.png, id=1604, 1252.68pt x 238.64156pt>
+<indexer.png, id=1606, 1252.68pt x 238.64156pt>
 File: indexer.png Graphic file (type png)
 <use indexer.png>
-Package pdftex.def Info: indexer.png  used on input line 3398.
+Package pdftex.def Info: indexer.png  used on input line 3411.
 (pdftex.def)             Requested size: 469.75385pt x 89.49036pt.
 
 
@@ -1779,19 +1787,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [63]
-Underfull \hbox (badness 6204) in paragraph at lines 3757--3757
+Underfull \hbox (badness 6204) in paragraph at lines 3770--3770
 []\T1/qtm/m/n/10.95 Re-search Pa-pers or
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3757--3757
+Underfull \hbox (badness 10000) in paragraph at lines 3770--3770
 []\T1/qtm/m/n/10.95 Le-gal or Tech-ni-cal
  []
 
-<late_chunking.png, id=1630, 792.9625pt x 686.565pt>
+<late_chunking.png, id=1632, 792.9625pt x 686.565pt>
 File: late_chunking.png Graphic file (type png)
 <use late_chunking.png>
-Package pdftex.def Info: late_chunking.png  used on input line 3771.
+Package pdftex.def Info: late_chunking.png  used on input line 3784.
 (pdftex.def)             Requested size: 469.76765pt x 406.72507pt.
 
 
@@ -1814,7 +1822,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [65 <./late_chunking.png>]
-Overfull \vbox (3.61563pt too high) detected at line 3888
+Overfull \vbox (3.61563pt too high) detected at line 3901
  []
 
 
@@ -1828,7 +1836,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [66]
-Underfull \vbox (badness 10000) detected at line 3915
+Underfull \vbox (badness 10000) detected at line 3928
  []
 
 
@@ -1842,62 +1850,62 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [67]
-Overfull \hbox (11.2512pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (11.2512pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 Query| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3978--3978
+Underfull \hbox (badness 10000) in paragraph at lines 3991--3991
 []\T1/qtm/b/n/10.95 sim-i-lar-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3978--3978
+Underfull \hbox (badness 10000) in paragraph at lines 3991--3991
 []\T1/qtm/b/n/10.95 sim-i-lar-
  []
 
 
-Overfull \hbox (10.82411pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (10.82411pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 Berlin| 
  []
 
 
-Overfull \hbox (2.62741pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (2.62741pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 0.849546| 
  []
 
 
-Overfull \hbox (7.28696pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (7.28696pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 0.8486219| 
  []
 
 
-Overfull \hbox (10.82411pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (10.82411pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 Berlin| 
  []
 
 
-Overfull \hbox (13.5774pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (13.5774pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 0.82489026| 
  []
 
 
-Overfull \hbox (12.76195pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (12.76195pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 0.70843387| 
  []
 
 
-Overfull \hbox (10.82411pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (10.82411pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 Berlin| 
  []
 
 
-Overfull \hbox (8.1024pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (8.1024pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 0.8498009| 
  []
 
 
-Overfull \hbox (12.76195pt too wide) in paragraph at lines 3978--3978
+Overfull \hbox (12.76195pt too wide) in paragraph at lines 3991--3991
 []\T1/qtm/m/n/10.95 0.75345534| 
  []
 
@@ -1922,32 +1930,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [69]
-Overfull \hbox (10.18259pt too wide) in paragraph at lines 4477--4477
+Overfull \hbox (10.18259pt too wide) in paragraph at lines 4490--4490
 []\T1/qhv/b/n/10.95 Database| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4477--4477
+Underfull \hbox (badness 10000) in paragraph at lines 4490--4490
 []\T1/qhv/b/n/10.95 Open
  []
 
 
-Overfull \hbox (1.58688pt too wide) in paragraph at lines 4477--4477
+Overfull \hbox (1.58688pt too wide) in paragraph at lines 4490--4490
 []\T1/qtm/m/n/10.95 Pinecone| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4477--4477
+Underfull \hbox (badness 10000) in paragraph at lines 4490--4490
 []\T1/qtm/m/n/10.95 Weav-i-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4477--4477
+Underfull \hbox (badness 10000) in paragraph at lines 4490--4490
 []\T1/qtm/m/n/10.95 En-ter-prise cloud so-lu-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4477--4477
+Underfull \hbox (badness 10000) in paragraph at lines 4490--4490
 []\T1/qtm/m/n/10.95 E-commerce, rec-om-
  []
 
@@ -1982,44 +1990,44 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [72]
-Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
+Underfull \hbox (badness 10000) in paragraph at lines 4769--4769
 []\T1/qhv/b/n/10.95 Met-
  []
 
 
-Overfull \hbox (13.69151pt too wide) in paragraph at lines 4756--4756
+Overfull \hbox (13.69151pt too wide) in paragraph at lines 4769--4769
 \T1/qhv/b/n/10.95 ric/Algorithm| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
+Underfull \hbox (badness 10000) in paragraph at lines 4769--4769
 []\T1/qtm/b/n/10.95 Co-sine
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
+Underfull \hbox (badness 10000) in paragraph at lines 4769--4769
 []\T1/qtm/b/n/10.95 Dot Prod-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
+Underfull \hbox (badness 10000) in paragraph at lines 4769--4769
 \T1/qtm/b/n/10.95 uct Sim-i-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
+Underfull \hbox (badness 10000) in paragraph at lines 4769--4769
 []\T1/qtm/b/n/10.95 Eu-clidean
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4756--4756
+Underfull \hbox (badness 10000) in paragraph at lines 4769--4769
 []\T1/qtm/b/n/10.95 HNSW
  []
 
-<rrf.png, id=1703, 896.59969pt x 837.88031pt>
+<rrf.png, id=1705, 896.59969pt x 837.88031pt>
 File: rrf.png Graphic file (type png)
 <use rrf.png>
-Package pdftex.def Info: rrf.png  used on input line 4786.
+Package pdftex.def Info: rrf.png  used on input line 4799.
 (pdftex.def)             Requested size: 448.29875pt x 418.93913pt.
 
 
@@ -2042,10 +2050,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [74 <./rrf.png>]
-<generator.png, id=1714, 1492.8272pt x 204.765pt>
+<generator.png, id=1716, 1492.8272pt x 204.765pt>
 File: generator.png Graphic file (type png)
 <use generator.png>
-Package pdftex.def Info: generator.png  used on input line 4878.
+Package pdftex.def Info: generator.png  used on input line 4891.
 (pdftex.def)             Requested size: 469.74193pt x 64.43568pt.
 
 
@@ -2058,7 +2066,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [75]
-Overfull \vbox (3.67928pt too high) detected at line 4958
+Overfull \vbox (3.67928pt too high) detected at line 4971
  []
 
 
@@ -2072,10 +2080,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [76 <./generator.png>]
-<self_rag_paper.png, id=1724, 707.64375pt x 380.17032pt>
+<self_rag_paper.png, id=1726, 707.64375pt x 380.17032pt>
 File: self_rag_paper.png Graphic file (type png)
 <use self_rag_paper.png>
-Package pdftex.def Info: self_rag_paper.png  used on input line 4973.
+Package pdftex.def Info: self_rag_paper.png  used on input line 4986.
 (pdftex.def)             Requested size: 469.75656pt x 252.37502pt.
 
 
@@ -2088,10 +2096,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [77]
-<self_rag.png, id=1734, 1263.97218pt x 539.76656pt>
+<self_rag.png, id=1736, 1263.97218pt x 539.76656pt>
 File: self_rag.png Graphic file (type png)
 <use self_rag.png>
-Package pdftex.def Info: self_rag.png  used on input line 5090.
+Package pdftex.def Info: self_rag.png  used on input line 5103.
 (pdftex.def)             Requested size: 469.74535pt x 200.60825pt.
 
 
@@ -2106,7 +2114,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [78 <./self_rag_paper.png>]
 File: gemini.png Graphic file (type png)
 <use gemini.png>
-Package pdftex.def Info: gemini.png  used on input line 5116.
+Package pdftex.def Info: gemini.png  used on input line 5129.
 (pdftex.def)             Requested size: 454.76268pt x 277.3805pt.
 
 
@@ -2139,7 +2147,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [81]
-Underfull \hbox (badness 10000) in paragraph at lines 5242--5244
+Underfull \hbox (badness 10000) in paragraph at lines 5255--5257
 []\T1/txtt/m/n/10.95 partial_variables={"format_instructions": parser.
  []
 
@@ -2164,7 +2172,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [83]
-Underfull \vbox (badness 10000) detected at line 5367
+Underfull \vbox (badness 10000) detected at line 5380
  []
 
 
@@ -2208,11 +2216,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [87]
-Underfull \vbox (badness 10000) detected at line 5671
+Underfull \vbox (badness 10000) detected at line 5684
  []
 
 
-Overfull \vbox (3.26157pt too high) detected at line 5671
+Overfull \vbox (3.26157pt too high) detected at line 5684
  []
 
 
@@ -2226,11 +2234,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [88]
-Underfull \vbox (badness 10000) detected at line 5671
+Underfull \vbox (badness 10000) detected at line 5684
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 5671
+Overfull \vbox (3.26152pt too high) detected at line 5684
  []
 
 
@@ -2244,11 +2252,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [89]
-Underfull \vbox (badness 10000) detected at line 5671
+Underfull \vbox (badness 10000) detected at line 5684
  []
 
 
-Overfull \vbox (3.26155pt too high) detected at line 5671
+Overfull \vbox (3.26155pt too high) detected at line 5684
  []
 
 
@@ -2272,10 +2280,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [91]
-<self_rag_graph.png, id=1801, 304.13625pt x 372.64218pt>
+<self_rag_graph.png, id=1803, 304.13625pt x 372.64218pt>
 File: self_rag_graph.png Graphic file (type png)
 <use self_rag_graph.png>
-Package pdftex.def Info: self_rag_graph.png  used on input line 5733.
+Package pdftex.def Info: self_rag_graph.png  used on input line 5746.
 (pdftex.def)             Requested size: 304.1355pt x 372.64127pt.
 
 
@@ -2308,11 +2316,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [94]
-Underfull \vbox (badness 10000) detected at line 5904
+Underfull \vbox (badness 10000) detected at line 5917
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5904
+Underfull \vbox (badness 10000) detected at line 5917
  []
 
 
@@ -2326,11 +2334,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [95]
-Underfull \vbox (badness 10000) detected at line 5904
+Underfull \vbox (badness 10000) detected at line 5917
  []
 
 
-Overfull \vbox (3.2616pt too high) detected at line 5904
+Overfull \vbox (3.2616pt too high) detected at line 5917
  []
 
 
@@ -2344,17 +2352,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [96]
-<corrective_rag.png, id=1824, 1278.27562pt x 547.2947pt>
+<corrective_rag.png, id=1826, 1278.27562pt x 547.2947pt>
 File: corrective_rag.png Graphic file (type png)
 <use corrective_rag.png>
-Package pdftex.def Info: corrective_rag.png  used on input line 5914.
+Package pdftex.def Info: corrective_rag.png  used on input line 5927.
 (pdftex.def)             Requested size: 469.75578pt x 201.1263pt.
 File: gemini.png Graphic file (type png)
 <use gemini.png>
-Package pdftex.def Info: gemini.png  used on input line 5940.
+Package pdftex.def Info: gemini.png  used on input line 5953.
 (pdftex.def)             Requested size: 454.76268pt x 277.3805pt.
 
-Underfull \vbox (badness 10000) detected at line 5943
+Underfull \vbox (badness 10000) detected at line 5956
  []
 
 
@@ -2368,7 +2376,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [97 <./corrective_rag.png>]
-Overfull \vbox (2.42618pt too high) detected at line 5976
+Overfull \vbox (2.42618pt too high) detected at line 5989
  []
 
 
@@ -2452,11 +2460,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [105]
-Underfull \vbox (badness 10000) detected at line 6468
+Underfull \vbox (badness 10000) detected at line 6481
  []
 
 
-Overfull \vbox (3.26154pt too high) detected at line 6468
+Overfull \vbox (3.26154pt too high) detected at line 6481
  []
 
 
@@ -2470,11 +2478,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [106]
-Underfull \vbox (badness 10000) detected at line 6468
+Underfull \vbox (badness 10000) detected at line 6481
  []
 
 
-Overfull \vbox (3.26154pt too high) detected at line 6468
+Overfull \vbox (3.26154pt too high) detected at line 6481
  []
 
 
@@ -2488,11 +2496,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [107]
-Underfull \vbox (badness 10000) detected at line 6468
+Underfull \vbox (badness 10000) detected at line 6481
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 6468
+Overfull \vbox (3.26152pt too high) detected at line 6481
  []
 
 
@@ -2506,10 +2514,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [108]
-<c_rag_graph.png, id=1879, 149.05687pt x 417.81094pt>
+<c_rag_graph.png, id=1881, 149.05687pt x 417.81094pt>
 File: c_rag_graph.png Graphic file (type png)
 <use c_rag_graph.png>
-Package pdftex.def Info: c_rag_graph.png  used on input line 6522.
+Package pdftex.def Info: c_rag_graph.png  used on input line 6535.
 (pdftex.def)             Requested size: 149.0565pt x 417.80992pt.
 
 
@@ -2522,7 +2530,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [109]
-Overfull \vbox (2.03758pt too high) detected at line 6541
+Overfull \vbox (2.03758pt too high) detected at line 6554
  []
 
 
@@ -2546,11 +2554,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [111]
-Underfull \vbox (badness 10000) detected at line 6561
+Underfull \vbox (badness 10000) detected at line 6574
  []
 
 
-Overfull \vbox (3.26219pt too high) detected at line 6561
+Overfull \vbox (3.26219pt too high) detected at line 6574
  []
 
 
@@ -2575,12 +2583,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [113]
 LaTeX Font Info:    Font shape `TS1/txtt/b/n' in size <10.95> not available
-(Font)              Font shape `TS1/txtt/bx/n' tried instead on input line 6586
+(Font)              Font shape `TS1/txtt/bx/n' tried instead on input line 6599
 .
-<adaptive_rag.png, id=1902, 1071.25218pt x 561.59813pt>
+<adaptive_rag.png, id=1904, 1071.25218pt x 561.59813pt>
 File: adaptive_rag.png Graphic file (type png)
 <use adaptive_rag.png>
-Package pdftex.def Info: adaptive_rag.png  used on input line 6604.
+Package pdftex.def Info: adaptive_rag.png  used on input line 6617.
 (pdftex.def)             Requested size: 469.76686pt x 246.26414pt.
 
 
@@ -2595,14 +2603,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [114]
 File: gemini.png Graphic file (type png)
 <use gemini.png>
-Package pdftex.def Info: gemini.png  used on input line 6630.
+Package pdftex.def Info: gemini.png  used on input line 6643.
 (pdftex.def)             Requested size: 454.76268pt x 277.3805pt.
 
-Underfull \vbox (badness 10000) detected at line 6633
+Underfull \vbox (badness 10000) detected at line 6646
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6633
+Underfull \vbox (badness 10000) detected at line 6646
  []
 
 
@@ -2676,7 +2684,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [121]
-Overfull \vbox (2.04796pt too high) detected at line 6978
+Overfull \vbox (2.04796pt too high) detected at line 6991
  []
 
 
@@ -2710,7 +2718,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [124]
-Underfull \vbox (badness 10000) detected at line 7303
+Underfull \vbox (badness 10000) detected at line 7316
  []
 
 
@@ -2724,11 +2732,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [125]
-Underfull \vbox (badness 10000) detected at line 7303
+Underfull \vbox (badness 10000) detected at line 7316
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 7303
+Overfull \vbox (3.26152pt too high) detected at line 7316
  []
 
 
@@ -2742,11 +2750,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [126]
-Underfull \vbox (badness 10000) detected at line 7303
+Underfull \vbox (badness 10000) detected at line 7316
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 7303
+Overfull \vbox (3.26152pt too high) detected at line 7316
  []
 
 
@@ -2760,11 +2768,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [127]
-Underfull \vbox (badness 10000) detected at line 7303
+Underfull \vbox (badness 10000) detected at line 7316
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 7303
+Overfull \vbox (3.26152pt too high) detected at line 7316
  []
 
 
@@ -2778,11 +2786,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [128]
-Underfull \vbox (badness 10000) detected at line 7303
+Underfull \vbox (badness 10000) detected at line 7316
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 7303
+Overfull \vbox (3.26152pt too high) detected at line 7316
  []
 
 
@@ -2806,10 +2814,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [130]
-<a_rag_graph.png, id=1980, 416.30531pt x 447.17062pt>
+<a_rag_graph.png, id=1982, 416.30531pt x 447.17062pt>
 File: a_rag_graph.png Graphic file (type png)
 <use a_rag_graph.png>
-Package pdftex.def Info: a_rag_graph.png  used on input line 7373.
+Package pdftex.def Info: a_rag_graph.png  used on input line 7386.
 (pdftex.def)             Requested size: 416.30429pt x 447.16953pt.
 
 
@@ -2832,7 +2840,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [132 <./a_rag_graph.png>]
-Overfull \vbox (3.69633pt too high) detected at line 7449
+Overfull \vbox (3.69633pt too high) detected at line 7462
  []
 
 
@@ -2846,11 +2854,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [133]
-Underfull \vbox (badness 10000) detected at line 7449
+Underfull \vbox (badness 10000) detected at line 7462
  []
 
 
-Overfull \vbox (3.26219pt too high) detected at line 7449
+Overfull \vbox (3.26219pt too high) detected at line 7462
  []
 
 
@@ -2864,11 +2872,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [134]
-Underfull \vbox (badness 10000) detected at line 7449
+Underfull \vbox (badness 10000) detected at line 7462
  []
 
 
-Overfull \vbox (3.26219pt too high) detected at line 7449
+Overfull \vbox (3.26219pt too high) detected at line 7462
  []
 
 
@@ -2882,10 +2890,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [135]
-<agentic_rag.png, id=2003, 1215.79219pt x 443.40656pt>
+<agentic_rag.png, id=2005, 1215.79219pt x 443.40656pt>
 File: agentic_rag.png Graphic file (type png)
 <use agentic_rag.png>
-Package pdftex.def Info: agentic_rag.png  used on input line 7459.
+Package pdftex.def Info: agentic_rag.png  used on input line 7472.
 (pdftex.def)             Requested size: 469.7418pt x 171.32436pt.
 
 
@@ -2900,7 +2908,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [136]
 File: gemini.png Graphic file (type png)
 <use gemini.png>
-Package pdftex.def Info: gemini.png  used on input line 7485.
+Package pdftex.def Info: gemini.png  used on input line 7498.
 (pdftex.def)             Requested size: 454.76268pt x 277.3805pt.
 
 
@@ -2913,7 +2921,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [137 <./agentic_rag.png>]
-Underfull \vbox (badness 1389) detected at line 7521
+Underfull \vbox (badness 1389) detected at line 7534
  []
 
 
@@ -2937,7 +2945,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [139]
-Underfull \vbox (badness 1533) detected at line 7632
+Underfull \vbox (badness 1533) detected at line 7645
  []
 
 
@@ -2971,11 +2979,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [142]
-Underfull \vbox (badness 10000) detected at line 7850
+Underfull \vbox (badness 10000) detected at line 7863
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 7850
+Overfull \vbox (3.26152pt too high) detected at line 7863
  []
 
 
@@ -2989,11 +2997,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [143]
-Underfull \vbox (badness 10000) detected at line 7850
+Underfull \vbox (badness 10000) detected at line 7863
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 7850
+Overfull \vbox (3.26152pt too high) detected at line 7863
  []
 
 
@@ -3027,10 +3035,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [146]
-<agentic_rag_graph.png, id=2058, 240.9pt x 343.2825pt>
+<agentic_rag_graph.png, id=2060, 240.9pt x 343.2825pt>
 File: agentic_rag_graph.png Graphic file (type png)
 <use agentic_rag_graph.png>
-Package pdftex.def Info: agentic_rag_graph.png  used on input line 7938.
+Package pdftex.def Info: agentic_rag_graph.png  used on input line 7951.
 (pdftex.def)             Requested size: 240.8994pt x 343.28165pt.
 
 
@@ -3053,11 +3061,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [148 <./agentic_rag_graph.png>]
-Underfull \vbox (badness 10000) detected at line 7996
+Underfull \vbox (badness 10000) detected at line 8009
  []
 
 
-Overfull \vbox (3.26216pt too high) detected at line 7996
+Overfull \vbox (3.26216pt too high) detected at line 8009
  []
 
 
@@ -3071,13 +3079,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [149]
-<agent_architectures.png, id=2072, 1123.19624pt x 922.94812pt>
+<agent_architectures.png, id=2074, 1123.19624pt x 922.94812pt>
 File: agent_architectures.png Graphic file (type png)
 <use agent_architectures.png>
-Package pdftex.def Info: agent_architectures.png  used on input line 8011.
+Package pdftex.def Info: agent_architectures.png  used on input line 8024.
 (pdftex.def)             Requested size: 469.75113pt x 386.00194pt.
 
-Overfull \vbox (0.97575pt too high) detected at line 8075
+Overfull \vbox (0.97575pt too high) detected at line 8088
  []
 
 
@@ -3101,11 +3109,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [151 <./agent_architectures.png>]
-Underfull \vbox (badness 10000) detected at line 8075
+Underfull \vbox (badness 10000) detected at line 8088
  []
 
 
-Overfull \vbox (3.26152pt too high) detected at line 8075
+Overfull \vbox (3.26152pt too high) detected at line 8088
  []
 
 
@@ -3119,21 +3127,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [152]
-<multi_agents_simple.png, id=2089, 182.18062pt x 187.45032pt>
+<multi_agents_simple.png, id=2091, 182.18062pt x 187.45032pt>
 File: multi_agents_simple.png Graphic file (type png)
 <use multi_agents_simple.png>
-Package pdftex.def Info: multi_agents_simple.png  used on input line 8080.
+Package pdftex.def Info: multi_agents_simple.png  used on input line 8093.
 (pdftex.def)             Requested size: 182.18016pt x 187.44984pt.
-<neo4j_aura.png, id=2090, 1181.91562pt x 728.7225pt>
-File: neo4j_aura.png Graphic file (type png)
-<use neo4j_aura.png>
-Package pdftex.def Info: neo4j_aura.png  used on input line 8102.
-(pdftex.def)             Requested size: 469.74611pt x 289.62689pt.
-<graph_neighbor.png, id=2091, 864.22874pt x 222.8325pt>
-File: graph_neighbor.png Graphic file (type png)
-<use graph_neighbor.png>
-Package pdftex.def Info: graph_neighbor.png  used on input line 8115.
-(pdftex.def)             Requested size: 469.74915pt x 121.12338pt.
 
 
 
@@ -3145,40 +3143,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [153 <./multi_agents_simple.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[154 <./neo4j_aura.png> <./graph_neighbor.png>]
-Chapter 6.
-File: colab-badge.png Graphic file (type png)
-<use colab-badge.png>
-Package pdftex.def Info: colab-badge.png  used on input line 2.
-(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-File: colab-badge.png Graphic file (type png)
-<use colab-badge.png>
-Package pdftex.def Info: colab-badge.png  used on input line 2.
-(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<fine_tuning.png, id=2106, 2402.9775pt x 837.1275pt>
-File: fine_tuning.png Graphic file (type png)
-<use fine_tuning.png>
-Package pdftex.def Info: fine_tuning.png  used on input line 8153.
-(pdftex.def)             Requested size: 469.73372pt x 163.64157pt.
-
-
-[155
-
- <./fine_tuning.png (PNG copy)>]
-<lora.png, id=2113, 1204.5pt x 505.89pt>
-File: lora.png Graphic file (type png)
-<use lora.png>
-Package pdftex.def Info: lora.png  used on input line 8174.
-(pdftex.def)             Requested size: 469.75311pt x 197.2963pt.
+<graph_components.png, id=2098, 778.40813pt x 374.90062pt>
+File: graph_components.png Graphic file (type png)
+<use graph_components.png>
+Package pdftex.def Info: graph_components.png  used on input line 8195.
+(pdftex.def)             Requested size: 469.76843pt x 226.24638pt.
+<neo4j_aura.png, id=2099, 1181.91562pt x 728.7225pt>
+File: neo4j_aura.png Graphic file (type png)
+<use neo4j_aura.png>
+Package pdftex.def Info: neo4j_aura.png  used on input line 8211.
+(pdftex.def)             Requested size: 469.74611pt x 289.62689pt.
+<neo4j_sandbox.png, id=2101, 1351.29843pt x 728.7225pt>
+File: neo4j_sandbox.png Graphic file (type png)
+<use neo4j_sandbox.png>
+Package pdftex.def Info: neo4j_sandbox.png  used on input line 8234.
+(pdftex.def)             Requested size: 469.74495pt x 253.32207pt.
 
 
 
@@ -3189,25 +3168,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[156 <./lora.png>]
-<peft_1.png, id=2120, 840.13875pt x 576.65437pt>
-File: peft_1.png Graphic file (type png)
-<use peft_1.png>
-Package pdftex.def Info: peft_1.png  used on input line 8258.
-(pdftex.def)             Requested size: 469.75502pt x 322.43149pt.
-<peft_2.png, id=2121, 837.88031pt x 516.42938pt>
-File: peft_2.png Graphic file (type png)
-<use peft_2.png>
-Package pdftex.def Info: peft_2.png  used on input line 8258.
-(pdftex.def)             Requested size: 469.75502pt x 289.52943pt.
-File: peft_1.png Graphic file (type png)
-<use peft_1.png>
-Package pdftex.def Info: peft_1.png  used on input line 8258.
-(pdftex.def)             Requested size: 222.87845pt x 152.97986pt.
-File: peft_2.png Graphic file (type png)
-<use peft_2.png>
-Package pdftex.def Info: peft_2.png  used on input line 8258.
-(pdftex.def)             Requested size: 222.87845pt x 137.36533pt.
+[154 <./graph_components.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[155 <./neo4j_aura.png> <./neo4j_sandbox.png>]
+<neo4j_aura_free.png, id=2119, 1114.91531pt x 686.565pt>
+File: neo4j_aura_free.png Graphic file (type png)
+<use neo4j_aura_free.png>
+Package pdftex.def Info: neo4j_aura_free.png  used on input line 8279.
+(pdftex.def)             Requested size: 469.7413pt x 289.26675pt.
 
 
 
@@ -3218,32 +3194,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[157 <./peft_1.png> <./peft_2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 8483--8483
-[]\T1/qtm/b/n/10.95 Train-ing
- []
+[156 <./neo4j_aura_free.png>]
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8483--8483
-[]\T1/qtm/m/n/10.95 Su-per-vised fine-tuning
- []
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
 
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-Underfull \hbox (badness 10000) in paragraph at lines 8483--8483
-[]\T1/qtm/b/n/10.95 Work-flow Com-
- []
-
-
-Underfull \hbox (badness 5133) in paragraph at lines 8483--8483
-[]\T1/qtm/m/n/10.95 Scales well with large
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 8483--8483
-[]\T1/qtm/b/n/10.95 Hu-man Pref-er-
- []
-
-
+[157]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3254,13 +3215,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [158]
-<instructGPT_overview_RLHF.png, id=2137, 966.61125pt x 606.76688pt>
-File: instructGPT_overview_RLHF.png Graphic file (type png)
-<use instructGPT_overview_RLHF.png>
-Package pdftex.def Info: instructGPT_overview_RLHF.png  used on input line 8521
-.
-(pdftex.def)             Requested size: 469.74985pt x 294.88338pt.
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3270,12 +3224,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[159 <./instructGPT_overview_RLHF.png>]
-<ppo_clip_algo.png, id=2154, 988.44281pt x 631.60968pt>
-File: ppo_clip_algo.png Graphic file (type png)
-<use ppo_clip_algo.png>
-Package pdftex.def Info: ppo_clip_algo.png  used on input line 8625.
-(pdftex.def)             Requested size: 469.74146pt x 300.17192pt.
+[159]
+Underfull \vbox (badness 10000) detected at line 8432
+ []
+
+
+Overfull \vbox (3.2622pt too high) detected at line 8432
+ []
+
 
 
 
@@ -3296,17 +3252,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[161 <./ppo_clip_algo.png>]
-<PPO_RLHF_flowchart.png, id=2172, 1028.84375pt x 543.02875pt>
-File: PPO_RLHF_flowchart.png Graphic file (type png)
-<use PPO_RLHF_flowchart.png>
-Package pdftex.def Info: PPO_RLHF_flowchart.png  used on input line 8753.
-(pdftex.def)             Requested size: 469.75732pt x 247.9402pt.
-<RLHF_training_realworld.png, id=2174, 1020.81375pt x 653.44125pt>
-File: RLHF_training_realworld.png Graphic file (type png)
-<use RLHF_training_realworld.png>
-Package pdftex.def Info: RLHF_training_realworld.png  used on input line 8764.
-(pdftex.def)             Requested size: 469.76694pt x 300.6963pt.
+[161]
+<graph_neighbor.png, id=2148, 864.22874pt x 222.8325pt>
+File: graph_neighbor.png Graphic file (type png)
+<use graph_neighbor.png>
+Package pdftex.def Info: graph_neighbor.png  used on input line 8488.
+(pdftex.def)             Requested size: 469.74915pt x 121.12338pt.
 
 
 
@@ -3317,42 +3268,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[162]
+[162 <./graph_neighbor.png>]
+Underfull \vbox (badness 10000) detected at line 8589
+ []
 
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[163 <./PPO_RLHF_flowchart.png> <./RLHF_training_realworld.png>]
-<RLHF_training_tricks.png, id=2197, 857.2025pt x 581.17125pt>
-File: RLHF_training_tricks.png Graphic file (type png)
-<use RLHF_training_tricks.png>
-Package pdftex.def Info: RLHF_training_tricks.png  used on input line 8783.
-(pdftex.def)             Requested size: 469.74937pt x 318.49234pt.
-<DPO_idea.png, id=2200, 905.3825pt x 312.16624pt>
-File: DPO_idea.png Graphic file (type png)
-<use DPO_idea.png>
-Package pdftex.def Info: DPO_idea.png  used on input line 8808.
-(pdftex.def)             Requested size: 469.75168pt x 161.97014pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[164 <./RLHF_training_tricks.png>]
-
-Package amsmath Warning: Foreign command \over;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 8831.
+Overfull \vbox (3.26163pt too high) detected at line 8589
+ []
 
 
 
@@ -3364,7 +3286,35 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[165 <./DPO_idea.png>]
+[163]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[164]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[165]
+Underfull \vbox (badness 10000) detected at line 8692
+ []
+
+
+Overfull \vbox (3.26155pt too high) detected at line 8692
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3394,46 +3344,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[168]
-Overfull \hbox (1.82991pt too wide) in paragraph at lines 9204--9204
-[]\T1/qtm/b/n/10.95 Method| 
- []
+[168
+
+]
+Chapter 6.
+File: colab-badge.png Graphic file (type png)
+<use colab-badge.png>
+Package pdftex.def Info: colab-badge.png  used on input line 2.
+(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
+File: colab-badge.png Graphic file (type png)
+<use colab-badge.png>
+Package pdftex.def Info: colab-badge.png  used on input line 2.
+(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
+<fine_tuning.png, id=2183, 2402.9775pt x 837.1275pt>
+File: fine_tuning.png Graphic file (type png)
+<use fine_tuning.png>
+Package pdftex.def Info: fine_tuning.png  used on input line 8781.
+(pdftex.def)             Requested size: 469.73372pt x 163.64157pt.
 
 
-Overfull \hbox (2.48695pt too wide) in paragraph at lines 9204--9204
-[]\T1/qtm/b/n/10.95 QLoRA| 
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[169]
-Underfull \hbox (badness 10000) in paragraph at lines 9383--9388
-[]\T1/qtm/m/n/10.95 In this chap-ter, we will demon-strate how to fine-tune em-
-bed-ding mod-els us-ing the
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[170]
-Overfull \vbox (0.67218pt too high) detected at line 9468
- []
-
+[169 <./fine_tuning.png (PNG copy)>]
+<lora.png, id=2191, 1204.5pt x 505.89pt>
+File: lora.png Graphic file (type png)
+<use lora.png>
+Package pdftex.def Info: lora.png  used on input line 8802.
+(pdftex.def)             Requested size: 469.75311pt x 197.2963pt.
 
 
 
@@ -3444,7 +3379,61 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[171]
+[170 <./lora.png>]
+<peft_1.png, id=2198, 840.13875pt x 576.65437pt>
+File: peft_1.png Graphic file (type png)
+<use peft_1.png>
+Package pdftex.def Info: peft_1.png  used on input line 8886.
+(pdftex.def)             Requested size: 469.75502pt x 322.43149pt.
+<peft_2.png, id=2199, 837.88031pt x 516.42938pt>
+File: peft_2.png Graphic file (type png)
+<use peft_2.png>
+Package pdftex.def Info: peft_2.png  used on input line 8886.
+(pdftex.def)             Requested size: 469.75502pt x 289.52943pt.
+File: peft_1.png Graphic file (type png)
+<use peft_1.png>
+Package pdftex.def Info: peft_1.png  used on input line 8886.
+(pdftex.def)             Requested size: 222.87845pt x 152.97986pt.
+File: peft_2.png Graphic file (type png)
+<use peft_2.png>
+Package pdftex.def Info: peft_2.png  used on input line 8886.
+(pdftex.def)             Requested size: 222.87845pt x 137.36533pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[171 <./peft_1.png> <./peft_2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 9111--9111
+[]\T1/qtm/b/n/10.95 Train-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9111--9111
+[]\T1/qtm/m/n/10.95 Su-per-vised fine-tuning
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9111--9111
+[]\T1/qtm/b/n/10.95 Work-flow Com-
+ []
+
+
+Underfull \hbox (badness 5133) in paragraph at lines 9111--9111
+[]\T1/qtm/m/n/10.95 Scales well with large
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9111--9111
+[]\T1/qtm/b/n/10.95 Hu-man Pref-er-
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3455,12 +3444,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [172]
-Underfull \hbox (badness 10000) in paragraph at lines 9531--9534
-[]\T1/qtm/m/n/10.95 If you en-counter the er-ror \T1/txtt/m/n/10.95 Cannot impo
-rt name \TS1/txtt/m/n/10.95 '\T1/txtt/m/n/10.95 EncoderDecoderCache\TS1/txtt/m/
-n/10.95 ' \T1/txtt/m/n/10.95 from
- []
-
+<instructGPT_overview_RLHF.png, id=2214, 966.61125pt x 606.76688pt>
+File: instructGPT_overview_RLHF.png Graphic file (type png)
+<use instructGPT_overview_RLHF.png>
+Package pdftex.def Info: instructGPT_overview_RLHF.png  used on input line 9149
+.
+(pdftex.def)             Requested size: 469.74985pt x 294.88338pt.
 
 
 
@@ -3471,7 +3460,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[173]
+[173 <./instructGPT_overview_RLHF.png>]
+<ppo_clip_algo.png, id=2230, 988.44281pt x 631.60968pt>
+File: ppo_clip_algo.png Graphic file (type png)
+<use ppo_clip_algo.png>
+Package pdftex.def Info: ppo_clip_algo.png  used on input line 9253.
+(pdftex.def)             Requested size: 469.74146pt x 300.17192pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3482,176 +3477,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [174]
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/qhv/m/n/10.95 La-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 single
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 BatchAllTripletLoss\T1/qtm/m/n/10.95 , \T1/txtt/m/n/10.95 
-BatchHardSoftMarginTripletLoss\T1/qtm/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 single
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (anchor,
- []
-
-
-Overfull \hbox (36.89041pt too wide) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (damaged_sentence,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-
- []
-
-
-Overfull \hbox (36.89041pt too wide) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 original_sentence)
- []
-
-
-Overfull \hbox (2.39801pt too wide) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (sentence_A,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 sentence_B)
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (anchor,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 positive)
- []
-
-
-Overfull \hbox (42.58456pt too wide) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 MultipleNegativesRankingLoss\T1/qtm/m/n/10.95 , \T1/txtt/m
-/n/10.95 CachedMultipleNegativesRankingLoss\T1/qtm/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 MultipleNegativesSymmetricRankingLoss\T1/qtm/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 CachedMultipleNegativesSymmetricRankingLoss\T1/qtm/m/n/10.95
- ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (anchor,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 positive/
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 negative)
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/qtm/m/it/10.95 1 if
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/qtm/m/it/10.95 pos-i-
- []
-
-
-Overfull \hbox (2.39801pt too wide) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (sentence_A,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 sentence_B)
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/qtm/m/it/10.95 float
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/qtm/m/it/10.95 sim-i-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/qtm/m/it/10.95 lar-ity
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 (anchor,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 positive,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/txtt/m/n/10.95 negative)
- []
-
-
-Overfull \hbox (42.58456pt too wide) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 MultipleNegativesRankingLoss\T1/qtm/m/n/10.95 , \T1/txtt/m
-/n/10.95 CachedMultipleNegativesRankingLoss\T1/qtm/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-[]\T1/qtm/m/it/10.95 (an-chor,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/qtm/m/it/10.95 pos-i-tive, neg-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9726--9726
-\T1/qtm/m/it/10.95 a-tive_1, ...,
- []
-
-
-Overfull \hbox (42.58456pt too wide) in paragraph at lines 9726--9726
-[]\T1/txtt/m/n/10.95 MultipleNegativesRankingLoss\T1/qtm/m/n/10.95 , \T1/txtt/m
-/n/10.95 CachedMultipleNegativesRankingLoss\T1/qtm/m/n/10.95 ,
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3661,10 +3486,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[175]
-Underfull \vbox (badness 10000) detected at line 9782
- []
-
+[175 <./ppo_clip_algo.png>]
+<PPO_RLHF_flowchart.png, id=2249, 1028.84375pt x 543.02875pt>
+File: PPO_RLHF_flowchart.png Graphic file (type png)
+<use PPO_RLHF_flowchart.png>
+Package pdftex.def Info: PPO_RLHF_flowchart.png  used on input line 9381.
+(pdftex.def)             Requested size: 469.75732pt x 247.9402pt.
+<RLHF_training_realworld.png, id=2251, 1020.81375pt x 653.44125pt>
+File: RLHF_training_realworld.png Graphic file (type png)
+<use RLHF_training_realworld.png>
+Package pdftex.def Info: RLHF_training_realworld.png  used on input line 9392.
+(pdftex.def)             Requested size: 469.76694pt x 300.6963pt.
 
 
 
@@ -3676,11 +3508,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [176]
-<fine_tuning_wandb.png, id=2290, 1209.76968pt x 767.86874pt>
-File: fine_tuning_wandb.png Graphic file (type png)
-<use fine_tuning_wandb.png>
-Package pdftex.def Info: fine_tuning_wandb.png  used on input line 9915.
-(pdftex.def)             Requested size: 469.75926pt x 298.16705pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[177 <./PPO_RLHF_flowchart.png> <./RLHF_training_realworld.png>]
+<RLHF_training_tricks.png, id=2273, 857.2025pt x 581.17125pt>
+File: RLHF_training_tricks.png Graphic file (type png)
+<use RLHF_training_tricks.png>
+Package pdftex.def Info: RLHF_training_tricks.png  used on input line 9411.
+(pdftex.def)             Requested size: 469.74937pt x 318.49234pt.
+<DPO_idea.png, id=2276, 905.3825pt x 312.16624pt>
+File: DPO_idea.png Graphic file (type png)
+<use DPO_idea.png>
+Package pdftex.def Info: DPO_idea.png  used on input line 9436.
+(pdftex.def)             Requested size: 469.75168pt x 161.97014pt.
 
 
 
@@ -3691,7 +3538,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[177]
+[178 <./RLHF_training_tricks.png>]
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 9459.
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3701,23 +3554,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[178 <./fine_tuning_wandb.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[179]
-<fine_tuning_llm.png, id=2307, 1445.4pt x 813.0375pt>
-File: fine_tuning_llm.png Graphic file (type png)
-<use fine_tuning_llm.png>
-Package pdftex.def Info: fine_tuning_llm.png  used on input line 10033.
-(pdftex.def)             Requested size: 469.74944pt x 264.23405pt.
-
+[179 <./DPO_idea.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3737,7 +3574,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[181 <./fine_tuning_llm.png>]
+[181]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3747,24 +3584,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[182
-
-]
-Chapter 7.
-<ilya_sutskever.png, id=2323, 750.55406pt x 475.7775pt>
-File: ilya_sutskever.png Graphic file (type png)
-<use ilya_sutskever.png>
-Package pdftex.def Info: ilya_sutskever.png  used on input line 10049.
-(pdftex.def)             Requested size: 454.75658pt x 288.28548pt.
+[182]
+Overfull \hbox (1.82991pt too wide) in paragraph at lines 9832--9832
+[]\T1/qtm/b/n/10.95 Method| 
+ []
 
 
-[183 <./ilya_sutskever.png>]
-<transformer_architecture.png, id=2331, 570.63188pt x 453.94594pt>
-File: transformer_architecture.png Graphic file (type png)
-<use transformer_architecture.png>
-Package pdftex.def Info: transformer_architecture.png  used on input line 10076
-.
-(pdftex.def)             Requested size: 469.75838pt x 373.6996pt.
+Overfull \hbox (2.48695pt too wide) in paragraph at lines 9832--9832
+[]\T1/qtm/b/n/10.95 QLoRA| 
+ []
+
 
 
 
@@ -3775,7 +3604,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[184 <./transformer_architecture.png>]
+[183]
+Underfull \hbox (badness 10000) in paragraph at lines 10011--10016
+[]\T1/qtm/m/n/10.95 In this chap-ter, we will demon-strate how to fine-tune em-
+bed-ding mod-els us-ing the
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[184]
+Overfull \vbox (0.67218pt too high) detected at line 10096
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3796,10 +3645,351 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [186]
-<position_embedding.png, id=2349, 933.4875pt x 569.12625pt>
+Underfull \hbox (badness 10000) in paragraph at lines 10159--10162
+[]\T1/qtm/m/n/10.95 If you en-counter the er-ror \T1/txtt/m/n/10.95 Cannot impo
+rt name \TS1/txtt/m/n/10.95 '\T1/txtt/m/n/10.95 EncoderDecoderCache\TS1/txtt/m/
+n/10.95 ' \T1/txtt/m/n/10.95 from
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[187]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[188]
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/qhv/m/n/10.95 La-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 single
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 BatchAllTripletLoss\T1/qtm/m/n/10.95 , \T1/txtt/m/n/10.95 
+BatchHardSoftMarginTripletLoss\T1/qtm/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 single
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (anchor,
+ []
+
+
+Overfull \hbox (36.89041pt too wide) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (damaged_sentence,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+
+ []
+
+
+Overfull \hbox (36.89041pt too wide) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 original_sentence)
+ []
+
+
+Overfull \hbox (2.39801pt too wide) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (sentence_A,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 sentence_B)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (anchor,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 positive)
+ []
+
+
+Overfull \hbox (42.58456pt too wide) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 MultipleNegativesRankingLoss\T1/qtm/m/n/10.95 , \T1/txtt/m
+/n/10.95 CachedMultipleNegativesRankingLoss\T1/qtm/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 MultipleNegativesSymmetricRankingLoss\T1/qtm/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 CachedMultipleNegativesSymmetricRankingLoss\T1/qtm/m/n/10.95
+ ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (anchor,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 positive/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 negative)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/qtm/m/it/10.95 1 if
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/qtm/m/it/10.95 pos-i-
+ []
+
+
+Overfull \hbox (2.39801pt too wide) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (sentence_A,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 sentence_B)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/qtm/m/it/10.95 float
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/qtm/m/it/10.95 sim-i-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/qtm/m/it/10.95 lar-ity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 (anchor,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 positive,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/txtt/m/n/10.95 negative)
+ []
+
+
+Overfull \hbox (42.58456pt too wide) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 MultipleNegativesRankingLoss\T1/qtm/m/n/10.95 , \T1/txtt/m
+/n/10.95 CachedMultipleNegativesRankingLoss\T1/qtm/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+[]\T1/qtm/m/it/10.95 (an-chor,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/qtm/m/it/10.95 pos-i-tive, neg-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10354--10354
+\T1/qtm/m/it/10.95 a-tive_1, ...,
+ []
+
+
+Overfull \hbox (42.58456pt too wide) in paragraph at lines 10354--10354
+[]\T1/txtt/m/n/10.95 MultipleNegativesRankingLoss\T1/qtm/m/n/10.95 , \T1/txtt/m
+/n/10.95 CachedMultipleNegativesRankingLoss\T1/qtm/m/n/10.95 ,
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[189]
+Underfull \vbox (badness 10000) detected at line 10410
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[190]
+<fine_tuning_wandb.png, id=2366, 1209.76968pt x 767.86874pt>
+File: fine_tuning_wandb.png Graphic file (type png)
+<use fine_tuning_wandb.png>
+Package pdftex.def Info: fine_tuning_wandb.png  used on input line 10543.
+(pdftex.def)             Requested size: 469.75926pt x 298.16705pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[191]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[192 <./fine_tuning_wandb.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[193]
+<fine_tuning_llm.png, id=2384, 1445.4pt x 813.0375pt>
+File: fine_tuning_llm.png Graphic file (type png)
+<use fine_tuning_llm.png>
+Package pdftex.def Info: fine_tuning_llm.png  used on input line 10661.
+(pdftex.def)             Requested size: 469.74944pt x 264.23405pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[194]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[195 <./fine_tuning_llm.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[196
+
+]
+Chapter 7.
+<ilya_sutskever.png, id=2399, 750.55406pt x 475.7775pt>
+File: ilya_sutskever.png Graphic file (type png)
+<use ilya_sutskever.png>
+Package pdftex.def Info: ilya_sutskever.png  used on input line 10677.
+(pdftex.def)             Requested size: 454.75658pt x 288.28548pt.
+
+
+[197 <./ilya_sutskever.png>]
+<transformer_architecture.png, id=2407, 570.63188pt x 453.94594pt>
+File: transformer_architecture.png Graphic file (type png)
+<use transformer_architecture.png>
+Package pdftex.def Info: transformer_architecture.png  used on input line 10704
+.
+(pdftex.def)             Requested size: 469.75838pt x 373.6996pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[198 <./transformer_architecture.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[199]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[200]
+<position_embedding.png, id=2427, 933.4875pt x 569.12625pt>
 File: position_embedding.png Graphic file (type png)
 <use position_embedding.png>
-Package pdftex.def Info: position_embedding.png  used on input line 10303.
+Package pdftex.def Info: position_embedding.png  used on input line 10931.
 (pdftex.def)             Requested size: 469.7623pt x 286.41216pt.
 
 
@@ -3811,113 +4001,113 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[187 <./position_embedding.png>]
-Overfull \hbox (4.42688pt too wide) in paragraph at lines 10513--10513
+[201 <./position_embedding.png>]
+Overfull \hbox (4.42688pt too wide) in paragraph at lines 11141--11141
 []\T1/qhv/m/n/10.95 Fea-
  []
 
 
-Overfull \hbox (0.94476pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (0.94476pt too wide) in paragraph at lines 11141--11141
 \T1/qhv/m/n/10.95 ture| 
  []
 
 
-Underfull \hbox (badness 6141) in paragraph at lines 10513--10513
+Underfull \hbox (badness 6141) in paragraph at lines 11141--11141
 []\T1/qhv/m/n/10.95 Learn-able Po-si-tional En-
  []
 
 
-Overfull \hbox (3.5947pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (3.5947pt too wide) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Type| 
  []
 
 
-Overfull \hbox (11.58821pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (11.58821pt too wide) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Learn-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Ad-
  []
 
 
-Overfull \hbox (1.37186pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (1.37186pt too wide) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 van-
  []
 
 
-Overfull \hbox (4.41594pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (4.41594pt too wide) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 tages| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Flex-i-ble for task-specific
  []
 
 
-Overfull \hbox (1.04335pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (1.04335pt too wide) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Dis-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 ad-
  []
 
 
-Overfull \hbox (1.37186pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (1.37186pt too wide) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 van-
  []
 
 
-Overfull \hbox (4.41594pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (4.41594pt too wide) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 tages| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Us-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 to-sequence tasks like
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Mod-ern LLMs (e.g., GPT-4,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 LLaMA) with long con-text
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 lengths; Tasks re-quir-ing long-
  []
 
 
-Underfull \hbox (badness 5756) in paragraph at lines 10513--10513
+Underfull \hbox (badness 5756) in paragraph at lines 11141--11141
 \T1/qtm/m/n/10.95 GPT-2, BERT; Tasks with
  []
 
 
-Overfull \hbox (1.4923pt too wide) in paragraph at lines 10513--10513
+Overfull \hbox (1.4923pt too wide) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Best
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Sim-plic-ity, gen-er-al-iza-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10513--10513
+Underfull \hbox (badness 10000) in paragraph at lines 11141--11141
 []\T1/qtm/m/n/10.95 Task-specific op-ti-miza-tion,
  []
 
@@ -3931,26 +4121,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[188]
-<word_embedding_matrix.png, id=2361, 942.52126pt x 336.50719pt>
+[202]
+<word_embedding_matrix.png, id=2438, 942.52126pt x 336.50719pt>
 File: word_embedding_matrix.png Graphic file (type png)
 <use word_embedding_matrix.png>
-Package pdftex.def Info: word_embedding_matrix.png  used on input line 10555.
+Package pdftex.def Info: word_embedding_matrix.png  used on input line 11183.
 (pdftex.def)             Requested size: 469.76378pt x 167.71916pt.
-<contextual_embedding.png, id=2362, 771.88374pt x 396.48125pt>
+<contextual_embedding.png, id=2439, 771.88374pt x 396.48125pt>
 File: contextual_embedding.png Graphic file (type png)
 <use contextual_embedding.png>
-Package pdftex.def Info: contextual_embedding.png  used on input line 10584.
+Package pdftex.def Info: contextual_embedding.png  used on input line 11212.
 (pdftex.def)             Requested size: 469.75304pt x 241.29662pt.
-<self_attention_hendrik.png, id=2363, 634.62094pt x 631.60968pt>
+<self_attention_hendrik.png, id=2440, 634.62094pt x 631.60968pt>
 File: self_attention_hendrik.png Graphic file (type png)
 <use self_attention_hendrik.png>
-Package pdftex.def Info: self_attention_hendrik.png  used on input line 10601.
+Package pdftex.def Info: self_attention_hendrik.png  used on input line 11229.
 (pdftex.def)             Requested size: 469.76707pt x 467.52841pt.
-<selfattention_goal.png, id=2365, 897.3525pt x 207.77625pt>
+<selfattention_goal.png, id=2442, 897.3525pt x 207.77625pt>
 File: selfattention_goal.png Graphic file (type png)
 <use selfattention_goal.png>
-Package pdftex.def Info: selfattention_goal.png  used on input line 10622.
+Package pdftex.def Info: selfattention_goal.png  used on input line 11250.
 (pdftex.def)             Requested size: 469.74786pt x 108.7671pt.
 
 
@@ -3962,16 +4152,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[189 <./word_embedding_matrix.png>]
-<query_projection.png, id=2372, 851.18pt x 212.795pt>
+[203 <./word_embedding_matrix.png>]
+<query_projection.png, id=2449, 851.18pt x 212.795pt>
 File: query_projection.png Graphic file (type png)
 <use query_projection.png>
-Package pdftex.def Info: query_projection.png  used on input line 10657.
+Package pdftex.def Info: query_projection.png  used on input line 11285.
 (pdftex.def)             Requested size: 469.76094pt x 117.44022pt.
-<key_projection.png, id=2373, 796.9775pt x 305.14pt>
+<key_projection.png, id=2450, 796.9775pt x 305.14pt>
 File: key_projection.png Graphic file (type png)
 <use key_projection.png>
-Package pdftex.def Info: key_projection.png  used on input line 10684.
+Package pdftex.def Info: key_projection.png  used on input line 11312.
 (pdftex.def)             Requested size: 469.75053pt x 179.8634pt.
 
 
@@ -3983,7 +4173,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[190 <./contextual_embedding.png>]
+[204 <./contextual_embedding.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3993,7 +4183,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[191 <./self_attention_hendrik.png> <./selfattention_goal.png>]
+[205 <./self_attention_hendrik.png> <./selfattention_goal.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4003,11 +4193,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[192 <./query_projection.png> <./key_projection.png>]
-<attention_score.png, id=2398, 1030.85126pt x 515.9275pt>
+[206 <./query_projection.png> <./key_projection.png>]
+<attention_score.png, id=2476, 1030.85126pt x 515.9275pt>
 File: attention_score.png Graphic file (type png)
 <use attention_score.png>
-Package pdftex.def Info: attention_score.png  used on input line 10709.
+Package pdftex.def Info: attention_score.png  used on input line 11337.
 (pdftex.def)             Requested size: 469.74588pt x 235.10164pt.
 
 
@@ -4019,12 +4209,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[193 <./attention_score.png>]
-<value_projection_weighted_sum.png, id=2409, 1001.7425pt x 448.67625pt>
+[207 <./attention_score.png>]
+<value_projection_weighted_sum.png, id=2485, 1001.7425pt x 448.67625pt>
 File: value_projection_weighted_sum.png Graphic file (type png)
 <use value_projection_weighted_sum.png>
 Package pdftex.def Info: value_projection_weighted_sum.png  used on input line 
-10800.
+11428.
 (pdftex.def)             Requested size: 469.76434pt x 210.39862pt.
 
 
@@ -4036,23 +4226,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[194 <./value_projection_weighted_sum.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 10982--10982
+[208 <./value_projection_weighted_sum.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 11610--11610
 []\T1/qtm/m/n/10.95 Source of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10982--10982
+Underfull \hbox (badness 10000) in paragraph at lines 11610--11610
 []\T1/qtm/m/n/10.95 Source of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10982--10982
+Underfull \hbox (badness 10000) in paragraph at lines 11610--11610
 \T1/qtm/m/n/10.95 Keys /Val-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10982--10982
+Underfull \hbox (badness 10000) in paragraph at lines 11610--11610
 []\T1/qtm/m/n/10.95 Ex-am-ple
  []
 
@@ -4066,275 +4256,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[195]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[196]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[197]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[198]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[199]
-<beam_search.png, id=2457, 828.09375pt x 411.5375pt>
-File: beam_search.png Graphic file (type png)
-<use beam_search.png>
-Package pdftex.def Info: beam_search.png  used on input line 11473.
-(pdftex.def)             Requested size: 469.7692pt x 233.45477pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[200]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[201 <./beam_search.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-[]\T1/qtm/m/n/10.95 Greedy
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-[]\T1/qtm/m/n/10.95 Beam
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-[]\T1/qtm/m/n/10.95 Pro-duces higher-quality se-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-[]\T1/qtm/m/n/10.95 Top-k
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-[]\T1/qtm/m/n/10.95 Top-p
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-[]\T1/qtm/m/n/10.95 Tem-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-\T1/qtm/m/n/10.95 per-a-ture
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11732--11732
-\T1/qtm/m/n/10.95 gen-er-a-tion, fine-tuning
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[202]
-<qkv_attention_pattern.png, id=2473, 1304.875pt x 629.35126pt>
-File: qkv_attention_pattern.png Graphic file (type png)
-<use qkv_attention_pattern.png>
-Package pdftex.def Info: qkv_attention_pattern.png  used on input line 11763.
-(pdftex.def)             Requested size: 469.75464pt x 226.56627pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[203]
-<kv_cache.png, id=2478, 937.5025pt x 636.3775pt>
-File: kv_cache.png Graphic file (type png)
-<use kv_cache.png>
-Package pdftex.def Info: kv_cache.png  used on input line 11785.
-(pdftex.def)             Requested size: 469.75146pt x 318.86769pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[204 <./qkv_attention_pattern.png>]
-<multiquery_attention.png, id=2484, 1114.1625pt x 463.7325pt>
-File: multiquery_attention.png Graphic file (type png)
-<use multiquery_attention.png>
-Package pdftex.def Info: multiquery_attention.png  used on input line 11828.
-(pdftex.def)             Requested size: 469.74715pt x 195.52344pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[205 <./kv_cache.png>]
-<grouped_query_attention.png, id=2491, 1055.945pt x 466.74374pt>
-File: grouped_query_attention.png Graphic file (type png)
-<use grouped_query_attention.png>
-Package pdftex.def Info: grouped_query_attention.png  used on input line 11885.
-
-(pdftex.def)             Requested size: 469.7571pt x 207.63977pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[206 <./multiquery_attention.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[207 <./grouped_query_attention.png>]
-<flashattention_paper.png, id=2508, 688.07062pt x 372.64218pt>
-File: flashattention_paper.png Graphic file (type png)
-<use flashattention_paper.png>
-Package pdftex.def Info: flashattention_paper.png  used on input line 11976.
-(pdftex.def)             Requested size: 469.75067pt x 254.40544pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[208 <./flashattention_paper.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-[]\T1/qtm/m/n/10.95 Com-pu-ta-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-[]\T1/qtm/m/n/10.95 Han-dling
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-\T1/qtm/m/n/10.95 Long Se-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-[]\T1/qtm/m/n/10.95 Hard-ware
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-[]\T1/qtm/m/n/10.95 Re-duced
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-\T1/qtm/m/n/10.95 Mem-ory
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-[]\T1/qtm/m/n/10.95 Re-duces
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-\T1/qtm/m/n/10.95 Re-dun-dant
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12178--12178
-\T1/qtm/m/n/10.95 Com-pu-ta-
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
 [209]
-<MoE_layer.png, id=2524, 839.135pt x 628.3475pt>
-File: MoE_layer.png Graphic file (type png)
-<use MoE_layer.png>
-Package pdftex.def Info: MoE_layer.png  used on input line 12285.
-(pdftex.def)             Requested size: 469.75874pt x 351.74756pt.
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4354,17 +4276,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[211 <./MoE_layer.png>]
-<dense_sparse_decoder.png, id=2538, 637.38126pt x 618.31pt>
-File: dense_sparse_decoder.png Graphic file (type png)
-<use dense_sparse_decoder.png>
-Package pdftex.def Info: dense_sparse_decoder.png  used on input line 12303.
-(pdftex.def)             Requested size: 469.75824pt x 455.71191pt.
-<different_expert_path.png, id=2539, 838.13126pt x 524.96124pt>
-File: different_expert_path.png Graphic file (type png)
-<use different_expert_path.png>
-Package pdftex.def Info: different_expert_path.png  used on input line 12318.
-(pdftex.def)             Requested size: 469.74677pt x 294.24063pt.
+[211]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[212]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[213]
+<beam_search.png, id=2534, 828.09375pt x 411.5375pt>
+File: beam_search.png Graphic file (type png)
+<use beam_search.png>
+Package pdftex.def Info: beam_search.png  used on input line 12101.
+(pdftex.def)             Requested size: 469.7692pt x 233.45477pt.
 
 
 
@@ -4375,13 +4312,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[212 <./dense_sparse_decoder.png>]
-<MoE_layer_details.png, id=2546, 890.32625pt x 591.20876pt>
-File: MoE_layer_details.png Graphic file (type png)
-<use MoE_layer_details.png>
-Package pdftex.def Info: MoE_layer_details.png  used on input line 12350.
-(pdftex.def)             Requested size: 469.75137pt x 311.94087pt.
-
+[214]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4391,234 +4322,44 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[213 <./different_expert_path.png>]
+[215 <./beam_search.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+[]\T1/qtm/m/n/10.95 Greedy
+ []
 
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+[]\T1/qtm/m/n/10.95 Beam
+ []
 
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[214 <./MoE_layer_details.png>]
-<expert_capacity.png, id=2559, 765.86125pt x 413.545pt>
-File: expert_capacity.png Graphic file (type png)
-<use expert_capacity.png>
-Package pdftex.def Info: expert_capacity.png  used on input line 12391.
-(pdftex.def)             Requested size: 469.75731pt x 253.66293pt.
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+[]\T1/qtm/m/n/10.95 Pro-duces higher-quality se-
+ []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+[]\T1/qtm/m/n/10.95 Top-k
+ []
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
 
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+[]\T1/qtm/m/n/10.95 Top-p
+ []
 
-[215 <./expert_capacity.png>]
-<mixtral_of_experts.png, id=2567, 1461.46pt x 1112.155pt>
-File: mixtral_of_experts.png Graphic file (type png)
-<use mixtral_of_experts.png>
-Package pdftex.def Info: mixtral_of_experts.png  used on input line 12433.
-(pdftex.def)             Requested size: 469.75067pt x 357.4751pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+[]\T1/qtm/m/n/10.95 Tem-
+ []
 
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+\T1/qtm/m/n/10.95 per-a-ture
+ []
 
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[216 <./mixtral_of_experts.png>]
-<MLA_DeepSeekV2.png, id=2576, 765.6103pt x 333.49594pt>
-File: MLA_DeepSeekV2.png Graphic file (type png)
-<use MLA_DeepSeekV2.png>
-Package pdftex.def Info: MLA_DeepSeekV2.png  used on input line 12511.
-(pdftex.def)             Requested size: 469.75525pt x 204.62807pt.
-<deepseek_architecture.png, id=2578, 865.2325pt x 752.8125pt>
-File: deepseek_architecture.png Graphic file (type png)
-<use deepseek_architecture.png>
-Package pdftex.def Info: deepseek_architecture.png  used on input line 12539.
-(pdftex.def)             Requested size: 469.75345pt x 408.72968pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[217]
-<multi_token_prediction.png, id=2587, 880.28876pt x 462.72874pt>
-File: multi_token_prediction.png Graphic file (type png)
-<use multi_token_prediction.png>
-Package pdftex.def Info: multi_token_prediction.png  used on input line 12569.
-(pdftex.def)             Requested size: 469.74767pt x 246.93256pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[218 <./MLA_DeepSeekV2.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[219 <./deepseek_architecture.png>]
-<fp8_precision.png, id=2601, 886.31125pt x 317.185pt>
-File: fp8_precision.png Graphic file (type png)
-<use fp8_precision.png>
-Package pdftex.def Info: fp8_precision.png  used on input line 12634.
-(pdftex.def)             Requested size: 469.75624pt x 168.11691pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[220 <./multi_token_prediction.png> <./fp8_precision.png>]
-Chapter 8.
-File: colab-badge.png Graphic file (type png)
-<use colab-badge.png>
-Package pdftex.def Info: colab-badge.png  used on input line 2.
-(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-<metrics_llm.png, id=2612, 3152.02594pt x 2317.90968pt>
-File: metrics_llm.png Graphic file (type png)
-<use metrics_llm.png>
-Package pdftex.def Info: metrics_llm.png  used on input line 12654.
-(pdftex.def)             Requested size: 469.75345pt x 345.44324pt.
-
-
-[221
-
- <./metrics_llm.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[222]
-<geval.png, id=2627, 746.79pt x 543.02875pt>
-File: geval.png Graphic file (type png)
-<use geval.png>
-Package pdftex.def Info: geval.png  used on input line 12811.
-(pdftex.def)             Requested size: 469.7509pt x 341.59618pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[223]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[224 <./geval.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[225]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[226]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[227]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[228]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[229]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[230]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[231]
-Overfull \vbox (2.46165pt too high) detected at line 13406
+Underfull \hbox (badness 10000) in paragraph at lines 12360--12360
+\T1/qtm/m/n/10.95 gen-er-a-tion, fine-tuning
  []
 
 
@@ -4631,17 +4372,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[232]
+[216]
+<qkv_attention_pattern.png, id=2550, 1304.875pt x 629.35126pt>
+File: qkv_attention_pattern.png Graphic file (type png)
+<use qkv_attention_pattern.png>
+Package pdftex.def Info: qkv_attention_pattern.png  used on input line 12391.
+(pdftex.def)             Requested size: 469.75464pt x 226.56627pt.
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[233]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4651,21 +4388,320 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[234
+[217]
+<kv_cache.png, id=2556, 937.5025pt x 636.3775pt>
+File: kv_cache.png Graphic file (type png)
+<use kv_cache.png>
+Package pdftex.def Info: kv_cache.png  used on input line 12413.
+(pdftex.def)             Requested size: 469.75146pt x 318.86769pt.
 
-]
-Chapter 9.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[218 <./qkv_attention_pattern.png>]
+<multiquery_attention.png, id=2562, 1114.1625pt x 463.7325pt>
+File: multiquery_attention.png Graphic file (type png)
+<use multiquery_attention.png>
+Package pdftex.def Info: multiquery_attention.png  used on input line 12456.
+(pdftex.def)             Requested size: 469.74715pt x 195.52344pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[219 <./kv_cache.png>]
+<grouped_query_attention.png, id=2568, 1055.945pt x 466.74374pt>
+File: grouped_query_attention.png Graphic file (type png)
+<use grouped_query_attention.png>
+Package pdftex.def Info: grouped_query_attention.png  used on input line 12513.
+
+(pdftex.def)             Requested size: 469.7571pt x 207.63977pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[220 <./multiquery_attention.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[221 <./grouped_query_attention.png>]
+<flashattention_paper.png, id=2585, 688.07062pt x 372.64218pt>
+File: flashattention_paper.png Graphic file (type png)
+<use flashattention_paper.png>
+Package pdftex.def Info: flashattention_paper.png  used on input line 12604.
+(pdftex.def)             Requested size: 469.75067pt x 254.40544pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[222 <./flashattention_paper.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+[]\T1/qtm/m/n/10.95 Com-pu-ta-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+[]\T1/qtm/m/n/10.95 Han-dling
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+\T1/qtm/m/n/10.95 Long Se-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+[]\T1/qtm/m/n/10.95 Hard-ware
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+[]\T1/qtm/m/n/10.95 Re-duced
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+\T1/qtm/m/n/10.95 Mem-ory
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+[]\T1/qtm/m/n/10.95 Re-duces
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+\T1/qtm/m/n/10.95 Re-dun-dant
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12806--12806
+\T1/qtm/m/n/10.95 Com-pu-ta-
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[223]
+<MoE_layer.png, id=2602, 839.135pt x 628.3475pt>
+File: MoE_layer.png Graphic file (type png)
+<use MoE_layer.png>
+Package pdftex.def Info: MoE_layer.png  used on input line 12913.
+(pdftex.def)             Requested size: 469.75874pt x 351.74756pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[224]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[225 <./MoE_layer.png>]
+<dense_sparse_decoder.png, id=2614, 637.38126pt x 618.31pt>
+File: dense_sparse_decoder.png Graphic file (type png)
+<use dense_sparse_decoder.png>
+Package pdftex.def Info: dense_sparse_decoder.png  used on input line 12931.
+(pdftex.def)             Requested size: 469.75824pt x 455.71191pt.
+<different_expert_path.png, id=2615, 838.13126pt x 524.96124pt>
+File: different_expert_path.png Graphic file (type png)
+<use different_expert_path.png>
+Package pdftex.def Info: different_expert_path.png  used on input line 12946.
+(pdftex.def)             Requested size: 469.74677pt x 294.24063pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[226 <./dense_sparse_decoder.png>]
+<MoE_layer_details.png, id=2622, 890.32625pt x 591.20876pt>
+File: MoE_layer_details.png Graphic file (type png)
+<use MoE_layer_details.png>
+Package pdftex.def Info: MoE_layer_details.png  used on input line 12978.
+(pdftex.def)             Requested size: 469.75137pt x 311.94087pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[227 <./different_expert_path.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[228 <./MoE_layer_details.png>]
+<expert_capacity.png, id=2635, 765.86125pt x 413.545pt>
+File: expert_capacity.png Graphic file (type png)
+<use expert_capacity.png>
+Package pdftex.def Info: expert_capacity.png  used on input line 13019.
+(pdftex.def)             Requested size: 469.75731pt x 253.66293pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[229 <./expert_capacity.png>]
+<mixtral_of_experts.png, id=2644, 1461.46pt x 1112.155pt>
+File: mixtral_of_experts.png Graphic file (type png)
+<use mixtral_of_experts.png>
+Package pdftex.def Info: mixtral_of_experts.png  used on input line 13061.
+(pdftex.def)             Requested size: 469.75067pt x 357.4751pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[230 <./mixtral_of_experts.png>]
+<MLA_DeepSeekV2.png, id=2653, 765.6103pt x 333.49594pt>
+File: MLA_DeepSeekV2.png Graphic file (type png)
+<use MLA_DeepSeekV2.png>
+Package pdftex.def Info: MLA_DeepSeekV2.png  used on input line 13139.
+(pdftex.def)             Requested size: 469.75525pt x 204.62807pt.
+<deepseek_architecture.png, id=2655, 865.2325pt x 752.8125pt>
+File: deepseek_architecture.png Graphic file (type png)
+<use deepseek_architecture.png>
+Package pdftex.def Info: deepseek_architecture.png  used on input line 13167.
+(pdftex.def)             Requested size: 469.75345pt x 408.72968pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[231]
+<multi_token_prediction.png, id=2663, 880.28876pt x 462.72874pt>
+File: multi_token_prediction.png Graphic file (type png)
+<use multi_token_prediction.png>
+Package pdftex.def Info: multi_token_prediction.png  used on input line 13197.
+(pdftex.def)             Requested size: 469.74767pt x 246.93256pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[232 <./MLA_DeepSeekV2.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[233 <./deepseek_architecture.png>]
+<fp8_precision.png, id=2678, 886.31125pt x 317.185pt>
+File: fp8_precision.png Graphic file (type png)
+<use fp8_precision.png>
+Package pdftex.def Info: fp8_precision.png  used on input line 13262.
+(pdftex.def)             Requested size: 469.75624pt x 168.11691pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[234 <./multi_token_prediction.png> <./fp8_precision.png>]
+Chapter 8.
 File: colab-badge.png Graphic file (type png)
 <use colab-badge.png>
 Package pdftex.def Info: colab-badge.png  used on input line 2.
 (pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
-File: colab-badge.png Graphic file (type png)
-<use colab-badge.png>
-Package pdftex.def Info: colab-badge.png  used on input line 2.
-(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
+<metrics_llm.png, id=2689, 3152.02594pt x 2317.90968pt>
+File: metrics_llm.png Graphic file (type png)
+<use metrics_llm.png>
+Package pdftex.def Info: metrics_llm.png  used on input line 13282.
+(pdftex.def)             Requested size: 469.75345pt x 345.44324pt.
 
 
-[235]
+[235
+
+ <./metrics_llm.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4676,6 +4712,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [236]
+<geval.png, id=2705, 746.79pt x 543.02875pt>
+File: geval.png Graphic file (type png)
+<use geval.png>
+Package pdftex.def Info: geval.png  used on input line 13439.
+(pdftex.def)             Requested size: 469.7509pt x 341.59618pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4695,19 +4737,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[238]
-<llm_guardrails_overview.png, id=2706, 780.9175pt x 585.18625pt>
-File: llm_guardrails_overview.png Graphic file (type png)
-<use llm_guardrails_overview.png>
-Package pdftex.def Info: llm_guardrails_overview.png  used on input line 13930.
-
-(pdftex.def)             Requested size: 469.75761pt x 352.02524pt.
-<guardrails_categories.png, id=2707, 1131.47719pt x 993.7125pt>
-File: guardrails_categories.png Graphic file (type png)
-<use guardrails_categories.png>
-Package pdftex.def Info: guardrails_categories.png  used on input line 13976.
-(pdftex.def)             Requested size: 469.7442pt x 412.56496pt.
-
+[238 <./geval.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4727,7 +4757,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[240 <./llm_guardrails_overview.png>]
+[240]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4737,20 +4767,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[241 <./guardrails_categories.png>]
-<type_of_guardrails.png, id=2726, 895.345pt x 538.01pt>
-File: type_of_guardrails.png Graphic file (type png)
-<use type_of_guardrails.png>
-Package pdftex.def Info: type_of_guardrails.png  used on input line 14040.
-(pdftex.def)             Requested size: 469.7626pt x 282.27066pt.
-<summary_implement_techniques_for_guardrails.jpg, id=2727, 2119.92pt x 2068.728
-74pt>
-File: summary_implement_techniques_for_guardrails.jpg Graphic file (type jpg)
-<use summary_implement_techniques_for_guardrails.jpg>
-Package pdftex.def Info: summary_implement_techniques_for_guardrails.jpg  used 
-on input line 14054.
-(pdftex.def)             Requested size: 469.74797pt x 458.40462pt.
-
+[241]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4761,17 +4778,39 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [242]
-<rag_nemo_and_thirdparty.png, id=2733, 770.88pt x 503.63156pt>
-File: rag_nemo_and_thirdparty.png Graphic file (type png)
-<use rag_nemo_and_thirdparty.png>
-Package pdftex.def Info: rag_nemo_and_thirdparty.png  used on input line 14095.
 
-(pdftex.def)             Requested size: 469.75385pt x 306.89972pt.
-<llama_guard.png, id=2740, 848.4197pt x 529.22719pt>
-File: llama_guard.png Graphic file (type png)
-<use llama_guard.png>
-Package pdftex.def Info: llama_guard.png  used on input line 14146.
-(pdftex.def)             Requested size: 469.75223pt x 293.022pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[243]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[244]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[245]
+Overfull \vbox (2.46165pt too high) detected at line 14034
+ []
+
 
 
 
@@ -4782,37 +4821,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[243 <./type_of_guardrails.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[244 <./summary_implement_techniques_for_guardrails.jpg>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[245 <./rag_nemo_and_thirdparty.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[246 <./llama_guard.png>]
+[246]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4823,14 +4832,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [247]
-Underfull \vbox (badness 10000) detected at line 14576
- []
-
-
-Overfull \vbox (3.26155pt too high) detected at line 14576
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4840,33 +4841,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[248]
-Underfull \vbox (badness 10000) detected at line 14576
- []
+[248
 
+]
+Chapter 9.
+File: colab-badge.png Graphic file (type png)
+<use colab-badge.png>
+Package pdftex.def Info: colab-badge.png  used on input line 2.
+(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
+File: colab-badge.png Graphic file (type png)
+<use colab-badge.png>
+Package pdftex.def Info: colab-badge.png  used on input line 2.
+(pdftex.def)             Requested size: 88.07883pt x 15.0562pt.
 
-Overfull \vbox (3.26157pt too high) detected at line 14576
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [249]
-Underfull \vbox (badness 10000) detected at line 14576
- []
-
-
-Overfull \vbox (3.2616pt too high) detected at line 14576
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4877,14 +4866,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [250]
-Underfull \vbox (badness 10000) detected at line 14576
- []
-
-
-Overfull \vbox (3.26155pt too high) detected at line 14576
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4895,14 +4876,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [251]
-Underfull \vbox (badness 10000) detected at line 14576
- []
-
-
-Overfull \vbox (3.26158pt too high) detected at line 14576
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4913,13 +4886,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [252]
-Underfull \vbox (badness 10000) detected at line 14576
- []
+<llm_guardrails_overview.png, id=2782, 780.9175pt x 585.18625pt>
+File: llm_guardrails_overview.png Graphic file (type png)
+<use llm_guardrails_overview.png>
+Package pdftex.def Info: llm_guardrails_overview.png  used on input line 14558.
 
-
-Overfull \vbox (3.26161pt too high) detected at line 14576
- []
-
+(pdftex.def)             Requested size: 469.75761pt x 352.02524pt.
+<guardrails_categories.png, id=2783, 1131.47719pt x 993.7125pt>
+File: guardrails_categories.png Graphic file (type png)
+<use guardrails_categories.png>
+Package pdftex.def Info: guardrails_categories.png  used on input line 14604.
+(pdftex.def)             Requested size: 469.7442pt x 412.56496pt.
 
 
 
@@ -4940,7 +4917,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[254]
+[254 <./llm_guardrails_overview.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4950,7 +4927,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[255]
+[255 <./guardrails_categories.png>]
+<type_of_guardrails.png, id=2803, 895.345pt x 538.01pt>
+File: type_of_guardrails.png Graphic file (type png)
+<use type_of_guardrails.png>
+Package pdftex.def Info: type_of_guardrails.png  used on input line 14668.
+(pdftex.def)             Requested size: 469.7626pt x 282.27066pt.
+<summary_implement_techniques_for_guardrails.jpg, id=2804, 2119.92pt x 2068.728
+74pt>
+File: summary_implement_techniques_for_guardrails.jpg Graphic file (type jpg)
+<use summary_implement_techniques_for_guardrails.jpg>
+Package pdftex.def Info: summary_implement_techniques_for_guardrails.jpg  used 
+on input line 14682.
+(pdftex.def)             Requested size: 469.74797pt x 458.40462pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4961,9 +4951,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [256]
-Underfull \vbox (badness 7151) detected at line 14767
- []
+<rag_nemo_and_thirdparty.png, id=2810, 770.88pt x 503.63156pt>
+File: rag_nemo_and_thirdparty.png Graphic file (type png)
+<use rag_nemo_and_thirdparty.png>
+Package pdftex.def Info: rag_nemo_and_thirdparty.png  used on input line 14723.
 
+(pdftex.def)             Requested size: 469.75385pt x 306.89972pt.
+<llama_guard.png, id=2817, 848.4197pt x 529.22719pt>
+File: llama_guard.png Graphic file (type png)
+<use llama_guard.png>
+Package pdftex.def Info: llama_guard.png  used on input line 14774.
+(pdftex.def)             Requested size: 469.75223pt x 293.022pt.
 
 
 
@@ -4974,7 +4972,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[257]
+[257 <./type_of_guardrails.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4984,7 +4982,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[258]
+[258 <./summary_implement_techniques_for_guardrails.jpg>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -4994,7 +4992,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[259]
+[259 <./rag_nemo_and_thirdparty.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -5004,11 +5002,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[260]
-Underfull \vbox (badness 1509) detected at line 14970
- []
-
-
+[260 <./llama_guard.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -5019,6 +5013,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [261]
+Underfull \vbox (badness 10000) detected at line 15204
+ []
+
+
+Overfull \vbox (3.26155pt too high) detected at line 15204
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -5029,12 +5031,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [262]
-Chapter 10.
+Underfull \vbox (badness 10000) detected at line 15204
+ []
 
 
-[263
+Overfull \vbox (3.26157pt too high) detected at line 15204
+ []
 
-]
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[263]
+Underfull \vbox (badness 10000) detected at line 15204
+ []
+
+
+Overfull \vbox (3.2616pt too high) detected at line 15204
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -5045,29 +5067,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [264]
-<ollama_gradio.png, id=2854, 1070.49937pt x 805.50937pt>
-File: ollama_gradio.png Graphic file (type png)
-<use ollama_gradio.png>
-Package pdftex.def Info: ollama_gradio.png  used on input line 15158.
-(pdftex.def)             Requested size: 469.75502pt x 353.4788pt.
-<gradio.png, id=2855, 1070.49937pt x 758.08218pt>
-File: gradio.png Graphic file (type png)
-<use gradio.png>
-Package pdftex.def Info: gradio.png  used on input line 15158.
-(pdftex.def)             Requested size: 469.75502pt x 332.66649pt.
-File: ollama_gradio.png Graphic file (type png)
-<use ollama_gradio.png>
-Package pdftex.def Info: ollama_gradio.png  used on input line 15158.
-(pdftex.def)             Requested size: 222.87845pt x 167.69931pt.
-File: gradio.png Graphic file (type png)
-<use gradio.png>
-Package pdftex.def Info: gradio.png  used on input line 15158.
-(pdftex.def)             Requested size: 222.87845pt x 157.82542pt.
-<endpoint_db.jpg, id=2856, 971.12813pt x 628.59843pt>
-File: endpoint_db.jpg Graphic file (type jpg)
-<use endpoint_db.jpg>
-Package pdftex.def Info: endpoint_db.jpg  used on input line 15169.
-(pdftex.def)             Requested size: 469.75185pt x 304.06418pt.
+Underfull \vbox (badness 10000) detected at line 15204
+ []
+
+
+Overfull \vbox (3.26155pt too high) detected at line 15204
+ []
+
 
 
 
@@ -5078,7 +5084,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[265 <./ollama_gradio.png> <./gradio.png> <./endpoint_db.jpg>]
+[265]
+Underfull \vbox (badness 10000) detected at line 15204
+ []
+
+
+Overfull \vbox (3.26158pt too high) detected at line 15204
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -5088,11 +5102,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[266
+[266]
+Underfull \vbox (badness 10000) detected at line 15204
+ []
 
-]
-Chapter 11.
 
+Overfull \vbox (3.26161pt too high) detected at line 15204
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [267]
 
@@ -5104,11 +5130,175 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[268
+[268]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[269]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[270]
+Underfull \vbox (badness 7151) detected at line 15395
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[271]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[272]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[273]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[274]
+Underfull \vbox (badness 1509) detected at line 15598
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[275]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[276]
+Chapter 10.
+
+
+[277
 
 ]
 
-[269
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[278]
+<ollama_gradio.png, id=2932, 1070.49937pt x 805.50937pt>
+File: ollama_gradio.png Graphic file (type png)
+<use ollama_gradio.png>
+Package pdftex.def Info: ollama_gradio.png  used on input line 15786.
+(pdftex.def)             Requested size: 469.75502pt x 353.4788pt.
+<gradio.png, id=2933, 1070.49937pt x 758.08218pt>
+File: gradio.png Graphic file (type png)
+<use gradio.png>
+Package pdftex.def Info: gradio.png  used on input line 15786.
+(pdftex.def)             Requested size: 469.75502pt x 332.66649pt.
+File: ollama_gradio.png Graphic file (type png)
+<use ollama_gradio.png>
+Package pdftex.def Info: ollama_gradio.png  used on input line 15786.
+(pdftex.def)             Requested size: 222.87845pt x 167.69931pt.
+File: gradio.png Graphic file (type png)
+<use gradio.png>
+Package pdftex.def Info: gradio.png  used on input line 15786.
+(pdftex.def)             Requested size: 222.87845pt x 157.82542pt.
+<endpoint_db.jpg, id=2934, 971.12813pt x 628.59843pt>
+File: endpoint_db.jpg Graphic file (type jpg)
+<use endpoint_db.jpg>
+Package pdftex.def Info: endpoint_db.jpg  used on input line 15797.
+(pdftex.def)             Requested size: 469.75185pt x 304.06418pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[279 <./ollama_gradio.png> <./gradio.png> <./endpoint_db.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[280
+
+]
+Chapter 11.
+
+
+[281]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[282
+
+]
+
+[283
 
 ] (./GenAI.ind)
 
@@ -5120,7 +5310,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[270] (./GenAI.aux)
+[284] (./GenAI.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
@@ -5133,13 +5323,13 @@ Package rerunfilecheck Info: File `GenAI.out' has not changed.
 (rerunfilecheck)             Checksum: 5538E2DA23AF13315F376FC7C08B3CC0;36373.
  ) 
 Here is how much of TeX's memory you used:
- 19042 strings out of 475544
- 326593 string characters out of 5777741
+ 19095 strings out of 475544
+ 327533 string characters out of 5777741
  2255905 words of memory out of 5000000
- 40537 multiletter control sequences out of 15000+600000
+ 40567 multiletter control sequences out of 15000+600000
  626297 words of font info for 103 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,22n,83p,6361b,834s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,22n,83p,8430b,834s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
@@ -5160,10 +5350,10 @@ t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxbtt.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on GenAI.pdf (276 pages, 12583402 bytes).
+Output written on GenAI.pdf (290 pages, 12802334 bytes).
 PDF statistics:
- 3167 PDF objects out of 3580 (max. 8388607)
- 2664 compressed objects within 27 object streams
- 737 named destinations out of 1000 (max. 500000)
- 2411 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3251 PDF objects out of 3580 (max. 8388607)
+ 2727 compressed objects within 28 object streams
+ 760 named destinations out of 1000 (max. 500000)
+ 2426 words of extra memory for PDF output out of 10000 (max. 10000000)
 

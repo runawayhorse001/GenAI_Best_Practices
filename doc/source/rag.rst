@@ -24,6 +24,10 @@ Retrieval-Augmented Generation
     - Adaptive RAG: |A-RAG|
     - Agentic RAG: |Agentic-RAG|
 
+    --
+
+    - Neo4j Cypher: |neo4j-cypher|
+    - Graph-RAG: |graph-RAG|
 
     
     
@@ -57,6 +61,11 @@ Retrieval-Augmented Generation
 .. |Agentic-RAG| image:: images/colab-badge.png 
     :target: https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq_vL-6OKLW8Hdr4?usp=drive_link 
 
+.. |graph-RAG| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1-KkhK-bdTLWdUreV-jNkjgoaFo573ZCO?usp=drive_link 
+
+.. |neo4j-cypher| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1lO08AeXD_SwijC-KlTOzsh1lks55NsG3?usp=drive_link 
 
 .. _fig_rag:
 .. figure:: images/RAG_diagram.png
@@ -3945,16 +3954,484 @@ for handling interconnected data.
     Neo4j Aura
 
 
+- connection
+
+  1. Neo4j sandbox (only available for 3 days)
+
+    We will use [the small Movie project](https://sandbox.neo4j.com/?usecase=movies) to demonstrate 
+    how to connect to Neo4j database and use ``Cypher Query`` to fetch the data.
+
+    .. _fig_neo4j_sb:
+    .. figure:: images/neo4j_sandbox.png
+        :align: center
+
+        Neo4j Sandbox
+
+    .. code:: python
+
+      url = "bolt://3.86.166.85:7687"
+      username= "neo4j"
+      password = "shields-puffs-tours"
+      graph = Neo4jGraph(url=url, username=username, password=password)
+
+      print(graph.schema)
+
+    Ouput:
+
+    .. code:: bash 
+
+      Node properties:
+      Person {name: STRING, born: INTEGER}
+      Movie {tagline: STRING, title: STRING, released: INTEGER}
+      Relationship properties:
+      ACTED_IN {roles: LIST}
+      REVIEWED {summary: STRING, rating: INTEGER}
+      The relationships:
+      (:Person)-[:ACTED_IN]->(:Movie)
+      (:Person)-[:DIRECTED]->(:Movie)
+      (:Person)-[:PRODUCED]->(:Movie)
+      (:Person)-[:WROTE]->(:Movie)
+      (:Person)-[:FOLLOWS]->(:Person)
+      (:Person)-[:REVIEWED]->(:Movie)
+
+  2. Neo4j Aura 
+
+    .. _fig_neo4j_aura_free:
+    .. figure:: images/neo4j_aura_free.png
+        :align: center
+
+        Neo4j Aura Instance
+
+
+  .. code:: python
+
+    os.environ["NEO4J_URI"] = userdata.get('NEO4J_URI')
+    os.environ["NEO4J_USERNAME"] = userdata.get('NEO4J_USERNAME')
+    os.environ["NEO4J_PASSWORD"] = userdata.get('NEO4J_PASSWORD')
+
+    # graph = Neo4jGraph(url = 'neo4j+s://~~',database='neo4j',
+    #                    username='neo4j',password='')
+
+    graph = Neo4jGraph()    
+
+
+- Ingest new data 
+
+  .. code:: python
+
+    graph.query(
+    """
+    MERGE (m:Movie {name:"Top Gun", runtime: 120})
+    WITH m
+    UNWIND ["Tom Cruise", "Val Kilmer", "Anthony Edwards", "Meg Ryan"] AS actor
+    MERGE (a:Actor {name:actor})
+    MERGE (a)-[:ACTED_IN]->(m)
+    """
+    )      
+
+- Cypher query fech data 
+
+  .. code:: python
+
+    graph.query(
+    """
+    MATCH (m:Movie)
+    MATCH (m)-[r:ACTED_IN|DIRECTED]-(t)
+    RETURN m, r, t LIMIT 2
+    """
+    )    
+
+  Ouput:
+
+  .. code:: bash
+
+    [{'m': {'tagline': 'Welcome to the Real World',
+      'title': 'The Matrix',
+      'released': 1999},
+      'r': ({'born': 1978, 'name': 'Emil Eifrem'},
+      'ACTED_IN',
+      {'tagline': 'Welcome to the Real World',
+        'title': 'The Matrix',
+        'released': 1999}),
+      't': {'born': 1978, 'name': 'Emil Eifrem'}},
+    {'m': {'tagline': 'Welcome to the Real World',
+      'title': 'The Matrix',
+      'released': 1999},
+      'r': ({'born': 1965, 'name': 'Lana Wachowski'},
+      'DIRECTED',
+      {'tagline': 'Welcome to the Real World',
+        'title': 'The Matrix',
+        'released': 1999}),
+      't': {'born': 1965, 'name': 'Lana Wachowski'}}]    
+
+  .. code:: python
+
+    graph.query(
+    """
+    MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+        WHERE m.title = 'Top Gun'
+        RETURN p.name
+    """)
+
+  Ouput:
+
+  .. code:: python
+
+    [{'p.name': 'Val Kilmer'},
+    {'p.name': 'Meg Ryan'},
+    {'p.name': 'Tom Skerritt'},
+    {'p.name': 'Kelly McGillis'},
+    {'p.name': 'Tom Cruise'},
+    {'p.name': 'Anthony Edwards'}]
+
+
+- Graph Cypher QAChain
+
+  .. code:: python
+
+    chain = GraphCypherQAChain.from_llm(
+        llm, graph=graph, verbose=True, allow_dangerous_requests=True
+    )
+
+    chain.invoke({"query": "Who played in The Matrix?"})
+
+  .. code:: python
+
+    > Entering new GraphCypherQAChain chain...
+    Generated Cypher:
+    MATCH (p:Person)-[:ACTED_IN]->(m:Movie) WHERE m.title = 'The Matrix' RETURN p.name
+    Full Context:
+    [{'p.name': 'Emil Eifrem'}, {'p.name': 'Hugo Weaving'}, {'p.name': 'Laurence Fishburne'}, {'p.name': 'Carrie-Anne Moss'}, {'p.name': 'Keanu Reeves'}]
+
+    > Finished chain.
+    {'query': 'Who played in The Matrix?',
+    'result': ' Emil Eifrem, Hugo Weaving, Laurene Fishburne, Carrie-Anne Moss, and Keanu Reeves played in The Matrix.'}
+
+
+
 Graph RAG
 ~~~~~~~~~
 
-Graph retriever
+- Neo4j Environment Setup
 
-.. _fig_neo4j_neighbor:
-.. figure:: images/graph_neighbor.png
-    :align: center
+  .. code:: python
 
-    Graph retriever
+    from google.colab import userdata
+    os.environ["NEO4J_URI"] = userdata.get('NEO4J_URI')
+    os.environ["NEO4J_USERNAME"] = userdata.get('NEO4J_USERNAME')
+    os.environ["NEO4J_PASSWORD"] = userdata.get('NEO4J_PASSWORD')
+
+
+    #graph = Neo4jGraph(url="neo4j+s://", username="neo4j", password="password")
+    graph = Neo4jGraph()  
+
+
+- Data ingestion
+
+  .. code:: python
+
+    # Read the wikipedia article
+    raw_documents = WikipediaLoader(query="Elizabeth I").load()
+    # Define chunking strategy
+    text_splitter = TokenTextSplitter(chunk_size=512, chunk_overlap=24)
+
+    documents = text_splitter.split_documents(raw_documents)
+    documents
+
+  Ouput:
+
+  .. code:: python
+
+    [Document(metadata={'title': 'Elizabeth I', 'summary': 'Elizabeth I (7 September 1533 – 24 March 1603) was Queen of England and Ireland from 17 November 1558 until her death in 1603. She was the last monarch of the House of Tudor.\nElizabeth was the only surviving child of Henry VIII and his second wife, Anne Boleyn. When Elizabeth was two years old, her parents\' marriage was annulled, her mother was executed, and Elizabeth was declared illegitimate. Henry restored her to the line of succession when she was 10, via the Third Succession Act 1543. After Henry\'s death in 1547, Elizabeth\'s younger half-brother Edward VI ruled until his own death in 1553, bequeathing the crown to a Protestant cousin, Lady Jane Grey, and ignoring the claims of his two half-sisters, the Catholic Mary and the younger Elizabeth, in spite of statutes to the contrary. Edward\'s will was set aside within weeks of his death and Mary became queen, deposing and executing Jane. During Mary\'s reign, Elizabeth was imprisoned for nearly a year on suspicion of supporting Protestant rebels.\nUpon her half-sister\'s death in 1558, Elizabeth succeeded to the throne and set out to rule by good counsel. She depended heavily on a group of trusted advisers led by William Cecil, whom she created Baron Burghley. One of her first actions as queen was the establishment of an English Protestant church, of which she became the supreme governor. This era, later named the Elizabethan Religious Settlement, would evolve into the Church of England. It was expected that Elizabeth would marry and produce an heir; however, despite numerous courtships, she never did. Because of this she is sometimes referred to as the "Virgin Queen". She was eventually succeeded by her first cousin twice removed, James VI of Scotland, the son of Mary, Queen of Scots.\nIn government, Elizabeth was more moderate than her father and siblings had been. One of her mottoes was video et taceo ("I see and keep silent"). In religion, she was relatively tolerant and avoided systematic persecution. After the pope declared her illegitimate in 1570, which in theory released English Catholics from allegiance to her, several conspiracies threatened her life, all of which were defeated with the help of her ministers\' secret service, run by Sir Francis Walsingham. Elizabeth was cautious in foreign affairs, manoeuvring between the major powers of France and Spain. She half-heartedly supported a number of ineffective, poorly resourced military campaigns in the Netherlands, France, and Ireland. By the mid-1580s, England could no longer avoid war with Spain.\nAs she grew older, Elizabeth became celebrated for her virginity. A cult of personality grew around her which was celebrated in the portraits, pageants, and literature of the day. Elizabeth\'s reign became known as the Elizabethan era. The period is famous for the flourishing of English drama, led by playwrights such as William Shakespeare and Christopher Marlowe, the prowess of English maritime adventurers, such as Francis Drake and Walter Raleigh, and for the defeat of the Spanish Armada. Some historians depict Elizabeth as a short-tempered, sometimes indecisive ruler, who enjoyed more than her fair share of luck. Towards the end of her reign, a series of economic and military problems weakened her popularity. Elizabeth is acknowledged as a charismatic performer ("Gloriana") and a dogged survivor ("Good Queen Bess") in an era when government was ramshackle and limited, and when monarchs in neighbouring countries faced internal problems that jeopardised their thrones. After the short, disastrous reigns of her half-siblings, her 44 years on the throne provided welcome stability for the kingdom and helped to forge a sense of national identity.', 'source': 'https://en.wikipedia.org/wiki/Elizabeth_I'}, page_content='Elizabeth I (7 September 1533 – 24 March 1603) was Queen of England and Ireland from 17 November 1558 until her death in 1603. She was the last monarch of the House of Tudor.\nElizabeth was the only surviving child of Henry VIII and his second wife, Anne Boleyn. When Elizabeth was two years old, her parents\' marriage was annulled, her mother was executed, and Elizabeth was declared illegitimate. Henry restored her to the line of succession when she was 10, via the Third Succession Act 1543. After Henry\'s death in 1547, Elizabeth\'s younger half-brother Edward VI ruled until his own death in 1553, bequeathing the crown to a Protestant cousin, Lady Jane Grey, and ignoring the claims of his two half-sisters, the Catholic Mary and the younger Elizabeth, in spite of statutes to the contrary. Edward\'s will was set aside within weeks of his death and Mary became queen, deposing and executing Jane. During Mary\'s reign, Elizabeth was imprisoned for nearly a year on suspicion of supporting Protestant rebels.\nUpon her half-sister\'s death in 1558, Elizabeth succeeded to the throne and set out to rule by good counsel. She depended heavily on a group of trusted advisers led by William Cecil, whom she created Baron Burghley. One of her first actions as queen was the establishment of an English Protestant church, of which she became the supreme governor. This era, later named the Elizabethan Religious Settlement, would evolve into the Church of England. It was expected that Elizabeth would marry and produce an heir; however, despite numerous courtships, she never did. Because of this she is sometimes referred to as the "Virgin Queen". She was eventually succeeded by her first cousin twice removed, James VI of Scotland, the son of Mary, Queen of Scots.\nIn government, Elizabeth was more moderate than her father and siblings had been. One of her mottoes was video et taceo ("I see and keep silent"). In religion, she was relatively tolerant and avoided systematic persecution. After the pope declared her illegitimate in 1570, which in theory released English Catholics from allegiance to her, several conspiracies threatened her life, all of which were defeated with the help of her ministers\' secret service, run by Sir Francis Walsingham. Elizabeth was cautious in foreign affairs, manoeuvring between the major powers of France and Spain. She half-heartedly supported a number of ineffective, poorly resourced military campaigns in the Netherlands, France,'),]
+
+  .. code:: python
+
+    from langchain_ollama import OllamaEmbeddings
+    from langchain_ollama import ChatOllama
+
+    # embedding model
+    embedding = OllamaEmbeddings(model="bge-m3")
+
+    # LLM
+    llm = ChatOllama(model="mistral",temperature=0,)  
+
+
+    # 
+    llm_transformer = LLMGraphTransformer(llm=llm)
+
+    graph_documents = llm_transformer.convert_to_graph_documents(documents)
+    graph.add_graph_documents(
+        graph_documents,
+        baseEntityLabel=True,
+        include_source=True
+    )
+
+
+- Unstructured data retriever
+
+  You can use the Neo4jVector.from_existing_graph method to add both keyword and vector retrieval to documents. 
+  This method configures keyword and vector search indexes for a hybrid search approach, targeting nodes 
+  labeled Document. Additionally, it calculates text embedding values if they are missing.
+
+  .. code:: python
+
+    vector_index = Neo4jVector.from_existing_graph(
+        embedding,
+        search_type="hybrid",
+        node_label="Document",
+        text_node_properties=["text"],
+        embedding_node_property="embedding"
+    )
 
 
 
+- Graph retriever
+
+  The graph retriever starts by identifying relevant entities in the input. For simplicity, 
+  we instruct the LLM to identify people, organizations, and locations. To achieve this, 
+  we will use LCEL with the newly added with_structured_output method to achieve this.
+
+
+  .. _fig_neo4j_neighbor:
+  .. figure:: images/graph_neighbor.png
+      :align: center
+
+      Graph retriever  
+
+  .. code:: python
+
+    # Retriever
+    from langchain.chains import LLMChain
+    from langchain.output_parsers import PydanticOutputParser
+
+    from pydantic import BaseModel, Field
+    from langchain.output_parsers import PydanticOutputParser
+
+    # Data model
+    class Entity(BaseModel):
+        """An entity with a name and type."""
+        Name: str = Field(..., description="The name of the entity.")
+        Type: str = Field(..., description="The type of the entity.")
+
+    class Entities(BaseModel):
+        """A list of entities."""
+        Entities: List[Entity] = Field(...,
+                        description="All the person, organization, \
+                                  or business entitiesentities found in the text.")
+
+
+    parser = PydanticOutputParser(pydantic_object=Entities)
+
+    prompt = PromptTemplate(
+        template="""You are extracting organization and person entities \n
+                    from the text \n
+                    Use the given format to extract information from the
+                    following \n
+                    input: {question}\n
+                    Return your answer in JSON format with the keys "Question", "Entities" and "Answer".\n
+                    The value of "Entities" should be a list of entities where each entity is a dictionary with keys "Name" and "Type".\n
+                    The value of "Answer" should be a dictionary with keys "Text" and "Entities".\n
+                    The value of "Text" should be a string containing the answer to the question and the value of "Entities" should be a list of entities where each entity is a dictionary with keys "Name" and "Type".\n
+                """,
+        input_variables=["question"],
+        partial_variables={"format_instructions": parser.get_format_instructions()}
+    )
+
+    entity_chain = prompt | llm | parser
+
+    def generate_full_text_query(input: str) -> str:
+        """
+        Generate a full-text search query for a given input string.
+
+        This function constructs a query string suitable for a full-text search.
+        It processes the input string by splitting it into words and appending a
+        similarity threshold (~2 changed characters) to each word, then combines
+        them using the AND operator. Useful for mapping entities from user questions
+        to database values, and allows for some misspelings.
+        """
+        full_text_query = ""
+        words = [el for el in remove_lucene_chars(input).split() if el]
+        # Check if words is empty before trying to access element.
+        if words:
+            for word in words[:-1]:
+                full_text_query += f" {word}~2 AND"
+            full_text_query += f" {words[-1]}~2"
+        # Return empty query if no words
+        return full_text_query.strip()
+
+    def structured_retriever(question: str) -> str:
+        """
+        Collects the neighborhood of entities mentioned
+        in the question
+        """
+        result = ""
+        entities = entity_chain.invoke({"question": question}).Entities[0]
+        # Pass the entity name as a single string, not a split list
+        # print(entities.Name, generate_full_text_query(entities.Name))
+        for entity in entities.Name.split(' '):
+            # Check if the entity is valid before generating a query
+            if entity:  # Check if entity is not empty or whitespace
+                response = graph.query(
+                    """CALL db.index.fulltext.queryNodes('entity', $query, {limit:5})
+                    YIELD node,score
+                    CALL {
+                      WITH node
+                      MATCH (node)-[r:!MENTIONS]->(neighbor)
+                      RETURN node.id + ' - ' + type(r) + ' -> ' + neighbor.id AS output
+                      UNION ALL
+                      WITH node
+                      MATCH (node)<-[r:!MENTIONS]-(neighbor)
+                      RETURN neighbor.id + ' - ' + type(r) + ' -> ' +  node.id AS output
+                    }
+                    RETURN output LIMIT 50
+                    """,
+                    {"query": generate_full_text_query(entity)},
+                )
+                # Check if the response contains any results before processing
+                if response:
+                    result += "\n".join([el['output'] for el in response])
+                # If no results, you might want to handle it with a message or skip it
+                else:
+                    print(f"Warning: No results found for entity: {entity}")
+            # If the entity is invalid, you can handle it with a message or skip it
+            else:
+                print(f"Warning: Skipping invalid entity: {entity}")
+        return result
+
+  .. code:: python
+
+    print(structured_retriever("Who is Elizabeth I?"))
+
+  Ouput:
+
+  .. code:: python
+
+    Elizabeth - RULED -> Russia
+    Elizabeth - BORN_IN -> Greenwich Palace
+    Elizabeth - BORN_IN -> Kolomenskoye
+    Elizabeth - RULES -> England
+    Elizabeth - IS_A -> 1998 British biographical historical drama film
+    Elizabeth - WAS_MARRIED_TO -> William Carey
+    in-waiting - IS_WAITING_FOR -> Elizabeth
+    Elizabeth Stuart - BORN_IN -> Dunfermline Palace
+    Elizabeth Stuart - TRAVELLED -> Scotland
+    Elizabeth I - RULED -> England and Ireland
+    Elizabeth I - CORONATED -> Westminster Abbey
+    Elizabeth I - IS_A -> two-part 2005 British-American historical drama television serial
+    Becoming Elizabeth - REPEATED -> 15 July 2023Isabella I - BORN_IN -> Madrigal de las Altas Torres
+    Elizabeth I - RULED -> England and Ireland
+    Elizabeth I - CORONATED -> Westminster Abbey
+    Elizabeth I - IS_A -> two-part 2005 British-American historical drama television serial
+    Rip Hunter ... Time Master - PUBLISHES -> Elizabeth I of England
+    James VI and I - RULES -> Scotland
+
+- Final retriever
+
+  .. code:: python
+
+    def retriever(question: str):
+        print(f"Search query: {question}")
+        structured_data = structured_retriever(question)
+        unstructured_data = [el.page_content for el in vector_index.similarity_search(question)]
+        final_data = f"""Structured data:{structured_data}
+                        Unstructured data:
+                        {"#Document ". join(unstructured_data)}
+                      """
+        return final_data
+
+- Defining the RAG chain
+
+  .. code:: python
+
+    # Condense a chat history and follow-up question into a standalone question
+    _template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question,
+    in its original language.
+    Chat History:
+    {chat_history}
+    Follow Up Input: {question}
+    Standalone question:"""  # noqa: E501
+    CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template(_template)
+
+    def _format_chat_history(chat_history: List[Tuple[str, str]]) -> List:
+        buffer = []
+        for human, ai in chat_history:
+            buffer.append(HumanMessage(content=human))
+            buffer.append(AIMessage(content=ai))
+        return buffer
+
+    _search_query = RunnableBranch(
+        # If input includes chat_history, we condense it with the follow-up question
+        (
+            RunnableLambda(lambda x: bool(x.get("chat_history"))).with_config(
+                run_name="HasChatHistoryCheck"
+            ),  # Condense follow-up question and chat into a standalone_question
+            RunnablePassthrough.assign(
+                chat_history=lambda x: _format_chat_history(x["chat_history"])
+            )
+            | CONDENSE_QUESTION_PROMPT
+            | llm
+            | StrOutputParser(),
+        ),
+        # Else, we have no chat history, so just pass through the question
+        RunnableLambda(lambda x : x["question"]),
+    )
+
+    template = """Answer the question based only on the following context:
+    {context}
+
+    Question: {question}
+    Use natural language and be concise.
+    Answer:"""
+    prompt = ChatPromptTemplate.from_template(template)
+
+    chain = (
+        RunnableParallel(
+            {
+                "context": _search_query | retriever,
+                "question": RunnablePassthrough(),
+            }
+        )
+        | prompt
+        | llm
+        | StrOutputParser()
+    )  
+
+-  Test 
+
+  .. code:: python
+
+    chain.invoke({"question": "Which house did Elizabeth I belong to?"})
+
+  Ouput:
+
+  .. code:: bash
+
+    Search query: Which house did Elizabeth I belong to?
+    Elizabeth I belonged to the Tudor dynasty.
+
+  .. code:: python
+
+    chain.invoke({"question": "When was Elizabeth I born?"})
+
+  Ouput:
+
+  .. code:: python
+
+    Elizabeth I was born on September 7, 1533.
+
+Test a follow up question:
+
+  .. code:: python
+
+    chain.invoke(
+        {
+            "question": "When was she born?",
+            "chat_history": [("Which house did Elizabeth I belong to?", "House Of Tudor")],
+        }
+    )  
+
+  Ouput:
+
+  .. code:: python
+
+    Elizabeth I of England was born on September 7, 1533.

@@ -253,6 +253,11 @@
 <li><p>Adaptive RAG: <a class="reference external" href="https://colab.research.google.com/drive/1tzihPk9Ln96RYcwn6WaHHQjlMdFvCviS?usp=drive_link"><img alt="A-RAG" src="_images/colab-badge.png" /></a></p></li>
 <li><p>Agentic RAG: <a class="reference external" href="https://colab.research.google.com/drive/1-eZ61ux0QSCNx2jUDq_vL-6OKLW8Hdr4?usp=drive_link"><img alt="Agentic-RAG" src="_images/colab-badge.png" /></a></p></li>
 </ul>
+<p>–</p>
+<ul class="simple">
+<li><p>Neo4j Cypher: <a class="reference external" href="https://colab.research.google.com/drive/1lO08AeXD_SwijC-KlTOzsh1lks55NsG3?usp=drive_link"><img alt="neo4j-cypher" src="_images/colab-badge.png" /></a></p></li>
+<li><p>Graph-RAG: <a class="reference external" href="https://colab.research.google.com/drive/1-KkhK-bdTLWdUreV-jNkjgoaFo573ZCO?usp=drive_link"><img alt="graph-RAG" src="_images/colab-badge.png" /></a></p></li>
+</ul>
 </div>
 <figure class="align-center" id="id54">
 <span id="fig-rag"></span><img alt="_images/RAG_diagram.png" src="_images/RAG_diagram.png" />
@@ -4116,16 +4121,453 @@ for handling interconnected data.</p>
 <p><span class="caption-text">Neo4j Aura</span><a class="headerlink" href="#id68" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<ul>
+<li><p>connection</p>
+<ol class="arabic simple">
+<li><p>Neo4j sandbox (only available for 3 days)</p></li>
+</ol>
+<blockquote>
+<div><p>We will use [the small Movie project](<a class="reference external" href="https://sandbox.neo4j.com/?usecase=movies">https://sandbox.neo4j.com/?usecase=movies</a>) to demonstrate
+how to connect to Neo4j database and use <code class="docutils literal notranslate"><span class="pre">Cypher</span> <span class="pre">Query</span></code> to fetch the data.</p>
+<figure class="align-center" id="id69">
+<span id="fig-neo4j-sb"></span><img alt="_images/neo4j_sandbox.png" src="_images/neo4j_sandbox.png" />
+<figcaption>
+<p><span class="caption-text">Neo4j Sandbox</span><a class="headerlink" href="#id69" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;bolt://3.86.166.85:7687&quot;</span>
+<span class="n">username</span><span class="o">=</span> <span class="s2">&quot;neo4j&quot;</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;shields-puffs-tours&quot;</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Neo4jGraph</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Node<span class="w"> </span>properties:
+Person<span class="w"> </span><span class="o">{</span>name:<span class="w"> </span>STRING,<span class="w"> </span>born:<span class="w"> </span>INTEGER<span class="o">}</span>
+Movie<span class="w"> </span><span class="o">{</span>tagline:<span class="w"> </span>STRING,<span class="w"> </span>title:<span class="w"> </span>STRING,<span class="w"> </span>released:<span class="w"> </span>INTEGER<span class="o">}</span>
+Relationship<span class="w"> </span>properties:
+ACTED_IN<span class="w"> </span><span class="o">{</span>roles:<span class="w"> </span>LIST<span class="o">}</span>
+REVIEWED<span class="w"> </span><span class="o">{</span>summary:<span class="w"> </span>STRING,<span class="w"> </span>rating:<span class="w"> </span>INTEGER<span class="o">}</span>
+The<span class="w"> </span>relationships:
+<span class="o">(</span>:Person<span class="o">)</span>-<span class="o">[</span>:ACTED_IN<span class="o">]</span>-&gt;<span class="o">(</span>:Movie<span class="o">)</span>
+<span class="o">(</span>:Person<span class="o">)</span>-<span class="o">[</span>:DIRECTED<span class="o">]</span>-&gt;<span class="o">(</span>:Movie<span class="o">)</span>
+<span class="o">(</span>:Person<span class="o">)</span>-<span class="o">[</span>:PRODUCED<span class="o">]</span>-&gt;<span class="o">(</span>:Movie<span class="o">)</span>
+<span class="o">(</span>:Person<span class="o">)</span>-<span class="o">[</span>:WROTE<span class="o">]</span>-&gt;<span class="o">(</span>:Movie<span class="o">)</span>
+<span class="o">(</span>:Person<span class="o">)</span>-<span class="o">[</span>:FOLLOWS<span class="o">]</span>-&gt;<span class="o">(</span>:Person<span class="o">)</span>
+<span class="o">(</span>:Person<span class="o">)</span>-<span class="o">[</span>:REVIEWED<span class="o">]</span>-&gt;<span class="o">(</span>:Movie<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Neo4j Aura</p></li>
+</ol>
+<blockquote>
+<div><figure class="align-center" id="id70">
+<span id="fig-neo4j-aura-free"></span><img alt="_images/neo4j_aura_free.png" src="_images/neo4j_aura_free.png" />
+<figcaption>
+<p><span class="caption-text">Neo4j Aura</span><a class="headerlink" href="#id70" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NEO4J_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;NEO4J_URI&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NEO4J_USERNAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;NEO4J_USERNAME&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NEO4J_PASSWORD&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;NEO4J_PASSWORD&#39;</span><span class="p">)</span>
+
+<span class="c1"># graph = Neo4jGraph(url = &#39;neo4j+s://~~&#39;,database=&#39;neo4j&#39;,</span>
+<span class="c1">#                    username=&#39;neo4j&#39;,password=&#39;&#39;)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Neo4jGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Ingest new data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">MERGE (m:Movie {name:&quot;Top Gun&quot;, runtime: 120})</span>
+<span class="sd">WITH m</span>
+<span class="sd">UNWIND [&quot;Tom Cruise&quot;, &quot;Val Kilmer&quot;, &quot;Anthony Edwards&quot;, &quot;Meg Ryan&quot;] AS actor</span>
+<span class="sd">MERGE (a:Actor {name:actor})</span>
+<span class="sd">MERGE (a)-[:ACTED_IN]-&gt;(m)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cypher query fech data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">MATCH (m:Movie)</span>
+<span class="sd">MATCH (m)-[r:ACTED_IN|DIRECTED]-(t)</span>
+<span class="sd">RETURN m, r, t LIMIT 2</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[{</span><span class="s1">&#39;m&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;tagline&#39;</span>:<span class="w"> </span><span class="s1">&#39;Welcome to the Real World&#39;</span>,
+<span class="w">  </span><span class="s1">&#39;title&#39;</span>:<span class="w"> </span><span class="s1">&#39;The Matrix&#39;</span>,
+<span class="w">  </span><span class="s1">&#39;released&#39;</span>:<span class="w"> </span><span class="m">1999</span><span class="o">}</span>,
+<span class="w">  </span><span class="s1">&#39;r&#39;</span>:<span class="w"> </span><span class="o">({</span><span class="s1">&#39;born&#39;</span>:<span class="w"> </span><span class="m">1978</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Emil Eifrem&#39;</span><span class="o">}</span>,
+<span class="w">  </span><span class="s1">&#39;ACTED_IN&#39;</span>,
+<span class="w">  </span><span class="o">{</span><span class="s1">&#39;tagline&#39;</span>:<span class="w"> </span><span class="s1">&#39;Welcome to the Real World&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;title&#39;</span>:<span class="w"> </span><span class="s1">&#39;The Matrix&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;released&#39;</span>:<span class="w"> </span><span class="m">1999</span><span class="o">})</span>,
+<span class="w">  </span><span class="s1">&#39;t&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;born&#39;</span>:<span class="w"> </span><span class="m">1978</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Emil Eifrem&#39;</span><span class="o">}}</span>,
+<span class="o">{</span><span class="s1">&#39;m&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;tagline&#39;</span>:<span class="w"> </span><span class="s1">&#39;Welcome to the Real World&#39;</span>,
+<span class="w">  </span><span class="s1">&#39;title&#39;</span>:<span class="w"> </span><span class="s1">&#39;The Matrix&#39;</span>,
+<span class="w">  </span><span class="s1">&#39;released&#39;</span>:<span class="w"> </span><span class="m">1999</span><span class="o">}</span>,
+<span class="w">  </span><span class="s1">&#39;r&#39;</span>:<span class="w"> </span><span class="o">({</span><span class="s1">&#39;born&#39;</span>:<span class="w"> </span><span class="m">1965</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Lana Wachowski&#39;</span><span class="o">}</span>,
+<span class="w">  </span><span class="s1">&#39;DIRECTED&#39;</span>,
+<span class="w">  </span><span class="o">{</span><span class="s1">&#39;tagline&#39;</span>:<span class="w"> </span><span class="s1">&#39;Welcome to the Real World&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;title&#39;</span>:<span class="w"> </span><span class="s1">&#39;The Matrix&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;released&#39;</span>:<span class="w"> </span><span class="m">1999</span><span class="o">})</span>,
+<span class="w">  </span><span class="s1">&#39;t&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;born&#39;</span>:<span class="w"> </span><span class="m">1965</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Lana Wachowski&#39;</span><span class="o">}}]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">MATCH (p:Person)-[:ACTED_IN]-&gt;(m:Movie)</span>
+<span class="sd">    WHERE m.title = &#39;Top Gun&#39;</span>
+<span class="sd">    RETURN p.name</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Val Kilmer&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Meg Ryan&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Tom Skerritt&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Kelly McGillis&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Tom Cruise&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Anthony Edwards&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Graph Cypher QAChain</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">GraphCypherQAChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span>
+    <span class="n">llm</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_dangerous_requests</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;Who played in The Matrix?&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">Entering</span> <span class="n">new</span> <span class="n">GraphCypherQAChain</span> <span class="n">chain</span><span class="o">...</span>
+<span class="n">Generated</span> <span class="n">Cypher</span><span class="p">:</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span> <span class="n">WHERE</span> <span class="n">m</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;The Matrix&#39;</span> <span class="n">RETURN</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span>
+<span class="n">Full</span> <span class="n">Context</span><span class="p">:</span>
+<span class="p">[{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Emil Eifrem&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Hugo Weaving&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Laurence Fishburne&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carrie-Anne Moss&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;p.name&#39;</span><span class="p">:</span> <span class="s1">&#39;Keanu Reeves&#39;</span><span class="p">}]</span>
+
+<span class="o">&gt;</span> <span class="n">Finished</span> <span class="n">chain</span><span class="o">.</span>
+<span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;Who played in The Matrix?&#39;</span><span class="p">,</span>
+<span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="s1">&#39; Emil Eifrem, Hugo Weaving, Laurene Fishburne, Carrie-Anne Moss, and Keanu Reeves played in The Matrix.&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </section>
 <section id="id53">
 <h4><span class="section-number">5.7.2.3. </span>Graph RAG<a class="headerlink" href="#id53" title="Link to this heading"></a></h4>
-<p>Graph retriever</p>
-<figure class="align-center" id="id69">
+<ul>
+<li><p>Neo4j Environment Setup</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">userdata</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NEO4J_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;NEO4J_URI&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NEO4J_USERNAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;NEO4J_USERNAME&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NEO4J_PASSWORD&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;NEO4J_PASSWORD&#39;</span><span class="p">)</span>
+
+
+<span class="c1">#graph = Neo4jGraph(url=&quot;neo4j+s://&quot;, username=&quot;neo4j&quot;, password=&quot;password&quot;)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Neo4jGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Data ingestion</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the wikipedia article</span>
+<span class="n">raw_documents</span> <span class="o">=</span> <span class="n">WikipediaLoader</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;Elizabeth I&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="c1"># Define chunking strategy</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">TokenTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">raw_documents</span><span class="p">)</span>
+<span class="n">documents</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Elizabeth I&#39;</span><span class="p">,</span> <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="s1">&#39;Elizabeth I (7 September 1533 – 24 March 1603) was Queen of England and Ireland from 17 November 1558 until her death in 1603. She was the last monarch of the House of Tudor.</span><span class="se">\n</span><span class="s1">Elizabeth was the only surviving child of Henry VIII and his second wife, Anne Boleyn. When Elizabeth was two years old, her parents</span><span class="se">\&#39;</span><span class="s1"> marriage was annulled, her mother was executed, and Elizabeth was declared illegitimate. Henry restored her to the line of succession when she was 10, via the Third Succession Act 1543. After Henry</span><span class="se">\&#39;</span><span class="s1">s death in 1547, Elizabeth</span><span class="se">\&#39;</span><span class="s1">s younger half-brother Edward VI ruled until his own death in 1553, bequeathing the crown to a Protestant cousin, Lady Jane Grey, and ignoring the claims of his two half-sisters, the Catholic Mary and the younger Elizabeth, in spite of statutes to the contrary. Edward</span><span class="se">\&#39;</span><span class="s1">s will was set aside within weeks of his death and Mary became queen, deposing and executing Jane. During Mary</span><span class="se">\&#39;</span><span class="s1">s reign, Elizabeth was imprisoned for nearly a year on suspicion of supporting Protestant rebels.</span><span class="se">\n</span><span class="s1">Upon her half-sister</span><span class="se">\&#39;</span><span class="s1">s death in 1558, Elizabeth succeeded to the throne and set out to rule by good counsel. She depended heavily on a group of trusted advisers led by William Cecil, whom she created Baron Burghley. One of her first actions as queen was the establishment of an English Protestant church, of which she became the supreme governor. This era, later named the Elizabethan Religious Settlement, would evolve into the Church of England. It was expected that Elizabeth would marry and produce an heir; however, despite numerous courtships, she never did. Because of this she is sometimes referred to as the &quot;Virgin Queen&quot;. She was eventually succeeded by her first cousin twice removed, James VI of Scotland, the son of Mary, Queen of Scots.</span><span class="se">\n</span><span class="s1">In government, Elizabeth was more moderate than her father and siblings had been. One of her mottoes was video et taceo (&quot;I see and keep silent&quot;). In religion, she was relatively tolerant and avoided systematic persecution. After the pope declared her illegitimate in 1570, which in theory released English Catholics from allegiance to her, several conspiracies threatened her life, all of which were defeated with the help of her ministers</span><span class="se">\&#39;</span><span class="s1"> secret service, run by Sir Francis Walsingham. Elizabeth was cautious in foreign affairs, manoeuvring between the major powers of France and Spain. She half-heartedly supported a number of ineffective, poorly resourced military campaigns in the Netherlands, France, and Ireland. By the mid-1580s, England could no longer avoid war with Spain.</span><span class="se">\n</span><span class="s1">As she grew older, Elizabeth became celebrated for her virginity. A cult of personality grew around her which was celebrated in the portraits, pageants, and literature of the day. Elizabeth</span><span class="se">\&#39;</span><span class="s1">s reign became known as the Elizabethan era. The period is famous for the flourishing of English drama, led by playwrights such as William Shakespeare and Christopher Marlowe, the prowess of English maritime adventurers, such as Francis Drake and Walter Raleigh, and for the defeat of the Spanish Armada. Some historians depict Elizabeth as a short-tempered, sometimes indecisive ruler, who enjoyed more than her fair share of luck. Towards the end of her reign, a series of economic and military problems weakened her popularity. Elizabeth is acknowledged as a charismatic performer (&quot;Gloriana&quot;) and a dogged survivor (&quot;Good Queen Bess&quot;) in an era when government was ramshackle and limited, and when monarchs in neighbouring countries faced internal problems that jeopardised their thrones. After the short, disastrous reigns of her half-siblings, her 44 years on the throne provided welcome stability for the kingdom and helped to forge a sense of national identity.&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;https://en.wikipedia.org/wiki/Elizabeth_I&#39;</span><span class="p">},</span> <span class="n">page_content</span><span class="o">=</span><span class="s1">&#39;Elizabeth I (7 September 1533 – 24 March 1603) was Queen of England and Ireland from 17 November 1558 until her death in 1603. She was the last monarch of the House of Tudor.</span><span class="se">\n</span><span class="s1">Elizabeth was the only surviving child of Henry VIII and his second wife, Anne Boleyn. When Elizabeth was two years old, her parents</span><span class="se">\&#39;</span><span class="s1"> marriage was annulled, her mother was executed, and Elizabeth was declared illegitimate. Henry restored her to the line of succession when she was 10, via the Third Succession Act 1543. After Henry</span><span class="se">\&#39;</span><span class="s1">s death in 1547, Elizabeth</span><span class="se">\&#39;</span><span class="s1">s younger half-brother Edward VI ruled until his own death in 1553, bequeathing the crown to a Protestant cousin, Lady Jane Grey, and ignoring the claims of his two half-sisters, the Catholic Mary and the younger Elizabeth, in spite of statutes to the contrary. Edward</span><span class="se">\&#39;</span><span class="s1">s will was set aside within weeks of his death and Mary became queen, deposing and executing Jane. During Mary</span><span class="se">\&#39;</span><span class="s1">s reign, Elizabeth was imprisoned for nearly a year on suspicion of supporting Protestant rebels.</span><span class="se">\n</span><span class="s1">Upon her half-sister</span><span class="se">\&#39;</span><span class="s1">s death in 1558, Elizabeth succeeded to the throne and set out to rule by good counsel. She depended heavily on a group of trusted advisers led by William Cecil, whom she created Baron Burghley. One of her first actions as queen was the establishment of an English Protestant church, of which she became the supreme governor. This era, later named the Elizabethan Religious Settlement, would evolve into the Church of England. It was expected that Elizabeth would marry and produce an heir; however, despite numerous courtships, she never did. Because of this she is sometimes referred to as the &quot;Virgin Queen&quot;. She was eventually succeeded by her first cousin twice removed, James VI of Scotland, the son of Mary, Queen of Scots.</span><span class="se">\n</span><span class="s1">In government, Elizabeth was more moderate than her father and siblings had been. One of her mottoes was video et taceo (&quot;I see and keep silent&quot;). In religion, she was relatively tolerant and avoided systematic persecution. After the pope declared her illegitimate in 1570, which in theory released English Catholics from allegiance to her, several conspiracies threatened her life, all of which were defeated with the help of her ministers</span><span class="se">\&#39;</span><span class="s1"> secret service, run by Sir Francis Walsingham. Elizabeth was cautious in foreign affairs, manoeuvring between the major powers of France and Spain. She half-heartedly supported a number of ineffective, poorly resourced military campaigns in the Netherlands, France,&#39;</span><span class="p">),]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">OllamaEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain_ollama</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+
+<span class="c1"># embedding model</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">OllamaEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;bge-m3&quot;</span><span class="p">)</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;mistral&quot;</span><span class="p">,</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,)</span>
+
+
+<span class="c1">#</span>
+<span class="n">llm_transformer</span> <span class="o">=</span> <span class="n">LLMGraphTransformer</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+
+<span class="n">graph_documents</span> <span class="o">=</span> <span class="n">llm_transformer</span><span class="o">.</span><span class="n">convert_to_graph_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add_graph_documents</span><span class="p">(</span>
+    <span class="n">graph_documents</span><span class="p">,</span>
+    <span class="n">baseEntityLabel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_source</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Unstructured data retriever</p>
+<p>You can use the Neo4jVector.from_existing_graph method to add both keyword and vector retrieval to documents.
+This method configures keyword and vector search indexes for a hybrid search approach, targeting nodes
+labeled Document. Additionally, it calculates text embedding values if they are missing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vector_index</span> <span class="o">=</span> <span class="n">Neo4jVector</span><span class="o">.</span><span class="n">from_existing_graph</span><span class="p">(</span>
+    <span class="n">embedding</span><span class="p">,</span>
+    <span class="n">search_type</span><span class="o">=</span><span class="s2">&quot;hybrid&quot;</span><span class="p">,</span>
+    <span class="n">node_label</span><span class="o">=</span><span class="s2">&quot;Document&quot;</span><span class="p">,</span>
+    <span class="n">text_node_properties</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+    <span class="n">embedding_node_property</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Graph retriever</p>
+<p>The graph retriever starts by identifying relevant entities in the input. For simplicity,
+we instruct the LLM to identify people, organizations, and locations. To achieve this,
+we will use LCEL with the newly added with_structured_output method to achieve this.</p>
+<figure class="align-center" id="id71">
 <span id="fig-neo4j-neighbor"></span><img alt="_images/graph_neighbor.png" src="_images/graph_neighbor.png" />
 <figcaption>
-<p><span class="caption-text">Graph retriever</span><a class="headerlink" href="#id69" title="Link to this image"></a></p>
+<p><span class="caption-text">Graph retriever</span><a class="headerlink" href="#id71" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retriever</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
+
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
+
+<span class="c1"># Data model</span>
+<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An entity with a name and type.&quot;&quot;&quot;</span>
+    <span class="n">Name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The name of the entity.&quot;</span><span class="p">)</span>
+    <span class="n">Type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The type of the entity.&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Entities</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of entities.&quot;&quot;&quot;</span>
+    <span class="n">Entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+                    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;All the person, organization, </span><span class="se">\</span>
+<span class="s2">                              or business entitiesentities found in the text.&quot;</span><span class="p">)</span>
+
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">Entities</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;You are extracting organization and person entities </span><span class="se">\n</span>
+<span class="s2">                from the text </span><span class="se">\n</span>
+<span class="s2">                Use the given format to extract information from the</span>
+<span class="s2">                following </span><span class="se">\n</span>
+<span class="s2">                input: </span><span class="si">{question}</span><span class="se">\n</span>
+<span class="s2">                Return your answer in JSON format with the keys &quot;Question&quot;, &quot;Entities&quot; and &quot;Answer&quot;.</span><span class="se">\n</span>
+<span class="s2">                The value of &quot;Entities&quot; should be a list of entities where each entity is a dictionary with keys &quot;Name&quot; and &quot;Type&quot;.</span><span class="se">\n</span>
+<span class="s2">                The value of &quot;Answer&quot; should be a dictionary with keys &quot;Text&quot; and &quot;Entities&quot;.</span><span class="se">\n</span>
+<span class="s2">                The value of &quot;Text&quot; should be a string containing the answer to the question and the value of &quot;Entities&quot; should be a list of entities where each entity is a dictionary with keys &quot;Name&quot; and &quot;Type&quot;.</span><span class="se">\n</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">],</span>
+    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()}</span>
+<span class="p">)</span>
+
+<span class="n">entity_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">parser</span>
+
+<span class="k">def</span> <span class="nf">generate_full_text_query</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a full-text search query for a given input string.</span>
+
+<span class="sd">    This function constructs a query string suitable for a full-text search.</span>
+<span class="sd">    It processes the input string by splitting it into words and appending a</span>
+<span class="sd">    similarity threshold (~2 changed characters) to each word, then combines</span>
+<span class="sd">    them using the AND operator. Useful for mapping entities from user questions</span>
+<span class="sd">    to database values, and allows for some misspelings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">full_text_query</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">remove_lucene_chars</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">el</span><span class="p">]</span>
+    <span class="c1"># Check if words is empty before trying to access element.</span>
+    <span class="k">if</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">full_text_query</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">~2 AND&quot;</span>
+        <span class="n">full_text_query</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">words</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">~2&quot;</span>
+    <span class="c1"># Return empty query if no words</span>
+    <span class="k">return</span> <span class="n">full_text_query</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">structured_retriever</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Collects the neighborhood of entities mentioned</span>
+<span class="sd">    in the question</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="n">entity_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span><span class="o">.</span><span class="n">Entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Pass the entity name as a single string, not a split list</span>
+    <span class="c1"># print(entities.Name, generate_full_text_query(entities.Name))</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">Name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
+        <span class="c1"># Check if the entity is valid before generating a query</span>
+        <span class="k">if</span> <span class="n">entity</span><span class="p">:</span>  <span class="c1"># Check if entity is not empty or whitespace</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;CALL db.index.fulltext.queryNodes(&#39;entity&#39;, $query, {limit:5})</span>
+<span class="sd">                YIELD node,score</span>
+<span class="sd">                CALL {</span>
+<span class="sd">                  WITH node</span>
+<span class="sd">                  MATCH (node)-[r:!MENTIONS]-&gt;(neighbor)</span>
+<span class="sd">                  RETURN node.id + &#39; - &#39; + type(r) + &#39; -&gt; &#39; + neighbor.id AS output</span>
+<span class="sd">                  UNION ALL</span>
+<span class="sd">                  WITH node</span>
+<span class="sd">                  MATCH (node)&lt;-[r:!MENTIONS]-(neighbor)</span>
+<span class="sd">                  RETURN neighbor.id + &#39; - &#39; + type(r) + &#39; -&gt; &#39; +  node.id AS output</span>
+<span class="sd">                }</span>
+<span class="sd">                RETURN output LIMIT 50</span>
+<span class="sd">                &quot;&quot;&quot;</span><span class="p">,</span>
+                <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">generate_full_text_query</span><span class="p">(</span><span class="n">entity</span><span class="p">)},</span>
+            <span class="p">)</span>
+            <span class="c1"># Check if the response contains any results before processing</span>
+            <span class="k">if</span> <span class="n">response</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">el</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">response</span><span class="p">])</span>
+            <span class="c1"># If no results, you might want to handle it with a message or skip it</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: No results found for entity: </span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># If the entity is invalid, you can handle it with a message or skip it</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Skipping invalid entity: </span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">structured_retriever</span><span class="p">(</span><span class="s2">&quot;Who is Elizabeth I?&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">RULED</span> <span class="o">-&gt;</span> <span class="n">Russia</span>
+<span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">BORN_IN</span> <span class="o">-&gt;</span> <span class="n">Greenwich</span> <span class="n">Palace</span>
+<span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">BORN_IN</span> <span class="o">-&gt;</span> <span class="n">Kolomenskoye</span>
+<span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">RULES</span> <span class="o">-&gt;</span> <span class="n">England</span>
+<span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">IS_A</span> <span class="o">-&gt;</span> <span class="mi">1998</span> <span class="n">British</span> <span class="n">biographical</span> <span class="n">historical</span> <span class="n">drama</span> <span class="n">film</span>
+<span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">WAS_MARRIED_TO</span> <span class="o">-&gt;</span> <span class="n">William</span> <span class="n">Carey</span>
+<span class="ow">in</span><span class="o">-</span><span class="n">waiting</span> <span class="o">-</span> <span class="n">IS_WAITING_FOR</span> <span class="o">-&gt;</span> <span class="n">Elizabeth</span>
+<span class="n">Elizabeth</span> <span class="n">Stuart</span> <span class="o">-</span> <span class="n">BORN_IN</span> <span class="o">-&gt;</span> <span class="n">Dunfermline</span> <span class="n">Palace</span>
+<span class="n">Elizabeth</span> <span class="n">Stuart</span> <span class="o">-</span> <span class="n">TRAVELLED</span> <span class="o">-&gt;</span> <span class="n">Scotland</span>
+<span class="n">Elizabeth</span> <span class="n">I</span> <span class="o">-</span> <span class="n">RULED</span> <span class="o">-&gt;</span> <span class="n">England</span> <span class="ow">and</span> <span class="n">Ireland</span>
+<span class="n">Elizabeth</span> <span class="n">I</span> <span class="o">-</span> <span class="n">CORONATED</span> <span class="o">-&gt;</span> <span class="n">Westminster</span> <span class="n">Abbey</span>
+<span class="n">Elizabeth</span> <span class="n">I</span> <span class="o">-</span> <span class="n">IS_A</span> <span class="o">-&gt;</span> <span class="n">two</span><span class="o">-</span><span class="n">part</span> <span class="mi">2005</span> <span class="n">British</span><span class="o">-</span><span class="n">American</span> <span class="n">historical</span> <span class="n">drama</span> <span class="n">television</span> <span class="n">serial</span>
+<span class="n">Becoming</span> <span class="n">Elizabeth</span> <span class="o">-</span> <span class="n">REPEATED</span> <span class="o">-&gt;</span> <span class="mi">15</span> <span class="n">July</span> <span class="mi">2023</span><span class="n">Isabella</span> <span class="n">I</span> <span class="o">-</span> <span class="n">BORN_IN</span> <span class="o">-&gt;</span> <span class="n">Madrigal</span> <span class="n">de</span> <span class="n">las</span> <span class="n">Altas</span> <span class="n">Torres</span>
+<span class="n">Elizabeth</span> <span class="n">I</span> <span class="o">-</span> <span class="n">RULED</span> <span class="o">-&gt;</span> <span class="n">England</span> <span class="ow">and</span> <span class="n">Ireland</span>
+<span class="n">Elizabeth</span> <span class="n">I</span> <span class="o">-</span> <span class="n">CORONATED</span> <span class="o">-&gt;</span> <span class="n">Westminster</span> <span class="n">Abbey</span>
+<span class="n">Elizabeth</span> <span class="n">I</span> <span class="o">-</span> <span class="n">IS_A</span> <span class="o">-&gt;</span> <span class="n">two</span><span class="o">-</span><span class="n">part</span> <span class="mi">2005</span> <span class="n">British</span><span class="o">-</span><span class="n">American</span> <span class="n">historical</span> <span class="n">drama</span> <span class="n">television</span> <span class="n">serial</span>
+<span class="n">Rip</span> <span class="n">Hunter</span> <span class="o">...</span> <span class="n">Time</span> <span class="n">Master</span> <span class="o">-</span> <span class="n">PUBLISHES</span> <span class="o">-&gt;</span> <span class="n">Elizabeth</span> <span class="n">I</span> <span class="n">of</span> <span class="n">England</span>
+<span class="n">James</span> <span class="n">VI</span> <span class="ow">and</span> <span class="n">I</span> <span class="o">-</span> <span class="n">RULES</span> <span class="o">-&gt;</span> <span class="n">Scotland</span>
+</pre></div>
+</div>
+</li>
+<li><p>Final retriever</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">retriever</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Search query: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">structured_data</span> <span class="o">=</span> <span class="n">structured_retriever</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+    <span class="n">unstructured_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">vector_index</span><span class="o">.</span><span class="n">similarity_search</span><span class="p">(</span><span class="n">question</span><span class="p">)]</span>
+    <span class="n">final_data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Structured data:</span><span class="si">{</span><span class="n">structured_data</span><span class="si">}</span>
+<span class="s2">                    Unstructured data:</span>
+<span class="s2">                    </span><span class="si">{</span><span class="s2">&quot;#Document &quot;</span><span class="o">.</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">unstructured_data</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">                  &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">final_data</span>
+</pre></div>
+</div>
+</li>
+<li><p>Defining the RAG chain</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Condense a chat history and follow-up question into a standalone question</span>
+<span class="n">_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question,</span>
+<span class="s2">in its original language.</span>
+<span class="s2">Chat History:</span>
+<span class="si">{chat_history}</span>
+<span class="s2">Follow Up Input: </span><span class="si">{question}</span>
+<span class="s2">Standalone question:&quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
+<span class="n">CONDENSE_QUESTION_PROMPT</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">_template</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_format_chat_history</span><span class="p">(</span><span class="n">chat_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">human</span><span class="p">,</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">chat_history</span><span class="p">:</span>
+        <span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">human</span><span class="p">))</span>
+        <span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">ai</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">buffer</span>
+
+<span class="n">_search_query</span> <span class="o">=</span> <span class="n">RunnableBranch</span><span class="p">(</span>
+    <span class="c1"># If input includes chat_history, we condense it with the follow-up question</span>
+    <span class="p">(</span>
+        <span class="n">RunnableLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chat_history&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">with_config</span><span class="p">(</span>
+            <span class="n">run_name</span><span class="o">=</span><span class="s2">&quot;HasChatHistoryCheck&quot;</span>
+        <span class="p">),</span>  <span class="c1"># Condense follow-up question and chat into a standalone_question</span>
+        <span class="n">RunnablePassthrough</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+            <span class="n">chat_history</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_format_chat_history</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;chat_history&quot;</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="o">|</span> <span class="n">CONDENSE_QUESTION_PROMPT</span>
+        <span class="o">|</span> <span class="n">llm</span>
+        <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">(),</span>
+    <span class="p">),</span>
+    <span class="c1"># Else, we have no chat history, so just pass through the question</span>
+    <span class="n">RunnableLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]),</span>
+<span class="p">)</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Answer the question based only on the following context:</span>
+<span class="si">{context}</span>
+
+<span class="s2">Question: </span><span class="si">{question}</span>
+<span class="s2">Use natural language and be concise.</span>
+<span class="s2">Answer:&quot;&quot;&quot;</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">RunnableParallel</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">_search_query</span> <span class="o">|</span> <span class="n">retriever</span><span class="p">,</span>
+            <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">RunnablePassthrough</span><span class="p">(),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="o">|</span> <span class="n">prompt</span>
+    <span class="o">|</span> <span class="n">llm</span>
+    <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Test</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Which house did Elizabeth I belong to?&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Search<span class="w"> </span>query:<span class="w"> </span>Which<span class="w"> </span>house<span class="w"> </span>did<span class="w"> </span>Elizabeth<span class="w"> </span>I<span class="w"> </span>belong<span class="w"> </span>to?
+Elizabeth<span class="w"> </span>I<span class="w"> </span>belonged<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>Tudor<span class="w"> </span>dynasty.
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;When was Elizabeth I born?&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Elizabeth</span> <span class="n">I</span> <span class="n">was</span> <span class="n">born</span> <span class="n">on</span> <span class="n">September</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">1533.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Test a follow up question:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;When was she born?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;chat_history&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;Which house did Elizabeth I belong to?&quot;</span><span class="p">,</span> <span class="s2">&quot;House Of Tudor&quot;</span><span class="p">)],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Ouput:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Elizabeth</span> <span class="n">I</span> <span class="n">of</span> <span class="n">England</span> <span class="n">was</span> <span class="n">born</span> <span class="n">on</span> <span class="n">September</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">1533.</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 </section>
 </section>
@@ -4143,7 +4585,7 @@ for handling interconnected data.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Wenqiang Feng, Di Zhen and Wenyun Wang.
-      <span class="lastupdated">Last updated on Jan 24, 2025.
+      <span class="lastupdated">Last updated on Jan 25, 2025.
       </span></p>
   </div>
 
