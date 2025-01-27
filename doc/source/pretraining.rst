@@ -1630,11 +1630,9 @@ in long-context and multilingual scenarios.
    Mixtral of Experts (Source: `Sebastian Raschka <https://magazine.sebastianraschka.com/p/ai-research-papers-2024-part-1>`__)
 
 
-Case Studies
-------------
+Case Studies: DeepSeek-V3
+================================
 
-DeepSeek-V3
-~~~~~~~~~~~~
 
 DeepSeek-V3 marks a significant leap
 forward in AI model performance, offering exceptional inference
@@ -1670,34 +1668,36 @@ the gap between open-source and proprietary systems while redefining
 standards for scalability and performance. [DeepSeek-V3]_
 
 **Architecture:**
+------------------
 
-- **Multi-Head Latent Attention (MLA)**
+**Multi-Head Latent Attention (MLA)**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Multi-Head Latent Attention (MLA), introduced in DeepSeek-V2, is an
-  innovative attention mechanism designed to address the bottleneck of
-  large Key-Value (KV) caches in traditional Multi-Head Attention (MHA). 
-  The core concept of MLA is **low-rank joint compression** for keys and
-  values, which significantly reduces the KV cache size. During
-  inference, only a compressed latent representation of keys and values
-  is stored, enabling more efficient memory usage and allowing for
-  larger batch sizes and sequence lengths. Additionally, during
-  training, low-rank compression is also applied to queries to minimize
-  activation memory requirements. [DeepSeek-V2]_
+Multi-Head Latent Attention (MLA), introduced in DeepSeek-V2, is an
+innovative attention mechanism designed to address the bottleneck of
+large Key-Value (KV) caches in traditional Multi-Head Attention (MHA). 
+The core concept of MLA is **low-rank joint compression** for keys and
+values, which significantly reduces the KV cache size. During
+inference, only a compressed latent representation of keys and values
+is stored, enabling more efficient memory usage and allowing for
+larger batch sizes and sequence lengths. Additionally, during
+training, low-rank compression is also applied to queries to minimize
+activation memory requirements. [DeepSeek-V2]_
 
-  MLA further incorporates a **decoupled Rotary Position Embedding
-  (RoPE)**, applied to additional multi-head queries and a shared key.
-  This decoupling ensures compatibility with MLA’s compression process
-  by separating positional encoding information from the compressed
-  latent vectors. During inference, the decoupled key is cached
-  alongside the compressed latent vectors, maintaining efficiency while
-  preserving positional context. These innovations make MLA a highly
-  efficient and scalable solution for modern attention mechanisms.
+MLA further incorporates a **decoupled Rotary Position Embedding
+(RoPE)**, applied to additional multi-head queries and a shared key.
+This decoupling ensures compatibility with MLA’s compression process
+by separating positional encoding information from the compressed
+latent vectors. During inference, the decoupled key is cached
+alongside the compressed latent vectors, maintaining efficiency while
+preserving positional context. These innovations make MLA a highly
+efficient and scalable solution for modern attention mechanisms.
 
-  .. figure:: images/MLA_DeepSeekV2.png
-     :alt: MLA_DeepSeekV2
-     :align: center
+.. figure:: images/MLA_DeepSeekV2.png
+   :alt: MLA_DeepSeekV2
+   :align: center
 
-     DeepSeek-V2 Multi-Head Latent Attention (MLA) (Source: `DeepSeek-V2 <https://arxiv.org/abs/2405.04434>`__)
+   DeepSeek-V2 Multi-Head Latent Attention (MLA) (Source: `DeepSeek-V2 <https://arxiv.org/abs/2405.04434>`__)
 
 - DeepSeekMoE
 
@@ -1723,34 +1723,36 @@ standards for scalability and performance. [DeepSeek-V3]_
 
      DeepSeekMoE Architecture (Source: `DeepSeek-V3 <https://arxiv.org/abs/2412.19437>`__)
 
-- **Multi-Token Prediction (MTP)**
+**Multi-Token Prediction (MTP)**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Multi-Token Prediction (MTP) is an advanced training objective
-  employed in DeepSeek-V3 that extends the model’s ability to predict
-  multiple future tokens simultaneously at each position, rather than
-  focusing on a single token. This approach densifies training signals,
-  improving data efficiency by enabling the model to learn more
-  effectively from the same dataset. Additionally, MTP allows the model
-  to pre-plan its token representations, enhancing its ability to
-  predict long-term patterns and improving performance on complex tasks.
-  Unlike prior implementations, where multiple tokens are predicted in
-  parallel using independent output heads, DeepSeek-V3 sequentially
-  predicts additional tokens while maintaining the full causal chain at
-  each prediction depth. This design preserves contextual dependencies
-  and ensures robust generative capabilities. MTP also accelerates
-  inference by enabling faster token generation and supports speculative
-  decoding for further efficiency gains. These features make MTP a
-  transformative innovation for scaling language models and enhancing
-  their predictive accuracy and speed.
+Multi-Token Prediction (MTP) is an advanced training objective
+employed in DeepSeek-V3 that extends the model’s ability to predict
+multiple future tokens simultaneously at each position, rather than
+focusing on a single token. This approach densifies training signals,
+improving data efficiency by enabling the model to learn more
+effectively from the same dataset. Additionally, MTP allows the model
+to pre-plan its token representations, enhancing its ability to
+predict long-term patterns and improving performance on complex tasks.
+Unlike prior implementations, where multiple tokens are predicted in
+parallel using independent output heads, DeepSeek-V3 sequentially
+predicts additional tokens while maintaining the full causal chain at
+each prediction depth. This design preserves contextual dependencies
+and ensures robust generative capabilities. MTP also accelerates
+inference by enabling faster token generation and supports speculative
+decoding for further efficiency gains. These features make MTP a
+transformative innovation for scaling language models and enhancing
+their predictive accuracy and speed.
 
-  .. figure:: images/multi_token_prediction.png
-     :alt: multi_token_prediction
-     :align: center
+.. figure:: images/multi_token_prediction.png
+   :alt: multi_token_prediction
+   :align: center
 
-     Multi-Token Prediction (MTP) (Source: `DeepSeek-V3 <https://arxiv.org/abs/2412.19437>`__)
+   Multi-Token Prediction (MTP) (Source: `DeepSeek-V3 <https://arxiv.org/abs/2412.19437>`__)
 
 
 **Training Strategy:**
+~~~~~~~~~~~~~~~~~~~~~~
 
 - **Auxiliary-Loss-Free Load Balancing**
 

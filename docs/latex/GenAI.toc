@@ -208,39 +208,42 @@
 \contentsline {subsubsection}{Introduction}{224}{subsubsection*.72}%
 \contentsline {subsubsection}{Methodology}{224}{subsubsection*.73}%
 \contentsline {subsubsection}{Mixtral 8x7B}{229}{subsubsection*.74}%
-\contentsline {subsection}{\numberline {7.2.6}Case Studies}{230}{subsection.7.2.6}%
-\contentsline {subsubsection}{DeepSeek\sphinxhyphen {}V3}{230}{subsubsection*.75}%
-\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{235}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{236}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{236}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{237}{section.8.3}%
-\contentsline {section}{\numberline {8.4}GEval with DeepEval}{237}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{237}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{237}{subsection.8.4.2}%
-\contentsline {chapter}{\numberline {9}LLM Guardrails}{249}{chapter.9}%
-\contentsline {section}{\numberline {9.1}LLM Risks}{249}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{250}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{253}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{256}{section.9.4}%
-\contentsline {section}{\numberline {9.5}NeMo Guardrails}{261}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{261}{subsection.9.5.1}%
-\contentsline {subsection}{\numberline {9.5.2}Rails}{268}{subsection.9.5.2}%
-\contentsline {subsection}{\numberline {9.5.3}Test}{268}{subsection.9.5.3}%
-\contentsline {subsubsection}{Safe Usecase}{268}{subsubsection*.76}%
-\contentsline {subsubsection}{Unsafe Usecases}{270}{subsubsection*.77}%
-\contentsline {section}{\numberline {9.6}Llama Guard3}{273}{section.9.6}%
-\contentsline {subsection}{\numberline {9.6.1}Load Models}{273}{subsection.9.6.1}%
-\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{273}{subsection.9.6.2}%
-\contentsline {subsection}{\numberline {9.6.3}Tests}{274}{subsection.9.6.3}%
-\contentsline {subsubsection}{Safe Usecase}{274}{subsubsection*.78}%
-\contentsline {subsubsection}{Unsafe Usecase}{275}{subsubsection*.79}%
-\contentsline {chapter}{\numberline {10}LLM Deployments}{277}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Prototype Deployment}{277}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Gradio vs. Streamlit}{277}{subsection.10.1.1}%
-\contentsline {subsection}{\numberline {10.1.2}Deployment with Gradio}{277}{subsection.10.1.2}%
-\contentsline {subsubsection}{Ollama Local Model}{277}{subsubsection*.80}%
-\contentsline {subsubsection}{Gradio Chat Interface}{278}{subsubsection*.81}%
-\contentsline {subsubsection}{Demo}{279}{subsubsection*.82}%
-\contentsline {section}{\numberline {10.2}Production Deployment}{279}{section.10.2}%
-\contentsline {chapter}{\numberline {11}Main Reference}{281}{chapter.11}%
-\contentsline {chapter}{Bibliography}{283}{chapter*.83}%
+\contentsline {section}{\numberline {7.3}Case Studies: DeepSeek\sphinxhyphen {}V3}{230}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}\sphinxstylestrong {Architecture:}}{231}{subsection.7.3.1}%
+\contentsline {subsubsection}{\sphinxstylestrong {Multi\sphinxhyphen {}Head Latent Attention (MLA)}}{231}{subsubsection*.75}%
+\contentsline {subsubsection}{\sphinxstylestrong {Multi\sphinxhyphen {}Token Prediction (MTP)}}{232}{subsubsection*.76}%
+\contentsline {subsubsection}{\sphinxstylestrong {Training Strategy:}}{232}{subsubsection*.77}%
+\contentsline {chapter}{\numberline {8}LLM Evaluation Metrics}{237}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Statistical Scorers (Traditional Metrics)}{238}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Model\sphinxhyphen {}Based Scorers (Learned Metrics)}{238}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Human\sphinxhyphen {}Centric Evaluations (Augmenting Metrics)}{239}{section.8.3}%
+\contentsline {section}{\numberline {8.4}GEval with DeepEval}{239}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}G\sphinxhyphen {}Eval Algorithm}{239}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}G\sphinxhyphen {}Eval with DeepEval}{239}{subsection.8.4.2}%
+\contentsline {chapter}{\numberline {9}LLM Guardrails}{251}{chapter.9}%
+\contentsline {section}{\numberline {9.1}LLM Risks}{251}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Overview of Jailbreak Techniques}{252}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Introduction to Guardrails}{255}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Overview of Guardrails Tools}{258}{section.9.4}%
+\contentsline {section}{\numberline {9.5}NeMo Guardrails}{263}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Yaml Config}{263}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Rails}{270}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Test}{270}{subsection.9.5.3}%
+\contentsline {subsubsection}{Safe Usecase}{270}{subsubsection*.78}%
+\contentsline {subsubsection}{Unsafe Usecases}{272}{subsubsection*.79}%
+\contentsline {section}{\numberline {9.6}Llama Guard3}{275}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Load Models}{275}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Define Safety Check}{275}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Tests}{276}{subsection.9.6.3}%
+\contentsline {subsubsection}{Safe Usecase}{276}{subsubsection*.80}%
+\contentsline {subsubsection}{Unsafe Usecase}{277}{subsubsection*.81}%
+\contentsline {chapter}{\numberline {10}LLM Deployments}{279}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Prototype Deployment}{279}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Gradio vs. Streamlit}{279}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Deployment with Gradio}{279}{subsection.10.1.2}%
+\contentsline {subsubsection}{Ollama Local Model}{279}{subsubsection*.82}%
+\contentsline {subsubsection}{Gradio Chat Interface}{280}{subsubsection*.83}%
+\contentsline {subsubsection}{Demo}{281}{subsubsection*.84}%
+\contentsline {section}{\numberline {10.2}Production Deployment}{281}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Main Reference}{283}{chapter.11}%
+\contentsline {chapter}{Bibliography}{285}{chapter*.85}%
