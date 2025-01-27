@@ -63,7 +63,7 @@
 
 
 \title{GenAI: Best Practices}
-\date{January 25, 2025}
+\date{January 27, 2025}
 \release{1.0}
 \author{Wenqiang Feng, Di Zhen and Wenyun Wang}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{logo.png}\par}
@@ -8277,7 +8277,7 @@ Neo4j Aura
 \capstart
 
 \noindent\sphinxincludegraphics{{neo4j_aura_free}.png}
-\caption{Neo4j Aura}\label{\detokenize{rag:id70}}\label{\detokenize{rag:fig-neo4j-aura-free}}\end{figure}
+\caption{Neo4j Aura Instance}\label{\detokenize{rag:id70}}\label{\detokenize{rag:fig-neo4j-aura-free}}\end{figure}
 \end{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -13062,11 +13062,8 @@ in long\sphinxhyphen{}context and multilingual scenarios.
 \caption{Mixtral of Experts (Source: \sphinxhref{https://magazine.sebastianraschka.com/p/ai-research-papers-2024-part-1}{Sebastian Raschka})}\label{\detokenize{pretraining:id28}}\end{figure}
 
 
-\subsection{Case Studies}
-\label{\detokenize{pretraining:case-studies}}
-
-\subsubsection{DeepSeek\sphinxhyphen{}V3}
-\label{\detokenize{pretraining:deepseek-v3}}
+\section{Case Studies: DeepSeek\sphinxhyphen{}V3}
+\label{\detokenize{pretraining:case-studies-deepseek-v3}}
 \sphinxAtStartPar
 DeepSeek\sphinxhyphen{}V3 marks a significant leap
 forward in AI model performance, offering exceptional inference
@@ -13103,13 +13100,12 @@ DeepSeek\sphinxhyphen{}V3 as a formidable competitor in the AI landscape, narrow
 the gap between open\sphinxhyphen{}source and proprietary systems while redefining
 standards for scalability and performance. \sphinxcite{reference:deepseek-v3}
 
-\sphinxAtStartPar
-\sphinxstylestrong{Architecture:}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Multi\sphinxhyphen{}Head Latent Attention (MLA)}
 
+\subsection{\sphinxstylestrong{Architecture:}}
+\label{\detokenize{pretraining:architecture}}
+
+\subsubsection{\sphinxstylestrong{Multi\sphinxhyphen{}Head Latent Attention (MLA)}}
+\label{\detokenize{pretraining:multi-head-latent-attention-mla}}
 \sphinxAtStartPar
 Multi\sphinxhyphen{}Head Latent Attention (MLA), introduced in DeepSeek\sphinxhyphen{}V2, is an
 innovative attention mechanism designed to address the bottleneck of
@@ -13138,7 +13134,7 @@ efficient and scalable solution for modern attention mechanisms.
 
 \noindent\sphinxincludegraphics{{MLA_DeepSeekV2}.png}
 \caption{DeepSeek\sphinxhyphen{}V2 Multi\sphinxhyphen{}Head Latent Attention (MLA) (Source: \sphinxhref{https://arxiv.org/abs/2405.04434}{DeepSeek\sphinxhyphen{}V2})}\label{\detokenize{pretraining:id29}}\end{figure}
-
+\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 DeepSeekMoE
@@ -13167,10 +13163,11 @@ gating values, ensuring a more balanced and precise distribution.
 \noindent\sphinxincludegraphics{{deepseek_architecture}.png}
 \caption{DeepSeekMoE Architecture (Source: \sphinxhref{https://arxiv.org/abs/2412.19437}{DeepSeek\sphinxhyphen{}V3})}\label{\detokenize{pretraining:id30}}\end{figure}
 
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Multi\sphinxhyphen{}Token Prediction (MTP)}
+\end{itemize}
 
+
+\subsubsection{\sphinxstylestrong{Multi\sphinxhyphen{}Token Prediction (MTP)}}
+\label{\detokenize{pretraining:multi-token-prediction-mtp}}
 \sphinxAtStartPar
 Multi\sphinxhyphen{}Token Prediction (MTP) is an advanced training objective
 employed in DeepSeek\sphinxhyphen{}V3 that extends the model’s ability to predict
@@ -13197,11 +13194,9 @@ their predictive accuracy and speed.
 \noindent\sphinxincludegraphics{{multi_token_prediction}.png}
 \caption{Multi\sphinxhyphen{}Token Prediction (MTP) (Source: \sphinxhref{https://arxiv.org/abs/2412.19437}{DeepSeek\sphinxhyphen{}V3})}\label{\detokenize{pretraining:id31}}\end{figure}
 
-\end{itemize}
 
-\sphinxAtStartPar
-\sphinxstylestrong{Training Strategy:}
-\begin{itemize}
+\subsubsection{\sphinxstylestrong{Training Strategy:}}
+\label{\detokenize{pretraining:training-strategy}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Auxiliary\sphinxhyphen{}Loss\sphinxhyphen{}Free Load Balancing}

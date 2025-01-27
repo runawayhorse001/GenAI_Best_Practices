@@ -4000,7 +4000,7 @@ for handling interconnected data.
     .. figure:: images/neo4j_aura_free.png
         :align: center
 
-        Neo4j Aura
+        Neo4j Aura Instance
 
 
   .. code:: python
