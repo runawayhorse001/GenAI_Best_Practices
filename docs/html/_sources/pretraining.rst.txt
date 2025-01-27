@@ -5,6 +5,13 @@
 Pre-training 
 ============
 
+.. admonition:: Colab Notebook for This Chapter
+
+    - Deepseek-r1 with Ollama in Colab: |Deepseek-r1_Ollama_in_Colab|
+
+.. |Deepseek-r1_Ollama_in_Colab| image:: images/colab-badge.png 
+    :target: https://colab.research.google.com/drive/1q9pE3Mv6UIlBBZhM9rkyLK0nmebn2Yu9?usp=drive_link  
+
 
 .. admonition:: Ilya Sutskever at Neurips 2024
 
